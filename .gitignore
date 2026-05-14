@@ -1,6 +1,6 @@
 # FlexFringe binary (compiled from source, not committed)
-FlexFringe/flexfringe
-FlexFringe/flexfringe.exe
+# FlexFringe/flexfringe
+# FlexFringe/flexfringe.exe
 
 # Decompressed alert files (keep only .gz originals)
 alerts/**/*.json
