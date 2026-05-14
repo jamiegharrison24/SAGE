@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 from collections import OrderedDict
 
 import matplotlib.pyplot as plt
@@ -289,5 +290,5 @@ def plot_state_groups(state_sequences, data_file):
         for line in outlines:
             outfile.write(line)
 
-    os.system("dot -Tpng " + filename + ".dot -o " + filename + ".png")
+    subprocess.run(["dot", "-Tpng", filename + ".dot", "-o", filename + ".png"])
     return state_groups

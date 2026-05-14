@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe/build && make -j4 2>&1\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"ls /tmp/FlexFringe/build/flexfringe 2>&1 && echo 'Binary exists'\")",
+      "PowerShell(wsl bash -c \"/mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe --help\" 2>&1 | Select-Object -First 3)",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git log --oneline --format='%H %ai %s' --after='2020-01-01' --before='2022-12-31' | tail -20\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cat /tmp/FlexFringe/source/input/parsers/grammar/abbadingosymbol.h\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git branch -a && git tag\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"ls /tmp/ && ls /tmp/FlexFringe 2>/dev/null || echo 'FlexFringe dir missing'\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git log --oneline --format='%H %ai %s' | grep -v '2023\\\\|2024\\\\|2025\\\\|2026' | head -20\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git show 329d2a0:source/inputdata.cpp 2>/dev/null | head -50 || git ls-tree 329d2a0 source/ 2>/dev/null | head -20\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git show 329d2a0:source/inputdata.cpp 2>/dev/null | grep -n 'symbol\\\\|abbad\\\\|read_abb\\\\|parse' | head -30\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git show 329d2a0:source/inputdata.cpp 2>/dev/null | grep -n 'read_abbadingo_symbol' | head -10\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git show 329d2a0:source/inputdata.cpp 2>/dev/null | sed -n '544,580p'\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && git checkout 329d2a0 2>&1 && ls\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && rm -rf build && mkdir build && cd build && cmake -DENABLE_PYTHON=Off .. 2>&1 | tail -5 && make -j4 2>&1 | tail -5\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"cp ~/FlexFringe/build/flexfringe /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe && echo 'Copied'\")",
+      "PowerShell(wsl -d Ubuntu -- bash -c \"tail -20 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt 2>/dev/null\"; Get-Content \"C:\\\\Users\\\\Jamie\\\\.claude\\\\projects\\\\D--Projects-SAGE-SAGE\\\\70c3c178-1cd7-48ec-9933-e7bb13c61ac9\\\\tool-results\\\\b855h5c50.txt\" -Tail 15)",
+      "PowerShell(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\" | Select-Object Name, Length | Select-Object -First 10; \\(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\"\\).Count)"
+    ]
+  }
+}

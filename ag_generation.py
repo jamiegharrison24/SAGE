@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 from signatures.mappings import macro_inv, micro, micro2macro, verbose_micro
 
@@ -322,5 +323,5 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
                     for line in lines:
                         outfile.write(str(line[1]) + '\n')
 
-                os.system("dot -Tpng " + out_filepath + ".dot -o " + out_filepath + ".png")
-                os.system("dot -Tsvg " + out_filepath + ".dot -o " + out_filepath + ".svg")
+                subprocess.run(["dot", "-Tpng", out_filepath + ".dot", "-o", out_filepath + ".png"])
+                subprocess.run(["dot", "-Tsvg", out_filepath + ".dot", "-o", out_filepath + ".svg"])

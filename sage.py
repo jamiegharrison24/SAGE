@@ -4,10 +4,18 @@ import datetime
 import glob
 import json
 import os
+import platform
 import re
+import shutil
+import subprocess
 import sys
 
 import requests
+
+if platform.system() == 'Windows' and shutil.which('dot') is None:
+    _graphviz_bin = r'C:\Program Files\Graphviz\bin'
+    if os.path.isdir(_graphviz_bin):
+        os.environ['PATH'] = _graphviz_bin + os.pathsep + os.environ.get('PATH', '')
 
 from ag_generation import make_attack_graphs
 from episode_sequence_generation import aggregate_into_episodes, host_episode_sequences, break_into_subbehaviors
@@ -98,7 +106,7 @@ def _readfile(fname):
     with open(fname, 'r') as f:
         unparsed_data = json.load(f)
 
-    unparsed_data = unparsed_data[::-1]
+    unparsed_data = unparsed_data[::-1] # Reverse the list, for chronological order 
     return unparsed_data
 
 
@@ -122,16 +130,21 @@ def _parse(unparsed_data):
         else:
             raw = d
 
+        # Filter out non-alert events
         if raw['event_type'] != 'alert':
             continue
 
+        # Get the host name
         if 'host' in raw:
             host = raw['host']
         elif 'host' in d:
             host = d['host'][3:]
         else:
             host = 'dummy'
-
+            
+        # Get the timestamp
+        # Convert the timestamp to a datetime object
+        # Calculate the difference between the current and previous timestamp
         dt = datetime.datetime.strptime(raw['timestamp'], '%Y-%m-%dT%H:%M:%S.%f%z')  # 2018-11-03T23:16:09.148520+0000
         diff_dt = 0.0 if prev == -1 else round((dt - prev).total_seconds(), 2)
         prev = dt
@@ -313,7 +326,7 @@ episode_traces = generate_traces(episode_subsequences, path_to_traces)
 print('------ Learning S-PDFA ------')
 flexfringe(path_to_traces, ini=path_to_ini, symbol_count="2", state_count="4")
 
-os.system("dot -Tpng " + path_to_traces + ".ff.final.dot -o " + path_to_traces + ".png")
+subprocess.run(["dot", "-Tpng", path_to_traces + ".ff.final.dot", "-o", path_to_traces + ".png"])
 
 print('------ !! Special: Fixing syntax error in main model and sink files ------')
 print('--- Sinks')
@@ -355,16 +368,17 @@ make_attack_graphs(state_sequences, severe_sinks, path_to_traces, ag_directory, 
 
 if delete_files:
     print('Deleting extra files')
-    os.system("rm " + path_to_traces + ".ff.final.dot")
-    os.system("rm " + path_to_traces + ".ff.final.json")
-    os.system("rm " + path_to_traces + ".ff.finalsinks.json")
-    os.system("rm " + path_to_traces + ".ff.finalsinks.dot")
-    os.system("rm " + path_to_traces + ".ff.init.dot")
-    os.system("rm " + path_to_traces + ".ff.init.json")
-    os.system("rm " + path_to_traces + ".ff.initsinks.dot")
-    os.system("rm " + path_to_traces + ".ff.initsinks.json")
-    # os.system("rm " + "spdfa-clustered-" + path_to_traces + "-dfa.dot")  # Comment out if this file is created
-    os.system("rm " + ag_directory + "/*.dot")
+    for suffix in [".ff.final.dot", ".ff.final.json", ".ff.finalsinks.json", ".ff.finalsinks.dot",
+                   ".ff.init.dot", ".ff.init.json", ".ff.initsinks.dot", ".ff.initsinks.json"]:
+        try:
+            os.remove(path_to_traces + suffix)
+        except FileNotFoundError:
+            pass
+    for dot_file in glob.glob(ag_directory + "/*.dot"):
+        try:
+            os.remove(dot_file)
+        except FileNotFoundError:
+            pass
 
 print('\n------- FIN -------')
 # ----- END MAIN ------

@@ -1,0 +1,83 @@
+
+
+
+
+
+arguments: /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe --ini=/mnt/d/Projects/SAGE/SAGE/FlexFringe/ini/spdfa-config.ini --symbol_count=2 --state_count=4 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt
+Current dir: /mnt/d/Projects/SAGE/SAGE
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2026-05-14 14:50:15.148 (   0.005s) [main thread     ]             loguru.cpp:841   INFO| Logging to 'flexfringe.log', mode: 'a', verbosity: 9
+2026-05-14 14:50:15.148 (   0.006s) [main thread     ]               main.cpp:245   INFO| Starting flexfringe run
+2026-05-14 14:50:15.150 (   0.007s) [main thread     ]               apta.cpp:38    INFO| Creating APTA data structure
+2026-05-14 14:50:15.154 (   0.011s) [main thread     ]             common.cpp:31    INFO| Using heuristic alergia
+Stack trace:
+19      0x575e1d9569e5 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x439e5) [0x575e1d9569e5]
+18      0x76a33822a28b __libc_start_main + 139
+17      0x76a33822a1ca /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x76a33822a1ca]
+16      0x575e1d94f219 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x3c219) [0x575e1d94f219]
+15      0x575e1da7bc88 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x168c88) [0x575e1da7bc88]
+14      0x575e1da7ac7c /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x167c7c) [0x575e1da7ac7c]
+13      0x575e1da88ff3 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x175ff3) [0x575e1da88ff3]
+12      0x575e1da95659 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x182659) [0x575e1da95659]
+11      0x575e1dab7dd9 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x1a4dd9) [0x575e1dab7dd9]
+10      0x575e1dad2ebd /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x1bfebd) [0x575e1dad2ebd]
+9       0x575e1dad2b0c /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x1bfb0c) [0x575e1dad2b0c]
+8       0x575e1dac7a00 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x1b4a00) [0x575e1dac7a00]
+7       0x575e1d949565 /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe(+0x36565) [0x575e1d949565]
+6       0x76a3386bb391 /lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb391) [0x76a3386bb391]
+5       0x76a3386a5a55 std::unexpected() + 0
+4       0x76a3386bb0da /lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb0da) [0x76a3386bb0da]
+3       0x76a3386a5ff5 /lib/x86_64-linux-gnu/libstdc++.so.6(+0xa5ff5) [0x76a3386a5ff5]
+2       0x76a3382288ff abort + 223
+1       0x76a33824527e gsignal + 30
+0       0x76a33829eb2c pthread_kill + 284
+2026-05-14 14:50:15.175 (   0.032s) [main thread     ]                       :0     FATL| Signal: SIGABRT
+
+
+
+
+
+arguments: /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe --ini=/mnt/d/Projects/SAGE/SAGE/FlexFringe/ini/spdfa-config.ini --symbol_count=2 --state_count=4 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt
+Current dir: /mnt/d/Projects/SAGE/SAGE
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2026-05-14 15:01:57.262 (   0.004s) [main thread     ]             loguru.cpp:841   INFO| Logging to 'flexfringe.log', mode: 'a', verbosity: 9
+2026-05-14 15:01:57.262 (   0.005s) [main thread     ]               main.cpp:379   INFO| Starting flexfringe run
+2026-05-14 15:01:57.262 (   0.005s) [main thread     ]               main.cpp:70    INFO| Using heuristic alergia
+2026-05-14 15:01:57.280 (   0.023s) [main thread     ]               apta.cpp:34    INFO| Creating APTA data structure
+2026-05-14 15:01:57.323 (   0.066s) [main thread     ]               main.cpp:124   INFO| Greedy mode selected, starting run
+2026-05-14 15:01:57.358 (   0.100s) [main thread     ]               main.cpp:383   INFO| Ending flexfringe run normally
+2026-05-14 15:01:57.358 (   0.100s) [main thread     ]             loguru.cpp:538   INFO| atexit
+
+
+
+
+
+arguments: /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe --ini=/mnt/d/Projects/SAGE/SAGE/FlexFringe/ini/spdfa-config.ini --symbol_count=2 --state_count=4 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt
+Current dir: /mnt/d/Projects/SAGE/SAGE
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2026-05-14 15:03:32.943 (   0.005s) [main thread     ]             loguru.cpp:841   INFO| Logging to 'flexfringe.log', mode: 'a', verbosity: 9
+2026-05-14 15:03:32.943 (   0.005s) [main thread     ]               main.cpp:379   INFO| Starting flexfringe run
+2026-05-14 15:03:32.943 (   0.005s) [main thread     ]               main.cpp:70    INFO| Using heuristic alergia
+2026-05-14 15:03:32.961 (   0.023s) [main thread     ]               apta.cpp:34    INFO| Creating APTA data structure
+2026-05-14 15:03:32.995 (   0.057s) [main thread     ]               main.cpp:124   INFO| Greedy mode selected, starting run
+2026-05-14 15:03:33.035 (   0.097s) [main thread     ]               main.cpp:383   INFO| Ending flexfringe run normally
+2026-05-14 15:03:33.035 (   0.097s) [main thread     ]             loguru.cpp:538   INFO| atexit
+
+
+
+
+
+arguments: /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe --ini=/mnt/d/Projects/SAGE/SAGE/FlexFringe/ini/spdfa-config.ini --symbol_count=2 --state_count=4 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt
+Current dir: /mnt/d/Projects/SAGE/SAGE
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2026-05-14 15:07:38.568 (   0.005s) [main thread     ]             loguru.cpp:841   INFO| Logging to 'flexfringe.log', mode: 'a', verbosity: 9
+2026-05-14 15:07:38.568 (   0.006s) [main thread     ]               main.cpp:379   INFO| Starting flexfringe run
+2026-05-14 15:07:38.568 (   0.006s) [main thread     ]               main.cpp:70    INFO| Using heuristic alergia
+2026-05-14 15:07:38.589 (   0.026s) [main thread     ]               apta.cpp:34    INFO| Creating APTA data structure
+2026-05-14 15:07:38.625 (   0.063s) [main thread     ]               main.cpp:124   INFO| Greedy mode selected, starting run
+2026-05-14 15:07:38.663 (   0.100s) [main thread     ]               main.cpp:383   INFO| Ending flexfringe run normally
+2026-05-14 15:07:38.663 (   0.100s) [main thread     ]             loguru.cpp:538   INFO| atexit

@@ -1,0 +1,22 @@
+# FlexFringe binary (compiled from source, not committed)
+FlexFringe/flexfringe
+FlexFringe/flexfringe.exe
+
+# Decompressed alert files (keep only .gz originals)
+alerts/**/*.json
+!alerts/**/*.json.gz
+
+# SAGE experiment outputs (generated trace files and attack graph directories)
+*.txt
+!requirements.txt
+*AGs/
+*.png
+*.svg
+*.dot
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/

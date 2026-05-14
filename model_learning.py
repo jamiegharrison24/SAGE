@@ -1,4 +1,6 @@
 import json
+import os
+import platform
 import re
 import subprocess
 from collections import defaultdict
@@ -65,6 +67,12 @@ def generate_traces(subsequences, datafile):
     return flexfringe_traces
 
 
+def _win_to_wsl_path(path):
+    path = os.path.abspath(path)
+    drive, rest = os.path.splitdrive(path)
+    return '/mnt/' + drive[0].lower() + rest.replace('\\', '/')
+
+
 # Step 5: Learn the model (2 sept 2020)
 def flexfringe(*args, **kwargs):
     """
@@ -80,8 +88,23 @@ def flexfringe(*args, **kwargs):
     for key in kwargs:
         command += ["--" + key + "=" + kwargs[key]]
 
-    result = subprocess.run(["FlexFringe/flexfringe"] + command + [args[0]], stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE, universal_newlines=True)
+    if platform.system() == 'Windows':
+        ff_path = _win_to_wsl_path('FlexFringe/flexfringe')
+        input_path = _win_to_wsl_path(args[0])
+        wsl_args = []
+        for arg in command:
+            if '=' in arg:
+                k, v = arg.split('=', 1)
+                if os.path.exists(v):
+                    v = _win_to_wsl_path(v)
+                wsl_args.append(k + '=' + v)
+            else:
+                wsl_args.append(arg)
+        result = subprocess.run(['wsl', '-d', 'Ubuntu', ff_path] + wsl_args + [input_path],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    else:
+        result = subprocess.run(["FlexFringe/flexfringe"] + command + [args[0]],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     print(result.returncode, result.stdout, result.stderr)
 
 

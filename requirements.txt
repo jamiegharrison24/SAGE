@@ -1,0 +1,4 @@
+graphviz
+requests
+numpy
+matplotlib
