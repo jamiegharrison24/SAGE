@@ -1,0 +1,14 @@
+# Normalize line endings across Windows (WSL) and Linux collaborators.
+# Text files are stored with LF in the repo and checked out with LF,
+# so no more phantom CRLF diffs between machines.
+* text=auto eol=lf
+
+# Keep shell scripts LF explicitly (they must be LF to run).
+*.sh text eol=lf
+
+# Binary files: never touch their bytes or convert line endings.
+FlexFringe/flexfringe binary
+*.png binary
+*.svg binary
+*.dot binary
+*.gz binary
