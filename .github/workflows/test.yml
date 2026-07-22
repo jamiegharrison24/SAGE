@@ -5,6 +5,13 @@ on:
     branches-ignore:
       - 'docker'
 
+# Regression ground truth: this fork's own `main` (jamiegharrison24/SAGE), NOT
+# upstream tudelft-cda-lab/SAGE. The extension deliberately diverges from
+# upstream, so comparing against upstream would fail every PR. The frozen
+# `baseline-v1` tag is a separate reference for the honours evaluation, not for
+# per-PR regression. The FlexFringe binary and spdfa-config.ini are committed to
+# the repo, so no external download or copy is needed.
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,22 +26,14 @@ jobs:
           sudo apt install graphviz bc
           pip install requests numpy matplotlib pycodestyle
 
-      - name: Fetch flexfringe binary
-        env:
-          GH_TOKEN: ${{ github.token }}
-          FF_REPO: "https://github.com/tudelft-cda-lab/FlexFringe"
-        shell: bash
-        run: |
-          gh release download latest -R $FF_REPO -p "flexfringe-x64-linux"  # Might have to be updated if FlexFringe decides to change the binary name
-
-      - name: Clone main branch of tudelft-cda-lab/SAGE
+      - name: Clone main branch of jamiegharrison24/SAGE (regression ground truth)
         uses: actions/checkout@v4
         with:
-          repository: 'tudelft-cda-lab/SAGE'
+          repository: 'jamiegharrison24/SAGE'
           ref: 'main'
           path: 'SAGE-main'
 
-      - name: Clone PR branch of tudelft-cda-lab/SAGE
+      - name: Clone PR branch
         uses: actions/checkout@v4
         with:
           path: 'SAGE-updated'
@@ -65,26 +64,11 @@ jobs:
           rm -rf SAGE-main/alerts/
           cp -R SAGE-updated/alerts SAGE-main/alerts/
 
-      - name: Copy FlexFringe to SAGE (main branch)
-        shell: bash
-        if: '!contains(github.event.pull_request.labels.*.name, ''changes-ags'')'  # With 'changes-ags' label no regression tests will be run
-        run: |
-          cd SAGE-main/
-          mkdir FlexFringe/
-          mkdir FlexFringe/ini/
-          cp ../flexfringe-x64-linux FlexFringe/flexfringe  # Might have to be updated if FlexFringe decides to change the binary name
-          chmod u+x FlexFringe/flexfringe
-          mv spdfa-config.ini FlexFringe/ini/
-
-      - name: Copy FlexFringe to SAGE (updated branch)
+      - name: Ensure committed FlexFringe binary is executable
         shell: bash
         run: |
-          cd SAGE-updated/
-          mkdir FlexFringe/
-          mkdir FlexFringe/ini/
-          cp ../flexfringe-x64-linux FlexFringe/flexfringe  # Might have to be updated if FlexFringe decides to change the binary name
-          chmod u+x FlexFringe/flexfringe
-          mv spdfa-config.ini FlexFringe/ini/
+          chmod u+x SAGE-main/FlexFringe/flexfringe
+          chmod u+x SAGE-updated/FlexFringe/flexfringe
 
       - name: Copy the test file in the top directory
         shell: bash
