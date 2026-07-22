@@ -108,7 +108,7 @@ expected = [(0, 1), (6, 8), (15, 17), (196, 197)]
 run_episode_test(y, expected, "Test case 14: ramp up at end")
 
 
-print(f"Tests passed {passed_tests }/{total_tests}")
+print(f"Tests passed {passed_tests}/{total_tests}")
 
 if passed_tests != total_tests:
     exit(1)
