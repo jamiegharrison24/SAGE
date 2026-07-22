@@ -2,6 +2,9 @@
 
 In this file you can find the information that might be useful if you want to contribute to SAGE. Thank you!
 
+> Part of the [documentation index](README.md). See also the project
+> [`README.md`](../README.md) for running SAGE.
+
 ## Pull Request
 
 ### Branch strategy

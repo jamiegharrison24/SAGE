@@ -1,5 +1,8 @@
 # Reproducible Baseline (Task A1)
 
+> Part of the [documentation index](README.md). See also the project
+> [`README.md`](../README.md) for running SAGE.
+
 This document pins the locked, reproducible baseline for the SAGE extension
 project. Both project members confirm SAGE runs from a clean checkout and
 produces attack graphs at this reference point. All later work (MITRE mapping,

@@ -6,11 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SAGE (IntruSion Alert-driven Attack Graph Extractor) is a Python tool that processes Suricata IDS alerts to automatically generate attack graphs. It uses a probabilistic automaton model (S-PDFA, via the external FlexFringe tool) to learn attacker behavior patterns from alert sequences and visualizes them as directed attack graphs.
 
-This repository is a fork (`origin`: `jamiegharrison24/SAGE`, `upstream`: `tudelft-cda-lab/SAGE`) used for an honours extension project. A locked, reproducible reference point is pinned as tag `baseline-v1` — see `BASELINE.md` before making comparative changes.
+This repository is a fork (`origin`: `jamiegharrison24/SAGE`, `upstream`: `tudelft-cda-lab/SAGE`) used for an honours extension project. A locked, reproducible reference point is pinned as tag `baseline-v1` — see `docs/BASELINE.md` before making comparative changes. Other contributor docs (contributing guidelines, Windows/WSL setup) are indexed at `docs/README.md`.
 
 ## Environment
 
-SAGE runs in a **Linux environment**. Contributors run it either natively on Linux/macOS or, on Windows, inside **WSL (Ubuntu)** — there is no native-Windows runtime because FlexFringe is a Linux binary. Windows contributors should follow `WINDOWS_SETUP.md`.
+SAGE runs in a **Linux environment**. Contributors run it either natively on Linux/macOS or, on Windows, inside **WSL (Ubuntu)** — there is no native-Windows runtime because FlexFringe is a Linux binary. Windows contributors should follow `docs/WINDOWS_SETUP.md`.
 
 ## Setup Requirements
 

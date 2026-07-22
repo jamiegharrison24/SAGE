@@ -5,21 +5,31 @@ Repository to accompany our publications
 
 "Alert-driven Attack Graph Generation using S-PDFA" at TDSC'21.
 
+> This repository is a fork (`jamiegharrison24/SAGE`, upstream
+> `tudelft-cda-lab/SAGE`) used for an honours extension project. If you're
+> contributing to this fork, see the [documentation index](docs/README.md)
+> for contributing guidelines, the pinned baseline, and Windows/WSL setup.
+
 ## Hassle-free way to run SAGE
 
-Switch to the [`docker` branch](https://github.com/tudelft-cda-lab/SAGE/tree/docker) to download and run SAGE inside a docker container. No additional installations are required in that case.
+Switch to the [`docker` branch](https://github.com/tudelft-cda-lab/SAGE/tree/docker) to download and run SAGE inside a docker container. No additional installations are required in that case. Note: the `docker` branch is an upstream artefact and is not maintained in this fork.
 
 ## Run SAGE yourself
 
 ### Requires
-- Flexfringe (https://github.com/tudelft-cda-lab/FlexFringe)
-- Python packages
-  - `graphviz`
-  - `requests`
-  - `numpy`
-  - `matplotlib`
 
+SAGE runs in a **Linux environment** (native Linux/macOS, or WSL Ubuntu on
+Windows — see `WINDOWS_SETUP.md`), since FlexFringe is a Linux binary.
 
+- The FlexFringe binary (`FlexFringe/flexfringe`) and its config
+  (`FlexFringe/ini/spdfa-config.ini`) are **already committed to this repo**,
+  so a fresh checkout is runnable without building FlexFringe from source. Run
+  `./setup.sh` (Linux/WSL/macOS) or `setup.ps1` (Windows) to install the
+  remaining dependencies, or install manually:
+  - `graphviz` (system package; `dot` must be on PATH), `bc`
+  - Python packages from `requirements.txt`: `graphviz`, `requests`, `numpy`, `matplotlib`
+- Alert data ships gzipped; decompress before the first run:
+  `find alerts/ -type f -name '*.gz' | xargs gunzip`
 
 ### Usage
 `python sage.py path_to_json_files experiment_name [-h] [-t T] [-w W] [--timerange STARTRANGE ENDRANGE] [--dataset {cptc,other}] [--keep-files]`
@@ -53,14 +63,13 @@ Tip: in case you often use the same non-default values, you can create an alias 
 
 ### First time use
 
-- Clone [FlexFringe repository](https://github.com/tudelft-cda-lab/FlexFringe).
-- Move `spdfa-config.ini` file to `FlexFringe/ini/` directory. Alternatively, you can set the `path_to_ini` variable in `sage.py` to `"./spdfa-config.ini"`.
+- The FlexFringe binary and config are already in place at `FlexFringe/flexfringe`
+  and `FlexFringe/ini/spdfa-config.ini`. You only need to rebuild FlexFringe
+  from [source](https://github.com/tudelft-cda-lab/FlexFringe) if the committed
+  binary is missing or incompatible with your machine — `./setup.sh` / `setup.ps1`
+  do this automatically when needed.
 - In case you move the `FlexFringe/` directory to another location, update the function `flexfringe` in `model_learning.py` accordingly.
-- You can find the compressed alerts for the [Collegiate Penetration Testing Competition (CPTC)](https://cp.tc/research) and [Collegiate Cyber Defense Competition (CCDC)](https://github.com/FrankHassanabad/suricata-sample-data) datasets (taken from the linked sources) in the `alerts/` directory. To uncompress the alerts, run:
-
-  `find alerts/ -type f -name '*.gz' | xargs gunzip`
-
-  from the root directory of the repository. You can add other datasets, however make sure that they follow the same format.
+- You can find the compressed alerts for the [Collegiate Penetration Testing Competition (CPTC)](https://cp.tc/research) and [Collegiate Cyber Defense Competition (CCDC)](https://github.com/FrankHassanabad/suricata-sample-data) datasets (taken from the linked sources) in the `alerts/` directory. If you haven't already decompressed them (see *Requires* above), you can add other datasets too, provided they follow the same format.
 - You can run SAGE with the default parameters using the following command:
 
   `python sage.py alerts/ firstExp`,

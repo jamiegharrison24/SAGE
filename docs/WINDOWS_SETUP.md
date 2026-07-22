@@ -2,6 +2,9 @@
 
 This guide walks you through setting up SAGE on a Windows 11 machine from scratch.
 
+> Part of the [documentation index](README.md). See also the project
+> [`README.md`](../README.md) for running SAGE once set up.
+
 ---
 
 ## Prerequisites
@@ -208,46 +211,13 @@ Test-Path alerts\cptc-2017\NationalTeam1.json   # should print True
 
 ## Running SAGE
 
-All commands are run from the SAGE project directory in PowerShell or Command Prompt.
+All commands are run from the SAGE project directory in PowerShell or Command Prompt,
+using the same `python sage.py ...` invocations and options described in
+[`README.md`](../README.md#usage) — nothing Windows-specific changes here.
 
-**CPTC 2017 dataset:**
-```powershell
-python sage.py alerts/cptc-2017/ exp-2017 --dataset cptc
-```
-
-**CPTC 2018 dataset** (custom time window and episode width):
-```powershell
-python sage.py alerts/cptc-2018/ exp-2018 -t 2.0 -w 200 --dataset cptc
-```
-
-**CCDC dataset** (keep intermediate files):
-```powershell
-python sage.py alerts/ccdc/ exp-ccdc --dataset other --keep-files
-```
-
-Output attack graphs (`.png` and `.svg`) are written to a directory named `<experiment_name>AGs/` (e.g. `exp-2017AGs/`).
-
-### Key command-line options
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `-t THRESHOLD` | `1.0` | Time threshold (seconds) for deduplicating alerts |
-| `-w WINDOW` | `150` | Sliding window size (seconds) for episode aggregation |
-| `--dataset` | required | Alert format: `cptc` or `other` |
-| `--keep-files` | off | Keep intermediate FlexFringe files after the run |
-
----
-
-## Running Tests
-
-```powershell
-# Unit tests
-python tests.py
-
-# Style check
-pycodestyle --ignore=E501,W503,W504 *.py
-pycodestyle --ignore=E501,W503,W504 signatures/*.py
-```
+For running the Python unit tests, style checks, and the shell-based regression
+tests, see [`CONTRIBUTING.md`](CONTRIBUTING.md); note the regression tests in
+`test-scripts/` are Bash scripts and need to be run inside WSL.
 
 ---
 
