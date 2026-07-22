@@ -103,10 +103,10 @@ def _readfile(fname):
     @param fname: the name of the file with the alerts
     @return: the unparsed alerts
     """
-    with open(fname, 'r') as f:
+    with open(fname, 'r', encoding='utf-8-sig') as f:
         unparsed_data = json.load(f)
 
-    unparsed_data = unparsed_data[::-1] # Reverse the list, for chronological order 
+    unparsed_data = unparsed_data[::-1]  # Reverse the list, for chronological order
     return unparsed_data
 
 
@@ -141,7 +141,7 @@ def _parse(unparsed_data):
             host = d['host'][3:]
         else:
             host = 'dummy'
-            
+
         # Get the timestamp
         # Convert the timestamp to a datetime object
         # Calculate the difference between the current and previous timestamp

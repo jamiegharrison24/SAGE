@@ -174,7 +174,7 @@ def traverse(dfa, sinks, sequence):
 
 
 # Step 6.2: Encode traces (include state IDs to mcat|mserv)
-def encode_sequences(dfa, sinks, subsequences): 
+def encode_sequences(dfa, sinks, subsequences):
     """
     Encodes the episode traces into state traces, i.e. gathers the state IDs.
 
@@ -191,14 +191,14 @@ def encode_sequences(dfa, sinks, subsequences):
     for i, (attacker, episodes) in enumerate(subsequences.items()):
         if len(episodes) < 3:  # Discard subsequences of length < 3 (can be commented out, also in make_state_sequences)
             continue
-        
+
         mcats = [x[2] for x in episodes]
         max_services = [_most_frequent(epi[6]) for epi in episodes]
-        trace_ = [str(small_mapping[c])+"|"+str(s) for (c,s) in zip(mcats,max_services)]
+        trace_ = [str(small_mapping[c]) + "|" + str(s) for (c, s) in zip(mcats, max_services)]
         trace_.reverse()
 
         attackers.append(attacker)
-        
+
         state_list, _sev_sinks = traverse(dfa, sinks, trace_)
         state_list = state_list[1:]  # Remove the root node (with state ID 0)
         state_trace = list(zip(trace_, state_list))
@@ -220,23 +220,20 @@ def encode_sequences(dfa, sinks, subsequences):
         high_sev_states.update(high_sev)
         sev_sinks.update(_sev_sinks)
 
-        
         new_state = [int(x) for x in state_list][::-1]
-        assert(len(state_list) == len(episodes))
-
-
+        assert (len(state_list) == len(episodes))
 
         # start_time, end_time, mcat, state_ID, mserv, list of unique signatures, (1st and last timestamp)
         state_subsequence = [(epi[0], epi[1], epi[2], state_trace[i][1], max_services[i], epi[7], epi[8])
                              for i, epi in enumerate(episodes)]
-                             
+
         parts = attacker.split('->')
         attacker_victim = parts[0] + '->' + parts[1].split('-')[0]  # Remove the subsequence number (if present)
 
         if attacker_victim not in state_sequences.keys():
             state_sequences[attacker_victim] = []
         state_sequences[attacker_victim].extend(state_subsequence)
-        state_sequences[attacker_victim].sort(key=lambda epi: epi[0])  # Sort in place based on starting times                     
+        state_sequences[attacker_victim].sort(key=lambda epi: epi[0])  # Sort in place based on starting times
 
     print('Traces in sinks:', traces_in_sinks, 'Total traces:', total_traces, 'Percentage:',
           100 * (traces_in_sinks / float(total_traces)))
@@ -244,7 +241,6 @@ def encode_sequences(dfa, sinks, subsequences):
     print('Total high-severity states:', len(high_sev_states))
     print('Total severe sinks:', len(sev_sinks))
     return state_sequences, sev_sinks
-
 
 
 def group_episodes_per_av(state_sequences):
