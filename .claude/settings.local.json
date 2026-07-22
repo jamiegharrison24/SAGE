@@ -17,7 +17,12 @@
       "PowerShell(wsl -d Ubuntu -- bash -c \"cd /tmp/FlexFringe && rm -rf build && mkdir build && cd build && cmake -DENABLE_PYTHON=Off .. 2>&1 | tail -5 && make -j4 2>&1 | tail -5\")",
       "PowerShell(wsl -d Ubuntu -- bash -c \"cp ~/FlexFringe/build/flexfringe /mnt/d/Projects/SAGE/SAGE/FlexFringe/flexfringe && echo 'Copied'\")",
       "PowerShell(wsl -d Ubuntu -- bash -c \"tail -20 /mnt/d/Projects/SAGE/SAGE/exp-2017.txt 2>/dev/null\"; Get-Content \"C:\\\\Users\\\\Jamie\\\\.claude\\\\projects\\\\D--Projects-SAGE-SAGE\\\\70c3c178-1cd7-48ec-9933-e7bb13c61ac9\\\\tool-results\\\\b855h5c50.txt\" -Tail 15)",
-      "PowerShell(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\" | Select-Object Name, Length | Select-Object -First 10; \\(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\"\\).Count)"
+      "PowerShell(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\" | Select-Object Name, Length | Select-Object -First 10; \\(Get-ChildItem \"D:\\\\Projects\\\\SAGE\\\\SAGE\\\\exp-2017AGs\\\\\"\\).Count)",
+      "Bash(dot -V)",
+      "Bash(python -c \"import graphviz, requests, numpy, matplotlib; print\\('OK'\\)\")",
+      "Bash(gh run *)",
+      "PowerShell(gh run *)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
