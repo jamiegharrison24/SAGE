@@ -6,12 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SAGE (IntruSion Alert-driven Attack Graph Extractor) is a Python tool that processes Suricata IDS alerts to automatically generate attack graphs. It uses a probabilistic automaton model (S-PDFA, via the external FlexFringe tool) to learn attacker behavior patterns from alert sequences and visualizes them as directed attack graphs.
 
+This repository is a fork (`origin`: `jamiegharrison24/SAGE`, `upstream`: `tudelft-cda-lab/SAGE`) used for an honours extension project. A locked, reproducible reference point is pinned as tag `baseline-v1` — see `BASELINE.md` before making comparative changes.
+
+## Environment
+
+SAGE runs in a **Linux environment**. Contributors run it either natively on Linux/macOS or, on Windows, inside **WSL (Ubuntu)** — there is no native-Windows runtime because FlexFringe is a Linux binary. Windows contributors should follow `WINDOWS_SETUP.md`.
+
 ## Setup Requirements
 
-- **FlexFringe** (external dependency): Clone from https://github.com/tudelft-cda-lab/FlexFringe and place the binary at `FlexFringe/flexfringe`. Move `spdfa-config.ini` to `FlexFringe/ini/spdfa-config.ini`.
-- **Python packages**: `graphviz`, `requests`, `numpy`, `matplotlib`
-- **System tools**: `graphviz` (`dot` command must be in PATH), `bc`
-- **Alert data**: Decompress with `find alerts/ -type f -name '*.gz' | xargs gunzip`
+The FlexFringe binary (`FlexFringe/flexfringe`, a Linux ELF x86-64) and its config (`FlexFringe/ini/spdfa-config.ini`) are **committed to the repo**, so a fresh checkout is runnable without building FlexFringe from source. The setup scripts install the remaining dependencies:
+
+- **Automated setup**: run `./setup.sh` (Linux / WSL / macOS) or `setup.ps1` (Windows) to install system deps, Python packages, and build FlexFringe if the committed binary is missing or incompatible.
+- **Python packages** (`requirements.txt`): `graphviz`, `requests`, `numpy`, `matplotlib` — install with `pip install -r requirements.txt`.
+- **System tools**: `graphviz` (`dot` command must be in PATH), `bc`.
+- **Alert data**: ships gzipped; decompress before the first run with `find alerts/ -type f -name '*.gz' | xargs gunzip`.
+- **FlexFringe (only if rebuilding)**: source at https://github.com/tudelft-cda-lab/FlexFringe; place the compiled binary at `FlexFringe/flexfringe` and config at `FlexFringe/ini/spdfa-config.ini`.
+
+## Version Control
+
+- **Line endings**: `.gitattributes` normalizes all text files to **LF** in the repo (contributors work across native Linux and Windows/WSL). Do not commit CRLF; if you see spurious full-file diffs, run `git add --renormalize .`.
+- **Baseline**: do not rewrite or force-push over the `baseline-v1` commit — later evaluation depends on it. Cut a new tag rather than moving the baseline.
 
 ## Commands
 
