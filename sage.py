@@ -2,7 +2,6 @@ import argparse
 import glob
 import os
 import platform
-import re
 import shutil
 import subprocess
 
@@ -14,7 +13,7 @@ if platform.system() == 'Windows' and shutil.which('dot') is None:
 from ag_generation import make_attack_graphs
 from alert_loading import load_iana_mapping, load_data, group_alerts_per_team
 from episode_sequence_generation import aggregate_into_episodes, host_episode_sequences, break_into_subbehaviors
-from model_learning import generate_traces, flexfringe, load_model, encode_sequences
+from model_learning import generate_traces, flexfringe, fix_flexfringe_output, load_model, encode_sequences
 from plotting import plot_histogram
 
 
@@ -71,29 +70,7 @@ flexfringe(path_to_traces, ini=path_to_ini, symbol_count="2", state_count="4")
 subprocess.run(["dot", "-Tpng", path_to_traces + ".ff.final.dot", "-o", path_to_traces + ".png"])
 
 print('------ !! Special: Fixing syntax error in main model and sink files ------')
-print('--- Sinks')
-with open(path_to_traces + ".ff.finalsinks.json", 'r') as file:
-    filedata = file.read()
-stripped = re.sub(r'[\s+]', '', filedata)
-extra_commas = re.search(r'(}(,+)]}$)', stripped)
-if extra_commas is not None:
-    comma_count = (extra_commas.group(0)).count(',')
-    print(extra_commas.group(0), comma_count)
-    filedata = ''.join(filedata.rsplit(',', comma_count))
-    with open(path_to_traces + ".ff.finalsinks.json", 'w') as file:
-        file.write(filedata)
-
-print('--- Main')
-with open(path_to_traces + ".ff.final.json", 'r') as file:
-    filedata = file.read()
-stripped = re.sub(r'[\s+]', '', filedata)
-extra_commas = re.search(r'(}(,+)]}$)', stripped)
-if extra_commas is not None:
-    comma_count = (extra_commas.group(0)).count(',')
-    print(extra_commas.group(0), comma_count)
-    filedata = ''.join(filedata.rsplit(',', comma_count))
-    with open(path_to_traces + ".ff.final.json", 'w') as file:
-        file.write(filedata)
+fix_flexfringe_output(path_to_traces)
 
 print('------ Loading and traversing S-PDFA ------')
 main_model = load_model(path_to_traces + ".ff.final.json")

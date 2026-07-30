@@ -108,6 +108,40 @@ def flexfringe(*args, **kwargs):
     print(result.returncode, result.stdout, result.stderr)
 
 
+def _fix_json_trailing_commas(json_file):
+    """
+    Strips spurious trailing commas that FlexFringe can emit before the closing `]}` of a model file,
+        which would otherwise break `json.loads`.
+
+    @param json_file: the path to the `.ff.final.json` or `.ff.finalsinks.json` file to fix in place
+    """
+    with open(json_file, 'r') as file:
+        filedata = file.read()
+    stripped = re.sub(r'[\s+]', '', filedata)
+    extra_commas = re.search(r'(}(,+)]}$)', stripped)
+    if extra_commas is not None:
+        comma_count = (extra_commas.group(0)).count(',')
+        print(extra_commas.group(0), comma_count)
+        filedata = ''.join(filedata.rsplit(',', comma_count))
+        with open(json_file, 'w') as file:
+            file.write(filedata)
+
+
+# Step 5.1: Fix syntax errors FlexFringe can leave in its output files
+def fix_flexfringe_output(path_to_traces):
+    """
+    Fixes trailing-comma syntax errors in the main model and sinks model files produced by FlexFringe,
+        so that they can be parsed by `load_model`. Must be called after `flexfringe()` and before `load_model()`.
+
+    @param path_to_traces: the path to the traces file passed to `flexfringe()` (the model files are derived from it)
+    """
+    print('--- Sinks')
+    _fix_json_trailing_commas(path_to_traces + ".ff.finalsinks.json")
+
+    print('--- Main')
+    _fix_json_trailing_commas(path_to_traces + ".ff.final.json")
+
+
 # Step 6.1: Load the resulting model
 def load_model(model_file):
     """
