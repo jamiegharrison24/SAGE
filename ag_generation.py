@@ -1,3 +1,11 @@
+"""
+Stage 9 of the SAGE pipeline: rendering attack graphs from state sequences.
+
+Entry point: make_attack_graphs(state_sequences, severe_sinks, path_to_traces, ag_directory, save_ag)
+    -- consumes the `state_sequences`/`severe_sinks` produced by
+    `model_learning.encode_sequences` (see `pipeline.learn_model`), independent
+    of how the S-PDFA model itself was learned or loaded.
+"""
 import os
 import subprocess
 

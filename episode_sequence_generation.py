@@ -1,3 +1,12 @@
+"""
+Stages 4-5 of the SAGE pipeline: aggregating grouped alerts into episodes,
+then into per-host episode subsequences ready for trace generation.
+
+Entry points (see pipeline.build_episode_subsequences):
+    aggregate_into_episodes(team_data, team_start_times, step) -- Stage 4
+    host_episode_sequences(team_episodes)                       -- Stage 5.1
+    break_into_subbehaviors(host_data)                          -- Stage 5.2
+"""
 from itertools import accumulate
 
 import numpy as np

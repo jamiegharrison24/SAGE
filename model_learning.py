@@ -1,3 +1,16 @@
+"""
+Stages 6-8 of the SAGE pipeline: generating FlexFringe traces, learning the
+S-PDFA, and traversing it to encode episode traces into state sequences.
+
+Entry points (see pipeline.learn_model, which is cleanly separable from
+attack graph generation -- callers that only need the model or the state
+sequences can stop after this module):
+    generate_traces(subsequences, datafile)             -- Stage 6
+    flexfringe(*args, **kwargs)                          -- Stage 7 (invokes the FlexFringe binary)
+    fix_flexfringe_output(path_to_traces)                -- Stage 7.1 (repairs FlexFringe's output JSON)
+    load_model(model_file)                               -- Stage 8.1
+    encode_sequences(dfa, sinks, subsequences)           -- Stage 8.2
+"""
 import json
 import os
 import platform
