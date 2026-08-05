@@ -24,7 +24,11 @@
       "PowerShell(gh run *)",
       "WebFetch(domain:github.com)",
       "Bash(wsl *)",
-      "Bash(wsl.exe *)"
+      "Bash(wsl.exe *)",
+      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/run_cmp.sh\")",
+      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/full_cmp.sh\")",
+      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/determinism.sh\")",
+      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/nondet_char.sh\")"
     ]
   }
 }

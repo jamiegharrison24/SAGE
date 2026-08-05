@@ -29,6 +29,7 @@ from signatures.alert_signatures import usual_mapping, unknown_mapping, ccdc_com
 
 IANA_CSV_FILE = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
 IANA_NUM_RETRIES = 5
+IANA_TIMEOUT = 30  # Seconds to wait for the IANA download before giving up on an attempt
 CPTC_BAD_IP = '169.254.169.254'
 
 
@@ -63,8 +64,12 @@ def load_iana_mapping():
     """
     # Perform the first request and in case of a failure retry the specified number of times
     for attempt in range(IANA_NUM_RETRIES + 1):
-        response = requests.get(IANA_CSV_FILE)
-        if response.ok:
+        try:
+            response = requests.get(IANA_CSV_FILE, timeout=IANA_TIMEOUT)
+            succeeded = response.ok
+        except requests.exceptions.RequestException:  # Covers the timeout promised by the docstring
+            succeeded = False
+        if succeeded:
             content = response.content.decode("utf-8")
             break
         elif attempt < IANA_NUM_RETRIES:
@@ -186,7 +191,7 @@ def _remove_duplicates(unfiltered_alerts, plot=False, gap=1.0):
                        and not (unfiltered_alerts[x][0] <= gap  # Diff from previous alert is less than gap sec
                                 and unfiltered_alerts[x][1] == unfiltered_alerts[x - 1][1]  # Same srcIP
                                 and unfiltered_alerts[x][3] == unfiltered_alerts[x - 1][3]  # Same destIP
-                                and unfiltered_alerts[x][5] == unfiltered_alerts[x - 1][5]  # Same suricata category
+                                and unfiltered_alerts[x][5] == unfiltered_alerts[x - 1][5]  # Same suricata signature
                                 and unfiltered_alerts[x][2] == unfiltered_alerts[x - 1][2]  # Same srcPort
                                 and unfiltered_alerts[x][4] == unfiltered_alerts[x - 1][4])]  # Same destPort
     if plot:
@@ -219,10 +224,18 @@ def load_data(path_to_alerts, filtering_window, start, end, dataset_name):
     for f in files:
         name = os.path.basename(f)[:-5]
         print(name)
-        _team_labels.append(name)
 
         parsed_alerts = _parse(_readfile(f), dataset_name)
         parsed_alerts = _remove_duplicates(parsed_alerts, gap=filtering_window)
+
+        # A team can be left with no alerts at all (e.g. all non-malicious, or all duplicates), in which case
+        # there is no first alert to anchor the time range to. Skip the team entirely so that the three
+        # per-team lists stay aligned with each other.
+        if not parsed_alerts:
+            print('No alerts left after filtering, skipping', name)
+            continue
+
+        _team_labels.append(name)
 
         # EXP: Limit alerts by timing is better than limiting volume because each team is on a different scale.
         # 50% alerts for one team end at a diff time than for others

@@ -267,7 +267,6 @@ def encode_sequences(dfa, sinks, subsequences):
         high_sev_states.update(high_sev)
         sev_sinks.update(_sev_sinks)
 
-        new_state = [int(x) for x in state_list][::-1]
         assert (len(state_list) == len(episodes))
 
         # start_time, end_time, mcat, state_ID, mserv, list of unique signatures, (1st and last timestamp)

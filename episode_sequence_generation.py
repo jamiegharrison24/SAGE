@@ -264,9 +264,6 @@ def break_into_subbehaviors(host_data, full_seq=False):
             if full_seq:
                 subsequences[attacker_victim] = episodes
                 continue
-            if len(episodes) == 1:
-                subsequences[attacker_victim + '-0'] = episodes
-                continue
 
             # This part of the code only needs to cut the sequences at appropriate places -- no discarding is needed.
             # The discarding already happens later in make_attack_graphs.
