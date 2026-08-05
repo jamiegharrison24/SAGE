@@ -1,3 +1,16 @@
+"""
+Stages 6-8 of the SAGE pipeline: generating FlexFringe traces, learning the
+S-PDFA, and traversing it to encode episode traces into state sequences.
+
+Entry points (see pipeline.learn_model, which is cleanly separable from
+attack graph generation -- callers that only need the model or the state
+sequences can stop after this module):
+    generate_traces(subsequences, datafile)             -- Stage 6
+    flexfringe(*args, **kwargs)                          -- Stage 7 (invokes the FlexFringe binary)
+    fix_flexfringe_output(path_to_traces)                -- Stage 7.1 (repairs FlexFringe's output JSON)
+    load_model(model_file)                               -- Stage 8.1
+    encode_sequences(dfa, sinks, subsequences)           -- Stage 8.2
+"""
 import json
 import os
 import platform
@@ -106,6 +119,40 @@ def flexfringe(*args, **kwargs):
         result = subprocess.run(["FlexFringe/flexfringe"] + command + [args[0]],
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     print(result.returncode, result.stdout, result.stderr)
+
+
+def _fix_json_trailing_commas(json_file):
+    """
+    Strips spurious trailing commas that FlexFringe can emit before the closing `]}` of a model file,
+        which would otherwise break `json.loads`.
+
+    @param json_file: the path to the `.ff.final.json` or `.ff.finalsinks.json` file to fix in place
+    """
+    with open(json_file, 'r') as file:
+        filedata = file.read()
+    stripped = re.sub(r'[\s+]', '', filedata)
+    extra_commas = re.search(r'(}(,+)]}$)', stripped)
+    if extra_commas is not None:
+        comma_count = (extra_commas.group(0)).count(',')
+        print(extra_commas.group(0), comma_count)
+        filedata = ''.join(filedata.rsplit(',', comma_count))
+        with open(json_file, 'w') as file:
+            file.write(filedata)
+
+
+# Step 5.1: Fix syntax errors FlexFringe can leave in its output files
+def fix_flexfringe_output(path_to_traces):
+    """
+    Fixes trailing-comma syntax errors in the main model and sinks model files produced by FlexFringe,
+        so that they can be parsed by `load_model`. Must be called after `flexfringe()` and before `load_model()`.
+
+    @param path_to_traces: the path to the traces file passed to `flexfringe()` (the model files are derived from it)
+    """
+    print('--- Sinks')
+    _fix_json_trailing_commas(path_to_traces + ".ff.finalsinks.json")
+
+    print('--- Main')
+    _fix_json_trailing_commas(path_to_traces + ".ff.final.json")
 
 
 # Step 6.1: Load the resulting model
@@ -220,7 +267,6 @@ def encode_sequences(dfa, sinks, subsequences):
         high_sev_states.update(high_sev)
         sev_sinks.update(_sev_sinks)
 
-        new_state = [int(x) for x in state_list][::-1]
         assert (len(state_list) == len(episodes))
 
         # start_time, end_time, mcat, state_ID, mserv, list of unique signatures, (1st and last timestamp)

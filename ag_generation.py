@@ -1,3 +1,11 @@
+"""
+Stage 9 of the SAGE pipeline: rendering attack graphs from state sequences.
+
+Entry point: make_attack_graphs(state_sequences, severe_sinks, path_to_traces, ag_directory, save_ag)
+    -- consumes the `state_sequences`/`severe_sinks` produced by
+    `model_learning.encode_sequences` (see `pipeline.learn_model`), independent
+    of how the S-PDFA model itself was learned or loaded.
+"""
 import os
 import subprocess
 
@@ -201,8 +209,10 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
     @param dir_name: the name of the directory where the attack graphs should be saved
     @param save_ag: whether to save the attack graphs (i.e. create dot, png and svg files with the attack graphs)
     """
-    tcols = {'t0': 'maroon', 't1': 'orange', 't2': 'darkgreen', 't3': 'blue', 't4': 'magenta',
-             't5': 'purple', 't6': 'brown', 't7': 'tomato', 't8': 'turquoise', 't9': 'skyblue'}
+    # Team colours, indexed by the team number in the 't<N>' key. Teams beyond the end of the palette
+    # reuse colours from the start of it, so that a run with more than len(tcols) teams still renders.
+    tcols = ['maroon', 'orange', 'darkgreen', 'blue', 'magenta',
+             'purple', 'brown', 'tomato', 'turquoise', 'skyblue']
 
     if save_ag:
         try:
@@ -251,7 +261,7 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
             node_signatures = dict()
             already_addressed = set()
             for team_attacker, attempts in team_attack_attempts.items():  # For each attacker that obtains the objective
-                color = tcols[team_attacker.split('-')[0]]  # Team color
+                color = tcols[int(team_attacker.split('-')[0][1:]) % len(tcols)]  # Team color
                 # _print_unique_attempts(team_attacker, attempts)
 
                 for attempt in attempts:
@@ -272,7 +282,8 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
                                 if _is_severe_sink(vname, sev_sinks):  # If med- or high-sev sink, make dotted
                                     lines.append(
                                         (0, '"' + _translate(vname) + '" [style="dotted,filled", fillcolor= yellow]'))
-                                    already_addressed.add(vname.split('|')[2])
+                                    if len(vname.split('|')) > 2:  # Low-sev nodes carry no state ID to record
+                                        already_addressed.add(vname.split('|')[2])
                                 else:  # Else, normal starting node
                                     lines.append((0, '"' + _translate(vname) + '" [style=filled, fillcolor= yellow]'))
                         else:  # For other actions
@@ -298,11 +309,13 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
 
             # Go over all vertices again and define their shapes + make high-sev sink states dotted
             for vname, signatures in node_signatures.items():
-                mcat = vname.split('|')[0]
+                vname_parts = vname.split('|')
+                mcat = vname_parts[0]
                 mcat = macro_inv[micro2macro['MicroAttackStage.' + mcat]]
                 shape = shapes[mcat]
-                # If it's oval, we don't do anything because it is not a high-sev sink
-                if shape == shapes[0] or vname.split('|')[2] in already_addressed:
+                # If it's oval, we don't do anything because it is not a high-sev sink.
+                # Low-sev nodes are named `mcat|mserv` (no state ID), so there is no ID to look up either.
+                if shape == shapes[0] or (len(vname_parts) > 2 and vname_parts[2] in already_addressed):
                     lines.append((0, '"' + _translate(vname) + '" [shape=' + shape + ']'))
                 else:
                     if _is_severe_sink(vname, sev_sinks):
@@ -310,7 +323,9 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
                     else:
                         lines.append((0, '"' + _translate(vname) + '" [shape=' + shape + ']'))
                 # Add a tooltip with signatures
-                lines.append((1, '"' + _translate(vname) + '"' + ' [tooltip="' + "\n".join(signatures) + '"]'))
+                # Sorted so that the rendered AG is byte-reproducible: `signatures` is a set, and Python
+                # randomises string hashing per process, so an unsorted join varies between runs.
+                lines.append((1, '"' + _translate(vname) + '"' + ' [tooltip="' + "\n".join(sorted(signatures)) + '"]'))
             lines.append((1000, '}'))
             print('\t     Created')
 

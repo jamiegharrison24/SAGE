@@ -75,6 +75,35 @@ The pipeline in `sage.py` (which acts as the main script) runs these steps in se
 
 9. **Attack graph generation** (`ag_generation.py:make_attack_graphs`) — for each victim IP × high-severity objective, collects all attack attempts reaching that objective, then writes GraphViz `.dot` files and renders `.png`/`.svg` outputs into `<experiment_name>AGs/` directory.
 
+## Entry Points for Downstream Development
+
+The pipeline is orchestrated by `pipeline.py`, not `sage.py` -- `sage.py` is
+only argparse + `main()` over `pipeline.run_pipeline()`. Code that wants to
+reuse or extend the pipeline (rather than shell out to the CLI) should import
+`pipeline` directly:
+
+- `pipeline.PipelineConfig` -- explicit dataclass of run parameters (mirrors
+  the CLI args: `path_to_json_files`, `experiment_name`, `dataset_name`, etc.)
+- `pipeline.run_pipeline(config)` -- runs the full pipeline, returns a
+  `PipelineResult` (`state_sequences`, `severe_sinks`, `main_model`,
+  `sinks_model`, `episode_subsequences`, `team_data`, `team_episodes`, ...)
+- Individual stage functions are also exported for partial runs:
+  `pipeline.load_alerts`, `pipeline.build_episode_subsequences`,
+  `pipeline.learn_model` (stops after the S-PDFA is learned and traversed,
+  before AG rendering), `pipeline.generate_attack_graphs`.
+
+Two contribution-relevant seams:
+- **MITRE mapping**: attack stage classification lives in `signatures/`
+  (`attack_stages.py`, `mappings.py`, `alert_signatures.py`); `mcat` values
+  flow through every stage's output (episodes, subsequences, state sequences)
+  as an integer coded per `MicroAttackStage`, so a MITRE mapping layer can key
+  off the same `mcat` values without touching the pipeline internals.
+- **Evaluation module**: `PipelineResult.state_sequences` and
+  `PipelineResult.severe_sinks` are exactly the inputs
+  `ag_generation.make_attack_graphs` consumes -- an evaluation module can
+  consume the same two objects (via `pipeline.learn_model()`, without
+  rendering AGs) instead of parsing rendered `.dot`/`.png` output.
+
 ## Key Data Structures
 
 - **Alert tuple**: `(diff_dt, src_ip, src_port, dst_ip, dst_port, sig, cat, host, datetime, mcat_int)`
