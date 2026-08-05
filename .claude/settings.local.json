@@ -22,7 +22,9 @@
       "Bash(python -c \"import graphviz, requests, numpy, matplotlib; print\\('OK'\\)\")",
       "Bash(gh run *)",
       "PowerShell(gh run *)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(wsl *)",
+      "Bash(wsl.exe *)"
     ]
   }
 }
