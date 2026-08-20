@@ -41,13 +41,21 @@ FORMULAS = {
     'path_linearity':
         'longest_path_edges / edges_total  '
         '(longest path measured in EDGES traversed, over the same preserved edge basis)',
+    'reachability_density':
+        '|{(u,v) : u != v, v reachable from u}| / (nodes * (nodes - 1))  '
+        '(HEADLINE density. The paper gives no formula, defining density only by intent -- it '
+        '"captures how easily an attacker can traverse the network". This is the literal '
+        'reading: the fraction of ordered state pairs the attacker can actually get between, '
+        'following edges any distance. Same normalisation as edge density, so it stays in '
+        '[0,1] and remains comparable across graphs. Preferred over edge density because edge '
+        'density is confounded by graph size -- measured across the 104 CPTC-2017 baseline '
+        'AGs, corr(nodes, edge_density) = -0.79 versus corr(nodes, reachability_density) = '
+        '+0.17 -- and because the paper already defines branching_factor = edges/nodes, which '
+        'an edges-per-node density largely duplicates. Null when nodes < 2.)',
     'density':
         'edges_simple_no_loops / (nodes * (nodes - 1))  '
-        '(directed simple-graph density. CHOSEN HERE, NOT TAKEN FROM THE PAPER: the paper '
-        'gives no formula, describing density only by intent -- it "captures how easily an '
-        'attacker can traverse the network" -- so this needs the author\'s confirmation. '
-        'Standard directed density fits that intent: it is the fraction of all possible '
-        'attacker moves between distinct states that the graph actually realises. '
+        '(textbook directed simple-graph density, retained for comparability with the wider '
+        'graph literature but NOT the headline density -- see reachability_density for why. '
         'Multi-edges COLLAPSED and self-loops EXCLUDED from the numerator, because V*(V-1) '
         'counts ordered distinct pairs and neither is representable in it; leaving them in '
         'can push density above 1. Null when nodes < 2.)',
@@ -280,6 +288,42 @@ def _longest_path_edges(nodes, simple_edges):
     return _condensation_longest_path(nodes, adjacency), 'condensation_bound'
 
 
+def _reachability_density(nodes, simple_edges):
+    """
+    Computes the fraction of ordered node pairs the attacker can traverse between.
+
+    Counts pairs reachable over paths of any length, not just direct edges, which
+    is what the paper's "how easily an attacker can traverse the network" actually
+    describes. Self-loops are irrelevant (a node reaching itself is not a
+    traversal) and are excluded, as is the diagonal, matching the V*(V-1)
+    denominator.
+
+    @param nodes: the set of node names
+    @param simple_edges: a set of distinct (tail, head) pairs
+    @return: the reachability density in [0, 1], or None when nodes < 2
+    """
+    if len(nodes) < 2:
+        return None
+
+    adjacency = {node: set() for node in nodes}
+    for tail, head in simple_edges:
+        if tail != head:
+            adjacency[tail].add(head)
+
+    reachable_pairs = 0
+    for start in nodes:
+        seen, stack = set(), [start]
+        while stack:  # Iterative, so a deep graph cannot blow the stack
+            for nxt in adjacency[stack.pop()]:
+                if nxt not in seen:
+                    seen.add(nxt)
+                    stack.append(nxt)
+        seen.discard(start)  # Reaching yourself via a cycle is not a traversal
+        reachable_pairs += len(seen)
+
+    return reachable_pairs / (len(nodes) * (len(nodes) - 1))
+
+
 def _condensation_longest_path(nodes, adjacency):
     """
     Bounds the longest path by collapsing strongly connected components and
@@ -387,6 +431,7 @@ def graph_metrics(text, name=None, with_sets=False):
         'simplicity': (n_nodes / n_edges) if n_edges else None,
         'path_linearity': (longest_edges / n_edges) if n_edges else None,
         'density': (len(simple_no_loops) / ordered_pairs) if ordered_pairs else None,
+        'reachability_density': _reachability_density(nodes, simple_edges),
     }
     if with_sets:
         record['_nodes'], record['_edges'] = nodes, edges
@@ -477,8 +522,8 @@ def directory_metrics(ag_directory):
         'aggregate': aggregate,
         'distribution': {key: _distribution([r[key] for r in per_graph])
                          for key in ('nodes', 'edges_total', 'longest_path_edges',
-                                     'branching_factor', 'simplicity',
-                                     'path_linearity', 'density')},
+                                     'branching_factor', 'simplicity', 'path_linearity',
+                                     'reachability_density', 'density')},
         'formulas': FORMULAS,
         'edge_bases': EDGE_BASES,
     }

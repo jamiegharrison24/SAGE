@@ -101,6 +101,48 @@ class TestDotParsing(unittest.TestCase):
 
     def test_density_cannot_exceed_one(self):
         self.assertLessEqual(self.metrics['density'], 1.0)
+        self.assertLessEqual(self.metrics['reachability_density'], 1.0)
+
+    def test_reachability_density_counts_indirect_routes(self):
+        # Fixture: A -> B -> C -> Victim, plus a self-loop on A.
+        # Reachable ordered pairs: A reaches B, C, Victim (3); B reaches C,
+        # Victim (2); C reaches Victim (1); Victim reaches nothing (0) = 6.
+        # Denominator is 4*3 = 12, so 0.5. Edge density is only 3/12 = 0.25,
+        # because it counts the three direct edges and ignores the routes.
+        self.assertAlmostEqual(self.metrics['reachability_density'], 6 / 12)
+        self.assertAlmostEqual(self.metrics['density'], 3 / 12)
+        self.assertGreater(self.metrics['reachability_density'], self.metrics['density'])
+
+    def test_reachability_density_ignores_self_loops(self):
+        # A node reaching itself via its own loop is not a traversal.
+        nodes, edges = {'A', 'B'}, {('A', 'B'), ('A', 'A'), ('B', 'B')}
+        self.assertAlmostEqual(dot_metrics._reachability_density(nodes, edges), 0.5)
+
+    def test_reachability_density_endpoints(self):
+        # A fully connected pair in both directions: every ordered pair reachable.
+        self.assertAlmostEqual(
+            dot_metrics._reachability_density({'A', 'B'}, {('A', 'B'), ('B', 'A')}), 1.0)
+        # No edges at all: nothing is reachable.
+        self.assertAlmostEqual(dot_metrics._reachability_density({'A', 'B'}, set()), 0.0)
+        # Undefined below two nodes, rather than dividing by zero.
+        self.assertIsNone(dot_metrics._reachability_density({'A'}, set()))
+
+    def test_reachability_density_is_less_size_confounded_than_edge_density(self):
+        # The reason reachability density is the headline: a linear chain has the
+        # same shape at any size, but edge density collapses as it grows while
+        # reachability density stays put. Chains of 4 and 12 nodes:
+        results = {}
+        for size in (4, 12):
+            nodes = {'n{}'.format(i) for i in range(size)}
+            edges = {('n{}'.format(i), 'n{}'.format(i + 1)) for i in range(size - 1)}
+            results[size] = (
+                len(edges) / (size * (size - 1)),
+                dot_metrics._reachability_density(nodes, edges))
+
+        edge_drop = results[4][0] / results[12][0]
+        reach_drop = results[4][1] / results[12][1]
+        self.assertGreater(edge_drop, 2.5)    # edge density collapses with size
+        self.assertLess(reach_drop, 1.3)      # reachability density barely moves
 
     def test_ag_filename_identity(self):
         victim, objective = dot_metrics.parse_ag_filename(
@@ -376,6 +418,34 @@ class TestRunner(unittest.TestCase):
         with open(marker, 'w', encoding='utf-8') as handle:
             handle.write('{ truncated')
         self.assertFalse(runner.cell_is_complete(directory))  # corrupt marker
+
+    def test_cached_cell_from_a_different_config_is_not_reused(self):
+        # Resuming on the cell name alone let a check against a PERTURBED alert
+        # corpus poison the reference cell, so a later run silently reported the
+        # perturbed run's numbers as its own baseline. The stored spec must match.
+        directory = tempfile.mkdtemp()
+        clean = {'name': 'cptc-2017-reference', 'dataset_path': '/alerts/cptc-2017',
+                 'dataset_flag': 'cptc', 't': 1.0, 'w': 150}
+        perturbed = dict(clean, dataset_path='/eval-runs/bad/alerts/cptc-2017')
+
+        with open(os.path.join(directory, 'cell.json'), 'w', encoding='utf-8') as handle:
+            json.dump({'exit_code': 0, 'cell': perturbed}, handle)
+
+        self.assertFalse(runner.cell_is_complete(directory, expected_cell=clean))
+        self.assertTrue(runner.cell_is_complete(directory, expected_cell=perturbed))
+        # Without a spec to check against, the old name-only behaviour stands.
+        self.assertTrue(runner.cell_is_complete(directory))
+
+    def test_differing_parameters_also_invalidate_a_cached_cell(self):
+        directory = tempfile.mkdtemp()
+        base = {'name': 'x', 'dataset_path': '/a', 'dataset_flag': 'cptc',
+                't': 1.0, 'w': 150}
+        with open(os.path.join(directory, 'cell.json'), 'w', encoding='utf-8') as handle:
+            json.dump({'exit_code': 0, 'cell': base}, handle)
+        self.assertFalse(runner.cell_is_complete(directory,
+                                                 expected_cell=dict(base, w=200)))
+        self.assertFalse(runner.cell_is_complete(directory,
+                                                 expected_cell=dict(base, t=2.0)))
 
 
 def _record_with(aggregate=None, perplexity_training=None, timing=None, totals=None):

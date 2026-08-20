@@ -447,21 +447,35 @@ def harvest(worktree, experiment_name, destination):
     return harvested
 
 
-def cell_is_complete(output_directory):
+def cell_is_complete(output_directory, expected_cell=None):
     """
-    Reports whether a cell already finished, so a matrix can resume.
+    Reports whether a cell already finished *with the requested configuration*.
+
+    Resuming on the name alone is not safe. Two different configurations can map
+    to the same cell name -- a `check` run against a perturbed alert corpus and a
+    `run` reference cell both being '<dataset>-reference', for instance -- and the
+    second then silently reuses the first's artifacts and reports another run's
+    numbers as its own. So the stored spec is compared against the requested one
+    and a mismatch counts as incomplete.
 
     @param output_directory: the cell's output directory
-    @return: True if a completed-cell marker is present
+    @param expected_cell: the cell spec being requested; when given, a stored cell
+        whose spec differs is treated as not complete
+    @return: True only if a successful cell with a matching spec is present
     """
     marker = os.path.join(output_directory, _COMPLETED_MARKER)
     if not os.path.exists(marker):
         return False
     try:
         with open(marker, encoding='utf-8') as handle:
-            return json.load(handle).get('exit_code') == 0
+            stored = json.load(handle)
     except (ValueError, OSError):
         return False
+    if stored.get('exit_code') != 0:
+        return False
+    if expected_cell is not None and stored.get('cell') != expected_cell:
+        return False
+    return True
 
 
 def execute_cell(cell, worktree, output_root, iana, shim_directory, force=False):
@@ -479,7 +493,7 @@ def execute_cell(cell, worktree, output_root, iana, shim_directory, force=False)
     @raise RuntimeError: if the pinned CSV changed, or the worktree was dirtied
     """
     output_directory = os.path.join(output_root, cell['name'])
-    if not force and cell_is_complete(output_directory):
+    if not force and cell_is_complete(output_directory, expected_cell=cell):
         with open(os.path.join(output_directory, _COMPLETED_MARKER), encoding='utf-8') as handle:
             record = json.load(handle)
         record['skipped'] = 'already complete'

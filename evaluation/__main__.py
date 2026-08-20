@@ -15,7 +15,7 @@ import argparse
 import os
 import sys
 
-from evaluation import collect, perturbation, report, runner, schema
+from evaluation import collect, compare, perturbation, report, runner, schema
 
 DATASET_PATHS = {
     'cptc-2017': ('alerts/cptc-2017', 'cptc'),
@@ -55,18 +55,22 @@ def _prepare(args):
     return iana, shim, environment
 
 
-def _run_reference(args, iana, shim):
+def _run_reference(args, iana, shim, label='reference'):
     """
     Runs the single reference cell for a dataset and measures it.
 
     @param args: parsed CLI arguments
     @param iana: the pinned CSV record
     @param shim: the PYTHONPATH shim directory
+    @param label: distinguishes the cell from the stored reference. A `check` must
+        never write into the reference cell: it may be run against a different
+        alert corpus (that is how a regression is demonstrated), and reusing the
+        name overwrites the reference artifacts with the candidate's.
     @return: (cell_record, record_section)
     """
     dataset_path, flag = _dataset_paths(args.dataset, args.alerts_root)
     defaults = perturbation.DATASET_DEFAULTS[args.dataset]
-    cell = {'name': '{}-reference'.format(args.dataset),
+    cell = {'name': '{}-{}'.format(args.dataset, label),
             'dataset_path': dataset_path, 'dataset_flag': flag,
             't': defaults['t'], 'w': defaults['w']}
     if args.timerange:
@@ -120,6 +124,149 @@ def _repeats(args, iana, shim, dataset_path, flag):
             'exact_match': collect.exact_match_across_repeats(records)}
 
 
+def _perturbation_cells(args, iana, shim, reference_section):
+    """
+    Runs the noise-injection grid and measures each cell's distortion.
+
+    Perturbed alert corpora are written under the run root rather than over the
+    originals, and each cell gets its own experiment name so no two
+    configurations ever share an output directory.
+
+    @param args: parsed CLI arguments
+    @param iana: the pinned CSV record
+    @param shim: the PYTHONPATH shim directory
+    @param reference_section: the reference run, to measure distortion against
+    @return: a list of perturbation cell results
+    """
+    source_path, flag = _dataset_paths(args.dataset, args.alerts_root)
+    run_root = os.path.abspath(args.run_root)
+    cells_root = os.path.join(run_root, 'cells')
+
+    grid = perturbation.perturbation_grid(
+        families=args.families or None,
+        rates=args.rates or None,
+        seeds=args.seeds or None)
+    print('Perturbation grid: {} cells'.format(len(grid)))
+
+    results = []
+    for index, spec in enumerate(grid, start=1):
+        name = '{}-{}-r{}-s{}'.format(args.dataset, spec['family'],
+                                      str(spec['rate']).replace('.', ''), spec['seed'])
+        corpus = os.path.join(run_root, 'perturbed', name, 'alerts')
+        manifest = perturbation.perturb_dataset(source_path, corpus, spec['family'],
+                                                spec['rate'], spec['seed'])
+
+        cell = {'name': name, 'dataset_path': corpus, 'dataset_flag': flag,
+                't': perturbation.DATASET_DEFAULTS[args.dataset]['t'],
+                'w': perturbation.DATASET_DEFAULTS[args.dataset]['w']}
+        if args.timerange:
+            cell['timerange'] = tuple(args.timerange)
+
+        try:
+            cell_record = runner.execute_cell(cell, args.worktree, cells_root, iana, shim,
+                                              force=args.force)
+        except Exception as error:                          # noqa: BLE001
+            print('  [{}/{}] {} FAILED: {}'.format(index, len(grid), name, error),
+                  file=sys.stderr)
+            results.append({'spec': spec, 'error': str(error)})
+            continue
+
+        if cell_record['exit_code'] != 0:
+            results.append({'spec': spec, 'error': 'exit {}'.format(cell_record['exit_code'])})
+            print('  [{}/{}] {} exited {}'.format(index, len(grid), name,
+                                                  cell_record['exit_code']), file=sys.stderr)
+            continue
+
+        section = collect.measure_cell(cell_record, corpus, flag)
+        results.append({
+            'spec': spec,
+            'manifest': {k: v for k, v in manifest.items() if k != 'per_file'},
+            'metrics': section['attack_graphs']['aggregate'],
+            'perplexity': section['perplexity']['training'].get('perplexity'),
+            'distortion': _distortion(reference_section, section),
+            'timing': {'wall_clock_seconds': section['timing']['wall_clock_seconds']},
+        })
+        print('  [{}/{}] {} ok'.format(index, len(grid), name))
+    return results
+
+
+def _sweep_cells(args, iana, shim, reference_section):
+    """
+    Runs the one-at-a-time `-t`/`-w` sweep and computes per-metric elasticity.
+
+    @param args: parsed CLI arguments
+    @param iana: the pinned CSV record
+    @param shim: the PYTHONPATH shim directory
+    @param reference_section: the reference run, to measure distortion against
+    @return: a list of sweep cell results
+    """
+    dataset_path, flag = _dataset_paths(args.dataset, args.alerts_root)
+    cells_root = os.path.join(os.path.abspath(args.run_root), 'cells')
+    grid = perturbation.sweep_grid(args.dataset)
+    print('Sweep grid: {} cells'.format(len(grid)))
+
+    results = []
+    for index, spec in enumerate(grid, start=1):
+        name = '{}-sweep-{}{}'.format(args.dataset, spec['parameter'],
+                                      str(spec['value']).replace('.', ''))
+        cell = {'name': name, 'dataset_path': dataset_path, 'dataset_flag': flag,
+                't': spec['t'], 'w': spec['w']}
+        if args.timerange:
+            cell['timerange'] = tuple(args.timerange)
+
+        cell_record = runner.execute_cell(cell, args.worktree, cells_root, iana, shim,
+                                          force=args.force)
+        if cell_record['exit_code'] != 0:
+            results.append({'spec': spec, 'error': 'exit {}'.format(cell_record['exit_code'])})
+            continue
+
+        section = collect.measure_cell(cell_record, dataset_path, flag)
+        distortion = _distortion(reference_section, section)
+
+        # Elasticity: relative change in the metric per relative change in the
+        # parameter, so the paper can say which parameter the model is most
+        # sensitive to rather than only that it is sensitive.
+        parameter_change = ((spec['value'] - spec['baseline_value'])
+                            / spec['baseline_value'] if spec['baseline_value'] else None)
+        elasticities = {
+            metric: compare.elasticity(delta.get('relative'), parameter_change)
+            for metric, delta in distortion['metric_deltas'].items()}
+
+        results.append({
+            'spec': spec,
+            'parameter_relative_change': parameter_change,
+            'metrics': section['attack_graphs']['aggregate'],
+            'perplexity': section['perplexity']['training'].get('perplexity'),
+            'distortion': distortion,
+            'elasticity': elasticities,
+        })
+        print('  [{}/{}] {} ok'.format(index, len(grid), name))
+    return results
+
+
+def _distortion(reference_section, candidate_section):
+    """
+    Measures how far a cell moved from the reference run.
+
+    @param reference_section: the reference record section
+    @param candidate_section: the cell's record section
+    @return: a dict of distortion measures
+    """
+    reference = reference_section['attack_graphs']
+    candidate = candidate_section['attack_graphs']
+
+    reference_graphs = {(g['victim'], g['objective']) for g in reference['per_graph']}
+    candidate_graphs = {(g['victim'], g['objective']) for g in candidate['per_graph']}
+
+    return {
+        'graph_jaccard': compare.jaccard(reference_graphs, candidate_graphs),
+        'n_ags_gained': len(candidate_graphs - reference_graphs),
+        'n_ags_lost': len(reference_graphs - candidate_graphs),
+        'metric_deltas': compare.metric_deltas(reference['aggregate'],
+                                               candidate['aggregate']),
+    }
+
+
 def command_run(args):
     """
     Records a baseline for one dataset.
@@ -148,9 +295,34 @@ def command_run(args):
         schema.add_note(record, 'PARTIAL RUN: --timerange {} {} was applied, so this is not '
                                 'a full-dataset baseline.'.format(*args.timerange))
 
+    if args.heldout:
+        print('Held-out perplexity (second FlexFringe run)...')
+        record['reference']['perplexity']['heldout'] = collect.score_heldout(
+            cell_record['artifacts'], args.worktree,
+            os.path.join(os.path.abspath(args.run_root), 'heldout', args.dataset))
+        heldout = record['reference']['perplexity']['heldout']
+        if heldout.get('perplexity') is None:
+            schema.add_note(record, 'Held-out perplexity absent: {}'
+                                    .format(heldout.get('absent_because')))
+        elif (heldout.get('unresolved_fraction') or 0) > 0.2:
+            schema.add_note(
+                record,
+                'Held-out perplexity rests heavily on the unresolved-step policy: {:.0%} of '
+                'scored outcomes fell off the model entirely and took the uniform fallback. '
+                'It is NOT a like-for-like comparison against the training figure.'
+                .format(heldout['unresolved_fraction']))
+
     if args.repeats:
         print('Repeat runs ({} x)...'.format(args.repeats))
         record['repeats'] = _repeats(args, iana, shim, dataset_path, flag)
+
+    if args.perturb:
+        print('Perturbation runs...')
+        record['perturbations'] = _perturbation_cells(args, iana, shim, section)
+
+    if args.sweep:
+        print('Sensitivity sweep...')
+        record['sweeps'] = _sweep_cells(args, iana, shim, section)
 
     os.makedirs(args.baseline_dir, exist_ok=True)
     json_path = os.path.join(args.baseline_dir, 'metrics-{}.json'.format(args.dataset))
@@ -186,7 +358,7 @@ def command_check(args):
               file=sys.stderr)
 
     args.force = True  # A check must actually re-run, never reuse a cached cell
-    cell_record, section = _run_reference(args, iana, shim)
+    cell_record, section = _run_reference(args, iana, shim, label='check')
     candidate = schema.new_record(args.dataset, cell_record['measured_commit'],
                                   environment, iana)
     candidate['reference'] = section
@@ -198,7 +370,12 @@ def command_check(args):
 
 def command_report(args):
     """
-    Re-renders the Markdown document from a stored record, without re-running.
+    Re-renders the outputs from stored records, without re-running anything.
+
+    Every output is derived from the JSON, so a metric definition can be
+    corrected, a chart restyled or a figure re-cut without spending the compute
+    again -- which is why the records keep per-graph and per-cell detail rather
+    than only summaries.
 
     @param args: parsed CLI arguments
     @return: the process exit code
@@ -206,13 +383,27 @@ def command_report(args):
     json_path = os.path.join(args.baseline_dir, 'metrics-{}.json'.format(args.dataset))
     if not os.path.exists(json_path):
         raise SystemExit('No stored baseline at {}.'.format(json_path))
+
     document = report.render(schema.load(json_path))
     if args.markdown:
         with open(args.markdown, 'w', encoding='utf-8') as handle:
             handle.write(document)
         print('Wrote {}'.format(args.markdown))
-    else:
+    elif not (args.figures or args.dashboard):
         print(document)
+
+    if args.figures:
+        from evaluation import figures
+        for name, paths in sorted(figures.render_all(args.baseline_dir,
+                                                     args.figures).items()):
+            print('  {:28s} {}'.format(
+                name, 'skipped (no data)' if not paths else os.path.basename(paths[0])))
+        print('Wrote figures to {}'.format(args.figures))
+
+    if args.dashboard:
+        from evaluation import dashboard
+        dashboard.write(args.baseline_dir, args.dashboard)
+        print('Wrote {}'.format(args.dashboard))
     return 0
 
 
@@ -237,6 +428,10 @@ def build_parser():
     parser.add_argument('--baseline-dir', default=DEFAULT_BASELINE_DIR,
                         help='where metrics-<dataset>.json is stored')
     parser.add_argument('--markdown', default=None, help='also write a Markdown report here')
+    parser.add_argument('--figures', default=None, metavar='DIR',
+                        help='render publication figures (PDF + PNG) into this directory')
+    parser.add_argument('--dashboard', default=None, metavar='HTML',
+                        help='render the self-contained HTML review dashboard here')
     parser.add_argument('--repeats', type=int, default=0,
                         help='number of identical repeat runs for variance (spec: 5)')
     parser.add_argument('--timerange', type=int, nargs=2, default=None,
@@ -244,6 +439,20 @@ def build_parser():
                         help='pass --timerange to SAGE; marks the record as partial')
     parser.add_argument('--force', action='store_true',
                         help='re-run cells that are already complete')
+    parser.add_argument('--heldout', action='store_true',
+                        help='also score held-out perplexity (needs a 2nd FlexFringe run)')
+    parser.add_argument('--perturb', action='store_true',
+                        help='run the noise-injection grid (expensive: families x rates x seeds)')
+    parser.add_argument('--sweep', action='store_true',
+                        help='run the one-at-a-time -t/-w sensitivity sweep')
+    # Grid overrides, so CCDC can run a reduced matrix without editing code.
+    parser.add_argument('--families', nargs='*', default=None,
+                        choices=perturbation.FAMILIES,
+                        help='limit the perturbation families (default: all four)')
+    parser.add_argument('--rates', nargs='*', type=float, default=None,
+                        help='limit the perturbation rates (default: 0.01 0.05 0.10 0.20)')
+    parser.add_argument('--seeds', nargs='*', type=int, default=None,
+                        help='limit the perturbation seeds (default: 1 2 3)')
     return parser
 
 

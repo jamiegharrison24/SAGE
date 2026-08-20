@@ -222,6 +222,13 @@ def score(automaton, traces, alpha=DEFAULT_ALPHA, extra_alphabet=None):
         'alphabet_size': len(alphabet),
         'n_outcomes': n_outcomes,
         'unresolved_events': unresolved,
+        # Surfaced as a fraction because it governs how much the reported figure
+        # rests on UNRESOLVED_POLICY rather than on the model. On training traces
+        # this is ~0 and perplexity is a property of the automaton; on held-out
+        # traces it can approach half of all scored outcomes, at which point the
+        # figure is substantially a statement about the uniform fallback and must
+        # not be read as a like-for-like comparison against the training number.
+        'unresolved_fraction': (unresolved / n_scored) if n_scored else None,
         'oov_events': oov,
         'resolved_by_model': resolved_by,
         'scores_end_of_trace': SCORES_END_OF_TRACE,

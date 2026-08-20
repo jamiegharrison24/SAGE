@@ -77,6 +77,65 @@ def measure_cell(cell_record, dataset_path, dataset_flag, alert_counts=None):
     return section
 
 
+def score_heldout(artifacts, worktree, work_directory,
+                  test_fraction=perplexity.DEFAULT_TEST_FRACTION,
+                  seed=perplexity.DEFAULT_SPLIT_SEED):
+    """
+    Scores held-out perplexity: split the traces, relearn, score the unseen ones.
+
+    Requires a **second FlexFringe run**, because held-out perplexity is
+    meaningless against a model that was trained on the test traces. The split is
+    therefore at the trace level and happens before learning, not after.
+
+    Reported separately from training perplexity and never conflated with it: the
+    training figure is the one comparable to the original SAGE paper, the held-out
+    figure is the one that says whether the model generalises.
+
+    @param artifacts: the cell's harvested artifact paths
+    @param worktree: the SAGE tree holding the FlexFringe binary
+    @param work_directory: a scratch directory for the split model
+    @param test_fraction: the held-out proportion
+    @param seed: the pinned split seed, recorded in the output
+    @return: the perplexity record, or a reason it is absent
+    """
+    from evaluation import flexfringe
+
+    if '.txt' not in artifacts:
+        return {'perplexity': None, 'absent_because': 'no trace file in artifacts'}
+
+    traces = perplexity.read_traces(artifacts['.txt'])
+    train, test = perplexity.split_traces(traces, test_fraction, seed)
+
+    # A split that leaves too little to learn from, or nothing to score, produces
+    # a number that looks fine and means nothing. Say so instead.
+    if len(train) < 10 or not test:
+        return {'perplexity': None, 'n_train': len(train), 'n_test': len(test),
+                'split_seed': seed, 'test_fraction': test_fraction,
+                'absent_because': 'degenerate split: {} train / {} test traces'
+                                  .format(len(train), len(test))}
+
+    os.makedirs(work_directory, exist_ok=True)
+    train_path = os.path.join(work_directory, 'heldout-train.txt')
+    perplexity.write_traces(train, train_path)
+
+    learned = flexfringe.run(train_path, worktree)
+    automaton = perplexity.Automaton(learned['main_model'], learned['sinks_model'])
+
+    # The test set can contain symbols the training split never had; the union
+    # alphabet keeps those finite instead of infinite (see perplexity.OOV_POLICY).
+    test_alphabet = {symbol.split(':')[0] for trace in test for symbol in trace}
+    scored = perplexity.score(automaton, test, extra_alphabet=test_alphabet)
+    scored.update({
+        'n_train': len(train), 'n_test': len(test),
+        'split_seed': seed, 'test_fraction': test_fraction,
+        'requires_separate_model': True,
+        'model_learned_from': train_path,
+        'note': 'Held-out: a second FlexFringe run on the training split only. '
+                'Not comparable to the training perplexity, and never averaged with it.',
+    })
+    return scored
+
+
 def _score_training(artifacts):
     """
     Scores training perplexity from a cell's model and trace artifacts.
