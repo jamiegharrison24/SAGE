@@ -57,7 +57,14 @@
       "mcp__plugin_playwright_playwright__browser_take_screenshot",
       "Bash(python \"C:/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/2d3c755f-448d-4143-b3ee-8021fa72ae16/scratchpad/ascii_fix.py\")",
       "mcp__plugin_playwright_playwright__browser_evaluate",
-      "Bash(python -m evaluation report --dataset cptc-2017 --baseline-dir \"D:/Projects/SAGE/eval-runs/baseline-test\" --figures \"D:/Projects/SAGE/eval-runs/figures\" --dashboard \"D:/Projects/SAGE/eval-runs/dashboard.html\")"
+      "Bash(python -m evaluation report --dataset cptc-2017 --baseline-dir \"D:/Projects/SAGE/eval-runs/baseline-test\" --figures \"D:/Projects/SAGE/eval-runs/figures\" --dashboard \"D:/Projects/SAGE/eval-runs/dashboard.html\")",
+      "Artifact",
+      "Bash(rm -f dash-light.png dash2.png dash-dark.png)",
+      "Bash(rm -rf .playwright-mcp)",
+      "Bash(mkdir -p baseline figures)",
+      "Bash(python -m evaluation run --dataset cptc-2017 --worktree \"D:/Projects/SAGE/SAGE-baseline\" --alerts-root \"D:/Projects/SAGE/SAGE\" --run-root \"D:/Projects/SAGE/eval-runs-full\" --baseline-dir baseline --repeats 5 --heldout --perturb --sweep --markdown baseline/report-cptc-2017.md)",
+      "Bash(python -m evaluation report --dataset cptc-2017 --baseline-dir baseline --figures figures --dashboard baseline/dashboard.html)",
+      "Read(//d/Projects/SAGE/eval-runs-full/**)"
     ]
   }
 }

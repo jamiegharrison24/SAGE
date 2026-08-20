@@ -8,9 +8,84 @@ contribution — the MITRE ATT&CK mapping layer, the evaluation framework itself
 is measured against the numbers recorded here.
 
 The machine-readable records live in `baseline/metrics-<dataset>.json`
-(`schema_version: 1`). This document is the human-readable view. **The JSON is
-authoritative**; if the two ever disagree, regenerate this document with
-`python -m evaluation report`.
+(`schema_version: 1`). **The JSON is authoritative** — it is what `--check` diffs
+against, and every number below is derived from it.
+
+This document is written and maintained by hand: it carries the reasoning,
+caveats and definitions that a generated report cannot. The *generated* per-run
+summary is a separate file, `baseline/report-<dataset>.md`, produced by
+`python -m evaluation report --dataset <name> --markdown baseline/report-<name>.md`.
+Do not point that command at this file — it would overwrite the commentary.
+
+## Glossary
+
+Terms used throughout this document, grouped by where they come from. If you are
+reading a number in `baseline/metrics-*.json` and are unsure what it counts, start
+here.
+
+### SAGE pipeline terms
+
+| Term | Meaning |
+|---|---|
+| **Alert** | One IDS (Suricata) detection: a timestamp, source and destination IP and port, and a signature string. The raw input. |
+| **Signature** | The human-readable rule name Suricata attaches to an alert, e.g. `ET POLICY Python-urllib/ Suspicious User Agent`. SAGE maps signatures to attack stages via a hardcoded lookup — the thing the MITRE work replaces. |
+| **`mcat`** | *Micro attack stage*. The attack step an alert represents, as an integer whose digit count encodes severity: 1 digit = low (scanning), 2 = medium (enabler), 3 = high (exploitation/objective). |
+| **`mserv`** | The targeted service, resolved from the destination port via the IANA port-service table. |
+| **Episode** | A burst of alerts of the same `mcat` between one attacker and one victim, aggregated over a sliding window. One episode = one attacker *action*. |
+| **Subsequence** | A run of consecutive episodes cut at severity drops, representing one distinct attack attempt. Subsequences shorter than 3 episodes are discarded. |
+| **Trace** | A subsequence written as FlexFringe input: a reversed sequence of `mcat|mserv` symbols. Reversal is what makes the learned automaton a *suffix* automaton. |
+| **Symbol** | One `mcat|mserv` pair, e.g. `vulnD|mysql`. The alphabet is the set of distinct symbols across all traces. |
+| **S-PDFA** | *Suffix Probabilistic Deterministic Finite Automaton* — the model FlexFringe learns from the traces. States capture attacker progress; edges carry transition probabilities. |
+| **FlexFringe** | The external automaton-learning binary that produces the S-PDFA. A Linux ELF binary, so it runs under WSL on Windows. |
+| **Sink / sink state** | A state FlexFringe did not merge into the main model because too little data supported it. Sinks live in a separate model file, and traversal falls back to them when the main model has no matching transition. **38% of scored steps resolve this way**, so sinks are not an edge case. |
+| **Objective** | A high-severity attack stage treated as an attacker goal. Attack graphs are generated per (victim, objective) pair. |
+| **Victim** | The destination IP an attack graph is drawn for. |
+| **Attack graph (AG)** | The final output: a directed graph, per victim per objective, whose nodes are attacker actions and whose edges are transitions between them, one edge per attacker. |
+| **`-t`** | The duplicate-filter window in seconds. Identical alerts within `-t` of each other collapse to one. |
+| **`-w`** | The episode aggregation window in seconds — how wide a burst of alerts is grouped into a single episode. |
+
+### Evaluation terms
+
+| Term | Meaning |
+|---|---|
+| **Reference run** | The single canonical run of a dataset at its documented parameters. Everything else is measured against it. |
+| **Cell** | One run in the matrix — a reference, a repeat, a perturbation, or a sweep point. Each has its own output directory and can be resumed independently. |
+| **Run matrix** | The full set of cells for a dataset: reference + repeats + perturbations + sweeps. |
+| **Artifact-driven** | Metrics are derived from the files a run leaves behind (`.txt` traces, model JSONs, `.dot` graphs) plus its stdout — never by importing pipeline code. This is what lets one harness measure both `baseline-v1` and later branches. |
+| **Tolerance** | How far a metric may move before `--check` calls it a regression. Structural counts are exact (`0.0`); runtime is recorded but never fatal. |
+| **Jaccard index** | Overlap between two sets: `|A ∩ B| / |A ∪ B|`. 1.0 = identical, 0.0 = disjoint. Used for node sets, edge sets and the set of (victim, objective) graphs. |
+| **Distortion** | How far a perturbed or swept run moved from the reference — Jaccard plus per-metric deltas plus graphs gained and lost. |
+| **Elasticity** | Relative change in a metric ÷ relative change in the parameter that caused it. Makes `-t` and `-w` comparable despite different units. Near zero = the parameter does not move that metric. |
+| **Perturbation family** | One kind of injected noise: false positives, duplicate bursts, dropped alerts, or dropped episodes. |
+| **Rate (ρ)** | The proportion of alerts a perturbation adds or removes. |
+| **Output variance** | Spread of each metric across repeat runs of identical configuration. |
+| **Exact-artifact match** | Whether repeat runs produced byte-identical output files — reported raw and after normalising `.dot` tooltip ordering. |
+| **Determinism** | Whether identical inputs give identical outputs. If not, fixed reference values are unusable and every tolerance needs a band instead. |
+
+### Metric terms
+
+| Term | Meaning |
+|---|---|
+| **Raw records** | Every JSON object in the alert files, including non-alert events. The paper's "raw alerts" convention. |
+| **Raw alerts** | Records surviving the `event_type == 'alert'` and dataset filters (CPTC bad-IP, "Not Suspicious Traffic"). |
+| **Post-dedup alerts** | What remains after the `-t` duplicate window. Scraped from SAGE's own stdout rather than recomputed, so it cannot drift from what SAGE actually did. |
+| **Compression ratio** | Raw records per generated attack graph — the paper's core utility claim, i.e. how much the analyst's reading load shrinks. |
+| **Branching factor** | `edges / nodes`. How much an attack path fans out. Note this is the paper's definition, not the conventional mean out-degree. |
+| **Path linearity** | `longest path (in edges) / total edges`. Near 1.0 = one long chain; low = a bushy graph with many short branches. |
+| **Simplicity** | `nodes / edges` — the reciprocal of branching factor. Kept only for comparability with Nadeem et al. |
+| **Edge density** | `distinct edges / (V(V-1))`. The textbook measure; confounded by graph size here (see the density section). |
+| **Reachability density** | Fraction of ordered node pairs the attacker can get between over paths of *any* length. The headline density: 0.5 means an attacker at a random state can reach half the others. |
+| **Self-loop** | An edge from a node to itself, i.e. an attacker repeating the same action against the same service. Real and common in these graphs. |
+| **Parallel edges** | Two or more edges between the same node pair, one per attacker. Counted separately so any ratio can be rebuilt on either edge basis. |
+| **Perplexity** | How surprised the model is by a sequence: `exp(-mean log P(outcome))`. Lower is better. Roughly "how many equally likely options the model thinks it faces at each step". |
+| **Training perplexity** | Scored on the traces the model learned from. Comparable to the original SAGE paper, but it does not test generalisation. |
+| **Held-out perplexity** | Traces split 80/20 before learning; the model is trained on the 80% and scored on the unseen 20%. Needs a second FlexFringe run and a separate model. |
+| **Alphabet** | The set of distinct symbols the model can emit. |
+| **Add-α smoothing** | Adding a small constant (α = 0.1) to every outcome count so an unobserved symbol gets a small probability instead of zero — which would make perplexity infinite. |
+| **Unresolved step** | A step where traversal falls off the model entirely (no matching transition in either the main or sinks model). Scored against a uniform distribution rather than skipped, because skipping would flatter the model. |
+| **Unresolved fraction** | Share of scored outcomes that were unresolved. Near zero on training traces; high on held-out traces, where it means the reported perplexity is substantially a statement about the fallback policy rather than the model. |
+| **OOV** | *Out of vocabulary* — a symbol in the test set that the training set never contained. |
+| **Alert throughput** | `raw records / wall-clock seconds`. |
 
 ## What "regression reference" means operationally
 
