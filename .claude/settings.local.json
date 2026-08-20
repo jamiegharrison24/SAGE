@@ -28,7 +28,19 @@
       "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/run_cmp.sh\")",
       "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/full_cmp.sh\")",
       "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/determinism.sh\")",
-      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/nondet_char.sh\")"
+      "Bash(MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- bash \"/mnt/c/Users/Jamie/AppData/Local/Temp/claude/D--Projects-SAGE-SAGE/0b2a09b6-562a-491b-81c0-118e0edc18b7/scratchpad/nondet_char.sh\")",
+      "Bash(python -c ' *)",
+      "Bash(bash test-scripts/stats-nodes-ags.sh \"D:/Projects/SAGE/SAGE-baseline/probe-2017AGs\")",
+      "Bash(python evaluation/tests_evaluation.py)",
+      "Bash(python -m pycodestyle --ignore=E501,W503,W504 evaluation/*.py)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(timeout 900 python -c ' *)",
+      "Bash(timeout 1200 python -c ' *)",
+      "Bash(git reset *)",
+      "Bash(git restore *)",
+      "Bash(awk '{print $5, $9}')"
     ]
   }
 }
