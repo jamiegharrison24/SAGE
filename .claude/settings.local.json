@@ -64,7 +64,13 @@
       "Bash(mkdir -p baseline figures)",
       "Bash(python -m evaluation run --dataset cptc-2017 --worktree \"D:/Projects/SAGE/SAGE-baseline\" --alerts-root \"D:/Projects/SAGE/SAGE\" --run-root \"D:/Projects/SAGE/eval-runs-full\" --baseline-dir baseline --repeats 5 --heldout --perturb --sweep --markdown baseline/report-cptc-2017.md)",
       "Bash(python -m evaluation report --dataset cptc-2017 --baseline-dir baseline --figures figures --dashboard baseline/dashboard.html)",
-      "Read(//d/Projects/SAGE/eval-runs-full/**)"
+      "Read(//d/Projects/SAGE/eval-runs-full/**)",
+      "Bash(python *)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(Stop-Process *)",
+      "PowerShell(taskkill *)",
+      "PowerShell(Get-CimInstance *)",
+      "Bash(git check-ignore *)"
     ]
   }
 }

@@ -134,18 +134,38 @@ Three things are pinned so that a rerun is actually comparable:
 
 ## Headline results
 
-> **Status: not yet populated with full-dataset runs.** The framework is complete
-> and verified end to end, but the numbers below are placeholders until the full
-> matrix has been run. Values recorded from `--timerange`-limited runs are marked
-> `PARTIAL RUN` in their JSON record and must not be cited.
+> **Status: CPTC-2017 recorded (full 61-cell matrix). CPTC-2018 and CCDC pending.**
 
 | Dataset | Raw records | AGs | Nodes | Compression | Perplexity (train) | Perplexity (held-out) | Runtime |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `cptc-2017` | 47,876 | — | — | — | — | — | — |
+| `cptc-2017` | 47,876 | 104 | 1,885 | 460.3 | 13.478 | 40.27 | 97.5 s |
 | `cptc-2018` | 331,554 | — | — | — | — | — | — |
 | `ccdc` | 1,052,281 | — | — | — | — | — | — |
 
-Alert counts above are measured and final; the remaining columns await the full runs.
+CPTC-2017: 36 victims, 25 objectives, 3,024 edges, 326 unique nodes, 491 records/s.
+Held-out perplexity is **not** comparable to the training figure — 32.6% of its
+scored steps fall off the model entirely (see the perplexity section).
+
+### Determinism: confirmed
+
+Five identical repeat runs, compared at artifact level:
+
+| Check | Result |
+|---|---|
+| Attack graph `.dot` files | **104 / 104 byte-identical** (raw, not merely normalised) |
+| Trace file, both model JSONs | identical |
+| `n_attack_graphs`, `total_nodes`, `total_edges`, `unique_nodes` | stdev **0** |
+| Training perplexity | stdev **0** (13.477971857105626 every run) |
+| Wall-clock runtime | stdev 3.7 s — the only thing that moves |
+
+The `.dot` files match on **raw bytes**, which they would not without
+`PYTHONHASHSEED=0` pinned: at `baseline-v1` the tooltip signature list is joined
+from an unsorted `set`. The pin is what makes byte-level comparison meaningful
+here.
+
+This is the evidence behind the exact-`0.0` structural tolerances in
+`schema.TOLERANCES`. Fixed reference values are safe; tolerance bands are not
+needed.
 
 ## Metric definitions
 
@@ -339,11 +359,9 @@ alone would report SAGE as non-deterministic and — per the framework's own rul
 trigger a recommendation that every downstream reference needs tolerance bands, on
 the strength of a formatting artefact.
 
-**Provisional finding:** two independent runs of the same configuration produced
-**identical values for all 16 structural and perplexity metrics**; only wall-clock
-runtime differed (1.6%). This is why `schema.TOLERANCES` sets structural
-tolerances to exactly `0.0`. The 5-repeat matrix with artifact-level byte
-comparison is what will confirm it.
+**Confirmed on the full CPTC-2017 matrix:** five repeats, 104/104 attack graph
+`.dot` files byte-identical, every structural and perplexity metric at stdev 0.
+See *Determinism: confirmed* above.
 
 ### Robustness (noise injection)
 
@@ -367,20 +385,34 @@ separately, never averaged.
 Each perturbed run reports node/edge/graph Jaccard against the reference, AGs
 gained and lost, and per-metric deltas.
 
-**Provisional finding — SAGE is markedly sensitive to false positives.** A 10%
-false-positive injection produced:
+**Confirmed on the full CPTC-2017 matrix — SAGE is robust to three noise
+families and fragile to one.** Graph Jaccard against the reference run, median of
+3 seeds (1.000 = an unchanged set of attack graphs):
 
-| Metric | Clean | +10% FP | Change |
-|---|---:|---:|---:|
-| Attack graphs | 72 | 116 | +61% |
-| Objectives | 20 | 41 | +105% |
-| Total nodes | 748 | 1,196 | +60% |
-| Training perplexity | 11.73 | 19.50 | +66% |
+| Family | 1% | 5% | 10% | 20% |
+|---|---:|---:|---:|---:|
+| **False positives** | **0.832** | **0.534** | **0.366** | **0.264** |
+| Duplicate bursts | 1.000 | 0.981 | 0.963 | 0.981 |
+| Dropped alerts | 1.000 | 0.972 | 0.936 | 0.835 |
+| Dropped episodes | 1.000 | 0.981 | 0.963 | 0.907 |
 
-Injecting one spurious alert in ten roughly doubles the number of distinct
-objectives an analyst is shown. If this holds on the full datasets it is a
-substantive result for the paper's robustness claim, and it cuts against the
-expectation of resilience stated in *Anticipated Results*.
+Duplicates are absorbed almost perfectly, and losing alerts — even whole
+episodes' worth — degrades the output only gently. False positives are different
+in kind: at 10% injection **only 37% of the attack-graph set survives**, and at
+20% only 26%. Even 1% is measurable, where the other three families are still at
+1.000.
+
+This matters for the paper's own framing. The introduction motivates the work by
+noting that SOC alert streams are dominated by false positives; the evaluation
+shows that is precisely the input SAGE handles worst. It also contradicts the
+expectation of resilience stated in *Anticipated Results*, which should be
+revised rather than left to disagree with the measured result.
+
+The mechanism is visible in the raw counts: injected alerts map to real attack
+stages through the same signature lookup as genuine ones, so they do not get
+filtered — they create new episodes, which create new (victim, objective) pairs,
+which create additional attack graphs. The distortion is mostly *fabricated*
+graphs rather than corrupted ones.
 
 ### Sensitivity analysis
 
@@ -391,24 +423,37 @@ rather than SAGE's defaults. Each cell reports the same distortion measures plus
 an **elasticity** per metric (relative change in metric ÷ relative change in
 parameter), so the paper can state which parameter the model is most sensitive to.
 
-**Provisional finding — the two parameters are not remotely equal:**
+**Confirmed on the full CPTC-2017 matrix — the two parameters are not remotely
+equal:**
 
-| Parameter | Values | Attack graphs | Graph Jaccard vs reference |
-|---|---|---:|---:|
-| `-t` | 0.5, 1.0, 2.0, 5.0 | 72, 72, 72, 72 | 1.000 |
-| `-w` | 50, 100, 150, 200, 300 | 73, 74, 72, 71, 70 | 0.959 – 0.973 |
+| Parameter | Value | Attack graphs | Nodes | Graph Jaccard | Elasticity |
+|---|---:|---:|---:|---:|---:|
+| *(baseline)* | `-t 1.0 -w 150` | 104 | 1,885 | 1.000 | — |
+| `-t` | 0.5 | 104 | 1,885 | **1.000** | 0.000 |
+| `-t` | 2.0 | 104 | 1,885 | **1.000** | 0.000 |
+| `-t` | 5.0 | 104 | 1,885 | **1.000** | 0.000 |
+| `-w` | 50 | 105 | 1,995 | 0.935 | −0.014 |
+| `-w` | 100 | 106 | 1,931 | 0.963 | −0.058 |
+| `-w` | 200 | 105 | 1,829 | 0.972 | +0.029 |
+| `-w` | 300 | 104 | 1,765 | 0.962 | 0.000 |
 
-**`-t` had no effect at all.** A tenfold change in the deduplication window (0.5s
-to 5.0s) produced byte-identical attack graph sets — elasticity 0.00 on every
-metric. `-w` produces a small, monotone effect: wider aggregation windows yield
-slightly fewer, smaller graphs.
+**`-t` does nothing.** A tenfold change in the deduplication window — 0.5 s to
+5.0 s — produces an identical attack-graph set: same 104 graphs, same 1,885
+nodes, Jaccard exactly 1.000, elasticity 0.000 on every metric. This is not a
+small-sample artefact; it is the full 47,876-alert corpus.
 
-If this survives the full-dataset runs it is worth stating plainly, because the
-paper motivates sensitivity analysis on the grounds that the S-PDFA "is governed
-by manually tuned parameters". At least on CPTC-2017, one of those two parameters
-appears not to be doing anything. **Caveat:** a 2-hour slice contains few
-duplicate alerts for `-t` to filter, so this must be re-checked on the full
-capture before it is claimed.
+`-w` does have an effect, but a modest and coherent one: wider aggregation
+windows merge more alerts per episode, so node counts fall monotonically
+(1,995 → 1,765 across the sweep) while the graph count barely moves.
+
+This is worth stating plainly in the paper, because the sensitivity analysis is
+motivated on the grounds that the S-PDFA "is governed by manually tuned
+parameters, including deduplication threshold and episode aggregation window".
+On CPTC-2017, one of those two parameters is not tuning anything. The likely
+explanation is that `-t` only removes alerts identical in source, destination,
+ports *and* signature within the window, which is a narrow enough condition that
+the surviving duplicates are re-merged by episode aggregation regardless. Worth
+confirming on CPTC-2018 and CCDC before generalising.
 
 ## Known divergences from the paper
 

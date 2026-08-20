@@ -247,11 +247,12 @@ def exact_match_across_repeats(cell_records):
     @param cell_records: the completed cell records for the repeats
     @return: a dict with the per-artifact verdicts and an overall summary
     """
-    directories, traces, models = [], [], []
+    directories, traces, models, experiments = [], [], [], []
     for record in cell_records:
         artifacts = record.get('artifacts') or {}
         if 'ag_directory' in artifacts:
             directories.append(artifacts['ag_directory'])
+            experiments.append(record['name'])
         if '.txt' in artifacts:
             traces.append(artifacts['.txt'])
         if '.txt.ff.final.json' in artifacts:
@@ -264,12 +265,24 @@ def exact_match_across_repeats(cell_records):
     }
 
     if directories:
-        names = sorted({name for directory in directories
-                        for name in os.listdir(directory) if name.endswith('.dot')})
+        # Every artifact filename embeds its own experiment name
+        # ('<exp>.txt-attack-graph-for-victim-...'), so two runs never share a
+        # filename and matching on the raw name reports every graph as missing
+        # from every other run -- which reads as total non-determinism when the
+        # graphs are in fact identical. Key on the experiment-independent part.
+        per_run = []
+        for directory, experiment in zip(directories, experiments):
+            prefix = experiment + '.txt'
+            per_run.append({
+                (name[len(prefix):] if name.startswith(prefix) else name):
+                    os.path.join(directory, name)
+                for name in os.listdir(directory) if name.endswith('.dot')})
+
+        names = sorted({key for run in per_run for key in run})
         raw_identical, normalised_identical, missing = 0, 0, 0
         for name in names:
-            paths = [os.path.join(directory, name) for directory in directories]
-            if not all(os.path.exists(path) for path in paths):
+            paths = [run[name] for run in per_run if name in run]
+            if len(paths) != len(per_run):
                 missing += 1
                 continue
             if len({compare.file_digest(path) for path in paths}) == 1:

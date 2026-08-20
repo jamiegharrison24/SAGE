@@ -657,6 +657,48 @@ class TestPerturbation(unittest.TestCase):
         self.assertEqual(len({(c['family'], c['rate'], c['seed']) for c in grid}), 48)
 
 
+class TestExactMatch(unittest.TestCase):
+    """Comparing artifacts across repeat runs."""
+
+    def _run(self, experiment, bodies):
+        """Builds a fake completed cell with an AG directory."""
+        directory = os.path.join(tempfile.mkdtemp(), experiment + 'AGs')
+        os.makedirs(directory)
+        for objective, body in bodies.items():
+            name = '{}.txt-attack-graph-for-victim-10.0.0.1-{}.dot'.format(
+                experiment, objective)
+            with open(os.path.join(directory, name), 'w', encoding='utf-8') as handle:
+                handle.write(body)
+        return {'name': experiment, 'artifacts': {'ag_directory': directory}}
+
+    def test_differing_experiment_names_still_compare(self):
+        # Every artifact filename embeds its own experiment name, so two runs
+        # never share a filename. Matching on the raw name reported all 104
+        # graphs as "missing in some repeat" and a 0.0 match rate -- reading as
+        # total non-determinism when the graphs were in fact byte-identical.
+        graphs = {'DATAEXFIL': '"A" -> "B"\n', 'NETWORKDOS': '"C" -> "D"\n'}
+        runs = [self._run('exp-repeat-0', graphs), self._run('exp-repeat-1', graphs)]
+
+        verdict = collect.exact_match_across_repeats(runs)
+        self.assertEqual(verdict['n_ag_dot_files'], 2)          # not 4
+        self.assertEqual(verdict['ag_dot_missing_in_some_repeat'], 0)
+        self.assertEqual(verdict['ag_dot_match_rate_raw'], 1.0)
+
+    def test_real_difference_is_still_detected(self):
+        # The keying fix must not make everything look identical.
+        runs = [self._run('exp-repeat-0', {'DATAEXFIL': '"A" -> "B"\n'}),
+                self._run('exp-repeat-1', {'DATAEXFIL': '"A" -> "Z"\n'})]
+        verdict = collect.exact_match_across_repeats(runs)
+        self.assertEqual(verdict['ag_dot_match_rate_raw'], 0.0)
+
+    def test_graph_present_in_only_one_run_is_counted_missing(self):
+        runs = [self._run('exp-repeat-0', {'DATAEXFIL': 'x\n', 'EXTRA': 'y\n'}),
+                self._run('exp-repeat-1', {'DATAEXFIL': 'x\n'})]
+        verdict = collect.exact_match_across_repeats(runs)
+        self.assertEqual(verdict['ag_dot_missing_in_some_repeat'], 1)
+        self.assertEqual(verdict['ag_dot_identical_raw'], 1)
+
+
 class TestLogScraping(unittest.TestCase):
     """Recovering SAGE's own alert counts from stdout."""
 
