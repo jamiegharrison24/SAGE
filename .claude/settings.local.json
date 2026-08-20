@@ -70,7 +70,10 @@
       "PowerShell(Stop-Process *)",
       "PowerShell(taskkill *)",
       "PowerShell(Get-CimInstance *)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "PowerShell(Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -eq 'D' } | Select-Object Name, @{n='UsedGB';e={[math]::Round\\($_.Used/1GB,1\\)}}, @{n='FreeGB';e={[math]::Round\\($_.Free/1GB,1\\)}} | Format-Table -AutoSize; Write-Output \"--- existing perturbed corpora from the 2017 run ---\"; $p = 'D:\\\\Projects\\\\SAGE\\\\eval-runs-full\\\\perturbed'; if \\(Test-Path $p\\) { \"{0} dirs, {1:N1} GB\" -f \\(Get-ChildItem $p -Directory\\).Count, \\(\\(Get-ChildItem $p -Recurse -File | Measure-Object Length -Sum\\).Sum/1GB\\) } else { \"none\" })",
+      "Bash(echo \"2018 exit=$?\")",
+      "Bash(echo \"ccdc exit=$?\")"
     ]
   }
 }

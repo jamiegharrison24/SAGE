@@ -13,6 +13,7 @@ without meaning to.
 """
 import argparse
 import os
+import shutil
 import sys
 
 from evaluation import collect, compare, perturbation, report, runner, schema
@@ -124,18 +125,20 @@ def _repeats(args, iana, shim, dataset_path, flag):
             'exact_match': collect.exact_match_across_repeats(records)}
 
 
-def _perturbation_cells(args, iana, shim, reference_section):
+def _perturbation_cells(args, iana, shim, reference_section, keep_corpora=False):
     """
     Runs the noise-injection grid and measures each cell's distortion.
 
     Perturbed alert corpora are written under the run root rather than over the
     originals, and each cell gets its own experiment name so no two
-    configurations ever share an output directory.
+    configurations ever share an output directory. Each corpus is deleted once
+    measured -- see the note at the call site.
 
     @param args: parsed CLI arguments
     @param iana: the pinned CSV record
     @param shim: the PYTHONPATH shim directory
     @param reference_section: the reference run, to measure distortion against
+    @param keep_corpora: retain the perturbed datasets instead of deleting them
     @return: a list of perturbation cell results
     """
     source_path, flag = _dataset_paths(args.dataset, args.alerts_root)
@@ -186,6 +189,15 @@ def _perturbation_cells(args, iana, shim, reference_section):
             'distortion': _distortion(reference_section, section),
             'timing': {'wall_clock_seconds': section['timing']['wall_clock_seconds']},
         })
+
+        # Discard the perturbed corpus once it has been measured. It is a full
+        # copy of the dataset per cell -- ~27 GB across a 48-cell grid on
+        # CPTC-2018 -- and it is exactly reproducible from (family, rate, seed),
+        # so keeping it buys nothing. The cell's own artifacts and metrics are
+        # already harvested, so resuming does not need it either.
+        if not keep_corpora:
+            shutil.rmtree(os.path.dirname(corpus), ignore_errors=True)
+
         print('  [{}/{}] {} ok'.format(index, len(grid), name))
     return results
 
@@ -318,7 +330,8 @@ def command_run(args):
 
     if args.perturb:
         print('Perturbation runs...')
-        record['perturbations'] = _perturbation_cells(args, iana, shim, section)
+        record['perturbations'] = _perturbation_cells(
+            args, iana, shim, section, keep_corpora=args.keep_corpora)
 
     if args.sweep:
         print('Sensitivity sweep...')
@@ -402,7 +415,9 @@ def command_report(args):
 
     if args.dashboard:
         from evaluation import dashboard
-        dashboard.write(args.baseline_dir, args.dashboard)
+        # Scoped to the requested dataset: the page renders one record, so
+        # handing it every stored dataset would silently display only the first.
+        dashboard.write(args.baseline_dir, args.dashboard, datasets=[args.dataset])
         print('Wrote {}'.format(args.dashboard))
     return 0
 
@@ -445,6 +460,10 @@ def build_parser():
                         help='run the noise-injection grid (expensive: families x rates x seeds)')
     parser.add_argument('--sweep', action='store_true',
                         help='run the one-at-a-time -t/-w sensitivity sweep')
+    parser.add_argument('--keep-corpora', action='store_true',
+                        help='keep perturbed alert copies (default: delete once measured; '
+                             'they are ~27 GB on a full CPTC-2018 grid and are exactly '
+                             'reproducible from family/rate/seed)')
     # Grid overrides, so CCDC can run a reduced matrix without editing code.
     parser.add_argument('--families', nargs='*', default=None,
                         choices=perturbation.FAMILIES,
