@@ -40,7 +40,10 @@
       "Bash(timeout 1200 python -c ' *)",
       "Bash(git reset *)",
       "Bash(git restore *)",
-      "Bash(awk '{print $5, $9}')"
+      "Bash(awk '{print $5, $9}')",
+      "Bash(timeout 900 python -m evaluation run --dataset cptc-2017 --worktree \"D:/Projects/SAGE/SAGE-baseline\" --run-root \"D:/Projects/SAGE/eval-runs\" --baseline-dir \"D:/Projects/SAGE/eval-runs/baseline-test\" --timerange 0 2 --force)",
+      "Bash(timeout 900 python -m evaluation check --dataset cptc-2017 --worktree \"D:/Projects/SAGE/SAGE-baseline\" --run-root \"D:/Projects/SAGE/eval-runs\" --baseline-dir \"D:/Projects/SAGE/eval-runs/baseline-test\" --timerange 0 2)",
+      "Bash(echo \"EXIT CODE: $?\")"
     ]
   }
 }

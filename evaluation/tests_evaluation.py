@@ -8,16 +8,19 @@ enough to verify by hand. They deliberately do not run SAGE: the point is that a
 metric definition can be checked without a pipeline run, so a wrong number is
 caught before it is baked into a recorded baseline.
 """
+import datetime
 import json
 import math
 import os
+import random
 import sys
 import tempfile
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from evaluation import alerts, compare, dot_metrics, perplexity, runner  # noqa: E402
+from evaluation import (alerts, collect, compare, dot_metrics,  # noqa: E402
+                        perplexity, perturbation, runner, schema)
 
 
 # A graph whose counts are obvious by inspection, using the dialect SAGE emits:
@@ -373,6 +376,255 @@ class TestRunner(unittest.TestCase):
         with open(marker, 'w', encoding='utf-8') as handle:
             handle.write('{ truncated')
         self.assertFalse(runner.cell_is_complete(directory))  # corrupt marker
+
+
+def _record_with(aggregate=None, perplexity_training=None, timing=None, totals=None):
+    """
+    Builds a minimal record for the regression-check tests.
+
+    @param aggregate: the attack graph aggregate section
+    @param perplexity_training: a training perplexity value
+    @param timing: the timing section
+    @param totals: the alert totals section
+    @return: a record dict
+    """
+    record = schema.new_record('test-dataset', 'abc1234', {}, {})
+    record['reference'] = {
+        'attack_graphs': {'aggregate': aggregate or {}},
+        'alerts': {'totals': totals or {}},
+        'perplexity': {'training': {'perplexity': perplexity_training}},
+        'timing': timing or {},
+    }
+    return record
+
+
+class TestRegressionCheck(unittest.TestCase):
+    """The --check logic: what counts as a regression and what does not."""
+
+    def test_identical_records_pass(self):
+        record = _record_with({'n_attack_graphs': 104, 'total_nodes': 1885},
+                              perplexity_training=13.478)
+        result = schema.check_regression(record, record)
+        self.assertTrue(result['passed'])
+        self.assertEqual(result['failures'], [])
+        self.assertEqual(result['n_compared'], 3)
+
+    def test_structural_change_fails(self):
+        # The check must fail on a perturbed run -- otherwise the snapshot is a
+        # document, not a reference.
+        baseline = _record_with({'n_attack_graphs': 104, 'total_nodes': 1885})
+        candidate = _record_with({'n_attack_graphs': 103, 'total_nodes': 1885})
+        result = schema.check_regression(baseline, candidate)
+        self.assertFalse(result['passed'])
+        self.assertIn('n_attack_graphs', result['failures'])
+        self.assertNotIn('total_nodes', result['failures'])
+
+    def test_single_node_change_fails(self):
+        # Structural tolerances are exact, so even one node must trip the check.
+        baseline = _record_with({'total_nodes': 1885})
+        candidate = _record_with({'total_nodes': 1886})
+        self.assertFalse(schema.check_regression(baseline, candidate)['passed'])
+
+    def test_runtime_drift_is_reported_but_never_fatal(self):
+        # Runtime is hardware-dependent; failing on it would make the check fail
+        # on a different machine for reasons unrelated to a regression.
+        baseline = _record_with(timing={'wall_clock_seconds': 57.0})
+        candidate = _record_with(timing={'wall_clock_seconds': 400.0})
+        result = schema.check_regression(baseline, candidate)
+        self.assertTrue(result['passed'])
+        finding = next(f for f in result['findings']
+                       if f['metric'] == 'wall_clock_seconds')
+        self.assertEqual(finding['status'], 'informational')
+        self.assertAlmostEqual(finding['relative'], (400.0 - 57.0) / 57.0)
+
+    def test_float_noise_within_tolerance_passes(self):
+        baseline = _record_with(perplexity_training=13.478000000)
+        candidate = _record_with(perplexity_training=13.478000001)
+        self.assertTrue(schema.check_regression(baseline, candidate)['passed'])
+
+    def test_real_perplexity_shift_fails(self):
+        baseline = _record_with(perplexity_training=13.478)
+        candidate = _record_with(perplexity_training=13.52)
+        self.assertFalse(schema.check_regression(baseline, candidate)['passed'])
+
+    def test_missing_metric_fails(self):
+        baseline = _record_with({'n_attack_graphs': 104})
+        candidate = _record_with({})
+        result = schema.check_regression(baseline, candidate)
+        self.assertFalse(result['passed'])
+        self.assertEqual(next(f['status'] for f in result['findings']
+                              if f['metric'] == 'n_attack_graphs'), 'missing')
+
+    def test_schema_version_mismatch_is_flagged(self):
+        baseline = _record_with({'n_attack_graphs': 104})
+        baseline['schema_version'] = 999
+        result = schema.check_regression(baseline, _record_with({'n_attack_graphs': 104}))
+        self.assertIn('schema_warning', result)
+
+    def test_summarise_reports_spread(self):
+        summary = schema.summarise([10, 12, 14, 11, 13])
+        self.assertEqual(summary['n'], 5)
+        self.assertEqual((summary['min'], summary['median'], summary['max']), (10, 12, 14))
+        self.assertAlmostEqual(summary['mean'], 12.0)
+        self.assertGreater(summary['stdev'], 0)
+
+    def test_summarise_of_identical_repeats_has_zero_spread(self):
+        # What a deterministic pipeline should look like across repeats.
+        summary = schema.summarise([13.478] * 5)
+        self.assertEqual(summary['stdev'], 0.0)
+        self.assertEqual(summary['min'], summary['max'])
+
+    def test_round_trip_through_disk(self):
+        record = _record_with({'n_attack_graphs': 104})
+        path = os.path.join(tempfile.mkdtemp(), 'metrics-test.json')
+        schema.save(record, path)
+        self.assertTrue(schema.check_regression(schema.load(path), record)['passed'])
+
+
+class TestPerturbation(unittest.TestCase):
+    """Noise injection: seeding, rates, and wrapper preservation."""
+
+    @staticmethod
+    def _records(n=100, wrapper='plain'):
+        made = []
+        for i in range(n):
+            stamp = '2017-11-04T12:{:02d}:{:02d}.000000+0000'.format(i // 60, i % 60)
+            inner = {
+                'timestamp': stamp,
+                'event_type': 'alert', 'src_ip': '10.0.0.1',
+                'dest_ip': '10.0.0.2', 'src_port': 100 + i, 'dest_port': 80,
+                'alert': {'signature': 'SIG {}'.format(i % 5),
+                          'category': 'Attempted Admin'},
+            }
+            if wrapper == 'result_raw':
+                made.append({'preview': False, 'result': {'_raw': json.dumps(inner)}})
+            elif wrapper == 'top_raw':
+                made.append({'_bkt': 'x', '_raw': json.dumps(inner)})
+            else:
+                made.append(inner)
+        return made
+
+    def test_injection_preserves_each_wrapper_shape(self):
+        # A synthetic alert in the wrong wrapper is silently skipped by SAGE's
+        # parser, which would make a robustness run inject nothing at all.
+        for wrapper in ('plain', 'result_raw', 'top_raw'):
+            records = self._records(wrapper=wrapper)
+            perturbed, injected = perturbation.inject_false_positives(
+                records, 0.10, random.Random(1))
+            self.assertEqual(injected, 10, wrapper)
+            for record in perturbed:
+                inner = perturbation._unwrap(record)
+                self.assertEqual(inner['event_type'], 'alert', wrapper)
+                self.assertIn('signature', inner['alert'], wrapper)
+
+    def test_rates_are_honoured(self):
+        records = self._records(200)
+        for rate in (0.01, 0.05, 0.10, 0.20):
+            _, injected = perturbation.inject_false_positives(
+                records, rate, random.Random(1))
+            self.assertEqual(injected, int(round(200 * rate)))
+            kept, dropped = perturbation.drop_alerts(records, rate, random.Random(1))
+            self.assertEqual(dropped, int(round(200 * rate)))
+            self.assertEqual(len(kept), 200 - dropped)
+
+    def test_same_seed_reproduces_same_perturbation(self):
+        records = self._records()
+        first, _ = perturbation.drop_alerts(records, 0.2, random.Random(7))
+        second, _ = perturbation.drop_alerts(records, 0.2, random.Random(7))
+        third, _ = perturbation.drop_alerts(records, 0.2, random.Random(8))
+        self.assertEqual(first, second)
+        self.assertNotEqual(first, third)
+
+    def test_injected_alerts_stay_inside_the_capture_window(self):
+        records = self._records()
+        earliest, latest = perturbation._timestamps(
+            [perturbation._unwrap(r) for r in records])
+        perturbed, _ = perturbation.inject_false_positives(
+            records, 0.5, random.Random(3))
+        for record in perturbed:
+            when = datetime.datetime.strptime(
+                perturbation._unwrap(record)['timestamp'], perturbation._TIMESTAMP_FORMAT)
+            self.assertGreaterEqual(when, earliest)
+            self.assertLessEqual(when, latest)
+
+    def test_duplicates_repeat_existing_alerts_only(self):
+        records = self._records()
+        perturbed, added = perturbation.duplicate_subsequences(
+            records, 0.2, random.Random(5))
+        self.assertEqual(len(perturbed), len(records) + added)
+        original = [json.dumps(r, sort_keys=True) for r in records]
+        for record in perturbed:
+            self.assertIn(json.dumps(record, sort_keys=True), original)
+
+    def test_unknown_family_is_rejected(self):
+        with self.assertRaises(ValueError):
+            perturbation.perturb_dataset('.', tempfile.mkdtemp(), 'nonsense', 0.1, 1)
+
+    def test_sweep_excludes_each_dataset_own_baseline(self):
+        # CPTC-2018's baseline is -t 2.0 -w 200, not SAGE's defaults, so its
+        # sweep must exclude those values rather than the global defaults.
+        cells = perturbation.sweep_grid('cptc-2018')
+        swept_t = {c['value'] for c in cells if c['parameter'] == 't'}
+        swept_w = {c['value'] for c in cells if c['parameter'] == 'w'}
+        self.assertNotIn(2.0, swept_t)
+        self.assertNotIn(200, swept_w)
+        self.assertIn(1.0, swept_t)     # the default IS swept for 2018
+        self.assertIn(150, swept_w)
+
+        cells_2017 = perturbation.sweep_grid('cptc-2017')
+        self.assertNotIn(1.0, {c['value'] for c in cells_2017 if c['parameter'] == 't'})
+
+    def test_sweep_holds_the_other_parameter_at_baseline(self):
+        for cell in perturbation.sweep_grid('cptc-2018'):
+            if cell['parameter'] == 't':
+                self.assertEqual(cell['w'], 200)
+            else:
+                self.assertEqual(cell['t'], 2.0)
+
+    def test_perturbation_grid_size(self):
+        grid = perturbation.perturbation_grid()
+        self.assertEqual(len(grid), 4 * 4 * 3)  # families x rates x seeds
+        self.assertEqual(len({(c['family'], c['rate'], c['seed']) for c in grid}), 48)
+
+
+class TestLogScraping(unittest.TestCase):
+    """Recovering SAGE's own alert counts from stdout."""
+
+    def _cell_with_log(self, text):
+        directory = tempfile.mkdtemp()
+        with open(os.path.join(directory, 'stdout.log'), 'w', encoding='utf-8') as handle:
+            handle.write(text)
+        return {'artifacts': {'.txt': os.path.join(directory, 'exp.txt')}}
+
+    def test_counts_are_summed_across_team_files(self):
+        # SAGE prints these once per team file, not once per run. Taking the
+        # first match yields only the first team's count -- 4183 instead of the
+        # real 43299 on the CPTC-2017 baseline.
+        cell = self._cell_with_log(
+            '------ Reading alerts ------\n'
+            'Reading # alerts:  4274\n'
+            'Filtered # alerts (remaining): 4183\n'
+            'Reading # alerts:  5105\n'
+            'Filtered # alerts (remaining): 4949\n'
+            'Reading # alerts:  2923\n'
+            'Filtered # alerts (remaining): 2904\n')
+        counts = collect.alert_counts_from_log(cell)
+        self.assertEqual(counts['sage_read'], 4274 + 5105 + 2923)
+        self.assertEqual(counts['post_dedup'], 4183 + 4949 + 2904)
+        self.assertEqual(len(counts['per_file_read']), 3)
+        self.assertNotEqual(counts['post_dedup'], 4183)  # the bug this guards
+
+    def test_missing_log_yields_nulls_not_guesses(self):
+        counts = collect.alert_counts_from_log({'artifacts': {}})
+        self.assertIsNone(counts['sage_read'])
+        self.assertIsNone(counts['post_dedup'])
+
+    def test_unrelated_numbers_are_not_scraped(self):
+        cell = self._cell_with_log('# episode traces: 1102\n'
+                                   'Total medium-severity states: 42\n')
+        counts = collect.alert_counts_from_log(cell)
+        self.assertIsNone(counts['sage_read'])
+        self.assertIsNone(counts['post_dedup'])
 
 
 if __name__ == '__main__':
