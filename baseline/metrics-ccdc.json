@@ -1,0 +1,2587 @@
+{
+  "created_at": "2026-08-20T23:50:47.952935+00:00",
+  "dataset": "ccdc",
+  "environment": {
+    "captured_at": "2026-08-20T23:49:10.083713+00:00",
+    "cpu_count": 12,
+    "flexfringe_ini_sha256": "d20a6237768feaba9ce822fdf5ea1a783f6124c8cafb63ce641f8f191bc230b7",
+    "flexfringe_sha256": "69efbec90fb4140ec20b9fa450ef45bc709763cc6ba83bf8f2cbe32f5f4c5354",
+    "glibc_version": "ldd (Ubuntu GLIBC 2.39-0ubuntu8.7) 2.39",
+    "graphviz_version": "dot - graphviz version 14.1.5 (20260411.2331)",
+    "machine": "AMD64",
+    "os": "Windows-11-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "python_implementation": "CPython",
+    "python_version": "3.13.3",
+    "runs_flexfringe_via": "wsl -d Ubuntu",
+    "system": "Windows",
+    "total_ram_bytes": 33397133312,
+    "wsl_kernel": "6.6.87.2-microsoft-standard-WSL2"
+  },
+  "host": "Rocinante",
+  "iana": {
+    "bytes": 1156686,
+    "path": "D:\\Projects\\SAGE\\eval-runs-full\\pinned\\iana-service-names.csv",
+    "pinned_at": "2026-08-20T23:49:10.083389+00:00",
+    "sha256": "757d5969a623680753269c420688fc01b050ce8dae9f47d90aab0a057f144dc8",
+    "url": "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
+  },
+  "measured_commit": "20aa5ed99bfee77143d88ffdb19ed43a108810eb",
+  "notes": [],
+  "perturbations": [],
+  "reference": {
+    "alerts": {
+      "counter_agrees_with_sage": true,
+      "from_sage_stdout": {
+        "per_file_post_dedup": [
+          515346
+        ],
+        "per_file_read": [
+          1033067
+        ],
+        "post_dedup": 515346,
+        "sage_read": 1033067
+      },
+      "n_files": 1,
+      "per_file": {
+        "wrcddc-2018.json": {
+          "dropped_bad_ip": 0,
+          "dropped_category": 19166,
+          "dropped_non_alert": 48,
+          "raw_alerts": 1033067,
+          "raw_records": 1052281
+        }
+      },
+      "totals": {
+        "dropped_bad_ip": 0,
+        "dropped_category": 19166,
+        "dropped_non_alert": 48,
+        "raw_alerts": 1033067,
+        "raw_records": 1052281
+      }
+    },
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "sage.py",
+      "D:\\Projects\\SAGE\\SAGE\\alerts\\ccdc",
+      "ccdc-reference",
+      "--dataset",
+      "other",
+      "--keep-files",
+      "-t",
+      "1.0",
+      "-w",
+      "150"
+    ],
+    "attack_graphs": {
+      "aggregate": {
+        "longest_path_methods": {
+          "exact_dfs": 72
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 72,
+        "n_dot_files": 72,
+        "n_objectives": 8,
+        "n_victims": 47,
+        "parallel_edges": 62,
+        "self_loops": 32,
+        "total_edges": 327,
+        "total_nodes": 306,
+        "unique_edges": 149,
+        "unique_nodes": 121
+      },
+      "distribution": {
+        "branching_factor": {
+          "max": 4.333333333333333,
+          "mean": 1.0255621693121695,
+          "median": 0.75,
+          "min": 0.6666666666666666,
+          "n": 72
+        },
+        "density": {
+          "max": 0.3333333333333333,
+          "mean": 0.2640542328042328,
+          "median": 0.25,
+          "min": 0.125,
+          "n": 72
+        },
+        "edges_total": {
+          "max": 15,
+          "mean": 4.541666666666667,
+          "median": 3.0,
+          "min": 2,
+          "n": 72
+        },
+        "longest_path_edges": {
+          "max": 6,
+          "mean": 3.0416666666666665,
+          "median": 3.0,
+          "min": 2,
+          "n": 72
+        },
+        "nodes": {
+          "max": 8,
+          "mean": 4.25,
+          "median": 4.0,
+          "min": 3,
+          "n": 72
+        },
+        "path_linearity": {
+          "max": 1.0,
+          "mean": 0.8166751458418126,
+          "median": 1.0,
+          "min": 0.15384615384615385,
+          "n": 72
+        },
+        "reachability_density": {
+          "max": 0.6,
+          "mean": 0.49384920634920637,
+          "median": 0.5,
+          "min": 0.2857142857142857,
+          "n": 72
+        },
+        "simplicity": {
+          "max": 1.5,
+          "mean": 1.149230938814272,
+          "median": 1.3333333333333333,
+          "min": 0.23076923076923078,
+          "n": 72
+        }
+      },
+      "edge_bases": {
+        "edges_simple": "distinct (tail, head) pairs, self-loops included",
+        "edges_simple_no_loops": "distinct (tail, head) pairs where tail != head",
+        "edges_total": "every edge line, multi-edges preserved, self-loops included"
+      },
+      "formulas": {
+        "branching_factor": "edges_total / nodes  (paper definition; edge basis = multi-edges PRESERVED, self-loops included. NOTE: this is not the conventional mean out-degree)",
+        "density": "edges_simple_no_loops / (nodes * (nodes - 1))  (textbook directed simple-graph density, retained for comparability with the wider graph literature but NOT the headline density -- see reachability_density for why. Multi-edges COLLAPSED and self-loops EXCLUDED from the numerator, because V*(V-1) counts ordered distinct pairs and neither is representable in it; leaving them in can push density above 1. Null when nodes < 2.)",
+        "path_linearity": "longest_path_edges / edges_total  (longest path measured in EDGES traversed, over the same preserved edge basis)",
+        "reachability_density": "|{(u,v) : u != v, v reachable from u}| / (nodes * (nodes - 1))  (HEADLINE density. The paper gives no formula, defining density only by intent -- it \"captures how easily an attacker can traverse the network\". This is the literal reading: the fraction of ordered state pairs the attacker can actually get between, following edges any distance. Same normalisation as edge density, so it stays in [0,1] and remains comparable across graphs. Preferred over edge density because edge density is confounded by graph size -- measured across the 104 CPTC-2017 baseline AGs, corr(nodes, edge_density) = -0.79 versus corr(nodes, reachability_density) = +0.17 -- and because the paper already defines branching_factor = edges/nodes, which an edges-per-node density largely duplicates. Null when nodes < 2.)",
+        "simplicity": "nodes / edges_total  (reciprocal of branching_factor; same edge basis. Included only for comparability with Nadeem et al.)"
+      },
+      "per_graph": [
+        {
+          "branching_factor": 4.333333333333333,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 13,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.128.0.101-DATADELIVERYmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATADELIVERYmicrosoftds",
+          "parallel_edges": 10,
+          "path_linearity": 0.15384615384615385,
+          "reachability_density": 0.5,
+          "self_loops": 4,
+          "simplicity": 0.23076923076923078,
+          "victim": "10.128.0.101"
+        },
+        {
+          "branching_factor": 2.6,
+          "density": 0.25,
+          "edges_simple": 6,
+          "edges_simple_no_loops": 5,
+          "edges_total": 13,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.128.0.221-NETWORKDOSntp.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 7,
+          "path_linearity": 0.3076923076923077,
+          "reachability_density": 0.5,
+          "self_loops": 4,
+          "simplicity": 0.38461538461538464,
+          "victim": "10.128.0.221"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.128.0.235-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.128.0.235"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.128.0.235-DATAEXFILTRATIONunknown.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.128.0.235"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.240.105.57-DATAEXFILTRATIONhttps.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.240.105.57"
+        },
+        {
+          "branching_factor": 1.5,
+          "density": 0.26666666666666666,
+          "edges_simple": 8,
+          "edges_simple_no_loops": 8,
+          "edges_total": 9,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.244.217.243-DATAEXFILTRATIONhttps.dot",
+          "nodes": 6,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 1,
+          "path_linearity": 0.5555555555555556,
+          "reachability_density": 0.6,
+          "self_loops": 0,
+          "simplicity": 0.6666666666666666,
+          "victim": "10.244.217.243"
+        },
+        {
+          "branching_factor": 1.1666666666666667,
+          "density": 0.23333333333333334,
+          "edges_simple": 7,
+          "edges_simple_no_loops": 7,
+          "edges_total": 7,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.244.217.243-NETWORKDOShttpalt.dot",
+          "nodes": 6,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 0.7142857142857143,
+          "reachability_density": 0.5333333333333333,
+          "self_loops": 0,
+          "simplicity": 0.8571428571428571,
+          "victim": "10.244.217.243"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.2.100-NETWORKDOSntp.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.2.100"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.2.156-DATAEXFILTRATIONhttps.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.2.156"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.1-DATAEXFILTRATIONhttps.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.21.1"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.1-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.21.1"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.25-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.21.25"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.25-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.21.25"
+        },
+        {
+          "branching_factor": 1.5,
+          "density": 0.3333333333333333,
+          "edges_simple": 5,
+          "edges_simple_no_loops": 4,
+          "edges_total": 6,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.25-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 1,
+          "path_linearity": 0.5,
+          "reachability_density": 0.5,
+          "self_loops": 1,
+          "simplicity": 0.6666666666666666,
+          "victim": "10.47.21.25"
+        },
+        {
+          "branching_factor": 2.25,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 9,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.80-DATAEXFILTRATIONhttps.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 6,
+          "path_linearity": 0.3333333333333333,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 0.4444444444444444,
+          "victim": "10.47.21.80"
+        },
+        {
+          "branching_factor": 2.142857142857143,
+          "density": 0.19047619047619047,
+          "edges_simple": 8,
+          "edges_simple_no_loops": 8,
+          "edges_total": 15,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.80-NETWORKDOShttpalt.dot",
+          "nodes": 7,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 7,
+          "path_linearity": 0.3333333333333333,
+          "reachability_density": 0.4523809523809524,
+          "self_loops": 0,
+          "simplicity": 0.4666666666666667,
+          "victim": "10.47.21.80"
+        },
+        {
+          "branching_factor": 1.6666666666666667,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 5,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.81-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 2,
+          "path_linearity": 0.4,
+          "reachability_density": 0.5,
+          "self_loops": 3,
+          "simplicity": 0.6,
+          "victim": "10.47.21.81"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.81-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.21.81"
+        },
+        {
+          "branching_factor": 1.6666666666666667,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 5,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.82-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 2,
+          "path_linearity": 0.4,
+          "reachability_density": 0.5,
+          "self_loops": 2,
+          "simplicity": 0.6,
+          "victim": "10.47.21.82"
+        },
+        {
+          "branching_factor": 1.0,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 3,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.21.82-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 1,
+          "path_linearity": 0.6666666666666666,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.0,
+          "victim": "10.47.21.82"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.1-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.22.1"
+        },
+        {
+          "branching_factor": 1.1666666666666667,
+          "density": 0.16666666666666666,
+          "edges_simple": 5,
+          "edges_simple_no_loops": 5,
+          "edges_total": 7,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.186-NETWORKDOSssdp.dot",
+          "nodes": 6,
+          "objective": "NETWORKDOSssdp",
+          "parallel_edges": 2,
+          "path_linearity": 0.7142857142857143,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 0.8571428571428571,
+          "victim": "10.47.22.186"
+        },
+        {
+          "branching_factor": 1.5,
+          "density": 0.16666666666666666,
+          "edges_simple": 6,
+          "edges_simple_no_loops": 5,
+          "edges_total": 9,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.25-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 6,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 3,
+          "path_linearity": 0.3333333333333333,
+          "reachability_density": 0.3,
+          "self_loops": 4,
+          "simplicity": 0.6666666666666666,
+          "victim": "10.47.22.25"
+        },
+        {
+          "branching_factor": 0.875,
+          "density": 0.125,
+          "edges_simple": 7,
+          "edges_simple_no_loops": 7,
+          "edges_total": 7,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.25-DATAEXFILTRATIONunknown.dot",
+          "nodes": 8,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 0.5714285714285714,
+          "reachability_density": 0.2857142857142857,
+          "self_loops": 0,
+          "simplicity": 1.1428571428571428,
+          "victim": "10.47.22.25"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.80-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.22.80"
+        },
+        {
+          "branching_factor": 0.8333333333333334,
+          "density": 0.16666666666666666,
+          "edges_simple": 5,
+          "edges_simple_no_loops": 5,
+          "edges_total": 5,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.80-DATAEXFILTRATIONunknown.dot",
+          "nodes": 6,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 0.8,
+          "reachability_density": 0.4,
+          "self_loops": 0,
+          "simplicity": 1.2,
+          "victim": "10.47.22.80"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.22.82-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.22.82"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.23.25-NETWORKDOSntp.dot",
+          "nodes": 3,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.23.25"
+        },
+        {
+          "branching_factor": 1.3333333333333333,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 4,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.25-DATADELIVERYmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATADELIVERYmicrosoftds",
+          "parallel_edges": 1,
+          "path_linearity": 0.5,
+          "reachability_density": 0.5,
+          "self_loops": 2,
+          "simplicity": 0.75,
+          "victim": "10.47.24.25"
+        },
+        {
+          "branching_factor": 1.6666666666666667,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 5,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.25-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 2,
+          "path_linearity": 0.4,
+          "reachability_density": 0.5,
+          "self_loops": 3,
+          "simplicity": 0.6,
+          "victim": "10.47.24.25"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.25-NETWORKDOSntp.dot",
+          "nodes": 3,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.24.25"
+        },
+        {
+          "branching_factor": 1.5,
+          "density": 0.25,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 3,
+          "edges_total": 6,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.80-DATADELIVERYmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATADELIVERYmicrosoftds",
+          "parallel_edges": 2,
+          "path_linearity": 0.5,
+          "reachability_density": 0.5,
+          "self_loops": 3,
+          "simplicity": 0.6666666666666666,
+          "victim": "10.47.24.80"
+        },
+        {
+          "branching_factor": 1.1666666666666667,
+          "density": 0.2,
+          "edges_simple": 7,
+          "edges_simple_no_loops": 6,
+          "edges_total": 7,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.80-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 6,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 0.7142857142857143,
+          "reachability_density": 0.6,
+          "self_loops": 1,
+          "simplicity": 0.8571428571428571,
+          "victim": "10.47.24.80"
+        },
+        {
+          "branching_factor": 1.0,
+          "density": 0.2,
+          "edges_simple": 6,
+          "edges_simple_no_loops": 6,
+          "edges_total": 6,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.80-DATAEXFILTRATIONunknown.dot",
+          "nodes": 6,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 0.8333333333333334,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.0,
+          "victim": "10.47.24.80"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.80-NETWORKDOShttpalt.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.24.80"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.81-DATAEXFILTRATIONunknown.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.24.81"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.24.82-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.24.82"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.25.25-NETWORKDOSntp.dot",
+          "nodes": 3,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.25.25"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.26.25-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.26.25"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.26.25-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.26.25"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.26.25-NETWORKDOSntp.dot",
+          "nodes": 3,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.26.25"
+        },
+        {
+          "branching_factor": 1.25,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 5,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.26.80-DATAEXFILTRATIONhttps.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 2,
+          "path_linearity": 0.6,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 0.8,
+          "victim": "10.47.26.80"
+        },
+        {
+          "branching_factor": 0.8571428571428571,
+          "density": 0.14285714285714285,
+          "edges_simple": 6,
+          "edges_simple_no_loops": 6,
+          "edges_total": 6,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.26.80-NETWORKDOShttpalt.dot",
+          "nodes": 7,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 0.6666666666666666,
+          "reachability_density": 0.35714285714285715,
+          "self_loops": 0,
+          "simplicity": 1.1666666666666667,
+          "victim": "10.47.26.80"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.25-NETWORKDOSntp.dot",
+          "nodes": 3,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.27.25"
+        },
+        {
+          "branching_factor": 1.625,
+          "density": 0.14285714285714285,
+          "edges_simple": 9,
+          "edges_simple_no_loops": 8,
+          "edges_total": 13,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.80-DATAEXFILTRATIONhttps.dot",
+          "nodes": 8,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 4,
+          "path_linearity": 0.38461538461538464,
+          "reachability_density": 0.5535714285714286,
+          "self_loops": 1,
+          "simplicity": 0.6153846153846154,
+          "victim": "10.47.27.80"
+        },
+        {
+          "branching_factor": 1.5,
+          "density": 0.16071428571428573,
+          "edges_simple": 10,
+          "edges_simple_no_loops": 9,
+          "edges_total": 12,
+          "longest_path_edges": 6,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 7,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.80-NETWORKDOShttpalt.dot",
+          "nodes": 8,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 2,
+          "path_linearity": 0.5,
+          "reachability_density": 0.5535714285714286,
+          "self_loops": 1,
+          "simplicity": 0.6666666666666666,
+          "victim": "10.47.27.80"
+        },
+        {
+          "branching_factor": 1.0,
+          "density": 0.3333333333333333,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 2,
+          "edges_total": 3,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.81-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 0.6666666666666666,
+          "reachability_density": 0.5,
+          "self_loops": 1,
+          "simplicity": 1.0,
+          "victim": "10.47.27.81"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.81-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.27.81"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.27.82-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.27.82"
+        },
+        {
+          "branching_factor": 1.25,
+          "density": 0.25,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 3,
+          "edges_total": 5,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.28.25-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 1,
+          "path_linearity": 0.4,
+          "reachability_density": 0.4166666666666667,
+          "self_loops": 1,
+          "simplicity": 0.8,
+          "victim": "10.47.28.25"
+        },
+        {
+          "branching_factor": 1.8571428571428572,
+          "density": 0.16666666666666666,
+          "edges_simple": 7,
+          "edges_simple_no_loops": 7,
+          "edges_total": 13,
+          "longest_path_edges": 5,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 6,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.28.80-DATAEXFILTRATIONhttps.dot",
+          "nodes": 7,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 6,
+          "path_linearity": 0.38461538461538464,
+          "reachability_density": 0.5714285714285714,
+          "self_loops": 0,
+          "simplicity": 0.5384615384615384,
+          "victim": "10.47.28.80"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.28.80-NETWORKDOShttpalt.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.28.80"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.3.10-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.3.10"
+        },
+        {
+          "branching_factor": 1.0,
+          "density": 0.2,
+          "edges_simple": 6,
+          "edges_simple_no_loops": 6,
+          "edges_total": 6,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.3.142-NETWORKDOShttpalt.dot",
+          "nodes": 6,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 0.6666666666666666,
+          "reachability_density": 0.43333333333333335,
+          "self_loops": 0,
+          "simplicity": 1.0,
+          "victim": "10.47.3.142"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.3.30-NETWORKDOShttpalt.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOShttpalt",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.3.30"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.4.142-DATAEXFILTRATIONhttps.dot",
+          "nodes": 5,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.4.142"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.41.10-DATADELIVERYmicrosoftds.dot",
+          "nodes": 3,
+          "objective": "DATADELIVERYmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.41.10"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.41.10-NETWORKDOSntp.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.41.10"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.41.26-DATAEXFILTRATIONsmtp.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONsmtp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.41.26"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.41.26-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.41.26"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.43.10-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.43.10"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.43.26-DATAEXFILTRATIONsmtp.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONsmtp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.43.26"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.43.26-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.43.26"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.44.10-NETWORKDOSntp.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.44.10"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.44.68-DATAEXFILTRATIONunknown.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONunknown",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.44.68"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.47.10-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.47.10"
+        },
+        {
+          "branching_factor": 0.6666666666666666,
+          "density": 0.3333333333333333,
+          "edges_simple": 2,
+          "edges_simple_no_loops": 2,
+          "edges_total": 2,
+          "longest_path_edges": 2,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 3,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.48.27-DATAEXFILTRATIONsmtp.dot",
+          "nodes": 3,
+          "objective": "DATAEXFILTRATIONsmtp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.5,
+          "victim": "10.47.48.27"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.48.27-NETWORKDOSntp.dot",
+          "nodes": 4,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.48.27"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.8.10-DATAEXFILTRATIONmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATAEXFILTRATIONmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.8.10"
+        },
+        {
+          "branching_factor": 0.8,
+          "density": 0.2,
+          "edges_simple": 4,
+          "edges_simple_no_loops": 4,
+          "edges_total": 4,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.8.100-NETWORKDOSntp.dot",
+          "nodes": 5,
+          "objective": "NETWORKDOSntp",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.25,
+          "victim": "10.47.8.100"
+        },
+        {
+          "branching_factor": 1.0,
+          "density": 0.2,
+          "edges_simple": 5,
+          "edges_simple_no_loops": 4,
+          "edges_total": 5,
+          "longest_path_edges": 4,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 5,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.8.142-DATAEXFILTRATIONhttps.dot",
+          "nodes": 5,
+          "objective": "DATAEXFILTRATIONhttps",
+          "parallel_edges": 0,
+          "path_linearity": 0.8,
+          "reachability_density": 0.5,
+          "self_loops": 1,
+          "simplicity": 1.0,
+          "victim": "10.47.8.142"
+        },
+        {
+          "branching_factor": 0.75,
+          "density": 0.25,
+          "edges_simple": 3,
+          "edges_simple_no_loops": 3,
+          "edges_total": 3,
+          "longest_path_edges": 3,
+          "longest_path_method": "exact_dfs",
+          "longest_path_nodes": 4,
+          "name": "ccdc-reference.txt-attack-graph-for-victim-10.47.8.153-DATADELIVERYmicrosoftds.dot",
+          "nodes": 4,
+          "objective": "DATADELIVERYmicrosoftds",
+          "parallel_edges": 0,
+          "path_linearity": 1.0,
+          "reachability_density": 0.5,
+          "self_loops": 0,
+          "simplicity": 1.3333333333333333,
+          "victim": "10.47.8.153"
+        }
+      ]
+    },
+    "compression": {
+      "formulas": {
+        "post_dedup_alerts_per_ag": "post_dedup_alerts / n_attack_graphs",
+        "raw_alerts_per_ag": "raw_alerts / n_attack_graphs  (the same ratio over alerts SAGE actually ingests, i.e. after the event_type and dataset filters. Diverges sharply from the primary on CPTC-2018, where the bad-IP filter drops ~69% of records.)",
+        "raw_alerts_per_ag_node": "raw_alerts / total_ag_nodes  (nodes summed across graphs)",
+        "raw_alerts_per_unique_ag_node": "raw_alerts / unique_ag_nodes  (node union across graphs)",
+        "raw_records_per_ag": "raw_records / n_attack_graphs  (PRIMARY -- the paper defines compression as \"number of raw alerts divided by number of generated attack graphs\", and its own dataset counts pin \"raw alerts\" to every record in the file: it cites CCDC-2018 as 1,052,281, which is exactly the raw_records count here, whereas the post-filter alert count is 1,033,067. See RAW_ALERT_CONVENTION.)"
+      },
+      "inputs": {
+        "n_attack_graphs": 72,
+        "post_dedup_alerts": 515346,
+        "raw_alerts": 1033067,
+        "raw_records": 1052281,
+        "total_ag_nodes": 306,
+        "unique_ag_nodes": 121
+      },
+      "post_dedup_alerts_per_ag": 7157.583333333333,
+      "primary": "raw_records_per_ag",
+      "raw_alert_convention": "raw_records: every JSON object in the dataset files. Matches the paper convention, confirmed exactly against its CCDC-2018 count of 1,052,281.",
+      "raw_alerts_per_ag": 14348.152777777777,
+      "raw_alerts_per_ag_node": 3376.0359477124184,
+      "raw_alerts_per_unique_ag_node": 8537.743801652892,
+      "raw_records_per_ag": 14615.013888888889
+    },
+    "measured_commit": "20aa5ed99bfee77143d88ffdb19ed43a108810eb",
+    "perplexity": {
+      "heldout": {
+        "alpha": 0.1,
+        "alphabet_size": 60,
+        "formula": "PP = exp( -(1/N) * sum_i log P(outcome_i | state_i) ), N = total scored outcomes. Outcomes at a state are the alphabet symbols plus an explicit END event, so N counts one END per trace in addition to every symbol.",
+        "mean_log_prob": -1.8978459454097074,
+        "model_learned_from": "D:\\Projects\\SAGE\\eval-runs-full\\heldout\\ccdc\\heldout-train.txt",
+        "n_outcomes": 61,
+        "n_scored_outcomes": 1387,
+        "n_symbols": 1255,
+        "n_test": 132,
+        "n_traces": 132,
+        "n_train": 529,
+        "note": "Held-out: a second FlexFringe run on the training split only. Not comparable to the training perplexity, and never averaged with it.",
+        "oov_events": 0,
+        "oov_policy": "union_alphabet: n_outcomes spans the union of the training and scored alphabets plus END, so an unseen symbol receives alpha / (N_state + alpha * n_outcomes) rather than zero. Counted in oov_events.",
+        "perplexity": 6.671508160646297,
+        "prob_formula": "P(sym|state)  = (trans_counts[sym] + alpha) / (N_state + alpha * n_outcomes) ; P(END|state)  = (total_final   + alpha) / (N_state + alpha * n_outcomes) ; N_state = total_paths + total_final ; n_outcomes = |alphabet| + 1",
+        "prob_source": "flexfringe_counts",
+        "requires_separate_model": true,
+        "resolved_by_model": {
+          "main": 1144,
+          "sinks": 18
+        },
+        "scores_end_of_trace": true,
+        "split_seed": 42,
+        "test_fraction": 0.2,
+        "unresolved_events": 93,
+        "unresolved_fraction": 0.06705118961788031,
+        "unresolved_policy": "uniform_over_outcomes: an unresolvable step (traverse state -1) is scored as 1/n_outcomes rather than skipped, and counted in unresolved_events"
+      },
+      "training": {
+        "alpha": 0.1,
+        "alphabet_size": 60,
+        "formula": "PP = exp( -(1/N) * sum_i log P(outcome_i | state_i) ), N = total scored outcomes. Outcomes at a state are the alphabet symbols plus an explicit END event, so N counts one END per trace in addition to every symbol.",
+        "mean_log_prob": -1.5764766029939214,
+        "n_outcomes": 61,
+        "n_scored_outcomes": 8186,
+        "n_symbols": 7525,
+        "n_traces": 661,
+        "oov_events": 0,
+        "oov_policy": "union_alphabet: n_outcomes spans the union of the training and scored alphabets plus END, so an unseen symbol receives alpha / (N_state + alpha * n_outcomes) rather than zero. Counted in oov_events.",
+        "perplexity": 4.837879974608716,
+        "prob_formula": "P(sym|state)  = (trans_counts[sym] + alpha) / (N_state + alpha * n_outcomes) ; P(END|state)  = (total_final   + alpha) / (N_state + alpha * n_outcomes) ; N_state = total_paths + total_final ; n_outcomes = |alphabet| + 1",
+        "prob_source": "flexfringe_counts",
+        "resolved_by_model": {
+          "main": 7213,
+          "sinks": 312
+        },
+        "scores_end_of_trace": true,
+        "unresolved_events": 0,
+        "unresolved_fraction": 0.0,
+        "unresolved_policy": "uniform_over_outcomes: an unresolvable step (traverse state -1) is scored as 1/n_outcomes rather than skipped, and counted in unresolved_events"
+      }
+    },
+    "timing": {
+      "alert_throughput": 11659.364889420734,
+      "stages": [
+        {
+          "ended": 0.455,
+          "seconds": 0.014,
+          "stage": "Downloading the IANA port-service mapping",
+          "started": 0.441
+        },
+        {
+          "ended": 17.622,
+          "seconds": 17.167,
+          "stage": "Reading alerts",
+          "started": 0.455
+        },
+        {
+          "ended": 46.737,
+          "seconds": 29.115,
+          "stage": "Converting to episodes",
+          "started": 17.622
+        },
+        {
+          "ended": 46.747,
+          "seconds": 0.01,
+          "stage": "Converting to episode sequences",
+          "started": 46.737
+        },
+        {
+          "ended": 47.356,
+          "seconds": 0.609,
+          "stage": "Breaking into sub-sequences and generating traces",
+          "started": 46.747
+        },
+        {
+          "ended": 49.645,
+          "seconds": 2.289,
+          "stage": "Learning S-PDFA",
+          "started": 47.356
+        },
+        {
+          "ended": 49.651,
+          "seconds": 0.006,
+          "stage": "!! Special: Fixing syntax error in main model and sink files",
+          "started": 49.645
+        },
+        {
+          "ended": 49.656,
+          "seconds": 0.005,
+          "stage": "Loading and traversing S-PDFA",
+          "started": 49.651
+        },
+        {
+          "ended": 50.266,
+          "seconds": 0.61,
+          "stage": "Encoding traces into state sequences",
+          "started": 49.656
+        },
+        {
+          "ended": 90.252,
+          "seconds": 39.986,
+          "stage": "Making alert-driven AGs",
+          "started": 50.266
+        }
+      ],
+      "throughput_formula": "raw_records / wall_clock_seconds",
+      "wall_clock_seconds": 90.252
+    }
+  },
+  "repeats": {
+    "exact_match": {
+      "ag_dot_identical_normalised": 72,
+      "ag_dot_identical_raw": 72,
+      "ag_dot_match_rate_normalised": 1.0,
+      "ag_dot_match_rate_raw": 1.0,
+      "ag_dot_missing_in_some_repeat": 0,
+      "main_model_identical": true,
+      "n_ag_dot_files": 72,
+      "n_repeats": 5,
+      "traces_identical": true
+    },
+    "n": 5,
+    "summary": {
+      "alert_throughput": {
+        "max": 11965.216896924216,
+        "mean": 11838.541276672848,
+        "median": 11816.743402582819,
+        "min": 11735.301333809162,
+        "n": 5,
+        "stdev": 83.92970970172804
+      },
+      "dropped_bad_ip": {
+        "max": 0,
+        "mean": 0.0,
+        "median": 0,
+        "min": 0,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "dropped_category": {
+        "max": 19166,
+        "mean": 19166.0,
+        "median": 19166,
+        "min": 19166,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "dropped_non_alert": {
+        "max": 48,
+        "mean": 48.0,
+        "median": 48,
+        "min": 48,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "n_attack_graphs": {
+        "max": 72,
+        "mean": 72.0,
+        "median": 72,
+        "min": 72,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "n_dot_files": {
+        "max": 72,
+        "mean": 72.0,
+        "median": 72,
+        "min": 72,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "n_objectives": {
+        "max": 8,
+        "mean": 8.0,
+        "median": 8,
+        "min": 8,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "n_victims": {
+        "max": 47,
+        "mean": 47.0,
+        "median": 47,
+        "min": 47,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "parallel_edges": {
+        "max": 62,
+        "mean": 62.0,
+        "median": 62,
+        "min": 62,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "perplexity_training": {
+        "max": 4.837879974608716,
+        "mean": 4.837879974608716,
+        "median": 4.837879974608716,
+        "min": 4.837879974608716,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "raw_alerts": {
+        "max": 1033067,
+        "mean": 1033067.0,
+        "median": 1033067,
+        "min": 1033067,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "raw_records": {
+        "max": 1052281,
+        "mean": 1052281.0,
+        "median": 1052281,
+        "min": 1052281,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "self_loops": {
+        "max": 32,
+        "mean": 32.0,
+        "median": 32,
+        "min": 32,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "total_edges": {
+        "max": 327,
+        "mean": 327.0,
+        "median": 327,
+        "min": 327,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "total_nodes": {
+        "max": 306,
+        "mean": 306.0,
+        "median": 306,
+        "min": 306,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "unique_edges": {
+        "max": 149,
+        "mean": 149.0,
+        "median": 149,
+        "min": 149,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "unique_nodes": {
+        "max": 121,
+        "mean": 121.0,
+        "median": 121,
+        "min": 121,
+        "n": 5,
+        "stdev": 0.0
+      },
+      "wall_clock_seconds": {
+        "max": 89.668,
+        "mean": 88.8896,
+        "median": 89.05,
+        "min": 87.945,
+        "n": 5,
+        "stdev": 0.6284968575896034
+      }
+    }
+  },
+  "schema_version": 1,
+  "sweeps": [
+    {
+      "distortion": {
+        "graph_jaccard": 1.0,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_dot_files": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": 0,
+            "candidate": 47,
+            "reference": 47,
+            "relative": 0.0
+          },
+          "parallel_edges": {
+            "absolute": 0,
+            "candidate": 62,
+            "reference": 62,
+            "relative": 0.0
+          },
+          "self_loops": {
+            "absolute": 0,
+            "candidate": 32,
+            "reference": 32,
+            "relative": 0.0
+          },
+          "total_edges": {
+            "absolute": 0,
+            "candidate": 327,
+            "reference": 327,
+            "relative": 0.0
+          },
+          "total_nodes": {
+            "absolute": 0,
+            "candidate": 306,
+            "reference": 306,
+            "relative": 0.0
+          },
+          "unique_edges": {
+            "absolute": 0,
+            "candidate": 149,
+            "reference": 149,
+            "relative": 0.0
+          },
+          "unique_nodes": {
+            "absolute": 0,
+            "candidate": 121,
+            "reference": 121,
+            "relative": 0.0
+          }
+        },
+        "n_ags_gained": 0,
+        "n_ags_lost": 0
+      },
+      "elasticity": {
+        "n_attack_graphs": -0.0,
+        "n_dot_files": -0.0,
+        "n_objectives": -0.0,
+        "n_victims": -0.0,
+        "parallel_edges": -0.0,
+        "self_loops": -0.0,
+        "total_edges": -0.0,
+        "total_nodes": -0.0,
+        "unique_edges": -0.0,
+        "unique_nodes": -0.0
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 72
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 72,
+        "n_dot_files": 72,
+        "n_objectives": 8,
+        "n_victims": 47,
+        "parallel_edges": 62,
+        "self_loops": 32,
+        "total_edges": 327,
+        "total_nodes": 306,
+        "unique_edges": 149,
+        "unique_nodes": 121
+      },
+      "parameter_relative_change": -0.5,
+      "perplexity": 4.837879974608716,
+      "spec": {
+        "baseline_value": 1.0,
+        "parameter": "t",
+        "t": 0.5,
+        "value": 0.5,
+        "w": 150
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 1.0,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_dot_files": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": 0,
+            "candidate": 47,
+            "reference": 47,
+            "relative": 0.0
+          },
+          "parallel_edges": {
+            "absolute": 0,
+            "candidate": 62,
+            "reference": 62,
+            "relative": 0.0
+          },
+          "self_loops": {
+            "absolute": 0,
+            "candidate": 32,
+            "reference": 32,
+            "relative": 0.0
+          },
+          "total_edges": {
+            "absolute": 0,
+            "candidate": 327,
+            "reference": 327,
+            "relative": 0.0
+          },
+          "total_nodes": {
+            "absolute": 0,
+            "candidate": 306,
+            "reference": 306,
+            "relative": 0.0
+          },
+          "unique_edges": {
+            "absolute": 0,
+            "candidate": 149,
+            "reference": 149,
+            "relative": 0.0
+          },
+          "unique_nodes": {
+            "absolute": 0,
+            "candidate": 121,
+            "reference": 121,
+            "relative": 0.0
+          }
+        },
+        "n_ags_gained": 0,
+        "n_ags_lost": 0
+      },
+      "elasticity": {
+        "n_attack_graphs": 0.0,
+        "n_dot_files": 0.0,
+        "n_objectives": 0.0,
+        "n_victims": 0.0,
+        "parallel_edges": 0.0,
+        "self_loops": 0.0,
+        "total_edges": 0.0,
+        "total_nodes": 0.0,
+        "unique_edges": 0.0,
+        "unique_nodes": 0.0
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 72
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 72,
+        "n_dot_files": 72,
+        "n_objectives": 8,
+        "n_victims": 47,
+        "parallel_edges": 62,
+        "self_loops": 32,
+        "total_edges": 327,
+        "total_nodes": 306,
+        "unique_edges": 149,
+        "unique_nodes": 121
+      },
+      "parameter_relative_change": 1.0,
+      "perplexity": 4.837879974608716,
+      "spec": {
+        "baseline_value": 1.0,
+        "parameter": "t",
+        "t": 2.0,
+        "value": 2.0,
+        "w": 150
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 1.0,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_dot_files": {
+            "absolute": 0,
+            "candidate": 72,
+            "reference": 72,
+            "relative": 0.0
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": 0,
+            "candidate": 47,
+            "reference": 47,
+            "relative": 0.0
+          },
+          "parallel_edges": {
+            "absolute": 0,
+            "candidate": 62,
+            "reference": 62,
+            "relative": 0.0
+          },
+          "self_loops": {
+            "absolute": 0,
+            "candidate": 32,
+            "reference": 32,
+            "relative": 0.0
+          },
+          "total_edges": {
+            "absolute": 0,
+            "candidate": 327,
+            "reference": 327,
+            "relative": 0.0
+          },
+          "total_nodes": {
+            "absolute": 0,
+            "candidate": 306,
+            "reference": 306,
+            "relative": 0.0
+          },
+          "unique_edges": {
+            "absolute": 0,
+            "candidate": 149,
+            "reference": 149,
+            "relative": 0.0
+          },
+          "unique_nodes": {
+            "absolute": 0,
+            "candidate": 121,
+            "reference": 121,
+            "relative": 0.0
+          }
+        },
+        "n_ags_gained": 0,
+        "n_ags_lost": 0
+      },
+      "elasticity": {
+        "n_attack_graphs": 0.0,
+        "n_dot_files": 0.0,
+        "n_objectives": 0.0,
+        "n_victims": 0.0,
+        "parallel_edges": 0.0,
+        "self_loops": 0.0,
+        "total_edges": 0.0,
+        "total_nodes": 0.0,
+        "unique_edges": 0.0,
+        "unique_nodes": 0.0
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 72
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 72,
+        "n_dot_files": 72,
+        "n_objectives": 8,
+        "n_victims": 47,
+        "parallel_edges": 62,
+        "self_loops": 32,
+        "total_edges": 327,
+        "total_nodes": 306,
+        "unique_edges": 149,
+        "unique_nodes": 121
+      },
+      "parameter_relative_change": 4.0,
+      "perplexity": 4.837879974608716,
+      "spec": {
+        "baseline_value": 1.0,
+        "parameter": "t",
+        "t": 5.0,
+        "value": 5.0,
+        "w": 150
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 0.7608695652173914,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": 18,
+            "candidate": 90,
+            "reference": 72,
+            "relative": 0.25
+          },
+          "n_dot_files": {
+            "absolute": 18,
+            "candidate": 90,
+            "reference": 72,
+            "relative": 0.25
+          },
+          "n_objectives": {
+            "absolute": 2,
+            "candidate": 10,
+            "reference": 8,
+            "relative": 0.25
+          },
+          "n_victims": {
+            "absolute": 6,
+            "candidate": 53,
+            "reference": 47,
+            "relative": 0.1276595744680851
+          },
+          "parallel_edges": {
+            "absolute": 42,
+            "candidate": 104,
+            "reference": 62,
+            "relative": 0.6774193548387096
+          },
+          "self_loops": {
+            "absolute": 49,
+            "candidate": 81,
+            "reference": 32,
+            "relative": 1.53125
+          },
+          "total_edges": {
+            "absolute": 125,
+            "candidate": 452,
+            "reference": 327,
+            "relative": 0.382262996941896
+          },
+          "total_nodes": {
+            "absolute": 66,
+            "candidate": 372,
+            "reference": 306,
+            "relative": 0.21568627450980393
+          },
+          "unique_edges": {
+            "absolute": 25,
+            "candidate": 174,
+            "reference": 149,
+            "relative": 0.16778523489932887
+          },
+          "unique_nodes": {
+            "absolute": 19,
+            "candidate": 140,
+            "reference": 121,
+            "relative": 0.15702479338842976
+          }
+        },
+        "n_ags_gained": 20,
+        "n_ags_lost": 2
+      },
+      "elasticity": {
+        "n_attack_graphs": -0.375,
+        "n_dot_files": -0.375,
+        "n_objectives": -0.375,
+        "n_victims": -0.19148936170212766,
+        "parallel_edges": -1.0161290322580645,
+        "self_loops": -2.296875,
+        "total_edges": -0.573394495412844,
+        "total_nodes": -0.3235294117647059,
+        "unique_edges": -0.2516778523489933,
+        "unique_nodes": -0.23553719008264465
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 90
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 90,
+        "n_dot_files": 90,
+        "n_objectives": 10,
+        "n_victims": 53,
+        "parallel_edges": 104,
+        "self_loops": 81,
+        "total_edges": 452,
+        "total_nodes": 372,
+        "unique_edges": 174,
+        "unique_nodes": 140
+      },
+      "parameter_relative_change": -0.6666666666666666,
+      "perplexity": 4.695397920840901,
+      "spec": {
+        "baseline_value": 150,
+        "parameter": "w",
+        "t": 1.0,
+        "value": 50,
+        "w": 50
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 0.8780487804878049,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": 10,
+            "candidate": 82,
+            "reference": 72,
+            "relative": 0.1388888888888889
+          },
+          "n_dot_files": {
+            "absolute": 10,
+            "candidate": 82,
+            "reference": 72,
+            "relative": 0.1388888888888889
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": 4,
+            "candidate": 51,
+            "reference": 47,
+            "relative": 0.0851063829787234
+          },
+          "parallel_edges": {
+            "absolute": 16,
+            "candidate": 78,
+            "reference": 62,
+            "relative": 0.25806451612903225
+          },
+          "self_loops": {
+            "absolute": 24,
+            "candidate": 56,
+            "reference": 32,
+            "relative": 0.75
+          },
+          "total_edges": {
+            "absolute": 64,
+            "candidate": 391,
+            "reference": 327,
+            "relative": 0.19571865443425077
+          },
+          "total_nodes": {
+            "absolute": 39,
+            "candidate": 345,
+            "reference": 306,
+            "relative": 0.12745098039215685
+          },
+          "unique_edges": {
+            "absolute": 13,
+            "candidate": 162,
+            "reference": 149,
+            "relative": 0.087248322147651
+          },
+          "unique_nodes": {
+            "absolute": 8,
+            "candidate": 129,
+            "reference": 121,
+            "relative": 0.06611570247933884
+          }
+        },
+        "n_ags_gained": 10,
+        "n_ags_lost": 0
+      },
+      "elasticity": {
+        "n_attack_graphs": -0.4166666666666667,
+        "n_dot_files": -0.4166666666666667,
+        "n_objectives": -0.0,
+        "n_victims": -0.25531914893617025,
+        "parallel_edges": -0.7741935483870968,
+        "self_loops": -2.25,
+        "total_edges": -0.5871559633027523,
+        "total_nodes": -0.38235294117647056,
+        "unique_edges": -0.26174496644295303,
+        "unique_nodes": -0.19834710743801653
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 82
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 82,
+        "n_dot_files": 82,
+        "n_objectives": 8,
+        "n_victims": 51,
+        "parallel_edges": 78,
+        "self_loops": 56,
+        "total_edges": 391,
+        "total_nodes": 345,
+        "unique_edges": 162,
+        "unique_nodes": 129
+      },
+      "parameter_relative_change": -0.3333333333333333,
+      "perplexity": 4.7802535258599805,
+      "spec": {
+        "baseline_value": 150,
+        "parameter": "w",
+        "t": 1.0,
+        "value": 100,
+        "w": 100
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 0.9444444444444444,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": -4,
+            "candidate": 68,
+            "reference": 72,
+            "relative": -0.05555555555555555
+          },
+          "n_dot_files": {
+            "absolute": -4,
+            "candidate": 68,
+            "reference": 72,
+            "relative": -0.05555555555555555
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": -2,
+            "candidate": 45,
+            "reference": 47,
+            "relative": -0.0425531914893617
+          },
+          "parallel_edges": {
+            "absolute": -9,
+            "candidate": 53,
+            "reference": 62,
+            "relative": -0.14516129032258066
+          },
+          "self_loops": {
+            "absolute": -2,
+            "candidate": 30,
+            "reference": 32,
+            "relative": -0.0625
+          },
+          "total_edges": {
+            "absolute": -30,
+            "candidate": 297,
+            "reference": 327,
+            "relative": -0.09174311926605505
+          },
+          "total_nodes": {
+            "absolute": -18,
+            "candidate": 288,
+            "reference": 306,
+            "relative": -0.058823529411764705
+          },
+          "unique_edges": {
+            "absolute": -8,
+            "candidate": 141,
+            "reference": 149,
+            "relative": -0.053691275167785234
+          },
+          "unique_nodes": {
+            "absolute": -5,
+            "candidate": 116,
+            "reference": 121,
+            "relative": -0.04132231404958678
+          }
+        },
+        "n_ags_gained": 0,
+        "n_ags_lost": 4
+      },
+      "elasticity": {
+        "n_attack_graphs": -0.16666666666666666,
+        "n_dot_files": -0.16666666666666666,
+        "n_objectives": 0.0,
+        "n_victims": -0.12765957446808512,
+        "parallel_edges": -0.435483870967742,
+        "self_loops": -0.1875,
+        "total_edges": -0.27522935779816515,
+        "total_nodes": -0.17647058823529413,
+        "unique_edges": -0.16107382550335572,
+        "unique_nodes": -0.12396694214876033
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 68
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 68,
+        "n_dot_files": 68,
+        "n_objectives": 8,
+        "n_victims": 45,
+        "parallel_edges": 53,
+        "self_loops": 30,
+        "total_edges": 297,
+        "total_nodes": 288,
+        "unique_edges": 141,
+        "unique_nodes": 116
+      },
+      "parameter_relative_change": 0.3333333333333333,
+      "perplexity": 4.899655701925234,
+      "spec": {
+        "baseline_value": 150,
+        "parameter": "w",
+        "t": 1.0,
+        "value": 200,
+        "w": 200
+      }
+    },
+    {
+      "distortion": {
+        "graph_jaccard": 0.8888888888888888,
+        "metric_deltas": {
+          "n_attack_graphs": {
+            "absolute": -8,
+            "candidate": 64,
+            "reference": 72,
+            "relative": -0.1111111111111111
+          },
+          "n_dot_files": {
+            "absolute": -8,
+            "candidate": 64,
+            "reference": 72,
+            "relative": -0.1111111111111111
+          },
+          "n_objectives": {
+            "absolute": 0,
+            "candidate": 8,
+            "reference": 8,
+            "relative": 0.0
+          },
+          "n_victims": {
+            "absolute": -5,
+            "candidate": 42,
+            "reference": 47,
+            "relative": -0.10638297872340426
+          },
+          "parallel_edges": {
+            "absolute": -23,
+            "candidate": 39,
+            "reference": 62,
+            "relative": -0.3709677419354839
+          },
+          "self_loops": {
+            "absolute": -17,
+            "candidate": 15,
+            "reference": 32,
+            "relative": -0.53125
+          },
+          "total_edges": {
+            "absolute": -58,
+            "candidate": 269,
+            "reference": 327,
+            "relative": -0.17737003058103976
+          },
+          "total_nodes": {
+            "absolute": -29,
+            "candidate": 277,
+            "reference": 306,
+            "relative": -0.09477124183006536
+          },
+          "unique_edges": {
+            "absolute": -12,
+            "candidate": 137,
+            "reference": 149,
+            "relative": -0.08053691275167785
+          },
+          "unique_nodes": {
+            "absolute": -7,
+            "candidate": 114,
+            "reference": 121,
+            "relative": -0.05785123966942149
+          }
+        },
+        "n_ags_gained": 0,
+        "n_ags_lost": 8
+      },
+      "elasticity": {
+        "n_attack_graphs": -0.1111111111111111,
+        "n_dot_files": -0.1111111111111111,
+        "n_objectives": 0.0,
+        "n_victims": -0.10638297872340426,
+        "parallel_edges": -0.3709677419354839,
+        "self_loops": -0.53125,
+        "total_edges": -0.17737003058103976,
+        "total_nodes": -0.09477124183006536,
+        "unique_edges": -0.08053691275167785,
+        "unique_nodes": -0.05785123966942149
+      },
+      "metrics": {
+        "longest_path_methods": {
+          "exact_dfs": 64
+        },
+        "multiedges": "both_recorded",
+        "n_attack_graphs": 64,
+        "n_dot_files": 64,
+        "n_objectives": 8,
+        "n_victims": 42,
+        "parallel_edges": 39,
+        "self_loops": 15,
+        "total_edges": 269,
+        "total_nodes": 277,
+        "unique_edges": 137,
+        "unique_nodes": 114
+      },
+      "parameter_relative_change": 1.0,
+      "perplexity": 5.032563018466897,
+      "spec": {
+        "baseline_value": 150,
+        "parameter": "w",
+        "t": 1.0,
+        "value": 300,
+        "w": 300
+      }
+    }
+  ]
+}

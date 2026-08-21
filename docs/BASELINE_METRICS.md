@@ -134,29 +134,39 @@ Three things are pinned so that a rerun is actually comparable:
 
 ## Headline results
 
-> **Status: CPTC-2017 recorded (full 61-cell matrix). CPTC-2018 and CCDC pending.**
+> **Status: all three datasets recorded.** CPTC-2017 and CPTC-2018 ran the full
+> 61-cell matrix; CCDC ran a reduced 13-cell matrix without noise injection (see
+> [`FINDINGS.md`](FINDINGS.md) for why).
 
 | Dataset | Raw records | AGs | Nodes | Compression | Perplexity (train) | Perplexity (held-out) | Runtime |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `cptc-2017` | 47,876 | 104 | 1,885 | 460.3 | 13.478 | 40.27 | 97.5 s |
-| `cptc-2018` | 331,554 | — | — | — | — | — | — |
-| `ccdc` | 1,052,281 | — | — | — | — | — | — |
+| `cptc-2017` | 47,876 | 104 | 1,885 | 460 | 13.478 | 40.27 | 97.5 s |
+| `cptc-2018` | 331,554 | 75 | 1,283 | 4,421 | 9.419 | 35.90 | 85.2 s |
+| `ccdc` | 1,052,281 | 72 | 306 | 14,615 | 4.838 | 6.67 | 90.3 s |
 
-CPTC-2017: 36 victims, 25 objectives, 3,024 edges, 326 unique nodes, 491 records/s.
-Held-out perplexity is **not** comparable to the training figure — 32.6% of its
-scored steps fall off the model entirely (see the perplexity section).
+Held-out perplexity is **not** comparable to the training figure on the CPTC
+datasets — 32.6% and 39.5% of scored steps respectively fall off the model
+entirely (see the perplexity section). CCDC is the exception at 6.7%.
 
-### Determinism: confirmed
+Note that runtime is nearly flat across a 22x range of input size, because it is
+dominated by Graphviz rendering rather than alert processing. Throughput rises
+from 491 to 11,659 records/second accordingly.
 
-Five identical repeat runs, compared at artifact level:
+For what these numbers **mean** — what replicated across datasets and what did
+not — see [`FINDINGS.md`](FINDINGS.md).
 
-| Check | Result |
-|---|---|
-| Attack graph `.dot` files | **104 / 104 byte-identical** (raw, not merely normalised) |
-| Trace file, both model JSONs | identical |
-| `n_attack_graphs`, `total_nodes`, `total_edges`, `unique_nodes` | stdev **0** |
-| Training perplexity | stdev **0** (13.477971857105626 every run) |
-| Wall-clock runtime | stdev 3.7 s — the only thing that moves |
+### Determinism: confirmed on all three datasets
+
+Five identical repeat runs per dataset, compared at artifact level:
+
+| Dataset | Attack graph `.dot` files | Traces / models | Structural metrics |
+|---|---|---|---|
+| `cptc-2017` | **104 / 104 byte-identical** | identical | stdev **0** |
+| `cptc-2018` | **75 / 75 byte-identical** | identical | stdev **0** |
+| `ccdc` | **72 / 72 byte-identical** | identical | stdev **0** |
+
+Training perplexity is stdev **0** on every dataset. Wall-clock runtime is the
+only thing that varies (±3.7 s on CPTC-2017).
 
 The `.dot` files match on **raw bytes**, which they would not without
 `PYTHONHASHSEED=0` pinned: at `baseline-v1` the tooltip signature list is joined

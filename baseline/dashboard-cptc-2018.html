@@ -1,0 +1,597 @@
+<title>SAGE Baseline Evidence</title>
+<style>
+:root {
+  color-scheme: light;
+  --page:        #f4f5f6;
+  --surface:     #fcfcfb;
+  --raised:      #ffffff;
+  --ink:         #0b0b0b;
+  --ink-2:       #52514e;
+  --muted:       #898781;
+  --rule:        #e1e0d9;
+  --axis:        #c3c2b7;
+  --accent:      #2a78d6;
+  --accent-soft: rgba(42,120,214,0.10);
+  --good:        #0ca30c;
+  --warning:     #fab219;
+  --critical:    #d03b3b;
+  --ring:        rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page:        #0d0d0d;
+    --surface:     #1a1a19;
+    --raised:      #201f1e;
+    --ink:         #ffffff;
+    --ink-2:       #c3c2b7;
+    --muted:       #898781;
+    --rule:        #2c2c2a;
+    --axis:        #383835;
+    --accent:      #3987e5;
+    --accent-soft: rgba(57,135,229,0.14);
+    --good:        #0ca30c;
+    --warning:     #fab219;
+    --critical:    #d03b3b;
+    --ring:        rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page:        #0d0d0d;
+  --surface:     #1a1a19;
+  --raised:      #201f1e;
+  --ink:         #ffffff;
+  --ink-2:       #c3c2b7;
+  --muted:       #898781;
+  --rule:        #2c2c2a;
+  --axis:        #383835;
+  --accent:      #3987e5;
+  --accent-soft: rgba(57,135,229,0.14);
+  --good:        #0ca30c;
+  --warning:     #fab219;
+  --critical:    #d03b3b;
+  --ring:        rgba(255,255,255,0.10);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 88px; }
+.mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.86em;
+}
+h1 { font-size: 28px; line-height: 1.2; margin: 0; text-wrap: balance; letter-spacing: -0.015em; }
+h2 { font-size: 17px; margin: 0 0 4px; letter-spacing: -0.005em; }
+h3 { font-size: 13px; margin: 0; color: var(--ink-2); font-weight: 600; }
+p  { margin: 0; color: var(--ink-2); }
+a  { color: var(--accent); }
+
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--muted); font-weight: 600; margin: 0 0 10px;
+}
+
+header { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.meta span { color: var(--muted); font-size: 12.5px; }
+.meta b { color: var(--ink-2); font-weight: 500; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 500;
+  border: 1px solid var(--ring); background: var(--surface); color: var(--ink-2);
+}
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.chip.good     .dot { background: var(--good); }
+.chip.warning  .dot { background: var(--warning); }
+.chip.critical .dot { background: var(--critical); }
+.chip.neutral  .dot { background: var(--muted); }
+
+.banner {
+  display: flex; gap: 12px; align-items: flex-start;
+  border: 1px solid var(--ring); border-left: 3px solid var(--warning);
+  background: var(--surface); border-radius: 10px; padding: 14px 16px;
+}
+.banner .label {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--warning); font-weight: 700; flex: none; padding-top: 2px;
+}
+.banner ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 13.5px; }
+.banner li + li { margin-top: 6px; }
+
+section { margin-top: 34px; }
+.section-head { margin-bottom: 14px; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 12px; }
+.tile {
+  background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+  padding: 14px 15px; display: flex; flex-direction: column; gap: 3px;
+}
+.tile .k { font-size: 11.5px; color: var(--muted); letter-spacing: 0.02em; }
+.tile .v { font-size: 25px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+.tile .s { font-size: 11.5px; color: var(--muted); }
+.tile.is-flagged { border-left: 3px solid var(--warning); }
+
+.panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); gap: 16px; }
+.panel {
+  background: var(--surface); border: 1px solid var(--ring); border-radius: 12px;
+  padding: 18px 18px 14px; min-width: 0;
+}
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 2px; }
+.panel .why { font-size: 12.5px; color: var(--muted); margin: 6px 0 14px; }
+.chart { width: 100%; overflow-x: auto; }
+svg { display: block; max-width: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; }
+.legend .item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); }
+.legend .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+
+.tbl { width: 100%; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; }
+td { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+td.name { color: var(--ink); }
+tbody tr:last-child td { border-bottom: none; }
+
+details.deriv { margin-top: 8px; }
+details.deriv summary {
+  cursor: pointer; font-size: 12px; color: var(--accent); list-style: none;
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 0;
+}
+details.deriv summary::-webkit-details-marker { display: none; }
+details.deriv summary::before { content: "\25B8"; font-size: 9px; transition: transform .15s; }
+details.deriv[open] summary::before { transform: rotate(90deg); }
+details.deriv .body {
+  margin-top: 8px; padding: 12px 14px; border-radius: 8px;
+  background: var(--accent-soft); font-size: 12.5px; color: var(--ink-2);
+}
+details.deriv .body p + p { margin-top: 9px; }
+details.deriv code { color: var(--ink); }
+
+#tip {
+  position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+  background: var(--raised); color: var(--ink); border: 1px solid var(--ring);
+  border-radius: 8px; padding: 8px 11px; font-size: 12.5px; z-index: 50;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.16); max-width: 260px;
+}
+#tip .t { font-weight: 600; margin-bottom: 3px; }
+#tip .r { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.hit { cursor: crosshair; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (max-width: 720px) {
+  .wrap { padding: 28px 16px 64px; }
+  h1 { font-size: 23px; }
+  .panels { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Task A3 &middot; Regression reference</p>
+    <h1>SAGE baseline evidence</h1>
+    <div class="meta" id="meta"></div>
+    <div class="chips" id="chips"></div>
+  </header>
+
+  <div id="caveats"></div>
+
+  <section>
+    <div class="section-head">
+      <h2>Headline</h2>
+      <p>What the pinned commit scores. Every figure here is derived from run artifacts, not from instrumented pipeline code.</p>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <details class="deriv">
+      <summary>How compression is defined, and why the numerator is what it is</summary>
+      <div class="body" id="compression-deriv"></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Model evaluation</h2>
+      <p>Does the pipeline hold up under repetition, imperfect input, and parameter change?</p>
+    </div>
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-head"><h3>Robustness under alert noise</h3></div>
+        <p class="why">Alerts are corrupted before SAGE reads them, so the whole chain is exercised. 1.0 means the attack-graph set is unchanged.</p>
+        <div class="chart" id="c-robust"></div>
+        <div class="legend" id="l-robust"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Parameter sensitivity</h3></div>
+        <p class="why">Elasticity: relative change in a metric per relative change in the parameter. A bar at zero means the parameter moves nothing.</p>
+        <div class="chart" id="c-sens"></div>
+        <div class="legend" id="l-sens"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Attack graph structure</h2>
+      <p>Per-graph, not dataset means &mdash; graph sizes span an order of magnitude and an average hides it.</p>
+    </div>
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-head"><h3>Density vs graph size</h3></div>
+        <p class="why">Why density is measured by reachability: edge density tracks graph size rather than traversability.</p>
+        <div class="chart" id="c-density"></div>
+        <div class="legend" id="l-density"></div>
+        <details class="deriv">
+          <summary>The two density formulas</summary>
+          <div class="body" id="density-deriv"></div>
+        </details>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Where the runtime goes</h3></div>
+        <p class="why">Recovered by timestamping stdout stage banners, with no modification to sage.py.</p>
+        <div class="chart" id="c-runtime"></div>
+        <div class="legend" id="l-runtime"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Perplexity</h2>
+      <p>Recorded for comparability with Nadeem et al., not as a quality claim &mdash; the paper itself argues it carries little weight for graph construction.</p>
+    </div>
+    <div class="panel">
+      <div class="tbl"><table id="perp"></table></div>
+      <details class="deriv">
+        <summary>How the probabilities are obtained, and what the unresolved fraction means</summary>
+        <div class="body" id="perp-deriv"></div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Reproduction</h2></div>
+    <div class="panel">
+      <div class="tbl"><table id="env"></table></div>
+    </div>
+  </section>
+</div>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script id="viz-data" type="application/json">[{"dataset": "cptc-2018", "commit": "20aa5ed99bfee77143d88ffdb19ed43a108810eb", "created_at": "2026-08-20T21:56:37.408286+00:00", "host": "Rocinante", "schema_version": 1, "notes": ["Held-out perplexity rests heavily on the unresolved-step policy: 39% of scored outcomes fell off the model entirely and took the uniform fallback. It is NOT a like-for-like comparison against the training figure."], "argv": ["C:\\Python313\\python.exe", "sage.py", "D:\\Projects\\SAGE\\SAGE\\alerts\\cptc-2018", "cptc-2018-reference", "--dataset", "cptc", "--keep-files", "-t", "2.0", "-w", "200"], "environment": {"captured_at": "2026-08-20T21:55:05.211712+00:00", "cpu_count": 12, "flexfringe_ini_sha256": "d20a6237768feaba9ce822fdf5ea1a783f6124c8cafb63ce641f8f191bc230b7", "flexfringe_sha256": "69efbec90fb4140ec20b9fa450ef45bc709763cc6ba83bf8f2cbe32f5f4c5354", "glibc_version": "ldd (Ubuntu GLIBC 2.39-0ubuntu8.7) 2.39", "graphviz_version": "dot - graphviz version 14.1.5 (20260411.2331)", "machine": "AMD64", "os": "Windows-11-10.0.26200-SP0", "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD", "python_implementation": "CPython", "python_version": "3.13.3", "runs_flexfringe_via": "wsl -d Ubuntu", "system": "Windows", "total_ram_bytes": 33397133312, "wsl_kernel": "6.6.87.2-microsoft-standard-WSL2"}, "iana": {"bytes": 1156686, "path": "D:\\Projects\\SAGE\\eval-runs-full\\pinned\\iana-service-names.csv", "pinned_at": "2026-08-20T21:55:05.211183+00:00", "sha256": "757d5969a623680753269c420688fc01b050ce8dae9f47d90aab0a057f144dc8", "url": "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"}, "aggregate": {"longest_path_methods": {"exact_dfs": 75}, "multiedges": "both_recorded", "n_attack_graphs": 75, "n_dot_files": 75, "n_objectives": 34, "n_victims": 12, "parallel_edges": 971, "self_loops": 15, "total_edges": 2641, "total_nodes": 1283, "unique_edges": 449, "unique_nodes": 242}, "distribution": {"branching_factor": {"max": 8.5, "mean": 1.9781191204254587, "median": 1.7826086956521738, "min": 0.6666666666666666, "n": 75}, "density": {"max": 0.3333333333333333, "mean": 0.09293941150891206, "median": 0.07857142857142857, "min": 0.03655913978494624, "n": 75}, "edges_total": {"max": 136, "mean": 35.21333333333333, "median": 29, "min": 2, "n": 75}, "longest_path_edges": {"max": 26, "mean": 13.026666666666667, "median": 13, "min": 2, "n": 75}, "nodes": {"max": 34, "mean": 17.106666666666666, "median": 17, "min": 3, "n": 75}, "path_linearity": {"max": 1.0, "mean": 0.5336978694320118, "median": 0.41379310344827586, "min": 0.11029411764705882, "n": 75}, "reachability_density": {"max": 0.8650793650793651, "mean": 0.535341678699348, "median": 0.5, "min": 0.29523809523809524, "n": 75}, "simplicity": {"max": 1.5, "mean": 0.6688474136297063, "median": 0.5609756097560976, "min": 0.11764705882352941, "n": 75}}, "compression": {"post_dedup_alerts_per_ag": 947.9466666666667, "primary": "raw_records_per_ag", "raw_alert_convention": "raw_records: every JSON object in the dataset files. Matches the paper convention, confirmed exactly against its CCDC-2018 count of 1,052,281.", "raw_alerts_per_ag": 1354.28, "raw_alerts_per_ag_node": 79.1667965705378, "raw_alerts_per_unique_ag_node": 419.71487603305786, "raw_records_per_ag": 4420.72}, "compression_inputs": {"n_attack_graphs": 75, "post_dedup_alerts": 71096, "raw_alerts": 101571, "raw_records": 331554, "total_ag_nodes": 1283, "unique_ag_nodes": 242}, "formulas": {"branching_factor": "edges_total / nodes  (paper definition; edge basis = multi-edges PRESERVED, self-loops included. NOTE: this is not the conventional mean out-degree)", "density": "edges_simple_no_loops / (nodes * (nodes - 1))  (textbook directed simple-graph density, retained for comparability with the wider graph literature but NOT the headline density -- see reachability_density for why. Multi-edges COLLAPSED and self-loops EXCLUDED from the numerator, because V*(V-1) counts ordered distinct pairs and neither is representable in it; leaving them in can push density above 1. Null when nodes \u003c 2.)", "path_linearity": "longest_path_edges / edges_total  (longest path measured in EDGES traversed, over the same preserved edge basis)", "reachability_density": "|{(u,v) : u != v, v reachable from u}| / (nodes * (nodes - 1))  (HEADLINE density. The paper gives no formula, defining density only by intent -- it \"captures how easily an attacker can traverse the network\". This is the literal reading: the fraction of ordered state pairs the attacker can actually get between, following edges any distance. Same normalisation as edge density, so it stays in [0,1] and remains comparable across graphs. Preferred over edge density because edge density is confounded by graph size -- measured across the 104 CPTC-2017 baseline AGs, corr(nodes, edge_density) = -0.79 versus corr(nodes, reachability_density) = +0.17 -- and because the paper already defines branching_factor = edges/nodes, which an edges-per-node density largely duplicates. Null when nodes \u003c 2.)", "simplicity": "nodes / edges_total  (reciprocal of branching_factor; same edge basis. Included only for comparability with Nadeem et al.)"}, "compression_formulas": {"post_dedup_alerts_per_ag": "post_dedup_alerts / n_attack_graphs", "raw_alerts_per_ag": "raw_alerts / n_attack_graphs  (the same ratio over alerts SAGE actually ingests, i.e. after the event_type and dataset filters. Diverges sharply from the primary on CPTC-2018, where the bad-IP filter drops ~69% of records.)", "raw_alerts_per_ag_node": "raw_alerts / total_ag_nodes  (nodes summed across graphs)", "raw_alerts_per_unique_ag_node": "raw_alerts / unique_ag_nodes  (node union across graphs)", "raw_records_per_ag": "raw_records / n_attack_graphs  (PRIMARY -- the paper defines compression as \"number of raw alerts divided by number of generated attack graphs\", and its own dataset counts pin \"raw alerts\" to every record in the file: it cites CCDC-2018 as 1,052,281, which is exactly the raw_records count here, whereas the post-filter alert count is 1,033,067. See RAW_ALERT_CONVENTION.)"}, "alerts": {"dropped_bad_ip": 228608, "dropped_category": 1375, "dropped_non_alert": 0, "raw_alerts": 101571, "raw_records": 331554}, "counter_agrees": true, "timing": {"wall_clock_seconds": 85.241, "alert_throughput": 3889.6071139475134, "stages": [{"label": "Reading alerts", "seconds": 6.532}, {"label": "Episode building", "seconds": 8.844}, {"label": "Learning S-PDFA", "seconds": 4.471}, {"label": "Rendering AGs", "seconds": 64.595}, {"label": "Other", "seconds": 0.32}]}, "perplexity": {"training": {"perplexity": 9.419189537482675, "alpha": 0.1, "alphabet_size": 142, "n_traces": 633, "n_symbols": 3516, "n_scored_outcomes": 4149, "unresolved_fraction": 0.0, "oov_events": 0, "prob_source": "flexfringe_counts", "resolved_by_model": {"main": 1974, "sinks": 1542}}, "heldout": {"perplexity": 35.89689061808621, "n_train": 506, "n_test": 127, "split_seed": 42, "unresolved_fraction": 0.3947990543735225, "absent_because": null}}, "repeats": {"exact_match": {"ag_dot_identical_normalised": 75, "ag_dot_identical_raw": 75, "ag_dot_match_rate_normalised": 1.0, "ag_dot_match_rate_raw": 1.0, "ag_dot_missing_in_some_repeat": 0, "main_model_identical": true, "n_ag_dot_files": 75, "n_repeats": 5, "traces_identical": true}, "n": 5, "summary": {"alert_throughput": {"max": 4096.394771306432, "mean": 4042.780324963928, "median": 4065.6529736358066, "min": 3966.621204507932, "n": 5, "stdev": 50.77018646684019}, "dropped_bad_ip": {"max": 228608, "mean": 228608.0, "median": 228608, "min": 228608, "n": 5, "stdev": 0.0}, "dropped_category": {"max": 1375, "mean": 1375.0, "median": 1375, "min": 1375, "n": 5, "stdev": 0.0}, "dropped_non_alert": {"max": 0, "mean": 0.0, "median": 0, "min": 0, "n": 5, "stdev": 0.0}, "n_attack_graphs": {"max": 75, "mean": 75.0, "median": 75, "min": 75, "n": 5, "stdev": 0.0}, "n_dot_files": {"max": 75, "mean": 75.0, "median": 75, "min": 75, "n": 5, "stdev": 0.0}, "n_objectives": {"max": 34, "mean": 34.0, "median": 34, "min": 34, "n": 5, "stdev": 0.0}, "n_victims": {"max": 12, "mean": 12.0, "median": 12, "min": 12, "n": 5, "stdev": 0.0}, "parallel_edges": {"max": 971, "mean": 971.0, "median": 971, "min": 971, "n": 5, "stdev": 0.0}, "perplexity_training": {"max": 9.419189537482675, "mean": 9.419189537482675, "median": 9.419189537482675, "min": 9.419189537482675, "n": 5, "stdev": 0.0}, "raw_alerts": {"max": 101571, "mean": 101571.0, "median": 101571, "min": 101571, "n": 5, "stdev": 0.0}, "raw_records": {"max": 331554, "mean": 331554.0, "median": 331554, "min": 331554, "n": 5, "stdev": 0.0}, "self_loops": {"max": 15, "mean": 15.0, "median": 15, "min": 15, "n": 5, "stdev": 0.0}, "total_edges": {"max": 2641, "mean": 2641.0, "median": 2641, "min": 2641, "n": 5, "stdev": 0.0}, "total_nodes": {"max": 1283, "mean": 1283.0, "median": 1283, "min": 1283, "n": 5, "stdev": 0.0}, "unique_edges": {"max": 449, "mean": 449.0, "median": 449, "min": 449, "n": 5, "stdev": 0.0}, "unique_nodes": {"max": 242, "mean": 242.0, "median": 242, "min": 242, "n": 5, "stdev": 0.0}, "wall_clock_seconds": {"max": 83.586, "mean": 82.0218, "median": 81.55, "min": 80.938, "n": 5, "stdev": 1.0370512041360334}}}, "perturbations": [{"family": "false_positives", "rate": 0.01, "seed": 1, "jaccard": 0.9375, "gained": 5, "lost": 0, "n_attack_graphs": 80, "perplexity": 12.828324721299722}, {"family": "false_positives", "rate": 0.01, "seed": 2, "jaccard": 0.974025974025974, "gained": 2, "lost": 0, "n_attack_graphs": 77, "perplexity": 12.707028199302163}, {"family": "false_positives", "rate": 0.01, "seed": 3, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 12.434148028607007}, {"family": "false_positives", "rate": 0.05, "seed": 1, "jaccard": 0.9135802469135802, "gained": 6, "lost": 1, "n_attack_graphs": 80, "perplexity": 16.03146175098804}, {"family": "false_positives", "rate": 0.05, "seed": 2, "jaccard": 0.925, "gained": 5, "lost": 1, "n_attack_graphs": 79, "perplexity": 15.808683897457849}, {"family": "false_positives", "rate": 0.05, "seed": 3, "jaccard": 0.8333333333333334, "gained": 15, "lost": 0, "n_attack_graphs": 90, "perplexity": 16.599709101018487}, {"family": "false_positives", "rate": 0.1, "seed": 1, "jaccard": 0.7708333333333334, "gained": 21, "lost": 1, "n_attack_graphs": 95, "perplexity": 18.327046749745545}, {"family": "false_positives", "rate": 0.1, "seed": 2, "jaccard": 0.7684210526315789, "gained": 20, "lost": 2, "n_attack_graphs": 93, "perplexity": 18.329889840914195}, {"family": "false_positives", "rate": 0.1, "seed": 3, "jaccard": 0.7115384615384616, "gained": 29, "lost": 1, "n_attack_graphs": 103, "perplexity": 18.185386905719557}, {"family": "false_positives", "rate": 0.2, "seed": 1, "jaccard": 0.7352941176470589, "gained": 27, "lost": 0, "n_attack_graphs": 102, "perplexity": 20.229988721661442}, {"family": "false_positives", "rate": 0.2, "seed": 2, "jaccard": 0.6434782608695652, "gained": 40, "lost": 1, "n_attack_graphs": 114, "perplexity": 20.760689433846863}, {"family": "false_positives", "rate": 0.2, "seed": 3, "jaccard": 0.6851851851851852, "gained": 33, "lost": 1, "n_attack_graphs": 107, "perplexity": 19.777487467961166}, {"family": "duplicates", "rate": 0.01, "seed": 1, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.431383222794175}, {"family": "duplicates", "rate": 0.01, "seed": 2, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.400308840697042}, {"family": "duplicates", "rate": 0.01, "seed": 3, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.421838429263568}, {"family": "duplicates", "rate": 0.05, "seed": 1, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.466379189440062}, {"family": "duplicates", "rate": 0.05, "seed": 2, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.450866859418493}, {"family": "duplicates", "rate": 0.05, "seed": 3, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.497656759537263}, {"family": "duplicates", "rate": 0.1, "seed": 1, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.451354260787804}, {"family": "duplicates", "rate": 0.1, "seed": 2, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.413104808269507}, {"family": "duplicates", "rate": 0.1, "seed": 3, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.523535056297272}, {"family": "duplicates", "rate": 0.2, "seed": 1, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.594865457195937}, {"family": "duplicates", "rate": 0.2, "seed": 2, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.631477253965036}, {"family": "duplicates", "rate": 0.2, "seed": 3, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.652257878113858}, {"family": "missing_alerts", "rate": 0.01, "seed": 1, "jaccard": 0.9733333333333334, "gained": 0, "lost": 2, "n_attack_graphs": 73, "perplexity": 9.405894789575898}, {"family": "missing_alerts", "rate": 0.01, "seed": 2, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.664696751747297}, {"family": "missing_alerts", "rate": 0.01, "seed": 3, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.58342187868805}, {"family": "missing_alerts", "rate": 0.05, "seed": 1, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 10.255395181761843}, {"family": "missing_alerts", "rate": 0.05, "seed": 2, "jaccard": 0.9736842105263158, "gained": 1, "lost": 1, "n_attack_graphs": 75, "perplexity": 9.911077355841883}, {"family": "missing_alerts", "rate": 0.05, "seed": 3, "jaccard": 0.9493670886075949, "gained": 4, "lost": 0, "n_attack_graphs": 79, "perplexity": 10.036452253370067}, {"family": "missing_alerts", "rate": 0.1, "seed": 1, "jaccard": 0.974025974025974, "gained": 2, "lost": 0, "n_attack_graphs": 77, "perplexity": 10.590914534557784}, {"family": "missing_alerts", "rate": 0.1, "seed": 2, "jaccard": 0.961038961038961, "gained": 2, "lost": 1, "n_attack_graphs": 76, "perplexity": 10.734191469425488}, {"family": "missing_alerts", "rate": 0.1, "seed": 3, "jaccard": 0.9367088607594937, "gained": 4, "lost": 1, "n_attack_graphs": 78, "perplexity": 10.97268058921823}, {"family": "missing_alerts", "rate": 0.2, "seed": 1, "jaccard": 0.9240506329113924, "gained": 4, "lost": 2, "n_attack_graphs": 77, "perplexity": 12.0482990105502}, {"family": "missing_alerts", "rate": 0.2, "seed": 2, "jaccard": 0.9358974358974359, "gained": 3, "lost": 2, "n_attack_graphs": 76, "perplexity": 11.711255447784849}, {"family": "missing_alerts", "rate": 0.2, "seed": 3, "jaccard": 0.8875, "gained": 5, "lost": 4, "n_attack_graphs": 76, "perplexity": 11.916955749573967}, {"family": "missing_episodes", "rate": 0.01, "seed": 1, "jaccard": 1.0, "gained": 0, "lost": 0, "n_attack_graphs": 75, "perplexity": 9.572679991987732}, {"family": "missing_episodes", "rate": 0.01, "seed": 2, "jaccard": 0.974025974025974, "gained": 2, "lost": 0, "n_attack_graphs": 77, "perplexity": 9.479502463953551}, {"family": "missing_episodes", "rate": 0.01, "seed": 3, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 9.258555966150197}, {"family": "missing_episodes", "rate": 0.05, "seed": 1, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 10.112178916439774}, {"family": "missing_episodes", "rate": 0.05, "seed": 2, "jaccard": 0.9102564102564102, "gained": 3, "lost": 4, "n_attack_graphs": 74, "perplexity": 9.969947276884673}, {"family": "missing_episodes", "rate": 0.05, "seed": 3, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 9.72247290184876}, {"family": "missing_episodes", "rate": 0.1, "seed": 1, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 10.32295299840837}, {"family": "missing_episodes", "rate": 0.1, "seed": 2, "jaccard": 0.9090909090909091, "gained": 2, "lost": 5, "n_attack_graphs": 72, "perplexity": 10.409890665900202}, {"family": "missing_episodes", "rate": 0.1, "seed": 3, "jaccard": 0.9868421052631579, "gained": 1, "lost": 0, "n_attack_graphs": 76, "perplexity": 9.975480344248043}, {"family": "missing_episodes", "rate": 0.2, "seed": 1, "jaccard": 0.922077922077922, "gained": 2, "lost": 4, "n_attack_graphs": 73, "perplexity": 10.429035253363628}, {"family": "missing_episodes", "rate": 0.2, "seed": 2, "jaccard": 0.8571428571428571, "gained": 2, "lost": 9, "n_attack_graphs": 68, "perplexity": 10.622563325564979}, {"family": "missing_episodes", "rate": 0.2, "seed": 3, "jaccard": 0.9113924050632911, "gained": 4, "lost": 3, "n_attack_graphs": 76, "perplexity": 10.822657085098307}], "sweeps": [{"parameter": "t", "value": 0.5, "baseline_value": 2.0, "jaccard": 1.0, "n_attack_graphs": 75, "total_nodes": 1281, "elasticity": {"n_attack_graphs": -0.0, "n_dot_files": -0.0, "n_objectives": -0.0, "n_victims": -0.0, "parallel_edges": -0.0, "self_loops": -0.0, "total_edges": -0.0, "total_nodes": 0.0020784619381657575, "unique_edges": -0.002969561989606533, "unique_nodes": -0.0}}, {"parameter": "t", "value": 1.0, "baseline_value": 2.0, "jaccard": 1.0, "n_attack_graphs": 75, "total_nodes": 1283, "elasticity": {"n_attack_graphs": -0.0, "n_dot_files": -0.0, "n_objectives": -0.0, "n_victims": -0.0, "parallel_edges": -0.0, "self_loops": -0.0, "total_edges": -0.0, "total_nodes": -0.0, "unique_edges": -0.0, "unique_nodes": -0.0}}, {"parameter": "t", "value": 5.0, "baseline_value": 2.0, "jaccard": 1.0, "n_attack_graphs": 75, "total_nodes": 1283, "elasticity": {"n_attack_graphs": 0.0, "n_dot_files": 0.0, "n_objectives": 0.0, "n_victims": 0.0, "parallel_edges": 0.0, "self_loops": 0.0, "total_edges": 0.0, "total_nodes": 0.0, "unique_edges": 0.0, "unique_nodes": 0.0}}, {"parameter": "w", "value": 50, "baseline_value": 200, "jaccard": 0.9375, "n_attack_graphs": 80, "total_nodes": 1453, "elasticity": {"n_attack_graphs": -0.08888888888888889, "n_dot_files": -0.08888888888888889, "n_objectives": -0.0392156862745098, "n_victims": -0.0, "parallel_edges": -0.2663920357020254, "self_loops": -5.2444444444444445, "total_edges": -0.23627413858386973, "total_nodes": -0.17666926474408937, "unique_edges": -0.24944320712694878, "unique_nodes": -0.1487603305785124}}, {"parameter": "w", "value": 100, "baseline_value": 200, "jaccard": 0.9868421052631579, "n_attack_graphs": 76, "total_nodes": 1379, "elasticity": {"n_attack_graphs": -0.02666666666666667, "n_dot_files": -0.02666666666666667, "n_objectives": -0.058823529411764705, "n_victims": -0.0, "parallel_edges": -0.23892893923789907, "self_loops": -3.2, "total_edges": -0.21734191594093147, "total_nodes": -0.14964925954793454, "unique_edges": -0.20489977728285078, "unique_nodes": -0.15702479338842976}}, {"parameter": "w", "value": 150, "baseline_value": 200, "jaccard": 0.9866666666666667, "n_attack_graphs": 74, "total_nodes": 1293, "elasticity": {"n_attack_graphs": 0.05333333333333334, "n_dot_files": 0.05333333333333334, "n_objectives": 0.11764705882352941, "n_victims": -0.0, "parallel_edges": -0.164778578784758, "self_loops": -0.26666666666666666, "total_edges": -0.11813706929193488, "total_nodes": -0.03117692907248636, "unique_edges": -0.035634743875278395, "unique_nodes": -0.01652892561983471}}, {"parameter": "w", "value": 300, "baseline_value": 200, "jaccard": 0.9342105263157895, "n_attack_graphs": 72, "total_nodes": 1162, "elasticity": {"n_attack_graphs": -0.08, "n_dot_files": -0.08, "n_objectives": -0.11764705882352941, "n_victims": 0.0, "parallel_edges": -0.1462409886714727, "self_loops": -1.4666666666666666, "total_edges": -0.17569102612646725, "total_nodes": -0.18862042088854247, "unique_edges": -0.031180400890868598, "unique_nodes": -0.05785123966942149}}], "graph_points": [{"nodes": 23, "reach": 0.6482213438735178, "density": 0.0691699604743083, "branching": 3.0, "linearity": 0.2318840579710145, "objective": "DATADELIVERYhttp"}, {"nodes": 23, "reach": 0.5533596837944664, "density": 0.06324110671936758, "branching": 1.7826086956521738, "linearity": 0.34146341463414637, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 23, "reach": 0.5810276679841897, "density": 0.06719367588932806, "branching": 2.391304347826087, "linearity": 0.2727272727272727, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 12, "reach": 0.48484848484848486, "density": 0.12878787878787878, "branching": 2.1666666666666665, "linearity": 0.2692307692307692, "objective": "NETWORKDOShttp"}, {"nodes": 17, "reach": 0.6139705882352942, "density": 0.09191176470588236, "branching": 3.1176470588235294, "linearity": 0.2830188679245283, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 32, "reach": 0.5887096774193549, "density": 0.04536290322580645, "branching": 1.9375, "linearity": 0.25806451612903225, "objective": "DATADELIVERYhttp"}, {"nodes": 24, "reach": 0.644927536231884, "density": 0.05434782608695652, "branching": 1.5, "linearity": 0.4722222222222222, "objective": "DATAEXFILTRATIONetlservicemgr"}, {"nodes": 15, "reach": 0.49047619047619045, "density": 0.1, "branching": 1.6, "linearity": 0.5, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 21, "reach": 0.4976190476190476, "density": 0.05476190476190476, "branching": 1.4761904761904763, "linearity": 0.6129032258064516, "objective": "DATAMANIPULATIONetlservicemgr"}, {"nodes": 29, "reach": 0.4236453201970443, "density": 0.0480295566502463, "branching": 1.896551724137931, "linearity": 0.21818181818181817, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 14, "reach": 0.5604395604395604, "density": 0.11538461538461539, "branching": 2.357142857142857, "linearity": 0.2727272727272727, "objective": "NETWORKDOShttp"}, {"nodes": 24, "reach": 0.49818840579710144, "density": 0.04710144927536232, "branching": 1.5416666666666667, "linearity": 0.5945945945945946, "objective": "RESOURCEHIJACKINGetlservicemgr"}, {"nodes": 19, "reach": 0.5730994152046783, "density": 0.07894736842105263, "branching": 2.263157894736842, "linearity": 0.3488372093023256, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 15, "reach": 0.6714285714285714, "density": 0.10476190476190476, "branching": 2.2666666666666666, "linearity": 0.38235294117647056, "objective": "DATADELIVERYremotewarecl"}, {"nodes": 12, "reach": 0.7121212121212122, "density": 0.14393939393939395, "branching": 1.9166666666666667, "linearity": 0.30434782608695654, "objective": "DATAEXFILTRATIONremotewarecl"}, {"nodes": 19, "reach": 0.6052631578947368, "density": 0.09941520467836257, "branching": 3.0, "linearity": 0.17543859649122806, "objective": "DATAEXFILTRATIONunknown"}, {"nodes": 12, "reach": 0.6136363636363636, "density": 0.13636363636363635, "branching": 2.4166666666666665, "linearity": 0.3448275862068966, "objective": "DATAMANIPULATIONremotewarecl"}, {"nodes": 14, "reach": 0.6978021978021978, "density": 0.11538461538461539, "branching": 2.2142857142857144, "linearity": 0.3870967741935484, "objective": "RESOURCEHIJACKINGremotewarecl"}, {"nodes": 24, "reach": 0.5108695652173914, "density": 0.057971014492753624, "branching": 2.0416666666666665, "linearity": 0.40816326530612246, "objective": "DATADELIVERYhttp"}, {"nodes": 19, "reach": 0.47368421052631576, "density": 0.09064327485380116, "branching": 2.263157894736842, "linearity": 0.3023255813953488, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 22, "reach": 0.5064935064935064, "density": 0.0735930735930736, "branching": 2.590909090909091, "linearity": 0.3157894736842105, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 22, "reach": 0.5043290043290043, "density": 0.06926406926406926, "branching": 2.9545454545454546, "linearity": 0.27692307692307694, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 13, "reach": 0.5064102564102564, "density": 0.08974358974358974, "branching": 2.230769230769231, "linearity": 0.41379310344827586, "objective": "DATADELIVERYhttp"}, {"nodes": 22, "reach": 0.5, "density": 0.045454545454545456, "branching": 0.9545454545454546, "linearity": 1.0, "objective": "DATADELIVERYunknown"}, {"nodes": 6, "reach": 0.5333333333333333, "density": 0.23333333333333334, "branching": 1.3333333333333333, "linearity": 0.625, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 15, "reach": 0.5, "density": 0.06666666666666667, "branching": 0.9333333333333333, "linearity": 1.0, "objective": "DATAEXFILTRATIONunknown"}, {"nodes": 9, "reach": 0.5138888888888888, "density": 0.1388888888888889, "branching": 1.8888888888888888, "linearity": 0.47058823529411764, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 18, "reach": 0.5, "density": 0.05555555555555555, "branching": 0.9444444444444444, "linearity": 1.0, "objective": "DATAMANIPULATIONunknown"}, {"nodes": 6, "reach": 0.6, "density": 0.2, "branching": 2.0, "linearity": 0.4166666666666667, "objective": "NETWORKDOShttp"}, {"nodes": 12, "reach": 0.5075757575757576, "density": 0.09848484848484848, "branching": 2.1666666666666665, "linearity": 0.4230769230769231, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 21, "reach": 0.5, "density": 0.047619047619047616, "branching": 0.9523809523809523, "linearity": 1.0, "objective": "RESOURCEHIJACKINGunknown"}, {"nodes": 17, "reach": 0.5, "density": 0.058823529411764705, "branching": 0.9411764705882353, "linearity": 1.0, "objective": "DATADELIVERYcslistener"}, {"nodes": 18, "reach": 0.4673202614379085, "density": 0.06535947712418301, "branching": 1.6666666666666667, "linearity": 0.4, "objective": "DATADELIVERYhttp"}, {"nodes": 24, "reach": 0.625, "density": 0.06340579710144928, "branching": 1.8333333333333333, "linearity": 0.4090909090909091, "objective": "DATADELIVERYwapwsp"}, {"nodes": 10, "reach": 0.5, "density": 0.1, "branching": 0.9, "linearity": 1.0, "objective": "DATAEXFILTRATIONcslistener"}, {"nodes": 15, "reach": 0.4, "density": 0.1, "branching": 1.8, "linearity": 0.37037037037037035, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 14, "reach": 0.6428571428571429, "density": 0.12087912087912088, "branching": 2.5714285714285716, "linearity": 0.25, "objective": "DATAEXFILTRATIONunknown"}, {"nodes": 11, "reach": 0.4727272727272727, "density": 0.10909090909090909, "branching": 1.2727272727272727, "linearity": 0.5714285714285714, "objective": "DATAEXFILTRATIONwapwsp"}, {"nodes": 13, "reach": 0.5, "density": 0.07692307692307693, "branching": 0.9230769230769231, "linearity": 1.0, "objective": "DATAMANIPULATIONcslistener"}, {"nodes": 28, "reach": 0.3888888888888889, "density": 0.04497354497354497, "branching": 1.4285714285714286, "linearity": 0.375, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 28, "reach": 0.8650793650793651, "density": 0.05423280423280423, "branching": 1.7857142857142858, "linearity": 0.44, "objective": "DATAMANIPULATIONwapwsp"}, {"nodes": 11, "reach": 0.37272727272727274, "density": 0.11818181818181818, "branching": 1.4545454545454546, "linearity": 0.375, "objective": "NETWORKDOShttp"}, {"nodes": 16, "reach": 0.5, "density": 0.0625, "branching": 0.9375, "linearity": 1.0, "objective": "RESOURCEHIJACKINGcslistener"}, {"nodes": 18, "reach": 0.3954248366013072, "density": 0.058823529411764705, "branching": 1.5, "linearity": 0.48148148148148145, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 24, "reach": 0.42934782608695654, "density": 0.05615942028985507, "branching": 1.5833333333333333, "linearity": 0.39473684210526316, "objective": "RESOURCEHIJACKINGwapwsp"}, {"nodes": 7, "reach": 0.5, "density": 0.14285714285714285, "branching": 0.8571428571428571, "linearity": 1.0, "objective": "NETWORKDOSssdp"}, {"nodes": 14, "reach": 0.5, "density": 0.07142857142857142, "branching": 0.9285714285714286, "linearity": 1.0, "objective": "DATADELIVERYhttp"}, {"nodes": 6, "reach": 0.5, "density": 0.16666666666666666, "branching": 0.8333333333333334, "linearity": 1.0, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 10, "reach": 0.5, "density": 0.1, "branching": 0.9, "linearity": 1.0, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 8, "reach": 0.5178571428571429, "density": 0.19642857142857142, "branching": 2.25, "linearity": 0.3333333333333333, "objective": "NETWORKDOShttp"}, {"nodes": 15, "reach": 0.44285714285714284, "density": 0.07142857142857142, "branching": 1.0, "linearity": 0.8, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 14, "reach": 0.5, "density": 0.07142857142857142, "branching": 0.9285714285714286, "linearity": 1.0, "objective": "DATADELIVERYhttp"}, {"nodes": 7, "reach": 0.5, "density": 0.14285714285714285, "branching": 0.8571428571428571, "linearity": 1.0, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 10, "reach": 0.5, "density": 0.1, "branching": 0.9, "linearity": 1.0, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 9, "reach": 0.5694444444444444, "density": 0.1527777777777778, "branching": 1.3333333333333333, "linearity": 0.5, "objective": "NETWORKDOShttp"}, {"nodes": 17, "reach": 0.4522058823529412, "density": 0.06985294117647059, "branching": 1.1764705882352942, "linearity": 0.65, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 14, "reach": 0.5, "density": 0.07142857142857142, "branching": 0.9285714285714286, "linearity": 1.0, "objective": "DATADELIVERYcommplexmain"}, {"nodes": 15, "reach": 0.29523809523809524, "density": 0.07142857142857142, "branching": 1.0, "linearity": 0.6, "objective": "DATAEXFILTRATIONcommplexmain"}, {"nodes": 10, "reach": 0.5, "density": 0.1, "branching": 0.9, "linearity": 1.0, "objective": "DATAMANIPULATIONcommplexmain"}, {"nodes": 13, "reach": 0.5, "density": 0.07692307692307693, "branching": 0.9230769230769231, "linearity": 1.0, "objective": "RESOURCEHIJACKINGcommplexmain"}, {"nodes": 22, "reach": 0.5735930735930735, "density": 0.0735930735930736, "branching": 3.3636363636363638, "linearity": 0.21621621621621623, "objective": "DATADELIVERYhttp"}, {"nodes": 31, "reach": 0.47096774193548385, "density": 0.03655913978494624, "branching": 1.1935483870967742, "linearity": 0.6486486486486487, "objective": "DATADELIVERYuscli"}, {"nodes": 3, "reach": 0.5, "density": 0.3333333333333333, "branching": 0.6666666666666666, "linearity": 1.0, "objective": "DATADESTRUCTIONuscli"}, {"nodes": 21, "reach": 0.6857142857142857, "density": 0.07857142857142857, "branching": 2.2857142857142856, "linearity": 0.2916666666666667, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 30, "reach": 0.6218390804597701, "density": 0.05057471264367816, "branching": 2.7, "linearity": 0.2839506172839506, "objective": "DATAEXFILTRATIONuscli"}, {"nodes": 18, "reach": 0.7549019607843137, "density": 0.0915032679738562, "branching": 3.0, "linearity": 0.24074074074074073, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 26, "reach": 0.4169230769230769, "density": 0.04153846153846154, "branching": 1.0769230769230769, "linearity": 0.6785714285714286, "objective": "DATAMANIPULATIONuscli"}, {"nodes": 17, "reach": 0.7830882352941176, "density": 0.09558823529411764, "branching": 2.1176470588235294, "linearity": 0.3333333333333333, "objective": "NETWORKDOShttp"}, {"nodes": 22, "reach": 0.5627705627705628, "density": 0.0670995670995671, "branching": 2.9545454545454546, "linearity": 0.27692307692307694, "objective": "RESOURCEHIJACKINGhttp"}, {"nodes": 34, "reach": 0.5035650623885918, "density": 0.040106951871657755, "branching": 1.5588235294117647, "linearity": 0.49056603773584906, "objective": "RESOURCEHIJACKINGuscli"}, {"nodes": 16, "reach": 0.6291666666666667, "density": 0.11666666666666667, "branching": 8.5, "linearity": 0.11029411764705882, "objective": "DATADELIVERYhttp"}, {"nodes": 19, "reach": 0.7222222222222222, "density": 0.0935672514619883, "branching": 4.0, "linearity": 0.19736842105263158, "objective": "DATAEXFILTRATIONhttp"}, {"nodes": 17, "reach": 0.6066176470588235, "density": 0.11029411764705882, "branching": 6.0, "linearity": 0.13725490196078433, "objective": "DATAMANIPULATIONhttp"}, {"nodes": 16, "reach": 0.3375, "density": 0.10416666666666667, "branching": 3.25, "linearity": 0.1346153846153846, "objective": "NETWORKDOShttp"}, {"nodes": 18, "reach": 0.5294117647058824, "density": 0.1111111111111111, "branching": 7.277777777777778, "linearity": 0.11450381679389313, "objective": "RESOURCEHIJACKINGhttp"}]}]</script>
+<script>
+const DATA = JSON.parse(document.getElementById('viz-data').textContent);
+const FAMILY = {"false_positives": "False positives", "duplicates": "Duplicate bursts", "missing_alerts": "Dropped alerts", "missing_episodes": "Dropped episodes"};
+const D = DATA[0] || {};
+
+/* Returns the CSS variable rather than its resolved hex, so marks follow the
+   theme live. Resolving to hex at render time bakes one theme's palette into the
+   SVG attributes, and a viewer toggling theme afterwards would keep light-mode
+   series colours on a dark ground. */
+function series(i){ return 'var(--s'+(i+1)+')'; }
+function num(v, d){ if (v===null||v===undefined) return '\u2014';
+  return typeof v==='number' ? v.toLocaleString(undefined,{maximumFractionDigits:d===undefined?2:d}) : String(v); }
+function esc(s){ const e=document.createElement('div'); e.textContent=s==null?'':String(s); return e.innerHTML; }
+const NS='http://www.w3.org/2000/svg';
+function el(n,a){ const x=document.createElementNS(NS,n); for(const k in (a||{})) x.setAttribute(k,a[k]); return x; }
+
+/* ---- tooltip ---- */
+const tip=document.getElementById('tip');
+function showTip(evt,title,rows){
+  tip.innerHTML='<div class="t">'+esc(title)+'</div>'+rows.map(r=>'<div class="r">'+esc(r)+'</div>').join('');
+  tip.style.opacity='1';
+  const b=tip.getBoundingClientRect();
+  let x=evt.clientX+14, y=evt.clientY-10;
+  if(x+b.width>window.innerWidth-8) x=evt.clientX-b.width-14;
+  if(y+b.height>window.innerHeight-8) y=window.innerHeight-b.height-8;
+  tip.style.left=x+'px'; tip.style.top=Math.max(8,y)+'px';
+}
+function hideTip(){ tip.style.opacity='0'; }
+function hit(node,title,rows){
+  node.classList.add('hit');
+  node.addEventListener('mousemove',e=>showTip(e,title,rows));
+  node.addEventListener('mouseleave',hideTip);
+}
+
+/* ---- header ---- */
+function header(){
+  const m=document.getElementById('meta');
+  const argv=(D.argv||[]).slice(1).join(' ');
+  m.innerHTML=[
+    '<span>Dataset <b class="mono">'+esc(D.dataset)+'</b></span>',
+    '<span>Commit <b class="mono">'+esc((D.commit||'').slice(0,10))+'</b></span>',
+    '<span>Schema v<b>'+esc(D.schema_version)+'</b></span>',
+    '<span>Recorded <b>'+esc((D.created_at||'').slice(0,10))+'</b></span>'
+  ].join('');
+
+  const chips=[];
+  const partial=(D.notes||[]).some(n=>n.startsWith('PARTIAL RUN'));
+  chips.push(partial
+    ? {c:'warning', t:'Partial run \u2014 not a citable baseline'}
+    : {c:'good', t:'Full-dataset run'});
+  if(D.counter_agrees===true) chips.push({c:'good',t:'Alert counts agree with SAGE'});
+  else if(D.counter_agrees===false) chips.push({c:'critical',t:'Alert counts disagree with SAGE'});
+  const rp=D.repeats&&D.repeats.exact_match;
+  if(rp){
+    const norm=rp.ag_dot_match_rate_normalised, raw=rp.ag_dot_match_rate_raw;
+    if(norm===1&&raw===1) chips.push({c:'good',t:'Deterministic (byte-identical)'});
+    else if(norm===1) chips.push({c:'good',t:'Deterministic modulo tooltip order'});
+    else chips.push({c:'critical',t:'Not deterministic \u2014 needs tolerance bands'});
+  } else chips.push({c:'neutral',t:'Determinism unverified (no repeats yet)'});
+  chips.push({c:'neutral',t:(D.perturbations||[]).length+' noise cells \u00b7 '+(D.sweeps||[]).length+' sweep cells'});
+  document.getElementById('chips').innerHTML=chips.map(c=>
+    '<span class="chip '+c.c+'"><span class="dot"></span>'+esc(c.t)+'</span>').join('');
+
+  if((D.notes||[]).length){
+    document.getElementById('caveats').innerHTML=
+      '<div class="banner"><div class="label">Read first</div><ul>'+
+      D.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul></div>';
+  }
+  return argv;
+}
+const ARGV=header();
+
+/* ---- tiles ---- */
+(function tiles(){
+  const a=D.aggregate||{}, t=D.timing||{}, al=D.alerts||{}, p=(D.perplexity||{}).training||{};
+  const ho=(D.perplexity||{}).heldout||{};
+  const prim=D.compression&&D.compression.primary;
+  const items=[
+    {k:'Raw records', v:num(al.raw_records,0)},
+    {k:'Attack graphs', v:num(a.n_attack_graphs,0), s:num(a.n_victims,0)+' victims \u00b7 '+num(a.n_objectives,0)+' objectives'},
+    {k:'Compression', v:num(D.compression&&D.compression[prim],0), s:'records per graph'},
+    {k:'AG nodes', v:num(a.total_nodes,0), s:num(a.unique_nodes,0)+' unique'},
+    {k:'Perplexity (train)', v:num(p.perplexity,2), s:'alphabet '+num(p.alphabet_size,0)},
+    {k:'Perplexity (held-out)', v:num(ho.perplexity,2),
+     s:ho.unresolved_fraction!=null?(Math.round(ho.unresolved_fraction*100)+'% unresolved'):'not scored',
+     flag: ho.unresolved_fraction!=null && ho.unresolved_fraction>0.2},
+    {k:'Runtime', v:num(t.wall_clock_seconds,1)+'s', s:num(t.alert_throughput,0)+' rec/s'},
+  ];
+  document.getElementById('tiles').innerHTML=items.map(i=>
+    '<div class="tile'+(i.flag?' is-flagged':'')+'"><span class="k">'+esc(i.k)+
+    '</span><span class="v">'+esc(i.v)+'</span>'+
+    (i.s?'<span class="s">'+esc(i.s)+'</span>':'')+'</div>').join('');
+
+  const cf=D.compression_formulas||{}, ci=D.compression_inputs||{};
+  document.getElementById('compression-deriv').innerHTML=
+    '<p>Primary ratio <code class="mono">'+esc(prim)+'</code> = '+
+    num(ci.raw_records,0)+' \u00f7 '+num(ci.n_attack_graphs,0)+' = <b>'+num(D.compression&&D.compression[prim],1)+'</b>.</p>'+
+    '<p>'+esc(cf[prim]||'')+'</p>'+
+    '<p>Attack graphs are counted as distinct (victim, objective) pairs, not files \u2014 the output directory holds a .dot, .png and .svg per graph.</p>';
+})();
+
+/* ---- robustness ---- */
+(function robustness(){
+  const cells=D.perturbations||[];
+  const host=document.getElementById('c-robust');
+  if(!cells.length){ host.innerHTML='<p class="why">No noise-injection cells recorded yet.</p>'; return; }
+
+  const fams=Object.keys(FAMILY).filter(f=>cells.some(c=>c.family===f));
+  const rates=[...new Set(cells.map(c=>c.rate))].sort((a,b)=>a-b);
+  const W=520,H=250,L=44,R=118,T=14,B=38;
+  const x=r=>L+(rates.length<2?0:(r-rates[0])/(rates[rates.length-1]-rates[0])*(W-L-R));
+  const y=v=>T+(1-v)*(H-T-B);
+  const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img'});
+
+  [0,0.25,0.5,0.75,1].forEach(g=>{
+    svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(g),y2:y(g),stroke:'var(--rule)','stroke-width':1}));
+    const tx=el('text',{x:L-8,y:y(g)+4,'text-anchor':'end','font-size':10,fill:'var(--muted)'});
+    tx.textContent=g.toFixed(2); svg.appendChild(tx);
+  });
+  rates.forEach(r=>{
+    const tx=el('text',{x:x(r),y:H-B+16,'text-anchor':'middle','font-size':10,fill:'var(--muted)'});
+    tx.textContent=Math.round(r*100)+'%'; svg.appendChild(tx);
+  });
+  const ax=el('text',{x:(L+W-R)/2,y:H-6,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'});
+  ax.textContent='noise rate'; svg.appendChild(ax);
+
+  fams.forEach((f,i)=>{
+    const col=series(i);
+    const pts=rates.map(r=>{
+      const vs=cells.filter(c=>c.family===f&&c.rate===r).map(c=>c.jaccard).sort((a,b)=>a-b);
+      if(!vs.length) return null;
+      return {r, med:vs[Math.floor(vs.length/2)], lo:vs[0], hi:vs[vs.length-1], n:vs.length};
+    }).filter(Boolean);
+    if(!pts.length) return;
+
+    if(pts.some(p=>p.hi>p.lo)){
+      const band=pts.map(p=>x(p.r)+','+y(p.hi)).join(' ')+' '+
+                 pts.slice().reverse().map(p=>x(p.r)+','+y(p.lo)).join(' ');
+      svg.appendChild(el('polygon',{points:band,fill:col,opacity:0.14}));
+    }
+    svg.appendChild(el('polyline',{points:pts.map(p=>x(p.r)+','+y(p.med)).join(' '),
+      fill:'none',stroke:col,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    pts.forEach(p=>{
+      const c=el('circle',{cx:x(p.r),cy:y(p.med),r:4.5,fill:col,stroke:'var(--surface)','stroke-width':1.5});
+      hit(c,FAMILY[f]+' @ '+Math.round(p.r*100)+'%',
+        ['graph Jaccard '+p.med.toFixed(3),'range '+p.lo.toFixed(3)+'\u2013'+p.hi.toFixed(3),p.n+' seed(s)']);
+      svg.appendChild(c);
+    });
+    const last=pts[pts.length-1];
+    const lb=el('text',{x:x(last.r)+9,y:y(last.med)+3.5,'font-size':10.5,fill:'var(--ink-2)'});
+    lb.textContent=FAMILY[f]; svg.appendChild(lb);
+  });
+
+  host.appendChild(svg);
+  document.getElementById('l-robust').innerHTML=fams.map((f,i)=>
+    '<span class="item"><span class="sw" style="background:'+series(i)+'"></span>'+esc(FAMILY[f])+'</span>').join('');
+})();
+
+/* ---- sensitivity ---- */
+(function sensitivity(){
+  const cells=D.sweeps||[];
+  const host=document.getElementById('c-sens');
+  if(!cells.length){ host.innerHTML='<p class="why">No sweep cells recorded yet.</p>'; return; }
+
+  const metrics=['n_attack_graphs','total_nodes','total_edges','unique_nodes'];
+  const labels={n_attack_graphs:'Attack graphs',total_nodes:'Nodes',total_edges:'Edges',unique_nodes:'Unique nodes'};
+  const params=[...new Set(cells.map(c=>c.parameter))].sort();
+  const agg={};
+  params.forEach(p=>{ agg[p]={};
+    metrics.forEach(m=>{
+      const vs=cells.filter(c=>c.parameter===p&&c.elasticity[m]!=null).map(c=>Math.abs(c.elasticity[m]));
+      agg[p][m]=vs.length?vs.reduce((a,b)=>a+b,0)/vs.length:0;
+    });
+  });
+  const max=Math.max(0.001,...params.flatMap(p=>metrics.map(m=>agg[p][m])));
+
+  const W=520,L=104,R=54,rowH=30,barH=11,T=8;
+  const H=T+metrics.length*rowH+30;
+  const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img'});
+  const x=v=>L+v/max*(W-L-R);
+
+  metrics.forEach((m,mi)=>{
+    const yBase=T+mi*rowH+rowH/2;
+    const lb=el('text',{x:L-10,y:yBase+4,'text-anchor':'end','font-size':11,fill:'var(--ink-2)'});
+    lb.textContent=labels[m]; svg.appendChild(lb);
+    params.forEach((p,pi)=>{
+      const v=agg[p][m], col=series(pi);
+      const yy=yBase-barH-1+pi*(barH+2);
+      const w=Math.max(1.5,x(v)-L);
+      const r=el('rect',{x:L,y:yy,width:w,height:barH,rx:3,fill:col});
+      hit(r,'-'+p+' \u00b7 '+labels[m],['|elasticity| '+v.toFixed(3),
+        v<0.02?'parameter moves this metric essentially not at all':'mean over swept values']);
+      svg.appendChild(r);
+      const t=el('text',{x:L+w+6,y:yy+barH-1.5,'font-size':10,fill:'var(--muted)'});
+      t.textContent=v.toFixed(2); svg.appendChild(t);
+    });
+  });
+  svg.appendChild(el('line',{x1:L,x2:L,y1:T,y2:T+metrics.length*rowH,stroke:'var(--axis)','stroke-width':1}));
+  const ax=el('text',{x:(L+W-R)/2,y:H-8,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'});
+  ax.textContent='|elasticity|  (mean over swept values)'; svg.appendChild(ax);
+  host.appendChild(svg);
+
+  document.getElementById('l-sens').innerHTML=params.map((p,i)=>
+    '<span class="item"><span class="sw" style="background:'+series(i)+'"></span><span class="mono">-'+esc(p)+'</span></span>').join('');
+})();
+
+/* ---- density vs size ---- */
+(function density(){
+  const pts=D.graph_points||[];
+  const host=document.getElementById('c-density');
+  if(!pts.length){ host.innerHTML='<p class="why">No per-graph detail recorded.</p>'; return; }
+
+  const W=520,H=260,L=44,R=16,T=14,B=42;
+  const maxN=Math.max(...pts.map(p=>p.nodes));
+  const x=n=>L+n/maxN*(W-L-R), y=v=>T+(1-v)*(H-T-B);
+  const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img'});
+
+  [0,0.25,0.5,0.75,1].forEach(g=>{
+    svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(g),y2:y(g),stroke:'var(--rule)','stroke-width':1}));
+    const t=el('text',{x:L-8,y:y(g)+4,'text-anchor':'end','font-size':10,fill:'var(--muted)'});
+    t.textContent=g.toFixed(2); svg.appendChild(t);
+  });
+  [['reach','Reachability density',0],['density','Edge density',1]].forEach(([key,label,slot])=>{
+    const col=series(slot);
+    pts.forEach(p=>{
+      if(p[key]==null) return;
+      const c=el('circle',{cx:x(p.nodes),cy:y(p[key]),r:3.4,fill:col,opacity:0.65,
+        stroke:'var(--surface)','stroke-width':1});
+      hit(c,p.objective||'attack graph',[label+' '+p[key].toFixed(3),p.nodes+' nodes']);
+      svg.appendChild(c);
+    });
+  });
+  const ax=el('text',{x:(L+W-R)/2,y:H-8,'text-anchor':'middle','font-size':10.5,fill:'var(--muted)'});
+  ax.textContent='nodes per attack graph  (n = '+pts.length+')'; svg.appendChild(ax);
+  host.appendChild(svg);
+
+  document.getElementById('l-density').innerHTML=
+    '<span class="item"><span class="sw" style="background:'+series(0)+'"></span>Reachability density</span>'+
+    '<span class="item"><span class="sw" style="background:'+series(1)+'"></span>Edge density</span>';
+
+  const f=D.formulas||{};
+  document.getElementById('density-deriv').innerHTML=
+    '<p><b>Reachability density</b> \u2014 '+esc(f.reachability_density||'')+'</p>'+
+    '<p><b>Edge density</b> \u2014 '+esc(f.density||'')+'</p>';
+})();
+
+/* ---- runtime ---- */
+(function runtime(){
+  const stages=((D.timing||{}).stages||[]).filter(s=>s.seconds>0);
+  const host=document.getElementById('c-runtime');
+  if(!stages.length){ host.innerHTML='<p class="why">No stage timing recorded.</p>'; return; }
+  const total=stages.reduce((a,s)=>a+s.seconds,0);
+
+  const W=520,H=96,L=0,T=26,barH=34;
+  const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img'});
+  let cx=L;
+  stages.forEach((s,i)=>{
+    const w=s.seconds/total*(W-L);
+    const col=i<4?series(i):'var(--muted)';
+    const r=el('rect',{x:cx+(i?1:0),y:T,width:Math.max(0,w-(i?1:0)),height:barH,fill:col,
+      rx:i===0||i===stages.length-1?4:0});
+    hit(r,s.label,[s.seconds.toFixed(2)+' s',(s.seconds/total*100).toFixed(1)+'% of runtime']);
+    svg.appendChild(r);
+    if(w>52){
+      const t=el('text',{x:cx+w/2,y:T+barH+15,'text-anchor':'middle','font-size':10,fill:'var(--muted)'});
+      t.textContent=Math.round(s.seconds/total*100)+'%'; svg.appendChild(t);
+    }
+    cx+=w;
+  });
+  const cap=el('text',{x:0,y:14,'font-size':11,fill:'var(--ink-2)'});
+  cap.textContent=total.toFixed(1)+' s total'; svg.appendChild(cap);
+  host.appendChild(svg);
+
+  document.getElementById('l-runtime').innerHTML=stages.map((s,i)=>
+    '<span class="item"><span class="sw" style="background:'+(i<4?series(i):'var(--muted)')+'"></span>'+
+    esc(s.label)+'</span>').join('');
+})();
+
+/* ---- perplexity ---- */
+(function perp(){
+  const t=(D.perplexity||{}).training||{}, h=(D.perplexity||{}).heldout||{};
+  const rb=t.resolved_by_model||{};
+  const rows=[
+    ['Perplexity', num(t.perplexity,3), h.perplexity!=null?num(h.perplexity,3):'\u2014'],
+    ['Traces scored', num(t.n_traces,0), h.n_test!=null?num(h.n_test,0):'\u2014'],
+    ['Symbols', num(t.n_symbols,0), '\u2014'],
+    ['Alphabet', num(t.alphabet_size,0), '\u2014'],
+    ['Unresolved steps', t.unresolved_fraction!=null?(t.unresolved_fraction*100).toFixed(1)+'%':'\u2014',
+      h.unresolved_fraction!=null?(h.unresolved_fraction*100).toFixed(1)+'%':'\u2014'],
+    ['Resolved via main model', num(rb.main,0), '\u2014'],
+    ['Resolved via sinks model', num(rb.sinks,0), '\u2014'],
+  ];
+  document.getElementById('perp').innerHTML=
+    '<thead><tr><th>Measure</th><th>Training</th><th>Held-out</th></tr></thead><tbody>'+
+    rows.map(r=>'<tr><td class="name">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>').join('')+
+    '</tbody>';
+
+  const pct=h.unresolved_fraction!=null?Math.round(h.unresolved_fraction*100):null;
+  document.getElementById('perp-deriv').innerHTML=
+    '<p>Probabilities come from FlexFringe\u2019s own exported counts (<code class="mono">'+esc(t.prob_source||'\u2014')+
+    '</code>): <code class="mono">P(sym|state) = (trans_counts[sym] + \u03b1) / (total_paths + total_final + \u03b1\u00b7n_outcomes)</code>, with \u03b1 = '+
+    num(t.alpha,2)+'. The end-of-trace event is scored, not skipped.</p>'+
+    '<p>Traversal tries the main model first, then the sinks model \u2014 '+
+    (rb.main&&rb.sinks?Math.round(rb.sinks/(rb.main+rb.sinks)*100)+'% of steps resolve via sinks, so scoring against the main model alone would be wrong.':'')+'</p>'+
+    (pct!==null?'<p><b>Held-out caveat.</b> '+pct+'% of held-out steps fall off the model entirely and are scored against a uniform fallback rather than skipped (skipping would flatter the model). At that level the held-out figure is substantially a statement about the fallback policy, and is <b>not</b> comparable like-for-like with the training figure. The defensible reading is the coverage claim: '+pct+'% of unseen behaviour has no path through the learned model.</p>':'');
+})();
+
+/* ---- environment ---- */
+(function env(){
+  const e=D.environment||{}, i=D.iana||{};
+  const rows=[
+    ['Command','python '+ARGV],
+    ['Commit',D.commit],
+    ['Host',D.host],
+    ['OS',e.os],['CPU cores',e.cpu_count],['Python',e.python_version],
+    ['Graphviz',e.graphviz_version],['glibc',e.glibc_version],
+    ['FlexFringe SHA-256',e.flexfringe_sha256],
+    ['IANA CSV SHA-256',i.sha256],
+  ].filter(r=>r[1]!=null&&r[1]!=='');
+  document.getElementById('env').innerHTML='<tbody>'+rows.map(r=>
+    '<tr><td class="name">'+esc(r[0])+'</td><td style="text-align:left" class="mono">'+esc(r[1])+'</td></tr>'
+  ).join('')+'</tbody>';
+})();
+</script>
