@@ -23,3 +23,6 @@ venv/
 
 # Tool scratch output (browser automation logs and page snapshots)
 .playwright-mcp/
+
+# MITRE mapping experiment: cached raw STIX bundle (large, re-downloadable)
+experiments/mitre_mapping/enterprise-attack.json
