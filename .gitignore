@@ -20,3 +20,6 @@ __pycache__/
 *.pyo
 .venv/
 venv/
+
+# Tool scratch output (browser automation logs and page snapshots)
+.playwright-mcp/
