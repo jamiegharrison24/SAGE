@@ -1,0 +1,1002 @@
+[
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024297",
+    "signature": "ET EXPLOIT ETERNALBLUE Exploit M2 MS17-010",
+    "mitre_technique": "T1210",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Lateral Movement",
+    "behaviour_summary": "Exploitation of Remote Services",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2001569",
+    "signature": "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024297",
+    "signature": "ET EXPLOIT ETERNALBLUE Exploit M2 MS17-010",
+    "mitre_technique": "T1210",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Lateral Movement",
+    "behaviour_summary": "Exploitation of Remote Services",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2220006",
+    "signature": "SURICATA SMTP no server welcome message",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2006380",
+    "signature": "ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted",
+    "mitre_technique": "T1552.001",
+    "mitre_subtechnique": "Unsecured Credentials: Credentials In Files",
+    "tactic": "Credential Access",
+    "behaviour_summary": "Credentials observed in an unsecured form",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2001582",
+    "signature": "ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2001583",
+    "signature": "ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2010493",
+    "signature": "ET SCAN Non-Allowed Host Tried to Connect to MySQL Server",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2013504",
+    "signature": "ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2001569",
+    "signature": "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2240001",
+    "signature": "SURICATA DNS Unsolicited response",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2240001",
+    "signature": "SURICATA DNS Unsolicited response",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2006380",
+    "signature": "ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted",
+    "mitre_technique": "T1552.001",
+    "mitre_subtechnique": "Unsecured Credentials: Credentials In Files",
+    "tactic": "Credential Access",
+    "behaviour_summary": "Credentials observed in an unsecured form",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2012887",
+    "signature": "ET POLICY Http Client Body contains pass= in cleartext",
+    "mitre_technique": "T1552.001",
+    "mitre_subtechnique": "Unsecured Credentials: Credentials In Files",
+    "tactic": "Credential Access",
+    "behaviour_summary": "Credentials observed in an unsecured form",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2012887",
+    "signature": "ET POLICY Http Client Body contains pass= in cleartext",
+    "mitre_technique": "T1552.001",
+    "mitre_subtechnique": "Unsecured Credentials: Credentials In Files",
+    "tactic": "Credential Access",
+    "behaviour_summary": "Credentials observed in an unsecured form",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2001569",
+    "signature": "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2019415",
+    "signature": "ET POLICY SSLv3 inbound connection to server vulnerable to POODLE attack",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Unknown",
+    "behaviour_summary": "No deterministic MITRE technique match",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "none"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2025713",
+    "signature": "ET POLICY SMB2 Remote AT Scheduled Job Create Request",
+    "mitre_technique": "T1053.005",
+    "mitre_subtechnique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "behaviour_summary": "Remote or local scheduled task activity",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2025713",
+    "signature": "ET POLICY SMB2 Remote AT Scheduled Job Create Request",
+    "mitre_technique": "T1053.005",
+    "mitre_subtechnique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "behaviour_summary": "Remote or local scheduled task activity",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2025714",
+    "signature": "ET POLICY SMB Remote AT Scheduled Job Pipe Creation",
+    "mitre_technique": "T1053.005",
+    "mitre_subtechnique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "behaviour_summary": "Remote or local scheduled task activity",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2025714",
+    "signature": "ET POLICY SMB Remote AT Scheduled Job Pipe Creation",
+    "mitre_technique": "T1053.005",
+    "mitre_subtechnique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "behaviour_summary": "Remote or local scheduled task activity",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2025714",
+    "signature": "ET POLICY SMB Remote AT Scheduled Job Pipe Creation",
+    "mitre_technique": "T1053.005",
+    "mitre_subtechnique": "Scheduled Task/Job: Scheduled Task",
+    "tactic": "Persistence",
+    "behaviour_summary": "Remote or local scheduled task activity",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2020899",
+    "signature": "ET EXPLOIT D-Link Devices Home Network Administration Protocol Command Execution",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2020899",
+    "signature": "ET EXPLOIT D-Link Devices Home Network Administration Protocol Command Execution",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2001569",
+    "signature": "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+    "mitre_technique": "T1046",
+    "mitre_subtechnique": "Network Service Scanning",
+    "tactic": "Discovery",
+    "behaviour_summary": "Network or service scanning detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  },
+  {
+    "sid": "2230010",
+    "signature": "SURICATA TLS invalid record/traffic",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2230015",
+    "signature": "SURICATA TLS invalid record version",
+    "mitre_technique": "Unknown",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Command and Control",
+    "behaviour_summary": "Category indicates suspicious activity; technique is undetermined",
+    "recommended_action": "Review alert context and signature definition",
+    "confidence": "low"
+  },
+  {
+    "sid": "2024121",
+    "signature": "ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)",
+    "mitre_technique": "T1190",
+    "mitre_subtechnique": "Unknown",
+    "tactic": "Initial Access",
+    "behaviour_summary": "Exploit attempt detected",
+    "recommended_action": "Investigate and contain",
+    "confidence": "high"
+  }
+]

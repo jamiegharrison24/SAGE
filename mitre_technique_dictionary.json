@@ -1,0 +1,1374 @@
+{
+  "schema_version": 1,
+  "source": "..\\mitretechniques.txt",
+  "techniques": [
+    {
+      "technique_id": "T1001",
+      "technique_name": "Data Obfuscation",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Data Obfuscation",
+      "detection_keywords": [
+        "data obfuscation"
+      ]
+    },
+    {
+      "technique_id": "T1003",
+      "technique_name": "OS Credential Dumping",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with OS Credential Dumping",
+      "detection_keywords": [
+        "os credential dumping"
+      ]
+    },
+    {
+      "technique_id": "T1005",
+      "technique_name": "Data from Local System",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Local System",
+      "detection_keywords": [
+        "data from local system"
+      ]
+    },
+    {
+      "technique_id": "T1006",
+      "technique_name": "Direct Volume Access",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Direct Volume Access",
+      "detection_keywords": [
+        "direct volume access"
+      ]
+    },
+    {
+      "technique_id": "T1007",
+      "technique_name": "System Service Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Service Discovery",
+      "detection_keywords": [
+        "system service discovery"
+      ]
+    },
+    {
+      "technique_id": "T1008",
+      "technique_name": "Fallback Channels",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Fallback Channels",
+      "detection_keywords": [
+        "fallback channels"
+      ]
+    },
+    {
+      "technique_id": "T1010",
+      "technique_name": "Application Window Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with Application Window Discovery",
+      "detection_keywords": [
+        "application window discovery"
+      ]
+    },
+    {
+      "technique_id": "T1011",
+      "technique_name": "Exfiltration Over Other Network Medium",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Exfiltration Over Other Network Medium",
+      "detection_keywords": [
+        "exfiltration over other network medium"
+      ]
+    },
+    {
+      "technique_id": "T1014",
+      "technique_name": "Rootkit",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Rootkit",
+      "detection_keywords": [
+        "rootkit"
+      ]
+    },
+    {
+      "technique_id": "T1016",
+      "technique_name": "System Network Configuration Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Network Configuration Discovery",
+      "detection_keywords": [
+        "system network configuration discovery"
+      ]
+    },
+    {
+      "technique_id": "T1020",
+      "technique_name": "Automated Exfiltration",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Automated Exfiltration",
+      "detection_keywords": [
+        "automated exfiltration"
+      ]
+    },
+    {
+      "technique_id": "T1021",
+      "technique_name": "Remote Services",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Remote Services",
+      "detection_keywords": [
+        "remote services"
+      ]
+    },
+    {
+      "technique_id": "T1025",
+      "technique_name": "Data from Removable Media",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Removable Media",
+      "detection_keywords": [
+        "data from removable media"
+      ]
+    },
+    {
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Obfuscated Files or Information",
+      "detection_keywords": [
+        "obfuscated files or information"
+      ]
+    },
+    {
+      "technique_id": "T1029",
+      "technique_name": "Scheduled Transfer",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Scheduled Transfer",
+      "detection_keywords": [
+        "scheduled transfer"
+      ]
+    },
+    {
+      "technique_id": "T1030",
+      "technique_name": "Data Transfer Size Limits",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Data Transfer Size Limits",
+      "detection_keywords": [
+        "data transfer size limits"
+      ]
+    },
+    {
+      "technique_id": "T1036",
+      "technique_name": "Masquerading",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Masquerading",
+      "detection_keywords": [
+        "masquerading"
+      ]
+    },
+    {
+      "technique_id": "T1037",
+      "technique_name": "Boot or Logon Initialization Scripts",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Boot or Logon Initialization Scripts",
+      "detection_keywords": [
+        "boot or logon initialization scripts"
+      ]
+    },
+    {
+      "technique_id": "T1039",
+      "technique_name": "Data from Network Shared Drive",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Network Shared Drive",
+      "detection_keywords": [
+        "data from network shared drive"
+      ]
+    },
+    {
+      "technique_id": "T1040",
+      "technique_name": "Network Sniffing",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Network Sniffing",
+      "detection_keywords": [
+        "network sniffing"
+      ]
+    },
+    {
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over C2 Channel",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Exfiltration Over C2 Channel",
+      "detection_keywords": [
+        "exfiltration over c2 channel"
+      ]
+    },
+    {
+      "technique_id": "T1047",
+      "technique_name": "Windows Management Instrumentation",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Windows Management Instrumentation",
+      "detection_keywords": [
+        "windows management instrumentation"
+      ]
+    },
+    {
+      "technique_id": "T1048",
+      "technique_name": "Exfiltration Over Alternative Protocol",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Exfiltration Over Alternative Protocol",
+      "detection_keywords": [
+        "exfiltration over alternative protocol"
+      ]
+    },
+    {
+      "technique_id": "T1049",
+      "technique_name": "System Network Connections Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Network Connections Discovery",
+      "detection_keywords": [
+        "system network connections discovery"
+      ]
+    },
+    {
+      "technique_id": "T1052",
+      "technique_name": "Exfiltration Over Physical Medium",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Exfiltration Over Physical Medium",
+      "detection_keywords": [
+        "exfiltration over physical medium"
+      ]
+    },
+    {
+      "technique_id": "T1053",
+      "technique_name": "Scheduled Task/Job",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Scheduled Task/Job",
+      "detection_keywords": [
+        "scheduled task job"
+      ]
+    },
+    {
+      "technique_id": "T1055",
+      "technique_name": "Process Injection",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Process Injection",
+      "detection_keywords": [
+        "process injection"
+      ]
+    },
+    {
+      "technique_id": "T1056",
+      "technique_name": "Input Capture",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Input Capture",
+      "detection_keywords": [
+        "input capture"
+      ]
+    },
+    {
+      "technique_id": "T1059",
+      "technique_name": "Command and Scripting Interpreter",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Command and Scripting Interpreter",
+      "detection_keywords": [
+        "command and scripting interpreter"
+      ]
+    },
+    {
+      "technique_id": "T1068",
+      "technique_name": "Exploitation for Privilege Escalation",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Exploitation for Privilege Escalation",
+      "detection_keywords": [
+        "exploitation for privilege escalation"
+      ]
+    },
+    {
+      "technique_id": "T1070",
+      "technique_name": "Indicator Removal",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Indicator Removal",
+      "detection_keywords": [
+        "indicator removal"
+      ]
+    },
+    {
+      "technique_id": "T1071",
+      "technique_name": "Application Layer Protocol",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Application Layer Protocol",
+      "detection_keywords": [
+        "application layer protocol"
+      ]
+    },
+    {
+      "technique_id": "T1072",
+      "technique_name": "Software Deployment Tools",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Software Deployment Tools",
+      "detection_keywords": [
+        "software deployment tools"
+      ]
+    },
+    {
+      "technique_id": "T1074",
+      "technique_name": "Data Staged",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data Staged",
+      "detection_keywords": [
+        "data staged"
+      ]
+    },
+    {
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Valid Accounts",
+      "detection_keywords": [
+        "valid accounts"
+      ]
+    },
+    {
+      "technique_id": "T1080",
+      "technique_name": "Taint Shared Content",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Taint Shared Content",
+      "detection_keywords": [
+        "taint shared content"
+      ]
+    },
+    {
+      "technique_id": "T1082",
+      "technique_name": "System Information Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Information Discovery",
+      "detection_keywords": [
+        "system information discovery"
+      ]
+    },
+    {
+      "technique_id": "T1083",
+      "technique_name": "File and Directory Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with File and Directory Discovery",
+      "detection_keywords": [
+        "file and directory discovery"
+      ]
+    },
+    {
+      "technique_id": "T1087",
+      "technique_name": "Account Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with Account Discovery",
+      "detection_keywords": [
+        "account discovery"
+      ]
+    },
+    {
+      "technique_id": "T1090",
+      "technique_name": "Proxy",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Proxy",
+      "detection_keywords": [
+        "proxy"
+      ]
+    },
+    {
+      "technique_id": "T1091",
+      "technique_name": "Replication Through Removable Media",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Replication Through Removable Media",
+      "detection_keywords": [
+        "replication through removable media"
+      ]
+    },
+    {
+      "technique_id": "T1092",
+      "technique_name": "Communication Through Removable Media",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Communication Through Removable Media",
+      "detection_keywords": [
+        "communication through removable media"
+      ]
+    },
+    {
+      "technique_id": "T1095",
+      "technique_name": "Non-Application Layer Protocol",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Non-Application Layer Protocol",
+      "detection_keywords": [
+        "non application layer protocol"
+      ]
+    },
+    {
+      "technique_id": "T1098",
+      "technique_name": "Account Manipulation",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Account Manipulation",
+      "detection_keywords": [
+        "account manipulation"
+      ]
+    },
+    {
+      "technique_id": "T1102",
+      "technique_name": "Web Service",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Web Service",
+      "detection_keywords": [
+        "web service"
+      ]
+    },
+    {
+      "technique_id": "T1104",
+      "technique_name": "Multi-Stage Channels",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Multi-Stage Channels",
+      "detection_keywords": [
+        "multi stage channels"
+      ]
+    },
+    {
+      "technique_id": "T1105",
+      "technique_name": "Ingress Tool Transfer",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Ingress Tool Transfer",
+      "detection_keywords": [
+        "ingress tool transfer"
+      ]
+    },
+    {
+      "technique_id": "T1106",
+      "technique_name": "Native API",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Native API",
+      "detection_keywords": [
+        "native api"
+      ]
+    },
+    {
+      "technique_id": "T1110",
+      "technique_name": "Brute Force",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Brute Force",
+      "detection_keywords": [
+        "brute force"
+      ]
+    },
+    {
+      "technique_id": "T1111",
+      "technique_name": "Multi-Factor Authentication Interception",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Multi-Factor Authentication Interception",
+      "detection_keywords": [
+        "multi factor authentication interception"
+      ]
+    },
+    {
+      "technique_id": "T1112",
+      "technique_name": "Modify Registry",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Modify Registry",
+      "detection_keywords": [
+        "modify registry"
+      ]
+    },
+    {
+      "technique_id": "T1113",
+      "technique_name": "Screen Capture",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Screen Capture",
+      "detection_keywords": [
+        "screen capture"
+      ]
+    },
+    {
+      "technique_id": "T1114",
+      "technique_name": "Email Collection",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Email Collection",
+      "detection_keywords": [
+        "email collection"
+      ]
+    },
+    {
+      "technique_id": "T1119",
+      "technique_name": "Automated Collection",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Automated Collection",
+      "detection_keywords": [
+        "automated collection"
+      ]
+    },
+    {
+      "technique_id": "T1124",
+      "technique_name": "System Time Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Time Discovery",
+      "detection_keywords": [
+        "system time discovery"
+      ]
+    },
+    {
+      "technique_id": "T1125",
+      "technique_name": "Video Capture",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Video Capture",
+      "detection_keywords": [
+        "video capture"
+      ]
+    },
+    {
+      "technique_id": "T1127",
+      "technique_name": "Trusted Developer Utilities Proxy Execution",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Trusted Developer Utilities Proxy Execution",
+      "detection_keywords": [
+        "trusted developer utilities proxy execution"
+      ]
+    },
+    {
+      "technique_id": "T1129",
+      "technique_name": "Shared Modules",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Shared Modules",
+      "detection_keywords": [
+        "shared modules"
+      ]
+    },
+    {
+      "technique_id": "T1132",
+      "technique_name": "Data Encoding",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Data Encoding",
+      "detection_keywords": [
+        "data encoding"
+      ]
+    },
+    {
+      "technique_id": "T1133",
+      "technique_name": "External Remote Services",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with External Remote Services",
+      "detection_keywords": [
+        "external remote services"
+      ]
+    },
+    {
+      "technique_id": "T1134",
+      "technique_name": "Access Token Manipulation",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Access Token Manipulation",
+      "detection_keywords": [
+        "access token manipulation"
+      ]
+    },
+    {
+      "technique_id": "T1136",
+      "technique_name": "Create Account",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Create Account",
+      "detection_keywords": [
+        "create account"
+      ]
+    },
+    {
+      "technique_id": "T1137",
+      "technique_name": "Office Application Startup",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Office Application Startup",
+      "detection_keywords": [
+        "office application startup"
+      ]
+    },
+    {
+      "technique_id": "T1140",
+      "technique_name": "Deobfuscate/Decode Files or Information",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Deobfuscate/Decode Files or Information",
+      "detection_keywords": [
+        "deobfuscate decode files or information"
+      ]
+    },
+    {
+      "technique_id": "T1189",
+      "technique_name": "Drive-by Compromise",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Drive-by Compromise",
+      "detection_keywords": [
+        "drive by compromise"
+      ]
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Exploit Public-Facing Application",
+      "detection_keywords": [
+        "exploit public facing application"
+      ]
+    },
+    {
+      "technique_id": "T1195",
+      "technique_name": "Supply Chain Compromise",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Supply Chain Compromise",
+      "detection_keywords": [
+        "supply chain compromise"
+      ]
+    },
+    {
+      "technique_id": "T1199",
+      "technique_name": "Trusted Relationship",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Trusted Relationship",
+      "detection_keywords": [
+        "trusted relationship"
+      ]
+    },
+    {
+      "technique_id": "T1202",
+      "technique_name": "Indirect Command Execution",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Indirect Command Execution",
+      "detection_keywords": [
+        "indirect command execution"
+      ]
+    },
+    {
+      "technique_id": "T1203",
+      "technique_name": "Exploitation for Client Execution",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Exploitation for Client Execution",
+      "detection_keywords": [
+        "exploitation for client execution"
+      ]
+    },
+    {
+      "technique_id": "T1204",
+      "technique_name": "User Execution",
+      "tactic": "Execution",
+      "short_description": "Activity associated with User Execution",
+      "detection_keywords": [
+        "user execution"
+      ]
+    },
+    {
+      "technique_id": "T1205",
+      "technique_name": "Traffic Signaling",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Traffic Signaling",
+      "detection_keywords": [
+        "traffic signaling"
+      ]
+    },
+    {
+      "technique_id": "T1210",
+      "technique_name": "Exploitation of Remote Services",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Exploitation of Remote Services",
+      "detection_keywords": [
+        "exploitation of remote services"
+      ]
+    },
+    {
+      "technique_id": "T1211",
+      "technique_name": "Exploitation for Defense Impairment",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Exploitation for Defense Impairment",
+      "detection_keywords": [
+        "exploitation for defense impairment"
+      ]
+    },
+    {
+      "technique_id": "T1213",
+      "technique_name": "Data from Information Repositories",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Information Repositories",
+      "detection_keywords": [
+        "data from information repositories"
+      ]
+    },
+    {
+      "technique_id": "T1216",
+      "technique_name": "Signed Script Proxy Execution",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Signed Script Proxy Execution",
+      "detection_keywords": [
+        "signed script proxy execution"
+      ]
+    },
+    {
+      "technique_id": "T1218",
+      "technique_name": "System Binary Proxy Execution",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with System Binary Proxy Execution",
+      "detection_keywords": [
+        "system binary proxy execution"
+      ]
+    },
+    {
+      "technique_id": "T1219",
+      "technique_name": "Remote Access Software",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Remote Access Software",
+      "detection_keywords": [
+        "remote access software"
+      ]
+    },
+    {
+      "technique_id": "T1220",
+      "technique_name": "XSL Script Processing",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with XSL Script Processing",
+      "detection_keywords": [
+        "xsl script processing"
+      ]
+    },
+    {
+      "technique_id": "T1222",
+      "technique_name": "File and Directory Permissions Modification",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with File and Directory Permissions Modification",
+      "detection_keywords": [
+        "file and directory permissions modification"
+      ]
+    },
+    {
+      "technique_id": "T1485",
+      "technique_name": "Data Destruction",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Data Destruction",
+      "detection_keywords": [
+        "data destruction"
+      ]
+    },
+    {
+      "technique_id": "T1486",
+      "technique_name": "Data Encrypted for Impact",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Data Encrypted for Impact",
+      "detection_keywords": [
+        "data encrypted for impact"
+      ]
+    },
+    {
+      "technique_id": "T1489",
+      "technique_name": "Service Stop",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Service Stop",
+      "detection_keywords": [
+        "service stop"
+      ]
+    },
+    {
+      "technique_id": "T1490",
+      "technique_name": "Inhibit System Recovery",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Inhibit System Recovery",
+      "detection_keywords": [
+        "inhibit system recovery"
+      ]
+    },
+    {
+      "technique_id": "T1491",
+      "technique_name": "Defacement",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Defacement",
+      "detection_keywords": [
+        "defacement"
+      ]
+    },
+    {
+      "technique_id": "T1495",
+      "technique_name": "Firmware Corruption",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Firmware Corruption",
+      "detection_keywords": [
+        "firmware corruption"
+      ]
+    },
+    {
+      "technique_id": "T1496",
+      "technique_name": "Resource Hijacking",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Resource Hijacking",
+      "detection_keywords": [
+        "resource hijacking"
+      ]
+    },
+    {
+      "technique_id": "T1497",
+      "technique_name": "Virtualization/Sandbox Evasion",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Virtualization/Sandbox Evasion",
+      "detection_keywords": [
+        "virtualization sandbox evasion"
+      ]
+    },
+    {
+      "technique_id": "T1498",
+      "technique_name": "Network Denial of Service",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Network Denial of Service",
+      "detection_keywords": [
+        "network denial of service"
+      ]
+    },
+    {
+      "technique_id": "T1499",
+      "technique_name": "Endpoint Denial of Service",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Endpoint Denial of Service",
+      "detection_keywords": [
+        "endpoint denial of service"
+      ]
+    },
+    {
+      "technique_id": "T1505",
+      "technique_name": "Server Software Component",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Server Software Component",
+      "detection_keywords": [
+        "server software component"
+      ]
+    },
+    {
+      "technique_id": "T1529",
+      "technique_name": "System Shutdown/Reboot",
+      "tactic": "Impact",
+      "short_description": "Activity associated with System Shutdown/Reboot",
+      "detection_keywords": [
+        "system shutdown reboot"
+      ]
+    },
+    {
+      "technique_id": "T1530",
+      "technique_name": "Data from Cloud Storage",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Cloud Storage",
+      "detection_keywords": [
+        "data from cloud storage"
+      ]
+    },
+    {
+      "technique_id": "T1531",
+      "technique_name": "Account Access Removal",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Account Access Removal",
+      "detection_keywords": [
+        "account access removal"
+      ]
+    },
+    {
+      "technique_id": "T1537",
+      "technique_name": "Transfer Data to Cloud Account",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Transfer Data to Cloud Account",
+      "detection_keywords": [
+        "transfer data to cloud account"
+      ]
+    },
+    {
+      "technique_id": "T1542",
+      "technique_name": "Pre-OS Boot",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Pre-OS Boot",
+      "detection_keywords": [
+        "pre os boot"
+      ]
+    },
+    {
+      "technique_id": "T1543",
+      "technique_name": "Create or Modify System Process",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Create or Modify System Process",
+      "detection_keywords": [
+        "create or modify system process"
+      ]
+    },
+    {
+      "technique_id": "T1546",
+      "technique_name": "Event Triggered Execution",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Event Triggered Execution",
+      "detection_keywords": [
+        "event triggered execution"
+      ]
+    },
+    {
+      "technique_id": "T1547",
+      "technique_name": "Boot or Logon Autostart Execution",
+      "tactic": "Persistence",
+      "short_description": "Activity associated with Boot or Logon Autostart Execution",
+      "detection_keywords": [
+        "boot or logon autostart execution"
+      ]
+    },
+    {
+      "technique_id": "T1548",
+      "technique_name": "Abuse Elevation Control Mechanism",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Abuse Elevation Control Mechanism",
+      "detection_keywords": [
+        "abuse elevation control mechanism"
+      ]
+    },
+    {
+      "technique_id": "T1550",
+      "technique_name": "Use Alternate Authentication Material",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Use Alternate Authentication Material",
+      "detection_keywords": [
+        "use alternate authentication material"
+      ]
+    },
+    {
+      "technique_id": "T1552",
+      "technique_name": "Unsecured Credentials",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Unsecured Credentials",
+      "detection_keywords": [
+        "unsecured credentials"
+      ]
+    },
+    {
+      "technique_id": "T1553",
+      "technique_name": "Subvert Trust Controls",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Subvert Trust Controls",
+      "detection_keywords": [
+        "subvert trust controls"
+      ]
+    },
+    {
+      "technique_id": "T1555",
+      "technique_name": "Credentials from Password Stores",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Credentials from Password Stores",
+      "detection_keywords": [
+        "credentials from password stores"
+      ]
+    },
+    {
+      "technique_id": "T1556",
+      "technique_name": "Modify Authentication Process",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Modify Authentication Process",
+      "detection_keywords": [
+        "modify authentication process"
+      ]
+    },
+    {
+      "technique_id": "T1557",
+      "technique_name": "Adversary-in-the-Middle",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Adversary-in-the-Middle",
+      "detection_keywords": [
+        "adversary in the middle"
+      ]
+    },
+    {
+      "technique_id": "T1558",
+      "technique_name": "Steal or Forge Authentication Certificates",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Steal or Forge Authentication Certificates",
+      "detection_keywords": [
+        "steal or forge authentication certificates"
+      ]
+    },
+    {
+      "technique_id": "T1559",
+      "technique_name": "Inter-Process Communication",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Inter-Process Communication",
+      "detection_keywords": [
+        "inter process communication"
+      ]
+    },
+    {
+      "technique_id": "T1560",
+      "technique_name": "Archive Collected Data",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Archive Collected Data",
+      "detection_keywords": [
+        "archive collected data"
+      ]
+    },
+    {
+      "technique_id": "T1561",
+      "technique_name": "Disk Wipe",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Disk Wipe",
+      "detection_keywords": [
+        "disk wipe"
+      ]
+    },
+    {
+      "technique_id": "T1562",
+      "technique_name": "Disable or Modify System Firewall",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Disable or Modify System Firewall",
+      "detection_keywords": [
+        "disable or modify system firewall"
+      ]
+    },
+    {
+      "technique_id": "T1563",
+      "technique_name": "Remote Service Session Hijacking",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Remote Service Session Hijacking",
+      "detection_keywords": [
+        "remote service session hijacking"
+      ]
+    },
+    {
+      "technique_id": "T1564",
+      "technique_name": "Hide Artifacts",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Hide Artifacts",
+      "detection_keywords": [
+        "hide artifacts"
+      ]
+    },
+    {
+      "technique_id": "T1565",
+      "technique_name": "Data Manipulation",
+      "tactic": "Impact",
+      "short_description": "Activity associated with Data Manipulation",
+      "detection_keywords": [
+        "data manipulation"
+      ]
+    },
+    {
+      "technique_id": "T1566",
+      "technique_name": "Phishing",
+      "tactic": "Initial Access",
+      "short_description": "Activity associated with Phishing",
+      "detection_keywords": [
+        "phishing"
+      ]
+    },
+    {
+      "technique_id": "T1567",
+      "technique_name": "Exfiltration Over Web Service",
+      "tactic": "Exfiltration",
+      "short_description": "Activity associated with Exfiltration Over Web Service",
+      "detection_keywords": [
+        "exfiltration over web service"
+      ]
+    },
+    {
+      "technique_id": "T1568",
+      "technique_name": "Dynamic Resolution",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Dynamic Resolution",
+      "detection_keywords": [
+        "dynamic resolution"
+      ]
+    },
+    {
+      "technique_id": "T1569",
+      "technique_name": "System Services",
+      "tactic": "Execution",
+      "short_description": "Activity associated with System Services",
+      "detection_keywords": [
+        "system services"
+      ]
+    },
+    {
+      "technique_id": "T1570",
+      "technique_name": "Lateral Tool Transfer",
+      "tactic": "Lateral Movement",
+      "short_description": "Activity associated with Lateral Tool Transfer",
+      "detection_keywords": [
+        "lateral tool transfer"
+      ]
+    },
+    {
+      "technique_id": "T1571",
+      "technique_name": "Non-Standard Port",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Non-Standard Port",
+      "detection_keywords": [
+        "non standard port"
+      ]
+    },
+    {
+      "technique_id": "T1572",
+      "technique_name": "Protocol Tunneling",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Protocol Tunneling",
+      "detection_keywords": [
+        "protocol tunneling"
+      ]
+    },
+    {
+      "technique_id": "T1573",
+      "technique_name": "Encrypted Channel",
+      "tactic": "Command and Control",
+      "short_description": "Activity associated with Encrypted Channel",
+      "detection_keywords": [
+        "encrypted channel"
+      ]
+    },
+    {
+      "technique_id": "T1574",
+      "technique_name": "Hijack Execution Flow",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Hijack Execution Flow",
+      "detection_keywords": [
+        "hijack execution flow"
+      ]
+    },
+    {
+      "technique_id": "T1578",
+      "technique_name": "Modify Cloud Compute Infrastructure",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Modify Cloud Compute Infrastructure",
+      "detection_keywords": [
+        "modify cloud compute infrastructure"
+      ]
+    },
+    {
+      "technique_id": "T1583",
+      "technique_name": "Acquire Infrastructure",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Acquire Infrastructure",
+      "detection_keywords": [
+        "acquire infrastructure"
+      ]
+    },
+    {
+      "technique_id": "T1584",
+      "technique_name": "Compromise Infrastructure",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Compromise Infrastructure",
+      "detection_keywords": [
+        "compromise infrastructure"
+      ]
+    },
+    {
+      "technique_id": "T1585",
+      "technique_name": "Establish Accounts",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Establish Accounts",
+      "detection_keywords": [
+        "establish accounts"
+      ]
+    },
+    {
+      "technique_id": "T1586",
+      "technique_name": "Compromise Accounts",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Compromise Accounts",
+      "detection_keywords": [
+        "compromise accounts"
+      ]
+    },
+    {
+      "technique_id": "T1587",
+      "technique_name": "Develop Capabilities",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Develop Capabilities",
+      "detection_keywords": [
+        "develop capabilities"
+      ]
+    },
+    {
+      "technique_id": "T1588",
+      "technique_name": "Obtain Capabilities",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Obtain Capabilities",
+      "detection_keywords": [
+        "obtain capabilities"
+      ]
+    },
+    {
+      "technique_id": "T1589",
+      "technique_name": "Gather Victim Identity Information",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Gather Victim Identity Information",
+      "detection_keywords": [
+        "gather victim identity information"
+      ]
+    },
+    {
+      "technique_id": "T1590",
+      "technique_name": "Gather Victim Network Information",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Gather Victim Network Information",
+      "detection_keywords": [
+        "gather victim network information"
+      ]
+    },
+    {
+      "technique_id": "T1591",
+      "technique_name": "Gather Victim Org Information",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Gather Victim Org Information",
+      "detection_keywords": [
+        "gather victim org information"
+      ]
+    },
+    {
+      "technique_id": "T1592",
+      "technique_name": "Gather Victim Host Information",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Gather Victim Host Information",
+      "detection_keywords": [
+        "gather victim host information"
+      ]
+    },
+    {
+      "technique_id": "T1593",
+      "technique_name": "Search Open Websites/Domains",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Search Open Websites/Domains",
+      "detection_keywords": [
+        "search open websites domains"
+      ]
+    },
+    {
+      "technique_id": "T1594",
+      "technique_name": "Search Victim-Owned Websites",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Search Victim-Owned Websites",
+      "detection_keywords": [
+        "search victim owned websites"
+      ]
+    },
+    {
+      "technique_id": "T1595",
+      "technique_name": "Active Scanning",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Active Scanning",
+      "detection_keywords": [
+        "active scanning"
+      ]
+    },
+    {
+      "technique_id": "T1598",
+      "technique_name": "Phishing for Information",
+      "tactic": "Reconnaissance",
+      "short_description": "Activity associated with Phishing for Information",
+      "detection_keywords": [
+        "phishing for information"
+      ]
+    },
+    {
+      "technique_id": "T1599",
+      "technique_name": "Network Boundary Bridging",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Network Boundary Bridging",
+      "detection_keywords": [
+        "network boundary bridging"
+      ]
+    },
+    {
+      "technique_id": "T1600",
+      "technique_name": "Weaken Encryption",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Weaken Encryption",
+      "detection_keywords": [
+        "weaken encryption"
+      ]
+    },
+    {
+      "technique_id": "T1601",
+      "technique_name": "Modify System Image",
+      "tactic": "Impair Defenses",
+      "short_description": "Activity associated with Modify System Image",
+      "detection_keywords": [
+        "modify system image"
+      ]
+    },
+    {
+      "technique_id": "T1602",
+      "technique_name": "Data from Configuration Repository",
+      "tactic": "Collection",
+      "short_description": "Activity associated with Data from Configuration Repository",
+      "detection_keywords": [
+        "data from configuration repository"
+      ]
+    },
+    {
+      "technique_id": "T1606",
+      "technique_name": "Execution Guardrails",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Execution Guardrails",
+      "detection_keywords": [
+        "execution guardrails"
+      ]
+    },
+    {
+      "technique_id": "T1608",
+      "technique_name": "Stage Capabilities",
+      "tactic": "Resource Development",
+      "short_description": "Activity associated with Stage Capabilities",
+      "detection_keywords": [
+        "stage capabilities"
+      ]
+    },
+    {
+      "technique_id": "T1609",
+      "technique_name": "Container Administration Command",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Container Administration Command",
+      "detection_keywords": [
+        "container administration command"
+      ]
+    },
+    {
+      "technique_id": "T1610",
+      "technique_name": "Deploy Container",
+      "tactic": "Execution",
+      "short_description": "Activity associated with Deploy Container",
+      "detection_keywords": [
+        "deploy container"
+      ]
+    },
+    {
+      "technique_id": "T1611",
+      "technique_name": "Escape to Host",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Escape to Host",
+      "detection_keywords": [
+        "escape to host"
+      ]
+    },
+    {
+      "technique_id": "T1614",
+      "technique_name": "System Location Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with System Location Discovery",
+      "detection_keywords": [
+        "system location discovery"
+      ]
+    },
+    {
+      "technique_id": "T1615",
+      "technique_name": "Group Policy Discovery",
+      "tactic": "Discovery",
+      "short_description": "Activity associated with Group Policy Discovery",
+      "detection_keywords": [
+        "group policy discovery"
+      ]
+    },
+    {
+      "technique_id": "T1616",
+      "technique_name": "Domain or Tenant Policy Modification",
+      "tactic": "Privilege Escalation",
+      "short_description": "Activity associated with Domain or Tenant Policy Modification",
+      "detection_keywords": [
+        "domain or tenant policy modification"
+      ]
+    },
+    {
+      "technique_id": "T1620",
+      "technique_name": "Reflective Code Loading",
+      "tactic": "Defense Evasion",
+      "short_description": "Activity associated with Reflective Code Loading",
+      "detection_keywords": [
+        "reflective code loading"
+      ]
+    },
+    {
+      "technique_id": "T1621",
+      "technique_name": "Multi-Factor Authentication Request Generation",
+      "tactic": "Credential Access",
+      "short_description": "Activity associated with Multi-Factor Authentication Request Generation",
+      "detection_keywords": [
+        "multi factor authentication request generation"
+      ]
+    }
+  ]
+}
