@@ -1,0 +1,54 @@
+signature,winning_container,winning_stage,ccdc_combined,usual_mapping,unknown_mapping,attack_stage_mapping
+ET ATTACK_RESPONSE Net User Command Response,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,INFO_DISC,,
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port),ccdc_combined,PRIV_ESC,PRIV_ESC,DATA_EXFILTRATION,,
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port),ccdc_combined,PRIV_ESC,PRIV_ESC,VULN_DISC,,
+ET DOS Microsoft Remote Desktop (RDP) Syn then Reset 30 Second DoS Attempt,usual_mapping,NETWORK_DOS,,NETWORK_DOS,,END_POINT_DOS
+ET DOS Possible SSDP Amplification Scan in Progress,ccdc_combined,NETWORK_DOS,NETWORK_DOS,NETWORK_DOS,,END_POINT_DOS
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt,usual_mapping,ARBITRARY_CODE_EXE,,ARBITRARY_CODE_EXE,,SERVICE_SPECIFIC
+ET POLICY DynDNS CheckIp External IP Address Server Response,ccdc_combined,INFO_DISC,INFO_DISC,,,NON_MALICIOUS
+ET POLICY Http Client Body contains passwd= in cleartext,ccdc_combined,PRIV_ESC,PRIV_ESC,INFO_DISC,,
+ET POLICY Incoming Basic Auth Base64 HTTP Password detected unencrypted,ccdc_combined,PRIV_ESC,PRIV_ESC,USER_PRIV_ESC,,
+ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted,ccdc_combined,PRIV_ESC,PRIV_ESC,USER_PRIV_ESC,,
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,LATERAL_MOVEMENT,,
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,LATERAL_MOVEMENT,,
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,LATERAL_MOVEMENT,,
+ET POLICY SMB2 NT Create AndX Request For a .bat File,ccdc_combined,DATA_DELIVERY,DATA_DELIVERY,LATERAL_MOVEMENT,,
+ET POLICY SMB2 NT Create AndX Request For an Executable File,ccdc_combined,DATA_DELIVERY,DATA_DELIVERY,LATERAL_MOVEMENT,,
+ET POLICY curl User-Agent Outbound,ccdc_combined,DATA_DELIVERY,DATA_DELIVERY,COMMAND_AND_CONTROL,,
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1,usual_mapping,PUBLIC_APP_EXP,,PUBLIC_APP_EXP,,VULN_DISC
+ET SCAN Behavioral Unusual Port 135 traffic Potential Scan or Infection,ccdc_combined,SERVICE_DISC,SERVICE_DISC,SERVICE_DISC,,VULN_DISC
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection,ccdc_combined,SERVICE_DISC,SERVICE_DISC,,,VULN_DISC
+ET SCAN DEBUG Method Request with Command,usual_mapping,PUBLIC_APP_EXP,,PUBLIC_APP_EXP,,INFO_DISC
+ET SCAN DirBuster Scan in Progress,usual_mapping,VULN_DISC,,VULN_DISC,,INFO_DISC
+ET SCAN NMAP SIP Version Detection Script Activity,usual_mapping,SERVICE_DISC,,SERVICE_DISC,,HOST_DISC
+ET SCAN NMAP SQL Spider Scan,usual_mapping,VULN_DISC,,VULN_DISC,,INFO_DISC
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl),ccdc_combined,INFO_DISC,INFO_DISC,SERVICE_DISC,,INFO_DISC
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl),usual_mapping,SERVICE_DISC,,SERVICE_DISC,,INFO_DISC
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE),usual_mapping,VULN_DISC,,VULN_DISC,,HOST_DISC
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server,ccdc_combined,INFO_DISC,INFO_DISC,,,SERVICE_DISC
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,COMMAND_AND_CONTROL,,
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,DATA_EXFILTRATION,,
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,SERVICE_SPECIFIC,,
+ET WEB_SERVER ColdFusion administrator access,ccdc_combined,PRIV_ESC,PRIV_ESC,ROOT_PRIV_ESC,,
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,TRUSTED_ORG_EXP,,
+ET WEB_SERVER PHP SERVER SuperGlobal in URI,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,INFO_DISC,,
+ET WEB_SERVER PHP System Command in HTTP POST,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,COMMAND_AND_CONTROL,,
+ET WEB_SERVER PHP.//Input in HTTP POST,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,INFO_DISC,,
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,DATA_EXFILTRATION,,
+ET WEB_SERVER SELECT USER SQL Injection Attempt in URI,ccdc_combined,PRIV_ESC,PRIV_ESC,ACCT_MANIP,,
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,REMOTE_SERVICE_EXP,,
+ET WEB_SERVER WEB-PHP phpinfo access,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,SURFING,,
+ET WEB_SERVER allow_url_include PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+ET WEB_SERVER auto_prepend_file PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+ET WEB_SERVER disable_functions PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+ET WEB_SERVER open_basedir PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+ET WEB_SERVER safe_mode PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+ET WEB_SERVER suhosin.simulation PHP config option in uri,ccdc_combined,COMMAND_AND_CONTROL,COMMAND_AND_CONTROL,PUBLIC_APP_EXP,,
+GPL ATTACK_RESPONSE id check returned root,ccdc_combined,PRIV_ESC,PRIV_ESC,ROOT_PRIV_ESC,,
+GPL EXPLOIT /iisadmpwd/aexp2.htr access,ccdc_combined,DATA_EXFILTRATION,DATA_EXFILTRATION,ACCT_MANIP,,
+GPL EXPLOIT CodeRed v2 root.exe access,ccdc_combined,PRIV_ESC,PRIV_ESC,ROOT_PRIV_ESC,,
+GPL EXPLOIT ISAPI .idq attempt,ccdc_combined,DATA_EXFILTRATION,DATA_EXFILTRATION,INFO_DISC,,
+GPL EXPLOIT fpcount access,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,INFO_DISC,,
+GPL WEB_SERVER Oracle Java Process Manager access,ccdc_combined,INFO_DISC,INFO_DISC,RESOURCE_HIJACKING,,
+GPL WEB_SERVER Tomcat server snoop access,ccdc_combined,INFO_DISC,INFO_DISC,DATA_EXFILTRATION,,
+GPL WEB_SERVER perl post attempt,ccdc_combined,ARBITRARY_CODE_EXE,ARBITRARY_CODE_EXE,DATA_DELIVERY,,

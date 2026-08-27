@@ -1,0 +1,211 @@
+Requirement already satisfied: pip in /home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages (26.0.1)
+Collecting en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.3.0/en_core_web_lg-3.3.0-py3-none-any.whl#sha256=6ce19d37dfe5280400f80a5954d41afca10cbc742b97bfcf4b0e452b6eb24273 (from -r requirements-frozen.txt (line 33))
+  Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.3.0/en_core_web_lg-3.3.0-py3-none-any.whl (400.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 400.7/400.7 MB 17.1 MB/s  0:00:23
+Collecting en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.3.0/en_core_web_sm-3.3.0-py3-none-any.whl#sha256=84d7d8059bfbf53c09b39139782f76cd6ac7064851e7799dcc685c06ebf5fd4f (from -r requirements-frozen.txt (line 34))
+  Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.3.0/en_core_web_sm-3.3.0-py3-none-any.whl (12.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 12.8 MB/s  0:00:01
+Collecting aiohttp==3.9.1 (from -r requirements-frozen.txt (line 1))
+  Downloading aiohttp-3.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.4 kB)
+Collecting aiosignal==1.3.1 (from -r requirements-frozen.txt (line 2))
+  Downloading aiosignal-1.3.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting allennlp==2.10.1 (from -r requirements-frozen.txt (line 3))
+  Using cached allennlp-2.10.1-py3-none-any.whl.metadata (21 kB)
+Collecting allennlp-models==2.10.1 (from -r requirements-frozen.txt (line 4))
+  Using cached allennlp_models-2.10.1-py3-none-any.whl.metadata (23 kB)
+Collecting async-timeout==4.0.3 (from -r requirements-frozen.txt (line 5))
+  Downloading async_timeout-4.0.3-py3-none-any.whl.metadata (4.2 kB)
+Collecting attrs==23.1.0 (from -r requirements-frozen.txt (line 6))
+  Downloading attrs-23.1.0-py3-none-any.whl.metadata (11 kB)
+Collecting autocommand==2.2.2 (from -r requirements-frozen.txt (line 7))
+  Downloading autocommand-2.2.2-py3-none-any.whl.metadata (15 kB)
+Collecting backports.csv==1.0.7 (from -r requirements-frozen.txt (line 8))
+  Downloading backports.csv-1.0.7-py2.py3-none-any.whl.metadata (4.0 kB)
+Collecting base58==2.1.1 (from -r requirements-frozen.txt (line 9))
+  Downloading base58-2.1.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting beautifulsoup4==4.12.2 (from -r requirements-frozen.txt (line 10))
+  Downloading beautifulsoup4-4.12.2-py3-none-any.whl.metadata (3.6 kB)
+Collecting benepar==0.2.0 (from -r requirements-frozen.txt (line 11))
+  Downloading benepar-0.2.0.tar.gz (33 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting blis==0.7.11 (from -r requirements-frozen.txt (line 12))
+  Downloading blis-0.7.11-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.4 kB)
+Collecting boto3==1.34.4 (from -r requirements-frozen.txt (line 13))
+  Downloading boto3-1.34.4-py3-none-any.whl.metadata (6.6 kB)
+Collecting botocore==1.34.4 (from -r requirements-frozen.txt (line 14))
+  Downloading botocore-1.34.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting cached-path==1.1.6 (from -r requirements-frozen.txt (line 15))
+  Downloading cached_path-1.1.6-py3-none-any.whl.metadata (6.0 kB)
+Collecting cachetools==5.3.2 (from -r requirements-frozen.txt (line 16))
+  Downloading cachetools-5.3.2-py3-none-any.whl.metadata (5.2 kB)
+Collecting catalogue==2.0.10 (from -r requirements-frozen.txt (line 17))
+  Using cached catalogue-2.0.10-py3-none-any.whl.metadata (14 kB)
+Collecting certifi==2023.11.17 (from -r requirements-frozen.txt (line 18))
+  Downloading certifi-2023.11.17-py3-none-any.whl.metadata (2.2 kB)
+Collecting cffi==1.16.0 (from -r requirements-frozen.txt (line 19))
+  Downloading cffi-1.16.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+Collecting charset-normalizer==3.1.0 (from -r requirements-frozen.txt (line 20))
+  Downloading charset_normalizer-3.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (30 kB)
+Collecting cheroot==10.0.0 (from -r requirements-frozen.txt (line 21))
+  Downloading cheroot-10.0.0-py3-none-any.whl.metadata (6.4 kB)
+Collecting CherryPy==18.9.0 (from -r requirements-frozen.txt (line 22))
+  Downloading CherryPy-18.9.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting click==8.1.7 (from -r requirements-frozen.txt (line 23))
+  Downloading click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting colorama==0.4.6 (from -r requirements-frozen.txt (line 24))
+  Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting commonmark==0.9.1 (from -r requirements-frozen.txt (line 25))
+  Downloading commonmark-0.9.1-py2.py3-none-any.whl.metadata (5.7 kB)
+Collecting confection==0.0.4 (from -r requirements-frozen.txt (line 26))
+  Downloading confection-0.0.4-py3-none-any.whl.metadata (19 kB)
+Collecting conllu==4.4.2 (from -r requirements-frozen.txt (line 27))
+  Downloading conllu-4.4.2-py2.py3-none-any.whl.metadata (19 kB)
+Collecting cryptography==41.0.7 (from -r requirements-frozen.txt (line 28))
+  Downloading cryptography-41.0.7-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (5.2 kB)
+Collecting cymem==2.0.8 (from -r requirements-frozen.txt (line 29))
+  Downloading cymem-2.0.8-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.4 kB)
+Collecting datasets==2.10.1 (from -r requirements-frozen.txt (line 30))
+  Downloading datasets-2.10.1-py3-none-any.whl.metadata (20 kB)
+Collecting dill==0.3.6 (from -r requirements-frozen.txt (line 31))
+  Downloading dill-0.3.6-py3-none-any.whl.metadata (9.8 kB)
+Collecting docker-pycreds==0.4.0 (from -r requirements-frozen.txt (line 32))
+  Downloading docker_pycreds-0.4.0-py2.py3-none-any.whl.metadata (1.8 kB)
+Collecting exceptiongroup==1.2.0 (from -r requirements-frozen.txt (line 35))
+  Downloading exceptiongroup-1.2.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting fairscale==0.4.6 (from -r requirements-frozen.txt (line 36))
+  Downloading fairscale-0.4.6.tar.gz (248 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting feedparser==6.0.11 (from -r requirements-frozen.txt (line 37))
+  Downloading feedparser-6.0.11-py3-none-any.whl.metadata (2.4 kB)
+Collecting filelock==3.7.1 (from -r requirements-frozen.txt (line 38))
+  Downloading filelock-3.7.1-py3-none-any.whl.metadata (2.5 kB)
+Collecting frozenlist==1.4.1 (from -r requirements-frozen.txt (line 39))
+  Downloading frozenlist-1.4.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (12 kB)
+Collecting fsspec==2023.12.2 (from -r requirements-frozen.txt (line 40))
+  Downloading fsspec-2023.12.2-py3-none-any.whl.metadata (6.8 kB)
+Collecting ftfy==6.1.3 (from -r requirements-frozen.txt (line 41))
+  Downloading ftfy-6.1.3-py3-none-any.whl.metadata (6.2 kB)
+Collecting future==0.18.3 (from -r requirements-frozen.txt (line 42))
+  Downloading future-0.18.3.tar.gz (840 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 840.9/840.9 kB 12.5 MB/s  0:00:00
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting gitdb==4.0.11 (from -r requirements-frozen.txt (line 43))
+  Downloading gitdb-4.0.11-py3-none-any.whl.metadata (1.2 kB)
+Collecting GitPython==3.1.40 (from -r requirements-frozen.txt (line 44))
+  Downloading GitPython-3.1.40-py3-none-any.whl.metadata (12 kB)
+Collecting google-api-core==2.15.0 (from -r requirements-frozen.txt (line 45))
+  Downloading google_api_core-2.15.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting google-auth==2.25.2 (from -r requirements-frozen.txt (line 46))
+  Downloading google_auth-2.25.2-py2.py3-none-any.whl.metadata (4.7 kB)
+Collecting google-cloud-core==2.4.1 (from -r requirements-frozen.txt (line 47))
+  Downloading google_cloud_core-2.4.1-py2.py3-none-any.whl.metadata (2.7 kB)
+Collecting google-cloud-storage==2.14.0 (from -r requirements-frozen.txt (line 48))
+  Downloading google_cloud_storage-2.14.0-py2.py3-none-any.whl.metadata (6.1 kB)
+Collecting google-crc32c==1.5.0 (from -r requirements-frozen.txt (line 49))
+  Downloading google_crc32c-1.5.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.3 kB)
+Collecting google-resumable-media==2.7.0 (from -r requirements-frozen.txt (line 50))
+  Downloading google_resumable_media-2.7.0-py2.py3-none-any.whl.metadata (2.2 kB)
+Collecting googleapis-common-protos==1.62.0 (from -r requirements-frozen.txt (line 51))
+  Downloading googleapis_common_protos-1.62.0-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting h5py==3.10.0 (from -r requirements-frozen.txt (line 52))
+  Downloading h5py-3.10.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.5 kB)
+Collecting huggingface-hub==0.10.1 (from -r requirements-frozen.txt (line 53))
+  Downloading huggingface_hub-0.10.1-py3-none-any.whl.metadata (6.1 kB)
+Collecting idna==3.6 (from -r requirements-frozen.txt (line 54))
+  Downloading idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Collecting importlib-resources==6.1.1 (from -r requirements-frozen.txt (line 55))
+  Downloading importlib_resources-6.1.1-py3-none-any.whl.metadata (4.1 kB)
+Collecting inflect==6.0.1 (from -r requirements-frozen.txt (line 56))
+  Downloading inflect-6.0.1-py3-none-any.whl.metadata (21 kB)
+Collecting iniconfig==2.0.0 (from -r requirements-frozen.txt (line 57))
+  Downloading iniconfig-2.0.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting jaraco.collections==5.0.0 (from -r requirements-frozen.txt (line 58))
+  Downloading jaraco.collections-5.0.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting jaraco.context==4.3.0 (from -r requirements-frozen.txt (line 59))
+  Downloading jaraco.context-4.3.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting jaraco.functools==4.0.0 (from -r requirements-frozen.txt (line 60))
+  Downloading jaraco.functools-4.0.0-py3-none-any.whl.metadata (3.1 kB)
+Collecting jaraco.text==3.12.0 (from -r requirements-frozen.txt (line 61))
+  Downloading jaraco.text-3.12.0-py3-none-any.whl.metadata (4.0 kB)
+Collecting Jinja2==3.1.2 (from -r requirements-frozen.txt (line 62))
+  Downloading Jinja2-3.1.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting jmespath==1.0.1 (from -r requirements-frozen.txt (line 63))
+  Downloading jmespath-1.0.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting joblib==1.3.2 (from -r requirements-frozen.txt (line 64))
+  Downloading joblib-1.3.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting langcodes==3.3.0 (from -r requirements-frozen.txt (line 65))
+  Downloading langcodes-3.3.0-py3-none-any.whl.metadata (29 kB)
+Collecting lmdb==1.3.0 (from -r requirements-frozen.txt (line 66))
+  Downloading lmdb-1.3.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (1.1 kB)
+Collecting lxml==4.9.4 (from -r requirements-frozen.txt (line 67))
+  Downloading lxml-4.9.4-cp39-cp39-manylinux_2_28_x86_64.whl.metadata (3.7 kB)
+Collecting MarkupSafe==2.1.3 (from -r requirements-frozen.txt (line 68))
+  Downloading MarkupSafe-2.1.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Collecting more-itertools==10.1.0 (from -r requirements-frozen.txt (line 69))
+  Downloading more_itertools-10.1.0-py3-none-any.whl.metadata (33 kB)
+Collecting multidict==6.0.4 (from -r requirements-frozen.txt (line 70))
+  Downloading multidict-6.0.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting multiprocess==0.70.14 (from -r requirements-frozen.txt (line 71))
+  Downloading multiprocess-0.70.14-py39-none-any.whl.metadata (6.6 kB)
+Collecting murmurhash==1.0.10 (from -r requirements-frozen.txt (line 72))
+  Downloading murmurhash-1.0.10-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.0 kB)
+Collecting mysqlclient==2.2.1 (from -r requirements-frozen.txt (line 73))
+  Downloading mysqlclient-2.2.1.tar.gz (89 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Getting requirements to build wheel did not run successfully.
+  │ exit code: 1
+  ╰─> [27 lines of output]
+      /bin/sh: 1: pkg-config: not found
+      /bin/sh: 1: pkg-config: not found
+      /bin/sh: 1: pkg-config: not found
+      Trying pkg-config --exists mysqlclient
+      Command 'pkg-config --exists mysqlclient' returned non-zero exit status 127.
+      Trying pkg-config --exists mariadb
+      Command 'pkg-config --exists mariadb' returned non-zero exit status 127.
+      Trying pkg-config --exists libmariadb
+      Command 'pkg-config --exists libmariadb' returned non-zero exit status 127.
+      Traceback (most recent call last):
+        File "/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+          main()
+        File "/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+        File "/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 143, in get_requires_for_build_wheel
+          return hook(config_settings)
+        File "/tmp/pip-build-env-r6slncl5/overlay/lib/python3.9/site-packages/setuptools/build_meta.py", line 333, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+        File "/tmp/pip-build-env-r6slncl5/overlay/lib/python3.9/site-packages/setuptools/build_meta.py", line 301, in _get_build_requires
+          self.run_setup()
+        File "/tmp/pip-build-env-r6slncl5/overlay/lib/python3.9/site-packages/setuptools/build_meta.py", line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 155, in <module>
+        File "<string>", line 49, in get_config_posix
+        File "<string>", line 28, in find_package_name
+      Exception: Can not find valid pkg-config name.
+      Specify MYSQLCLIENT_CFLAGS and MYSQLCLIENT_LDFLAGS env vars manually
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed to build 'mysqlclient' when getting requirements to build wheel
+INSTALL_EXIT=0

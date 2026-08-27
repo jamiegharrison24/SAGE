@@ -1,0 +1,287 @@
+{
+  "INIT": {
+    "kind": "none",
+    "confidence": "none",
+    "note": "sentinel value, not a real attack stage",
+    "resolved_ids": []
+  },
+  "TARGET_IDEN": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Gather Victim Network Information",
+    "resolved_ids": [
+      "T1590"
+    ]
+  },
+  "SURFING": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Active Scanning",
+    "resolved_ids": [
+      "T1595"
+    ]
+  },
+  "SOCIAL_ENGINEERING": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Phishing",
+    "resolved_ids": [
+      "T1566"
+    ]
+  },
+  "HOST_DISC": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Remote System Discovery",
+    "resolved_ids": [
+      "T1018"
+    ]
+  },
+  "SERVICE_DISC": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Network Service Discovery",
+    "resolved_ids": [
+      "T1046"
+    ]
+  },
+  "VULN_DISC": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Active Scanning: Vulnerability Scanning",
+    "resolved_ids": [
+      "T1595.002"
+    ]
+  },
+  "INFO_DISC": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Gather Victim Host/Network Information -- context-dependent",
+    "resolved_ids": [
+      "T1592",
+      "T1590"
+    ]
+  },
+  "USER_PRIV_ESC": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Exploitation for Privilege Escalation",
+    "resolved_ids": [
+      "T1068"
+    ]
+  },
+  "ROOT_PRIV_ESC": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "same as USER_PRIV_ESC -- SAGE splits user/root, ATT&CK doesn't",
+    "resolved_ids": [
+      "T1068"
+    ]
+  },
+  "NETWORK_SNIFFING": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Network Sniffing",
+    "resolved_ids": [
+      "T1040"
+    ]
+  },
+  "BRUTE_FORCE_CREDS": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Brute Force",
+    "resolved_ids": [
+      "T1110"
+    ]
+  },
+  "ACCT_MANIP": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Account Manipulation",
+    "resolved_ids": [
+      "T1098"
+    ]
+  },
+  "TRUSTED_ORG_EXP": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Trusted Relationship",
+    "resolved_ids": [
+      "T1199"
+    ]
+  },
+  "PUBLIC_APP_EXP": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Exploit Public-Facing Application",
+    "resolved_ids": [
+      "T1190"
+    ]
+  },
+  "REMOTE_SERVICE_EXP": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Exploitation of Remote Services",
+    "resolved_ids": [
+      "T1210"
+    ]
+  },
+  "SPEARPHISHING": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Spearphishing sub-techniques",
+    "resolved_ids": [
+      "T1566.001",
+      "T1566.002",
+      "T1566.003"
+    ]
+  },
+  "SERVICE_SPECIFIC": {
+    "kind": "none",
+    "confidence": "needs_review",
+    "note": "no clean match -- catch-all",
+    "resolved_ids": []
+  },
+  "DEFENSE_EVASION": {
+    "kind": "tactic",
+    "confidence": "tactic",
+    "note": "Defense Evasion (tactic, not a technique)",
+    "resolved_ids": [
+      "TA0005"
+    ]
+  },
+  "COMMAND_AND_CONTROL": {
+    "kind": "tactic",
+    "confidence": "tactic",
+    "note": "Command and Control (tactic)",
+    "resolved_ids": [
+      "TA0011"
+    ]
+  },
+  "LATERAL_MOVEMENT": {
+    "kind": "tactic",
+    "confidence": "tactic",
+    "note": "Lateral Movement (tactic)",
+    "resolved_ids": [
+      "TA0008"
+    ]
+  },
+  "ARBITRARY_CODE_EXE": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Exploitation for Client Execution (alt: T1059)",
+    "resolved_ids": [
+      "T1203"
+    ]
+  },
+  "PRIV_ESC": {
+    "kind": "tactic",
+    "confidence": "tactic",
+    "note": "Privilege Escalation (tactic -- generic fallback bucket)",
+    "resolved_ids": [
+      "TA0004"
+    ]
+  },
+  "END_POINT_DOS": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Endpoint Denial of Service",
+    "resolved_ids": [
+      "T1499"
+    ]
+  },
+  "NETWORK_DOS": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Network Denial of Service",
+    "resolved_ids": [
+      "T1498"
+    ]
+  },
+  "SERVICE_STOP": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Service Stop",
+    "resolved_ids": [
+      "T1489"
+    ]
+  },
+  "RESOURCE_HIJACKING": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Resource Hijacking",
+    "resolved_ids": [
+      "T1496"
+    ]
+  },
+  "DATA_DESTRUCTION": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Data Destruction",
+    "resolved_ids": [
+      "T1485"
+    ]
+  },
+  "CONTENT_WIPE": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Disk Wipe -- overlaps with Data Destruction",
+    "resolved_ids": [
+      "T1561"
+    ]
+  },
+  "DATA_ENCRYPTION": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Data Encrypted for Impact",
+    "resolved_ids": [
+      "T1486"
+    ]
+  },
+  "DEFACEMENT": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Defacement",
+    "resolved_ids": [
+      "T1491"
+    ]
+  },
+  "DATA_MANIPULATION": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "Data Manipulation",
+    "resolved_ids": [
+      "T1565"
+    ]
+  },
+  "DATA_EXFILTRATION": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Exfiltration Over C2 Channel (alt: tactic-level TA0010)",
+    "resolved_ids": [
+      "T1041"
+    ]
+  },
+  "DATA_DELIVERY": {
+    "kind": "technique",
+    "confidence": "ambiguous",
+    "note": "Ingress Tool Transfer -- ambiguous, could be Initial Access delivery",
+    "resolved_ids": [
+      "T1105"
+    ]
+  },
+  "PHISHING": {
+    "kind": "technique",
+    "confidence": "high",
+    "note": "redundant with SOCIAL_ENGINEERING/SPEARPHISHING",
+    "resolved_ids": [
+      "T1566"
+    ]
+  },
+  "NON_MALICIOUS": {
+    "kind": "none",
+    "confidence": "none",
+    "note": "no MITRE equivalent -- not an attack; reject class",
+    "resolved_ids": []
+  }
+}

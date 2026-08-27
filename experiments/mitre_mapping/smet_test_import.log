@@ -1,0 +1,16 @@
+/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.25). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/google/auth/__init__.py:54: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/home/jamie/miniconda3/envs/smet/lib/python3.9/site-packages/google/oauth2/__init__.py:40: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "/mnt/d/Projects/SAGE/SAGE/experiments/mitre_mapping/SMET/SMET.py", line 13, in <module>
+    from parse_class import Parser
+  File "/mnt/d/Projects/SAGE/SAGE/experiments/mitre_mapping/SMET/parse_class.py", line 17, in <module>
+    from nlp_general import NLP
+  File "/mnt/d/Projects/SAGE/SAGE/experiments/mitre_mapping/SMET/nlp_general.py", line 25, in <module>
+    from pattern.en import lexeme, pluralize
+ModuleNotFoundError: No module named 'pattern'
+TEST_EXIT=0

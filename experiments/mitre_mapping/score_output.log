@@ -1,0 +1,513 @@
+
+=== 1_attackbert_full ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.06405693950177936,
+    "top1_acc_lenient_subtechnique": 0.1103202846975089,
+    "top3_acc": 0.1494661921708185,
+    "right_tactic_rate": 0.2491103202846975,
+    "median_top1_score": 0.5318,
+    "mean_top1_score": 0.5524606761565837,
+    "pct_below_0.5": 0.3879003558718861,
+    "top_hub_predictions": [
+      [
+        "T1505.004",
+        31
+      ],
+      [
+        "T1505.003",
+        30
+      ],
+      [
+        "T1205",
+        25
+      ],
+      [
+        "T1499.001",
+        22
+      ],
+      [
+        "T1218.005",
+        22
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.04657179818887452,
+    "top1_acc_lenient_subtechnique": 0.08020698576972833,
+    "top3_acc": 0.10866752910737387,
+    "right_tactic_rate": 0.21216041397153945,
+    "median_top1_score": 0.5429,
+    "mean_top1_score": 0.5562659767141009,
+    "pct_below_0.5": 0.36222509702457956,
+    "top_hub_predictions": [
+      [
+        "T1505.004",
+        43
+      ],
+      [
+        "T1505.003",
+        35
+      ],
+      [
+        "T1205",
+        25
+      ],
+      [
+        "T1499.001",
+        24
+      ],
+      [
+        "T1218.005",
+        23
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 2_attackbert_filtered ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.05516014234875445,
+    "top1_acc_lenient_subtechnique": 0.10142348754448399,
+    "top3_acc": 0.14056939501779359,
+    "right_tactic_rate": 0.2526690391459075,
+    "median_top1_score": 0.5145,
+    "mean_top1_score": 0.5344478647686832,
+    "pct_below_0.5": 0.45729537366548045,
+    "top_hub_predictions": [
+      [
+        "T1505.003",
+        46
+      ],
+      [
+        "T1218.005",
+        30
+      ],
+      [
+        "T1205",
+        25
+      ],
+      [
+        "T1499.001",
+        24
+      ],
+      [
+        "T1205.002",
+        22
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.040103492884864166,
+    "top1_acc_lenient_subtechnique": 0.07373868046571798,
+    "top3_acc": 0.10219922380336352,
+    "right_tactic_rate": 0.22121604139715395,
+    "median_top1_score": 0.5177,
+    "mean_top1_score": 0.5360728331177231,
+    "pct_below_0.5": 0.4463130659767141,
+    "top_hub_predictions": [
+      [
+        "T1505.003",
+        59
+      ],
+      [
+        "T1218.005",
+        31
+      ],
+      [
+        "T1205.002",
+        26
+      ],
+      [
+        "T1499.001",
+        26
+      ],
+      [
+        "T1205",
+        25
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 3_minilm_full ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.08362989323843416,
+    "top1_acc_lenient_subtechnique": 0.11921708185053381,
+    "top3_acc": 0.16903914590747332,
+    "right_tactic_rate": 0.26334519572953735,
+    "median_top1_score": 0.37055,
+    "mean_top1_score": 0.37313932384341636,
+    "pct_below_0.5": 0.9323843416370107,
+    "top_hub_predictions": [
+      [
+        "T1552.006",
+        37
+      ],
+      [
+        "T1498",
+        30
+      ],
+      [
+        "T1595.002",
+        28
+      ],
+      [
+        "T1190",
+        27
+      ],
+      [
+        "T1595.001",
+        17
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.06080206985769728,
+    "top1_acc_lenient_subtechnique": 0.08667529107373868,
+    "top3_acc": 0.12289780077619664,
+    "right_tactic_rate": 0.2069857697283312,
+    "median_top1_score": 0.3702,
+    "mean_top1_score": 0.36889611901681757,
+    "pct_below_0.5": 0.944372574385511,
+    "top_hub_predictions": [
+      [
+        "T1190",
+        41
+      ],
+      [
+        "T1552.006",
+        39
+      ],
+      [
+        "T1498",
+        30
+      ],
+      [
+        "T1595.002",
+        28
+      ],
+      [
+        "T1595.001",
+        17
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 4_minilm_filtered ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.0711743772241993,
+    "top1_acc_lenient_subtechnique": 0.1103202846975089,
+    "top3_acc": 0.16548042704626334,
+    "right_tactic_rate": 0.2491103202846975,
+    "median_top1_score": 0.3589,
+    "mean_top1_score": 0.36483060498220643,
+    "pct_below_0.5": 0.9395017793594306,
+    "top_hub_predictions": [
+      [
+        "T1552.006",
+        44
+      ],
+      [
+        "T1190",
+        34
+      ],
+      [
+        "T1498",
+        31
+      ],
+      [
+        "T1595.002",
+        29
+      ],
+      [
+        "T1218.001",
+        22
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.0517464424320828,
+    "top1_acc_lenient_subtechnique": 0.08020698576972833,
+    "top3_acc": 0.1203104786545925,
+    "right_tactic_rate": 0.1888745148771022,
+    "median_top1_score": 0.3585,
+    "mean_top1_score": 0.3582534282018111,
+    "pct_below_0.5": 0.9534282018111255,
+    "top_hub_predictions": [
+      [
+        "T1190",
+        56
+      ],
+      [
+        "T1552.006",
+        53
+      ],
+      [
+        "T1498",
+        31
+      ],
+      [
+        "T1595.002",
+        29
+      ],
+      [
+        "T1218.001",
+        23
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 5_knn_attackbert ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.5658362989323843,
+    "top1_acc_lenient_subtechnique": 0.5658362989323843,
+    "top3_acc": null,
+    "right_tactic_rate": 0.6352313167259787,
+    "median_top1_score": null,
+    "mean_top1_score": null,
+    "pct_below_0.5": null,
+    "top_hub_predictions": [
+      [
+        "T1203",
+        89
+      ],
+      [
+        "T1105",
+        74
+      ],
+      [
+        "T1592",
+        73
+      ],
+      [
+        "T1498",
+        48
+      ],
+      [
+        "T1595.002",
+        48
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.5097024579560155,
+    "top1_acc_lenient_subtechnique": 0.5097024579560155,
+    "top3_acc": null,
+    "right_tactic_rate": 0.46959896507115134,
+    "median_top1_score": null,
+    "mean_top1_score": null,
+    "pct_below_0.5": null,
+    "top_hub_predictions": [
+      [
+        "TA0011",
+        133
+      ],
+      [
+        "T1203",
+        109
+      ],
+      [
+        "T1592",
+        89
+      ],
+      [
+        "T1105",
+        77
+      ],
+      [
+        "T1595.002",
+        53
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 6_knn_minilm ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.6103202846975089,
+    "top1_acc_lenient_subtechnique": 0.6103202846975089,
+    "top3_acc": null,
+    "right_tactic_rate": 0.6797153024911032,
+    "median_top1_score": null,
+    "mean_top1_score": null,
+    "pct_below_0.5": null,
+    "top_hub_predictions": [
+      [
+        "T1203",
+        101
+      ],
+      [
+        "T1592",
+        79
+      ],
+      [
+        "T1105",
+        70
+      ],
+      [
+        "T1498",
+        57
+      ],
+      [
+        "T1595.002",
+        47
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.5485122897800776,
+    "top1_acc_lenient_subtechnique": 0.5485122897800776,
+    "top3_acc": null,
+    "right_tactic_rate": 0.500646830530401,
+    "median_top1_score": null,
+    "mean_top1_score": null,
+    "pct_below_0.5": null,
+    "top_hub_predictions": [
+      [
+        "T1203",
+        131
+      ],
+      [
+        "TA0011",
+        120
+      ],
+      [
+        "T1592",
+        100
+      ],
+      [
+        "T1105",
+        84
+      ],
+      [
+        "T1498",
+        60
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+=== 7_smet ===
+{
+  "technique_scoreable": {
+    "n_scored": 562,
+    "n_missing_pred": 0,
+    "top1_acc": 0.13167259786476868,
+    "top1_acc_lenient_subtechnique": 0.1512455516014235,
+    "top3_acc": null,
+    "right_tactic_rate": 0.298932384341637,
+    "median_top1_score": 0.114736,
+    "mean_top1_score": 0.14658828291814946,
+    "pct_below_0.5": 0.9875444839857651,
+    "top_hub_predictions": [
+      [
+        "T1505",
+        47
+      ],
+      [
+        "T1046",
+        35
+      ],
+      [
+        "T1105",
+        34
+      ],
+      [
+        "T1499",
+        32
+      ],
+      [
+        "T1571",
+        23
+      ]
+    ]
+  },
+  "all_773": {
+    "n_scored": 773,
+    "n_missing_pred": 0,
+    "top1_acc": 0.09573091849935317,
+    "top1_acc_lenient_subtechnique": 0.10996119016817593,
+    "top3_acc": null,
+    "right_tactic_rate": 0.2574385510996119,
+    "median_top1_score": 0.120014,
+    "mean_top1_score": 0.14848103104786545,
+    "pct_below_0.5": 0.9883570504527813,
+    "top_hub_predictions": [
+      [
+        "T1505",
+        54
+      ],
+      [
+        "T1071",
+        48
+      ],
+      [
+        "T1105",
+        37
+      ],
+      [
+        "T1046",
+        35
+      ],
+      [
+        "T1499",
+        32
+      ]
+    ]
+  },
+  "n_technique_scoreable": 562,
+  "n_tactic_only": 122,
+  "n_unmappable": 89
+}
+
+Wrote D:\Projects\SAGE\SAGE\experiments\mitre_mapping\scores.json

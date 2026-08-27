@@ -1,0 +1,160 @@
+Requirement already satisfied: scikit-learn in /home/jamie/.local/lib/python3.12/site-packages (1.9.0)
+Requirement already satisfied: scipy in /home/jamie/.local/lib/python3.12/site-packages (1.18.1)
+Requirement already satisfied: sentence-transformers in /home/jamie/.local/lib/python3.12/site-packages (6.0.0)
+Collecting spacy
+  Downloading spacy-3.8.16-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (28 kB)
+Requirement already satisfied: numpy>=1.24.1 in /usr/local/lib/python3.12/dist-packages (from scikit-learn) (2.5.1)
+Requirement already satisfied: joblib>=1.4.0 in /home/jamie/.local/lib/python3.12/site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: narwhals>=2.0.1 in /home/jamie/.local/lib/python3.12/site-packages (from scikit-learn) (2.25.0)
+Requirement already satisfied: threadpoolctl>=3.5.0 in /home/jamie/.local/lib/python3.12/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: transformers<6.0.0,>=5.0.0 in /home/jamie/.local/lib/python3.12/site-packages (from sentence-transformers) (5.15.1)
+Requirement already satisfied: tokenizers>=0.19 in /home/jamie/.local/lib/python3.12/site-packages (from sentence-transformers) (0.22.2)
+Requirement already satisfied: huggingface-hub<2.0.0,>=1.3.0 in /home/jamie/.local/lib/python3.12/site-packages (from sentence-transformers) (1.28.0)
+Requirement already satisfied: torch>=2.2 in /home/jamie/.local/lib/python3.12/site-packages (from sentence-transformers) (2.13.0)
+Requirement already satisfied: typing_extensions>=4.10.0 in /usr/lib/python3/dist-packages (from sentence-transformers) (4.10.0)
+Requirement already satisfied: tqdm>=4.0.0 in /home/jamie/.local/lib/python3.12/site-packages (from sentence-transformers) (4.70.0)
+Collecting spacy-legacy<3.1.0,>=3.0.11 (from spacy)
+  Downloading spacy_legacy-3.0.12-py2.py3-none-any.whl.metadata (2.8 kB)
+Collecting spacy-loggers<2.0.0,>=1.0.0 (from spacy)
+  Downloading spacy_loggers-1.0.5-py3-none-any.whl.metadata (23 kB)
+Collecting murmurhash<1.1.0,>=0.28.0 (from spacy)
+  Downloading murmurhash-1.0.15-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl.metadata (2.3 kB)
+Collecting cymem<2.1.0,>=2.0.2 (from spacy)
+  Downloading cymem-2.0.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (9.7 kB)
+Collecting preshed<3.1.0,>=3.0.2 (from spacy)
+  Downloading preshed-3.0.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting thinc<8.4.0,>=8.3.12 (from spacy)
+  Downloading thinc-8.3.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (14 kB)
+Collecting wasabi<1.2.0,>=0.9.1 (from spacy)
+  Downloading wasabi-1.1.3-py3-none-any.whl.metadata (28 kB)
+Collecting srsly<3.0.0,>=2.5.3 (from spacy)
+  Downloading srsly-2.5.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (19 kB)
+Collecting catalogue<2.1.0,>=2.0.6 (from spacy)
+  Downloading catalogue-2.0.10-py3-none-any.whl.metadata (14 kB)
+Collecting weasel<2.0.0,>=1.0.0 (from spacy)
+  Downloading weasel-1.0.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting confection<2.0.0,>=1.3.2 (from spacy)
+  Downloading confection-1.3.3-py3-none-any.whl.metadata (19 kB)
+Requirement already satisfied: typer<1.0.0,>=0.3.0 in /home/jamie/.local/lib/python3.12/site-packages (from spacy) (0.27.1)
+Requirement already satisfied: click<9.0.0,>=8.2.1 in /home/jamie/.local/lib/python3.12/site-packages (from spacy) (8.4.2)
+Requirement already satisfied: requests<3.0.0,>=2.13.0 in /usr/lib/python3/dist-packages (from spacy) (2.31.0)
+Collecting pydantic<3.0.0,>=2.0.0 (from spacy)
+  Downloading pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 109.4/109.4 kB 5.1 MB/s eta 0:00:00
+Requirement already satisfied: jinja2 in /usr/lib/python3/dist-packages (from spacy) (3.1.2)
+Requirement already satisfied: setuptools in /home/jamie/.local/lib/python3.12/site-packages (from spacy) (84.0.0)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from spacy) (26.2)
+Requirement already satisfied: filelock>=3.10.0 in /home/jamie/.local/lib/python3.12/site-packages (from huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (3.32.4)
+Requirement already satisfied: fsspec>=2023.5.0 in /home/jamie/.local/lib/python3.12/site-packages (from huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (2026.7.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.5.2 in /home/jamie/.local/lib/python3.12/site-packages (from huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (1.6.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in /home/jamie/.local/lib/python3.12/site-packages (from huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (0.28.1)
+Requirement already satisfied: pyyaml>=5.1 in /usr/lib/python3/dist-packages (from huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (6.0.1)
+Collecting annotated-types>=0.6.0 (from pydantic<3.0.0,>=2.0.0->spacy)
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.4 (from pydantic<3.0.0,>=2.0.0->spacy)
+  Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting typing_extensions>=4.10.0 (from sentence-transformers)
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic<3.0.0,>=2.0.0->spacy)
+  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting blis<1.4.0,>=1.3.0 (from thinc<8.4.0,>=8.3.12->spacy)
+  Downloading blis-1.3.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (7.5 kB)
+Requirement already satisfied: sympy>=1.13.3 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (3.6.1)
+Requirement already satisfied: cuda-toolkit==13.0.3 in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.0.3.0)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (13.3.1)
+Requirement already satisfied: nvidia-cudnn-cu13==9.20.0.48 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (9.20.0.48)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.1 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (0.8.1)
+Requirement already satisfied: nvidia-nccl-cu13==2.29.7 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (2.29.7)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (3.4.5)
+Requirement already satisfied: triton==3.7.1 in /home/jamie/.local/lib/python3.12/site-packages (from torch>=2.2->sentence-transformers) (3.7.1)
+Requirement already satisfied: nvidia-cublas==13.1.1.3.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.1.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.0.88)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (12.0.0.61)
+Requirement already satisfied: nvidia-nvjitlink<14,>=13.0.88 in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.3.33)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (12.6.3.3)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /home/jamie/.local/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.2->sentence-transformers) (13.0.85)
+Requirement already satisfied: regex>=2025.10.22 in /home/jamie/.local/lib/python3.12/site-packages (from transformers<6.0.0,>=5.0.0->sentence-transformers) (2026.7.19)
+Requirement already satisfied: safetensors>=0.8.0 in /home/jamie/.local/lib/python3.12/site-packages (from transformers<6.0.0,>=5.0.0->sentence-transformers) (0.8.0)
+Requirement already satisfied: shellingham>=1.3.0 in /home/jamie/.local/lib/python3.12/site-packages (from typer<1.0.0,>=0.3.0->spacy) (1.5.4)
+Requirement already satisfied: rich>=13.8.0 in /home/jamie/.local/lib/python3.12/site-packages (from typer<1.0.0,>=0.3.0->spacy) (15.0.0)
+Requirement already satisfied: annotated-doc>=0.0.2 in /home/jamie/.local/lib/python3.12/site-packages (from typer<1.0.0,>=0.3.0->spacy) (0.0.5)
+Collecting cloudpathlib>=0.7.0 (from weasel<2.0.0,>=1.0.0->spacy)
+  Downloading cloudpathlib-0.25.0-py3-none-any.whl.metadata (16 kB)
+Collecting smart-open>=5.2.1 (from weasel<2.0.0,>=1.0.0->spacy)
+  Downloading smart_open-8.0.1-py3-none-any.whl.metadata (24 kB)
+Requirement already satisfied: cuda-pathfinder>=1.4.2 in /home/jamie/.local/lib/python3.12/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.2->sentence-transformers) (1.7.0)
+Requirement already satisfied: anyio in /home/jamie/.local/lib/python3.12/site-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (4.14.2)
+Requirement already satisfied: certifi in /usr/lib/python3/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (2023.11.17)
+Requirement already satisfied: httpcore==1.* in /home/jamie/.local/lib/python3.12/site-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (1.0.9)
+Requirement already satisfied: idna in /usr/lib/python3/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (3.6)
+Requirement already satisfied: h11>=0.16 in /home/jamie/.local/lib/python3.12/site-packages (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub<2.0.0,>=1.3.0->sentence-transformers) (0.16.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/lib/python3/dist-packages (from rich>=13.8.0->typer<1.0.0,>=0.3.0->spacy) (3.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/lib/python3/dist-packages (from rich>=13.8.0->typer<1.0.0,>=0.3.0->spacy) (2.17.2)
+Collecting wrapt (from smart-open>=5.2.1->weasel<2.0.0,>=1.0.0->spacy)
+  Downloading wrapt-2.3.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.4 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/jamie/.local/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.2->sentence-transformers) (1.3.0)
+Requirement already satisfied: mdurl~=0.1 in /usr/lib/python3/dist-packages (from markdown-it-py>=2.2.0->rich>=13.8.0->typer<1.0.0,>=0.3.0->spacy) (0.1.2)
+Downloading spacy-3.8.16-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (35.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.5/35.5 MB 18.4 MB/s eta 0:00:00
+Downloading catalogue-2.0.10-py3-none-any.whl (17 kB)
+Downloading confection-1.3.3-py3-none-any.whl (35 kB)
+Downloading cymem-2.0.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (260 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 260.8/260.8 kB 17.9 MB/s eta 0:00:00
+Downloading murmurhash-1.0.15-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.1/134.1 kB 10.3 MB/s eta 0:00:00
+Downloading preshed-3.0.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (868 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 869.0/869.0 kB 20.6 MB/s eta 0:00:00
+Downloading pydantic-2.13.4-py3-none-any.whl (472 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 472.3/472.3 kB 21.7 MB/s eta 0:00:00
+Downloading pydantic_core-2.46.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 27.5 MB/s eta 0:00:00
+Downloading spacy_legacy-3.0.12-py2.py3-none-any.whl (29 kB)
+Downloading spacy_loggers-1.0.5-py3-none-any.whl (22 kB)
+Downloading srsly-2.5.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 20.6 MB/s eta 0:00:00
+Downloading thinc-8.3.13-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.9/3.9 MB 27.6 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 4.8 MB/s eta 0:00:00
+Downloading wasabi-1.1.3-py3-none-any.whl (27 kB)
+Downloading weasel-1.0.0-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.7/50.7 kB 5.4 MB/s eta 0:00:00
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading blis-1.3.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (11.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.4/11.4 MB 23.3 MB/s eta 0:00:00
+Downloading cloudpathlib-0.25.0-py3-none-any.whl (66 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.1/66.1 kB 7.3 MB/s eta 0:00:00
+Downloading smart_open-8.0.1-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 5.3 MB/s eta 0:00:00
+Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading wrapt-2.3.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (172 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 172.4/172.4 kB 8.5 MB/s eta 0:00:00
+Installing collected packages: wrapt, wasabi, typing_extensions, spacy-loggers, spacy-legacy, murmurhash, cymem, confection, cloudpathlib, catalogue, blis, annotated-types, typing-inspection, srsly, smart-open, pydantic-core, preshed, pydantic, weasel, thinc, spacy
+Successfully installed annotated-types-0.8.0 blis-1.3.3 catalogue-2.0.10 cloudpathlib-0.25.0 confection-1.3.3 cymem-2.0.13 murmurhash-1.0.15 preshed-3.0.13 pydantic-2.13.4 pydantic-core-2.46.4 smart-open-8.0.1 spacy-3.8.16 spacy-legacy-3.0.12 spacy-loggers-1.0.5 srsly-2.5.3 thinc-8.3.13 typing-inspection-0.4.4 typing_extensions-4.16.0 wasabi-1.1.3 weasel-1.0.0 wrapt-2.3.0
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+    
+    If you wish to install a non-Debian-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have python3-full installed.
+    
+    If you wish to install a non-Debian packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+    
+    See /usr/share/doc/python3.12/README.venv for more information.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+SMET_PIP_DONE

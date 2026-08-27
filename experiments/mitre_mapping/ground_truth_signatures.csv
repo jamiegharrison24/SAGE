@@ -1,0 +1,774 @@
+signature,micro_attack_stage,source_container,gt_kind,gt_ids,confidence
+BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+BROWSER-CHROME Google Chrome FileReader use after free attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+BROWSER-CHROME V8 JavaScript engine Out-of-Memory denial of service attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+ET ATTACK_RESPONSE Frequent HTTP 401 Unauthorized - Possible Brute Force Attack,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET ATTACK_RESPONSE Metasploit Meterpreter Reverse HTTPS certificate,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET ATTACK_RESPONSE Net User Command Response,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET ATTACK_RESPONSE Output of id command from HTTP server,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style),DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET ATTACK_RESPONSE Possible BeEF HTTP Headers Inbound,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET ATTACK_RESPONSE python shell spawn attempt,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET CHAT Facebook Chat using XMPP,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT Google IM traffic Jabber client sign-on,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET CHAT Google Talk (Jabber) Client Login,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET CHAT IRC JOIN command,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT IRC NICK command,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT IRC PRIVMSG command,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT IRC USER command,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT IRC authorization message,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT MSN status change,DATA_MANIPULATION,usual_mapping,technique_scoreable,T1565,high
+ET CHAT Skype User-Agent detected,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CHAT Skype VOIP Checking Version (Startup),NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET CINS Active Threat Intelligence Poor Reputation IP group 100,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CINS Active Threat Intelligence Poor Reputation IP group 44,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET CINS Active Threat Intelligence Poor Reputation IP group 66,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CINS Active Threat Intelligence Poor Reputation IP group 91,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CNC Ransomware Tracker Reported CnC Server group 101,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET COMPROMISED Known Compromised or Hostile Host Traffic group 9,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (gggatat456.com),END_POINT_DOS,usual_mapping,technique_scoreable,T1499,high
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (xxxatat456.com),END_POINT_DOS,usual_mapping,technique_scoreable,T1499,high
+ET CURRENT_EVENTS Malformed HeartBeat Request,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET CURRENT_EVENTS Malformed HeartBeat Response,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET CURRENT_EVENTS Nuclear EK Landing Apr 03 2015,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CURRENT_EVENTS Nuclear EK Landing Apr 08 2015,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CURRENT_EVENTS Nuclear EK Landing Apr 22 2015,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET CURRENT_EVENTS Possible Magnitude IE EK Payload Nov 8 2013,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Client Init Vuln Server),PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Server Init Vuln Client),PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port),PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port),PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET CURRENT_EVENTS Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET CURRENT_EVENTS QNAP Shellshock CVE-2014-6271,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET CURRENT_EVENTS SUSPICIOUS Firesale gTLD EXE DL with no Referer June 13 2016,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET CURRENT_EVENTS Terse alphanumeric executable downloader high likelihood of being hostile,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct M2 Feb 06 2015,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct Sept 15 2015,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET DNS Query for .su TLD (Soviet Union) Often Malware Related,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET DNS Query to a *.pw domain - Likely Hostile,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET DNS Query to a .tk domain - Likely Hostile,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET DOS Catalyst memory leak attack,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Cisco 4200 Wireless Lan Controller Long Authorisation Denial of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Cisco 514 UDP flood DoS,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Cisco Router HTTP DoS,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS DNS BIND 9 Dynamic Update DoS attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Excessive SMTP MAIL-FROM DDoS,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS FreeBSD NFS RPC Kernel Panic,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS HOIC with booster inbound,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS HTTP GET AAAAAAAA Likely FireFlood,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS IBM DB2 kuddb2 Remote Denial of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS IBM Tivoli Endpoint Buffer Overflow Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS ICMP Path MTU lowered below acceptable threshold,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS LibuPnP CVE-2012-5963 ST UDN Buffer Overflow,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x02,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS MC-SQLR Response Outbound Possible DDoS Participation,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Microsoft Remote Desktop (RDP) Syn then Reset 30 Second DoS Attempt,NETWORK_DOS,usual_mapping,technique_scoreable,T1498,high
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Integer indef DoS Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Negative Integer indef DoS Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Microsoft Streaming Server Malformed Request,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Microsoft Windows 7 ICMPv6 Router Advertisement Flood,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Microsoft Windows LSASS Remote Memory Corruption (CVE-2017-0004),END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Miniupnpd M-SEARCH Buffer Overflow CVE-2013-0229,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Netgear DG632 Web Management Denial Of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS NetrWkstaUserEnum Request with large Preferred Max Len,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Outbound Low Orbit Ion Cannon LOIC Tool Internal User May Be Participating in DDOS,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible Cisco ASA 5500 Series Adaptive Security Appliance Remote SIP Inspection Device Reload Denial of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Possible MYSQL GeomFromWKB() function Denial Of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service AttemptET DOS Possible MySQL ALTER DATABASE Denial Of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible Memcached DDoS Amplification Query (set),NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Possible Microsoft SQL Server Remote Denial Of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x03,NETWORK_DOS,ccdc_combined,technique_scoreable,T1498,high
+ET DOS Possible SMBLoris NBSS Length Mem Exhaustion Vuln Inbound,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible SSDP Amplification Scan in Progress,NETWORK_DOS,ccdc_combined,technique_scoreable,T1498,high
+ET DOS Possible SolarWinds TFTP Server Read Request Denial Of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Possible VNC ClientCutText Message Denial of Service/Memory Corruption Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 reply),NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 request),NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS Potential Tsunami SYN Flood Denial Of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS SMBLoris NBSS Length Mem Exhaustion Attempt (PoC Based),END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS SolarWinds TFTP Server Long Write Request Denial Of Service Attempt,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS Trojan.BlackRev V1.Botnet HTTP Login POST Flood Traffic Inbound,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET DOS ntop Basic-Auth DOS inbound,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET DOS ntop Basic-Auth DOS outbound,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ET EXPLOIT Cisco Smart Install Exploitation Tool - ChangeConfig,SERVICE_SPECIFIC,ccdc_combined,unmappable,,needs_review
+ET EXPLOIT Cisco Smart Install Exploitation Tool - GetConfig,SERVICE_SPECIFIC,ccdc_combined,unmappable,,needs_review
+ET EXPLOIT Exim/Dovecot Possible MAIL FROM Command Execution,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET EXPLOIT F5 BIG-IP rsync cmi authorized_keys successful exfiltration,DATA_EXFILTRATION,attack_stage_mapping,technique_scoreable,T1041,ambiguous
+ET EXPLOIT FortiOS SSL VPN - Information Disclosure (CVE-2018-13379),INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET EXPLOIT FortiOS SSL VPN - Pre-Auth Messages Payload Buffer Overflow (CVE-2018-13381),END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ET EXPLOIT FortiOS SSL VPN - Remote Code Execution (CVE-2018-13383),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT IBM WebSphere - RCE Java Deserialization,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT LastPass RCE Attempt,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT Metasploit Random Base CharCode JS Encoded String,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET EXPLOIT Possible CVE-2014-6271 exploit attempt via malicious DNS,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible GoldenPac Priv Esc in-use,USER_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET EXPLOIT Possible IE Scripting Engine Memory Corruption Vulnerability (CVE-2019-0752),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible Internet Explorer VBscript failure to handle error case information disclosure CVE-2014-6332 Common Construct M2,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT Possible MySQL cnf overwrite CVE-2016-6662 Attempt,ROOT_PRIV_ESC,attack_stage_mapping,technique_scoreable,T1068,ambiguous
+ET EXPLOIT Possible OpenVPN CVE-2014- 6271 attempt,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible OpenVPN CVE-2014-6271 attempt,REMOTE_SERVICE_EXP,attack_stage_mapping,technique_scoreable,T1210,high
+ET EXPLOIT Possible Palo Alto SSL VPN sslmgr Format String Vulnerability (Inbound),REMOTE_SERVICE_EXP,attack_stage_mapping,technique_scoreable,T1210,high
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible Pure-FTPd CVE-2014-6271 attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible Qmail CVE-2014-6271 Mail From attempt,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Possible Redirect to SMB exploit attempt - 303,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT Possible SpamAssassin Milter Plugin Remote Arbitrary Command Injection Attempt,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET EXPLOIT Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET EXPLOIT Possible iOS Pegasus Safari Exploit (CVE-2016-4657),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Potential Internet Explorer Use After Free CVE-2013-3163 Exploit URI Struct 1,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT QNAP Shellshock script retrieval,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT REDIS Attempted SSH Key Upload,USER_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET EXPLOIT Seagate Business NAS Unauthenticated Remote Command Execution,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ET EXPLOIT Serialized Java Object Calling Common Collection Function,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET EXPLOIT SolusVM 1.13.03 SQL injection,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET EXPLOIT TrendMicro node.js HTTP RCE Exploit Inbound (openUrlInDefaultBrowser),SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ET FTP Suspicious Quotation Mark Usage in FTP Username,ACCT_MANIP,usual_mapping,technique_scoreable,T1098,high
+ET INFO Executable Download from dotted-quad Host,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET INFO NetSSH SSH Version String Hardcoded in Metasploit,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET INFO Possible Windows executable sent when remote host claims to send a Text File,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET INFO SUSPICIOUS Dotted Quad Host MZ Response,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET INFO WinHttp AutoProxy Request wpad.dat Possible BadTunnel,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET INFO Windows OS Submitting USB Metadata to Microsoft,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET MALWARE Common Adware Library ISX User Agent Detected,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET MALWARE Suspicious User-Agent (1 space),COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET MALWARE W32/OpenCandy Adware Checkin,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET MOBILE_MALWARE Android/Code4hk.A Checkin,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET P2P BitTorrent DHT announce_peers request,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET P2P BitTorrent DHT nodes reply,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET P2P BitTorrent DHT ping request,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET P2P BitTorrent peer sync,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET P2P Bittorrent P2P Client User-Agent (Transmission/1.x),DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET P2P Edonkey Publicize File ACK,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET P2P TOR 1.0 Outbound Circuit Traffic,DEFENSE_EVASION,usual_mapping,tactic_only,TA0005,tactic
+ET POLICY Application Crash Report Sent to Microsoft,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Cisco Device New Config Built,SERVICE_SPECIFIC,ccdc_combined,unmappable,,needs_review
+ET POLICY Cisco Device in Config Mode,SERVICE_SPECIFIC,ccdc_combined,unmappable,,needs_review
+ET POLICY Cleartext WordPress Login,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY DNS Query For XXX Adult Site Top Level Domain,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY DNS Update From External net,DATA_MANIPULATION,usual_mapping,technique_scoreable,T1565,high
+ET POLICY Dropbox Client Broadcasting,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY Dropbox DNS Lookup - Possible Offsite File Backup in Use,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY Dropbox.com Offsite File Backup in Use,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY DynDNS CheckIp External IP Address Server Response,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY Executable and linking format (ELF) file download,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET POLICY Executable and linking format (ELF) file download Over HTTP,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET POLICY Executable served from Amazon S3,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY External Unencrypted Connection to BASE Console,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY GNU/Linux YUM User-Agent Outbound likely related to package management,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY HTTP Request to a *.tk domain,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY HTTP traffic on port 443 (POST),NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Http Client Body contains pass= in cleartext,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY Http Client Body contains passwd= in cleartext,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY Http Client Body contains pwd= in cleartext,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY IP Check Domain (icanhazip. com in HTTP Host),INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY IP Check Domain (whatismyip in HTTP Host),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY Incoming Basic Auth Base64 HTTP Password detected unencrypted,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY MS Remote Desktop Administrator Login Request,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET POLICY MS Terminal Server Root login,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET POLICY Metasploit Framework Checking For Update,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY OpenVPN Update Check,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Outbound MSSQL Connection to Non-Standard Port - Likely Malware,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET POLICY Outdated Flash Version M1,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Outdated Flash Version M2,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET POLICY PDF With Embedded File,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY PE EXE or DLL Windows file download HTTP,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY POSSIBLE Web Crawl using Curl,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY POSSIBLE Web Crawl using Wget,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY Possible HTA Application Download,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY Possible IP Check api.ipify.org,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY Possible Kali Linux hostname in DHCP Request Packet,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement,LATERAL_MOVEMENT,usual_mapping,tactic_only,TA0008,tactic
+ET POLICY Proxy TRACE Request - inbound,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY Python-urllib/ Suspicious User Agent,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY RDP connection confirm,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET POLICY SMB Executable File Transfer,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY SMB Remote AT Scheduled Job Pipe Creation,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY SMB2 NT Create AndX Request For a .bat File,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY SMB2 NT Create AndX Request For a Powershell .ps1 File,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY SMB2 NT Create AndX Request For an Executable File,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY SMB2 Remote AT Scheduled Job Create Request,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET POLICY SSLv3 inbound connection to server vulnerable to POODLE attack,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY SSLv3 outbound connection from client vulnerable to POODLE attack,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY Suspicious inbound to MSSQL port 1433,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET POLICY Suspicious inbound to Oracle SQL port 1521,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET POLICY Suspicious inbound to PostgreSQL port 5432,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET POLICY Suspicious inbound to mSQL port 4333,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET POLICY Suspicious inbound to mySQL port 3306,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET POLICY TeamViewer Dyngate User-Agent,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET POLICY User-Agent (Launcher),COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY User-Agent (NSIS_Inetc (Mozilla)) - Sometimes used by hostile installers,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET POLICY Vulnerable Java Version 1.7.x Detected,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET POLICY curl User-Agent Outbound,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET POLICY libwww-perl User-Agent,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET SCAN Amap TCP Service Scan Detected,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Amap UDP Service Scan Detected,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Apache mod_deflate DoS via many multiple byte Range values,NETWORK_DOS,ccdc_combined,technique_scoreable,T1498,high
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1,PUBLIC_APP_EXP,usual_mapping,technique_scoreable,T1190,high
+ET SCAN Behavioral Unusual Port 135 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound),HOST_DISC,usual_mapping,technique_scoreable,T1018,high
+ET SCAN COMMIX Command injection scan attempt,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Cisco Torch TFTP Scan,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN DCERPC rpcmgmt ifids Unauthenticated BIND,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN DEBUG Method Request with Command,PUBLIC_APP_EXP,usual_mapping,technique_scoreable,T1190,high
+ET SCAN DirBuster Scan in Progress,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN DirBuster Web App Scan in Progress,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN DominoHunter Security Scan in Progress,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN External to Internal UPnP Request udp port 1900,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN GET with HTML tag in start of URI seen with PHPMyAdmin scanning,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET SCAN Grendel-Scan Web Application Security Scan Detected,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Grim's Ping ftp scanning tool,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Havij SQL Injection Tool User-Agent Inbound,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Httprecon Web Server Fingerprint Scan,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Hydra User-Agent,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN ICMP =XXXXXXXX Likely Precursor to Scan,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN ICMP Delphi Likely Precursor to Scan,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN ICMP PING IPTools,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SCAN Internet Scanning Project HTTP scan,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN MYSQL 4.1 brute force root login attempt,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SCAN Medusa User-Agent,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SCAN Metasploit WMAP GET len 0 and type,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Modbus Scanning detected,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Modified Sipvicious User-Agent Detected (sundayddr),HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Multiple FTP Administrator Login Attempts from Single Source - Possible Brute Force Attempt,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SCAN Multiple FTP Root Login Attempts from Single Source - Possible Brute Force Attempt,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN MySQL Malicious Scanning 1,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+"ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration",HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN NETWORK Incoming Masscan detected,HOST_DISC,ccdc_combined,technique_scoreable,T1018,high
+"ET SCAN NMAP -f -sXET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration",HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN NMAP -sA (1),HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN NMAP -sO,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN NMAP -sS window 2048,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN NMAP OS Detection Probe,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+ET SCAN NMAP SIP Version Detect OPTIONS Scan,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN NMAP SIP Version Detection Script Activity,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+ET SCAN NMAP SQL Spider Scan,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN NNG MS02-039 Exploit False Positive Generator - May Conceal A Genuine Attack,DEFENSE_EVASION,attack_stage_mapping,tactic_only,TA0005,tactic
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl),SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+ET SCAN Nessus User Agent,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET SCAN Netsparker Scan in Progress,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN Nikto Web App Scan in Progress,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Nmap NSE Heartbleed Request,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Nmap NSE Heartbleed Response,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE),VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),HOST_DISC,usual_mapping,technique_scoreable,T1018,high
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN Non-Malicious SSH/SSL Scanner on the run,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN OpenVAS User-Agent Inbound,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN PHP Attack Tool Morfeus F Scanner,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET SCAN PRO Search Crawler Probe,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN Possible Fast-Track Tool Spidering User-Agent Detected,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Possible Nmap User-Agent Observed,HOST_DISC,ccdc_combined,technique_scoreable,T1018,high
+ET SCAN Possible SQLMAP Scan,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Possible Scanning for Vulnerable JBoss,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Potential FTP Brute-Force attempt response,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN Potential SSH Scan,SERVICE_DISC,ccdc_combined,technique_scoreable,T1046,high
+ET SCAN Potential SSH Scan OUTBOUND,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET SCAN Potential VNC Scan 5800-5820,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+ET SCAN Potential VNC Scan 5900-5920,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+ET SCAN Potential muieblackcat scanner double-URI and HTTP library,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Rapid IMAP Connections - Possible Brute Force Attack,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN Rapid IMAPS Connections - Possible Brute Force Attack,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN Rapid POP3 Connections - Possible Brute Force Attack,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN Rapid POP3S Connections - Possible Brute Force Attack,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+ET SCAN Redis SSH Key Overwrite Probing,USER_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET SCAN SFTP/FTP Password Exposure via sftp-config.json,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN SQLBrute SQL Scan Detected,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Sipvicious Scan,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ET SCAN Sqlmap SQL Injection Scan,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious User-Agent - get-minimal - Possible Vuln Scan,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious inbound to MSSQL port 1433,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious inbound to Oracle SQL port 1521,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious inbound to PostgreSQL port 5432,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious inbound to mSQL port 4333,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ET SCAN Suspicious inbound to mySQL port 3306,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+"ET SCAN Unusually Fast 400 Error Messages (Bad Request), Possible Web Application Scan",INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+"ET SCAN Unusually Fast 403 Error Messages, Possible Web Application Scan",INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+"ET SCAN Unusually Fast 404 Error Messages (Page Not Found), Possible Web Application Scan/Directory Guessing Attack",INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET SCAN WSFuzzer Web Application Fuzzing,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Wapiti Web Server Vulnerability Scan,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Wikto Backend Data Miner Scan,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN Wikto Scan,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ET SCAN ntop-ng Authentication Bypass via Session ID Guessing,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI,REMOTE_SERVICE_EXP,usual_mapping,technique_scoreable,T1210,high
+ET SNMP Samsung Printer SNMP Hardcode RW Community String,REMOTE_SERVICE_EXP,usual_mapping,technique_scoreable,T1210,high
+ET SNMP missing community string attempt 1,REMOTE_SERVICE_EXP,usual_mapping,technique_scoreable,T1210,high
+ET TFTP Outbound TFTP Error Message,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 128,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 155,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 271,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 285,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 328,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 519,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 595,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 615,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 684,NON_MALICIOUS,ccdc_combined,unmappable,,none
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing *nix,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - net command output,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET TROJAN ATTACKER IRCBot - The command completed successfully - PRIVMSG Response,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET TROJAN Backdoor family PCRat/Gh0st CnC traffic (OUTBOUND) 106,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN DDoS.XOR Checkin,NETWORK_DOS,usual_mapping,technique_scoreable,T1498,high
+ET TROJAN Double HTTP/1.1 Header Inbound - Likely Hostile Traffic,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN HTTP Executable Download from suspicious domain with direct request/fake browser (multiple families) ,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET TROJAN HackerDefender Root Kit Remote Connection Attempt Detected,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Miuref/Boaxxe Checkin,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN NgrBot IRC CnC Channel Join,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Possible Metasploit Payload Common Construct Bind_API (from server),COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Possible NanoCore C2 60B,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Possible NanoCore C2 64B,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Possible Windows executable sent when remote host claims to send html content,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET TROJAN Possible Zendran ELF IRCBot Joining Channel 2,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Poweliks Clickfraud CnC M4,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Suspicious User-Agent (WindowsNT) With No Separating Space,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Unknown - Loader - Check .exe Updated,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC COMPUTERSYSTEM get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC NETLOGIN get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC NIC get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC OS get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC PROCESS get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC SERVER get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC SERVICE get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC SHARE get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows WMIC STARTUP get Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows dir Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows driverquery -si Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows driverquery -v Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows gpresult Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows netstat Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows quser Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET TROJAN Windows qwinsta Microsoft Windows DOS prompt command exit OUTBOUND,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET USER_AGENTS Go HTTP Client User-Agent,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET USER_AGENTS MSF Meterpreter Default User Agent,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_CLIENT BeEF Cookie Outbound,SERVICE_SPECIFIC,usual_mapping,unmappable,,needs_review
+ET WEB_CLIENT HTA File containing Wscript.Shell Call - Potential CVE-2017-0199,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of Script Tag % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of String.fromCharCode % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of charCodeAt % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of document.write % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of substr % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT Hex Obfuscation of unescape % Encoding,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT PowerShell call in script 1,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_CLIENT PowerShell call in script 2,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+"ET WEB_SERVER /bin/bash In URI, Possible Shell Command Execution Attempt Within Web Exploit",COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER /etc/shadow Detected in URI,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER 401TRG Generic Webshell Request - POST with wget in body,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET WEB_SERVER CRLF Injection - Newline Characters in URL,PUBLIC_APP_EXP,usual_mapping,technique_scoreable,T1190,high
+ET WEB_SERVER CURL Command Specifying Output in HTTP Headers,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER ColdFusion adminapi access,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET WEB_SERVER ColdFusion administrator access,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET WEB_SERVER ColdFusion componentutils access,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER ColdFusion password.properties access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER DD-WRT Information Disclosure Attempt,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER DFind w00tw00t GET-Requests,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET WEB_SERVER Exploit Suspected PHP Injection Attack (cmd=),ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER HTTP 414 Request URI Too Large,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET WEB_SERVER IIS 8.3 Filename With Wildcard (Possible File/Dir Bruteforce),DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER Joomla Component SQLi Attempt,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER Likely Malicious Request for /proc/self/environ,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER MYSQL SELECT CONCAT SQL Injection Attempt,DATA_MANIPULATION,ccdc_combined,technique_scoreable,T1565,high
+ET WEB_SERVER Muieblackcat scanner,VULN_DISC,ccdc_combined,technique_scoreable,T1595.002,high
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER PHP ENV SuperGlobal in URI,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP Easteregg Information-Disclosure (funny-logo),INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP Easteregg Information-Disclosure (php-logo),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP Easteregg Information-Disclosure (phpinfo),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP Easteregg Information-Disclosure (zend-logo),INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER PHP Possible https Local File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER PHP Possible php Remote File Inclusion Attempt,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER PHP REQUEST SuperGlobal in URI,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP SERVER SuperGlobal in URI,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER PHP SESSION SuperGlobal in URI,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER PHP System Command in HTTP POST,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER PHP tags in HTTP POST,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER PHP.//Input in HTTP POST,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible Attempt to Get SQL Server Version in URI using SELECT VERSION,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SERVER Possible CVE-2013-0156 Ruby On Rails XML YAML tag with !ruby,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2014-6271 Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Cookie,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible Cherokee Web Server GET AUX Request Denial Of Service Attempt,NETWORK_DOS,usual_mapping,technique_scoreable,T1498,high
+ET WEB_SERVER Possible IIS Integer Overflow DoS (CVE-2015-1635),ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER Possible SQL Injection (exec),COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM,DATA_MANIPULATION,ccdc_combined,technique_scoreable,T1565,high
+ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT,DATA_MANIPULATION,ccdc_combined,technique_scoreable,T1565,high
+ET WEB_SERVER Possible SQLi xp_cmdshell POST body,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Possible bash shell piped to dev tcp Inbound to WebServer,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER SELECT USER SQL Injection Attempt in URI,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+ET WEB_SERVER SQL Injection Local File Access Attempt Using LOAD_FILE,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER Suspicious Chmod Usage in URI,DATA_MANIPULATION,usual_mapping,technique_scoreable,T1565,high
+ET WEB_SERVER Tilde in URI - potential .inc source disclosure vulnerability,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER Tilde in URI - potential .php~ source disclosure vulnerability,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SERVER WEB-PHP phpinfo access,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER WGET Command Specifying Output in HTTP Headers,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER WebShell Generic - wget http - POST,DATA_DELIVERY,ccdc_combined,technique_scoreable,T1105,ambiguous
+ET WEB_SERVER allow_url_include PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER auto_prepend_file PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER cmd.exe In URI - Possible Command Execution Attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+ET WEB_SERVER disable_functions PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER open_basedir PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER safe_mode PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SERVER suhosin.simulation PHP config option in uri,COMMAND_AND_CONTROL,ccdc_combined,tactic_only,TA0011,tactic
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS BASE base_stat_common.php remote file include,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS BLOG CMS nsextt parameter Cross Site Scripting Vulnerability,TRUSTED_ORG_EXP,usual_mapping,technique_scoreable,T1199,high
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Enthusiast path parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Fork-CMS js.php module parameter Local File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS FormMailer formmailer.admin.inc.php BASE_DIR Parameter Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Golem Gaming Portal root_path Parameter Remote File inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Horde type Parameter Local File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS IBSng str Parameter Cross Site Scripting Attempt,PUBLIC_APP_EXP,usual_mapping,technique_scoreable,T1190,high
+ET WEB_SPECIFIC_APPS JobHut browse.php pk Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Joomla 3.7.0 - Sql Injection (CVE-2017-8917),ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Joomla AjaxChat Component ajcuser.php GLOBALS Parameter Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Joomla Dada Mail Manager Component config.dadamail.php GLOBALS Parameter Remote File Inclusion,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Joomla Onguma Time Sheet Component onguma.class.php mosConfig_absolute_path Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Joomla Simple RSS Reader admin.rssreader.php mosConfig_live_site Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Joomla swMenuPro ImageManager.php Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS KR-Web krgourl.php DOCUMENT_ROOT Parameter Remote File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS KingCMS menu.php CONFIG Parameter Remote File Inclusion,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS MAXcms fm_includes_special Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS MODx CMS snippet.reflect.php reflect_base Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Mambo Component com_smf smf.php Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Microhard Systems 3G/4G Cellular Ethernet and Serial Gateway - Default Credentials,USER_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET WEB_SPECIFIC_APPS Noname Media Photo Galerie Standard SQL Injection Attempt -- view.php id SELECT,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS OBOphiX fonctions_racine.php chemin_lib parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS OpenX phpAdsNew phpAds_geoPlugin Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Opencadastre soustab.php script Local File Inclusion Vulnerability,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Oracle JSF2 Path Traversal Attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SPECIFIC_APPS OrangeHRM path Parameter Local File Inclusion Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS PHP Aardvark Topsites PHP CONFIG PATH Remote File Include Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PHP Booking Calendar page_info_message parameter Cross-Site Scripting Vulnerability ,TRUSTED_ORG_EXP,usual_mapping,technique_scoreable,T1199,high
+ET WEB_SPECIFIC_APPS PHP Classifieds class.phpmailer.php lang_path Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PHP phpMyAgenda rootagenda Remote File Include Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PHP-CGI query string parameter vulnerability,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SPECIFIC_APPS PHP-Paid4Mail RFI attempt ,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PHPOF DB_AdoDB.Class.PHP PHPOF_INCLUDE_PATH parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PithCMS oldnews_reader.php lang Parameter Local File Inclusion Attempt,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ET WEB_SPECIFIC_APPS Plone and Zope cmd Parameter Remote Command Execution Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PointComma pctemplate.php pcConfig Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Possible JBoss JMX Console Beanshell Deployer WAR Upload and Deployment Exploit Attempt,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ET WEB_SPECIFIC_APPS Possible Mambo/Joomla! com_koesubmit Component 'koesubmit.php' Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Possible OpenSiteAdmin pageHeader.php Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Possible eFront database.php Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS PozScripts Business Directory Script cid parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS ProdLer prodler.class.php sPath Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS ProjectButler RFI attempt ,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Request to Wordpress W3TC Plug-in dbcache Directory,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ET WEB_SPECIFIC_APPS SAPID get_infochannel.inc.php Remote File inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS SERWeb load_lang.php configdir Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS SERWeb main_prepend.php functionsdir Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site showcategory.php cid Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site software-description.php id Parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Sisplet CMS komentar.php site_path Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS TECHNOTE shop_this_skin_path Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Turnkeyforms Software Directory showcategory.php cid parameter SQL Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS Ve-EDIT edit_htmlarea.php highlighter Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Vulnerable Magento Adminhtml Access,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ET WEB_SPECIFIC_APPS WEB-PHP RCE PHPBB 2004-1315,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ET WEB_SPECIFIC_APPS WHMCompleteSolution templatefile Parameter Local File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS WikyBlog which Parameter Cross Site Scripting Attempt,TRUSTED_ORG_EXP,usual_mapping,technique_scoreable,T1199,high
+ET WEB_SPECIFIC_APPS YapBB class_yapbbcooker.php cfgIncludeDirectory Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS Zen Cart loader_file Parameter Local File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS axdcms aXconf Parameter Local File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS evision cms addplain.php module parameter Local File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS p-Table for WordPress wptable-tinymce.php ABSPATH Parameter RFI Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php icerikyolu Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php sayfaid Parameter Remote File Inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS phpSkelSite theme parameter remote file inclusion,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WEB_SPECIFIC_APPS phptraverse mp3_id.php GLOBALS Parameter Remote File Inclusion Attempt,DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ET WORM TheMoon.linksys.router 1,NETWORK_DOS,ccdc_combined,technique_scoreable,T1498,high
+ETPRO ATTACK_RESPONSE MongoDB Database Enumeration Request,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ETPRO ATTACK_RESPONSE MongoDB Version Request,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ETPRO DOS CA eTrust Intrusion Detection Encryption Key Handling Denial of Service,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS Firebird SQL op_connect_request Denial of Service,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS FreeRADIUS RADIUS Server rad_decode Remote Denial of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS IBM DB2 Database Server Invalid Data Stream Denial of Service (Published Exploit),END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS ICMP with truncated IPv6 header CVE-2013-3182,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS ISC DHCP Server Zero Length Client ID Denial of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Linux Kernel NetFilter SCTP Unknown Chunk Types Denial of Service 1,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS MS DNS CHAOS Denial of Service (CVE-2017-0171),NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS MS RADIUS DoS Vulnerability CVE-2015-0015,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Malformed Email Header Concatination Denial Of Service,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS Microsoft Host Integration Server snabase.exe Denial of Service 1,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Microsoft Host Integration Server snabase.exe Infinite Loop Denial of Service (Exploit Specific),NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Microsoft Windows Active Directory LDAP SearchRequest Denial of Service Attempt 1,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Microsoft Windows NAT Helper DNS Query Denial of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Microsoft Windows SMTP Service MX Record Denial Of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Multiple Vendor ICMP Source Quench Denial of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS OpenLDAP Modrdn RDN NULL String Denial of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS OpenLDAP ber_get_next BER Decoding Denial of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Oracle Internet Directory Pre-Authentication LDAP Denial of Service Attempt,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Possible XMLRPC DoS in Progress,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS Possible mDNS Amplification Scan in Progress,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Squid Proxy FTP URI Processing Denial of Service,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Squid Proxy String Processing NULL Pointer Dereference Vulnerability,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS Win32/Whybo.F DDoS Traffic Outbound,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+ETPRO DOS iCal Null pointer de-reference Count Variable,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO DOS iCal improper resource liberation,END_POINT_DOS,attack_stage_mapping,technique_scoreable,T1499,high
+ETPRO EXPLOIT ATMFD.DLL Privilege Elevation Vuln (CVE-2016-3220),ROOT_PRIV_ESC,attack_stage_mapping,technique_scoreable,T1068,ambiguous
+ETPRO EXPLOIT Internet Explorer Memory Corruption Vulnerability (CVE-2016-3211),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT MSXML3 Same Origin Policy SFB vulnerability 1 (CVE-2015-1646),DATA_EXFILTRATION,attack_stage_mapping,technique_scoreable,T1041,ambiguous
+ETPRO EXPLOIT Microsoft Edge CSS History Information Disclosure Vulnerability (CVE-2016-7206),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT Microsoft Office Memory Corruption Vulnerability Pointer Reuse (CVE-2016-0021),SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ETPRO EXPLOIT Netcore Router Backdoor Usage,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ETPRO EXPLOIT Possible CVE-2016-3219 Executable Inbound,ROOT_PRIV_ESC,attack_stage_mapping,technique_scoreable,T1068,ambiguous
+ETPRO EXPLOIT Possible EDGE OOB Access (CVE-2016-0193),ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT Possible HP.SSF.WebService Exploit Attempt,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ETPRO EXPLOIT Possible HTML Meta Refresh (CVE-2015-6123) Inbound to Server,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT Possible HTML Meta Refresh (CVE-2015-6123) via IMAP/POP3,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT Possible Jetty Web Server Information Leak Attempt,SERVICE_SPECIFIC,attack_stage_mapping,unmappable,,needs_review
+ETPRO EXPLOIT Possible Novidade EK Attempting Intranet Router Compromise M7 (Bruteforce),BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+ETPRO EXPLOIT Possible Wget Arbitrary File Write Exploit Attempt (CVE-2016-4971),DATA_DELIVERY,usual_mapping,technique_scoreable,T1105,ambiguous
+ETPRO EXPLOIT SChannel Possible Heap Overflow ECDSAWithSHA512 CVE-2014-6321,ARBITRARY_CODE_EXE,attack_stage_mapping,technique_scoreable,T1203,ambiguous
+ETPRO EXPLOIT SOAP Netgear WNDR Auth Bypass/Info Disclosure,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+ETPRO EXPLOIT Win32k Privilege Elevation Vulnerability (CVE-2016-3254),ROOT_PRIV_ESC,attack_stage_mapping,technique_scoreable,T1068,ambiguous
+ETPRO EXPLOIT Windows Diagnostics Hub Privilege Elevation Vuln Inbound (CVE-2016-3231) 1,ROOT_PRIV_ESC,attack_stage_mapping,technique_scoreable,T1068,ambiguous
+ETPRO SCAN IPMI Get Authentication Request (null seq number - null sessionID),HOST_DISC,usual_mapping,technique_scoreable,T1018,high
+ETPRO SCAN Internal Machine Scanning VNC - Outbound Traffic,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+ETPRO SCAN Nessus Scanner TFTP Get Attempt,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+ETPRO SCAN NexusTaco Scanning for CVE-2014-3341,VULN_DISC,attack_stage_mapping,technique_scoreable,T1595.002,high
+ETPRO SCAN Redis INFO Service Probe,SERVICE_DISC,attack_stage_mapping,technique_scoreable,T1046,high
+ETPRO TROJAN CoinMiner Known Malicious Stratum Authline,RESOURCE_HIJACKING,usual_mapping,technique_scoreable,T1496,high
+ETPRO TROJAN Likely Bot Nick in IRC ([country|so_version|computername]),DATA_MANIPULATION,usual_mapping,technique_scoreable,T1565,high
+ETPRO TROJAN Likely Bot Nick in Off Port IRC,DATA_MANIPULATION,usual_mapping,technique_scoreable,T1565,high
+ETPRO TROJAN Win32/Meterpreter Receiving Meterpreter M1,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ETPRO WEB_SERVER JexBoss Common URI struct Observed 2 (INBOUND),COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+ETPRO WEB_SERVER Possible Information Leak Vuln CVE-2015-1648,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+ETPRO WEB_SERVER SQLMap Scan Tool User Agent,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+ETPRO WEB_SPECIFIC_APPS CM Download Manager WP Plugin Code Injection,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ETPRO WEB_SPECIFIC_APPS Majordomo Directory Traversal Attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+ETPRO WEB_SPECIFIC_APPS PHPMoAdmin RCE Attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+ETPRO WEB_SPECIFIC_APPS ipTIME firmware < 9.58 RCE,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+FILE-EXECUTABLE Kaspersky Internet Security kl1.sys out of bounds read attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+FILE-EXECUTABLE Microsoft CLFS.sys information leak attempt,DATA_EXFILTRATION,unknown_mapping,technique_scoreable,T1041,ambiguous
+FILE-EXECUTABLE Microsoft Windows Authenticode signature verification bypass attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+FILE-EXECUTABLE Microsoft Windows NTFS privilege escalation attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+FILE-EXECUTABLE XOR 0xfe encrypted portable executable file download attempt,DATA_DELIVERY,unknown_mapping,technique_scoreable,T1105,ambiguous
+FILE-FLASH Adobe Flash Player memory corruption attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+FILE-FLASH Adobe Flash Player use after free attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+FILE-IMAGE Adobe Acrobat TIFF Software tag heap buffer overflow attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+FILE-IMAGE Oracle Java Virtual Machine malformed GIF buffer overflow attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+FILE-JAVA Oracle Java RangeStatisticImpl sandbox breach attempt,SERVICE_SPECIFIC,unknown_mapping,unmappable,,needs_review
+FILE-JAVA Oracle Java System.arraycopy race condition attempt,SERVICE_SPECIFIC,unknown_mapping,unmappable,,needs_review
+FILE-JAVA Oracle Java privileged protection domain exploitation attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+FILE-JAVA Oracle Java sun.awt.image.ImagingLib.lookupByteBI memory corruption attempt,SERVICE_SPECIFIC,unknown_mapping,unmappable,,needs_review
+FILE-PDF Adobe Acrobat Reader PDF font processing memory corruption attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+FILE-PDF PDF with click-to-launch executable,DATA_DELIVERY,unknown_mapping,technique_scoreable,T1105,ambiguous
+GPL ATTACK_RESPONSE directory listing,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL ATTACK_RESPONSE id check returned root,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+GPL CHAT Google Talk Logon,NON_MALICIOUS,ccdc_combined,unmappable,,none
+GPL CHAT Google Talk Startup,NON_MALICIOUS,ccdc_combined,unmappable,,none
+GPL CHAT Jabber/Google Talk Outgoing Traffic,NON_MALICIOUS,ccdc_combined,unmappable,,none
+GPL DNS named authors attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL DNS named version attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL DOS IGMP dos attack,NETWORK_DOS,attack_stage_mapping,technique_scoreable,T1498,high
+GPL EXPLOIT .cnf access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL EXPLOIT .htr access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL EXPLOIT /iisadmpwd/aexp2.htr access,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT /msadc/samples/ access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT CodeRed v2 root.exe access,PRIV_ESC,ccdc_combined,tactic_only,TA0004,tactic
+GPL EXPLOIT ISAPI .ida access,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT ISAPI .ida attempt,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT ISAPI .idq access,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT ISAPI .idq attempt,DATA_EXFILTRATION,ccdc_combined,technique_scoreable,T1041,ambiguous
+GPL EXPLOIT administrators.pwd access,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+GPL EXPLOIT fpcount access,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+GPL EXPLOIT iisadmpwd attempt,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL EXPLOIT iissamples access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL EXPLOIT unicode directory traversal attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP .forward,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP CWD ...,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP CWD .... attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP CWD Root directory transversal attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP CWD ~ attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP CWD ~root attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP LIST directory traversal attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP MKD overflow,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP MKD overflow attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP PORT bounce attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL FTP SITE EXEC attempt,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL ICMP_INFO PING *NIX,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL ICMP_INFO PING BSDtype,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL MISC UPnP malformed advertisement,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL MISC rsh root,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+GPL NETBIOS DCERPC IActivation little endian bind attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL NETBIOS DCERPC Remote Activation bind attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL NETBIOS SMB-DS ADMIN$ share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS C$ share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS C$ unicode share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS D$ share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS IPC$ share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS IPC$ unicode share access,DATA_EXFILTRATION,usual_mapping,technique_scoreable,T1041,ambiguous
+GPL NETBIOS SMB-DS Session Setup NTMLSSP asn1 overflow attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL NETBIOS SMB-DS Session Setup NTMLSSP unicode asn1 overflow attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL NETBIOS SMB-DS repeated logon failure,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+GPL POLICY PCAnywhere server response,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL POLICY Sun JavaServer default password login attempt,BRUTE_FORCE_CREDS,usual_mapping,technique_scoreable,T1110,high
+GPL POP3 POP3 PASS overflow attempt,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL RPC portmap bootparam request TCP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap cachefsd request TCP,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL RPC portmap listing TCP 111,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap listing UDP 111,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap mountd request UDP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap rstatd request TCP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap rusers request TCP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap sadmind request TCP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap ypserv request TCP,SERVICE_DISC,usual_mapping,technique_scoreable,T1046,high
+GPL RPC portmap ypupdated request TCP,ARBITRARY_CODE_EXE,usual_mapping,technique_scoreable,T1203,ambiguous
+GPL RPC xdmcp info query,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL SCAN Broadscan Smurf Scanner,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN Finger Account Enumeration Attempt,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL SCAN Finger Version Query,INFO_DISC,attack_stage_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL SCAN ISS Pinger,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN PING CyberKit 2.2 Windows,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN PING NMAP,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN SSH Version map attempt,SERVICE_DISC,attack_stage_mapping,technique_scoreable,T1046,high
+GPL SCAN SolarWinds IP scan attempt,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN Webtrends Scanner UDP Probe,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SCAN loopback traffic,HOST_DISC,attack_stage_mapping,technique_scoreable,T1018,high
+GPL SMTP expn root,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+GPL SMTP vrfy root,ROOT_PRIV_ESC,usual_mapping,technique_scoreable,T1068,ambiguous
+GPL SNMP private access udp,ACCT_MANIP,usual_mapping,technique_scoreable,T1098,high
+GPL SNMP public access udp,ACCT_MANIP,usual_mapping,technique_scoreable,T1098,high
+GPL SQL sa brute force failed login attempt,BRUTE_FORCE_CREDS,attack_stage_mapping,technique_scoreable,T1110,high
+GPL WEB_SERVER .htaccess access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER .htpasswd access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER /~root access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER 403 Forbidden,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER DELETE attempt,DATA_DESTRUCTION,usual_mapping,technique_scoreable,T1485,high
+GPL WEB_SERVER Oracle Java Process Manager access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER Tomcat directory traversal attempt,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER Tomcat null byte directory listing attempt,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER Tomcat server snoop access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER author.exe access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER authors.pwd access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER global.asa access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER globals.pl access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER iisadmin access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER mod_gzip_status access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER perl post attempt,ARBITRARY_CODE_EXE,ccdc_combined,technique_scoreable,T1203,ambiguous
+GPL WEB_SERVER printenv access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER python access attempt,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+GPL WEB_SERVER service.cnf access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER service.pwd,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER services.cnf access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER viewcode access,INFO_DISC,ccdc_combined,technique_scoreable,T1592;T1590,ambiguous
+GPL WEB_SERVER writeto.cnf access,INFO_DISC,usual_mapping,technique_scoreable,T1592;T1590,ambiguous
+INDICATOR-SCAN DirBuster brute forcing tool detected,INFO_DISC,unknown_mapping,technique_scoreable,T1592;T1590,ambiguous
+INDICATOR-SCAN PHP backdoor scan attempt,VULN_DISC,usual_mapping,technique_scoreable,T1595.002,high
+INDICATOR-SCAN SSH Version map attempt,HOST_DISC,unknown_mapping,technique_scoreable,T1018,high
+INDICATOR-SCAN SSH brute force login attempt,BRUTE_FORCE_CREDS,unknown_mapping,technique_scoreable,T1110,high
+INDICATOR-SCAN User-Agent known malicious user-agent Masscan,HOST_DISC,unknown_mapping,technique_scoreable,T1018,high
+INDICATOR-SCAN cybercop os probe,SERVICE_DISC,unknown_mapping,technique_scoreable,T1046,high
+INDICATOR-SCAN cybercop udp bomb,SERVICE_DISC,unknown_mapping,technique_scoreable,T1046,high
+INDICATOR-SCAN inbound probing for IPTUX messenger port,SERVICE_DISC,unknown_mapping,technique_scoreable,T1046,high
+INDICATOR-SHELLCODE possible /bin/sh shellcode transfer attempt,DATA_DELIVERY,unknown_mapping,technique_scoreable,T1105,ambiguous
+INDICATOR-SHELLCODE ssh CRC32 overflow /bin/sh,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+MALWARE-CNC Flame malware connection - /view.php,COMMAND_AND_CONTROL,unknown_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Gozi trojan checkin,COMMAND_AND_CONTROL,unknown_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Hacker-Tool sars notifier variant outbound connection php notification,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC TT-bot botnet variant outbound connection,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Win.Trojan.Alureon.DG runtime traffic detected,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Win.Trojan.Crisis variant outbound connection,COMMAND_AND_CONTROL,unknown_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Win.Trojan.Dorkbot variant outbound connection,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+MALWARE-CNC Win.Trojan.Saeeka variant outbound connection,COMMAND_AND_CONTROL,usual_mapping,tactic_only,TA0011,tactic
+OS-LINUX Linux Kernel keyring object exploit download attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+OS-LINUX Linux kernel ARM put_user write outside process address space privilege escalation attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+OS-LINUX Linux kernel madvise race condition attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+OS-OTHER Bash environment variable injection attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+OS-OTHER Intel x86 side-channel analysis information leak attempt,DATA_EXFILTRATION,unknown_mapping,technique_scoreable,T1041,ambiguous
+OS-OTHER Mac OS X setuid privilege esclatation exploit attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+OS-WINDOWS Microsoft Windows DNS client TXT buffer overrun attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+PROTOCOL-FINGER account enumeration attempt,INFO_DISC,unknown_mapping,technique_scoreable,T1592;T1590,ambiguous
+SERVER-APACHE Apache APR header memory corruption attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+SERVER-APACHE Apache Struts remote code execution attempt - POST parameter,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+SERVER-APACHE Apache header parsing space saturation denial of service attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+SERVER-APACHE Apache malformed ipv6 uri overflow attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+SERVER-APACHE Apache server mod_proxy reverse proxy bypass attempt,PUBLIC_APP_EXP,unknown_mapping,technique_scoreable,T1190,high
+SERVER-MYSQL Multiple SQL products privilege escalation attempt,PRIV_ESC,unknown_mapping,tactic_only,TA0004,tactic
+SERVER-MYSQL MySQL/MariaDB Server geometry query object integer overflow attempt,END_POINT_DOS,unknown_mapping,technique_scoreable,T1499,high
+SERVER-MYSQL yaSSL SSL Hello Message buffer overflow attempt,ARBITRARY_CODE_EXE,unknown_mapping,technique_scoreable,T1203,ambiguous
+SURICATA DNS Not a response,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA DNS Unsolicited response,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA DNS malformed response data,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP Host header ambiguous,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP Host header invalid,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP Host part of URI is invalid,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP METHOD terminated by non-compliant character,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP Request abnormal Content-Encoding header,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP Request line with leading whitespace,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP URI terminated by non-compliant character,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP gzip decompression failed,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP invalid content length field in request,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP invalid request chunk len,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP invalid response chunk len,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP invalid response field folding,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP invalid transfer encoding value in request,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP missing Host header,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP multipart generic error,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP request field missing colon,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP request header invalid,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP response field missing colon,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP response header invalid,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP status 100-Continue already seen,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA HTTP unable to match response to request,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA SMTP data command rejected,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA SMTP invalid pipelined sequence,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA SMTP invalid reply,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA SMTP no server welcome message,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA SMTP tls rejected,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS certificate invalid length,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS error message encountered,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS handshake invalid length,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid SNI length,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid certificate,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid handshake message,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid record type,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid record version,NON_MALICIOUS,ccdc_combined,unmappable,,none
+SURICATA TLS invalid record/traffic,NON_MALICIOUS,ccdc_combined,unmappable,,none
+"SURICATA TLS overflow heartbeat encountered, possible exploit attempt (heartbleed)",NON_MALICIOUS,ccdc_combined,unmappable,,none
