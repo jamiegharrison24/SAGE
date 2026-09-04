@@ -1,0 +1,89 @@
+signature,technique_ids,tactic_ids
+ET EXPLOIT FortiOS SSL VPN - Information Disclosure (CVE-2018-13379),T1082,TA0007
+ET EXPLOIT FortiOS SSL VPN - Remote Code Execution (CVE-2018-13383),T1190,TA0001
+ET EXPLOIT Possible Internet Explorer VBscript failure to handle error case information disclosure CVE-2014-6332 Common Construct M2,T1082,TA0007
+ET EXPLOIT SolusVM 1.13.03 SQL injection,T1190,TA0001
+ET MOBILE_MALWARE Android/Code4hk.A Checkin,T1041,TA0010
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,T1570,TA0008
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,T1570,TA0008
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement,T1570,TA0008
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement,T1570,TA0008
+ET SCAN COMMIX Command injection scan attempt,T1210,TA0008
+ET SCAN Havij SQL Injection Tool User-Agent Inbound,T1190,TA0001
+ET SCAN Sqlmap SQL Injection Scan,T1190,TA0001
+ET SCAN ntop-ng Authentication Bypass via Session ID Guessing,T1190,TA0001
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal,T1083,TA0007
+ET WEB_SERVER DD-WRT Information Disclosure Attempt,T1082,TA0007
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SERVER PHP Possible https Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SERVER PHP Possible php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt,T1190,TA0001
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt,T1190,TA0001
+ET WEB_SERVER SELECT USER SQL Injection Attempt in URI,T1190,TA0001
+ET WEB_SERVER SQL Injection Local File Access Attempt Using LOAD_FILE,T1190,TA0001
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS BASE base_stat_common.php remote file include,T1190,TA0001
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Enthusiast path parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Fork-CMS js.php module parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS FormMailer formmailer.admin.inc.php BASE_DIR Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Golem Gaming Portal root_path Parameter Remote File inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Horde type Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS JobHut browse.php pk Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla 3.7.0 - Sql Injection (CVE-2017-8917),T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla AjaxChat Component ajcuser.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Dada Mail Manager Component config.dadamail.php GLOBALS Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Onguma Time Sheet Component onguma.class.php mosConfig_absolute_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Simple RSS Reader admin.rssreader.php mosConfig_live_site Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla swMenuPro ImageManager.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS KR-Web krgourl.php DOCUMENT_ROOT Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS KingCMS menu.php CONFIG Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS MAXcms fm_includes_special Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS MODx CMS snippet.reflect.php reflect_base Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Mambo Component com_smf smf.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Noname Media Photo Galerie Standard SQL Injection Attempt -- view.php id SELECT,T1190,TA0001
+ET WEB_SPECIFIC_APPS OBOphiX fonctions_racine.php chemin_lib parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS OpenX phpAdsNew phpAds_geoPlugin Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Opencadastre soustab.php script Local File Inclusion Vulnerability,T1190,TA0001
+ET WEB_SPECIFIC_APPS Oracle JSF2 Path Traversal Attempt,T1083,TA0007
+ET WEB_SPECIFIC_APPS OrangeHRM path Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHP Aardvark Topsites PHP CONFIG PATH Remote File Include Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHP Classifieds class.phpmailer.php lang_path Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHP phpMyAgenda rootagenda Remote File Include Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHPOF DB_AdoDB.Class.PHP PHPOF_INCLUDE_PATH parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS PithCMS oldnews_reader.php lang Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PointComma pctemplate.php pcConfig Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible Mambo/Joomla! com_koesubmit Component 'koesubmit.php' Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible OpenSiteAdmin pageHeader.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible eFront database.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS ProdLer prodler.class.php sPath Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS SAPID get_infochannel.inc.php Remote File inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS SERWeb load_lang.php configdir Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS SERWeb main_prepend.php functionsdir Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site showcategory.php cid Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site software-description.php id Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Sisplet CMS komentar.php site_path Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS TECHNOTE shop_this_skin_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Turnkeyforms Software Directory showcategory.php cid parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Ve-EDIT edit_htmlarea.php highlighter Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS WHMCompleteSolution templatefile Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS YapBB class_yapbbcooker.php cfgIncludeDirectory Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Zen Cart loader_file Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS axdcms aXconf Parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS evision cms addplain.php module parameter Local File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php icerikyolu Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php sayfaid Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS phpSkelSite theme parameter remote file inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS phptraverse mp3_id.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,TA0001
+GPL EXPLOIT unicode directory traversal attempt,T1083,TA0007
+GPL FTP LIST directory traversal attempt,T1083,TA0007
+GPL WEB_SERVER Tomcat directory traversal attempt,T1083,TA0007

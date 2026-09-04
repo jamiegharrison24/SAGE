@@ -1,0 +1,13 @@
+signature,matched_aliases,technique_ids
+ET SCAN Havij SQL Injection Tool User-Agent Inbound,havij,T1190
+"ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration",nbtstat,T1016;T1049
+"ET SCAN NMAP -f -sXET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration",nbtstat,T1016;T1049
+ET SCAN Possible SQLMAP Scan,sqlmap,T1190
+ET SCAN Sqlmap SQL Injection Scan,sqlmap,T1190
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output,ipconfig,T1016
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND,nbtstat,T1016;T1049
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND,nbtstat,T1016;T1049
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND,nbtstat,T1016;T1049
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND,nbtstat,T1016;T1049
+ET TROJAN Windows netstat Microsoft Windows DOS prompt command exit OUTBOUND,netstat,T1049
+ETPRO WEB_SERVER SQLMap Scan Tool User Agent,sqlmap,T1190

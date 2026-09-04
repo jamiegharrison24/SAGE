@@ -26,3 +26,6 @@ venv/
 
 # MITRE mapping experiment: cached raw STIX bundle (large, re-downloadable)
 experiments/mitre_mapping/enterprise-attack.json
+
+# MITRE mapping experiment (tiered approach): cached ET Open ruleset (large, re-downloadable)
+experiments/mitre_mapping/tiered_approach/emerging-all.rules
