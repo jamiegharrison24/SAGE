@@ -1,0 +1,774 @@
+signature,predicted_technique_1,score_1,predicted_technique_2,score_2,predicted_technique_3,score_3
+BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt,T1189,0.5277,T1190,-0.6218,T1078,-0.7872
+BROWSER-CHROME Google Chrome FileReader use after free attempt,T1189,0.5986,T1133,-0.6926,T1036.006,-0.7155
+BROWSER-CHROME V8 JavaScript engine Out-of-Memory denial of service attempt,T1529,0.0737,T1565.001,0.0138,T1495,0.0011
+ET ATTACK_RESPONSE Frequent HTTP 401 Unauthorized - Possible Brute Force Attack,T1110,-0.1541,T1105,-0.3247,T1190,-0.5340
+ET ATTACK_RESPONSE Metasploit Meterpreter Reverse HTTPS certificate,T1105,0.1468,T1570,-0.3251,T1134.002,-0.3641
+ET ATTACK_RESPONSE Net User Command Response,T1105,0.6417,T1210,-0.4923,T1570,-0.5473
+ET ATTACK_RESPONSE Output of id command from HTTP server,T1105,-0.0925,T1505,-0.1421,T1210,-0.8109
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style),T1505,0.7888,T1204.001,-0.5045,T1552.001,-0.6226
+ET ATTACK_RESPONSE Possible BeEF HTTP Headers Inbound,T1105,0.1111,T1505,-0.1218,T1570,-0.6045
+ET ATTACK_RESPONSE python shell spawn attempt,T1105,-0.0831,T1059,-0.0892,T1210,-0.4895
+ET CHAT Facebook Chat using XMPP,T1685,-0.8416,T1055,-0.8479,T1547.010,-0.9093
+ET CHAT Google IM traffic Jabber client sign-on,T1189,-0.2620,T1078.004,-0.2870,T1078,-0.5912
+ET CHAT Google Talk (Jabber) Client Login,T1078.004,-0.0801,T1189,-0.3620,T1071,-0.7712
+ET CHAT IRC JOIN command,T1210,-0.6078,T1078.004,-0.6320,T1027,-0.8763
+ET CHAT IRC NICK command,T1210,-0.5097,T1041,-0.8760,T1059.004,-0.9046
+ET CHAT IRC PRIVMSG command,T1210,-0.5447,T1059.004,-0.8647,T1573,-0.9357
+ET CHAT IRC USER command,T1210,-0.6466,T1098,-0.7165,T1027,-0.7723
+ET CHAT IRC authorization message,T1190,-0.3973,T1588.001,-0.6325,T1573,-0.7328
+ET CHAT MSN status change,T1218,-0.5333,T1685,-0.5644,T1222.002,-0.7541
+ET CHAT Skype User-Agent detected,T1071.001,-0.0970,T1021,-0.1332,T1190,-0.5919
+ET CHAT Skype VOIP Checking Version (Startup),T1547.001,-0.3306,T1059.001,-0.4573,T1547,-0.6113
+ET CINS Active Threat Intelligence Poor Reputation IP group 100,T1078,0.3311,T1190,-0.2719,T1059.004,-0.7878
+ET CINS Active Threat Intelligence Poor Reputation IP group 44,T1078,0.2472,T1190,-0.2431,T1059.004,-0.8251
+ET CINS Active Threat Intelligence Poor Reputation IP group 66,T1078,0.2508,T1190,-0.2537,T1059.004,-0.8241
+ET CINS Active Threat Intelligence Poor Reputation IP group 91,T1078,0.2450,T1190,-0.2563,T1059.004,-0.8266
+ET CNC Ransomware Tracker Reported CnC Server group 101,T1486,0.4919,T1095,-0.6940,T1059.004,-0.7714
+ET COMPROMISED Known Compromised or Hostile Host Traffic group 9,T1505,-0.6463,T1189,-0.6583,T1041,-0.6848
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (gggatat456.com),T1033,-0.5469,T1041,-0.5960,T1105,-0.6313
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (xxxatat456.com),T1033,-0.5435,T1041,-0.6241,T1105,-0.6310
+ET CURRENT_EVENTS Malformed HeartBeat Request,T1041,0.1045,T1033,-0.7234,T1112,-0.8404
+ET CURRENT_EVENTS Malformed HeartBeat Response,T1041,0.2421,T1033,-0.7814,T1566,-0.8089
+ET CURRENT_EVENTS Nuclear EK Landing Apr 03 2015,T1041,-0.5890,T1033,-0.7081,T1566,-0.7594
+ET CURRENT_EVENTS Nuclear EK Landing Apr 08 2015,T1566,-0.6099,T1041,-0.6192,T1033,-0.7049
+ET CURRENT_EVENTS Nuclear EK Landing Apr 22 2015,T1041,-0.6083,T1033,-0.7098,T1566,-0.7584
+ET CURRENT_EVENTS Possible Magnitude IE EK Payload Nov 8 2013,T1566,-0.6371,T1033,-0.6430,T1190,-0.8104
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Client Init Vuln Server),T1041,0.0858,T1190,-0.6847,T1219,-0.7928
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Server Init Vuln Client),T1041,0.0904,T1190,-0.6972,T1219,-0.7781
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port),T1071,-0.6727,T1041,-0.7265,T1098,-0.7764
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port),T1071,-0.6749,T1041,-0.7282,T1098,-0.7764
+ET CURRENT_EVENTS Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),T1566,-0.5677,T1041,-0.6597,T1190,-0.7146
+ET CURRENT_EVENTS QNAP Shellshock CVE-2014-6271,T1033,-0.5363,T1041,-0.6537,T1112,-0.7144
+ET CURRENT_EVENTS SUSPICIOUS Firesale gTLD EXE DL with no Referer June 13 2016,T1566,-0.1568,T1203,-0.4195,T1112,-0.4343
+ET CURRENT_EVENTS Terse alphanumeric executable downloader high likelihood of being hostile,T1105,-0.4032,T1041,-0.7121,T1566,-0.7376
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct M2 Feb 06 2015,T1105,-0.1369,T1041,-0.4071,T1566,-0.4532
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct Sept 15 2015,T1105,-0.1404,T1041,-0.3602,T1566,-0.5348
+ET DNS Query for .su TLD (Soviet Union) Often Malware Related,T1071,-0.3522,T1566,-0.6225,T1203,-0.6803
+ET DNS Query to a *.pw domain - Likely Hostile,T1568,-0.0463,T1566,-0.5765,T1570,-0.7721
+ET DNS Query to a .tk domain - Likely Hostile,T1568,-0.1124,T1566,-0.5449,T1570,-0.7836
+ET DOS Catalyst memory leak attack,T1565.001,0.0811,T1495,0.0521,T1529,0.0171
+ET DOS Cisco 4200 Wireless Lan Controller Long Authorisation Denial of Service Attempt,T1495,0.5390,T1565.001,0.5051,T1529,0.4968
+ET DOS Cisco 514 UDP flood DoS,T1495,0.5103,T1529,0.5073,T1565.001,0.4739
+ET DOS Cisco Router HTTP DoS,T1495,0.6058,T1529,0.5912,T1565.001,0.5672
+ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port,T1495,-0.2808,T1529,-0.3554,T1565.001,-0.3572
+ET DOS DNS BIND 9 Dynamic Update DoS attempt,T1565.001,0.3167,T1495,0.3041,T1529,0.2509
+ET DOS Excessive SMTP MAIL-FROM DDoS,T1495,0.2413,T1565.001,0.2320,T1529,0.1543
+ET DOS FreeBSD NFS RPC Kernel Panic,T1495,0.1926,T1529,0.1705,T1565.001,0.1386
+ET DOS HOIC with booster inbound,T1495,0.3042,T1565.001,0.2634,T1529,0.2312
+ET DOS HTTP GET AAAAAAAA Likely FireFlood,T1495,0.0741,T1529,0.0231,T1190,0.0230
+ET DOS IBM DB2 kuddb2 Remote Denial of Service Attempt,T1565.001,0.6955,T1495,0.6198,T1529,0.5846
+ET DOS IBM Tivoli Endpoint Buffer Overflow Attempt,T1190,0.5585,T1495,-0.0170,T1565.001,-0.0388
+ET DOS ICMP Path MTU lowered below acceptable threshold,T1495,0.1431,T1529,0.0925,T1565.001,0.0653
+ET DOS LibuPnP CVE-2012-5963 ST UDN Buffer Overflow,T1190,0.6727,T1565.001,0.1118,T1495,0.0989
+ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x02,T1495,-0.2013,T1565.001,-0.2368,T1529,-0.3132
+ET DOS MC-SQLR Response Outbound Possible DDoS Participation,T1495,0.0414,T1565.001,0.0299,T1529,0.0057
+ET DOS Microsoft Remote Desktop (RDP) Syn then Reset 30 Second DoS Attempt,T1190,0.1075,T1021.001,-0.1091,T1495,-0.2900
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Integer indef DoS Attempt,T1190,0.1091,T1021.001,-0.1660,T1112,-0.2670
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Negative Integer indef DoS Attempt,T1190,0.1214,T1021.001,-0.2086,T1112,-0.2698
+ET DOS Microsoft Streaming Server Malformed Request,T1190,0.2701,T1529,0.0192,T1495,0.0046
+ET DOS Microsoft Windows 7 ICMPv6 Router Advertisement Flood,T1190,-0.1201,T1495,-0.2002,T1529,-0.2332
+ET DOS Microsoft Windows LSASS Remote Memory Corruption (CVE-2017-0004),T1189,0.1031,T1190,0.0909,T1003.001,-0.3139
+ET DOS Miniupnpd M-SEARCH Buffer Overflow CVE-2013-0229,T1190,0.7294,T1565.001,0.0520,T1495,0.0448
+ET DOS Netgear DG632 Web Management Denial Of Service Attempt,T1565.001,0.6228,T1495,0.5679,T1529,0.5101
+ET DOS NetrWkstaUserEnum Request with large Preferred Max Len,T1529,0.0999,T1495,0.0813,T1565.001,-0.0097
+ET DOS Outbound Low Orbit Ion Cannon LOIC Tool Internal User May Be Participating in DDOS,T1495,-0.1545,T1565.001,-0.1999,T1529,-0.2189
+ET DOS Possible Cisco ASA 5500 Series Adaptive Security Appliance Remote SIP Inspection Device Reload Denial of Service Attempt,T1565.001,0.3178,T1495,0.2138,T1529,0.1902
+ET DOS Possible MYSQL GeomFromWKB() function Denial Of Service Attempt,T1565.001,0.4972,T1495,0.4794,T1529,0.4338
+ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service AttemptET DOS Possible MySQL ALTER DATABASE Denial Of Service Attempt,T1190,0.5900,T1565.001,0.3780,T1495,0.3518
+ET DOS Possible Memcached DDoS Amplification Query (set),T1495,0.1855,T1565.001,0.1412,T1190,0.1158
+ET DOS Possible Microsoft SQL Server Remote Denial Of Service Attempt,T1190,1.0089,T1565.001,0.3958,T1495,0.3467
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02,T1495,-0.2074,T1190,-0.2262,T1565.001,-0.2407
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x03,T1495,-0.2076,T1565.001,-0.2409,T1190,-0.2537
+ET DOS Possible SMBLoris NBSS Length Mem Exhaustion Vuln Inbound,T1190,-0.0179,T1495,-0.1032,T1529,-0.1251
+ET DOS Possible SSDP Amplification Scan in Progress,T1190,0.4917,T1495,0.1182,T1565.001,0.0618
+ET DOS Possible SolarWinds TFTP Server Read Request Denial Of Service Attempt,T1190,0.7190,T1565.001,0.3604,T1529,0.3217
+ET DOS Possible VNC ClientCutText Message Denial of Service/Memory Corruption Attempt,T1565.001,0.1883,T1495,0.1729,T1529,0.1068
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 reply),T1565.001,0.4946,T1529,0.3619,T1495,0.3386
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 request),T1565.001,0.5290,T1529,0.4471,T1495,0.3707
+ET DOS Potential Tsunami SYN Flood Denial Of Service Attempt,T1565.001,0.6898,T1529,0.5650,T1495,0.5129
+ET DOS SMBLoris NBSS Length Mem Exhaustion Attempt (PoC Based),T1190,0.2765,T1495,-0.0156,T1529,-0.0231
+ET DOS SolarWinds TFTP Server Long Write Request Denial Of Service Attempt,T1190,0.7143,T1565.001,0.4384,T1529,0.4080
+ET DOS Trojan.BlackRev V1.Botnet HTTP Login POST Flood Traffic Inbound,T1190,-0.1883,T1495,-0.2788,T1565.001,-0.3224
+ET DOS ntop Basic-Auth DOS inbound,T1565.001,0.5245,T1495,0.4849,T1529,0.4366
+ET DOS ntop Basic-Auth DOS outbound,T1565.001,0.5480,T1495,0.5126,T1529,0.4838
+ET EXPLOIT Cisco Smart Install Exploitation Tool - ChangeConfig,T1190,0.2978,T1685,-0.2663,T1018,-0.5141
+ET EXPLOIT Cisco Smart Install Exploitation Tool - GetConfig,T1190,0.5388,T1018,-0.3639,T1685,-0.5936
+ET EXPLOIT Exim/Dovecot Possible MAIL FROM Command Execution,T1190,-0.4096,T1210,-0.5348,T1059,-0.6497
+ET EXPLOIT F5 BIG-IP rsync cmi authorized_keys successful exfiltration,T1190,0.5626,T1203,-0.6072,T1189,-0.6955
+ET EXPLOIT FortiOS SSL VPN - Information Disclosure (CVE-2018-13379),T1082,0.9964,T1190,-0.3601,T1133,-0.8643
+ET EXPLOIT FortiOS SSL VPN - Pre-Auth Messages Payload Buffer Overflow (CVE-2018-13381),T1190,1.0839,T1059,-0.8239,T1083,-0.8463
+ET EXPLOIT FortiOS SSL VPN - Remote Code Execution (CVE-2018-13383),T1190,1.3116,T1133,-0.5404,T1083,-0.6555
+ET EXPLOIT IBM WebSphere - RCE Java Deserialization,T1190,2.1416,T1218.005,-1.0148,T1574.006,-1.0308
+ET EXPLOIT LastPass RCE Attempt,T1190,1.6903,T1555.005,-0.6768,T1216,-0.9435
+ET EXPLOIT Metasploit Random Base CharCode JS Encoded String,T1189,0.0581,T1190,-0.0037,T1027,-0.2616
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1,T1190,1.3313,T1210,0.4415,T1207,-1.0134
+ET EXPLOIT Possible CVE-2014-6271 exploit attempt via malicious DNS,T1190,0.7826,T1210,-0.4925,T1189,-0.8201
+ET EXPLOIT Possible GoldenPac Priv Esc in-use,T1190,-0.0221,T1574.005,-0.4941,T1615,-0.5039
+ET EXPLOIT Possible IE Scripting Engine Memory Corruption Vulnerability (CVE-2019-0752),T1190,0.3407,T1189,0.2799,T1499.001,-0.8589
+ET EXPLOIT Possible Internet Explorer VBscript failure to handle error case information disclosure CVE-2014-6332 Common Construct M2,T1082,0.9944,T1027,-0.4609,T1190,-0.5707
+ET EXPLOIT Possible MySQL cnf overwrite CVE-2016-6662 Attempt,T1190,1.1328,T1485,-0.1932,T1213,-0.4229
+ET EXPLOIT Possible OpenVPN CVE-2014- 6271 attempt,T1190,0.4663,T1210,-0.2831,T1133,-0.6025
+ET EXPLOIT Possible OpenVPN CVE-2014-6271 attempt,T1190,1.1197,T1133,-0.4765,T1210,-0.6205
+ET EXPLOIT Possible Palo Alto SSL VPN sslmgr Format String Vulnerability (Inbound),T1190,0.0137,T1082,-0.7198,T1189,-0.7567
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt,T1190,1.6026,T1210,-0.2990,T1189,-0.7899
+ET EXPLOIT Possible Pure-FTPd CVE-2014-6271 attempt,T1190,1.2578,T1210,-0.5532,T1207,-0.9425
+ET EXPLOIT Possible Qmail CVE-2014-6271 Mail From attempt,T1190,0.9994,T1210,-0.4885,T1189,-0.7424
+ET EXPLOIT Possible Redirect to SMB exploit attempt - 303,T1190,0.5826,T1189,-0.2972,T1210,-0.6120
+ET EXPLOIT Possible SpamAssassin Milter Plugin Remote Arbitrary Command Injection Attempt,T1210,0.5169,T1190,0.1592,T1202,-1.0258
+ET EXPLOIT Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),T1190,0.1560,T1505,-0.7408,T1566,-0.7912
+ET EXPLOIT Possible iOS Pegasus Safari Exploit (CVE-2016-4657),T1190,1.0656,T1189,-0.6842,T1210,-0.7354
+ET EXPLOIT Potential Internet Explorer Use After Free CVE-2013-3163 Exploit URI Struct 1,T1189,0.5484,T1190,0.3097,T1021.003,-0.7266
+ET EXPLOIT QNAP Shellshock script retrieval,T1190,-0.1226,T1078.004,-0.3063,T1189,-0.5331
+ET EXPLOIT REDIS Attempted SSH Key Upload,T1190,0.1271,T1021.004,-0.7019,T1213,-0.7948
+ET EXPLOIT Seagate Business NAS Unauthenticated Remote Command Execution,T1190,0.5100,T1210,-0.1438,T1021.006,-0.8217
+ET EXPLOIT Serialized Java Object Calling Common Collection Function,T1190,0.5032,T1189,-0.5800,T1114.001,-0.8218
+ET EXPLOIT SolusVM 1.13.03 SQL injection,T1190,1.2350,T1210,-0.5739,T1041,-0.9640
+ET EXPLOIT TrendMicro node.js HTTP RCE Exploit Inbound (openUrlInDefaultBrowser),T1190,0.4134,T1189,-0.3069,T1528,-0.7477
+ET FTP Suspicious Quotation Mark Usage in FTP Username,T1190,-0.2112,T1202,-0.4314,T1059,-0.4651
+ET INFO Executable Download from dotted-quad Host,T1105,0.2841,T1059,0.0060,T1102,-0.2357
+ET INFO NetSSH SSH Version String Hardcoded in Metasploit,T1078,-0.1624,T1021.002,-0.3744,T1021.004,-0.3891
+ET INFO Possible Windows executable sent when remote host claims to send a Text File,T1021.006,-0.5688,T1564,-0.7378,T1105,-0.7586
+ET INFO SUSPICIOUS Dotted Quad Host MZ Response,T1059,0.6725,T1102,0.3719,T1566,-0.7609
+ET INFO WinHttp AutoProxy Request wpad.dat Possible BadTunnel,T1090,0.1150,T1572,-0.2129,T1071.001,-0.6112
+ET INFO Windows OS Submitting USB Metadata to Microsoft,T1027,-0.3851,T1036,-0.4854,T1036.003,-0.5353
+ET MALWARE Common Adware Library ISX User Agent Detected,T1071,-0.1634,T1496,-0.3529,T1021,-0.4322
+ET MALWARE Suspicious User-Agent (1 space),T1071.001,0.2156,T1071,0.0043,T1590,-0.8272
+ET MALWARE W32/OpenCandy Adware Checkin,T1041,0.4319,T1496,-0.0142,T1005,-0.1541
+ET MOBILE_MALWARE Android/Code4hk.A Checkin,T1041,1.2455,T1583,-0.7207,T1496,-0.9558
+ET P2P BitTorrent DHT announce_peers request,T1095,-0.5679,T1571,-0.5980,T1486,-0.6277
+ET P2P BitTorrent DHT nodes reply,T1095,-0.6668,T1571,-0.7099,T1486,-0.7140
+ET P2P BitTorrent DHT ping request,T1005,-0.5808,T1486,-0.7178,T1140,-0.7459
+ET P2P BitTorrent peer sync,T1218,0.3611,T1041,-0.4898,T1095,-0.7345
+ET P2P Bittorrent P2P Client User-Agent (Transmission/1.x),T1071.001,0.1214,T1110,-0.3166,T1071,-0.5590
+ET P2P Edonkey Publicize File ACK,T1190,-0.6809,T1027.003,-0.8916,T1078,-0.8971
+ET P2P TOR 1.0 Outbound Circuit Traffic,T1041,-0.2174,T1048,-0.5378,T1090.003,-0.6030
+ET POLICY Application Crash Report Sent to Microsoft,T1112,-0.3149,T1528,-0.3413,T1204.002,-0.4748
+ET POLICY Cisco Device New Config Built,T1201,-0.1723,T1567,-0.2916,T1078,-0.3056
+ET POLICY Cisco Device in Config Mode,T1201,-0.1506,T1567,-0.2080,T1071,-0.2911
+ET POLICY Cleartext WordPress Login,T1190,-0.6839,T1078.004,-0.7075,T1098,-0.8024
+ET POLICY DNS Query For XXX Adult Site Top Level Domain,T1567,-0.4638,T1112,-0.5088,T1189,-0.5758
+ET POLICY DNS Update From External net,T1614,0.1251,T1584,-0.2422,T1189,-0.6811
+ET POLICY Dropbox Client Broadcasting,T1567.002,-0.1001,T1190,-0.4800,T1105,-0.4981
+ET POLICY Dropbox DNS Lookup - Possible Offsite File Backup in Use,T1567.002,0.2799,T1570,-0.5567,T1567,-0.5980
+ET POLICY Dropbox.com Offsite File Backup in Use,T1567.002,0.4939,T1190,-0.4544,T1567,-0.5493
+ET POLICY DynDNS CheckIp External IP Address Server Response,T1614,0.2457,T1528,-0.7378,T1090,-0.8116
+ET POLICY Executable and linking format (ELF) file download,T1105,0.8837,T1218,-0.1769,T1564,-0.6199
+ET POLICY Executable and linking format (ELF) file download Over HTTP,T1105,0.6470,T1218,-0.2644,T1082,-0.6557
+ET POLICY Executable served from Amazon S3,T1564,-0.3182,T1105,-0.6690,T1059.009,-0.7711
+ET POLICY External Unencrypted Connection to BASE Console,T1614,-0.2340,T1102,-0.7606,T1070,-0.7677
+ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management,T1071.001,0.2934,T1583,-0.4632,T1593,-0.5762
+ET POLICY GNU/Linux YUM User-Agent Outbound likely related to package management,T1071.001,0.2117,T1593,-0.5690,T1496,-0.6892
+ET POLICY HTTP Request to a *.tk domain,T1568,-0.0869,T1567,-0.3654,T1484.001,-0.6164
+ET POLICY HTTP traffic on port 443 (POST),T1071,-0.2323,T1568,-0.7005,T1547.010,-0.7192
+ET POLICY Http Client Body contains pass= in cleartext,T1190,-0.3849,T1570,-0.6464,T1550.002,-0.7780
+ET POLICY Http Client Body contains passwd= in cleartext,T1190,-0.4472,T1570,-0.6919,T1204.001,-0.8091
+ET POLICY Http Client Body contains pwd= in cleartext,T1190,-0.5314,T1570,-0.6742,T1572,-0.8272
+ET POLICY IP Check Domain (icanhazip. com in HTTP Host),T1614,-0.5606,T1568,-0.8262,T1205,-0.8807
+ET POLICY IP Check Domain (whatismyip in HTTP Host),T1614,-0.4116,T1590,-0.8521,T1486,-0.8523
+ET POLICY Incoming Basic Auth Base64 HTTP Password detected unencrypted,T1027,-0.3783,T1190,-0.4256,T1558,-0.5338
+ET POLICY MS Remote Desktop Administrator Login Request,T1078,-0.0780,T1021.001,-0.2489,T1136.001,-0.3260
+ET POLICY MS Terminal Server Root login,T1190,0.1502,T1078.004,-0.1551,T1210,-0.2902
+ET POLICY Metasploit Framework Checking For Update,T1189,-0.1509,T1570,-0.1843,T1567,-0.5165
+ET POLICY OpenVPN Update Check,T1205,-0.1541,T1219,-0.4873,T1572,-0.5738
+ET POLICY Outbound MSSQL Connection to Non-Standard Port - Likely Malware,T1041,-0.1768,T1547.010,-0.3039,T1021.001,-0.5333
+ET POLICY Outdated Flash Version M1,T1567,-0.5218,T1036.005,-0.6533,T1190,-0.6633
+ET POLICY Outdated Flash Version M2,T1041,-0.6491,T1036.005,-0.6534,T1190,-0.6941
+ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted,T1027,-0.4143,T1190,-0.4653,T1558,-0.5794
+ET POLICY PDF With Embedded File,T1027,-0.2988,T1190,-0.4300,T1548,-0.6000
+ET POLICY PE EXE or DLL Windows file download HTTP,T1105,0.1515,T1218,-0.0766,T1489,-0.6459
+ET POLICY POSSIBLE Web Crawl using Curl,T1567,-0.4635,T1105,-0.6699,T1593,-0.6921
+ET POLICY POSSIBLE Web Crawl using Wget,T1593,-0.7072,T1048.003,-0.7106,T1570,-0.7595
+ET POLICY Possible HTA Application Download,T1489,-0.4185,T1218.005,-0.5631,T1570,-0.6952
+ET POLICY Possible IP Check api.ipify.org,T1614,-0.4630,T1570,-0.7353,T1190,-0.8010
+ET POLICY Possible Kali Linux hostname in DHCP Request Packet,T1059,-0.6131,T1570,-0.7170,T1202,-0.7177
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement,T1570,1.0987,T1021.002,-0.6068,T1021.003,-0.7231
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,T1570,0.9994,T1564.003,-0.6218,T1021.002,-0.9235
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,T1570,1.0866,T1546.013,-0.8897,T1021.002,-0.9440
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement,T1570,0.9996,T1059.001,-0.6929,T1112,-0.7787
+ET POLICY Proxy TRACE Request - inbound,T1095,-0.4471,T1090,-0.4541,T1105,-0.5032
+ET POLICY Python-urllib/ Suspicious User Agent,T1071.001,0.1227,T1046,-0.6759,T1048.003,-0.6927
+ET POLICY RDP connection confirm,T1021.001,0.1872,T1567,-0.3207,T1102,-0.5733
+ET POLICY SMB Executable File Transfer,T1567,-0.0515,T1570,-0.2923,T1564,-0.3992
+ET POLICY SMB Remote AT Scheduled Job Pipe Creation,T1053.002,-0.1813,T1570,-0.2378,T1053.005,-0.6730
+ET POLICY SMB2 NT Create AndX Request For a .bat File,T1570,-0.0925,T1567,-0.6387,T1059,-0.7139
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement,T1570,0.9995,T1112,-0.8004,T1021.003,-0.8795
+ET POLICY SMB2 NT Create AndX Request For a Powershell .ps1 File,T1570,-0.0610,T1105,-0.6107,T1059.001,-0.7390
+ET POLICY SMB2 NT Create AndX Request For an Executable File,T1570,-0.1430,T1105,-0.5760,T1564,-0.6105
+ET POLICY SMB2 Remote AT Scheduled Job Create Request,T1053.002,-0.3135,T1570,-0.3705,T1489,-0.7509
+ET POLICY SSLv3 inbound connection to server vulnerable to POODLE attack,T1105,-0.4050,T1548,-0.5441,T1082,-0.5569
+ET POLICY SSLv3 outbound connection from client vulnerable to POODLE attack,T1558,-0.3695,T1105,-0.4958,T1548,-0.5137
+ET POLICY Suspicious inbound to MSSQL port 1433,T1485,-0.0668,T1547.010,-0.5534,T1082,-0.6294
+ET POLICY Suspicious inbound to Oracle SQL port 1521,T1190,-0.3875,T1547.010,-0.5504,T1572,-0.6161
+ET POLICY Suspicious inbound to PostgreSQL port 5432,T1210,-0.0575,T1547.010,-0.6482,T1082,-0.7134
+ET POLICY Suspicious inbound to mSQL port 4333,T1547.010,-0.4262,T1190,-0.5478,T1571,-0.5506
+ET POLICY Suspicious inbound to mySQL port 3306,T1547.010,-0.5932,T1003,-0.5988,T1105,-0.6642
+ET POLICY TeamViewer Dyngate User-Agent,T1219.002,0.0362,T1071.001,-0.2001,T1593,-0.6083
+ET POLICY User-Agent (Launcher),T1071.001,-0.0149,T1593,-0.5124,T1564.003,-0.5911
+ET POLICY User-Agent (NSIS_Inetc (Mozilla)) - Sometimes used by hostile installers,T1071.001,-0.1474,T1190,-0.6298,T1548,-0.6563
+ET POLICY Vulnerable Java Version 1.7.x Detected,T1190,-0.2921,T1041,-0.5118,T1548,-0.6196
+ET POLICY curl User-Agent Outbound,T1071.001,0.5984,T1593,-0.1860,T1041,-0.6026
+ET POLICY libwww-perl User-Agent,T1071.001,0.0563,T1593,-0.5061,T1098,-0.5927
+ET SCAN Amap TCP Service Scan Detected,T1046,0.3573,T1190,0.0882,T1041,-0.6333
+ET SCAN Amap UDP Service Scan Detected,T1046,0.3526,T1190,0.0469,T1059,-0.5760
+ET SCAN Apache mod_deflate DoS via many multiple byte Range values,T1190,-0.1967,T1046,-0.8506,T1071,-0.9003
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1,T1665,0.0727,T1090,0.0524,T1190,-0.0892
+ET SCAN Behavioral Unusual Port 135 traffic Potential Scan or Infection,T1059,-0.1504,T1046,-0.3531,T1485,-0.6230
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection,T1059,-0.1440,T1046,-0.3500,T1485,-0.6208
+ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection,T1059,-0.1449,T1046,-0.3505,T1485,-0.6211
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection,T1059,-0.1436,T1046,-0.3498,T1485,-0.6206
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection,T1059,-0.1438,T1046,-0.3499,T1485,-0.6207
+ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection,T1059,-0.1521,T1046,-0.3539,T1485,-0.6237
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound),T1190,0.0296,T1046,-0.6306,T1059,-0.6781
+ET SCAN COMMIX Command injection scan attempt,T1210,0.9914,T1190,-0.5097,T1046,-0.5633
+ET SCAN Cisco Torch TFTP Scan,T1046,0.1384,T1190,0.0143,T1018,-0.0429
+ET SCAN DCERPC rpcmgmt ifids Unauthenticated BIND,T1190,0.0540,T1046,-0.6485,T1210,-0.9376
+ET SCAN DEBUG Method Request with Command,T1556,-0.5192,T1046,-0.5242,T1546.015,-0.5256
+ET SCAN DirBuster Scan in Progress,T1190,0.3786,T1046,0.0234,T1059,-0.6256
+ET SCAN DirBuster Web App Scan in Progress,T1190,0.6349,T1046,-0.0210,T1059,-0.6880
+ET SCAN DominoHunter Security Scan in Progress,T1190,0.4119,T1046,-0.2067,T1555,-0.7575
+ET SCAN External to Internal UPnP Request udp port 1900,T1614,-0.2945,T1190,-0.4636,T1046,-0.5593
+ET SCAN GET with HTML tag in start of URI seen with PHPMyAdmin scanning,T1046,0.0173,T1190,-0.3053,T1071,-0.5487
+ET SCAN Grendel-Scan Web Application Security Scan Detected,T1190,0.7254,T1046,-0.0878,T1059,-0.1129
+ET SCAN Grim's Ping ftp scanning tool,T1046,0.3554,T1190,0.1697,T1059,0.0759
+ET SCAN Havij SQL Injection Tool User-Agent Inbound,T1190,1.0180,T1110,-0.7470,T1071.001,-0.8810
+ET SCAN Httprecon Web Server Fingerprint Scan,T1190,0.8550,T1046,-0.1282,T1082,-0.5707
+ET SCAN Hydra User-Agent,T1071.001,-0.0130,T1110,-0.1461,T1190,-0.1495
+ET SCAN ICMP =XXXXXXXX Likely Precursor to Scan,T1190,-0.1210,T1046,-0.2112,T1048.003,-0.5373
+ET SCAN ICMP Delphi Likely Precursor to Scan,T1190,-0.0723,T1046,-0.1545,T1048.003,-0.4880
+ET SCAN ICMP PING IPTools,T1190,-0.1016,T1048.003,-0.1242,T1046,-0.3201
+ET SCAN Internet Scanning Project HTTP scan,T1046,0.5836,T1190,0.2121,T1071,-0.7052
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack,T1190,-0.0617,T1110,-0.0981,T1078,-0.4504
+ET SCAN MYSQL 4.1 brute force root login attempt,T1190,0.7079,T1110,-0.0826,T1078.004,-0.5589
+ET SCAN Medusa User-Agent,T1071.001,0.2155,T1190,0.0002,T1046,-0.1507
+ET SCAN Metasploit WMAP GET len 0 and type,T1190,-0.2947,T1046,-0.3714,T1021.002,-0.4745
+ET SCAN Modbus Scanning detected,T1046,0.4435,T1190,-0.0285,T1059,-0.2884
+ET SCAN Modified Sipvicious User-Agent Detected (sundayddr),T1190,-0.1603,T1098.003,-0.5136,T1071.001,-0.6261
+ET SCAN Multiple FTP Administrator Login Attempts from Single Source - Possible Brute Force Attempt,T1190,0.6794,T1078,-0.2935,T1110,-0.3145
+ET SCAN Multiple FTP Root Login Attempts from Single Source - Possible Brute Force Attempt,T1190,0.7038,T1078.004,-0.1053,T1110,-0.2209
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt,T1110,0.5657,T1190,0.3337,T1557,-0.4984
+ET SCAN MySQL Malicious Scanning 1,T1046,0.2577,T1190,0.0688,T1071,-0.6170
+"ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration",T1595.002,-0.6510,T1190,-0.6688,T1018,-0.6993
+ET SCAN NETWORK Incoming Masscan detected,T1059,-0.0059,T1190,-0.1304,T1046,-0.2221
+"ET SCAN NMAP -f -sXET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration",T1046,-0.1014,T1190,-0.4270,T1595.002,-0.7339
+ET SCAN NMAP -sA (1),T1046,1.3697,T1190,-0.6551,T1593,-0.8439
+ET SCAN NMAP -sO,T1046,1.3985,T1190,-0.6604,T1593,-0.8388
+ET SCAN NMAP -sS window 2048,T1046,0.8016,T1564.003,-0.4583,T1190,-0.8807
+ET SCAN NMAP OS Detection Probe,T1046,0.4969,T1529,-0.4311,T1059.001,-0.4356
+ET SCAN NMAP SIP Version Detect OPTIONS Scan,T1046,0.5553,T1190,-0.2012,T1123,-0.4459
+ET SCAN NMAP SIP Version Detection Script Activity,T1046,0.4840,T1059.001,-0.1329,T1123,-0.4339
+ET SCAN NMAP SQL Spider Scan,T1046,0.8812,T1190,0.2258,T1593,-0.8271
+ET SCAN NNG MS02-039 Exploit False Positive Generator - May Conceal A Genuine Attack,T1190,0.1442,T1036,-0.5468,T1046,-0.7522
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl),T1190,0.3997,T1059,0.1844,T1046,-0.4332
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl),T1190,0.4275,T1059,0.2357,T1046,-0.5002
+ET SCAN Nessus User Agent,T1071.001,0.3170,T1190,0.1760,T1046,-0.1386
+ET SCAN Netsparker Scan in Progress,T1190,0.3205,T1046,0.1453,T1059,-0.6177
+ET SCAN Nikto Web App Scan in Progress,T1190,0.6813,T1046,0.0269,T1059,-0.5960
+ET SCAN Nmap NSE Heartbleed Request,T1046,0.9170,T1190,-0.6794,T1593,-0.7469
+ET SCAN Nmap NSE Heartbleed Response,T1046,0.7108,T1059,-0.7801,T1071,-0.8362
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE),T1046,0.3666,T1190,-0.5147,T1593,-0.8221
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),T1046,0.1439,T1190,-0.5039,T1059.005,-0.6526
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server,T1190,-0.2014,T1102,-0.2198,T1685,-0.5374
+ET SCAN Non-Malicious SSH/SSL Scanner on the run,T1190,-0.2373,T1046,-0.4644,T1195,-0.4860
+ET SCAN OpenVAS User-Agent Inbound,T1190,0.1302,T1071.001,-0.0383,T1046,-0.2832
+ET SCAN PHP Attack Tool Morfeus F Scanner,T1046,0.2008,T1190,0.1570,T1557.001,-0.2503
+ET SCAN PRO Search Crawler Probe,T1593,-0.4619,T1190,-0.4745,T1046,-0.5428
+ET SCAN Possible Fast-Track Tool Spidering User-Agent Detected,T1190,-0.0049,T1021,-0.5942,T1090,-0.7011
+ET SCAN Possible Nmap User-Agent Observed,T1046,0.4582,T1190,-0.6459,T1071,-0.6554
+ET SCAN Possible SQLMAP Scan,T1190,0.5399,T1046,0.3914,T1593,-0.7349
+ET SCAN Possible Scanning for Vulnerable JBoss,T1046,0.0642,T1190,-0.0979,T1685,-0.7691
+ET SCAN Potential FTP Brute-Force attempt response,T1190,0.1317,T1059,0.0301,T1110,-0.0498
+ET SCAN Potential SSH Scan,T1190,0.3767,T1059,0.2191,T1046,-0.0204
+ET SCAN Potential SSH Scan OUTBOUND,T1190,0.1166,T1059,-0.0840,T1046,-0.2914
+ET SCAN Potential VNC Scan 5800-5820,T1190,0.0887,T1046,-0.2147,T1059,-0.3615
+ET SCAN Potential VNC Scan 5900-5920,T1190,0.0281,T1046,-0.1900,T1059,-0.3370
+ET SCAN Potential muieblackcat scanner double-URI and HTTP library,T1190,-0.0094,T1046,-0.3297,T1195,-0.4949
+ET SCAN Rapid IMAP Connections - Possible Brute Force Attack,T1110,-0.0427,T1190,-0.3685,T1046,-0.6881
+ET SCAN Rapid IMAPS Connections - Possible Brute Force Attack,T1110,-0.1184,T1190,-0.3187,T1046,-0.7392
+ET SCAN Rapid POP3 Connections - Possible Brute Force Attack,T1110,-0.1629,T1190,-0.3328,T1207,-0.7625
+ET SCAN Rapid POP3S Connections - Possible Brute Force Attack,T1110,-0.1676,T1190,-0.3349,T1207,-0.7645
+ET SCAN Redis SSH Key Overwrite Probing,T1190,-0.2874,T1485,-0.3046,T1572,-0.6509
+ET SCAN SFTP/FTP Password Exposure via sftp-config.json,T1190,0.2949,T1202,-0.7549,T1567,-0.8106
+ET SCAN SQLBrute SQL Scan Detected,T1190,0.9779,T1046,-0.0379,T1059,-0.0868
+ET SCAN Sipvicious Scan,T1046,0.4057,T1190,0.3113,T1018,-0.5204
+ET SCAN Sqlmap SQL Injection Scan,T1190,1.1068,T1046,-0.2596,T1210,-0.6145
+ET SCAN Suspicious User-Agent - get-minimal - Possible Vuln Scan,T1190,0.6482,T1046,-0.2361,T1071.001,-0.5439
+ET SCAN Suspicious inbound to MSSQL port 1433,T1485,-0.3146,T1547.010,-0.5721,T1190,-0.5925
+ET SCAN Suspicious inbound to Oracle SQL port 1521,T1190,0.3225,T1547.010,-0.5705,T1571,-0.6577
+ET SCAN Suspicious inbound to PostgreSQL port 5432,T1210,-0.0036,T1547.010,-0.6607,T1190,-0.6714
+ET SCAN Suspicious inbound to mSQL port 4333,T1190,0.2553,T1547.010,-0.4467,T1571,-0.5710
+ET SCAN Suspicious inbound to mySQL port 3306,T1190,-0.0641,T1590,-0.5281,T1547.010,-0.5992
+"ET SCAN Unusually Fast 400 Error Messages (Bad Request), Possible Web Application Scan",T1190,0.8325,T1046,-0.6710,T1593,-0.8711
+"ET SCAN Unusually Fast 403 Error Messages, Possible Web Application Scan",T1190,1.0623,T1046,-0.5727,T1090,-0.8175
+"ET SCAN Unusually Fast 404 Error Messages (Page Not Found), Possible Web Application Scan/Directory Guessing Attack",T1190,0.5788,T1552,-0.7983,T1046,-0.8040
+ET SCAN WSFuzzer Web Application Fuzzing,T1190,0.6859,T1489,-0.3115,T1046,-0.3976
+ET SCAN Wapiti Web Server Vulnerability Scan,T1190,0.9119,T1046,0.0039,T1499.001,-0.6617
+ET SCAN Wikto Backend Data Miner Scan,T1046,0.1892,T1190,0.0878,T1496,-0.5477
+ET SCAN Wikto Scan,T1046,0.5060,T1190,0.4407,T1059,-0.5398
+ET SCAN ntop-ng Authentication Bypass via Session ID Guessing,T1190,0.7689,T1553.001,-0.8241,T1018,-0.8697
+ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY),T1016,0.1645,T1105,-0.2095,T1490,-0.4215
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI,T1190,-0.2225,T1016,-0.5229,T1041,-0.6442
+ET SNMP Samsung Printer SNMP Hardcode RW Community String,T1016,-0.1237,T1190,-0.1692,T1021,-0.6533
+ET SNMP missing community string attempt 1,T1190,-0.4082,T1016,-0.4620,T1078,-0.4934
+ET TFTP Outbound TFTP Error Message,T1041,0.5880,T1190,0.0859,T1210,-0.5215
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 128,T1090.003,-0.5079,T1048,-0.5290,T1219,-0.7686
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 155,T1090.003,-0.5081,T1048,-0.5293,T1219,-0.7714
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 271,T1090.003,-0.5102,T1048,-0.5299,T1219,-0.7706
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 285,T1090.003,-0.5101,T1048,-0.5299,T1219,-0.7713
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 328,T1090.003,-0.5098,T1048,-0.5298,T1219,-0.7696
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 519,T1090.003,-0.5100,T1048,-0.5298,T1219,-0.7696
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 595,T1090.003,-0.5194,T1048,-0.5334,T1219,-0.7745
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 615,T1090.003,-0.5096,T1048,-0.5303,T1219,-0.7698
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 684,T1090.003,-0.5113,T1048,-0.5304,T1219,-0.7704
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing,T1105,-0.0741,T1041,-0.6056,T1036.003,-0.7276
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing *nix,T1105,-0.0745,T1041,-0.6876,T1036.003,-0.7342
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output,T1041,-0.4597,T1505,-0.5293,T1105,-0.6162
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - net command output,T1041,-0.2868,T1105,-0.4340,T1505,-0.5271
+ET TROJAN ATTACKER IRCBot - The command completed successfully - PRIVMSG Response,T1105,-0.2583,T1041,-0.4191,T1210,-0.6704
+ET TROJAN Backdoor family PCRat/Gh0st CnC traffic (OUTBOUND) 106,T1041,0.3567,T1568,-0.8373,T1190,-0.8393
+ET TROJAN DDoS.XOR Checkin,T1041,0.3729,T1027,-0.7408,T1573,-0.7990
+ET TROJAN Double HTTP/1.1 Header Inbound - Likely Hostile Traffic,T1041,0.1811,T1027,-0.6759,T1566,-0.6968
+ET TROJAN HTTP Executable Download from suspicious domain with direct request/fake browser (multiple families) ,T1105,0.7308,T1566,-0.5011,T1204.002,-0.5613
+ET TROJAN HackerDefender Root Kit Remote Connection Attempt Detected,T1021,-0.4472,T1685,-0.4522,T1558,-0.6592
+ET TROJAN Miuref/Boaxxe Checkin,T1041,0.1991,T1573,-0.7659,T1496,-0.8066
+ET TROJAN NgrBot IRC CnC Channel Join,T1041,-0.5232,T1112,-0.5878,T1078.004,-0.7009
+ET TROJAN Possible Metasploit Payload Common Construct Bind_API (from server),T1190,-0.3388,T1189,-0.4410,T1570,-0.6598
+ET TROJAN Possible NanoCore C2 60B,T1041,0.0698,T1071,-0.4866,T1528,-0.6461
+ET TROJAN Possible NanoCore C2 64B,T1041,0.0721,T1071,-0.4975,T1528,-0.6422
+ET TROJAN Possible Windows executable sent when remote host claims to send html content,T1021.006,-0.5650,T1564,-0.7680,T1566,-0.8332
+ET TROJAN Possible Zendran ELF IRCBot Joining Channel 2,T1112,-0.6646,T1190,-0.7152,T1685.002,-0.7597
+ET TROJAN Poweliks Clickfraud CnC M4,T1041,-0.0838,T1071,-0.9281,T1685,-0.9800
+ET TROJAN Suspicious User-Agent (WindowsNT) With No Separating Space,T1071.001,0.0832,T1027.010,-0.6081,T1134,-0.7455
+ET TROJAN Unknown - Loader - Check .exe Updated,T1041,-0.2014,T1218,-0.5658,T1205,-0.7837
+ET TROJAN Windows WMIC COMPUTERSYSTEM get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.1563,T1529,-0.3927,T1495,-0.4007
+ET TROJAN Windows WMIC NETLOGIN get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.1788,T1495,-0.3871,T1529,-0.4518
+ET TROJAN Windows WMIC NIC get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.1959,T1495,-0.3998,T1529,-0.4643
+ET TROJAN Windows WMIC OS get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.2286,T1495,-0.3793,T1529,-0.4107
+ET TROJAN Windows WMIC PROCESS get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.0294,T1495,-0.3927,T1565.001,-0.4873
+ET TROJAN Windows WMIC SERVER get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.2265,T1495,-0.3704,T1529,-0.4493
+ET TROJAN Windows WMIC SERVICE get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.1827,T1495,-0.3098,T1565.001,-0.3795
+ET TROJAN Windows WMIC SHARE get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.2130,T1495,-0.3886,T1529,-0.4506
+ET TROJAN Windows WMIC STARTUP get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,-0.1618,T1204.002,-0.3953,T1495,-0.4102
+ET TROJAN Windows dir Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3470,T1529,-0.4083,T1565.001,-0.4250
+ET TROJAN Windows driverquery -si Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3656,T1529,-0.4225,T1565.001,-0.4422
+ET TROJAN Windows driverquery -v Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3421,T1529,-0.4077,T1565.001,-0.4157
+ET TROJAN Windows gpresult Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3406,T1529,-0.3988,T1565.001,-0.4294
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3404,T1529,-0.3999,T1041,-0.4046
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3412,T1529,-0.4002,T1041,-0.4058
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3413,T1529,-0.4004,T1041,-0.4070
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3413,T1529,-0.4004,T1041,-0.4059
+ET TROJAN Windows netstat Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3408,T1041,-0.3707,T1529,-0.4016
+ET TROJAN Windows quser Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3236,T1529,-0.3846,T1565.001,-0.3995
+ET TROJAN Windows qwinsta Microsoft Windows DOS prompt command exit OUTBOUND,T1495,-0.3392,T1529,-0.4047,T1565.001,-0.4143
+ET USER_AGENTS Go HTTP Client User-Agent,T1071.001,0.8021,T1190,-0.0056,T1110,-0.2110
+ET USER_AGENTS MSF Meterpreter Default User Agent,T1071.001,0.6230,T1134.001,0.0440,T1190,-0.1677
+ET WEB_CLIENT BeEF Cookie Outbound,T1189,-0.2849,T1048.003,-0.4322,T1190,-0.5665
+ET WEB_CLIENT HTA File containing Wscript.Shell Call - Potential CVE-2017-0199,T1059,0.2958,T1190,-0.2597,T1059.001,-0.6141
+ET WEB_CLIENT Hex Obfuscation of Script Tag % Encoding,T1027,0.7438,T1059.001,0.0779,T1190,-0.7152
+ET WEB_CLIENT Hex Obfuscation of String.fromCharCode % Encoding,T1027,0.8260,T1059.001,0.5010,T1190,-0.5651
+ET WEB_CLIENT Hex Obfuscation of charCodeAt % Encoding,T1027,0.7523,T1059.001,0.0972,T1190,-0.4555
+ET WEB_CLIENT Hex Obfuscation of document.write % Encoding,T1027,0.5470,T1059.001,-0.3766,T1190,-0.6022
+ET WEB_CLIENT Hex Obfuscation of substr % Encoding,T1027,0.8260,T1059.001,0.2767,T1127,-0.7835
+ET WEB_CLIENT Hex Obfuscation of unescape % Encoding,T1027,0.8696,T1059.001,-0.1144,T1140,-0.6774
+ET WEB_CLIENT PowerShell call in script 1,T1059.001,1.1254,T1189,-0.5587,T1553,-0.6583
+ET WEB_CLIENT PowerShell call in script 2,T1059.001,1.1243,T1189,-0.5473,T1553,-0.6582
+"ET WEB_SERVER /bin/bash In URI, Possible Shell Command Execution Attempt Within Web Exploit",T1190,0.8440,T1059.004,-0.5460,T1566.001,-0.6058
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt,T1190,0.3425,T1505.003,-0.5478,T1505,-0.5512
+ET WEB_SERVER /etc/shadow Detected in URI,T1190,0.2055,T1505,-0.1621,T1505.003,-0.3658
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt,T1190,0.1752,T1505,-0.6449,T1036.003,-0.8228
+ET WEB_SERVER 401TRG Generic Webshell Request - POST with wget in body,T1190,-0.0571,T1505.003,-0.1172,T1505,-0.1911
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013,T1190,0.3142,T1505,-0.6851,T1566,-0.8230
+ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI,T1190,-0.0489,T1003,-0.4952,T1505,-0.5702
+ET WEB_SERVER CRLF Injection - Newline Characters in URL,T1190,-0.0938,T1027.010,-0.7482,T1204.004,-0.7919
+ET WEB_SERVER CURL Command Specifying Output in HTTP Headers,T1190,-0.0440,T1218,-0.2933,T1505,-0.4837
+ET WEB_SERVER ColdFusion adminapi access,T1190,0.1481,T1071.001,-0.6731,T1505,-0.8142
+ET WEB_SERVER ColdFusion administrator access,T1190,0.1381,T1078,-0.1253,T1098,-0.5219
+ET WEB_SERVER ColdFusion componentutils access,T1190,-0.0491,T1505,-0.8266,T1102.003,-0.8696
+ET WEB_SERVER ColdFusion password.properties access,T1190,0.0285,T1078,-0.6678,T1110,-0.6972
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal,T1083,1.2829,T1505,-0.7906,T1505.003,-0.8412
+ET WEB_SERVER DD-WRT Information Disclosure Attempt,T1082,1.1278,T1190,-0.7657,T1027.003,-0.9985
+ET WEB_SERVER DFind w00tw00t GET-Requests,T1190,0.4115,T1071.001,-0.2852,T1505,-0.6195
+ET WEB_SERVER Exploit Suspected PHP Injection Attack (cmd=),T1190,0.8724,T1210,-0.5042,T1505,-0.5080
+ET WEB_SERVER HTTP 414 Request URI Too Large,T1190,0.4465,T1505.003,-0.5392,T1505,-0.7332
+ET WEB_SERVER IIS 8.3 Filename With Wildcard (Possible File/Dir Bruteforce),T1190,0.0718,T1505.004,-0.5955,T1110.001,-0.6138
+ET WEB_SERVER Joomla Component SQLi Attempt,T1190,1.0847,T1210,-0.8929,T1048.003,-0.9849
+ET WEB_SERVER Likely Malicious Request for /proc/self/environ,T1190,0.0447,T1566,-0.5764,T1071,-0.7990
+ET WEB_SERVER MYSQL SELECT CONCAT SQL Injection Attempt,T1190,1.2745,T1210,-0.9932,T1095,-1.0149
+ET WEB_SERVER Muieblackcat scanner,T1190,0.6308,T1195,-0.1245,T1195.001,-0.1920
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt,T1190,0.6955,T1566,-0.6850,T1189,-0.7079
+ET WEB_SERVER PHP ENV SuperGlobal in URI,T1190,0.4961,T1059.004,-0.6362,T1505.003,-0.6490
+ET WEB_SERVER PHP Easteregg Information-Disclosure (funny-logo),T1082,0.9443,T1190,-0.5914,T1219,-0.9640
+ET WEB_SERVER PHP Easteregg Information-Disclosure (php-logo),T1082,0.9330,T1190,-0.4718,T1027.003,-0.9835
+ET WEB_SERVER PHP Easteregg Information-Disclosure (phpinfo),T1082,1.0155,T1190,-0.6201,T1027.003,-0.9801
+ET WEB_SERVER PHP Easteregg Information-Disclosure (zend-logo),T1082,0.7689,T1190,-0.4191,T1027.003,-0.9870
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt,T1190,1.3756,T1505,-0.9493,T1570,-0.9902
+ET WEB_SERVER PHP Possible https Local File Inclusion Attempt,T1190,1.4591,T1572,-0.8262,T1505,-0.8504
+ET WEB_SERVER PHP Possible php Remote File Inclusion Attempt,T1190,1.5046,T1505,-0.9618,T1207,-1.0091
+ET WEB_SERVER PHP REQUEST SuperGlobal in URI,T1190,0.5355,T1505.003,-0.5561,T1546.012,-0.6870
+ET WEB_SERVER PHP SERVER SuperGlobal in URI,T1190,0.7368,T1505.003,-0.2809,T1546.012,-0.7228
+ET WEB_SERVER PHP SESSION SuperGlobal in URI,T1190,0.5190,T1505.003,-0.5851,T1210,-0.6962
+ET WEB_SERVER PHP System Command in HTTP POST,T1190,0.4892,T1027,-0.4398,T1070,-0.6621
+ET WEB_SERVER PHP tags in HTTP POST,T1190,0.7336,T1071,-0.5580,T1505,-0.6969
+ET WEB_SERVER PHP.//Input in HTTP POST,T1190,0.8350,T1552.003,-0.2625,T1056.002,-0.4728
+ET WEB_SERVER Possible Attempt to Get SQL Server Version in URI using SELECT VERSION,T1190,1.0319,T1505.003,-0.6960,T1095,-0.7318
+ET WEB_SERVER Possible CVE-2013-0156 Ruby On Rails XML YAML tag with !ruby,T1190,0.5390,T1566,-0.8737,T1505,-0.8853
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt,T1190,1.2878,T1083,-1.0186,T1552.001,-1.0301
+ET WEB_SERVER Possible CVE-2014-6271 Attempt,T1190,1.3117,T1505,-0.5654,T1207,-0.9187
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Cookie,T1190,1.2776,T1505,-0.7457,T1005,-1.0066
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number,T1190,1.0430,T1505,-0.8181,T1095,-0.9066
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers,T1190,1.1173,T1505,-0.8088,T1578,-0.9915
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt,T1190,1.0100,T1566,-0.9741,T1548.001,-1.0351
+ET WEB_SERVER Possible Cherokee Web Server GET AUX Request Denial Of Service Attempt,T1190,1.0232,T1495,0.0231,T1529,0.0202
+ET WEB_SERVER Possible IIS Integer Overflow DoS (CVE-2015-1635),T1190,1.0310,T1505.004,-0.3718,T1685.001,-0.5574
+ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access,T1190,0.7455,T1213,-0.5159,T1003,-0.5640
+ET WEB_SERVER Possible SQL Injection (exec),T1190,0.8178,T1505,-0.8389,T1210,-0.9842
+ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM,T1190,1.3728,T1210,-0.8698,T1505,-0.8834
+ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT,T1190,1.5702,T1210,-0.8161,T1505,-0.9113
+ET WEB_SERVER Possible SQLi xp_cmdshell POST body,T1190,1.3706,T1505,-0.6960,T1505.003,-0.9353
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.,T1190,0.5701,T1070,-0.6773,T1082,-0.7817
+ET WEB_SERVER Possible bash shell piped to dev tcp Inbound to WebServer,T1190,0.2806,T1505,-0.0354,T1505.003,-0.7964
+ET WEB_SERVER SELECT USER SQL Injection Attempt in URI,T1190,1.7800,T1505.003,-0.8076,T1213,-0.9330
+ET WEB_SERVER SQL Injection Local File Access Attempt Using LOAD_FILE,T1190,0.8129,T1543.003,-0.7282,T1105,-0.7537
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt,T1190,0.6448,T1189,-0.4187,T1059.005,-0.5675
+ET WEB_SERVER Suspicious Chmod Usage in URI,T1190,0.2514,T1505.003,-0.0572,T1105,-0.5404
+ET WEB_SERVER Tilde in URI - potential .inc source disclosure vulnerability,T1082,0.0856,T1190,-0.2619,T1083,-0.5103
+ET WEB_SERVER Tilde in URI - potential .php~ source disclosure vulnerability,T1082,0.1226,T1190,-0.1518,T1083,-0.4760
+ET WEB_SERVER WEB-PHP phpinfo access,T1190,0.7452,T1505,-0.2299,T1071.001,-0.6230
+ET WEB_SERVER WGET Command Specifying Output in HTTP Headers,T1190,0.0790,T1048.003,-0.3242,T1505,-0.4945
+ET WEB_SERVER WebShell Generic - wget http - POST,T1190,0.7426,T1505,0.3024,T1048.003,-0.0806
+ET WEB_SERVER allow_url_include PHP config option in uri,T1190,0.9385,T1505.003,-0.6295,T1112,-0.6334
+ET WEB_SERVER auto_prepend_file PHP config option in uri,T1190,0.8379,T1505.003,-0.6522,T1071,-0.7310
+ET WEB_SERVER cmd.exe In URI - Possible Command Execution Attempt,T1190,0.0661,T1059.003,-0.3321,T1059,-0.5241
+ET WEB_SERVER disable_functions PHP config option in uri,T1190,0.6241,T1685,-0.4368,T1112,-0.4900
+ET WEB_SERVER open_basedir PHP config option in uri,T1190,1.1325,T1219,-0.7005,T1564.003,-0.7339
+ET WEB_SERVER safe_mode PHP config option in uri,T1190,0.8253,T1564.001,-0.3187,T1071,-0.5025
+ET WEB_SERVER suhosin.simulation PHP config option in uri,T1190,0.6649,T1505.003,-0.6711,T1564.003,-0.7683
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt,T1190,1.9924,T1546.008,-0.9243,T1185,-0.9590
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection,T1190,1.5391,T1548.001,-1.0430,T1218.013,-1.0521
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt,T1190,2.0118,T1030,-1.0517,T1548.001,-1.0550
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt,T1190,1.7745,T1098.005,-0.9850,T1548.001,-1.0421
+ET WEB_SPECIFIC_APPS BASE base_stat_common.php remote file include,T1190,1.5774,T1105,-1.0232,T1030,-1.0295
+ET WEB_SPECIFIC_APPS BLOG CMS nsextt parameter Cross Site Scripting Vulnerability,T1190,1.4040,T1189,-0.4891,T1055,-0.8014
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt,T1190,1.5103,T1030,-1.0224,T1027.003,-1.0413
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection,T1190,2.7590,T1078.002,-0.9350,T1059.012,-1.0116
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection,T1190,2.2914,T1033,-0.9418,T1135,-0.9875
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt,T1190,1.9688,T1030,-1.0505,T1548.001,-1.0577
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion,T1190,1.6666,T1037,-0.9630,T1030,-1.0370
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion,T1190,1.5773,T1021,-0.8825,T1021.001,-0.9220
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion,T1190,1.5403,T1021,-0.9175,T1021.001,-0.9336
+ET WEB_SPECIFIC_APPS Enthusiast path parameter Remote File Inclusion,T1190,1.8286,T1204.004,-1.0169,T1030,-1.0358
+ET WEB_SPECIFIC_APPS Fork-CMS js.php module parameter Local File Inclusion Attempt,T1190,2.0064,T1020,-0.9832,T1505.004,-0.9988
+ET WEB_SPECIFIC_APPS FormMailer formmailer.admin.inc.php BASE_DIR Parameter Remote File Inclusion Attempt,T1190,1.9517,T1218.005,-0.9479,T1137.003,-0.9744
+ET WEB_SPECIFIC_APPS Golem Gaming Portal root_path Parameter Remote File inclusion Attempt,T1190,1.9242,T1078.001,-0.9661,T1078.003,-0.9927
+ET WEB_SPECIFIC_APPS Horde type Parameter Local File Inclusion Attempt,T1190,2.0519,T1030,-1.0426,T1069.003,-1.0542
+ET WEB_SPECIFIC_APPS IBSng str Parameter Cross Site Scripting Attempt,T1190,1.9568,T1189,-0.6760,T1055,-0.6834
+ET WEB_SPECIFIC_APPS JobHut browse.php pk Parameter SQL Injection,T1190,2.0456,T1053.002,-0.8805,T1197,-0.9430
+ET WEB_SPECIFIC_APPS Joomla 3.7.0 - Sql Injection (CVE-2017-8917),T1190,2.5087,T1590,-0.9714,T1583,-1.0377
+ET WEB_SPECIFIC_APPS Joomla AjaxChat Component ajcuser.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,1.7257,T1548.001,-1.0534,T1030,-1.0572
+ET WEB_SPECIFIC_APPS Joomla Dada Mail Manager Component config.dadamail.php GLOBALS Parameter Remote File Inclusion,T1190,1.3227,T1071,-0.9748,T1548.001,-1.0381
+ET WEB_SPECIFIC_APPS Joomla Onguma Time Sheet Component onguma.class.php mosConfig_absolute_path Parameter Remote File Inclusion,T1190,1.4911,T1071,-1.0202,T1548.001,-1.0404
+ET WEB_SPECIFIC_APPS Joomla Simple RSS Reader admin.rssreader.php mosConfig_live_site Parameter Remote File Inclusion,T1190,1.3316,T1567,-0.9471,T1059.012,-1.0199
+ET WEB_SPECIFIC_APPS Joomla swMenuPro ImageManager.php Remote File Inclusion Attempt,T1190,1.5310,T1055.003,-0.9975,T1546.009,-1.0254
+ET WEB_SPECIFIC_APPS KR-Web krgourl.php DOCUMENT_ROOT Parameter Remote File Inclusion Attempt,T1190,2.3228,T1078.001,-0.9814,T1078.003,-1.0019
+ET WEB_SPECIFIC_APPS KingCMS menu.php CONFIG Parameter Remote File Inclusion,T1190,2.1488,T1030,-1.0476,T1548.001,-1.0539
+ET WEB_SPECIFIC_APPS MAXcms fm_includes_special Parameter Remote File Inclusion Attempt,T1190,2.5553,T1543.003,-0.7846,T1564.002,-1.0277
+ET WEB_SPECIFIC_APPS MODx CMS snippet.reflect.php reflect_base Remote File Inclusion,T1190,1.0940,T1036.003,-0.9039,T1620,-1.0165
+ET WEB_SPECIFIC_APPS Mambo Component com_smf smf.php Remote File Inclusion Attempt,T1190,1.5961,T1030,-1.0480,T1548.001,-1.0493
+ET WEB_SPECIFIC_APPS Microhard Systems 3G/4G Cellular Ethernet and Serial Gateway - Default Credentials,T1190,0.9181,T1573,-0.5503,T1003.003,-0.8090
+ET WEB_SPECIFIC_APPS Noname Media Photo Galerie Standard SQL Injection Attempt -- view.php id SELECT,T1190,1.0796,T1560.001,-1.0091,T1548,-1.0106
+ET WEB_SPECIFIC_APPS OBOphiX fonctions_racine.php chemin_lib parameter Remote File Inclusion Attempt,T1190,2.4346,T1055.012,-1.0481,T1030,-1.0535
+ET WEB_SPECIFIC_APPS OpenX phpAdsNew phpAds_geoPlugin Parameter Remote File Inclusion Attempt,T1190,2.0887,T1564.004,-0.5964,T1133,-0.9549
+ET WEB_SPECIFIC_APPS Opencadastre soustab.php script Local File Inclusion Vulnerability,T1190,1.4858,T1195.001,-0.9659,T1499.001,-0.9678
+ET WEB_SPECIFIC_APPS Oracle JSF2 Path Traversal Attempt,T1083,0.9960,T1190,0.1267,T1059.003,-0.8468
+ET WEB_SPECIFIC_APPS OrangeHRM path Parameter Local File Inclusion Attempt,T1190,1.8896,T1546.002,-1.0151,T1204.004,-1.0252
+ET WEB_SPECIFIC_APPS PHP Aardvark Topsites PHP CONFIG PATH Remote File Include Attempt,T1190,1.6612,T1567.002,-0.9976,T1552.001,-1.0099
+ET WEB_SPECIFIC_APPS PHP Booking Calendar page_info_message parameter Cross-Site Scripting Vulnerability ,T1190,1.0892,T1189,-0.3235,T1055,-0.8248
+ET WEB_SPECIFIC_APPS PHP Classifieds class.phpmailer.php lang_path Parameter Remote File Inclusion Attempt,T1190,1.9665,T1030,-1.0490,T1548.001,-1.0543
+ET WEB_SPECIFIC_APPS PHP phpMyAgenda rootagenda Remote File Include Attempt,T1190,1.7774,T1030,-1.0324,T1548.001,-1.0570
+ET WEB_SPECIFIC_APPS PHP-CGI query string parameter vulnerability,T1190,1.8826,T1071.004,-0.6845,T1499.001,-0.7288
+ET WEB_SPECIFIC_APPS PHP-Paid4Mail RFI attempt ,T1190,2.4319,T1069.003,-1.0298,T1030,-1.0344
+ET WEB_SPECIFIC_APPS PHPOF DB_AdoDB.Class.PHP PHPOF_INCLUDE_PATH parameter Remote File Inclusion,T1190,2.0232,T1539,-0.9548,T1030,-1.0401
+ET WEB_SPECIFIC_APPS PithCMS oldnews_reader.php lang Parameter Local File Inclusion Attempt,T1190,2.0896,T1030,-1.0361,T1548.001,-1.0574
+ET WEB_SPECIFIC_APPS Plone and Zope cmd Parameter Remote Command Execution Attempt,T1190,1.4897,T1059.003,-0.4371,T1059,-0.7334
+ET WEB_SPECIFIC_APPS PointComma pctemplate.php pcConfig Parameter Remote File Inclusion Attempt,T1190,2.3917,T1071,-1.0383,T1030,-1.0500
+ET WEB_SPECIFIC_APPS Possible JBoss JMX Console Beanshell Deployer WAR Upload and Deployment Exploit Attempt,T1190,1.1112,T1498,-0.7107,T1218,-0.7652
+ET WEB_SPECIFIC_APPS Possible Mambo/Joomla! com_koesubmit Component 'koesubmit.php' Remote File Inclusion Attempt,T1190,1.3314,T1548.001,-1.0408,T1030,-1.0517
+ET WEB_SPECIFIC_APPS Possible OpenSiteAdmin pageHeader.php Remote File Inclusion Attempt,T1190,1.8805,T1078.002,-0.9460,T1078.003,-0.9847
+ET WEB_SPECIFIC_APPS Possible eFront database.php Remote File Inclusion Attempt,T1190,2.1158,T1005,-0.8621,T1546.011,-0.8831
+ET WEB_SPECIFIC_APPS PozScripts Business Directory Script cid parameter SQL Injection,T1190,1.3680,T1037.001,-0.8433,T1620,-0.9592
+ET WEB_SPECIFIC_APPS ProdLer prodler.class.php sPath Parameter Remote File Inclusion Attempt,T1190,2.1410,T1204.004,-1.0207,T1030,-1.0503
+ET WEB_SPECIFIC_APPS ProjectButler RFI attempt ,T1190,2.0934,T1030,-1.0364,T1069.003,-1.0407
+ET WEB_SPECIFIC_APPS Request to Wordpress W3TC Plug-in dbcache Directory,T1190,0.6350,T1568,-0.8454,T1083,-0.8563
+ET WEB_SPECIFIC_APPS SAPID get_infochannel.inc.php Remote File inclusion Attempt,T1190,2.1726,T1030,-1.0391,T1548.001,-1.0486
+ET WEB_SPECIFIC_APPS SERWeb load_lang.php configdir Parameter Remote File Inclusion,T1190,2.3129,T1599.001,-1.0403,T1548.001,-1.0516
+ET WEB_SPECIFIC_APPS SERWeb main_prepend.php functionsdir Parameter Remote File Inclusion,T1190,2.0127,T1548.001,-1.0431,T1030,-1.0478
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site showcategory.php cid Parameter SQL Injection,T1190,1.2018,T1548.001,-1.0294,T1218.013,-1.0558
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site software-description.php id Parameter SQL Injection,T1190,1.2963,T1205,-0.9999,T1072,-1.0008
+ET WEB_SPECIFIC_APPS Sisplet CMS komentar.php site_path Parameter Remote File Inclusion Attempt,T1190,2.0943,T1030,-1.0372,T1548.001,-1.0555
+ET WEB_SPECIFIC_APPS TECHNOTE shop_this_skin_path Parameter Remote File Inclusion,T1190,1.2964,T1030,-1.0384,T1548.001,-1.0414
+ET WEB_SPECIFIC_APPS Turnkeyforms Software Directory showcategory.php cid parameter SQL Injection,T1190,1.2743,T1548.001,-1.0352,T1027.011,-1.0474
+ET WEB_SPECIFIC_APPS Ve-EDIT edit_htmlarea.php highlighter Parameter Remote File Inclusion,T1190,1.5608,T1030,-1.0346,T1548.001,-1.0403
+ET WEB_SPECIFIC_APPS Vulnerable Magento Adminhtml Access,T1190,0.6194,T1071.001,-0.6471,T1543.003,-0.7780
+ET WEB_SPECIFIC_APPS WEB-PHP RCE PHPBB 2004-1315,T1190,2.5243,T1569,-1.0275,T1542.001,-1.0312
+ET WEB_SPECIFIC_APPS WHMCompleteSolution templatefile Parameter Local File Inclusion Attempt,T1190,2.3324,T1542.001,-1.0389,T1030,-1.0417
+ET WEB_SPECIFIC_APPS WikyBlog which Parameter Cross Site Scripting Attempt,T1190,1.5630,T1189,-0.8064,T1055,-0.8158
+ET WEB_SPECIFIC_APPS YapBB class_yapbbcooker.php cfgIncludeDirectory Parameter Remote File Inclusion,T1190,1.6592,T1542.001,-1.0232,T1036.003,-1.0378
+ET WEB_SPECIFIC_APPS Zen Cart loader_file Parameter Local File Inclusion Attempt,T1190,2.2203,T1129,-0.9645,T1027.003,-1.0139
+ET WEB_SPECIFIC_APPS axdcms aXconf Parameter Local File Inclusion Attempt,T1190,2.8540,T1218.008,-0.9427,T1069.003,-1.0454
+ET WEB_SPECIFIC_APPS evision cms addplain.php module parameter Local File Inclusion,T1190,1.6594,T1505.004,-0.9921,T1685.001,-1.0052
+ET WEB_SPECIFIC_APPS p-Table for WordPress wptable-tinymce.php ABSPATH Parameter RFI Attempt,T1190,1.8602,T1565,-0.9303,T1542.001,-1.0488
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php icerikyolu Parameter Remote File Inclusion,T1190,1.5567,T1030,-1.0374,T1548.001,-1.0420
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php sayfaid Parameter Remote File Inclusion,T1190,1.5492,T1548.001,-1.0349,T1030,-1.0370
+ET WEB_SPECIFIC_APPS phpSkelSite theme parameter remote file inclusion,T1190,1.8745,T1030,-1.0394,T1548.001,-1.0497
+ET WEB_SPECIFIC_APPS phptraverse mp3_id.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,1.9236,T1548.001,-1.0492,T1030,-1.0519
+ET WORM TheMoon.linksys.router 1,T1071,-0.4369,T1190,-0.5986,T1557,-0.7268
+ETPRO ATTACK_RESPONSE MongoDB Database Enumeration Request,T1105,0.3066,T1005,0.1084,T1546.011,-0.7143
+ETPRO ATTACK_RESPONSE MongoDB Version Request,T1105,0.5151,T1005,-0.6024,T1505,-0.7103
+ETPRO DOS CA eTrust Intrusion Detection Encryption Key Handling Denial of Service,T1529,0.7774,T1495,0.3414,T1565.001,0.3034
+ETPRO DOS Firebird SQL op_connect_request Denial of Service,T1529,0.6091,T1495,0.5801,T1565.001,0.5703
+ETPRO DOS FreeRADIUS RADIUS Server rad_decode Remote Denial of Service,T1565.001,0.5211,T1495,0.4641,T1529,0.4121
+ETPRO DOS IBM DB2 Database Server Invalid Data Stream Denial of Service (Published Exploit),T1190,0.6731,T1565.001,0.2546,T1495,0.2505
+ETPRO DOS ICMP with truncated IPv6 header CVE-2013-3182,T1190,0.2328,T1495,0.0160,T1529,-0.0421
+ETPRO DOS ISC DHCP Server Zero Length Client ID Denial of Service,T1495,0.3995,T1565.001,0.3837,T1529,0.3580
+ETPRO DOS Linux Kernel NetFilter SCTP Unknown Chunk Types Denial of Service 1,T1529,0.4620,T1495,0.3462,T1565.001,0.3035
+ETPRO DOS MS DNS CHAOS Denial of Service (CVE-2017-0171),T1565.001,0.6948,T1495,0.5990,T1529,0.5626
+ETPRO DOS MS RADIUS DoS Vulnerability CVE-2015-0015,T1190,0.2442,T1495,0.0833,T1565.001,0.0619
+ETPRO DOS Malformed Email Header Concatination Denial Of Service,T1565.001,0.4499,T1495,0.4361,T1529,0.3640
+ETPRO DOS Microsoft Host Integration Server snabase.exe Denial of Service 1,T1495,0.4059,T1565.001,0.4032,T1529,0.3068
+ETPRO DOS Microsoft Host Integration Server snabase.exe Infinite Loop Denial of Service (Exploit Specific),T1190,0.5838,T1495,0.2537,T1565.001,0.2405
+ETPRO DOS Microsoft Windows Active Directory LDAP SearchRequest Denial of Service Attempt 1,T1529,0.2164,T1495,0.2023,T1565.001,0.1970
+ETPRO DOS Microsoft Windows NAT Helper DNS Query Denial of Service,T1565.001,0.3242,T1495,0.3132,T1529,0.2694
+ETPRO DOS Microsoft Windows SMTP Service MX Record Denial Of Service,T1565.001,0.2998,T1495,0.2998,T1529,0.2553
+ETPRO DOS Multiple Vendor ICMP Source Quench Denial of Service,T1565.001,0.5205,T1495,0.4763,T1529,0.4244
+ETPRO DOS OpenLDAP Modrdn RDN NULL String Denial of Service Attempt,T1495,0.4797,T1565.001,0.4756,T1529,0.4375
+ETPRO DOS OpenLDAP ber_get_next BER Decoding Denial of Service Attempt,T1495,0.3174,T1565.001,0.3134,T1529,0.2617
+ETPRO DOS Oracle Internet Directory Pre-Authentication LDAP Denial of Service Attempt,T1565.001,0.3702,T1495,0.3505,T1529,0.2867
+ETPRO DOS Possible XMLRPC DoS in Progress,T1495,0.0984,T1565.001,0.0872,T1529,0.0461
+ETPRO DOS Possible mDNS Amplification Scan in Progress,T1190,0.4647,T1495,0.1271,T1565.001,0.0962
+ETPRO DOS Squid Proxy FTP URI Processing Denial of Service,T1565.001,0.5213,T1495,0.5002,T1190,0.4677
+ETPRO DOS Squid Proxy String Processing NULL Pointer Dereference Vulnerability,T1190,-0.0200,T1495,-0.1161,T1529,-0.1373
+ETPRO DOS Win32/Whybo.F DDoS Traffic Outbound,T1495,0.1589,T1565.001,0.1523,T1529,0.0606
+ETPRO DOS iCal Null pointer de-reference Count Variable,T1529,0.0008,T1495,-0.0189,T1565.001,-0.0803
+ETPRO DOS iCal improper resource liberation,T1495,0.0966,T1565.001,0.0703,T1529,0.0429
+ETPRO EXPLOIT ATMFD.DLL Privilege Elevation Vuln (CVE-2016-3220),T1543.003,0.1933,T1190,0.1581,T1569.002,-0.1540
+ETPRO EXPLOIT Internet Explorer Memory Corruption Vulnerability (CVE-2016-3211),T1189,0.2622,T1190,0.0817,T1021.003,-0.7470
+ETPRO EXPLOIT MSXML3 Same Origin Policy SFB vulnerability 1 (CVE-2015-1646),T1190,0.4871,T1499.001,-0.6798,T1195.001,-0.7390
+ETPRO EXPLOIT Microsoft Edge CSS History Information Disclosure Vulnerability (CVE-2016-7206),T1082,0.2077,T1190,-0.0904,T1070.003,-0.6839
+ETPRO EXPLOIT Microsoft Office Memory Corruption Vulnerability Pointer Reuse (CVE-2016-0021),T1190,0.5162,T1189,0.1311,T1218.010,-0.7603
+ETPRO EXPLOIT Netcore Router Backdoor Usage,T1190,0.1512,T1189,-0.5897,T1210,-0.6848
+ETPRO EXPLOIT Possible CVE-2016-3219 Executable Inbound,T1190,0.5059,T1564,-0.3578,T1189,-0.7577
+ETPRO EXPLOIT Possible EDGE OOB Access (CVE-2016-0193),T1190,1.0121,T1210,-0.3204,T1041,-0.6526
+ETPRO EXPLOIT Possible HP.SSF.WebService Exploit Attempt,T1190,1.2902,T1210,-0.2303,T1189,-0.4616
+ETPRO EXPLOIT Possible HTML Meta Refresh (CVE-2015-6123) Inbound to Server,T1190,0.4154,T1189,-0.7548,T1027,-0.8068
+ETPRO EXPLOIT Possible HTML Meta Refresh (CVE-2015-6123) via IMAP/POP3,T1190,0.1545,T1566,-0.6820,T1001,-0.8565
+ETPRO EXPLOIT Possible Jetty Web Server Information Leak Attempt,T1190,0.6293,T1082,-0.1371,T1210,-0.7685
+ETPRO EXPLOIT Possible Novidade EK Attempting Intranet Router Compromise M7 (Bruteforce),T1190,-0.1798,T1110.001,-0.6391,T1110,-0.7527
+ETPRO EXPLOIT Possible Wget Arbitrary File Write Exploit Attempt (CVE-2016-4971),T1190,1.4521,T1210,-0.7464,T1189,-0.8472
+ETPRO EXPLOIT SChannel Possible Heap Overflow ECDSAWithSHA512 CVE-2014-6321,T1190,1.1348,T1068,-0.7963,T1566,-0.9176
+ETPRO EXPLOIT SOAP Netgear WNDR Auth Bypass/Info Disclosure,T1190,0.4083,T1082,-0.3471,T1110,-0.8850
+ETPRO EXPLOIT Win32k Privilege Elevation Vulnerability (CVE-2016-3254),T1190,0.5091,T1543.003,0.2532,T1569.002,-0.0082
+ETPRO EXPLOIT Windows Diagnostics Hub Privilege Elevation Vuln Inbound (CVE-2016-3231) 1,T1190,-0.1410,T1685,-0.1865,T1569.002,-0.2352
+ETPRO SCAN IPMI Get Authentication Request (null seq number - null sessionID),T1190,-0.0028,T1018,-0.6272,T1098,-0.6925
+ETPRO SCAN Internal Machine Scanning VNC - Outbound Traffic,T1046,-0.1634,T1082,-0.5837,T1190,-0.6332
+ETPRO SCAN Nessus Scanner TFTP Get Attempt,T1190,0.7776,T1046,0.1943,T1195,-0.1809
+ETPRO SCAN NexusTaco Scanning for CVE-2014-3341,T1046,0.2443,T1190,0.1200,T1685,-0.7986
+ETPRO SCAN Redis INFO Service Probe,T1190,-0.0584,T1046,-0.1319,T1003,-0.4654
+ETPRO TROJAN CoinMiner Known Malicious Stratum Authline,T1496,0.0594,T1068,-0.6266,T1071,-0.8333
+ETPRO TROJAN Likely Bot Nick in IRC ([country|so_version|computername]),T1078,-0.1681,T1041,-0.3573,T1190,-0.7439
+ETPRO TROJAN Likely Bot Nick in Off Port IRC,T1041,-0.3988,T1071,-0.5906,T1685,-0.7381
+ETPRO TROJAN Win32/Meterpreter Receiving Meterpreter M1,T1134.002,0.4141,T1134.001,0.3385,T1071,-0.8797
+ETPRO WEB_SERVER JexBoss Common URI struct Observed 2 (INBOUND),T1190,0.2069,T1505,-0.6882,T1189,-0.7139
+ETPRO WEB_SERVER Possible Information Leak Vuln CVE-2015-1648,T1190,0.2274,T1082,-0.2525,T1499.001,-0.8106
+ETPRO WEB_SERVER SQLMap Scan Tool User Agent,T1190,1.4315,T1110,0.1430,T1071.001,-0.2306
+ETPRO WEB_SPECIFIC_APPS CM Download Manager WP Plugin Code Injection,T1190,1.5305,T1608,-0.7781,T1105,-0.8146
+ETPRO WEB_SPECIFIC_APPS Majordomo Directory Traversal Attempt,T1083,1.1362,T1190,-0.0574,T1552,-0.6564
+ETPRO WEB_SPECIFIC_APPS PHPMoAdmin RCE Attempt,T1190,2.5484,T1078.002,-0.7725,T1078.003,-0.8156
+ETPRO WEB_SPECIFIC_APPS ipTIME firmware < 9.58 RCE,T1190,1.5452,T1070.006,-1.0024,T1590,-1.0243
+FILE-EXECUTABLE Kaspersky Internet Security kl1.sys out of bounds read attempt,T1190,-0.4932,T1685,-0.5207,T1567,-0.5440
+FILE-EXECUTABLE Microsoft CLFS.sys information leak attempt,T1564,-0.3747,T1082,-0.4598,T1190,-0.7383
+FILE-EXECUTABLE Microsoft Windows Authenticode signature verification bypass attempt,T1190,-0.1752,T1189,-0.5983,T1003,-0.6518
+FILE-EXECUTABLE Microsoft Windows NTFS privilege escalation attempt,T1569.002,-0.5412,T1574.005,-0.5460,T1021,-0.6067
+FILE-EXECUTABLE XOR 0xfe encrypted portable executable file download attempt,T1105,0.3512,T1564,-0.1525,T1218,-0.5492
+FILE-FLASH Adobe Flash Player memory corruption attempt,T1189,0.5472,T1036.005,-0.0185,T1190,-0.3497
+FILE-FLASH Adobe Flash Player use after free attempt,T1189,0.6175,T1036.005,0.0043,T1204.002,-0.3106
+FILE-IMAGE Adobe Acrobat TIFF Software tag heap buffer overflow attempt,T1190,-0.1865,T1068,-0.8523,T1189,-0.9179
+FILE-IMAGE Oracle Java Virtual Machine malformed GIF buffer overflow attempt,T1190,0.1215,T1082,-0.5849,T1587.001,-0.7551
+FILE-JAVA Oracle Java RangeStatisticImpl sandbox breach attempt,T1190,-0.0320,T1059,-0.9047,T1203,-0.9142
+FILE-JAVA Oracle Java System.arraycopy race condition attempt,T1190,0.3080,T1686,-0.9159,T1071,-0.9365
+FILE-JAVA Oracle Java privileged protection domain exploitation attempt,T1190,0.4701,T1685,-0.1156,T1210,-0.7091
+FILE-JAVA Oracle Java sun.awt.image.ImagingLib.lookupByteBI memory corruption attempt,T1189,-0.1304,T1190,-0.4558,T1055.003,-0.9526
+FILE-PDF Adobe Acrobat Reader PDF font processing memory corruption attempt,T1189,0.0917,T1190,0.0389,T1078,-0.9236
+FILE-PDF PDF with click-to-launch executable,T1564,-0.2463,T1190,-0.4673,T1056,-0.5564
+GPL ATTACK_RESPONSE directory listing,T1105,0.6754,T1036.003,-0.4295,T1505,-0.5909
+GPL ATTACK_RESPONSE id check returned root,T1105,0.0938,T1078,-0.5617,T1078.004,-0.6241
+GPL CHAT Google Talk Logon,T1078,-0.1942,T1550.002,-0.4214,T1189,-0.6403
+GPL CHAT Google Talk Startup,T1685,-0.1203,T1547.001,-0.2365,T1547,-0.4632
+GPL CHAT Jabber/Google Talk Outgoing Traffic,T1550,-0.4762,T1189,-0.6148,T1074,-0.6613
+GPL DNS named authors attempt,T1190,-0.0553,T1021.002,-0.4680,T1564.004,-0.6595
+GPL DNS named version attempt,T1190,-0.0397,T1528,-0.7540,T1095,-0.7975
+GPL DOS IGMP dos attack,T1565.001,0.6872,T1495,0.6321,T1529,0.5948
+GPL EXPLOIT .cnf access,T1190,0.5184,T1071.001,-0.1470,T1102.003,-0.4011
+GPL EXPLOIT .htr access,T1190,0.3996,T1071.001,-0.2020,T1102.003,-0.4416
+GPL EXPLOIT /iisadmpwd/aexp2.htr access,T1190,0.2085,T1071.001,-0.2769,T1102.003,-0.5776
+GPL EXPLOIT /msadc/samples/ access,T1190,0.2174,T1071.001,-0.3947,T1102.003,-0.5770
+GPL EXPLOIT CodeRed v2 root.exe access,T1190,0.2781,T1071.001,-0.5467,T1078.004,-0.5971
+GPL EXPLOIT ISAPI .ida access,T1190,0.0950,T1071.001,-0.5323,T1189,-0.6174
+GPL EXPLOIT ISAPI .ida attempt,T1190,0.6329,T1189,-0.5061,T1210,-0.7223
+GPL EXPLOIT ISAPI .idq access,T1190,0.3640,T1071.001,-0.2514,T1189,-0.5026
+GPL EXPLOIT ISAPI .idq attempt,T1190,1.6418,T1189,-0.2099,T1210,-0.2945
+GPL EXPLOIT administrators.pwd access,T1190,-0.1002,T1098,-0.4383,T1071.001,-0.6208
+GPL EXPLOIT fpcount access,T1190,0.1577,T1071.001,-0.3327,T1210,-0.3746
+GPL EXPLOIT iisadmpwd attempt,T1190,1.4917,T1210,-0.2774,T1189,-0.3016
+GPL EXPLOIT iissamples access,T1190,0.2829,T1071.001,-0.4290,T1102.003,-0.5707
+GPL EXPLOIT unicode directory traversal attempt,T1083,1.6156,T1189,-0.6334,T1552,-0.8132
+GPL FTP .forward,T1190,-0.3372,T1059,-0.5642,T1020,-0.6175
+GPL FTP CWD ...,T1190,-0.3500,T1059,-0.4768,T1202,-0.6456
+GPL FTP CWD .... attempt,T1190,-0.0697,T1021,-0.6084,T1059,-0.6444
+GPL FTP CWD Root directory transversal attempt,T1083,-0.2878,T1190,-0.4602,T1202,-0.7271
+GPL FTP CWD ~ attempt,T1190,-0.0697,T1021,-0.6084,T1059,-0.6444
+GPL FTP CWD ~root attempt,T1190,0.0485,T1078.003,-0.7165,T1021,-0.7202
+GPL FTP LIST directory traversal attempt,T1083,1.6065,T1552,-0.6624,T1087.002,-0.8078
+GPL FTP MKD overflow,T1190,0.3174,T1059,-0.4827,T1202,-0.6121
+GPL FTP MKD overflow attempt,T1190,0.6201,T1021,-0.6215,T1059,-0.6930
+GPL FTP PORT bounce attempt,T1190,-0.1250,T1547.010,-0.4707,T1571,-0.6717
+GPL FTP SITE EXEC attempt,T1021,0.2970,T1190,0.1159,T1202,-0.0630
+GPL ICMP_INFO PING *NIX,T1048.003,0.2433,T1027,-0.5371,T1140,-0.5510
+GPL ICMP_INFO PING BSDtype,T1048.003,0.0614,T1027,-0.5412,T1140,-0.5920
+GPL MISC UPnP malformed advertisement,T1190,-0.5629,T1071,-0.7281,T1189,-0.8760
+GPL MISC rsh root,T1078,-0.3401,T1078.004,-0.3996,T1078.003,-0.5283
+GPL NETBIOS DCERPC IActivation little endian bind attempt,T1190,-0.2698,T1055.003,-0.5836,T1570,-0.6926
+GPL NETBIOS DCERPC Remote Activation bind attempt,T1190,0.0561,T1570,-0.6246,T1078,-0.7906
+GPL NETBIOS SMB-DS ADMIN$ share access,T1021.002,0.6905,T1190,-0.2954,T1048,-0.6500
+GPL NETBIOS SMB-DS C$ share access,T1021.002,0.2660,T1190,-0.3064,T1570,-0.5984
+GPL NETBIOS SMB-DS C$ unicode share access,T1021.002,0.0246,T1190,-0.2385,T1570,-0.7298
+GPL NETBIOS SMB-DS D$ share access,T1021.002,0.2660,T1190,-0.3064,T1570,-0.5984
+GPL NETBIOS SMB-DS IPC$ share access,T1021.002,0.2242,T1190,-0.2802,T1570,-0.6220
+GPL NETBIOS SMB-DS IPC$ unicode share access,T1021.002,-0.0017,T1190,-0.2159,T1570,-0.7449
+GPL NETBIOS SMB-DS Session Setup NTMLSSP asn1 overflow attempt,T1190,0.1493,T1570,-0.8078,T1546.009,-0.8856
+GPL NETBIOS SMB-DS Session Setup NTMLSSP unicode asn1 overflow attempt,T1190,0.1777,T1486,-0.8688,T1570,-0.8821
+GPL NETBIOS SMB-DS repeated logon failure,T1110,-0.1304,T1005,-0.3048,T1078,-0.5058
+GPL POLICY PCAnywhere server response,T1082,-0.5275,T1570,-0.5982,T1573,-0.6970
+GPL POLICY Sun JavaServer default password login attempt,T1190,0.2072,T1201,-0.4692,T1078,-0.4749
+GPL POP3 POP3 PASS overflow attempt,T1190,0.0595,T1550.002,-0.7174,T1555.005,-0.7611
+GPL RPC portmap bootparam request TCP,T1041,-0.5542,T1205,-0.5971,T1090.002,-0.6197
+GPL RPC portmap cachefsd request TCP,T1041,-0.4332,T1205,-0.5826,T1005,-0.5917
+GPL RPC portmap listing TCP 111,T1041,-0.4338,T1090.002,-0.5438,T1205,-0.5632
+GPL RPC portmap listing UDP 111,T1041,-0.4049,T1090.002,-0.5199,T1205,-0.5642
+GPL RPC portmap mountd request UDP,T1041,-0.4267,T1090.002,-0.5722,T1205,-0.5751
+GPL RPC portmap rstatd request TCP,T1041,-0.4582,T1090.002,-0.5852,T1005,-0.5880
+GPL RPC portmap rusers request TCP,T1041,-0.5322,T1005,-0.5689,T1090.002,-0.5730
+GPL RPC portmap sadmind request TCP,T1041,-0.5145,T1205,-0.5908,T1090.002,-0.5914
+GPL RPC portmap ypserv request TCP,T1041,-0.4201,T1005,-0.5516,T1090.002,-0.5741
+GPL RPC portmap ypupdated request TCP,T1005,-0.5047,T1041,-0.5095,T1205,-0.5125
+GPL RPC xdmcp info query,T1568,-0.2728,T1205,-0.2939,T1557.001,-0.7080
+GPL SCAN Broadscan Smurf Scanner,T1046,0.4347,T1190,0.2612,T1195,-0.1372
+GPL SCAN Finger Account Enumeration Attempt,T1071.004,-0.2711,T1018,-0.4173,T1087.002,-0.5216
+GPL SCAN Finger Version Query,T1190,0.1856,T1071.004,0.1807,T1059.003,-0.0587
+GPL SCAN ISS Pinger,T1190,0.2191,T1046,0.2077,T1059,-0.4271
+GPL SCAN PING CyberKit 2.2 Windows,T1059,-0.4268,T1189,-0.4329,T1046,-0.6088
+GPL SCAN PING NMAP,T1046,1.0354,T1140,-0.5282,T1059,-0.5467
+GPL SCAN SSH Version map attempt,T1190,0.3889,T1046,-0.3448,T1059.001,-0.4354
+GPL SCAN SolarWinds IP scan attempt,T1190,1.0372,T1046,0.0667,T1018,-0.8068
+GPL SCAN Webtrends Scanner UDP Probe,T1046,0.0389,T1190,-0.0526,T1195,-0.3543
+GPL SCAN loopback traffic,T1046,-0.3742,T1190,-0.4224,T1036,-0.5540
+GPL SMTP expn root,T1048.003,-0.2031,T1078.004,-0.3514,T1078,-0.4488
+GPL SMTP vrfy root,T1048.003,-0.2076,T1078.004,-0.3106,T1078,-0.4161
+GPL SNMP private access udp,T1016,-0.2231,T1102.003,-0.7789,T1071.001,-0.7803
+GPL SNMP public access udp,T1016,-0.2119,T1566,-0.3877,T1110,-0.4777
+GPL SQL sa brute force failed login attempt,T1110,0.9923,T1190,0.4641,T1133,-0.4574
+GPL WEB_SERVER .htaccess access,T1190,0.1894,T1505,-0.1765,T1071.001,-0.2504
+GPL WEB_SERVER .htpasswd access,T1190,0.2009,T1505,-0.3443,T1071.001,-0.5373
+GPL WEB_SERVER /~root access,T1190,0.4579,T1505,-0.3028,T1078.004,-0.3280
+GPL WEB_SERVER 403 Forbidden,T1190,0.4851,T1505,-0.4716,T1048.003,-0.5834
+GPL WEB_SERVER DELETE attempt,T1190,1.1722,T1070,-0.3094,T1505,-0.6089
+GPL WEB_SERVER Oracle Java Process Manager access,T1190,0.4696,T1555.004,-0.2024,T1102.001,-0.7865
+GPL WEB_SERVER Tomcat directory traversal attempt,T1083,0.9997,T1070,-0.7506,T1505,-0.7765
+GPL WEB_SERVER Tomcat null byte directory listing attempt,T1190,-0.2298,T1070,-0.7356,T1083,-0.8081
+GPL WEB_SERVER Tomcat server snoop access,T1190,0.1429,T1070,-0.2329,T1505,-0.5381
+GPL WEB_SERVER author.exe access,T1190,-0.1302,T1505,-0.4941,T1070,-0.6402
+GPL WEB_SERVER authors.pwd access,T1190,0.0683,T1505,-0.5428,T1071.001,-0.6105
+GPL WEB_SERVER global.asa access,T1190,-0.0253,T1098,-0.3688,T1505,-0.5618
+GPL WEB_SERVER globals.pl access,T1190,-0.0011,T1505,-0.5412,T1071.001,-0.6426
+GPL WEB_SERVER iisadmin access,T1190,0.2431,T1071.001,-0.1031,T1505,-0.3403
+GPL WEB_SERVER mod_gzip_status access,T1190,-0.1781,T1132.001,-0.3611,T1505,-0.6279
+GPL WEB_SERVER perl post attempt,T1190,0.5096,T1505,-0.2067,T1048.003,-0.9267
+GPL WEB_SERVER printenv access,T1190,0.2877,T1505,-0.3366,T1071.001,-0.4924
+GPL WEB_SERVER python access attempt,T1190,0.2185,T1048.003,-0.1079,T1027.002,-0.4474
+GPL WEB_SERVER service.cnf access,T1190,0.4293,T1543.003,-0.0516,T1569.002,-0.0948
+GPL WEB_SERVER service.pwd,T1190,0.2981,T1569.002,-0.1618,T1543.003,-0.3592
+GPL WEB_SERVER services.cnf access,T1190,0.0737,T1569.002,-0.2333,T1505,-0.3884
+GPL WEB_SERVER viewcode access,T1190,0.4464,T1505,-0.3217,T1071.001,-0.3297
+GPL WEB_SERVER writeto.cnf access,T1190,0.4481,T1505,-0.3453,T1505.003,-0.4376
+INDICATOR-SCAN DirBuster brute forcing tool detected,T1190,-0.1639,T1059,-0.2449,T1110,-0.5190
+INDICATOR-SCAN PHP backdoor scan attempt,T1190,1.0274,T1046,0.2250,T1018,-0.6223
+INDICATOR-SCAN SSH Version map attempt,T1190,0.3889,T1046,-0.3448,T1059.001,-0.4354
+INDICATOR-SCAN SSH brute force login attempt,T1190,0.4624,T1110,0.4026,T1078,-0.3420
+INDICATOR-SCAN User-Agent known malicious user-agent Masscan,T1071.001,0.0295,T1190,-0.2603,T1001,-0.3944
+INDICATOR-SCAN cybercop os probe,T1190,-0.0083,T1046,-0.3329,T1059,-0.7228
+INDICATOR-SCAN cybercop udp bomb,T1046,-0.2208,T1190,-0.2711,T1593,-0.8590
+INDICATOR-SCAN inbound probing for IPTUX messenger port,T1046,-0.2402,T1190,-0.3489,T1590,-0.5272
+INDICATOR-SHELLCODE possible /bin/sh shellcode transfer attempt,T1189,-0.4928,T1190,-0.7240,T1567,-0.7408
+INDICATOR-SHELLCODE ssh CRC32 overflow /bin/sh,T1190,-0.4450,T1078,-0.4793,T1021.004,-0.4927
+MALWARE-CNC Flame malware connection - /view.php,T1049,-0.1258,T1041,-0.2072,T1071,-0.3698
+MALWARE-CNC Gozi trojan checkin,T1041,0.1118,T1587,-0.6971,T1573,-0.8426
+MALWARE-CNC Hacker-Tool sars notifier variant outbound connection php notification,T1550.003,-0.7001,T1622,-0.7222,T1190,-0.7256
+MALWARE-CNC TT-bot botnet variant outbound connection,T1041,-0.2754,T1071,-0.6102,T1558,-0.6112
+MALWARE-CNC Win.Trojan.Alureon.DG runtime traffic detected,T1041,-0.1902,T1021.003,-0.4269,T1518,-0.7046
+MALWARE-CNC Win.Trojan.Crisis variant outbound connection,T1041,0.0423,T1082,-0.5710,T1046,-0.6153
+MALWARE-CNC Win.Trojan.Dorkbot variant outbound connection,T1041,0.0189,T1082,-0.5519,T1046,-0.6155
+MALWARE-CNC Win.Trojan.Saeeka variant outbound connection,T1041,0.0408,T1082,-0.5396,T1046,-0.5947
+OS-LINUX Linux Kernel keyring object exploit download attempt,T1083,-0.5161,T1105,-0.5495,T1685.006,-0.5836
+OS-LINUX Linux kernel ARM put_user write outside process address space privilege escalation attempt,T1548,-0.0871,T1068,-0.4569,T1190,-0.5120
+OS-LINUX Linux kernel madvise race condition attempt,T1190,-0.6664,T1548,-0.6665,T1547.006,-0.6836
+OS-OTHER Bash environment variable injection attempt,T1190,-0.3412,T1546,-0.4517,T1027,-0.5106
+OS-OTHER Intel x86 side-channel analysis information leak attempt,T1082,-0.5203,T1548,-0.7574,T1190,-0.8030
+OS-OTHER Mac OS X setuid privilege esclatation exploit attempt,T1190,-0.1351,T1548.001,-0.3903,T1189,-0.6106
+OS-WINDOWS Microsoft Windows DNS client TXT buffer overrun attempt,T1189,-0.1970,T1040,-0.6878,T1071.001,-0.7086
+PROTOCOL-FINGER account enumeration attempt,T1071.004,-0.1335,T1059.003,-0.4011,T1087.002,-0.4217
+SERVER-APACHE Apache APR header memory corruption attempt,T1190,-0.3398,T1189,-0.4062,T1499.004,-0.6794
+SERVER-APACHE Apache Struts remote code execution attempt - POST parameter,T1190,1.3295,T1499.004,-0.7816,T1055,-0.9316
+SERVER-APACHE Apache header parsing space saturation denial of service attempt,T1190,0.0949,T1495,-0.0049,T1565.001,-0.0143
+SERVER-APACHE Apache malformed ipv6 uri overflow attempt,T1190,0.3938,T1499.004,-0.6359,T1210,-0.8736
+SERVER-APACHE Apache server mod_proxy reverse proxy bypass attempt,T1190,0.4223,T1090,0.0776,T1665,-0.0768
+SERVER-MYSQL Multiple SQL products privilege escalation attempt,T1190,0.4682,T1574.005,-0.5131,T1615,-0.5185
+SERVER-MYSQL MySQL/MariaDB Server geometry query object integer overflow attempt,T1190,0.6404,T1213,-0.5223,T1003,-0.6874
+SERVER-MYSQL yaSSL SSL Hello Message buffer overflow attempt,T1190,0.0062,T1573,-0.3013,T1068,-0.6527
+SURICATA DNS Not a response,T1105,-0.2762,T1566,-0.6170,T1005,-0.8389
+SURICATA DNS Unsolicited response,T1105,-0.6788,T1005,-0.7239,T1498,-0.7566
+SURICATA DNS malformed response data,T1005,-0.4484,T1105,-0.5380,T1566,-0.7459
+SURICATA HTTP Host header ambiguous,T1041,-0.6275,T1190,-0.7000,T1566,-0.8136
+SURICATA HTTP Host header invalid,T1190,-0.5855,T1210,-0.7003,T1041,-0.7507
+SURICATA HTTP Host part of URI is invalid,T1190,-0.4029,T1078,-0.7465,T1210,-0.8441
+SURICATA HTTP METHOD terminated by non-compliant character,T1190,-0.4056,T1556,-0.4396,T1078.004,-0.5433
+SURICATA HTTP Request abnormal Content-Encoding header,T1190,-0.5888,T1027,-0.6181,T1592.004,-0.7603
+SURICATA HTTP Request line with leading whitespace,T1027.010,-0.3631,T1204.002,-0.4088,T1568,-0.8018
+SURICATA HTTP URI terminated by non-compliant character,T1078.004,-0.2370,T1190,-0.2766,T1219.002,-0.6651
+SURICATA HTTP gzip decompression failed,T1132.001,-0.2937,T1027.001,-0.5840,T1590.002,-0.5904
+SURICATA HTTP invalid content length field in request,T1190,-0.3516,T1210,-0.6093,T1552,-0.7355
+SURICATA HTTP invalid request chunk len,T1210,-0.2138,T1190,-0.5328,T1218,-0.7277
+SURICATA HTTP invalid response chunk len,T1210,-0.1085,T1041,-0.7408,T1078,-0.7670
+SURICATA HTTP invalid response field folding,T1210,-0.2827,T1552,-0.7712,T1041,-0.8699
+SURICATA HTTP invalid transfer encoding value in request,T1190,-0.5395,T1567,-0.5630,T1210,-0.5850
+SURICATA HTTP missing Host header,T1078,-0.3726,T1059.001,-0.3816,T1557,-0.4648
+SURICATA HTTP multipart generic error,T1190,0.4529,T1210,-0.5947,T1584,-0.6613
+SURICATA HTTP request field missing colon,T1059.006,-0.3863,T1552,-0.5090,T1557,-0.5331
+SURICATA HTTP request header invalid,T1210,-0.4242,T1190,-0.4248,T1568,-0.7259
+SURICATA HTTP response field missing colon,T1059.006,-0.4901,T1078,-0.5467,T1557,-0.5785
+SURICATA HTTP response header invalid,T1210,-0.3806,T1566,-0.4528,T1082,-0.5561
+SURICATA HTTP status 100-Continue already seen,T1071,-0.7699,T1566,-0.8168,T1568,-0.8409
+SURICATA HTTP unable to match response to request,T1568,-0.6288,T1105,-0.7400,T1566,-0.7950
+SURICATA SMTP data command rejected,T1048.003,-0.5767,T1041,-0.7021,T1059.001,-0.7258
+SURICATA SMTP invalid pipelined sequence,T1048.003,-0.5984,T1210,-0.6008,T1190,-0.6219
+SURICATA SMTP invalid reply,T1190,-0.4653,T1210,-0.5173,T1048.003,-0.6106
+SURICATA SMTP no server welcome message,T1048.003,-0.3611,T1190,-0.4400,T1588.001,-0.6004
+SURICATA SMTP tls rejected,T1048.003,-0.2834,T1110.001,-0.7684,T1041,-0.8154
+SURICATA TLS certificate invalid length,T1071,-0.4697,T1210,-0.6887,T1190,-0.6988
+SURICATA TLS error message encountered,T1190,0.1527,T1588.001,-0.5511,T1210,-0.6395
+SURICATA TLS handshake invalid length,T1190,-0.5320,T1210,-0.6493,T1218,-0.7614
+SURICATA TLS invalid SNI length,T1210,-0.5117,T1190,-0.5847,T1078,-0.7016
+SURICATA TLS invalid certificate,T1071,-0.4096,T1210,-0.4555,T1553.004,-0.4642
+SURICATA TLS invalid handshake message,T1190,-0.5790,T1588.001,-0.6056,T1573,-0.6152
+SURICATA TLS invalid record type,T1566.001,-0.3152,T1210,-0.6070,T1078,-0.6765
+SURICATA TLS invalid record version,T1566.001,-0.3262,T1210,-0.3700,T1190,-0.4862
+SURICATA TLS invalid record/traffic,T1566.001,-0.2818,T1036,-0.5277,T1210,-0.6292
+"SURICATA TLS overflow heartbeat encountered, possible exploit attempt (heartbleed)",T1190,0.1266,T1090,-0.7133,T1041,-0.8222
