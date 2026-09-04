@@ -13,7 +13,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Five sub-experiments have run so far, in order. Each has its own detailed
+Six sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 ## 1. Seven-method zero-shot/kNN/SMET comparison — `archive/results.md`, `archive/SMET_STATUS.md`
@@ -86,23 +86,29 @@ review," not fully independent inference.
 
 ## 4. Sigma corpus pull — `attack_mapper/sigma_corpus/findings.md`
 
-Follow-on to effort 3's recommendation. Sparse/shallow-cloned SigmaHQ's
-`rules/` (3,144 files, 18MB) and ran it through `SigmaExtractor` for the
-first time against real (non-fixture) data — **100% parsed, 0 exceptions.**
-2,798 rules yielded a labeled (rule -> ATT&CK technique) corpus,
+Follow-on to effort 3's recommendation. Sparse/shallow-cloned SigmaHQ,
+starting with just `rules/` (3,144 files) and later extended to include
+`rules-threat-hunting/` and `rules-emerging-threats/` (3,757 files total,
+~21MB), and ran it through `SigmaExtractor` for the first time against real
+(non-fixture) data — **100% parsed, 0 exceptions**, on both pulls.
+3,289 rules yielded a labeled (rule -> ATT&CK technique) corpus,
 `sigma_labeled_corpus.csv`, built the same way as the tiered-approach's
 `et_labeled_corpus.csv` so the two are directly comparable:
 
 | | ET corpus | Sigma corpus |
 |---|---:|---:|
-| rows | 26,644 | 2,798 |
-| distinct techniques | 45 | 390 |
-| top-5-techniques share | 81.3% | 22.8% |
-| `T1203` training rows | 1 | 19 |
+| rows | 26,644 | 3,289 |
+| distinct techniques | 45 | 398 |
+| top-5-techniques share | 81.3% | 23.7% |
+| `T1203` training rows | 1 | 35 |
 
 Confirms `embedding_swap_findings.md`'s prediction directly: Sigma covers
-352 techniques the ET corpus never tags at all, and every ET technique that
-had ≤1 training example gets ≥2 once combined.
+360 techniques the ET corpus never tags at all, and every ET technique that
+had ≤1 training example gets ≥4 once combined. Re-running `validate.py`
+against the live pipeline after the extended pull produced an **identical**
+53.8%/same source breakdown, though — the extra rows didn't happen to touch
+the small number of hand-audit rows that reach the classifier at all. See
+`attack_mapper/sigma_corpus/findings.md`'s "Update" section.
 
 Retrained Tier 2's exact classifier architecture on the concatenated
 ET+Sigma corpus (`archive/tiered_approach/tier2_classifier_combined.py`,
@@ -148,18 +154,47 @@ several being compared. Re-ran `validate.py` after the move: identical
 `findings.md`'s "Update: package promoted and made self-contained" section
 and "Where things live" below for the full picture.
 
+## 6. LLM layer (Layer D) tested — `findings.md` ("Update: LLM layer tested" section)
+
+First time Layer D has actually executed anywhere in this branch. Set up a
+local Ollama server (free, no repo footprint — `attack_mapper/LLM_SETUP.md`)
+and ran `validate.py --llm ollama`. `llama3.1:8b` repeatedly triggered
+Windows OOM kills on this 16GB machine (also surfaced and fixed a real
+memory bug: `classifier_training.py` was spawning one parallel training
+worker per CPU core via `n_jobs=-1`, multiplying memory several-fold — now
+capped at 4). `llama3.2:3b` (2GB) completed cleanly.
+
+**Result: 33.8% top-1 (27/80), down from 53.8% — a 20-point regression.**
+Every row got reprocessed by the LLM (source breakdown: `{'llm': 100}`),
+including ones `declared`/`bridge_table` had already answered at
+81.8%/50% precision — `reasoner.py`'s current design only skips Layer D
+when the candidate pool is empty, which with the embedding fallback in
+place is never. `T1190` hub-collapse rose from 16% to 30% of top-1
+predictions, and self-reported confidence carries no signal about
+correctness (0.80 average on wrong answers, 0.83 on right ones). Read as
+evidence against *this* combination (a 3B local model, full-override
+design) specifically, not against LLM-assisted mapping as a concept — the
+stronger `llama3.1:8b` was never actually scored (memory-killed before
+finishing), so model capability and reasoner design are still confounded.
+`AttackMapperPipeline()`'s default is unaffected (`NullLLMClient`); this
+result lives in a separate `validation_report_llm.md`, not the committed
+baseline.
+
 ## Current bottom line
 
-**53.8% top-1** (effort 5, stacking 3+4) is the best number across all
-efforts, up from 48.8% (effort 3 alone) and 38.0% (effort 4 alone). The two
-non-embedding, non-LLM levers identified so far — SAGE-internal signal
-(declared tags + `MicroAttackStage` bridge) and a broadened training corpus
-— compose cleanly because they resolve disjoint rows. Every embedding/
-similarity-based method tried anywhere in this research branch (zero-shot
-ATTACK-BERT/MiniLM, kNN, Tier 2 TF-IDF/MiniLM/ATTACK-BERT, Tier 2 combined,
-Layer A in the HF pipeline) still tops out under 40% top-1 on independently-
-reviewed rows on its own — every accuracy gain in this research branch has
-come from a non-embedding signal.
+**53.8% top-1** (effort 5, stacking 3+4) is still the best number and the
+default. Non-embedding, non-LLM signal remains the only thing that has
+actually helped in this branch: SAGE-internal signal (declared tags +
+`MicroAttackStage` bridge) and a broadened training corpus compose cleanly
+because they resolve disjoint rows. Every embedding/similarity-based method
+tried anywhere in this research branch (zero-shot ATTACK-BERT/MiniLM, kNN,
+Tier 2 TF-IDF/MiniLM/ATTACK-BERT, Tier 2 combined, Layer A in the HF
+pipeline) tops out under 40% top-1 on its own — and now Layer D, the one
+piece explicitly designed to add reasoning on top of everything else, has
+made things *worse* (effort 6) in its only test so far. Every accuracy gain
+in this research branch has come from harvesting or combining existing
+structured signal, not from any model — embedding, classifier, or LLM —
+reasoning freshly over rule text.
 
 ## What's not done
 
@@ -168,9 +203,15 @@ come from a non-embedding signal.
   proposed corrections from a prior analysis pass, not yet human-confirmed.
   The brief for the HF pipeline asked for 200+. This is the one item that
   needs a human, not more engineering.
-- **LLM reasoning layer.** Architecturally ready (`attack_mapper/
-  llm_client.py`) but has never actually run once, anywhere, in this
-  research branch — no API key configured.
+- **LLM reasoning layer needs a design fix, not just a bigger model.**
+  Effort 6 tested it (`llama3.2:3b`) and got a 20-point regression, traced
+  to `reasoner.py`'s full-override design (Layer D reprocesses every row,
+  not just uncertain ones, and replaces rather than blends prior
+  confidence). Two untried fixes before drawing a final conclusion: (a) gate
+  Layer D to only fire on low-confidence/`embedding`-sourced rows and blend
+  rather than replace confidence; (b) retry with `llama3.1:8b` or a hosted
+  model once (a) is in, to separate "small local model" from "override
+  design" as the cause. Neither attempted yet.
 - **The classifier-stacking gain rests on a 5-row sample** (effort 5, the
   18 rows that used to fall through to embedding, of which the classifier
   claims 5). Directionally promising, not a stable estimate — the 200+-row

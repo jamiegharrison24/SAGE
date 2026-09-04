@@ -15,9 +15,18 @@ as the first real-data stress test of `../extractors/sigma.py`, which until
 then was only exercised against one hand-written fixture.
 
 Usage: python build_corpus.py
-Requires a local checkout of SigmaHQ/sigma's `rules/` directory at
-./sigmahq/rules (see ../../STATUS.md or this file's header for how it was
-fetched: sparse/shallow git clone, `rules/` only, ~3100 files, ~18MB).
+Requires a local checkout of SigmaHQ/sigma with these top-level rule tiers
+sparse-checked-out under ./sigmahq/ (see ../../STATUS.md or this file's
+header for how it was fetched -- sparse/shallow git clone):
+- `rules/` -- the primary, best-maintained tier (3,144 files)
+- `rules-threat-hunting/` -- broader/lower-confidence hunting rules (140 files)
+- `rules-emerging-threats/` -- year-organized, campaign/CVE-specific rules,
+  largely non-overlapping with our own ET Suricata corpus despite similar
+  subject matter, since Sigma's authors/tagging are independent (473 files)
+`rules-dfir/` also exists in the checkout but currently has 0 `.yml` files
+at the top of the sparse-checked-out tree (its content is nested under
+subdirectories not yet pulled) -- harmless, `iter_rule_files` just finds
+nothing there.
 Writes ../data/sigma_labeled_corpus.csv, ../data/sigma_parse_failures.csv,
 and prints stats.
 """
@@ -27,7 +36,8 @@ import sys
 import traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RULES_DIR = os.path.join(HERE, "sigmahq", "rules")
+SIGMAHQ_DIR = os.path.join(HERE, "sigmahq")
+RULE_TIERS = ["rules", "rules-threat-hunting", "rules-dfir", "rules-emerging-threats"]
 MITRE_MAPPING_DIR = os.path.normpath(os.path.join(HERE, "..", ".."))
 OUT_CORPUS = os.path.join(HERE, "..", "data", "sigma_labeled_corpus.csv")
 OUT_FAILURES = os.path.join(HERE, "..", "data", "sigma_parse_failures.csv")
@@ -37,16 +47,20 @@ from attack_mapper.extractors.sigma import SigmaExtractor  # noqa: E402
 from attack_mapper.mitre_client import MitreAttackClient  # noqa: E402
 
 
-def iter_rule_files(rules_dir):
-    for root, _dirs, files in os.walk(rules_dir):
-        for fn in files:
-            if fn.endswith((".yml", ".yaml")):
-                yield os.path.join(root, fn)
+def iter_rule_files(sigmahq_dir, tiers):
+    for tier in tiers:
+        tier_dir = os.path.join(sigmahq_dir, tier)
+        if not os.path.isdir(tier_dir):
+            continue
+        for root, _dirs, files in os.walk(tier_dir):
+            for fn in files:
+                if fn.endswith((".yml", ".yaml")):
+                    yield os.path.join(root, fn)
 
 
 def main():
-    if not os.path.isdir(RULES_DIR):
-        raise SystemExit(f"{RULES_DIR} not found -- see this file's docstring for how to fetch it")
+    if not os.path.isdir(SIGMAHQ_DIR):
+        raise SystemExit(f"{SIGMAHQ_DIR} not found -- see this file's docstring for how to fetch it")
 
     extractor = SigmaExtractor()
     mitre = MitreAttackClient()
@@ -57,7 +71,7 @@ def main():
     no_technique_tag = 0
     corpus_rows = []
 
-    for path in iter_rule_files(RULES_DIR):
+    for path in iter_rule_files(SIGMAHQ_DIR, RULE_TIERS):
         total += 1
         with open(path, encoding="utf-8") as fh:
             raw = fh.read()

@@ -2797,3 +2797,494 @@ Sysmon Configuration Modification,T1564,TA0005
 WMI Event Subscription,T1546.003,TA0003;TA0004
 Suspicious Encoded Scripts in a WMI Consumer,T1047;T1546.003,TA0002;TA0003;TA0004
 Suspicious Scripting in a WMI Consumer,T1059.005,TA0002
+Azure Sign-In With Axios User Agent,T1557,TA0006;TA0009
+Mail Forwarding/Redirecting Activity In O365,T1020;T1114.003;T1564.008,TA0005;TA0009;TA0010
+Inbox Rules Creation Or Update Activity in O365,T1114.003;T1564.008,TA0005;TA0009
+Python Path Configuration File Creation - Linux,T1059.006,TA0002
+Potentially Suspicious Long Filename Pattern - Linux,T1027;T1059.004,TA0002;TA0005
+Terminate Linux Process Via Kill,T1685,TA0112
+Process Discovery,T1057,TA0007
+Python Path Configuration File Creation - MacOS,T1059.006,TA0002
+Clipboard Data Collection Via Pbpaste,T1115,TA0009
+Low Reputation Effective Top-Level Domain (eTLD),T1071.004,TA0011
+Successful MSIX/AppX Package Installation,T1204.002,TA0002
+Firewall Rule Modified In The Windows Firewall Exception List,T1686.003,TA0112
+Access To Browser Credential Files By Uncommon Applications - Security,T1555.003,TA0006
+Scheduled Task Deletion,T1053.005,TA0002;TA0003;TA0004
+Potential Remote WMI ActiveScriptEventConsumers Activity,T1546.003,TA0003;TA0004
+CreateRemoteThread API and LoadLibrary,T1055.001,TA0004;TA0005
+Remote Thread Creation Via PowerShell,T1059.001,TA0002
+Remote Thread Created In Shell Application,T1055,TA0004;TA0005
+Access To Chromium Browsers Sensitive Files By Uncommon Applications,T1003,TA0006
+Access To Browser Credential Files By Uncommon Applications,T1003,TA0006
+Access To Windows Outlook Mail Files By Uncommon Applications,T1070.008,TA0005
+Access To Sysvol Policies Share By Uncommon Process,T1552.006,TA0006
+Access To .Reg/.Hive Files By Uncommon Applications,T1112,TA0003;TA0112
+Unattend.XML File Access Attempt,T1552.001,TA0006
+File Creation Date Changed to Another Year,T1070.006,TA0005
+ADS Zone.Identifier Deleted,T1070.004,TA0005
+PFX File Creation,T1552.004,TA0006
+Python Path Configuration File Creation - Windows,T1059.006,TA0002
+Scheduled Task Created - FileCreation,T1053.005,TA0002;TA0003;TA0004
+Creation of an Executable by an Executable,T1587.001,TA0042
+Suspicious Creation TXT File in User Desktop,T1486,TA0040
+WDAC Policy File Creation In CodeIntegrity Folder,T1685,TA0112
+WebDAV Temporary Local File Creation,T1566;T1584,TA0001;TA0042
+Non-DLL Extension File Renamed With DLL Extension,T1036.008,TA0005
+Amsi.DLL Load By Uncommon Process,T1490,TA0040
+BITS Client BitsProxy DLL Loaded By Uncommon Process,T1197,TA0002;TA0003;TA0005
+Dbghelp/Dbgcore DLL Loaded By Uncommon/Suspicious Process,T1003.001,TA0006
+System Drawing DLL Load,T1113,TA0009
+Task Scheduler DLL Loaded By Application Located In Potentially Suspicious Location,T1053.005,TA0002;TA0003;TA0004
+Microsoft Excel Add-In Loaded,T1204.002,TA0002
+Microsoft Word Add-In Loaded,T1204.002,TA0002
+Signed DLL Loaded With Missing PE Version Metadata,T1574.001,TA0002;TA0005
+WerFaultSecure Loading DbgCore or DbgHelp - EDR-Freeze,T1685,TA0112
+WMI Module Loaded By Uncommon Process,T1047,TA0002
+Dfsvc.EXE Network Connection To Non-Local IPs,T1203,TA0002
+Dfsvc.EXE Initiated Network Connection Over Uncommon Port,T1203,TA0002
+Dllhost.EXE Initiated Network Connection To Non-Local IP Address,T1218;T1559.001,TA0002;TA0005
+HH.EXE Initiated HTTP Network Connection,T1218.001,TA0005
+Msiexec.EXE Initiated Network Connection Over HTTP,T1218.007,TA0005
+Network Connection Initiated By PowerShell Process,T1059.001,TA0002
+Potentially Suspicious Azure Front Door Connection,T1090.004;T1102.002,TA0011
+Network Connection Initiated From Users\Public Folder,T1105,TA0011
+PsExec Default Named Pipe,T1569.002,TA0002
+Uncommon PowerShell Hosts,T1059.001,TA0002
+bXOR Operator Usage In PowerShell Command Line - PowerShell Classic,T1059.001,TA0002
+Local Firewall Rules Enumeration Via NetFirewallRule Cmdlet,T1016;T1518.001,TA0007
+Compress-Archive Cmdlet Execution,T1560,TA0009
+Mail Forwarding/Redirecting Activity Via ExchangePowerShell Cmdlet,T1020;T1114.003;T1564.008,TA0005;TA0009;TA0010
+Inbox Rules Creation Or Update Activity Via ExchangePowerShell Cmdlet,T1114.003;T1564.008,TA0005;TA0009
+Windows Mail App Mailbox Access Via PowerShell Script,T1070.008,TA0005
+New Windows Firewall Rule Added Via New-NetFirewallRule Cmdlet - ScriptBlock,T1686.003,TA0112
+SMB over QUIC Via PowerShell Script,T1570,TA0008
+Potential Registry Reconnaissance Via PowerShell Script,T1007;T1012,TA0007
+Use Of Remove-Item to Delete File - ScriptBlock,T1070.004,TA0005
+Potential Data Exfiltration Over SMTP Via Send-MailMessage Cmdlet,T1048.003,TA0010
+Powershell Token Obfuscation - Powershell,T1027.009,TA0005
+WinAPI Library Calls Via PowerShell Scripts,T1059.001;T1106,TA0002
+WinAPI Function Calls Via PowerShell Scripts,T1059.001;T1106,TA0002
+Potential Credential Dumping Attempt Via PowerShell,T1003.001,TA0006
+LSASS Access From Program In Potentially Suspicious Folder,T1003.001,TA0006
+Uncommon GrantedAccess Flags On LSASS,T1003.001,TA0006
+Potential Shellcode Injection,T1055,TA0004;TA0005
+Password Protected Compressed File Extraction Via 7Zip,T1560.001,TA0009
+Set Files as System Files Using Attrib.EXE,T1564.001,TA0005
+Potential BOINC Software Execution (UC-Berkeley Signature),T1553,TA0112
+CMD Shell Output Redirect,T1082,TA0007
+Headless Process Launched Via Conhost.EXE,T1059.001;T1059.003,TA0002
+Dynamic .NET Compilation Via Csc.EXE - Hunting,T1027.004,TA0005
+File Download Via Curl.EXE,T1105,TA0011
+Curl.EXE Execution,T1105,TA0011
+Potential Data Exfiltration Via Curl.EXE,T1105;T1567,TA0010;TA0011
+Curl.EXE Execution With Custom UserAgent,T1071.001,TA0011
+Diskshadow Child Process Spawned,T1218,TA0005
+Diskshadow Script Mode Execution,T1218,TA0005
+Potential Proxy Execution Via Explorer.EXE From Shell Process,T1218,TA0005
+Potential DLL Sideloading Activity Via ExtExport.EXE,T1218,TA0005
+Potential Password Reconnaissance Via Findstr.EXE,T1552.001,TA0006
+New Self Extracting Package Created Via IExpress.EXE,T1218,TA0005
+Microsoft Workflow Compiler Execution,T1127;T1218,TA0002;TA0005
+CodePage Modification Via MODE.COM,T1036,TA0005
+Net.EXE Execution,T1007;T1018;T1021.002;T1049;T1069.001;T1069.002;T1087.001;T1087.002;T1135;T1201,TA0007;TA0008
+SMB over QUIC Via Net.EXE,T1570,TA0008
+Unusually Long PowerShell CommandLine,T1059.001,TA0002
+"Invocation Of Crypto-Classes From The ""Cryptography"" PowerShell Namespace",T1027.010;T1059.001,TA0002;TA0005
+New Windows Firewall Rule Added Via New-NetFirewallRule Cmdlet,T1686.003,TA0112
+Potentially Suspicious PowerShell Child Processes,T1059.001,TA0002
+Regsvr32.EXE Calling of DllRegisterServer Export Function Implicitly,T1218,TA0005
+Remote Access Tool - Action1 Arbitrary Code Execution and Remote Sessions,T1219.002,TA0011
+DLL Call by Ordinal Via Rundll32.EXE,T1218.011,TA0005
+Rundll32.EXE Calling DllRegisterServer Export Function Explicitly,T1218,TA0005
+Scheduled Task Creation From Potential Suspicious Parent Location,T1053.005,TA0002;TA0003;TA0004
+SC.EXE Query Execution,T1007,TA0007
+Potential CommandLine Obfuscation Using Unicode Characters,T1027,TA0005
+Potentially Suspicious Compression Tool Parameters,T1560.001,TA0009
+Elevated System Shell Spawned,T1059,TA0002
+EventLog Query Requests By Builtin Utilities,T1552,TA0006
+Potential Suspicious Execution From GUID Like Folder Names,T1027,TA0005
+Execution From Webserver Root Folder,T1505.003,TA0003
+Tunneling Tool Execution,T1041;T1071.001;T1572,TA0010;TA0011
+File or Folder Permissions Modifications,T1222.001,TA0112
+Use Short Name Path in Command Line,T1564.004,TA0005
+HTML File Opened From Download Folder,T1566.001;T1598.002,TA0001;TA0043
+Potential Executable Run Itself As Sacrificial Process,T1055,TA0004;TA0005
+Manual Execution of Script Inside of a Compressed File,T1059,TA0002
+Process Terminated Via Taskkill,T1489,TA0040
+Suspicious Tasklist Discovery Command,T1057,TA0007
+Process Execution From WebDAV Share,T1105,TA0011
+FTP Connection Open Attempt Via Winscp CLI,T1048,TA0010
+Winscp Execution From Non Standard Folder,T1048,TA0010
+System Information Discovery Via Wmic.EXE,T1082,TA0007
+WSF/JSE/JS/VBA/VBE File Execution Via Cscript/Wscript,T1059.005;T1059.007,TA0002
+Arbitrary Command Execution Using WSL,T1202;T1218,TA0005
+Scheduled Task Created - Registry,T1053.005,TA0002;TA0003;TA0004
+Microsoft Office Trusted Location Updated,T1112,TA0003;TA0112
+"Registry Set With Crypto-Classes From The ""Cryptography"" PowerShell Namespace",T1027.010;T1059.001;T1547.001,TA0002;TA0003;TA0004;TA0005
+Service Binary in User Controlled Folder,T1112,TA0003;TA0112
+CVE-2010-5278 Exploitation Attempt,T1190,TA0001
+Rejetto HTTP File Server RCE,T1190;T1505.003,TA0001;TA0003
+ZxShell Malware,T1059.003;T1218.011,TA0002;TA0005
+Turla Group Lateral Movement,T1021.002;T1059;T1083;T1135,TA0002;TA0007;TA0008
+Turla Group Commands May 2020,T1027;T1053.005;T1059.001,TA0002;TA0003;TA0004;TA0005
+Exploit for CVE-2015-1641,T1036.005,TA0005
+Exploit for CVE-2017-0261,T1203;T1204.002;T1566.001,TA0001;TA0002
+Droppers Exploiting CVE-2017-11882,T1203;T1204.002;T1566.001,TA0001;TA0002
+Exploit for CVE-2017-8759,T1203;T1204.002;T1566.001,TA0001;TA0002
+Adwind RAT / JRAT,T1059.005;T1059.007,TA0002
+CosmicDuke Service Installation,T1543.003;T1569.002,TA0002;TA0003;TA0004
+Fireball Archer Install,T1218.011,TA0005
+Malware Shellcode in Verclsid Target Process,T1055,TA0004;TA0005
+NotPetya Ransomware Activity,T1003.001;T1218.011;T1685.005,TA0005;TA0006;TA0112
+Potential PlugX Activity,T1574.001,TA0002;TA0005
+StoneDrill Service Install,T1543.003,TA0003;TA0004
+WannaCry Ransomware Activity,T1083;T1210;T1222.001;T1486;T1490,TA0007;TA0008;TA0040;TA0112
+Potential APT10 Cloud Hopper Activity,T1059.005,TA0002
+Ps.exe Renamed SysInternals Tool,T1036.003,TA0005
+Equation Group C2 Communication,T1041,TA0010
+Lazarus System Binary Masquerading,T1036.005,TA0005
+Pandemic Registry Key,T1105,TA0011
+Turla Group Named Pipes,T1106,TA0002
+Turla Service Install,T1543.003,TA0003;TA0004
+Turla PNG Dropper Service,T1543.003,TA0003;TA0004
+Fortinet CVE-2018-13379 Exploitation,T1190,TA0001
+SSHD Error Message CVE-2018-15473,T1589,TA0043
+Oracle WebLogic Exploit,T1190;T1505.003,TA0001;TA0003
+Elise Backdoor Activity,T1059.003,TA0002
+APT27 - Emissary Panda Activity,T1574.001,TA0002;TA0005
+Sofacy Trojan Loader Activity,T1059.003;T1218.011,TA0002;TA0005
+APT29 2018 Phishing Campaign File Indicators,T1218.011,TA0005
+APT29 2018 Phishing Campaign CommandLine Indicators,T1218.011,TA0005
+OceanLotus Registry Activity,T1112,TA0003;TA0112
+OilRig APT Activity,T1053.005;T1071.004;T1112;T1543.003,TA0002;TA0003;TA0004;TA0011;TA0112
+OilRig APT Registry Persistence,T1053.005;T1071.004;T1112;T1543.003,TA0002;TA0003;TA0004;TA0011;TA0112
+OilRig APT Schedule Task Persistence - Security,T1053.005;T1071.004;T1112;T1543.003,TA0002;TA0003;TA0004;TA0011;TA0112
+OilRig APT Schedule Task Persistence - System,T1053.005;T1071.004;T1112;T1543.003,TA0002;TA0003;TA0004;TA0011;TA0112
+Defrag Deactivation,T1053.005,TA0002;TA0003;TA0004
+Defrag Deactivation - Security,T1053,TA0002;TA0003;TA0004
+TropicTrooper Campaign November 2018,T1059.001,TA0002
+Potential BearLPE Exploitation,T1053.005,TA0002;TA0003;TA0004
+Scanner PoC for CVE-2019-0708 RDP RCE Vuln,T1210,TA0008
+Potential RDP Exploit CVE-2019-0708,T1210,TA0008
+Pulse Secure Attack CVE-2019-11510,T1190,TA0001
+Exploiting SetupComplete.cmd CVE-2019-1378,T1059.003;T1068;T1574,TA0002;TA0004;TA0005
+Exploiting CVE-2019-1388,T1068,TA0004
+Sudo Privilege Escalation CVE-2019-14287 - Builtin,T1068;T1548.003,TA0004
+Sudo Privilege Escalation CVE-2019-14287,T1068;T1548.003,TA0004
+Citrix Netscaler Attack CVE-2019-19781,T1190,TA0001
+Confluence Exploitation CVE-2019-3398,T1190,TA0001
+Potential Baby Shark Malware Activity,T1012;T1059.001;T1059.003;T1218.005,TA0002;TA0005;TA0007
+Chafer Malware URL Pattern,T1071.001,TA0011
+Potential Dridex Activity,T1033;T1055;T1135,TA0004;TA0005;TA0007
+Potential Dtrack RAT Activity,T1490,TA0040
+Potential Emotet Activity,T1027;T1059.001,TA0002;TA0005
+Formbook Process Creation,T1587.001,TA0042
+LockerGoga Ransomware Activity,T1486,TA0040
+Potential QBot Activity,T1059.005,TA0002
+Potential Ryuk Ransomware Activity,T1547.001,TA0003;TA0004
+Potential Snatch Ransomware Activity,T1204,TA0002
+Ursnif Malware C2 URL Pattern,T1071.001;T1204.002;T1566.001,TA0001;TA0002;TA0011
+Ursnif Malware Download URL Pattern,T1071.001,TA0011
+Potential Ursnif Malware Activity - Registry,T1112,TA0003;TA0112
+Potential APT-C-12 BlueMushroom DLL Load Activity Via Regsvr32,T1218.010,TA0005
+APT31 Judgement Panda Activity,T1003.001;T1560.001,TA0006;TA0009
+APT40 Dropbox Tool User Agent,T1071.001;T1567.002,TA0010;TA0011
+Potential Russian APT Credential Theft Activity,T1003.003;T1552.001,TA0006
+Potential EmpireMonkey Activity,T1218.010,TA0005
+Equation Group DLL_U Export Function Load,T1218.011,TA0005
+Mustang Panda Dropper,T1587.001,TA0042
+Operation Wocao Activity,T1012;T1027;T1036.004;T1053.005;T1059.001,TA0002;TA0003;TA0004;TA0005;TA0007
+Operation Wocao Activity - Security,T1012;T1027;T1036.004;T1053.005;T1059.001,TA0002;TA0003;TA0004;TA0005;TA0007
+CVE-2020-0688 Exploitation Attempt,T1190,TA0001
+CVE-2020-0688 Exchange Exploitation via Web Log,T1190,TA0001
+CVE-2020-0688 Exploitation via Eventlog,T1190,TA0001
+CVE-2020-10148 SolarWinds Orion API Auth Bypass,T1190,TA0001
+Exploited CVE-2020-10189 Zoho ManageEngine,T1059.001;T1059.003;T1190,TA0001;TA0002
+Suspicious PrinterPorts Creation (CVE-2020-1048),T1059.001,TA0002
+CVE-2020-1048 Exploitation Attempt - Suspicious New Printer Ports - Registry,T1112,TA0003;TA0112
+DNS RCE CVE-2020-1350,T1190;T1569.002,TA0001;TA0002
+Exploitation Attempt Of CVE-2020-1472 - Execution of ZeroLogon PoC,T1210,TA0008
+Oracle WebLogic Exploit CVE-2020-14882,T1190,TA0001
+TerraMaster TOS CVE-2020-28188,T1190,TA0001
+Cisco ASA FTD Exploit CVE-2020-3452,T1190,TA0001
+CVE-2020-5902 F5 BIG-IP Exploitation Attempt,T1190,TA0001
+Citrix ADS Exploitation CVE-2020-8193 CVE-2020-8195,T1190,TA0001
+Blue Mockingbird,T1047;T1112,TA0002;TA0003;TA0112
+Blue Mockingbird - Registry,T1047;T1112,TA0002;TA0003;TA0112
+ComRAT Network Communication,T1071.001,TA0011
+Potential Emotet Rundll32 Execution,T1218.011,TA0005
+FlowCloud Registry Markers,T1112,TA0003;TA0112
+Potential Ke3chang/TidePool Malware Activity,T1685,TA0112
+Potential Maze Ransomware Activity,T1047;T1204.002;T1490,TA0002;TA0040
+Trickbot Malware Activity,T1559,TA0002
+EvilNum APT Golden Chickens Deployment Via OCX Files,T1218.011,TA0005
+GALLIUM IOCs,T1071;T1212,TA0006;TA0011
+GALLIUM Artefacts - Builtin,T1071,TA0011
+Greenbug Espionage Group Indicators,T1036.005;T1059.001;T1105,TA0002;TA0005;TA0011
+Lazarus Group Activity,T1059,TA0002
+Leviathan Registry Key Activity,T1547.001,TA0003;TA0004
+UNC2452 Process Creation Patterns,T1059.001,TA0002
+UNC2452 PowerShell Pattern,T1047;T1059.001,TA0002
+Suspicious VBScript UN2452 Pattern,T1547.001,TA0003;TA0004
+Solarwinds SUPERNOVA Webshell Access,T1505.003,TA0003
+TAIDOOR RAT DLL Load,T1055.001,TA0004;TA0005
+Winnti Malware HK University Campaign,T1574.001,TA0002;TA0005
+Winnti Pipemon Characteristics,T1574.001,TA0002;TA0005
+Antivirus PrinterNightmare CVE-2021-34527 Exploit Detection,T1055,TA0004;TA0005
+Potential PrintNightmare Exploitation Attempt,T1574,TA0002;TA0005
+CVE-2021-1675 Print Spooler Exploitation Filename Pattern,T1587,TA0042
+Windows Spooler Service Suspicious Binary Load,T1574,TA0002;TA0005
+PrinterNightmare Mimikatz Driver Name,T1204,TA0002
+Possible CVE-2021-1675 Print Spooler Exploitation,T1569,TA0002
+CVE-2021-1675 Print Spooler Exploitation,T1569,TA0002
+CVE-2021-1675 Print Spooler Exploitation IPC Access,T1569,TA0002
+Arcadyan Router Exploitations,T1190,TA0001
+Oracle WebLogic Exploit CVE-2021-2109,T1190,TA0001
+CVE-2021-21972 VSphere Exploitation,T1190,TA0001
+CVE-2021-21978 Exploitation Attempt,T1190,TA0001
+VMware vCenter Server File Upload CVE-2021-22005,T1190,TA0001
+Fortinet CVE-2021-22123 Exploitation,T1190,TA0001
+Pulse Connect Secure RCE Attack CVE-2021-22893,T1190,TA0001
+Potential Atlassian Confluence CVE-2021-26084 Exploitation Attempt,T1059;T1190,TA0001;TA0002
+Potential CVE-2021-26084 Exploitation Attempt,T1190,TA0001
+Exploitation of CVE-2021-26814 in Wazuh,T1190,TA0001
+Potential CVE-2021-26857 Exploitation Attempt,T1203,TA0002
+CVE-2021-26858 Exchange Exploitation,T1203,TA0002
+ProxyLogon Reset Virtual Directories Based On IIS Log,T1190,TA0001
+Potential CVE-2021-27905 Exploitation Attempt,T1190,TA0001
+Exchange Exploitation CVE-2021-28480,T1190,TA0001
+CVE-2021-33766 Exchange ProxyToken Exploitation,T1190,TA0001
+CVE-2021-31979 CVE-2021-33771 Exploits by Sourgum,T1203;T1566,TA0001;TA0002
+CVE-2021-31979 CVE-2021-33771 Exploits,T1203;T1566,TA0001;TA0002
+Serv-U Exploitation CVE-2021-35211 by DEV-0322,T1136.001,TA0003
+OMIGOD HTTP No Authentication RCE - CVE-2021-38647,T1021.006;T1068;T1190;T1203;T1210,TA0001;TA0002;TA0004;TA0008
+PwnKit Local Privilege Escalation,T1548.001,TA0004
+Suspicious Word Cab File Write CVE-2021-40444,T1587,TA0042
+Potential CVE-2021-40444 Exploitation Attempt,T1059,TA0002
+ADSelfService Exploitation,T1190,TA0001
+CVE-2021-40539 Zoho ManageEngine ADSelfService Plus Exploit,T1190;T1505.003,TA0001;TA0003
+InstallerFileTakeOver LPE CVE-2021-41379 File Create Event,T1068,TA0004
+Potential CVE-2021-41379 Exploitation Attempt,T1068,TA0004
+LPE InstallerFileTakeOver PoC CVE-2021-41379,T1190,TA0001
+CVE-2021-41773 Exploitation Attempt,T1190,TA0001
+Sitecore Pre-Auth RCE CVE-2021-42237,T1190,TA0001
+Potential CVE-2021-42278 Exploitation Attempt,T1558.003,TA0006
+Suspicious Computer Account Name Change CVE-2021-42287,T1036;T1098,TA0003;TA0004;TA0005
+Potential CVE-2021-42287 Exploitation Attempt,T1558.003,TA0006
+Possible Exploitation of Exchange RCE CVE-2021-42321,T1210,TA0008
+Grafana Path Traversal Exploitation CVE-2021-43798,T1190,TA0001
+Potential CVE-2021-44228 Exploitation Attempt - VMware Horizon,T1190,TA0001
+Log4j RCE CVE-2021-44228 Generic,T1190,TA0001
+Log4j RCE CVE-2021-44228 in Fields,T1190,TA0001
+Exchange ProxyShell Pattern,T1190,TA0001
+Suspicious RazerInstaller Explorer Subprocess,T1553,TA0112
+Potential SystemNightmare Exploitation Attempt,T1068,TA0004
+SonicWall SSL/VPN Jarrewrite Exploitation,T1190,TA0001
+Potential BlackByte Ransomware Activity,T1059.001;T1140;T1485;T1498,TA0002;TA0005;TA0040
+Blackbyte Ransomware Registry,T1112,TA0003;TA0112
+Conti Volume Shadow Listing,T1587.001,TA0042
+Conti NTDS Exfiltration Command,T1560,TA0009
+Potential Conti Ransomware Activity,T1486,TA0040
+Potential Conti Ransomware Database Dumping Activity Via SQLCmd,T1005,TA0009
+DarkSide Ransomware Pattern,T1204,TA0002
+Potential Devil Bait Malware Reconnaissance,T1218,TA0005
+FoggyWeb Backdoor DLL Loading,T1587,TA0042
+Moriya Rootkit File Created,T1543.003,TA0003;TA0004
+Potential NetWire RAT Activity - Registry,T1112,TA0003;TA0112
+Pingback Backdoor File Indicators,T1574.001,TA0002;TA0005
+Pingback Backdoor DLL Loading Activity,T1574.001,TA0002;TA0005
+Pingback Backdoor Activity,T1574.001,TA0002;TA0005
+Small Sieve Malware File Indicator Creation,T1036.005,TA0005
+Small Sieve Malware CommandLine Indicator,T1574.001,TA0002;TA0005
+HAFNIUM Exchange Exploitation Activity,T1053;T1546,TA0002;TA0003;TA0004
+Exchange Exploitation Used by HAFNIUM,T1190,TA0001
+REvil Kaseya Incident Malware Patterns,T1059,TA0002
+APT PRIVATELOG Image Load Pattern,T1055,TA0004;TA0005
+SOURGUM Actor Behaviours,T1546;T1546.015,TA0003;TA0004
+DEWMODE Webshell Access,T1505.003,TA0003
+Potential CVE-2022-21587 Exploitation Attempt,T1190,TA0001
+Potential CVE-2022-22954 Exploitation Attempt - VMware Workspace ONE Access Remote Code Execution,T1059.006;T1190,TA0001;TA0002
+CVE-2022-24527 Microsoft Connected Cache LPE,T1059.001,TA0002
+Atlassian Confluence CVE-2022-26134,T1059;T1190,TA0001;TA0002
+Potential CVE-2022-26809 Exploitation Attempt,T1190;T1569.002,TA0001;TA0002
+Zimbra Collaboration Suite Email Server Unauthenticated RCE,T1190,TA0001
+Potential Nimbuspwn Exploit CVE-2022-29799 and CVE-2022-27800,T1068,TA0004
+Suspicious Set Value of MSDT in Registry (CVE-2022-30190),T1221,TA0005
+CVE-2022-31656 VMware Workspace ONE Access Auth Bypass,T1190,TA0001
+CVE-2022-31659 VMware Workspace ONE Access RCE,T1190,TA0001
+Apache Spark Shell Command Injection - ProcessCreation,T1190,TA0001
+Apache Spark Shell Command Injection - Weblogs,T1190,TA0001
+Atlassian Bitbucket Command Injection Via Archive API,T1190,TA0001
+Potential OWASSRF Exploitation Attempt - Proxy,T1190,TA0001
+OWASSRF Exploitation Attempt Using Public POC - Proxy,T1190,TA0001
+Potential OWASSRF Exploitation Attempt - Webserver,T1190,TA0001
+OWASSRF Exploitation Attempt Using Public POC - Webserver,T1190,TA0001
+Suspicious Sysmon as Execution Parent,T1068,TA0004
+Potential Centos Web Panel Exploitation Attempt - CVE-2022-44877,T1190,TA0001
+Potential CVE-2022-46169 Exploitation Attempt,T1190,TA0001
+MSSQL Extended Stored Procedure Backdoor Maggie,T1546,TA0003;TA0004
+BlueSky Ransomware Artefacts,T1486,TA0040
+Potential Bumblebee Remote Thread Creation,T1059.001;T1218.011,TA0002;TA0005
+ChromeLoader Malware Execution,T1053.005;T1059.001;T1176,TA0002;TA0003;TA0004
+Emotet Loader Execution Via .LNK File,T1059.006,TA0002
+Hermetic Wiper TG Process Patterns,T1021.001,TA0008
+Raspberry Robin Subsequent Execution of Commands,T1059.001,TA0002
+Raspberry Robin Initial Execution From External Drive,T1059.001,TA0002
+Serpent Backdoor Payload Execution Via Scheduled Task,T1053.005;T1059.006,TA0002;TA0003;TA0004
+FakeUpdates/SocGholish Activity,T1059.001,TA0002
+Potential ACTINIUM Persistence Activity,T1053;T1053.005,TA0002;TA0003;TA0004
+MERCURY APT Activity,T1059.001,TA0002
+CVE-2023-1389 Potential Exploitation Attempt - Unauthenticated Command Injection In TP-Link Archer AX21,T1190,TA0001
+CVE-2023-22518 Exploitation Attempt - Suspicious Confluence Child Process (Linux),T1059;T1190,TA0001;TA0002
+CVE-2023-22518 Exploitation Attempt - Suspicious Confluence Child Process (Windows),T1059;T1190,TA0001;TA0002
+CVE-2023-22518 Exploitation Attempt - Vulnerable Endpoint Connection (Proxy),T1190,TA0001
+CVE-2023-22518 Exploitation Attempt - Vulnerable Endpoint Connection (Webserver),T1190,TA0001
+Potential CVE-2023-2283 Exploitation,T1190,TA0001
+Outlook Task/Note Reminder Received,T1137,TA0003
+Potential CVE-2023-23752 Exploitation Attempt,T1190,TA0001
+Potential CVE-2023-25717 Exploitation Attempt,T1190,TA0001
+Potential CVE-2023-27363 Exploitation - HTA File Creation By FoxitPDFReader,T1505.001,TA0003
+Potential CVE-2023-27997 Exploitation Indicators,T1190,TA0001
+Potential MOVEit Transfer CVE-2023-34362 Exploitation - File Activity,T1190,TA0001
+Potential MOVEit Transfer CVE-2023-34362 Exploitation - Dynamic Compilation Via Csc.EXE,T1059,TA0002
+MOVEit CVE-2023-34362 Exploitation Attempt - Potential Web Shell Request,T1505.003,TA0003
+CVE-2023-38331 Exploitation Attempt - Suspicious WinRAR Child Process,T1203,TA0002
+Potential Information Disclosure CVE-2023-43261 Exploitation - Proxy,T1190,TA0001
+Potential Information Disclosure CVE-2023-43261 Exploitation - Web,T1190,TA0001
+Potential CVE-2023-46214 Exploitation Attempt,T1210,TA0008
+Exploitation Attempt Of CVE-2023-46214 Using Public POC Code,T1210,TA0008
+CVE-2023-46747 Exploitation Activity - Proxy,T1190,TA0001
+CVE-2023-46747 Exploitation Activity - Webserver,T1190,TA0001
+CVE-2023-4966 Exploitation Attempt - Citrix ADC Sensitive Information Disclosure - Proxy,T1190,TA0001
+CVE-2023-4966 Potential Exploitation Attempt - Citrix ADC Sensitive Information Disclosure - Proxy,T1190,TA0001
+CVE-2023-4966 Potential Exploitation Attempt - Citrix ADC Sensitive Information Disclosure - Webserver,T1190,TA0001
+CVE-2023-4966 Exploitation Attempt - Citrix ADC Sensitive Information Disclosure - Webserver,T1190,TA0001
+Potential Exploitation Attempt Of Undocumented WindowsServer RCE,T1190,TA0001
+Potential SocGholish Second Stage C2 DNS Query,T1219.002,TA0011
+DarkGate - Autoit3.EXE File Creation By Uncommon Process,T1059;T1105,TA0002;TA0011
+DarkGate - Autoit3.EXE Execution Parameters,T1059,TA0002
+DarkGate - User Created Via Net.EXE,T1136.001,TA0003
+Injected Browser Process Spawning Rundll32 - GuLoader Activity,T1055,TA0004;TA0005
+IcedID Malware Suspicious Single Digit DLL Execution Via Rundll32,T1218.011,TA0005
+Potential Pikabot C2 Activity,T1573,TA0011
+Potential Pikabot Infection - Suspicious Command Combinations Via Cmd.EXE,T1059.003;T1105;T1218,TA0002;TA0005;TA0011
+Potential Pikabot Discovery Activity,T1016;T1049;T1087,TA0007
+Potential Pikabot Hollowing Activity,T1055.012,TA0004;TA0005
+Rhadamanthys Stealer Module Launch Via Rundll32.EXE,T1218.011,TA0005
+Rorschach Ransomware Execution Activity,T1059.001;T1059.003,TA0002
+Ursnif Redirection Of Discovery Commands,T1059,TA0002
+Potential Compromised 3CXDesktopApp Execution,T1218,TA0005
+Potential Suspicious Child Process Of 3CXDesktopApp,T1218,TA0005
+Potential Compromised 3CXDesktopApp Update Activity,T1218,TA0005
+DLL Names Used By SVR For GraphicalProton Backdoor,T1574.001,TA0002;TA0005
+Diamond Sleet APT DLL Sideloading Indicators,T1574.001,TA0002;TA0005
+Diamond Sleet APT Scheduled Task Creation - Registry,T1685,TA0112
+Diamond Sleet APT Scheduled Task Creation,T1053.005,TA0002;TA0003;TA0004
+Potential APT FIN7 POWERHOLD Execution,T1059.001,TA0002
+Potential POWERTRASH Script Execution,T1059.001,TA0002
+Lace Tempest PowerShell Evidence Eraser,T1059.001,TA0002
+Lace Tempest PowerShell Launcher,T1059.001,TA0002
+Lazarus APT DLL Sideloading Activity,T1574.001,TA0002;TA0005
+UNC4841 - SSL Certificate Exfiltration Via Openssl,T1140,TA0005
+UNC4841 - Download Compressed Files From Temp.sh Using Wget,T1140,TA0005
+UNC4841 - Download Tar File From Untrusted Direct IP Via Wget,T1140,TA0005
+Potential CVE-2024-35250 Exploitation Activity,T1068,TA0004
+CVE-2024-49113 Exploitation Attempt - LDAP Nightmare,T1499,TA0040
+CVE-2024-50623 Exploitation Attempt - Cleo,T1190,TA0001
+Potential CSharp Streamer RAT Loading .NET Executable Image,T1219.002,TA0011
+DarkGate - Drop DarkGate Loader In C:\Temp Directory,T1059,TA0002
+Potential KamiKakaBot Activity - Lure Document Execution,T1059,TA0002
+Potential KamiKakaBot Activity - Winlogon Shell Persistence,T1547.001,TA0003;TA0004
+Kapeka Backdoor Loaded Via Rundll32.EXE,T1204.002;T1218.011,TA0002;TA0005
+Kapeka Backdoor Persistence Activity,T1053.005,TA0002;TA0003;TA0004
+Kapeka Backdoor Execution Via RunDLL32.EXE,T1218.011,TA0005
+Kapeka Backdoor Autorun Persistence,T1547.001,TA0003;TA0004
+Kapeka Backdoor Configuration Persistence,T1553.003,TA0112
+Kapeka Backdoor Scheduled Task Creation,T1053.005,TA0002;TA0003;TA0004
+Lummac Stealer Activity - Execution Of More.com And Vbc.exe,T1055,TA0004;TA0005
+Potential Raspberry Robin Aclui Dll SideLoading,T1574.001,TA0002;TA0005
+Potential Raspberry Robin CPL Execution Activity,T1218.011,TA0005
+Potential Raspberry Robin Registry Set Internet Settings ZoneMap,T1112,TA0003;TA0112
+Potential APT FIN7 Exploitation Activity,T1059.001;T1059.003,TA0002
+Forest Blizzard APT - File Creation Activity,T1685.001,TA0112
+Forest Blizzard APT - JavaScript Constrained File Creation,T1685.001,TA0112
+Forest Blizzard APT - Custom Protocol Handler Creation,T1547.001,TA0003;TA0004
+Forest Blizzard APT - Custom Protocol Handler DLL Registry Set,T1547.001,TA0003;TA0004
+Potential Exploitation of GoAnywhere MFT Vulnerability,T1059.001;T1133;T1190,TA0001;TA0002;TA0003
+Cisco ASA Exploitation Activity - Proxy,T1190,TA0001
+Suspicious Creation of .library-ms File — Potential CVE-2025-24054 Exploit,T1187,TA0006
+Suspicious Process Spawned by CentreStack Portal AppPool,T1059.003;T1505.003,TA0002;TA0003
+Suspicious CrushFTP Child Process,T1059.001;T1059.003;T1190,TA0001;TA0002
+Potential SAP NetWeaver Webshell Creation - Linux,T1059.003;T1190,TA0001;TA0002
+Potential SAP NetWeaver Webshell Creation,T1059.003;T1190,TA0001;TA0002
+Suspicious Child Process of SAP NetWeaver - Linux,T1059.003;T1190,TA0001;TA0002
+Suspicious Child Process of SAP NetWeaver,T1059.003;T1190,TA0001;TA0002
+Potential SAP NetViewer Webshell Command Execution,T1190;T1505.003,TA0001;TA0003
+Potential Java WebShell Upload in SAP NetViewer Server,T1505.003,TA0003
+Non-Standard Nsswitch.Conf Creation - Potential CVE-2025-32463 Exploitation,T1068,TA0004
+Potential Exploitation of RCE Vulnerability CVE-2025-33053 - Image Load,T1105;T1218,TA0005;TA0011
+Potential Exploitation of RCE Vulnerability CVE-2025-33053 - Process Access,T1105;T1218,TA0005;TA0011
+Potential Exploitation of RCE Vulnerability CVE-2025-33053,T1105;T1218,TA0005;TA0011
+Suspicious Child Process of SolarWinds WebHelpDesk,T1190,TA0001
+Potential Exploitation of CVE-2025-4427/4428 Ivanti EPMM Pre-Auth RCE,T1190;T1203,TA0001;TA0002
+Potential Notepad++ CVE-2025-49144 Exploitation,T1574.008,TA0002;TA0005
+Potential SharePoint ToolShell CVE-2025-53770 Exploitation - File Create,T1190,TA0001
+Potential SharePoint ToolShell CVE-2025-53770 Exploitation Indicators,T1190,TA0001
+SharePoint ToolShell CVE-2025-53770 Exploitation - Web IIS,T1190,TA0001
+Potential Exploitation of CrushFTP RCE Vulnerability (CVE-2025-54309),T1059.001;T1059.003;T1068;T1190,TA0001;TA0002;TA0004
+Linux Suspicious Child Process from Node.js - React2Shell,T1059;T1190,TA0001;TA0002
+Windows Suspicious Child Process from Node.js - React2Shell,T1059;T1190,TA0001;TA0002
+Commvault QLogin with PublicSharingUser and GUID Password (CVE-2025-57788),T1078.001,TA0001;TA0003;TA0004;TA0005
+Commvault QOperation Path Traversal Webshell Drop (CVE-2025-57790),T1505.003,TA0003
+Commvault QLogin Argument Injection Authentication Bypass (CVE-2025-57791),T1190,TA0001
+Exploitation Activity of CVE-2025-59287 - WSUS Suspicious Child Process,T1190;T1203,TA0001;TA0002
+Exploitation Activity of CVE-2025-59287 - WSUS Deserialization,T1190;T1203,TA0001;TA0002
+Potential Exploitation of CVE-2025-5054 or CVE-2025-4598,T1003;T1548,TA0004;TA0006
+FunkLocker Ransomware File Creation,T1486,TA0040
+Kalambur Backdoor Curl TOR SOCKS Proxy Execution,T1059.001;T1071.001;T1090;T1573,TA0002;TA0011
+Atomic MacOS Stealer - Persistence Indicators,T1543.004;T1564.001,TA0003;TA0004;TA0005
+Atomic MacOS Stealer - FileGrabber Activity,T1059.002,TA0002
+Grixba Malware Reconnaissance Activity,T1046;T1595.001,TA0007;TA0043
+DNS Query To Katz Stealer Domains,T1071.004,TA0011
+Katz Stealer DLL Loaded,T1129,TA0002
+DNS Query To Katz Stealer Domains - Network,T1071.004,TA0011
+Katz Stealer Suspicious User-Agent,T1071.001,TA0011
+Shai-Hulud Malicious GitHub Workflow Creation,T1119;T1552.001,TA0006;TA0009
+Shai-Hulud Malware Indicators - Linux,T1059,TA0002
+Shai-Hulud Malicious Bun Execution - Linux,T1195.002;T1203,TA0001;TA0002
+Shai-Hulud 2.0 Malicious NPM Package Installation - Linux,T1195.002,TA0001
+Shai-Hulud NPM Package Malicious Exfiltration via Curl,T1005;T1041,TA0009;TA0010
+Shai-Hulud Malware Indicators - Windows,T1059,TA0002
+Shai-Hulud Malicious Bun Execution,T1195.002;T1203,TA0001;TA0002
+Shai-Hulud 2.0 Malicious NPM Package Installation,T1195.002,TA0001
+Linux AF_ALG Socket Creation - Kernel Crypto API Exploit Indicator,T1068,TA0004
+Authencesn Crypto Module Load via Modprobe - Copy-Fail Indicator,T1068;T1547.006,TA0003;TA0004
+Potential CVE-2026-33829 Exploitation - Windows Snipping Tool Remote File Path URI,T1187,TA0006
+LSASS Crash Via Netlogon Stack Buffer Overflow - CVE-2026-41089,T1499,TA0040
+ADCS - Certighost CDC Chase Certificate Request (CVE-2026-54121),T1649,TA0006
+ADCS - Certighost Certificate Issued via CDC Chase (CVE-2026-54121),T1649,TA0006
+ADCS - Certighost Ghost Machine Account Creation,T1136.002;T1649,TA0003;TA0006
+WordPress Wp2shell REST Batch Endpoint Exploitation,T1190,TA0001
+WordPress Wp2shell Webshell Plugin Access,T1505.003,TA0003
+WordPress Wp2shell Exploitation Tool User-Agent,T1190,TA0001
+RedSun - TieringEngineService.exe Staged in RS-Prefixed Temp Dir,T1036.005,TA0005
+RedSun - Named Pipe Created,T1055;T1685,TA0004;TA0005;TA0112
+RedSun - Conhost.exe Spawned by TieringEngineService.exe,T1036.005;T1134.002,TA0004;TA0005
+RedSun - TieringEngineService.exe Detected as EICAR Test File,T1036.005;T1055;T1685,TA0004;TA0005;TA0112
+Axios NPM Compromise File Creation Indicators - Linux,T1105;T1195.002,TA0001;TA0011
+Axios NPM Compromise File Creation Indicators - MacOS,T1105;T1195.002,TA0001;TA0011
+Axios NPM Compromise File Creation Indicators - Windows,T1195.002,TA0001
+Axios NPM Compromise Malicious C2 Domain DNS Query,T1071.001;T1568,TA0011
+Axios NPM Compromise Indicators - Linux,T1059.004;T1059.006;T1105;T1195.002,TA0001;TA0002;TA0011
+Axios NPM Compromise Indicators - macOS,T1059.002;T1059.004;T1105;T1195.002,TA0001;TA0002;TA0011
+Axios NPM Compromise Indicators - Windows,T1059.003;T1059.005;T1105;T1195.002,TA0001;TA0002;TA0011
+EvilTokens PhaaS Kit Phishing Related Request - Proxy,T1566.002,TA0001
+RedTail Cryptominer User-Agent,T1190,TA0001
+TanStack Supply-Chain Attack DNS Indicators,T1048;T1071.001,TA0010;TA0011
+TanStack Supply-Chain Attack File Creation Indicators - Linux,T1059.007;T1195.002;T1547.004,TA0001;TA0002;TA0003;TA0004
+TanStack Supply-Chain Attack File Creation Indicators - Windows,T1059.007;T1195.002;T1554,TA0001;TA0002;TA0003
+TanStack Supply-Chain Attack Execution Indicators - Linux,T1059.006;T1059.007;T1204.002,TA0002
+TanStack Supply-Chain Attack Execution Indicators - Windows,T1059.007;T1204.002,TA0002
+TeamPCP LiteLLM Supply Chain Attack Persistence Indicators,T1195.002;T1543.002,TA0001;TA0003;TA0004
+LiteLLM / TeamPCP Supply Chain Attack Indicators,T1195.002;T1543.002;T1560.001,TA0001;TA0003;TA0004;TA0009

@@ -12,10 +12,18 @@ labeled regression set. This repo currently has 100 hand-audited rows
 findings.md for the explicit gap. This harness scores what exists; it does
 not claim the 200+ bar is met.
 
-Usage: python validate.py
+Usage:
+    python validate.py                # LLM-off baseline (default, no setup needed)
+    python validate.py --llm ollama   # also exercise Layer D via a local Ollama
+                                       # server -- see attack_mapper/LLM_SETUP.md.
+                                       # Writes validation_report_llm.md, separate
+                                       # from the committed LLM-off baseline, so the
+                                       # two are diffable rather than one overwriting
+                                       # the other.
 Requires the attack_mapper package (same directory) and the STIX bundle at
 attack_mapper/data/enterprise-attack.json.
 """
+import argparse
 import csv
 import glob
 import os
@@ -28,8 +36,7 @@ DATA_DIR = os.path.join(HERE, "attack_mapper", "data")
 sys.path.insert(0, HERE)
 
 from attack_mapper.pipeline import AttackMapperPipeline  # noqa: E402
-
-OUT_PATH = os.path.join(HERE, "validation_report.md")
+from attack_mapper.llm_client import ollama_client  # noqa: E402
 
 
 def parse_proposed(cell):
@@ -53,8 +60,28 @@ def load_audit_rows():
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--llm", choices=["ollama"], default=None,
+        help="Exercise Layer D via a local Ollama server (see attack_mapper/LLM_SETUP.md). "
+             "Default: no LLM, matching every number reported in findings.md so far.",
+    )
+    parser.add_argument(
+        "--llm-model", default="llama3.2:3b",
+        help="Ollama model tag (with --llm ollama). Default is the small (~2GB) model -- "
+             "the only one actually scored so far; see attack_mapper/LLM_SETUP.md for why "
+             "llama3.1:8b repeatedly OOM-killed on a 16GB machine before finishing.",
+    )
+    args = parser.parse_args()
+
+    out_path = os.path.join(HERE, "validation_report_llm.md" if args.llm else "validation_report.md")
+
+    llm_client = ollama_client(model=args.llm_model) if args.llm == "ollama" else None
+    if llm_client:
+        print(f"LLM reasoning layer: Ollama, model={args.llm_model}")
+
     rows = load_audit_rows()
-    pipeline = AttackMapperPipeline()
+    pipeline = AttackMapperPipeline(llm_client=llm_client)
 
     scoreable = correct = 0
     source_counts = {}
@@ -89,6 +116,7 @@ def main():
 
     lines = [
         "# attack_mapper vs. hand-audited sample\n",
+        f"- LLM reasoning layer (Layer D): {'Ollama ' + args.llm_model if llm_client else 'off (NullLLMClient)'}",
         f"- matched audit rows: **{len(rows)}**",
         f"- scoreable (non-ambiguous) rows: **{scoreable}**",
         (f"- top-1 correct vs. hand-audit proposed technique: "
@@ -116,10 +144,10 @@ def main():
         if verdict == "HIT":
             lines.append(f"| {proposed} | {top_id} ({source}, {conf}) | {sig} |")
 
-    with open(OUT_PATH, "w", encoding="utf-8") as fh:
+    with open(out_path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
 
-    print(f"Wrote {OUT_PATH}")
+    print(f"Wrote {out_path}")
     if scoreable:
         print(f"top-1 vs hand-audit: {correct}/{scoreable} = {correct / scoreable:.1%}")
     print(f"human review required: {review_required_count}/{len(rows)}")

@@ -1,11 +1,12 @@
 # attack_mapper vs. hand-audited sample
 
+- LLM reasoning layer (Layer D): off (NullLLMClient)
 - matched audit rows: **100**
 - scoreable (non-ambiguous) rows: **80**
 - top-1 correct vs. hand-audit proposed technique: **43/80 = 53.8%**
 - flagged for human review: 89/100 (89.0%)
 - source breakdown (top-1 mapping's source): {'bridge_table': 69, 'tier2_combined': 6, 'embedding': 12, 'declared': 11, 'ioc_alias': 2}
-- wall time: 10.0s for 100 rows
+- wall time: 10.6s for 100 rows
 
 **Baseline for comparison** (`archive/tiered_approach/tier2_vs_audit_findings.md`, TF-IDF classifier trained on 26,644-row ET-labeled corpus): 27/79 = 34.2% top-1.
 
@@ -16,7 +17,7 @@
 | proposed | mapper top-1 (source, conf) | verdict | signature |
 |---|---|---|---|
 | T1190 | T1203 (bridge_table, 0.40) | MISS | ET EXPLOIT Possible Qmail CVE-2014-6271 Mail From attempt |
-| TA0011 | T1486 (tier2_combined, 0.31) | SKIPPED | ET CNC Ransomware Tracker Reported CnC Server group 101 |
+| TA0011 | T1486 (tier2_combined, 0.29) | SKIPPED | ET CNC Ransomware Tracker Reported CnC Server group 101 |
 | (none) - maybe weak T1071.003 | T1667 (embedding, 0.15) | SKIPPED | SURICATA SMTP invalid pipelined sequence |
 | T1595 | T1018 (bridge_table, 0.70) | MISS | ET SCAN NETWORK Incoming Masscan detected |
 | T1595 | T1018 (bridge_table, 0.70) | MISS | ET SCAN External to Internal UPnP Request udp port 1900 |
@@ -40,7 +41,7 @@
 | T1046 | T1592 (bridge_table, 0.40) | MISS | ET SCAN MySQL Malicious Scanning 1 |
 | T1595 | T1018 (bridge_table, 0.70) | MISS | ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine) |
 | (none) | T1016 (embedding, 0.20) | SKIPPED | ET POLICY Cisco Device New Config Built |
-| T1210 | T1190 (tier2_combined, 0.29) | MISS | ET EXPLOIT Cisco Smart Install Exploitation Tool - ChangeConfig |
+| T1210 | T1190 (tier2_combined, 0.28) | MISS | ET EXPLOIT Cisco Smart Install Exploitation Tool - ChangeConfig |
 | T1190 | T1592 (bridge_table, 0.40) | MISS | ET WEB_SERVER PHP SESSION SuperGlobal in URI |
 | (none) | T1027.015 (embedding, 0.17) | SKIPPED | SURICATA HTTP gzip decompression failed |
 | T1190 | T1082 (declared, 1.00) | MISS | ET EXPLOIT FortiOS SSL VPN - Information Disclosure (CVE-2018-13379) |
@@ -91,7 +92,7 @@
 | T1046 | T1046 (bridge_table, 0.70) | ET SCAN Behavioral Unusual Port 135 traffic Potential Scan or Infection |
 | T1105 | T1105 (bridge_table, 0.40) | ET POLICY SMB2 NT Create AndX Request For a .bat File |
 | T1595.002 | T1595.002 (bridge_table, 0.70) | ET SCAN OpenVAS User-Agent Inbound |
-| T1190 | T1190 (tier2_combined, 0.33) | ETPRO EXPLOIT Possible Jetty Web Server Information Leak Attempt |
+| T1190 | T1190 (tier2_combined, 0.31) | ETPRO EXPLOIT Possible Jetty Web Server Information Leak Attempt |
 | T1499 | T1499 (bridge_table, 0.70) | SERVER-APACHE Apache APR header memory corruption attempt |
 | T1018 | T1018 (bridge_table, 0.70) | ETPRO SCAN Internal Machine Scanning VNC - Outbound Traffic |
 | T1190 | T1190 (declared, 1.00) | ET WEB_SPECIFIC_APPS phPortal gunaysoft.php sayfaid Parameter Remote File Inclusion |
@@ -106,17 +107,17 @@
 | T1203 | T1203 (bridge_table, 0.40) | FILE-IMAGE Adobe Acrobat TIFF Software tag heap buffer overflow attempt |
 | T1203 | T1203 (bridge_table, 0.40) | ET EXPLOIT Possible IE Scripting Engine Memory Corruption Vulnerability (CVE-2019-0752) |
 | T1190 | T1190 (declared, 1.00) | ET WEB_SERVER PHP Possible https Local File Inclusion Attempt |
-| T1190 | T1190 (tier2_combined, 0.39) | ETPRO EXPLOIT Possible HP.SSF.WebService Exploit Attempt |
+| T1190 | T1190 (tier2_combined, 0.37) | ETPRO EXPLOIT Possible HP.SSF.WebService Exploit Attempt |
 | T1110 | T1110 (bridge_table, 0.70) | ET SCAN Medusa User-Agent |
 | T1105 | T1105 (bridge_table, 0.40) | ET CURRENT_EVENTS Terse alphanumeric executable downloader high likelihood of being hostile |
 | T1190 | T1190 (declared, 1.00) | ET WEB_SPECIFIC_APPS Joomla 3.7.0 - Sql Injection (CVE-2017-8917) |
 | T1499 | T1499 (bridge_table, 0.70) | ET DOS Possible MYSQL GeomFromWKB() function Denial Of Service Attempt |
 | T1595.002 | T1595.002 (bridge_table, 0.70) | ET SCAN PHP Attack Tool Morfeus F Scanner |
-| T1190 | T1190 (tier2_combined, 0.42) | ET EXPLOIT LastPass RCE Attempt |
+| T1190 | T1190 (tier2_combined, 0.41) | ET EXPLOIT LastPass RCE Attempt |
 | T1190 | T1190 (declared, 1.00) | ET WEB_SPECIFIC_APPS KR-Web krgourl.php DOCUMENT_ROOT Parameter Remote File Inclusion Attempt |
 | T1498 | T1498 (bridge_table, 0.70) | ET DOS Microsoft Remote Desktop (RDP) Syn then Reset 30 Second DoS Attempt |
 | T1498 | T1498 (bridge_table, 0.70) | ET DOS Microsoft Streaming Server Malformed Request |
 | T1046 | T1046 (bridge_table, 0.70) | GPL POLICY PCAnywhere server response |
-| T1190 | T1190 (tier2_combined, 0.38) | ET WEB_SERVER open_basedir PHP config option in uri |
+| T1190 | T1190 (tier2_combined, 0.37) | ET WEB_SERVER open_basedir PHP config option in uri |
 | T1499 | T1499 (bridge_table, 0.70) | ET DOS Excessive SMTP MAIL-FROM DDoS |
 | T1498 | T1498 (bridge_table, 0.70) | ET DOS Cisco Router HTTP DoS |

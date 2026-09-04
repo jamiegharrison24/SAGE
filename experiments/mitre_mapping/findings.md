@@ -14,7 +14,84 @@ brief:
 - a `MappedRule.processing_steps` audit trail
 
 Code: `attack_mapper/`. Tests: `tests/test_extractors.py` (6/6 pass).
-Validation harness: `validate.py` -> `validation_report.md`.
+Validation harness: `validate.py` -> `validation_report.md`
+(`validate.py --llm ollama` -> `validation_report_llm.md`, see below).
+
+## Update: LLM layer (Layer D) tested for the first time — regression, not improvement
+
+Set up a local Ollama server (free, no repo footprint — see `attack_mapper/
+LLM_SETUP.md`) and ran `validate.py --llm ollama` for the first time
+anywhere in this research branch. Two models tried; `llama3.1:8b` had to be
+abandoned after repeatedly triggering Windows out-of-memory kills on this
+16GB machine (see `LLM_SETUP.md`'s troubleshooting note and
+`classifier_training.py`'s `n_jobs` cap, added because of this). `llama3.2:3b`
+(2GB) completed cleanly.
+
+**Result: 33.8% top-1 (27/80), down from 53.8% with the LLM off — a
+20-point regression**, not the improvement the architecture was built to
+test for.
+
+| | LLM off (default) | LLM on (llama3.2:3b) |
+|---|---:|---:|
+| top-1 vs. hand-audit | 43/80 = 53.8% | **27/80 = 33.8%** |
+| flagged for human review | 89/100 | 63/100 |
+| `T1190` top-1 share (all 100 rows) | 16/100 | 30/100 |
+| avg. self-reported confidence, MISS rows | n/a | 0.80 |
+| avg. self-reported confidence, HIT rows | n/a | 0.83 |
+
+Three compounding problems, all traceable to `reasoner.py`'s current design
+(`_llm_refine`) rather than to "LLMs don't work for this":
+
+1. **It fires on every row, not just uncertain ones.** `reasoner.infer` only
+   gates Layer D on "is the candidate pool non-empty" — and the embedding
+   fallback means the pool is *always* non-empty. Source breakdown for the
+   LLM-on run: `{'llm': 100}` — literally every row got re-processed by the
+   LLM, including ones `declared`/`bridge_table` had already answered at
+   81.8%/50% precision.
+2. **It's a full override, not a refinement.** `_llm_refine` returns
+   `refined or candidates` — falling back to the original pool only if the
+   LLM returns zero valid mappings. A small model dutifully answering
+   *something* on every row (which `llama3.2:3b` did, 100/100) means the
+   fallback essentially never triggers, so a high-precision prior candidate
+   like the bridge-table's correct `T1046` for "GPL RPC portmap listing UDP
+   111" (0.70 confidence, evidence attached) gets silently discarded in
+   favor of the LLM's own guess (`T1190` at 0.95) — wrong, and asserted with
+   *higher* confidence than the correct answer it replaced.
+3. **`T1190` hub-collapse gets worse, not better.** Every non-LLM effort in
+   this branch (effort 4 above, `archive/tiered_approach/
+   embedding_swap_findings.md`) fought this exact failure mode down.
+   `llama3.2:3b` predicts `T1190` top-1 in 30% of rows, up from 16% with
+   the LLM off (itself mostly legitimate — genuine `T1190` rules the
+   `declared` source correctly tags) — still well short of the original
+   ET-only Tier 2's 76.8%, but a real step backward from where this branch
+   already was. A small model apparently defaults toward "looks like *some*
+   exploit -> T1190" as a generic prior, the same hub-collapse pattern
+   every embedding/classifier approach in this branch already exhibited.
+4. **Confidence is uninformative.** 0.80 average on wrong answers vs. 0.83
+   on right ones — essentially no separation. The model isn't just
+   sometimes wrong; it gives no usable signal for *when* it's wrong, which
+   defeats the point of a confidence-gated pipeline.
+
+**Not concluded from this: "LLMs can't help."** `llama3.1:8b` (a stronger
+model) was never actually scored — it kept getting OOM-killed before
+finishing (see above), so this is evidence against *this specific*
+combination (a 3B local model, given the current full-override design), not
+against Layer D as a concept. The two confounded variables — model
+capability and reasoner design — should be separated before drawing a
+broader conclusion. Two concrete next steps, not yet done: (a) fix
+`reasoner.py` so the LLM only gets a turn on genuinely low-confidence rows
+(e.g. only where the prior top candidate's source is `embedding`, or below
+some confidence threshold) and blends rather than fully replaces
+confidence, matching what "refinement" should mean; (b) once (a) is in,
+retry with `llama3.1:8b` or a hosted model on a machine that can actually
+hold it in memory, to separate "small local model is unreliable" from "this
+architecture's override behavior is unsafe with any model."
+
+**LLM-off remains the default and the number cited everywhere else in this
+file.** `AttackMapperPipeline()` with no `llm_client` argument is
+unaffected — this finding lives in `validation_report_llm.md`, a separate
+opt-in report, specifically so a negative LLM result never contaminates the
+53.8% baseline everyone else in this document builds on.
 
 ## Update: stacking in the ET+Sigma classifier (effort 4)
 
