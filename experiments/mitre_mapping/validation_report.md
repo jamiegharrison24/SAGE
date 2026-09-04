@@ -5,9 +5,9 @@
 - top-1 correct vs. hand-audit proposed technique: **43/80 = 53.8%**
 - flagged for human review: 89/100 (89.0%)
 - source breakdown (top-1 mapping's source): {'bridge_table': 69, 'tier2_combined': 6, 'embedding': 12, 'declared': 11, 'ioc_alias': 2}
-- wall time: 2.8s for 100 rows
+- wall time: 10.0s for 100 rows
 
-**Baseline for comparison** (`../tiered_approach/tier2_vs_audit_findings.md`, TF-IDF classifier trained on 26,644-row ET-labeled corpus): 27/79 = 34.2% top-1.
+**Baseline for comparison** (`archive/tiered_approach/tier2_vs_audit_findings.md`, TF-IDF classifier trained on 26,644-row ET-labeled corpus): 27/79 = 34.2% top-1.
 
 **Coverage caveat**: the brief asks for a 200+-rule labeled regression set; this harness only has 100 hand-audited rows (80 scoreable) to draw on. Treat the number above as directional, not a satisfied validation bar.
 

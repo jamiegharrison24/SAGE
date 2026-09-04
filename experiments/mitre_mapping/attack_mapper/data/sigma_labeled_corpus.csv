@@ -1,0 +1,2799 @@
+msg,technique_ids,tactic_ids
+Bitbucket Full Data Export Triggered,T1213.003,TA0009
+Bitbucket Global Permission Changed,T1098,TA0003;TA0004
+Bitbucket Global Secret Scanning Rule Deleted,T1685,TA0112
+Bitbucket Global SSH Settings Changed,T1021.004;T1685,TA0008;TA0112
+Bitbucket Audit Log Configuration Updated,T1685,TA0112
+Bitbucket Project Secret Scanning Allowlist Added,T1685,TA0112
+Bitbucket Secret Scanning Exempt Repository Added,T1685,TA0112
+Bitbucket Secret Scanning Rule Deleted,T1685,TA0112
+Bitbucket Unauthorized Access To A Resource,T1586,TA0042
+Bitbucket Unauthorized Full Data Export Triggered,T1213.003;T1586,TA0009;TA0042
+Bitbucket User Details Export Attempt Detected,T1082;T1213;T1591.004,TA0007;TA0009;TA0043
+Bitbucket User Login Failure,T1078.004;T1110,TA0001;TA0003;TA0004;TA0005;TA0006
+Bitbucket User Login Failure Via SSH,T1021.004;T1110,TA0006;TA0008
+Bitbucket User Permissions Export Attempt,T1082;T1213;T1591.004,TA0007;TA0009;TA0043
+Django Framework Exceptions,T1190,TA0001
+Github Delete Action Invoked,T1213.003,TA0009
+Outdated Dependency Or Vulnerability Alert Disabled,T1195.001,TA0001
+Github High Risk Configuration Disabled,T1556,TA0003;TA0006;TA0112
+Github Fork Private Repositories Setting Enabled/Cleared,T1020;T1537,TA0010
+New Github Organization Member Added,T1136.003,TA0003
+Github New Secret Created,T1078.004,TA0001;TA0003;TA0004;TA0005
+Github Outside Collaborator Detected,T1098.001;T1098.003;T1213.003,TA0003;TA0004;TA0009
+GitHub Repository Pages Site Changed to Public,T1567.001,TA0010
+Github Push Protection Bypass Detected,T1685,TA0112
+Github Push Protection Disabled,T1685,TA0112
+Github Repository/Organization Transferred,T1020;T1537,TA0010
+Github Secret Scanning Feature Disabled,T1685,TA0112
+Github Self Hosted Runner Changes Detected,T1078.004;T1213.003;T1526,TA0001;TA0003;TA0004;TA0005;TA0007;TA0009
+Github SSH Certificate Configuration Changed,T1078.004,TA0001;TA0003;TA0004;TA0005
+Potential JNDI Injection Exploitation In JVM Based Application,T1190,TA0001
+Potential Local File Read Vulnerability In JVM Based Application,T1190,TA0001
+Potential OGNL Injection Exploitation In JVM Based Application,T1190,TA0001
+Process Execution Error In JVM Based Application,T1190,TA0001
+Potential XXE Exploitation Attempt In JVM Based Application,T1190,TA0001
+Kubernetes Admission Controller Modification,T1078;T1552;T1552.007,TA0001;TA0003;TA0004;TA0005;TA0006
+Deployment Deleted From Kubernetes Cluster,T1498,TA0040
+Kubernetes Events Deleted,T1070,TA0005
+Potential Remote Command Execution In Pod Container,T1609,TA0002
+Container With A hostPath Mount Created,T1611,TA0004
+Creation Of Pod In System Namespace,T1036.005,TA0005
+Kubernetes Potential Enumeration Activity,T1609;T1613,TA0002;TA0007
+Privileged Container Deployed,T1611,TA0004
+RBAC Permission Enumeration Attempt,T1069.003;T1087.004,TA0007
+Kubernetes Secrets Enumeration,T1552.007,TA0006
+New Kubernetes Service Account Created,T1136,TA0003
+Potential Sidecar Injection Into Running Deployment,T1609,TA0002
+Potential RCE Exploitation Attempt In NodeJS,T1190,TA0001
+OpenCanary - FTP Login Attempt,T1021;T1190,TA0001;TA0008
+OpenCanary - GIT Clone Request,T1213,TA0009
+OpenCanary - HTTPPROXY Login Attempt,T1090,TA0011
+OpenCanary - HTTP GET Request,T1190,TA0001
+OpenCanary - HTTP POST Login Attempt,T1190,TA0001
+OpenCanary - MSSQL Login Attempt Via SQLAuth,T1003;T1213,TA0006;TA0009
+OpenCanary - MSSQL Login Attempt Via Windows Authentication,T1003;T1213,TA0006;TA0009
+OpenCanary - MySQL Login Attempt,T1003;T1213,TA0006;TA0009
+OpenCanary - NTP Monlist Request,T1498,TA0040
+OpenCanary - NMAP FIN Scan,T1046,TA0007
+OpenCanary - NMAP NULL Scan,T1046,TA0007
+OpenCanary - NMAP OS Scan,T1046,TA0007
+OpenCanary - NMAP XMAS Scan,T1046,TA0007
+OpenCanary - Host Port Scan (SYN Scan),T1046,TA0007
+OpenCanary - RDP New Connection Attempt,T1021.001;T1133,TA0001;TA0003;TA0008
+OpenCanary - REDIS Action Command Attempt,T1003;T1213,TA0006;TA0009
+OpenCanary - SIP Request,T1123,TA0009
+OpenCanary - SMB File Open Request,T1005;T1021,TA0008;TA0009
+OpenCanary - SNMP OID Request,T1016;T1021,TA0007;TA0008
+OpenCanary - SSH Login Attempt,T1021;T1078;T1133,TA0001;TA0003;TA0004;TA0005;TA0008
+OpenCanary - SSH New Connection Attempt,T1021;T1078;T1133,TA0001;TA0003;TA0004;TA0005;TA0008
+OpenCanary - Telnet Login Attempt,T1078;T1133,TA0001;TA0003;TA0004;TA0005
+OpenCanary - TFTP Request,T1041,TA0010
+OpenCanary - VNC Connection Attempt,T1021,TA0008
+Python SQL Exceptions,T1190,TA0001
+Remote Schedule Task Lateral Movement via ATSvc,T1053;T1053.002,TA0002;TA0003;TA0004
+Possible DCSync Attack,T1033,TA0007
+Remote Schedule Task Lateral Movement via ITaskSchedulerService,T1053;T1053.002,TA0002;TA0003;TA0004
+Remote DCOM/WMI Lateral Movement,T1021.003;T1047,TA0002;TA0008
+Remote Registry Lateral Movement,T1112,TA0003;TA0112
+Remote Server Service Abuse for Lateral Movement,T1569.002,TA0002
+Remote Schedule Task Lateral Movement via SASec,T1053;T1053.002,TA0002;TA0003;TA0004
+SharpHound Recon Account Discovery,T1087,TA0007
+SharpHound Recon Sessions,T1033,TA0007
+Ruby on Rails Framework Exceptions,T1190,TA0001
+Spring Framework Exceptions,T1190,TA0001
+Potential SpEL Injection In Spring Framework,T1190,TA0001
+Suspicious SQL Error Messages,T1190,TA0001
+Potential Server Side Template Injection In Velocity,T1190,TA0001
+Antivirus - APT Malware Signature,T1203;T1219.002,TA0002;TA0011
+Antivirus - Exploitation Framework Signature,T1203;T1219.002,TA0002;TA0011
+Antivirus - Hacktool Signature,T1204,TA0002
+Antivirus - Password Dumper Signature,T1003;T1003.001;T1003.002;T1558,TA0006
+Antivirus - Ransomware Signature,T1486,TA0040
+Antivirus - Relevant File Paths Alerts Signature,T1588,TA0042
+Antivirus - Remote Access Tools Signature,T1203;T1219.002,TA0002;TA0011
+Antivirus - Web Shell Detection Signature,T1505.003,TA0003
+Suspicious SQL Query,T1190;T1505.001,TA0001;TA0003
+AWS Bedrock Guardrail Deleted,T1685,TA0112
+AWS Bedrock Guardrail Updated,T1685,TA0112
+AWS ConsoleLogin Failed Authentication,T1110,TA0006
+AWS Successful Console Login Without MFA,T1078.004,TA0001;TA0003;TA0004;TA0005
+AWS CloudTrail Important Change,T1685.002,TA0112
+AWS GuardDuty Detector Deleted Or Updated,T1685;T1685.002,TA0112
+Malicious Usage Of IMDS Credentials Outside Of AWS Infrastructure,T1078;T1078.002,TA0001;TA0003;TA0004;TA0005
+New Network ACL Entry Added,T1686.001,TA0112
+New Network Route Added,T1686.001,TA0112
+PUA - AWS TruffleHog Execution,T1003;T1555,TA0006
+Ingress/Egress Security Group Modification,T1190,TA0001
+LoadBalancer Security Group Modification,T1190,TA0001
+RDS Database Security Group Modification,T1190,TA0001
+Potential Malicious Usage of CloudTrail System Manager,T1566;T1566.002,TA0001
+AWS Config Disabling Channel/Recorder,T1685.002,TA0112
+AWS Console GetSigninToken Potential Abuse,T1021.007;T1550.001,TA0008
+SES Identity Has Been Deleted,T1070,TA0005
+AWS SAML Provider Deletion Activity,T1078.004;T1531,TA0001;TA0003;TA0004;TA0005;TA0040
+AWS S3 Bucket Versioning Disable,T1490,TA0040
+AWS EC2 Disable EBS Encryption,T1486;T1565,TA0040
+AWS Key Pair Import Activity,T1078,TA0001;TA0003;TA0004;TA0005
+AWS EC2 Startup Shell Script Change,T1059.001;T1059.003;T1059.004,TA0002
+AWS EC2 VM Export Failure,T1005;T1537,TA0009;TA0010
+AWS ECS Task Definition That Queries The Credential Endpoint,T1525,TA0003
+AWS EFS Fileshare Mount Modified or Deleted,T1485,TA0040
+AWS EKS Cluster Created or Deleted,T1485,TA0040
+AWS ElastiCache Security Group Created,T1136;T1136.003,TA0003
+AWS ElastiCache Security Group Modified or Deleted,T1531,TA0040
+Potential Bucket Enumeration on AWS,T1580;T1619,TA0007
+AWS GuardDuty Important Change,T1685,TA0112
+AWS IAM Backdoor Users Keys,T1098,TA0003;TA0004
+AWS IAM S3Browser LoginProfile Creation,T1059.009;T1078.004,TA0001;TA0002;TA0003;TA0004;TA0005
+AWS IAM S3Browser Templated S3 Bucket Policy Creation,T1059.009;T1078.004,TA0001;TA0002;TA0003;TA0004;TA0005
+AWS IAM S3Browser User or AccessKey Creation,T1059.009;T1078.004,TA0001;TA0002;TA0003;TA0004;TA0005
+AWS KMS Imported Key Material Usage,T1486;T1608.003,TA0040;TA0042
+AWS RDS Master Password Change,T1020,TA0010
+Modification or Deletion of an AWS RDS Cluster,T1020,TA0010
+Restore Public AWS RDS Instance,T1020,TA0010
+AWS Root Credentials,T1078.004,TA0001;TA0003;TA0004;TA0005
+AWS Route 53 Domain Transfer Lock Disabled,T1098,TA0003;TA0004
+AWS Route 53 Domain Transferred to Another Account,T1098,TA0003;TA0004
+AWS S3 Data Management Tampering,T1537,TA0010
+AWS SecurityHub Findings Evasion,T1685,TA0112
+AWS Snapshot Backup Exfiltration,T1537,TA0010
+AWS Identity Center Identity Provider Change,T1556,TA0003;TA0006;TA0112
+AWS STS AssumeRole Misuse,T1548;T1550;T1550.001,TA0004;TA0008
+AWS STS GetCallerIdentity Enumeration Via TruffleHog,T1087.004,TA0007
+AWS STS GetSessionToken Misuse,T1548;T1550;T1550.001,TA0004;TA0008
+AWS Suspicious SAML Activity,T1078;T1548;T1550;T1550.001,TA0001;TA0003;TA0004;TA0005;TA0008
+AWS User Login Profile Was Modified,T1098,TA0003;TA0004
+Azure Active Directory Hybrid Health AD FS New Server,T1578,TA0112
+Azure Active Directory Hybrid Health AD FS Service Delete,T1578.003,TA0112
+Azure Container Registry Created or Deleted,T1485;T1489;T1496,TA0040
+Number Of Resource Creation Or Deployment Activities,T1098,TA0003;TA0004
+Azure Device or Configuration Modified or Deleted,T1485;T1565.001,TA0040
+Azure DNS Zone Modified or Deleted,T1565.001,TA0040
+Azure Firewall Modified or Deleted,T1686.001,TA0112
+Azure Firewall Rule Collection Modified or Deleted,T1686.001,TA0112
+Granting Of Permissions To An Account,T1098.003,TA0003;TA0004
+Azure Keyvault Key Modified or Deleted,T1552;T1552.001,TA0006
+Azure Key Vault Modified or Deleted,T1552;T1552.001,TA0006
+Azure Keyvault Secrets Modified or Deleted,T1552;T1552.001,TA0006
+Azure Kubernetes Admission Controller,T1078;T1552;T1552.007,TA0001;TA0003;TA0004;TA0005;TA0006
+Azure Kubernetes Cluster Created or Deleted,T1485;T1489;T1496,TA0040
+Azure Kubernetes CronJob,T1053.003,TA0002;TA0003;TA0004
+Azure Kubernetes Events Deleted,T1685,TA0112
+Azure Kubernetes Network Policy Change,T1485;T1489;T1496,TA0040
+Azure Kubernetes RoleBinding/ClusterRoleBinding Modified and Deleted,T1485;T1489;T1496,TA0040
+Azure Kubernetes Sensitive Role Access,T1485;T1489;T1496,TA0040
+Azure Kubernetes Secret or Config Object Access,T1485;T1489;T1496,TA0040
+Azure Kubernetes Service Account Modified or Deleted,T1485;T1489;T1496;T1531,TA0040
+Azure Network Firewall Policy Modified or Deleted,T1686.001,TA0112
+Azure New CloudShell Created,T1059,TA0002
+Rare Subscription-level Operations In Azure,T1003,TA0006
+Azure Subscription Permission Elevation Via ActivityLogs,T1078.004,TA0001;TA0003;TA0004;TA0005
+CA Policy Removed by Non Approved Actor,T1548;T1556,TA0003;TA0004;TA0006;TA0112
+CA Policy Updated by Non Approved Actor,T1548;T1556,TA0003;TA0004;TA0006;TA0112
+New CA Policy by Non-approved Actor,T1548,TA0004
+Account Created And Deleted Within A Close Time Frame,T1078,TA0001;TA0003;TA0004;TA0005
+Bitlocker Key Retrieval,T1078.004,TA0001;TA0003;TA0004;TA0005
+Certificate-Based Authentication Enabled,T1556,TA0003;TA0006;TA0112
+Changes to Device Registration Policy,T1484,TA0004;TA0112
+New Root Certificate Authority Added,T1556,TA0003;TA0006;TA0112
+Users Added to Global or Device Admin Roles,T1078.004,TA0001;TA0003;TA0004;TA0005
+User Added to an Administrator's Azure AD Role,T1078;T1098.003,TA0001;TA0003;TA0004;TA0005
+Azure Application Deleted,T1489,TA0040
+Application AppID Uri Configuration Changes,T1078.004;T1552,TA0001;TA0003;TA0004;TA0005;TA0006
+Added Credentials to Existing Application,T1098.001,TA0003;TA0004
+Delegated Permissions Granted For All Users,T1528,TA0006
+End User Consent,T1528,TA0006
+End User Consent Blocked,T1528,TA0006
+Added Owner To Application,T1552,TA0006
+App Granted Microsoft Permissions,T1528,TA0006
+App Granted Privileged Delegated Or App Permissions,T1098.003,TA0003;TA0004
+App Assigned To Azure RBAC/Microsoft Entra Role,T1098.003,TA0003;TA0004
+Application URI Configuration Changes,T1078.004;T1528,TA0001;TA0003;TA0004;TA0005;TA0006
+Windows LAPS Credential Dump From Entra ID,T1098.005,TA0003;TA0004
+Change to Authentication Method,T1098;T1556,TA0003;TA0004;TA0006;TA0112
+Azure Domain Federation Settings Modified,T1078,TA0001;TA0003;TA0004;TA0005
+User Added To Group With CA Policy Modification Access,T1548;T1556,TA0003;TA0004;TA0006;TA0112
+User Removed From Group With CA Policy Modification Access,T1548;T1556,TA0003;TA0004;TA0006;TA0112
+Guest User Invited By Non Approved Inviters,T1078.004,TA0001;TA0003;TA0004;TA0005
+User State Changed From Guest To Member,T1078.004,TA0001;TA0003;TA0004;TA0005
+Disabled MFA to Bypass Authentication Mechanisms,T1556,TA0003;TA0006;TA0112
+PIM Approvals And Deny Elevation,T1078.004,TA0001;TA0003;TA0004;TA0005
+PIM Alert Setting Changes To Disabled,T1078,TA0001;TA0003;TA0004;TA0005
+Changes To PIM Settings,T1078.004,TA0001;TA0003;TA0004;TA0005
+User Added To Privilege Role,T1078.004,TA0001;TA0003;TA0004;TA0005
+Bulk Deletion Changes To Privileged Account Permissions,T1098,TA0003;TA0004
+Privileged Account Creation,T1078.004,TA0001;TA0003;TA0004;TA0005
+Azure Subscription Permission Elevation Via AuditLogs,T1078,TA0001;TA0003;TA0004;TA0005
+Temporary Access Pass Added To An Account,T1078.004,TA0001;TA0003;TA0004;TA0005
+Password Reset By User Account,T1078.004,TA0001;TA0003;TA0004;TA0005
+Anomalous Token,T1528,TA0006
+Anomalous User Activity,T1098,TA0003;TA0004
+Activity From Anonymous IP Address,T1078,TA0001;TA0003;TA0004;TA0005
+Anonymous IP Address,T1528,TA0006
+Atypical Travel,T1078,TA0001;TA0003;TA0004;TA0005
+Impossible Travel,T1078,TA0001;TA0003;TA0004;TA0005
+Suspicious Inbox Forwarding Identity Protection,T1114.003,TA0009
+Suspicious Inbox Manipulation Rules,T1140,TA0005
+Azure AD Account Credential Leaked,T1589,TA0043
+Malicious IP Address Sign-In Failure Rate,T1090,TA0011
+Malicious IP Address Sign-In Suspicious,T1090,TA0011
+Sign-In From Malware Infected IP,T1090,TA0011
+New Country,T1078,TA0001;TA0003;TA0004;TA0005
+Password Spray Activity,T1110,TA0006
+Primary Refresh Token Access Attempt,T1528,TA0006
+Suspicious Browser Activity,T1078,TA0001;TA0003;TA0004;TA0005
+Azure AD Threat Intelligence,T1078,TA0001;TA0003;TA0004;TA0005
+SAML Token Issuer Anomaly,T1606,TA0006
+Unfamiliar Sign-In Properties,T1078,TA0001;TA0003;TA0004;TA0005
+Stale Accounts In A Privileged Role,T1078,TA0001;TA0003;TA0004;TA0005
+Invalid PIM License,T1078,TA0001;TA0003;TA0004;TA0005
+Roles Assigned Outside PIM,T1078,TA0001;TA0003;TA0004;TA0005
+Roles Activated Too Frequently,T1078,TA0001;TA0003;TA0004;TA0005
+Roles Are Not Being Used,T1078,TA0001;TA0003;TA0004;TA0005
+Roles Activation Doesn't Require MFA,T1078,TA0001;TA0003;TA0004;TA0005
+Too Many Global Admins,T1078,TA0001;TA0003;TA0004;TA0005
+Account Lockout,T1110,TA0006
+Discovery Using AzureHound,T1087.004;T1526,TA0007
+Device Registration or Join Without MFA,T1078.004,TA0001;TA0003;TA0004;TA0005
+Azure AD Only Single Factor Authentication Required,T1078.004;T1556.006,TA0001;TA0003;TA0004;TA0005;TA0006;TA0112
+Suspicious SignIns From A Non Registered Device,T1078,TA0001;TA0003;TA0004;TA0005
+Sign-ins from Non-Compliant Devices,T1078.004,TA0001;TA0003;TA0004;TA0005
+Sign-ins by Unknown Devices,T1078.004,TA0001;TA0003;TA0004;TA0005
+Potential MFA Bypass Using Legacy Client Authentication,T1078.004;T1110,TA0001;TA0003;TA0004;TA0005;TA0006
+Application Using Device Code Authentication Flow,T1078,TA0001;TA0003;TA0004;TA0005
+Applications That Are Using ROPC Authentication Flow,T1078,TA0001;TA0003;TA0004;TA0005
+Account Disabled or Blocked for Sign in Attempts,T1078.004,TA0001;TA0003;TA0004;TA0005
+Sign-in Failure Due to Conditional Access Requirements Not Met,T1078.004;T1110,TA0001;TA0003;TA0004;TA0005;TA0006
+Use of Legacy Authentication Protocols,T1078.004;T1110,TA0001;TA0003;TA0004;TA0005;TA0006
+Login to Disabled Account,T1078.004,TA0001;TA0003;TA0004;TA0005
+Multifactor Authentication Denied,T1078.004;T1110;T1621,TA0001;TA0003;TA0004;TA0005;TA0006
+Multifactor Authentication Interrupted,T1078.004;T1110;T1621,TA0001;TA0003;TA0004;TA0005;TA0006
+Azure Unusual Authentication Interruption,T1078,TA0001;TA0003;TA0004;TA0005
+User Access Blocked by Azure Conditional Access,T1078.004;T1110,TA0001;TA0003;TA0004;TA0005;TA0006
+GCP Access Policy Deleted,T1098,TA0003;TA0004
+GCP Break-glass Container Workload Deployed,T1548,TA0004
+Google Cloud Re-identifies Sensitive Information,T1565,TA0040
+Google Cloud Firewall Modified or Deleted,T1685,TA0112
+Google Full Network Traffic Packet Capture,T1074,TA0009
+Google Cloud Kubernetes Admission Controller,T1078;T1552;T1552.007,TA0001;TA0003;TA0004;TA0005;TA0006
+Google Cloud Service Account Disabled or Deleted,T1531,TA0040
+Google Workspace Application Access Level Modified,T1098.003,TA0003;TA0004
+Google Workspace Granted Domain API Access,T1098,TA0003;TA0004
+Google Workspace User Granted Admin Privileges,T1098,TA0003;TA0004
+Google Workspace Government Attack Warning,T1078,TA0001;TA0003;TA0004;TA0005
+Google Workspace Out Of Domain Email Forwarding,T1114.003,TA0009
+Suspicious Login Activity Classified By Google,T1078.004,TA0001;TA0003;TA0004;TA0005
+Azure Login Bypassing Conditional Access Policies,T1078,TA0001;TA0003;TA0004;TA0005
+Disabling Multi Factor Authentication,T1556.006,TA0003;TA0006;TA0112
+New Federated Domain Added,T1484.002,TA0004;TA0112
+Suspicious Email Delivered In Microsoft 365,T1566.001;T1566.002,TA0001
+New Federated Domain Added - Exchange,T1136.003,TA0003
+Activity from Suspicious IP Addresses,T1573,TA0011
+Activity from Anonymous IP Addresses,T1573,TA0011
+Activity from Infrequent Country,T1573,TA0011
+Data Exfiltration to Unsanctioned Apps,T1537,TA0010
+Microsoft 365 - Impossible Travel Activity,T1078,TA0001;TA0003;TA0004;TA0005
+Logon from a Risky IP Address,T1078,TA0001;TA0003;TA0004;TA0005
+Microsoft 365 - Potential Ransomware Activity,T1486,TA0040
+PST Export Alert Using eDiscovery Alert,T1114,TA0009
+PST Export Alert Using New-ComplianceSearchAction,T1114,TA0009
+Suspicious Inbox Forwarding,T1020,TA0010
+Microsoft 365 - Unusual Volume of File Deletion,T1485,TA0040
+Microsoft 365 - User Restricted from Sending Email,T1199,TA0001
+Okta Admin Role Assigned to an User or Group,T1098.003,TA0003;TA0004
+Okta FastPass Phishing Detection,T1566,TA0001
+Okta Identity Provider Created,T1098.001,TA0003;TA0004
+Okta MFA Reset or Deactivated,T1556.006,TA0003;TA0006;TA0112
+Okta New Admin Console Behaviours,T1078.004,TA0001;TA0003;TA0004;TA0005
+Potential Okta Password in AlternateID Field,T1552,TA0006
+Okta Suspicious Activity Reported by End-user,T1586.003,TA0042
+Okta User Account Locked Out,T1531,TA0040
+Okta User Session Start Via An Anonymising Proxy Service,T1685,TA0112
+Audio Capture,T1123,TA0009
+ASLR Disabled Via Sysctl or Direct Syscall - Linux,T1055.009;T1685,TA0004;TA0005;TA0112
+Linux Keylogging with Pam.d,T1003;T1056.001,TA0006;TA0009
+Password Policy Discovery - Linux,T1201,TA0007
+System Information Discovery - Auditd,T1082,TA0007
+Binary Padding - Linux,T1027.001,TA0005
+Bpfdoor TCP Ports Redirect,T1686,TA0112
+Linux Capabilities Discovery,T1083;T1548,TA0004;TA0007
+File Time Attribute Change - Linux,T1070.006,TA0005
+Remove Immutable File Attribute - Auditd,T1222.002,TA0112
+Clipboard Collection with Xclip Tool - Auditd,T1115,TA0009
+Clipboard Collection of Image Data with Xclip Tool,T1115,TA0009
+Possible Coin Miner CPU Priority Param,T1068,TA0004
+Data Compressed,T1560.001,TA0009
+Data Exfiltration with Wget,T1048.003,TA0010
+Overwriting the File with Dev Zero or Null,T1485,TA0040
+File or Folder Permissions Change,T1222.002,TA0112
+Credentials In Files - Linux,T1552.001,TA0006
+Hidden Files and Directories,T1564.001,TA0005
+Steganography Hide Zip Information in Picture File,T1027.003,TA0005
+Masquerading as Linux Crond Process,T1036.003,TA0005
+Modify System Firewall,T1686,TA0112
+Network Sniffing - Linux,T1040,TA0006;TA0007
+Screen Capture with Import Tool,T1113,TA0009
+Screen Capture with Xwd,T1113,TA0009
+Steganography Hide Files with Steghide,T1027.003,TA0005
+Steganography Extract Files with Steghide,T1027.003,TA0005
+Suspicious Commands Linux,T1059.004,TA0002
+Suspicious History File Operations - Linux,T1552.003,TA0006
+Service Reload or Start - Linux,T1543.002,TA0003;TA0004
+System Shutdown/Reboot - Linux,T1529,TA0040
+Steganography Unzip Hidden Information From Picture File,T1027.003,TA0005
+System Owner or User Discovery - Linux,T1033,TA0007
+Auditing Configuration Changes on Linux Host,T1685,TA0112
+BPFDoor Abnormal Process ID or Lock File Accessed,T1059;T1106,TA0002
+Use Of Hidden Paths Or Files,T1574.001,TA0002;TA0005
+Modification of ld.so.preload,T1574.006,TA0002;TA0005
+Logging Configuration Changes on Linux Host,T1685,TA0112
+Potential Abuse of Linux Magic System Request Key,T1059.004;T1489;T1499;T1529,TA0002;TA0040
+Systemd Service Creation,T1543.002,TA0003;TA0004
+System and Hardware Information Discovery,T1082,TA0007
+Unix Shell Configuration Modification,T1546.004,TA0003;TA0004
+Disable System Firewall,T1686,TA0112
+Clear or Disable Kernel Ring Buffer Logs via Syslog Syscall,T1685.006,TA0112
+Creation Of An User Account,T1136.001,TA0003
+Loading of Kernel Module via Insmod,T1547.006,TA0003;TA0004
+Linux Network Service Scanning - Auditd,T1046,TA0007
+Split A File Into Pieces - Linux,T1030,TA0010
+System Info Discovery via Sysinfo Syscall,T1057;T1082,TA0007
+Program Executions in Suspicious Folders,T1584;T1587,TA0042
+Special File Creation via Mknod Syscall,T1543.003,TA0003;TA0004
+Webshell Remote Command Execution,T1505.003,TA0003
+Equation Group Indicators,T1059.004,TA0002
+Buffer Overflow Attempts,T1068,TA0004
+Commands to Clear or Remove the Syslog - Builtin,T1565.001,TA0040
+Remote File Copy,T1105,TA0011
+Code Injection by ld.so Preload,T1574.006,TA0002;TA0005
+Privileged User Has Been Created,T1098;T1136.001,TA0003;TA0004
+Shellshock Expression,T1505.003,TA0003
+Linux Command History Tampering,T1070.003,TA0005
+Suspicious Activity in Shell Commands,T1059.004,TA0002
+Suspicious Reverse Shell Command Line,T1059.004,TA0002
+JexBoss Command Sequence,T1059.004,TA0002
+Symlink Etc Passwd,T1204.001,TA0002
+Relevant ClamAV Message,T1588.001,TA0042
+Modifying Crontab,T1053.003,TA0002;TA0003;TA0004
+Guacamole Two Users Sharing Session Anomaly,T1212,TA0006
+Suspicious OpenSSH Daemon Error,T1190,TA0001
+Disabling Security Tools - Builtin,T1686,TA0112
+Suspicious Named Error,T1190,TA0001
+Suspicious VSFTPD Error Messages,T1190,TA0001
+Linux Doas Conf File Creation,T1548,TA0004
+Persistence Via Sudoers.d Files,T1548.003,TA0004
+New Cron File Created,T1053.003,TA0002;TA0003;TA0004
+Suspicious Filename with Embedded Base64 Commands,T1027;T1059.004,TA0002;TA0005
+Triple Cross eBPF Rootkit Default Persistence,T1053.003,TA0002;TA0003;TA0004
+Wget Creating Files in Tmp Directory,T1105,TA0011
+Linux Reverse Shell Indicator,T1059.004,TA0002
+Linux Crypto Mining Pool Connections,T1496,TA0040
+Communication To LocaltoNet Tunneling Service Initiated - Linux,T1090;T1102;T1572,TA0011
+Communication To Ngrok Tunneling Service - Linux,T1090;T1102;T1567;T1568.002;T1572,TA0010;TA0011
+Potentially Suspicious Malware Callback Communication - Linux,T1571,TA0011
+Shell Invocation via Apt - Linux,T1083,TA0007
+Scheduled Task/Job At,T1053.002,TA0002;TA0003;TA0004
+Audit Rules Deleted Via Auditctl,T1685.004,TA0112
+Kaspersky Endpoint Security Stopped Via CommandLine - Linux,T1685,TA0112
+Suspicious Invocation of Shell via AWK - Linux,T1059,TA0002
+Decode Base64 Encoded Text,T1027,TA0005
+Linux Base64 Encoded Pipe to Shell,T1140,TA0005
+Linux Base64 Encoded Shebang In CLI,T1140,TA0005
+BPFtrace Unsafe Option Usage,T1059.004,TA0002
+Capabilities Discovery - Linux,T1083,TA0007
+Capsh Shell Invocation - Linux,T1059,TA0002
+Linux Setgid Capability Set on a Binary via Setcap Utility,T1548;T1554,TA0003;TA0004
+Linux Setuid Capability Set on a Binary via Setcap Utility,T1548;T1554,TA0003;TA0004
+Remove Immutable File Attribute,T1222.002,TA0112
+Chmod Targeting Sensitive Directories,T1222.002,TA0112
+Linux Sudo Chroot Execution,T1068,TA0004
+Linux Logs Clearing Attempts,T1685.006,TA0112
+Syslog Clearing or Removal Via System Utilities,T1685.006,TA0112
+Clipboard Collection with Xclip Tool,T1115,TA0009
+Copy Passwd Or Shadow From TMP Path,T1552.001,TA0006
+Crontab Enumeration,T1007,TA0007
+Linux Crypto Mining Indicators,T1496,TA0040
+Curl Usage on Linux,T1105,TA0011
+Suspicious Download and Execute Pattern via Curl/Wget,T1059.004;T1203,TA0002
+DD File Overwrite,T1485,TA0040
+Potential Linux Process Code Injection Via DD Utility,T1055.009,TA0004;TA0005
+UFW Disable Attempt,T1686,TA0112
+Linux Doas Tool Execution,T1548,TA0004
+Shell Invocation via Env Command - Linux,T1059.004,TA0002
+ESXi Network Configuration Discovery Via ESXCLI,T1007;T1033;T1059.012,TA0002;TA0007
+ESXi Admin Permission Assigned To Account Via ESXCLI,T1059.012;T1098,TA0002;TA0003;TA0004
+ESXi Storage Information Discovery Via ESXCLI,T1007;T1033;T1059.012,TA0002;TA0007
+ESXi Syslog Configuration Change Via ESXCLI,T1059.012;T1685;T1690,TA0002;TA0112
+ESXi System Information Discovery Via ESXCLI,T1007;T1033;T1059.012,TA0002;TA0007
+ESXi Account Creation Via ESXCLI,T1059.012;T1136,TA0002;TA0003
+ESXi VM List Discovery Via ESXCLI,T1007;T1033;T1059.012,TA0002;TA0007
+ESXi VM Kill Via ESXCLI,T1059.012;T1529,TA0002;TA0040
+ESXi VSAN Information Discovery Via ESXCLI,T1007;T1033;T1059.012,TA0002;TA0007
+File and Directory Discovery - Linux,T1083,TA0007
+File Deletion,T1070.004,TA0005
+Shell Execution via Find - Linux,T1083,TA0007
+Shell Execution via Flock - Linux,T1083,TA0007
+Shell Execution GCC  - Linux,T1083,TA0007
+Shell Execution via Git - Linux,T1059,TA0002
+OS Architecture Discovery Via Grep,T1082,TA0007
+Group Has Been Deleted Via Groupdel,T1531,TA0040
+Install Root Certificate,T1553.004,TA0112
+Suspicious Package Installed - Linux,T1553.004,TA0112
+Flush Iptables Ufw Chain,T1686,TA0112
+Local System Accounts Discovery - Linux,T1087.001,TA0007
+Local Groups Discovery - Linux,T1069.001,TA0007
+Potential GobRAT File Discovery Via Grep,T1082,TA0007
+Mount Execution With Hidepid Parameter,T1564,TA0005
+Potential Netcat Reverse Shell Execution,T1059,TA0002
+Shell Execution via Nice - Linux,T1083,TA0007
+Nohup Execution,T1059.004,TA0002
+OMIGOD SCX RunAsProvider ExecuteScript,T1068;T1190;T1203,TA0001;TA0002;TA0004
+OMIGOD SCX RunAsProvider ExecuteShellCommand,T1068;T1190;T1203,TA0001;TA0002;TA0004
+Pnscan Binary Data Transmission Activity,T1046,TA0007
+Connection Proxy,T1090,TA0011
+PUA - TruffleHog Execution - Linux,T1083;T1552.001,TA0006;TA0007
+Python One-Liners with Base64 Decoding - Linux,T1027.010;T1059.006,TA0002;TA0005
+Python WebServer Execution - Linux,T1048.003,TA0010
+Python Spawning Pretty TTY Via PTY Module,T1059,TA0002
+Inline Python Execution - Spawn Shell Via OS System Library,T1059,TA0002
+Remote Access Tool - Team Viewer Session Started On Linux Host,T1133,TA0001;TA0003
+Linux Remote System Discovery,T1018,TA0007
+Linux Package Uninstall,T1070,TA0005
+Shell Execution via Rsync - Linux,T1059,TA0002
+Suspicious Invocation of Shell via Rsync,T1059;T1203,TA0002
+Scheduled Cron Task/Job - Linux,T1053.003,TA0002;TA0003;TA0004
+Security Software Discovery - Linux,T1518.001,TA0007
+Disabling Security Tools,T1686,TA0112
+Disable Or Stop Services,T1489;T1685,TA0040;TA0112
+Setuid and Setgid,T1548.001,TA0004
+Shell Invocation Via Ssh - Linux,T1059,TA0002
+Potential Linux Amazon SSM Agent Hijacking,T1219.002,TA0011
+Container Residence Discovery Via Proc Virtual FS,T1082,TA0007
+Suspicious Curl File Upload - Linux,T1105;T1567,TA0010;TA0011
+Suspicious Curl Change User Agents - Linux,T1071.001,TA0011
+Docker Container Discovery Via Dockerenv Listing,T1082,TA0007
+Potentially Suspicious Execution From Tmp Folder,T1036,TA0005
+Process Execution From Shared Memory Directory,T1027.011,TA0005
+Potential Discovery Activity Using Find - Linux,T1083,TA0007
+Suspicious Git Clone - Linux,T1593.003,TA0043
+History File Deletion,T1565.001,TA0040
+Print History File Contents,T1592.004,TA0043
+Linux HackTool Execution,T1587,TA0042
+Potential Container Discovery Via Inodes Listing,T1082,TA0007
+Interactive Bash Suspicious Children,T1036;T1059.004,TA0002;TA0005
+Suspicious Java Children Processes,T1059,TA0002
+Linux Network Service Scanning Tools Execution,T1046,TA0007
+Linux Shell Pipe to Shell,T1140,TA0005
+Access of Sudoers File Content,T1592.004,TA0043
+Linux Recon Indicators,T1552.001;T1592.004,TA0006;TA0043
+Script Interpreter Spawning Credential Scanner - Linux,T1005;T1059.004;T1552,TA0002;TA0006;TA0009
+Potential Suspicious Change To Sensitive/Critical Files,T1565.001,TA0040
+Mask System Power Settings Via Systemctl,T1653,TA0003
+System Information Discovery,T1082,TA0007
+System Network Connections Discovery - Linux,T1049,TA0007
+System Network Discovery - Linux,T1016,TA0007
+Touch Suspicious Service File,T1070.006,TA0005
+Triple Cross eBPF Rootkit Install Commands,T1014,TA0005
+User Has Been Deleted Via Userdel,T1531,TA0040
+Vim GTFOBin Abuse - Linux,T1059;T1083,TA0002;TA0007
+Linux Webshell Indicators,T1505.003,TA0003
+Download File To Potentially Suspicious Directory Via Wget,T1105,TA0011
+Potential Xterm Reverse Shell,T1059,TA0002
+MacOS Emond Launch Daemon,T1546.014,TA0003;TA0004
+Startup Item File Created - MacOS,T1037.005,TA0003;TA0004
+MacOS Scripting Interpreter AppleScript,T1059.002,TA0002
+Decode Base64 Encoded Text -MacOs,T1027,TA0005
+Binary Padding - MacOS,T1027.001,TA0005
+File Time Attribute Change,T1070.006,TA0005
+Hidden Flag Set On File/Directory Via Chflags - MacOS,T1105;T1218;T1552.001;T1564.004,TA0005;TA0006;TA0011
+Indicator Removal on Host - Clear Mac System Logs,T1685.006,TA0112
+Clipboard Access Via OSAScript,T1059.002;T1115,TA0002;TA0009
+Creation Of A Local User Account,T1136.001,TA0003
+Hidden User Creation,T1564.002,TA0005
+Credentials from Password Stores - Keychain,T1555.001,TA0006
+System Integrity Protection (SIP) Disabled,T1518.001,TA0007
+System Integrity Protection (SIP) Enumeration,T1518.001,TA0007
+Disable Security Tools,T1685,TA0112
+User Added To Admin Group Via Dscl,T1078.003,TA0001;TA0003;TA0004;TA0005
+User Added To Admin Group Via DseditGroup,T1078.003,TA0001;TA0003;TA0004;TA0005
+Root Account Enable Via Dsenableroot,T1078;T1078.001;T1078.003,TA0001;TA0003;TA0004;TA0005
+File and Directory Discovery - MacOS,T1083,TA0007
+Credentials In Files,T1552.001,TA0006
+GUI Input Capture - macOS,T1056.002,TA0006;TA0009
+Disk Image Mounting Via Hdiutil - MacOS,T1560.001;T1566.001,TA0001;TA0009
+Suspicious Installer Package Child Process,T1059;T1059.007;T1071;T1071.001,TA0002;TA0011
+System Information Discovery Using Ioreg,T1082,TA0007
+JXA In-memory Execution Via OSAScript,T1059.002;T1059.007,TA0002
+Launch Agent/Daemon Execution Via Launchctl,T1543.001;T1543.004;T1569.001,TA0002;TA0003;TA0004
+Local System Accounts Discovery - MacOs,T1087.001,TA0007
+Local Groups Discovery - MacOs,T1069.001,TA0007
+MacOS Network Service Scanning,T1046,TA0007
+Network Sniffing - MacOs,T1040,TA0006;TA0007
+File Download Via Nscurl - MacOS,T1105,TA0011
+Suspicious Microsoft Office Child Process - MacOS,T1059.002;T1137.002;T1204.002,TA0002;TA0003
+OSACompile Run-Only Execution,T1059.002,TA0002
+Payload Decoded and Decrypted via Built-in Utilities,T1059;T1140;T1204,TA0002;TA0005
+Potential Persistence Via PlistBuddy,T1543.001;T1543.004,TA0003;TA0004
+Remote Access Tool - Potential MeshAgent Execution - MacOS,T1219.002,TA0011
+Remote Access Tool - Renamed MeshAgent Execution - MacOS,T1036.003;T1219.002,TA0005;TA0011
+Remote Access Tool - Team Viewer Session Started On MacOS Host,T1133,TA0001;TA0003
+Macos Remote System Discovery,T1018,TA0007
+Scheduled Cron Task/Job - MacOs,T1053.003,TA0002;TA0003;TA0004
+Screen Capture - macOS,T1113,TA0009
+Security Software Discovery - MacOs,T1518.001,TA0007
+Space After Filename - macOS,T1036.006,TA0005
+Split A File Into Pieces,T1030,TA0010
+Osacompile Execution By Potentially Suspicious Applet/Osascript,T1059.002,TA0002
+Suspicious Browser Child Process - MacOS,T1059;T1189;T1203,TA0001;TA0002
+Suspicious Execution via macOS Script Editor,T1059;T1059.002;T1204;T1204.001;T1553;T1566;T1566.002,TA0001;TA0002;TA0112
+Potential Discovery Activity Using Find - MacOS,T1083,TA0007
+Suspicious History File Operations,T1552.003,TA0006
+Potential In-Memory Download And Compile Of Payloads,T1059.007;T1105,TA0002;TA0011
+System Network Discovery - macOS,T1016,TA0007
+System Information Discovery Using sw_vers,T1082,TA0007
+User Added To Admin Group Via Sysadminctl,T1078.003,TA0001;TA0003;TA0004;TA0005
+Guest Account Enabled Via Sysadminctl,T1078;T1078.001,TA0001;TA0003;TA0004;TA0005
+System Information Discovery Via Sysctl - MacOS,T1082;T1497.001,TA0005;TA0007
+System Network Connections Discovery - MacOs,T1049,TA0007
+System Information Discovery Using System_Profiler,T1082;T1497.001,TA0005;TA0007
+System Shutdown/Reboot - MacOs,T1529,TA0040
+Potential Base64 Decoded From Images,T1140,TA0005
+Time Machine Backup Deletion Attempt Via Tmutil - MacOS,T1490,TA0040
+Time Machine Backup Disabled Via Tmutil - MacOS,T1490,TA0040
+New File Exclusion Added To Time Machine Via Tmutil - MacOS,T1490,TA0040
+Gatekeeper Bypass via Xattr,T1553.001,TA0112
+Cisco Clear Logs,T1070.003,TA0005
+Cisco Collect Data,T1005;T1087.001;T1552.001,TA0006;TA0007;TA0009
+Cisco Crypto Commands,T1552.004;T1553.004,TA0006;TA0112
+Cisco Disabling Logging,T1685,TA0112
+Cisco Discovery,T1016;T1018;T1033;T1049;T1057;T1082;T1083;T1124;T1201,TA0007
+Cisco Denial of Service,T1495;T1529;T1565.001,TA0040
+Cisco Dot1x Disabled,T1556.004;T1685,TA0003;TA0006;TA0112
+Cisco File Deletion,T1070.004;T1561.001;T1561.002,TA0005;TA0040
+Cisco Show Commands Input,T1552.003,TA0006
+Cisco Local Accounts,T1098;T1136.001,TA0003;TA0004
+Cisco Modify Configuration,T1053;T1490;T1505;T1565.002,TA0002;TA0003;TA0004;TA0040
+Cisco Stage Data,T1074;T1105;T1560.001,TA0009;TA0011
+Cisco Sniffing,T1040,TA0006;TA0007
+Cisco BGP Authentication Failures,T1078;T1110;T1557,TA0001;TA0003;TA0004;TA0005;TA0006;TA0009
+Cisco LDP Authentication Failures,T1078;T1110;T1557,TA0001;TA0003;TA0004;TA0005;TA0006;TA0009
+DNS Query to External Service Interaction Domains,T1190;T1595.002,TA0001;TA0043
+Cobalt Strike DNS Beaconing,T1071.004,TA0011
+Monero Crypto Coin Mining Pool Lookup,T1496;T1567,TA0010;TA0040
+Suspicious DNS Query with B64 Encoded String,T1048.003;T1071.004,TA0010;TA0011
+Telegram Bot API Request,T1102.002,TA0011
+DNS TXT Answer with Possible Execution Strings,T1071.004,TA0011
+Wannacry Killswitch Domain,T1071.001,TA0011
+FortiGate - New Administrator Account Created,T1136.001,TA0003
+FortiGate - Firewall Address Object Added,T1686.002,TA0112
+FortiGate - New Firewall Policy Added,T1686.002,TA0112
+FortiGate - New Local User Created,T1136.001,TA0003
+FortiGate - New VPN SSL Web Portal Added,T1133,TA0001;TA0003
+FortiGate - VPN SSL Settings Modified,T1133,TA0001;TA0003
+Huawei BGP Authentication Failures,T1078;T1110;T1557,TA0001;TA0003;TA0004;TA0005;TA0006;TA0009
+Juniper BGP Missing MD5,T1078;T1110;T1557,TA0001;TA0003;TA0004;TA0005;TA0006;TA0009
+MITRE BZAR Indicators for Execution,T1047;T1053.002;T1569.002,TA0002;TA0003;TA0004
+MITRE BZAR Indicators for Persistence,T1547.004,TA0003;TA0004
+Potential PetitPotam Attack Via EFS RPC Calls,T1187;T1557.001,TA0006;TA0009
+SMB Spoolss Name Piped Usage,T1021.002,TA0008
+Suspicious DNS Query Indicating Kerberos Coercion via DNS Object SPN Spoofing - Network,T1187;T1557.001,TA0006;TA0009
+DNS Events Related To Mining Pools,T1496;T1569.002,TA0002;TA0040
+Suspicious DNS Z Flag Bit Set,T1095;T1571,TA0011
+DNS TOR Proxies,T1048,TA0010
+Executable from Webdav,T1105,TA0011
+WebDav Put Request,T1048.003,TA0010
+Publicly Accessible RDP Service,T1021.001,TA0008
+Remote Task Creation via ATSVC Named Pipe - Zeek,T1053.002,TA0002;TA0003;TA0004
+Possible Impacket SecretDump Remote Activity - Zeek,T1003.002;T1003.003;T1003.004,TA0006
+First Time Seen Remote Named Pipe - Zeek,T1021.002,TA0008
+Suspicious PsExec Execution - Zeek,T1021.002,TA0008
+Transferring Files with Credential Data via Network Shares - Zeek,T1003.001;T1003.002;T1003.003,TA0006
+Kerberos Network Traffic RC4 Ticket Encryption,T1558.003,TA0006
+Apache Segmentation Fault,T1499.004,TA0040
+Apache Threading Error,T1190;T1210,TA0001;TA0008
+Nginx Core Dump,T1499.004,TA0040
+Windows WebDAV User Agent,T1071.001,TA0011
+Download from Suspicious Dyndns Hosts,T1105;T1568,TA0011
+Download From Suspicious TLD - Blacklist,T1203;T1204.002;T1566,TA0001;TA0002
+Download From Suspicious TLD - Whitelist,T1203;T1204.002;T1566,TA0001;TA0002
+F5 BIG-IP iControl Rest API Command Execution - Proxy,T1190,TA0001
+Potential Hello-World Scraper Botnet Activity,T1595,TA0043
+HackTool - BabyShark Agent Default URL Pattern,T1071.001,TA0011
+HackTool - CobaltStrike Malleable Profile Patterns - Proxy,T1071.001,TA0011
+HackTool - Empire UserAgent URI Combo,T1071.001,TA0011
+PUA - Advanced IP/Port Scanner Update Check,T1590,TA0043
+PwnDrp Access,T1071.001;T1102.001;T1102.003,TA0011
+Raw Paste Service Access,T1071.001;T1102.001;T1102.003,TA0011
+Flash Player Update from Suspicious Location,T1036.005;T1189;T1204.002,TA0001;TA0002;TA0005
+Suspicious Network Communication With IPFS,T1056,TA0006;TA0009
+Telegram API Access,T1071.001;T1102.002,TA0011
+APT User Agent,T1071.001,TA0011
+Suspicious Base64 Encoded User-Agent,T1071.001,TA0011
+Bitsadmin to Uncommon IP Server Address,T1071.001;T1197,TA0002;TA0003;TA0005;TA0011
+Bitsadmin to Uncommon TLD,T1071.001;T1197,TA0002;TA0003;TA0005;TA0011
+Crypto Miner User Agent,T1071.001,TA0011
+HTTP Request With Empty User Agent,T1071.001,TA0011
+Exploit Framework User Agent,T1071.001,TA0011
+Hack Tool User Agent,T1110;T1190,TA0001;TA0006
+Malware User Agent,T1071.001,TA0011
+Windows PowerShell User Agent,T1071.001,TA0011
+Rclone Activity via Proxy,T1567.002,TA0010
+Suspicious User Agent,T1071.001,TA0011
+Potential Base64 Encoded User-Agent,T1071.001,TA0011
+Suspicious External WebDAV Execution,T1566;T1584,TA0001;TA0042
+F5 BIG-IP iControl Rest API Command Execution - Webserver,T1190,TA0001
+Successful IIS Shortname Fuzzing Scan,T1190,TA0001
+Java Payload Strings,T1190,TA0001
+JNDIExploit Pattern,T1190,TA0001
+Path Traversal Exploitation Attempts,T1190,TA0001
+Source Code Enumeration Detection by Keyword,T1083,TA0007
+SQL Injection Strings In URI,T1190,TA0001
+Server Side Template Injection Strings,T1221,TA0005
+Suspicious User-Agents Related To Recon Tools,T1190,TA0001
+Suspicious Windows Strings In URI,T1505.003,TA0003
+Webshell ReGeorg Detection Via Web Logs,T1505.003,TA0003
+Windows Webshell Strings,T1505.003,TA0003
+Cross Site Scripting Strings,T1189,TA0001
+Mimikatz Use,T1003.001;T1003.002;T1003.004;T1003.006,TA0006
+LSASS Process Crashed - Application,T1003.001,TA0006
+Microsoft Malware Protection Engine Crash,T1211;T1685,TA0005;TA0112
+Ntdsutil Abuse,T1003.003,TA0006
+Audit CVE Event,T1068;T1203;T1210;T1211;T1212;T1499.004,TA0002;TA0004;TA0005;TA0006;TA0008;TA0040
+Backup Catalog Deleted,T1070.004,TA0005
+Restricted Software Access By SRP,T1072,TA0002;TA0008
+Application Uninstalled,T1489,TA0040
+MSI Installation From Web,T1218;T1218.007,TA0005
+Atera Agent Installation,T1219.002,TA0011
+MSSQL Destructive Query,T1485,TA0040
+MSSQL Server Failed Logon,T1110,TA0006
+MSSQL Server Failed Logon From External Network,T1110,TA0006
+Relevant Anti-Virus Signature Keywords In Application Log,T1588,TA0042
+Remote Access Tool - ScreenConnect Command Execution,T1059.003,TA0002
+Remote Access Tool - ScreenConnect File Transfer,T1059.003,TA0002
+Microsoft Malware Protection Engine Crash - WER,T1211;T1685,TA0005;TA0112
+AppLocker Prevented Application or Script from Running,T1059.001;T1059.003;T1059.005;T1059.006;T1059.007;T1204.002,TA0002
+AppLocker Application Would Have Been Blocked,T1059.001;T1059.003;T1059.005;T1059.006;T1059.007;T1204.002,TA0002
+Windows AppX Deployment Full Trust Package Installation,T1204.002;T1553.005,TA0002;TA0112
+Windows AppX Deployment Unsigned Package Installation,T1204.002;T1553.005,TA0002;TA0112
+New BITS Job Created Via Bitsadmin,T1197,TA0002;TA0003;TA0005
+New BITS Job Created Via PowerShell,T1197,TA0002;TA0003;TA0005
+BITS Transfer Job Downloading File Potential Suspicious Extension,T1197,TA0002;TA0003;TA0005
+BITS Transfer Job Download From File Sharing Domains,T1197,TA0002;TA0003;TA0005
+BITS Transfer Job Download From Direct IP,T1197,TA0002;TA0003;TA0005
+BITS Transfer Job With Uncommon Or Suspicious Remote TLD,T1197,TA0002;TA0003;TA0005
+BITS Transfer Job Download To Potential Suspicious Folder,T1197,TA0002;TA0003;TA0005
+Certificate Private Key Acquired,T1649,TA0006
+Certificate Exported From Local Certificate Store,T1649,TA0006
+CodeIntegrity - Blocked Image/Driver Load For Policy Violation,T1543,TA0003;TA0004
+CodeIntegrity - Blocked Driver Load With Revoked Certificate,T1543,TA0003;TA0004
+DNS Query for Anonfiles.com Domain - DNS Client,T1567.002,TA0010
+Suspicious Cobalt Strike DNS Beaconing - DNS Client,T1071.004,TA0011
+DNS Query To MEGA Hosting Website - DNS Client,T1567.002,TA0010
+Query Tor Onion Address - DNS Client,T1090.003,TA0011
+DNS Query To Ufile.io - DNS Client,T1567.002,TA0010
+Failed DNS Zone Transfer,T1590.002,TA0043
+DNS Server Error Failed Loading the ServerLevelPluginDLL,T1574.001,TA0002;TA0005
+USB Device Plugged,T1200,TA0001
+Uncommon New Firewall Rule Added In Windows Firewall Exception List,T1686.003,TA0112
+New Firewall Rule Added In Windows Firewall Exception List For Potential Suspicious Application,T1686.003,TA0112
+New Firewall Rule Added In Windows Firewall Exception List Via WmiPrvSE.EXE,T1686.003,TA0112
+All Rules Have Been Deleted From The Windows Firewall Configuration,T1686.003,TA0112
+A Rule Has Been Deleted From The Windows Firewall Exception List,T1686.003,TA0112
+The Windows Defender Firewall Service Failed To Load Group Policy,T1686.003,TA0112
+Windows Defender Firewall Has Been Reset To Its Default Configuration,T1686.003,TA0112
+Windows Firewall Settings Have Been Changed,T1686.003,TA0112
+ETW Logging/Processing Option Disabled On IIS Server,T1505.004;T1685.001,TA0003;TA0112
+HTTP Logging Disabled On IIS Server,T1505.004;T1685.001,TA0003;TA0112
+New Module Module Added To IIS Server,T1505.004;T1685.001,TA0003;TA0112
+Previously Installed IIS Module Was Removed,T1505.004;T1685.001,TA0003;TA0112
+Potential Active Directory Reconnaissance/Enumeration Via LDAP,T1069.002;T1087.002;T1482,TA0007
+ProxyLogon MSExchange OabVirtualDirectory,T1587.001,TA0042
+Certificate Request Export to Exchange Webserver,T1505.003,TA0003
+Mailbox Export to Exchange Webserver,T1505.003,TA0003
+Remove Exported Mailbox from Exchange Webserver,T1070,TA0005
+Exchange Set OabVirtualDirectory ExternalUrl Property,T1505.003,TA0003
+MSExchange Transport Agent Installation - Builtin,T1505.002,TA0003
+Failed MSExchange Transport Agent Installation,T1505.002,TA0003
+NTLM Logon,T1550.002,TA0008
+NTLM Brute Force,T1110,TA0006
+Potential Remote Desktop Connection to Non-Domain Host,T1219.002,TA0011
+OpenSSH Server Listening On Socket,T1021.004,TA0008
+Azure AD Health Monitoring Agent Registry Keys Access,T1012,TA0007
+Azure AD Health Service Agents Registry Keys Access,T1012,TA0007
+Powerview Add-DomainObjectAcl DCSync AD Extend Right,T1098,TA0003;TA0004
+AD Privileged Users or Groups Reconnaissance,T1087.002,TA0007
+Add or Remove Computer from DC,T1207,TA0112
+Access To ADMIN$ Network Share,T1021.002,TA0008
+AD Object WriteDAC Access,T1222.001,TA0112
+Suspicious Machine Account Replication - DcSync Indicator,T1003.006,TA0006
+Active Directory Replication from Non Machine Account - DcSync Indicator,T1003.006,TA0006
+Potential AD User Enumeration From Non-Machine Account,T1087.002,TA0007
+Enabled User Right in AD to Control User Objects,T1098,TA0003;TA0004
+Active Directory User Backdoors,T1098,TA0003;TA0004
+Weak Encryption Enabled and Kerberoast,T1685,TA0112
+Hacktool Ruler,T1059;T1087;T1114;T1550.002,TA0002;TA0007;TA0008;TA0009
+Remote Task Creation via ATSVC Named Pipe,T1053.002,TA0002;TA0003;TA0004
+Security Eventlog Cleared,T1685.005,TA0112
+Processes Accessing the Microphone and Webcam,T1123,TA0009
+CobaltStrike Service Installations - Security,T1021.002;T1543.003;T1569.002,TA0002;TA0003;TA0004;TA0008
+Failed Code Integrity Checks,T1027.001,TA0005
+DCERPC SMB Spoolss Named Pipe,T1021.002,TA0008
+DCOM InternetExplorer.Application Iertutil DLL Hijack - Security,T1021.002;T1021.003,TA0008
+Windows Default Domain GPO Modification,T1484.001,TA0004;TA0112
+Device Installation Blocked,T1200,TA0001
+Windows Event Auditing Disabled,T1685.001,TA0112
+Important Windows Event Auditing Disabled,T1685.001,TA0112
+ETW Logging Disabled In .NET Processes - Registry,T1112;T1685,TA0003;TA0112
+DPAPI Domain Backup Key Extraction,T1003.004,TA0006
+DPAPI Domain Master Key Backup Attempt,T1003.004,TA0006
+Potentially Suspicious Explicit Credential Local Logon,T1134;T1134.003,TA0004;TA0005
+External Disk Drive Or USB Storage Device Was Recognized By The System,T1091;T1200,TA0001;TA0008
+Persistence and Execution at Scale via GPO Scheduled Task,T1053.005,TA0002;TA0003;TA0004
+Hidden Local User Creation,T1136.001,TA0003
+HackTool - EDRSilencer Execution - Filter Added,T1685,TA0112
+HackTool - NoFilter Execution,T1134;T1134.001,TA0004;TA0005
+HybridConnectionManager Service Installation,T1554,TA0003
+Impacket PsExec Execution,T1021.002,TA0008
+Possible Impacket SecretDump Remote Activity,T1003.002;T1003.003;T1003.004,TA0006
+Invoke-Obfuscation CLIP+ Launcher - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Obfuscated IEX Invocation - Security,T1027,TA0005
+Invoke-Obfuscation STDIN+ Launcher - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR+ Launcher - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation COMPRESS OBFUSCATION - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation RUNDLL LAUNCHER - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Stdin - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Clip - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use MSHTA - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Rundll32 - Security,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - Security,T1027;T1059.001,TA0002;TA0005
+ISO Image Mounted,T1566.001,TA0001
+Kerberoasting Activity - Initial Query,T1558.003,TA0006
+Potential Kerberos Coercion by Spoofing SPNs via DNS Manipulation,T1557.003,TA0006;TA0009
+First Time Seen Remote Named Pipe,T1021.002,TA0008
+LSASS Access From Non System Account,T1003.001,TA0006
+Credential Dumping Tools Service Execution - Security,T1003.001;T1003.002;T1003.004;T1003.005;T1003.006;T1569.002,TA0002;TA0006
+WCE wceaux.dll Access,T1003,TA0006
+Metasploit SMB Authentication,T1021.002,TA0008
+Metasploit Or Impacket Service Installation Via SMB PsExec,T1021.002;T1569.002;T1570,TA0002;TA0008
+Meterpreter or Cobalt Strike Getsystem Service Installation - Security,T1134.001;T1134.002,TA0004;TA0005
+NetNTLM Downgrade Attack,T1112;T1685,TA0003;TA0112
+Windows Network Access Suspicious desktop.ini Action,T1547.009,TA0003;TA0004
+New or Renamed User Account with '$' Character,T1036,TA0005
+Denied Access To Remote Desktop,T1021.001,TA0008
+Password Policy Enumerated,T1201,TA0007
+Windows Pcap Drivers,T1040,TA0006;TA0007
+Possible PetitPotam Coerce Authentication Attempt,T1187,TA0006
+PetitPotam Suspicious Kerberos TGT Request,T1187,TA0006
+Possible DC Shadow Attack,T1207,TA0112
+PowerShell Scripts Installed as Services - Security,T1569.002,TA0002
+Protected Storage Service Access,T1021.002,TA0008
+RDP over Reverse SSH Tunnel WFP,T1021.001;T1090.001;T1090.002,TA0008;TA0011
+Register new Logon Process by Rubeus,T1558.003,TA0006
+Service Registry Key Read Access Request,T1574.011,TA0002;TA0005
+Remote PowerShell Sessions Network Connections (WinRM),T1059.001,TA0002
+Replay Attack Detected,T1558,TA0006
+SAM Registry Hive Handle Request,T1012;T1552.002,TA0006;TA0007
+SCM Database Handle Failure,T1010,TA0007
+SCM Database Privileged Operation,T1548,TA0004
+Potential Secure Deletion with SDelete,T1027.005;T1070.004;T1485;T1553.002,TA0005;TA0040;TA0112
+Service Installed By Unusual Client - Security,T1543,TA0003;TA0004
+Remote Access Tool Services Have Been Installed - Security,T1543.003;T1569.002,TA0002;TA0003;TA0004
+File Access Of Signal Desktop Sensitive Data,T1003,TA0006
+SMB Create Remote File Admin Share,T1021.002,TA0008
+A New Trust Was Created To A Domain,T1098,TA0003;TA0004
+Addition of SID History to Active Directory Object,T1134.005,TA0004;TA0005
+Win Susp Computer Name Containing Samtheadmin,T1078,TA0001;TA0003;TA0004;TA0005
+Password Change on Directory Service Restore Mode (DSRM) Account,T1098,TA0003;TA0004
+Account Tampering - Suspicious Failed Logon Reasons,T1078,TA0001;TA0003;TA0004;TA0005
+Group Policy Abuse for Privilege Addition,T1484.001,TA0004;TA0112
+Startup/Logon Script Added to Group Policy Object,T1484.001;T1547,TA0003;TA0004;TA0112
+Kerberos Manipulation,T1212,TA0006
+Suspicious LDAP-Attributes Used,T1001.003,TA0011
+Suspicious Windows ANONYMOUS LOGON Local Account Created,T1136.001;T1136.002,TA0003
+Suspicious Remote Logon with Explicit Credentials,T1078,TA0001;TA0003;TA0004;TA0005
+Password Dumper Activity on LSASS,T1003.001,TA0006
+Potentially Suspicious AccessMask Requested From LSASS,T1003.001,TA0006
+Reconnaissance Activity,T1069.002;T1087.002,TA0007
+Password Protected ZIP File Opened,T1027,TA0005
+Password Protected ZIP File Opened (Suspicious Filenames),T1027;T1036;T1105,TA0005;TA0011
+Password Protected ZIP File Opened (Email Attachment),T1027;T1566.001,TA0001;TA0005
+Uncommon Outbound Kerberos Connection - Security,T1558.003,TA0006
+Possible Shadow Credentials Added,T1556,TA0003;TA0006;TA0112
+Suspicious PsExec Execution,T1021.002,TA0008
+Suspicious Access to Sensitive File Extensions,T1039,TA0009
+Suspicious Kerberos RC4 Ticket Encryption,T1558.003,TA0006
+Suspicious Scheduled Task Creation,T1053.005,TA0002;TA0003;TA0004
+Important Scheduled Task Deleted/Disabled,T1053.005,TA0002;TA0003;TA0004
+Suspicious Scheduled Task Update,T1053.005,TA0002;TA0003;TA0004
+Unauthorized System Time Modification,T1070.006,TA0005
+Remote Service Activity via SVCCTL Named Pipe,T1021.002,TA0008
+SysKey Registry Keys Access,T1012,TA0007
+Sysmon Channel Reference Deletion,T1112,TA0003;TA0112
+Tap Driver Installation - Security,T1048,TA0010
+Suspicious Teams Application Related ObjectAcess Event,T1528,TA0006
+Transferring Files with Credential Data via Network Shares,T1003.001;T1003.002;T1003.003,TA0006
+User Added to Local Administrator Group,T1078;T1098,TA0001;TA0003;TA0004;TA0005
+User Couldn't Call a Privileged Service 'LsaRegisterLogonProcess',T1558.003,TA0006
+Local User Creation,T1136.001,TA0003
+Potential Privileged System Service Operation - SeLoadDriverPrivilege,T1685,TA0112
+User Logoff Event,T1531,TA0040
+VSSAudit Security Event Source Registration,T1003.002,TA0006
+Windows Defender Exclusion List Modified,T1685,TA0112
+Windows Defender Exclusion Registry Key - Write Access Requested,T1685,TA0112
+T1047 Wmiprvse Wbemcomn DLL Hijack,T1021.002;T1047,TA0002;TA0008
+WMI Persistence - Security,T1546.003,TA0003;TA0004
+Potential Access Token Abuse,T1134.001,TA0004;TA0005
+Admin User Remote Logon,T1078.001;T1078.002;T1078.003,TA0001;TA0003;TA0004;TA0005
+A Member Was Added to a Security-Enabled Global Group,T1098,TA0003;TA0004
+A Member Was Removed From a Security-Enabled Global Group,T1098,TA0003;TA0004
+Successful Overpass the Hash Attempt,T1550.002,TA0008
+Pass the Hash Activity 2,T1550.002,TA0008
+RDP Login from Localhost,T1021.001,TA0008
+A Security-Enabled Global Group Was Deleted,T1098,TA0003;TA0004
+External Remote RDP Logon from Public IP,T1078;T1110;T1133,TA0001;TA0003;TA0004;TA0005;TA0006
+External Remote SMB Logon from Public IP,T1078;T1110;T1133,TA0001;TA0003;TA0004;TA0005;TA0006
+Failed Logon From Public IP,T1078;T1133;T1190,TA0001;TA0003;TA0004;TA0005
+Outgoing Logon with New Credentials,T1550,TA0008
+Potential Privilege Escalation via Local Kerberos Relay over LDAP,T1548,TA0004
+RottenPotato Like Attack Pattern,T1557.001,TA0006;TA0009
+Successful Account Login Via WMI,T1047,TA0002
+Windows Filtering Platform Blocked Connection From EDR Agent Binary,T1685,TA0112
+Microsoft Defender Blocked from Loading Unsigned DLL,T1574.001,TA0002;TA0005
+Unsigned Binary Loaded From Suspicious Location,T1574.001,TA0002;TA0005
+HybridConnectionManager Service Running,T1554,TA0003
+Suspicious Rejected SMB Guest Logon From IP,T1110.001,TA0006
+Unsigned or Unencrypted SMB Connection to Share Established,T1021.002,TA0008
+Sysmon Application Crashed,T1685,TA0112
+NTLMv1 Logon Between Client and Server,T1550.002,TA0008
+Active Directory Certificate Services Denied Certificate Enrollment Request,T1553.004,TA0112
+DHCP Server Loaded the CallOut DLL,T1574.001,TA0002;TA0005
+DHCP Server Error Failed Loading the CallOut DLL,T1574.001,TA0002;TA0005
+Local Privilege Escalation Indicator TabTip,T1557.001,TA0006;TA0009
+Eventlog Cleared,T1685.005,TA0112
+Important Windows Eventlog Cleared,T1685.005,TA0112
+ISATAP Router Address Was Set,T1557;T1565.002,TA0006;TA0009;TA0040
+No Suitable Encryption Key Found For Generating Kerberos Ticket,T1558.003,TA0006
+Critical Hive In Suspicious Location Access Bits Cleared,T1003.002,TA0006
+Volume Shadow Copy Mount,T1003.002,TA0006
+Crash Dump Created By Operating System,T1003.002;T1005,TA0006;TA0009
+Windows Update Error,T1584,TA0042
+Zerologon Exploitation Using Well-known Tools,T1210,TA0008
+Vulnerable Netlogon Secure Channel Connection Allowed,T1548,TA0004
+NTFS Vulnerability Exploitation,T1499.001,TA0040
+CobaltStrike Service Installations - System,T1021.002;T1543.003;T1569.002,TA0002;TA0003;TA0004;TA0008
+Windows Defender Threat Detection Service Disabled,T1685,TA0112
+smbexec.py Service Installation,T1021.002;T1569.002,TA0002;TA0008
+Invoke-Obfuscation CLIP+ Launcher - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Obfuscated IEX Invocation - System,T1027,TA0005
+Invoke-Obfuscation STDIN+ Launcher - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR+ Launcher - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation COMPRESS OBFUSCATION - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation RUNDLL LAUNCHER - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Stdin - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Clip - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use MSHTA - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Rundll32 - System,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - System,T1027;T1059.001,TA0002;TA0005
+KrbRelayUp Service Installation,T1543,TA0003;TA0004
+Credential Dumping Tools Service Execution - System,T1003.001;T1003.002;T1003.004;T1003.005;T1003.006;T1569.002,TA0002;TA0006
+Meterpreter or Cobalt Strike Getsystem Service Installation - System,T1134.001;T1134.002,TA0004;TA0005
+Moriya Rootkit - System,T1543.003,TA0003;TA0004
+PowerShell Scripts Installed as Services,T1569.002,TA0002
+CSExec Service Installation,T1569.002,TA0002
+HackTool Service Registration or Execution,T1569.002,TA0002
+Mesh Agent Service Installation,T1219.002,TA0011
+PAExec Service Installation,T1569.002,TA0002
+New PDQDeploy Service - Server Side,T1543.003,TA0003;TA0004
+New PDQDeploy Service - Client Side,T1543.003,TA0003;TA0004
+ProcessHacker Privilege Elevation,T1543.003;T1569.002,TA0002;TA0003;TA0004
+RemCom Service Installation,T1569.002,TA0002
+Remote Access Tool Services Have Been Installed - System,T1543.003;T1569.002,TA0002;TA0003;TA0004
+Sliver C2 Default Service Installation,T1543.003;T1569.002,TA0002;TA0003;TA0004
+Service Installed By Unusual Client - System,T1543,TA0003;TA0004
+Suspicious Service Installation,T1543.003,TA0003;TA0004
+PsExec Service Installation,T1569.002,TA0002
+TacticalRMM Service Installation,T1219.002,TA0011
+Tap Driver Installation,T1048,TA0010
+Uncommon Service Installation Image Path,T1543.003,TA0003;TA0004
+Service Installation in Suspicious Folder,T1543.003,TA0003;TA0004
+Service Installation with Suspicious Folder Pattern,T1543.003,TA0003;TA0004
+Suspicious Service Installation Script,T1543.003,TA0003;TA0004
+Scheduled Task Executed From A Suspicious Location,T1053.005,TA0002;TA0003;TA0004
+Scheduled Task Executed Uncommon LOLBIN,T1053.005,TA0002;TA0003;TA0004
+Important Scheduled Task Deleted or Disabled,T1489,TA0040
+Ngrok Usage with Remote Desktop Service,T1090,TA0011
+Windows Defender Grace Period Expired,T1685,TA0112
+LSASS Access Detected via Attack Surface Reduction,T1003.001,TA0006
+PSExec and WMI Process Creations Block,T1047;T1569.002,TA0002
+Windows Defender Exclusions Added,T1685,TA0112
+Windows Defender Exploit Guard Tamper,T1685,TA0112
+Windows Defender Submit Sample Feature Disabled,T1685,TA0112
+Windows Defender Malware And PUA Scanning Disabled,T1685,TA0112
+Windows Defender AMSI Trigger Detected,T1059,TA0002
+Windows Defender Real-time Protection Disabled,T1685,TA0112
+Windows Defender Real-Time Protection Failure/Restart,T1685,TA0112
+Win Defender Restored Quarantine File,T1685,TA0112
+Windows Defender Configuration Changes,T1685,TA0112
+Microsoft Defender Tamper Protection Trigger,T1685,TA0112
+Windows Defender Threat Detected,T1059,TA0002
+Windows Defender Virus Scanning Feature Disabled,T1685,TA0112
+Failed Event Log Clear Via WMI NTEventLogFile ClearEventLog,T1685.005,TA0112
+WMI Persistence,T1546.003,TA0003;TA0004
+HackTool - CACTUSTORCH Remote Thread Creation,T1055.012;T1059.005;T1059.007;T1218.005,TA0002;TA0004;TA0005
+HackTool - Potential CobaltStrike Process Injection,T1055.001,TA0004;TA0005
+Remote Thread Created In KeePass.EXE,T1555.005,TA0006
+Potential Credential Dumping Attempt Via PowerShell Remote Thread,T1003.001,TA0006
+Remote Thread Creation Via PowerShell In Uncommon Target,T1059.001;T1218.011,TA0002;TA0005
+Password Dumper Remote Thread in LSASS,T1003.001,TA0006
+Rare Remote Thread Creation By Uncommon Source Image,T1055,TA0004;TA0005
+Remote Thread Creation By Uncommon Source Image,T1055,TA0004;TA0005
+Remote Thread Creation In Uncommon Target Image,T1055.003,TA0004;TA0005
+Remote Thread Creation Ttdinject.exe Proxy,T1127,TA0002;TA0005
+Hidden Executable In NTFS Alternate Data Stream,T1564.004,TA0005
+Suspicious File Download From File Sharing Websites -  File Stream,T1564.004,TA0005
+Unusual File Download From File Sharing Websites - File Stream,T1564.004,TA0005
+HackTool Named File Stream Created,T1564.004,TA0005
+Exports Registry Key To an Alternate Data Stream,T1564.004,TA0005
+Unusual File Download from Direct IP Address,T1564.004,TA0005
+DNS Query for Anonfiles.com Domain - Sysmon,T1567.002,TA0010
+AppX Package Installation Attempts Via AppInstaller.EXE,T1105,TA0011
+Cloudflared Tunnels Related DNS Requests,T1071.001;T1572,TA0011
+DNS Query To Common Malware Hosting and Shortener Services,T1071.004,TA0011
+DNS Query To Devtunnels Domain,T1071.001;T1572,TA0011
+DNS Server Discovery Via LDAP Query,T1482,TA0007
+DNS Query To AzureWebsites.NET By Non-Browser Process,T1219.002,TA0011
+DNS Query by Finger Utility,T1059.003;T1071.004,TA0002;TA0011
+Notepad++ Updater DNS Query to Uncommon Domains,T1195.002;T1557,TA0001;TA0006;TA0009
+DNS HybridConnectionManager Service Bus,T1554,TA0003
+Suspicious DNS Query Indicating Kerberos Coercion via DNS Object SPN Spoofing,T1187;T1557.001,TA0006;TA0009
+Suspicious Cobalt Strike DNS Beaconing - Sysmon,T1071.004,TA0011
+DNS Query To MEGA Hosting Website,T1567.002,TA0010
+DNS Query Request To OneLaunch Update Service,T1056,TA0006;TA0009
+DNS Query Request By QuickAssist.EXE,T1071.001;T1210,TA0008;TA0011
+DNS Query Request By Regsvr32.EXE,T1218.010;T1559.001,TA0002;TA0005
+DNS Query To Remote Access Software Domain From Non-Browser App,T1219.002,TA0011
+Suspicious DNS Query for IP Lookup Service APIs,T1590,TA0043
+TeamViewer Domain Query By Non-TeamViewer Application,T1219.002,TA0011
+DNS Query Tor .Onion Address - Sysmon,T1090.003,TA0011
+DNS Query To Ufile.io,T1567.002,TA0010
+DNS Query To Visual Studio Code Tunnels Domain,T1071.001,TA0011
+Malicious Driver Load,T1068;T1543.003,TA0003;TA0004
+Malicious Driver Load By Name,T1068;T1543.003,TA0003;TA0004
+PUA - Process Hacker Driver Load,T1543,TA0003;TA0004
+PUA - System Informer Driver Load,T1543,TA0003;TA0004
+Driver Load From A Temporary Directory,T1543.003,TA0003;TA0004
+Vulnerable Driver Load,T1068;T1543.003,TA0003;TA0004
+Vulnerable Driver Load By Name,T1068;T1543.003,TA0003;TA0004
+Vulnerable HackSys Extreme Vulnerable Driver Load,T1543.003,TA0003;TA0004
+Vulnerable WinRing0 Driver Load,T1543.003,TA0003;TA0004
+WinDivert Driver Load,T1557.001;T1599.001,TA0006;TA0009;TA0112
+Credential Manager Access By Uncommon Applications,T1003,TA0006
+Access To Windows Credential History File By Uncommon Applications,T1555.004,TA0006
+Access To Crypto Currency Wallets By Uncommon Applications,T1003,TA0006
+Access To Windows DPAPI Master Keys By Uncommon Applications,T1555.004,TA0006
+Access To Potentially Sensitive Sysvol Files By Uncommon Applications,T1552.006,TA0006
+Suspicious File Access to Browser Credential Storage,T1217;T1555.003,TA0006;TA0007
+Microsoft Teams Sensitive File Access By Uncommon Applications,T1528,TA0006
+Unusual File Modification by dns.exe,T1133,TA0001;TA0003
+Backup Files Deleted,T1490,TA0040
+EventLog EVTX File Deleted,T1070,TA0005
+Exchange PowerShell Cmdlet History Deleted,T1070,TA0005
+IIS WebServer Access Logs Deleted,T1070,TA0005
+PowerShell Console History Logs Deleted,T1070,TA0005
+Prefetch File Deleted,T1070.004,TA0005
+TeamViewer Log File Deleted,T1070.004,TA0005
+Tomcat WebServer Logs Deleted,T1070,TA0005
+File Deleted Via Sysinternals SDelete,T1070.004,TA0005
+Unusual File Deletion by Dns.exe,T1133,TA0001;TA0003
+ADS Zone.Identifier Deleted By Uncommon Application,T1070.004,TA0005
+ADSI-Cache File Creation By Uncommon Tool,T1001.003,TA0011
+Advanced IP Scanner - File Event,T1046,TA0007
+Anydesk Temporary Artefact,T1219.002,TA0011
+Suspicious Binary Writes Via AnyDesk,T1219.002,TA0011
+Suspicious File Created by ArcSOC.exe,T1105;T1127;T1133,TA0001;TA0002;TA0003;TA0005;TA0011
+BloodHound Collection Files,T1059.001;T1069.001;T1069.002;T1087.001;T1087.002;T1482,TA0002;TA0007
+Potentially Suspicious File Creation by OpenEDR's ITSMService,T1105;T1219;T1570,TA0008;TA0011
+EVTX Created In Uncommon Location,T1685.001,TA0112
+Creation Of Non-Existent System DLL,T1574.001,TA0002;TA0005
+Suspicious Deno File Written from Remote Source,T1059.007;T1105;T1204,TA0002;TA0011
+New Custom Shim Database Created,T1547.009,TA0003;TA0004
+Suspicious Screensaver Binary File Creation,T1546.002,TA0003;TA0004
+Files With System DLL Name In Unsuspected Locations,T1036.005,TA0005
+Files With System Process Name In Unsuspected Locations,T1036.005,TA0005
+Creation Exe for Service with Unquoted Path,T1547.009,TA0003;TA0004
+Cred Dump Tools Dropped Files,T1003.001;T1003.002;T1003.003;T1003.004;T1003.005,TA0006
+WScript or CScript Dropper - File,T1059.005;T1059.007,TA0002
+CSExec Service File Creation,T1569.002,TA0002
+Dynamic CSharp Compile Artefact,T1027.004,TA0005
+Potential DCOM InternetExplorer.Application DLL Hijack,T1021.002;T1021.003,TA0008
+Desktop.INI Created by Uncommon Process,T1547.009,TA0003;TA0004
+DLL Search Order Hijackig Via Additional Space in Path,T1574.001,TA0002;TA0005
+Suspicious ASPX File Drop by Exchange,T1505.003,TA0003
+Suspicious File Drop by Exchange,T1190;T1505.003,TA0001;TA0003
+GoToAssist Temporary Installation Artefact,T1219.002,TA0011
+Uncommon File Created by Notepad++ Updater Gup.EXE,T1195.002;T1557,TA0001;TA0006;TA0009
+HackTool - CrackMapExec File Indicators,T1003.001,TA0006
+HackTool - Dumpert Process Dumper Default File,T1003.001,TA0006
+HackTool - Typical HiveNightmare SAM File Export,T1552.001,TA0006
+HackTool - Inveigh Execution Artefacts,T1219.002,TA0011
+HackTool - RemoteKrbRelay SMB Relay Secrets Dump Module Indicators,T1219.002,TA0011
+HackTool - Mimikatz Kirbi File Creation,T1558,TA0006
+HackTool - NetExec File Indicators,T1021.002;T1059.005,TA0002;TA0008
+HackTool - Powerup Write Hijack DLL,T1574.001,TA0002;TA0005
+HackTool - QuarksPwDump Dump File,T1003.002,TA0006
+HackTool - Potential Remote Credential Dumping Activity Via CrackMapExec Or Impacket-Secretsdump,T1003,TA0006
+HackTool - SafetyKatz Dump Indicator,T1003.001,TA0006
+HackTool - Impacket File Indicators,T1003.001,TA0006
+Potential Initial Access via DLL Search Order Hijacking,T1566;T1566.001;T1574;T1574.001,TA0001;TA0002;TA0005
+Installation of TeamViewer Desktop,T1219.002,TA0011
+Malicious DLL File Dropped in the Teams or OneDrive Folder,T1574.001,TA0002;TA0005
+ISO File Created Within Temp Folders,T1566.001,TA0001
+ISO or Image Mount Indicator in Recent Files,T1566.001,TA0001
+LSASS Process Memory Dump Files,T1003.001,TA0006
+LSASS Process Dump Artefact In CrashDumps Folder,T1003.001,TA0006
+WerFault LSASS Process Memory Dump,T1003.001,TA0006
+Adwind RAT / JRAT File Artifact,T1059.005;T1059.007,TA0002
+Octopus Scanner Malware,T1195;T1195.001,TA0001
+File Creation In Suspicious Directory By Msdt.EXE,T1547.001,TA0003;TA0004
+Suspicious DotNET CLR Usage Log Artifact,T1218,TA0005
+SCR File Write Event,T1218.011,TA0005
+NTDS.DIT Created,T1003.003,TA0006
+NTDS.DIT Creation By Uncommon Parent Process,T1003.003,TA0006
+NTDS.DIT Creation By Uncommon Process,T1003.002;T1003.003,TA0006
+NTDS Exfiltration Filename Patterns,T1003.003,TA0006
+Potential Persistence Via Microsoft Office Add-In,T1137.006,TA0003
+Office Macro File Creation,T1566.001,TA0001
+Office Macro File Download,T1566.001,TA0001
+Office Macro File Creation From Suspicious Process,T1566.001,TA0001
+New Outlook Macro Created,T1008;T1137;T1546,TA0003;TA0004;TA0011
+Potential Persistence Via Outlook Form,T1137.003,TA0003
+Suspicious File Created in Outlook Temporary Directory,T1566.001,TA0001
+Suspicious Outlook Macro Created,T1008;T1137;T1546,TA0003;TA0004;TA0011
+Potential Persistence Via Microsoft Office Startup Folder,T1137,TA0003
+File With Uncommon Extension Created By An Office Application,T1204.002,TA0002
+Uncommon File Created In Office Startup Folder,T1587.001,TA0042
+PCRE.NET Package Temp Files,T1059,TA0002
+Suspicious File Created In PerfLogs,T1059,TA0002
+Malicious PowerShell Scripts - FileCreation,T1059.001,TA0002
+Potential Startup Shortcut Persistence Via PowerShell.EXE,T1547.001,TA0003;TA0004
+Rclone Config File Creation,T1567.002,TA0010
+Potential Winnti Dropper Activity,T1027,TA0005
+RemCom Service File Creation,T1569.002,TA0002
+ScreenConnect Temporary Installation Artefact,T1219.002,TA0011
+Remote Access Tool - ScreenConnect Temporary File,T1059.003,TA0002
+Potential RipZip Attack on Startup Folder,T1547,TA0003;TA0004
+Potential SAM Database Dump,T1003.002,TA0006
+Self Extraction Directive File Created In Potentially Suspicious Location,T1218,TA0005
+Windows Shell/Scripting Application File Write to Suspicious Folder,T1059,TA0002
+Windows Binaries Write Suspicious Extensions,T1036,TA0005
+Startup Folder File Write,T1547.001,TA0003;TA0004
+Suspicious Creation with Colorcpl,T1564,TA0005
+Created Files by Microsoft Sync Center,T1055;T1218,TA0004;TA0005
+Suspicious Files in Default GPO Folder,T1036.005,TA0005
+Suspicious Desktopimgdownldr Target File,T1105,TA0011
+Suspicious Double Extension Files,T1036.007,TA0005
+DPAPI Backup Keys And Certificate Export Activity IOC,T1552.004;T1555,TA0006
+Suspicious MSExchangeMailboxReplication ASPX Write,T1190;T1505.003,TA0001;TA0003
+Suspicious Executable File Creation,T1564,TA0005
+Suspicious File Write to SharePoint Layouts Directory,T1190;T1505.003,TA0001;TA0003
+Suspicious File Write to Webapps Root Directory,T1190;T1505.003,TA0001;TA0003
+Suspicious Get-Variable.exe Creation,T1027;T1546,TA0003;TA0004;TA0005
+Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream,T1564.004,TA0005
+Potential Homoglyph Attack Using Lookalike Characters in Filename,T1036;T1036.003,TA0005
+Legitimate Application Dropped Archive,T1218,TA0005
+Legitimate Application Dropped Executable,T1218,TA0005
+Legitimate Application Writing Files In Uncommon Location,T1105;T1218,TA0005;TA0011
+Legitimate Application Dropped Script,T1218,TA0005
+Suspicious LNK Double Extension File Created,T1036.007,TA0005
+PowerShell Profile Modification,T1546.013,TA0003;TA0004
+Suspicious PROCEXP152.sys File Created In TMP,T1685,TA0112
+Suspicious Binaries and Scripts in Public Folder,T1204,TA0002
+Registry Hive File Staged Outside Standard User Profile Path,T1003;T1548,TA0004;TA0006
+Potential File Extension Spoofing Using Right-to-Left Override,T1036.002,TA0005
+Suspicious Startup Folder Persistence,T1204.002;T1547.001,TA0002;TA0003;TA0004
+Suspicious Interactive PowerShell as SYSTEM,T1059.001,TA0002
+Suspicious Scheduled Task Write to System32 Tasks,T1053,TA0002;TA0003;TA0004
+TeamViewer Remote Session,T1219.002,TA0011
+VsCode Powershell Profile Modification,T1546.013,TA0003;TA0004
+Windows Terminal Profile Settings Modification By Uncommon Process,T1547.015,TA0003;TA0004
+ADExplorer Writing Complete AD Snapshot Into .dat File,T1069.002;T1087.002;T1482,TA0007
+Process Explorer Driver Creation By Non-Sysinternals Binary,T1068,TA0004
+Process Monitor Driver Creation By Non-Sysinternals Binary,T1068,TA0004
+PsExec Service File Creation,T1569.002,TA0002
+PSEXEC Remote Execution File Artefact,T1136.002;T1543.003;T1570,TA0003;TA0004;TA0008
+LSASS Process Memory Dump Creation Via Taskmgr.EXE,T1003.001,TA0006
+Hijack Legit RDP Session to Move Laterally,T1219.002,TA0011
+UAC Bypass Using Consent and Comctl32 - File,T1548.002,TA0004
+UAC Bypass Using .NET Code Profiler on MMC,T1548.002,TA0004
+UAC Bypass Using IDiagnostic Profile - File,T1548.002,TA0004
+UAC Bypass Using IEInstal - File,T1548.002,TA0004
+UAC Bypass Using MSConfig Token Modification - File,T1548.002,TA0004
+UAC Bypass Using NTFS Reparse Point - File,T1548.002,TA0004
+UAC Bypass Abusing Winsat Path Parsing - File,T1548.002,TA0004
+UAC Bypass Using Windows Media Player - File,T1548.002,TA0004
+VHD Image Download Via Browser,T1587.001,TA0042
+Potential Webshell Creation On Static Website,T1505.003,TA0003
+Creation of WerFault.exe/Wer.dll in Unusual Folder,T1574.001,TA0002;TA0005
+WinRAR Creating Files in Startup Locations,T1547.001,TA0003;TA0004
+AWL Bypass with Winrm.vbs and Malicious WsmPty.xsl/WsmTxt.xsl - File,T1216,TA0005
+Wmiexec Default Output File,T1047,TA0002
+Wmiprvse Wbemcomn DLL Hijack - File,T1021.002;T1047,TA0002;TA0008
+WMI Persistence - Script Event Consumer File Write,T1546.003,TA0003;TA0004
+UEFI Persistence Via Wpbbin - FileCreation,T1542.001,TA0003;TA0005
+Writing Local Admin Share,T1546.002,TA0003;TA0004
+Potentially Suspicious Self Extraction Directive File Created,T1218,TA0005
+Suspicious Appended Extension,T1486,TA0040
+Clfs.SYS Loaded By Process Located In a Potential Suspicious Location,T1059,TA0002
+DLL Loaded From Suspicious Location Via Cmspt.EXE,T1218.003,TA0005
+Potential Azure Browser SSO Abuse,T1574.001,TA0002;TA0005
+Suspicious Renamed Comsvcs DLL Loaded By Rundll32,T1003.001,TA0006
+CredUI.DLL Loaded By Uncommon Process,T1056.002,TA0006;TA0009
+Suspicious Unsigned Dbghelp/Dbgcore DLL Loaded,T1003.001,TA0006
+PCRE.NET Package Image Load,T1059,TA0002
+Load Of RstrtMgr.DLL By A Suspicious Process,T1486;T1685,TA0040;TA0112
+Load Of RstrtMgr.DLL By An Uncommon Process,T1486;T1685,TA0040;TA0112
+Diagnostic Library Sdiageng.DLL Loaded By Msdt.EXE,T1202,TA0005
+PowerShell Core DLL Loaded By Non PowerShell Process,T1059.001,TA0002
+Time Travel Debugging Utility Usage - Image,T1003.001;T1218,TA0005;TA0006
+Unsigned .node File Loaded,T1036.005;T1129;T1574.001,TA0002;TA0005
+Suspicious Volume Shadow Copy Vssapi.dll Load,T1490,TA0040
+Potentially Suspicious Volume Shadow Copy Vsstrace.dll Load,T1490,TA0040
+Suspicious Volume Shadow Copy VSS_PS.dll Load,T1490,TA0040
+HackTool - SharpEvtMute DLL Load,T1685.001,TA0112
+HackTool - SILENTTRINITY Stager DLL Load,T1071,TA0011
+Potential DCOM InternetExplorer.Application DLL Hijack - Image Load,T1021.002;T1021.003,TA0008
+Unsigned Image Loaded Into LSASS Process,T1003.001,TA0006
+DotNET Assembly DLL Loaded Via Office Application,T1204.002,TA0002
+CLR DLL Loaded Via Office Applications,T1204.002,TA0002
+GAC DLL Loaded Via Office Applications,T1204.002,TA0002
+Microsoft Excel Add-In Loaded From Uncommon Location,T1204.002,TA0002
+Microsoft VBA For Outlook Addin Loaded Via Outlook,T1204.002,TA0002
+VBA DLL Loaded Via Office Application,T1204.002,TA0002
+Remote DLL Load Via Rundll32.EXE,T1204.002,TA0002
+WMI ActiveScriptEventConsumers Activity Via Scrcons.EXE DLL Load,T1546.003,TA0003;TA0004
+Potential 7za.DLL Sideloading,T1574.001,TA0002;TA0005
+Abusable DLL Potential Sideloading From Suspicious Location,T1059,TA0002
+Potential Antivirus Software DLL Sideloading,T1574.001,TA0002;TA0005
+Potential appverifUI.DLL Sideloading,T1574.001,TA0002;TA0005
+Aruba Network Service Potential DLL Sideloading,T1574.001,TA0002;TA0005
+Potential AVKkid.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential CCleanerDU.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential CCleanerReactivator.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Chrome Frame Helper DLL Sideloading,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Via ClassicExplorer32.dll,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Via comctl32.dll,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Using Coregen.exe,T1055;T1218,TA0004;TA0005
+System Control Panel Item Loaded From Uncommon Location,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of DBGCORE.DLL,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of DBGHELP.DLL,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of DbgModel.DLL,T1574.001,TA0002;TA0005
+Potential EACore.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Edputil.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential System DLL Sideloading From Non System Locations,T1574.001,TA0002;TA0005
+Potential Goopdate.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of Libcurl.DLL Via GUP.EXE,T1574.001,TA0002;TA0005
+Potential Iviewers.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential JLI.dll Side-Loading,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Via JsSchHlp,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of KeyScramblerIE.DLL Via KeyScrambler.EXE,T1574.001,TA0002;TA0005
+Potential Libvlc.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Mfdetours.DLL Sideloading,T1574.001,TA0002;TA0005
+Unsigned Mfdetours.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of MpSvc.DLL,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of MsCorSvc.DLL,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Of Non-Existent DLLs From System Folders,T1574.001,TA0002;TA0005
+Microsoft Office DLL Sideload,T1574.001,TA0002;TA0005
+Potential Python DLL SideLoading,T1574.001,TA0002;TA0005
+Potential Rcdll.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential RjvPlatform.DLL Sideloading From Default Location,T1574.001,TA0002;TA0005
+Potential RjvPlatform.DLL Sideloading From Non-Default Location,T1574.001,TA0002;TA0005
+Potential RoboForm.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential ShellDispatch.DLL Sideloading,T1574.001,TA0002;TA0005
+DLL Sideloading Of ShellChromeAPI.DLL,T1574.001,TA0002;TA0005
+Potential SmadHook.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential SolidPDFCreator.DLL Sideloading,T1574.001,TA0002;TA0005
+Third Party Software DLL Sideloading,T1574.001,TA0002;TA0005
+Fax Service DLL Search Order Hijack,T1574.001,TA0002;TA0005
+Potential Vcruntime140 DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Vivaldi_elf.DLL Sideloading,T1574.001,TA0002;TA0005
+VMGuestLib DLL Sideload,T1574.001,TA0002;TA0005
+VMMap Signed Dbghelp.DLL Potential Sideloading,T1574.001,TA0002;TA0005
+VMMap Unsigned Dbghelp.DLL Potential Sideloading,T1574.001,TA0002;TA0005
+Potential DLL Sideloading Via VMware Xfer,T1574.001,TA0002;TA0005
+Potential Waveedit.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Wazuh Security Platform DLL Sideloading,T1574.001,TA0002;TA0005
+Potential Mpclient.DLL Sideloading,T1574.001,TA0002;TA0005
+Potential WWlib.DLL Sideloading,T1574.001,TA0002;TA0005
+BaaUpdate.exe Suspicious DLL Load,T1021.003;T1218,TA0005;TA0008
+Unsigned Module Loaded by ClickOnce Application,T1574.001,TA0002;TA0005
+DLL Load By System Process From Suspicious Locations,T1070,TA0005
+Potentially Suspicious Image Load of Offreg.dll,T1112,TA0003;TA0112
+Python Image Load By Non-Python Process,T1027.002,TA0005
+DotNet CLR DLL Loaded By Scripting Applications,T1055,TA0004;TA0005
+Unsigned DLL Loaded by Windows Utility,T1218.010;T1218.011,TA0005
+Suspicious Unsigned Thor Scanner Execution,T1574.001,TA0002;TA0005
+UAC Bypass Using Iscsicpl - ImageLoad,T1548.002,TA0004
+UAC Bypass With Fake DLL,T1548.002;T1574.001,TA0002;TA0004;TA0005
+MMC Loading Script Engines DLLs,T1059.005;T1218.014,TA0002;TA0005
+Suspicious Loading of Dbgcore/Dbghelp DLLs from Uncommon Location,T1003;T1685,TA0006;TA0112
+Trusted Path Bypass via Windows Directory Spoofing,T1548.002;T1574.007,TA0002;TA0004;TA0005
+WMIC Loading Scripting Libraries,T1220,TA0005
+Wmiprvse Wbemcomn DLL Hijack,T1021.002;T1047,TA0002;TA0008
+WMI Persistence - Command Line Event Consumer,T1546.003,TA0003;TA0004
+Suspicious WSMAN Provider Image Loads,T1021.003;T1059.001,TA0002;TA0008
+Network Connection Initiated By AddinUtil.EXE,T1218,TA0005
+Uncommon Connection to Active Directory Web Services,T1087,TA0007
+Uncommon Network Connection Initiated By Certutil.EXE,T1105,TA0011
+Outbound Network Connection Initiated By Cmstp.EXE,T1218.003,TA0005
+Outbound Network Connection Initiated By Microsoft Dialer,T1071.001,TA0011
+Network Connection Initiated To AzureWebsites.NET By Non-Browser Process,T1102;T1102.001,TA0011
+Network Connection Initiated To BTunnels Domains,T1567;T1572,TA0010;TA0011
+Network Connection Initiated To Cloudflared Tunnels Domains,T1567;T1572,TA0010;TA0011
+Network Communication With Crypto Mining Pool,T1496,TA0040
+New Connection Initiated To Potential Dead Drop Resolver Domain,T1102;T1102.001,TA0011
+Network Connection Initiated To DevTunnels Domain,T1567.001;T1572,TA0010;TA0011
+Suspicious Dropbox API Usage,T1105;T1567.002,TA0010;TA0011
+Suspicious Network Connection to IP Lookup Service APIs,T1016,TA0007
+Suspicious Non-Browser Network Communication With Google API,T1102,TA0011
+Communication To LocaltoNet Tunneling Service Initiated,T1090;T1102;T1572,TA0011
+Network Connection Initiated To Mega.nz,T1567.002,TA0010
+Process Initiated Network Connection To Ngrok Domain,T1102;T1567;T1572,TA0010;TA0011
+Communication To Ngrok Tunneling Service Initiated,T1090;T1102;T1567;T1568.002;T1572,TA0010;TA0011
+Potentially Suspicious Network Connection To Notion API,T1102,TA0011
+Network Communication Initiated To Portmap.IO Domain,T1041;T1090.002,TA0010;TA0011
+Suspicious Non-Browser Network Communication With Telegram API,T1102;T1105;T1567,TA0010;TA0011
+Network Connection Initiated To Visual Studio Code Tunnels Domain,T1567;T1572,TA0010;TA0011
+Network Connection Initiated By Eqnedt32.EXE,T1203,TA0002
+Network Connection Initiated via Finger.EXE,T1059.003;T1071.004,TA0002;TA0011
+Network Connection Initiated By IMEWDBLD.EXE,T1105,TA0011
+Network Connection Initiated Via Notepad.EXE,T1055,TA0004;TA0005
+Office Application Initiated Network Connection To Non-Local IP,T1203,TA0002
+Python Initiated Connection,T1046,TA0007
+Outbound RDP Connections Over Non-Standard Tools,T1021.001,TA0008
+RDP Over Reverse SSH Tunnel,T1021.001;T1572,TA0008;TA0011
+RDP to HTTP or HTTPS Target Ports,T1021.001;T1572,TA0008;TA0011
+RegAsm.EXE Initiating Network Connection To Public IP,T1218.009,TA0005
+Network Connection Initiated By Regsvr32.EXE,T1218.010;T1559.001,TA0002;TA0005
+Remote Access Tool - AnyDesk Incoming Connection,T1219.002,TA0011
+Rundll32 Internet Connection,T1218.011,TA0005
+Silenttrinity Stager Msbuild Activity,T1127.001,TA0002;TA0005
+Network Communication Initiated To File Sharing Domains From Process Located In Suspicious Folder,T1105,TA0011
+Network Connection Initiated From Process Located In Potentially Suspicious Or Uncommon Location,T1105,TA0011
+Potentially Suspicious Malware Callback Communication,T1571,TA0011
+Communication To Uncommon Destination Ports,T1571,TA0011
+Uncommon Outbound Kerberos Connection,T1550.003;T1558,TA0006;TA0008
+Microsoft Sync Center Suspicious Network Connections,T1055;T1218,TA0004;TA0005
+Suspicious Outbound SMTP Connections,T1048.003,TA0010
+Potential Remote PowerShell Session Initiated,T1021.006;T1059.001,TA0002;TA0008
+Outbound Network Connection To Public IP Via Winlogon,T1218.011,TA0005
+Local Network Connection Initiated By Script Interpreter,T1105,TA0011
+Outbound Network Connection Initiated By Script Interpreter,T1105,TA0011
+Potentially Suspicious Wuauclt Network Connection,T1218,TA0005
+ADFS Database Named Pipe Connection By Uncommon Tool,T1005,TA0009
+CobaltStrike Named Pipe,T1055,TA0004;TA0005
+CobaltStrike Named Pipe Pattern Regex,T1055,TA0004;TA0005
+CobaltStrike Named Pipe Patterns,T1055,TA0004;TA0005
+HackTool - CoercedPotato Named Pipe Creation,T1055,TA0004;TA0005
+HackTool - EfsPotato Named Pipe Creation,T1055,TA0004;TA0005
+HackTool - Credential Dumping Tools Named Pipe Created,T1003.001;T1003.002;T1003.004;T1003.005,TA0006
+HackTool - Koh Default Named Pipe,T1134.001;T1528,TA0004;TA0005;TA0006
+Alternate PowerShell Hosts Pipe,T1059.001,TA0002
+New PowerShell Instance Created,T1059.001,TA0002
+PUA - CSExec Default Named Pipe,T1021.002;T1569.002,TA0002;TA0008
+PUA - PAExec Default Named Pipe,T1569.002,TA0002
+PUA - RemCom Default Named Pipe,T1021.002;T1569.002,TA0002;TA0008
+WMI Event Consumer Created Named Pipe,T1047,TA0002
+Malicious Named Pipe Created,T1055,TA0004;TA0005
+PsExec Tool Execution From Suspicious Locations - PipeName,T1569.002,TA0002
+Nslookup PowerShell Download Cradle,T1059.001,TA0002
+Delete Volume Shadow Copies Via WMI With PowerShell,T1490,TA0040
+PowerShell Downgrade Attack - PowerShell,T1059.001,TA0002
+PowerShell Download Via Net.WebClient - PowerShell Classic,T1059.001;T1105,TA0002;TA0011
+PowerShell Called from an Executable Version Mismatch,T1059.001,TA0002
+Netcat The Powershell Version,T1059.001;T1095,TA0002;TA0011
+Potential RemoteFXvGPUDisablement.EXE Abuse,T1218,TA0005
+Remote PowerShell Session (PS Classic),T1021.006;T1059.001,TA0002;TA0008
+Renamed Powershell Under Powershell Channel,T1036.003;T1059.001,TA0002;TA0005
+Use Get-NetTCPConnection,T1049,TA0007
+Zip A Folder With PowerShell For Staging In Temp - PowerShell,T1074.001,TA0009
+Tamper Windows Defender - PSClassic,T1685,TA0112
+Suspicious Non PowerShell WSMAN COM Provider,T1021.003;T1059.001,TA0002;TA0008
+Alternate PowerShell Hosts - PowerShell Module,T1059.001,TA0002
+Bad Opsec Powershell Code Artifacts,T1059.001,TA0002
+Clear PowerShell History - PowerShell Module,T1070.003,TA0005
+PowerShell Decompress Commands,T1140,TA0005
+Malicious PowerShell Scripts - PoshModule,T1059.001,TA0002
+Suspicious Get-ADDBAccount Usage,T1003.003,TA0006
+PowerShell Get Clipboard,T1115,TA0009
+Invoke-Obfuscation CLIP+ Launcher - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Obfuscated IEX Invocation - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation STDIN+ Launcher - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR+ Launcher - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation COMPRESS OBFUSCATION - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation RUNDLL LAUNCHER - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Stdin - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Clip - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use MSHTA - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Rundll32 - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - PowerShell Module,T1027;T1059.001,TA0002;TA0005
+Malicious PowerShell Commandlets - PoshModule,T1059.001;T1069;T1069.001;T1069.002;T1087;T1087.001;T1087.002;T1482,TA0002;TA0007
+Potential RemoteFXvGPUDisablement.EXE Abuse - PowerShell Module,T1218,TA0005
+Remote PowerShell Session (PS Module),T1021.006;T1059.001,TA0002;TA0008
+AD Groups Or Users Enumeration Using PowerShell - PoshModule,T1069.001,TA0007
+Suspicious PowerShell Download - PoshModule,T1059.001,TA0002
+Use Get-NetTCPConnection - PowerShell Module,T1049,TA0007
+Suspicious PowerShell Invocations - Generic - PowerShell Module,T1059.001,TA0002
+Suspicious PowerShell Invocations - Specific - PowerShell Module,T1059.001,TA0002
+Suspicious Get Local Groups Information,T1069.001,TA0007
+Suspicious Computer Machine Password by PowerShell,T1078,TA0001;TA0003;TA0004;TA0005
+Suspicious Get Information for SMB Share - PowerShell Module,T1069.001,TA0007
+Zip A Folder With PowerShell For Staging In Temp  - PowerShell Module,T1074.001,TA0009
+SyncAppvPublishingServer Bypass Powershell Restriction - PS Module,T1218,TA0005
+Access to Browser Login Data,T1555.003,TA0006
+Powershell Add Name Resolution Policy Table Rule,T1565,TA0040
+PowerShell ADRecon Execution,T1059.001,TA0002
+New User Account Creation Attempt Via ADSI,T1136.001;T1136.002,TA0003
+AMSI Bypass Pattern Assembly GetType,T1685,TA0112
+Potential AMSI Bypass Script Using NULL Bits,T1685,TA0112
+Silence.EDA Detection,T1059.001;T1071.004;T1529;T1572,TA0002;TA0011;TA0040
+Get-ADUser Enumeration Using UserAccountControl Flags,T1033,TA0007
+Automated Collection Command PowerShell,T1119,TA0009
+Windows Screen Capture with CopyFromScreen,T1113,TA0009
+Clearing Windows Console History,T1070;T1070.003,TA0005
+Clear PowerShell History - PowerShell,T1070.003,TA0005
+Powershell Create Scheduled Task,T1053.005,TA0002;TA0003;TA0004
+Computer Discovery And Export Via Get-ADComputer Cmdlet - PowerShell,T1033,TA0007
+Powershell Install a DLL in System Directory,T1556.002,TA0003;TA0006;TA0112
+Registry-Free Process Scope COR_PROFILER,T1574.012,TA0002;TA0005
+PowerShell Create Local User,T1059.001;T1136.001,TA0002;TA0003
+DMSA Service Account Created in Specific OUs - PowerShell,T1078.002;T1098,TA0001;TA0003;TA0004;TA0005
+Create Volume Shadow Copy with Powershell,T1003.003,TA0006
+Powershell Detect Virtualization Environment,T1497.001,TA0005;TA0007
+DirectorySearcher Powershell Exploitation,T1018,TA0007
+Manipulation of User Computer or Group Security Principals Across AD,T1136.002,TA0003
+Disable Powershell Command History,T1070.003,TA0005
+Disable-WindowsOptionalFeature Command PowerShell,T1685,TA0112
+Potential In-Memory Execution Using Reflection.Assembly,T1620,TA0005
+Potential COM Objects Download Cradles Usage - PS Script,T1105,TA0011
+DSInternals Suspicious PowerShell Cmdlets - ScriptBlock,T1059.001,TA0002
+Dump Credentials from Windows Credential Manager With PowerShell,T1555,TA0006
+Enable Windows Remote Management,T1021.006,TA0008
+Enumerate Credentials from Windows Credential Manager With PowerShell,T1555,TA0006
+Disable of ETW Trace - Powershell,T1070;T1685,TA0005;TA0112
+Certificate Exported Via PowerShell - ScriptBlock,T1552.004,TA0006
+Suspicious FromBase64String Usage On Gzip Archive - Ps Script,T1132.001,TA0011
+Service Registry Permissions Weakness Check,T1574.011,TA0002;TA0005
+Active Directory Computers Enumeration With Get-AdComputer,T1018;T1087.002,TA0007
+Active Directory Group Enumeration With Get-AdGroup,T1069.002,TA0007
+Suspicious Get-ADReplAccount,T1003.006,TA0006
+Automated Collection Bookmarks Using Get-ChildItem PowerShell,T1217,TA0007
+Security Software Discovery Via Powershell Script,T1518.001,TA0007
+HackTool - Rubeus Execution - ScriptBlock,T1003;T1550.003;T1558.003,TA0006;TA0008
+HackTool - WinPwn Execution - ScriptBlock,T1046;T1082;T1106;T1518;T1548.002;T1552.001;T1555;T1555.003,TA0002;TA0004;TA0006;TA0007
+PowerShell ICMP Exfiltration,T1048.003,TA0010
+Import PowerShell Modules From Suspicious Directories,T1059.001,TA0002
+Execute Invoke-command on Remote Host,T1021.006,TA0008
+Powershell DNSExfiltration,T1048,TA0010
+Invoke-Obfuscation CLIP+ Launcher - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Obfuscated IEX Invocation - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation STDIN+ Launcher - Powershell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR+ Launcher - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation COMPRESS OBFUSCATION - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation RUNDLL LAUNCHER - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Stdin - Powershell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Clip - Powershell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use MSHTA - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Rundll32 - PowerShell,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - PowerShell,T1027;T1059.001,TA0002;TA0005
+Powershell Keylogging,T1056.001,TA0006;TA0009
+Powershell LocalAccount Manipulation,T1098,TA0003;TA0004
+Malicious PowerShell Commandlets - ScriptBlock,T1059.001;T1069;T1069.001;T1069.002;T1087;T1087.001;T1087.002;T1482,TA0002;TA0007
+Malicious PowerShell Keywords,T1059.001,TA0002
+Live Memory Dump Using Powershell,T1003,TA0006
+DMSA Link Attributes Modified,T1078.002;T1098,TA0001;TA0003;TA0004;TA0005
+Modify Group Policy Settings - ScriptBlockLogging,T1484.001,TA0004;TA0112
+Powershell MsXml COM Object,T1059.001,TA0002
+Malicious Nishang PowerShell Commandlets,T1059.001,TA0002
+NTFS Alternate Data Stream,T1059.001;T1564.004,TA0002;TA0005
+Code Executed Via Office Add-in XLL File,T1137.006,TA0003
+Potential Packet Capture Activity Via Start-NetEventSession - ScriptBlock,T1040,TA0006;TA0007
+Potential Invoke-Mimikatz PowerShell Script,T1003,TA0006
+Potential Unconstrained Delegation Discovery Via Get-ADComputer - ScriptBlock,T1018;T1558;T1589.002,TA0006;TA0007;TA0043
+PowerShell Web Access Installation - PsScript,T1059.001,TA0002
+PowerView PowerShell Cmdlets - ScriptBlock,T1059.001,TA0002
+PowerShell Credential Prompt,T1059.001,TA0002
+PSAsyncShell - Asynchronous TCP Reverse Shell,T1059.001,TA0002
+PowerShell PSAttack,T1059.001,TA0002
+Potential RemoteFXvGPUDisablement.EXE Abuse - PowerShell ScriptBlock,T1218,TA0005
+PowerShell Remote Session Creation,T1059.001,TA0002
+Suspicious Kerberos Ticket Request via PowerShell Script - ScriptBlock,T1558.003,TA0006
+PowerShell Script With File Hostname Resolving Capabilities,T1020,TA0010
+Root Certificate Installed - PowerShell,T1553.004,TA0112
+Suspicious Invoke-Item From Mount-DiskImage,T1553.005,TA0112
+PowerShell Script With File Upload Capabilities,T1020,TA0010
+Powershell Sensitive File Discovery,T1083,TA0007
+PowerShell Script Change Permission Via Set-Acl - PsScript,T1222,TA0112
+PowerShell Set-Acl On Windows Folder - PsScript,T1222,TA0112
+Change PowerShell Policies to an Insecure Level - PowerShell,T1059.001,TA0002
+PowerShell ShellCode,T1055;T1059.001,TA0002;TA0004;TA0005
+Malicious ShellIntel PowerShell Commandlets,T1059.001,TA0002
+Detected Windows Software Discovery - PowerShell,T1518,TA0007
+Powershell Store File In Alternate Data Stream,T1564.004,TA0005
+AD Groups Or Users Enumeration Using PowerShell - ScriptBlock,T1069.001,TA0007
+Potential PowerShell Obfuscation Using Character Join,T1027;T1059.001,TA0002;TA0005
+Suspicious Eventlog Clear,T1685.005,TA0112
+Powershell Directory Enumeration,T1083,TA0007
+Suspicious PowerShell Download - Powershell Script,T1059.001,TA0002
+Powershell Execute Batch Script,T1059.003,TA0002
+Extracting Information with PowerShell,T1552.001,TA0006
+Troubleshooting Pack Cmdlet Execution,T1202,TA0005
+PowerShell Get-Process LSASS in ScriptBlock,T1003.001,TA0006
+Suspicious GetTypeFromCLSID ShellExecute,T1546.015,TA0003;TA0004
+Password Policy Discovery With Get-AdDefaultDomainPasswordPolicy,T1201,TA0007
+Suspicious PowerShell Get Current User,T1033,TA0007
+Suspicious GPO Discovery With Get-GPO,T1615,TA0007
+Suspicious Process Discovery With Get-Process,T1057,TA0007
+Suspicious Hyper-V Cmdlets,T1564.006,TA0005
+Suspicious PowerShell Invocations - Generic,T1059.001,TA0002
+Suspicious PowerShell Invocations - Specific,T1059.001,TA0002
+Change User Agents with WebRequest,T1071.001,TA0011
+Suspicious IO.FileStream,T1070.003,TA0005
+Potential Keylogger Activity,T1056.001,TA0006;TA0009
+Potential Suspicious PowerShell Keywords,T1059.001,TA0002
+Suspicious Get Local Groups Information - PowerShell,T1069.001,TA0007
+Powershell Local Email Collection,T1114.001,TA0009
+PowerShell Deleted Mounted Share,T1070.005,TA0005
+Suspicious Mount-DiskImage,T1553.005,TA0112
+Suspicious Connection to Remote Account,T1110.001,TA0006
+Suspicious New-PSDrive to Admin Share,T1021.002,TA0008
+Suspicious TCP Tunnel Via PowerShell Script,T1090,TA0011
+Recon Information for Export with PowerShell,T1119,TA0009
+Remove Account From Domain Admin Group,T1531,TA0040
+Suspicious Service DACL Modification Via Set-Service Cmdlet - PS,T1574.011,TA0002;TA0005
+Potential PowerShell Obfuscation Using Alias Cmdlets,T1027;T1059.001,TA0002;TA0005
+Suspicious Get Information for SMB Share,T1069.001,TA0007
+Suspicious SSL Connection,T1573,TA0011
+Suspicious Start-Process PassThru,T1036.003,TA0005
+Suspicious Unblock-File,T1553.005,TA0112
+Replace Desktop Wallpaper by Powershell,T1491.001,TA0040
+Powershell Suspicious Win32_PnPEntity,T1120,TA0007
+Deletion of Volume Shadow Copies via WMI with PowerShell - PS Script,T1490,TA0040
+Suspicious PowerShell WindowStyle Option,T1564.003,TA0005
+Zip A Folder With PowerShell For Staging In Temp - PowerShell Script,T1074.001,TA0009
+SyncAppvPublishingServer Execution to Bypass Powershell Restriction,T1218,TA0005
+Tamper Windows Defender Remove-MpPreference - ScriptBlockLogging,T1685,TA0112
+Tamper Windows Defender - ScriptBlockLogging,T1685,TA0112
+Testing Usage of Uncommonly Used Port,T1571,TA0011
+Powershell Timestomp,T1070.006,TA0005
+User Discovery And Export Via Get-ADUser Cmdlet - PowerShell,T1033,TA0007
+Potential Persistence Via PowerShell User Profile Using Add-Content,T1546.013,TA0003;TA0004
+Abuse of Service Permissions to Hide Services Via Set-Service - PS,T1574.011,TA0002;TA0005
+Registry Modification Attempt Via VBScript - PowerShell,T1059.005;T1112,TA0002;TA0003;TA0112
+Usage Of Web Request Commands And Cmdlets - ScriptBlock,T1059.001,TA0002
+PowerShell WMI Win32_Product Install MSI,T1218.007,TA0005
+Windows Firewall Profile Disabled,T1686.003,TA0112
+Winlogon Helper DLL,T1547.004,TA0003;TA0004
+Potential WinAPI Calls Via PowerShell Scripts,T1059.001;T1106;T1620,TA0002;TA0005
+Windows Defender Exclusions Added - PowerShell,T1059;T1685,TA0002;TA0112
+WMImplant Hack Tool,T1047;T1059.001,TA0002
+Powershell WMI Persistence,T1546.003,TA0003;TA0004
+WMIC Unquoted Services Path Lookup - PowerShell,T1047,TA0002
+Suspicious X509Enrollment - Ps Script,T1553.004,TA0112
+Powershell XML Execute Command,T1059.001,TA0002
+CMSTP Execution Process Access,T1218.003;T1559.001,TA0002;TA0005
+HackTool - CobaltStrike BOF Injection Pattern,T1106;T1685,TA0002;TA0112
+HackTool - Generic Process Access,T1003.001,TA0006
+HackTool - HandleKatz Duplicating LSASS Handle,T1003.001;T1106,TA0002;TA0006
+HackTool - LittleCorporal Generated Maldoc Injection,T1055.003;T1204.002,TA0002;TA0004;TA0005
+HackTool - SysmonEnte Execution,T1685.001,TA0112
+Lsass Memory Dump via Comsvcs DLL,T1003.001,TA0006
+LSASS Memory Access by Tool With Dump Keyword In Name,T1003.001,TA0006
+Potential Credential Dumping Activity Via LSASS,T1003.001,TA0006
+Credential Dumping Activity By Python Based Tool,T1003.001,TA0006
+Remote LSASS Process Access Through Windows Remote Management,T1003.001;T1021.006;T1059.001,TA0002;TA0006;TA0008
+Suspicious LSASS Access Via MalSecLogon,T1003.001,TA0006
+Potentially Suspicious GrantedAccess Flags On LSASS,T1003.001,TA0006
+Credential Dumping Attempt Via WerFault,T1003.001,TA0006
+LSASS Access From Potentially White-Listed Processes,T1003.001,TA0006
+Uncommon Process Access Rights For Target Image,T1055.011,TA0004;TA0005
+Suspicious Process Access to LSASS with Dbgcore/Dbghelp DLLs,T1003.001;T1685,TA0006;TA0112
+Potential Direct Syscall of NtOpenProcess,T1106,TA0002
+Credential Dumping Attempt Via Svchost,T1548,TA0004
+Suspicious Svchost Process Access,T1685.001,TA0112
+Function Call From Undocumented COM Interface EditionUpgradeManager,T1548.002,TA0004
+UAC Bypass Using WOW64 Logger DLL Hijack,T1548.002,TA0004
+Suspicious Process Access of MsMpEng by WerFaultSecure - EDR-Freeze,T1685,TA0112
+7Zip Compressing Dump Files,T1560.001,TA0009
+Compress Data and Lock With Password for Exfiltration With 7-ZIP,T1560.001,TA0009
+Suspicious AddinUtil.EXE CommandLine Execution,T1218,TA0005
+Uncommon Child Process Of AddinUtil.EXE,T1218,TA0005
+Uncommon AddinUtil.EXE CommandLine Execution,T1218,TA0005
+AddinUtil.EXE Execution From Uncommon Directory,T1218,TA0005
+Potential Adplus.EXE Abuse,T1003.001,TA0006
+AgentExecutor PowerShell Execution,T1218,TA0005
+Suspicious AgentExecutor PowerShell Execution,T1218,TA0005
+Windows AMSI Related Registry Tampering Via CommandLine,T1685,TA0112
+Uncommon Child Process Of Appvlp.EXE,T1218,TA0005
+Suspicious ArcSOC.exe Child Process,T1059;T1203,TA0002
+AspNetCompiler Execution,T1127,TA0002;TA0005
+Suspicious Child Process of AspNetCompiler,T1127,TA0002;TA0005
+Potentially Suspicious ASP.NET Compilation Via AspNetCompiler,T1127,TA0002;TA0005
+Uncommon  Assistive Technology Applications Execution Via AtBroker.EXE,T1218,TA0005
+Hiding Files with Attrib.exe,T1564.001,TA0005
+Set Suspicious Files as System Files Using Attrib.EXE,T1564.001,TA0005
+Interactive AT Job,T1053.002,TA0002;TA0003;TA0004
+Audit Policy Tampering Via NT Resource Kit Auditpol,T1685.001,TA0112
+Audit Policy Tampering Via Auditpol,T1685.001,TA0112
+Windows EventLog Autologger Session Registry Modification Via CommandLine,T1685.001,TA0112
+Suspicious Autorun Registry Modified via WMI,T1047;T1547.001,TA0002;TA0003;TA0004
+Suspicious BitLocker Access Agent Update Utility Execution,T1021.003;T1218,TA0005;TA0008
+Indirect Inline Command Execution Via Bash.EXE,T1202,TA0005
+Indirect Command Execution From Script File Via Bash.EXE,T1202,TA0005
+Boot Configuration Tampering Via Bcdedit.EXE,T1490,TA0040
+Potential Ransomware or Unauthorized MBR Tampering Via Bcdedit.EXE,T1070;T1542.003,TA0003;TA0005
+Data Export From MSSQL Table Via BCP.EXE,T1048,TA0010
+Suspicious Child Process Of BgInfo.EXE,T1059.005;T1202;T1218,TA0002;TA0005
+Uncommon Child Process Of BgInfo.EXE,T1059.005;T1202;T1218,TA0002;TA0005
+BitLockerTogo.EXE Execution,T1218,TA0005
+File Download Via Bitsadmin,T1036.003;T1105;T1197,TA0002;TA0003;TA0005;TA0011
+Suspicious Download From Direct IP Via Bitsadmin,T1036.003;T1197,TA0002;TA0003;TA0005
+Suspicious Download From File-Sharing Website Via Bitsadmin,T1036.003;T1105;T1197,TA0002;TA0003;TA0005;TA0011
+File With Suspicious Extension Downloaded Via Bitsadmin,T1036.003;T1105;T1197,TA0002;TA0003;TA0005;TA0011
+File Download Via Bitsadmin To A Suspicious Target Folder,T1036.003;T1105;T1197,TA0002;TA0003;TA0005;TA0011
+Monitoring For Persistence Via BITS,T1197,TA0002;TA0003;TA0005
+Potential Data Stealing Via Chromium Headless Debugging,T1185;T1564.003,TA0005;TA0009
+Browser Execution In Headless Mode,T1105;T1564.003,TA0005;TA0011
+File Download with Headless Browser,T1105;T1564.003,TA0005;TA0011
+Chromium Browser Instance Executed With Custom Extension,T1176.001,TA0003
+Suspicious Chromium Browser Instance Executed With Custom Extension,T1176.001,TA0003
+File Download From Browser Process Via Inline URL,T1105,TA0011
+Browser Started with Remote Debugging,T1185,TA0009
+Tor Client/Browser Execution,T1090.003,TA0011
+Suspicious Calculator Usage,T1036,TA0005
+Potential Binary Proxy Execution Via Cdb.EXE,T1106;T1127;T1218,TA0002;TA0005
+New Root Certificate Installed Via CertMgr.EXE,T1553.004,TA0112
+File Download via CertOC.EXE,T1105,TA0011
+File Download From IP Based URL Via CertOC.EXE,T1105,TA0011
+DLL Loaded via CertOC.EXE,T1218,TA0005
+Suspicious DLL Loaded via CertOC.EXE,T1218,TA0005
+Suspicious CertReq Command to Download,T1105,TA0011
+New Root Certificate Installed Via Certutil.EXE,T1553.004,TA0112
+File Decoded From Base64/Hex Via Certutil.EXE,T1027,TA0005
+Suspicious Download Via Certutil.EXE,T1027;T1105,TA0005;TA0011
+Suspicious File Downloaded From Direct IP Via Certutil.EXE,T1027;T1105,TA0005;TA0011
+Suspicious File Downloaded From File-Sharing Website Via Certutil.EXE,T1027;T1105,TA0005;TA0011
+File Encoded To Base64 Via Certutil.EXE,T1027,TA0005
+Suspicious File Encoded To Base64 Via Certutil.EXE,T1027,TA0005
+File In Suspicious Location Encoded To Base64 Via Certutil.EXE,T1027,TA0005
+Certificate Exported Via Certutil.EXE,T1027,TA0005
+Potential NTLM Coercion Via Certutil.EXE,T1218,TA0005
+Console CodePage Lookup Via CHCP,T1614.001,TA0007
+Suspicious CodePage Switch Via CHCP,T1036,TA0005
+Deleted Data Overwritten Via Cipher.EXE,T1485,TA0040
+Process Access via TrolleyExpress Exclusion,T1003.001;T1218.011,TA0005;TA0006
+Data Copied To Clipboard Via Clip.EXE,T1115,TA0009
+Cloudflared Portable Execution,T1090.001,TA0011
+Cloudflared Quick Tunnel Execution,T1090.001,TA0011
+Cloudflared Tunnel Connections Cleanup,T1090;T1102;T1572,TA0011
+Cloudflared Tunnel Execution,T1090;T1102;T1572,TA0011
+New Generic Credentials Added Via Cmdkey.EXE,T1003.005,TA0006
+Potential Reconnaissance For Cached Credentials Via Cmdkey.EXE,T1003.005,TA0006
+Potential Arbitrary File Download Via Cmdl32.EXE,T1202;T1218,TA0005
+Change Default File Association Via Assoc,T1546.001,TA0003;TA0004
+Change Default File Association To Executable Via Assoc,T1546.001,TA0003;TA0004
+Curl Download And Execute Combination,T1105;T1218,TA0005;TA0011
+File Deletion Via Del,T1070.004,TA0005
+Greedy File Deletion Using Del,T1070.004,TA0005
+File And SubFolder Enumeration Via Dir Command,T1217,TA0007
+Potential Dosfuscation Activity,T1059,TA0002
+Command Line Execution with Suspicious URL and AppData Strings,T1059.001;T1059.003;T1105,TA0002;TA0011
+Cmd Launched with Hidden Start Flags to Suspicious Targets,T1564.003,TA0005
+Potential Privilege Escalation Using Symlink Between Osk and Cmd,T1546.008,TA0003;TA0004
+VolumeShadowCopy Symlink Creation Via Mklink,T1003.002;T1003.003,TA0006
+Suspicious File Execution From Internet Hosted WebDav Share,T1059.001,TA0002
+Cmd.EXE Missing Space Characters Execution Anomaly,T1059.001,TA0002
+Potential CommandLine Path Traversal Via Cmd.EXE,T1059.003,TA0002
+Potentially Suspicious Ping/Copy Command Combination,T1070.004,TA0005
+Suspicious Ping/Del Command Combination,T1070.004,TA0005
+Potentially Suspicious CMD Shell Output Redirect,T1218,TA0005
+Directory Removal Via Rmdir,T1070.004,TA0005
+Copy From VolumeShadowCopy Via Cmd.EXE,T1490,TA0040
+Read Contents From Stdin Via Cmd.EXE,T1059.003,TA0002
+Persistence Via Sticky Key Backdoor,T1546.008,TA0003;TA0004
+Sticky Key Like Backdoor Execution,T1546.008,TA0003;TA0004
+Potential Download/Upload Activity Using Type Command,T1105,TA0011
+Unusual Parent Process For Cmd.EXE,T1059,TA0002
+CMSTP Execution Process Creation,T1218.003,TA0005
+OpenEDR Spawning Command Shell,T1021.004;T1059.003;T1219,TA0002;TA0008;TA0011
+Arbitrary File Download Via ConfigSecurityPolicy.EXE,T1567,TA0010
+Powershell Executed From Headless ConHost Process,T1059.001;T1059.003;T1564.003,TA0002;TA0005
+Suspicious High IntegrityLevel Conhost Legacy Option,T1202,TA0005
+Conhost.exe CommandLine Path Traversal,T1059.003,TA0002
+Uncommon Child Process Of Conhost.EXE,T1202,TA0005
+Potentially Suspicious Child Processes Spawned by ConHost,T1202;T1218,TA0005
+Conhost Spawned By Uncommon Parent Process,T1059,TA0002
+Control Panel Items,T1218.002;T1546,TA0003;TA0004;TA0005
+CreateDump Process Dump,T1003.001;T1036,TA0005;TA0006
+New DMSA Service Account Created in Specific OUs,T1078.002;T1098,TA0001;TA0003;TA0004;TA0005
+Windows Credential Guard Registry Tampering Via CommandLine,T1685,TA0112
+Dynamic .NET Compilation Via Csc.EXE,T1027.004,TA0005
+Csc.EXE Execution Form Potentially Suspicious Parent,T1027.004;T1059.005;T1059.007;T1218.005,TA0002;TA0005
+Suspicious Csi.exe Usage,T1072;T1218,TA0002;TA0005;TA0008
+Suspicious Use of CSharp Interactive Console,T1127,TA0002;TA0005
+Active Directory Structure Export Via Csvde.EXE,T1087.002,TA0007
+NTLM Hash Leak Via Curl NTLM Authentication,T1187,TA0006
+Suspicious Curl.EXE Download,T1105,TA0011
+Curl File Upload To File Sharing Websites,T1567.002,TA0010
+Suspicious CustomShellHost Execution,T1216,TA0005
+ManageEngine Endpoint Central Dctask64.EXE Potential Abuse,T1055.001,TA0004;TA0005
+Uncommon Child Process Of Defaultpack.EXE,T1218,TA0005
+PowerShell Defender Threat Severity Default Action Set to 'Allow' or 'NoAction',T1685,TA0112
+Windows Defender Context Menu Removed,T1685,TA0112
+Remote File Download Via Desktopimgdownldr Utility,T1105,TA0011
+Suspicious Desktopimgdownldr Command,T1105,TA0011
+Devcon Execution Disabling VMware VMCI Device,T1543.003;T1685,TA0003;TA0004;TA0112
+Potential DLL Sideloading Via DeviceEnroller.EXE,T1574.001,TA0002;TA0005
+DeviceCredentialDeployment Execution,T1218,TA0005
+Arbitrary MSI Download Via Devinit.EXE,T1218,TA0005
+DirLister Execution,T1083,TA0007
+System Information Discovery via Registry Queries,T1082,TA0007
+Potentially Suspicious Child Process Of DiskShadow.EXE,T1218,TA0005
+Diskshadow Script Mode - Uncommon Script Extension Execution,T1218,TA0005
+Diskshadow Script Mode - Execution From Potential Suspicious Location,T1218,TA0005
+PowerShell Web Access Feature Enabled Via DISM,T1548.002,TA0004
+Dism Remove Online Package,T1685,TA0112
+Dllhost.EXE Execution Anomaly,T1055,TA0004;TA0005
+DLL Sideloading by VMware Xfer Utility,T1574.001,TA0002;TA0005
+New DNS ServerLevelPluginDll Installed Via Dnscmd.EXE,T1112;T1574.001,TA0002;TA0003;TA0005;TA0112
+DNS Exfiltration and Tunneling Tools Execution,T1048.001;T1071.004;T1132.001,TA0010;TA0011
+Unusual Child Process of dns.exe,T1133,TA0001;TA0003
+Potential Application Whitelisting Bypass via Dnx.EXE,T1027.004;T1218,TA0005
+Process Memory Dump Via Dotnet-Dump,T1218,TA0005
+Arbitrary DLL or Csproj Code Execution Via Dotnet.EXE,T1218,TA0005
+Binary Proxy Execution Via Dotnet-Trace.EXE,T1218,TA0005
+Potentially Over Permissive Permissions Granted Using Dsacls.EXE,T1218,TA0005
+Potential Password Spraying Attempt Using Dsacls.EXE,T1218,TA0005
+Domain Trust Discovery Via Dsquery,T1482,TA0007
+Suspicious Kernel Dump Using Dtrace,T1082,TA0007
+Potential Windows Defender AV Bypass Via Dump64.EXE Rename,T1003.001,TA0006
+DumpMinitool Execution,T1003.001;T1036,TA0005;TA0006
+Suspicious DumpMinitool Execution,T1003.001;T1036,TA0005;TA0006
+New Capture Session Launched Via DXCap.EXE,T1218,TA0005
+Esentutl Gather Credentials,T1003;T1003.003,TA0006
+Copying Sensitive Files with Credential Data,T1003.002;T1003.003,TA0006
+Esentutl Steals Browser Information,T1005,TA0009
+Potentially Suspicious Event Viewer Child Process,T1548.002,TA0004
+Security Event Logging Disabled via MiniNt Registry Key - Process,T1112;T1685.001,TA0003;TA0112
+Potentially Suspicious Cabinet File Expansion,T1218,TA0005
+Explorer Process Tree Break,T1036,TA0005
+File Explorer Folder Opened Using Explorer Folder Shortcut Via Shell,T1135,TA0007
+Explorer NOUACCHECK Flag,T1548.002,TA0004
+Remote File Download Via Findstr.EXE,T1105;T1218;T1552.001;T1564.004,TA0005;TA0006;TA0011
+Findstr GPP Passwords,T1552.006,TA0006
+Findstr Launching .lnk File,T1027.003;T1036;T1202,TA0005
+LSASS Process Reconnaissance Via Findstr.EXE,T1552.006,TA0006
+Permission Misconfiguration Reconnaissance Via Findstr.EXE,T1552.006,TA0006
+Recon Command Output Piped To Findstr.EXE,T1057,TA0007
+Security Tools Keyword Lookup Via Findstr.EXE,T1518.001,TA0007
+Insensitive Subfolder Search Via Findstr.EXE,T1105;T1218;T1552.001;T1564.004,TA0005;TA0006;TA0011
+Sysmon Discovery Via Default Driver Altitude Using Findstr.EXE,T1518.001,TA0007
+Finger.EXE Execution,T1105,TA0011
+Filter Driver Unloaded Via Fltmc.EXE,T1070;T1685;T1685.001,TA0005;TA0112
+Sysmon Driver Unloaded Via Fltmc.EXE,T1070;T1685;T1685.001,TA0005;TA0112
+Forfiles.EXE Child Process Masquerading,T1036,TA0005
+Forfiles Command Execution,T1059,TA0002
+Use of FSharp Interpreters,T1059,TA0002
+Fsutil Drive Enumeration,T1120,TA0007
+Potentially Suspicious NTFS Symlink Behavior Modification,T1059;T1222.001,TA0002;TA0112
+Fsutil Suspicious Invocation,T1070;T1485,TA0005;TA0040
+Potential Arbitrary Command Execution Via FTP.EXE,T1059;T1202,TA0002;TA0005
+Arbitrary File Download Via GfxDownloadWrapper.EXE,T1105,TA0011
+Github Self-Hosted Runner Execution,T1071;T1102.002,TA0011
+Suspicious Git Clone,T1593.003,TA0043
+Portable Gpg.EXE Execution,T1486,TA0040
+Gpresult Display Group Policy Information,T1615,TA0007
+File Download Using Notepad++ GUP Utility,T1105,TA0011
+Suspicious GUP Usage,T1574.001,TA0002;TA0005
+Suspicious Child Process of Notepad++ Updater - GUP.Exe,T1195.002;T1557,TA0001;TA0006;TA0009
+HH.EXE Execution,T1218.001,TA0005
+Remote CHM File Download/Execution Via HH.EXE,T1218.001,TA0005
+HTML Help HH.EXE Suspicious Child Process,T1047;T1059.001;T1059.003;T1059.005;T1059.007;T1218;T1218.001;T1218.010;T1218.011;T1566;T1566.001,TA0001;TA0002;TA0005
+Suspicious HH.EXE Execution,T1047;T1059.001;T1059.003;T1059.005;T1059.007;T1218;T1218.001;T1218.010;T1218.011;T1566;T1566.001,TA0001;TA0002;TA0005
+HackTool - ADCSPwn Execution,T1557.001,TA0006;TA0009
+HackTool - Bloodhound/Sharphound Execution,T1059.001;T1069.001;T1069.002;T1087.001;T1087.002;T1482,TA0002;TA0007
+HackTool - F-Secure C3 Load by Rundll32,T1218.011,TA0005
+HackTool - Certify Execution,T1649,TA0006
+HackTool - Certipy Execution,T1649,TA0006
+Operator Bloopers Cobalt Strike Commands,T1059.003,TA0002
+Operator Bloopers Cobalt Strike Modules,T1059.003,TA0002
+CobaltStrike Load by Rundll32,T1218.011,TA0005
+Potential CobaltStrike Process Patterns,T1059,TA0002
+HackTool - CoercedPotato Execution,T1055,TA0004;TA0005
+HackTool - Covenant PowerShell Launcher,T1059.001;T1564.003,TA0002;TA0005
+HackTool - CrackMapExec Execution,T1047;T1053;T1059.001;T1059.003;T1110;T1201,TA0002;TA0003;TA0004;TA0006;TA0007
+HackTool - CrackMapExec Execution Patterns,T1047;T1053;T1059.001;T1059.003,TA0002;TA0003;TA0004
+HackTool - CrackMapExec Process Patterns,T1003.001,TA0006
+HackTool - CrackMapExec PowerShell Obfuscation,T1027.005;T1059.001,TA0002;TA0005
+HackTool - CreateMiniDump Execution,T1003.001,TA0006
+HackTool - DInjector PowerShell Cradle Execution,T1055,TA0004;TA0005
+HackTool - Doppelanger LSASS Dumper Execution,T1003.001,TA0006
+HackTool - Dumpert Process Dumper Execution,T1003.001,TA0006
+HackTool - EDRSilencer Execution,T1685,TA0112
+Hacktool - EDR-Freeze Execution,T1685,TA0112
+HackTool - Empire PowerShell Launch Parameters,T1059.001,TA0002
+HackTool - Empire PowerShell UAC Bypass,T1548.002,TA0004
+HackTool - WinRM Access Via Evil-WinRM,T1021.006,TA0008
+Hacktool Execution - Imphash,T1003;T1588.002,TA0006;TA0042
+Hacktool Execution - PE Metadata,T1003;T1588.002,TA0006;TA0042
+HackTool - HandleKatz LSASS Dumper Execution,T1003.001,TA0006
+HackTool - Hashcat Password Cracker Execution,T1110.002,TA0006
+HackTool - HollowReaper Execution,T1055.012,TA0004;TA0005
+HackTool - Htran/NATBypass Execution,T1090,TA0011
+HackTool - Hydra Password Bruteforce Execution,T1110;T1110.001,TA0006
+HackTool - Potential Impacket Lateral Movement Activity,T1021.003;T1047,TA0002;TA0008
+HackTool - Impacket Tools Execution,T1557.001,TA0006;TA0009
+HackTool - Impersonate Execution,T1134.001;T1134.003,TA0004;TA0005
+HackTool - Inveigh Execution,T1003.001,TA0006
+Invoke-Obfuscation CLIP+ Launcher,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Obfuscated IEX Invocation,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation STDIN+ Launcher,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR+ Launcher,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation COMPRESS OBFUSCATION,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Stdin,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use Clip,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation Via Use MSHTA,T1027;T1059.001,TA0002;TA0005
+Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION,T1027;T1059.001,TA0002;TA0005
+HackTool - Jlaive In-Memory Assembly Execution,T1059.003,TA0002
+HackTool - Koadic Execution,T1059.003;T1059.005;T1059.007,TA0002
+HackTool - KrbRelay Execution,T1558.003,TA0006
+HackTool - KrbRelayUp Execution,T1550.003;T1558.003,TA0006;TA0008
+HackTool - RemoteKrbRelay Execution,T1558.003,TA0006
+Potential Meterpreter/CobaltStrike Activity,T1134.001;T1134.002,TA0004;TA0005
+HackTool - Mimikatz Execution,T1003.001;T1003.002;T1003.004;T1003.005;T1003.006,TA0006
+HackTool - NetExec Execution,T1018;T1021,TA0007;TA0008
+HackTool - PCHunter Execution,T1007;T1012;T1057;T1082;T1083,TA0007
+HackTool - Default PowerSploit/Empire Scheduled Task Creation,T1053.005;T1059.001,TA0002;TA0003;TA0004
+HackTool - PowerTool Execution,T1685,TA0112
+HackTool - PurpleSharp Execution,T1587,TA0042
+HackTool - Pypykatz Credentials Dumping Activity,T1003.002,TA0006
+HackTool - Quarks PwDump Execution,T1003.002,TA0006
+HackTool - RedMimicry Winnti Playbook Execution,T1059.003;T1106;T1218.011,TA0002;TA0005
+Potential SMB Relay Attack Tool Execution,T1557.001,TA0006;TA0009
+HackTool - Rubeus Execution,T1003;T1550.003;T1558.003,TA0006;TA0008
+HackTool - SafetyKatz Execution,T1003.001,TA0006
+HackTool - SecurityXploded Execution,T1555,TA0006
+HackTool - PPID Spoofing SelectMyParent Tool Execution,T1134.004,TA0004;TA0005
+HackTool - SharPersist Execution,T1053,TA0002;TA0003;TA0004
+HackTool - SharpEvtMute Execution,T1685.001,TA0112
+HackTool - SharpLdapWhoami Execution,T1033,TA0007
+HackTool - SharpMove Tool Execution,T1021.002,TA0008
+HKTL - SharpSuccessor Privilege Escalation Tool Execution,T1068,TA0004
+HackTool - SharpUp PrivEsc Tool Execution,T1569.002;T1574.005;T1615,TA0002;TA0005;TA0007
+HackTool - SharpView Execution,T1033;T1049;T1069.002;T1135;T1482,TA0007
+HackTool - SharpWSUS/WSUSpendu Execution,T1210,TA0008
+HackTool - SharpChisel Execution,T1090.001,TA0011
+HackTool - SharpDPAPI Execution,T1134.001;T1134.003,TA0004;TA0005
+HackTool - SharpImpersonation Execution,T1134.001;T1134.003,TA0004;TA0005
+HackTool - SILENTTRINITY Stager Execution,T1071,TA0011
+HackTool - Sliver C2 Implant Activity Pattern,T1059,TA0002
+HackTool - SOAPHound Execution,T1087,TA0007
+HackTool - Stracciatella Execution,T1059;T1685,TA0002;TA0112
+HackTool - SysmonEOP Execution,T1068,TA0004
+HackTool - TruffleSnout Execution,T1482,TA0007
+HackTool - UACMe Akagi Execution,T1548.002,TA0004
+HackTool - Windows Credential Editor (WCE) Execution,T1003.001,TA0006
+HackTool - winPEAS Execution,T1046;T1082;T1087,TA0007
+HackTool - WinPwn Execution,T1046;T1082;T1106;T1518;T1548.002;T1552.001;T1555;T1555.003,TA0002;TA0004;TA0006;TA0007
+HackTool - WSASS Execution,T1003.001,TA0006
+HackTool - XORDump Execution,T1003.001;T1036,TA0005;TA0006
+Suspicious ZipExec Execution,T1202;T1218,TA0005
+Suspicious Execution of Hostname,T1082,TA0007
+Hypervisor-protected Code Integrity (HVCI) Related Registry Tampering Via CommandLine,T1685,TA0112
+Suspicious HWP Sub Processes,T1059.003;T1203;T1566.001,TA0001;TA0002
+Potential Fake Instance Of Hxtsr.EXE Executed,T1036,TA0005
+Use Icacls to Hide File to Everyone,T1564.001,TA0005
+File Download And Execution Via IEExec.EXE,T1105,TA0011
+Self Extracting Package Creation Via Iexpress.EXE From Potentially Suspicious Location,T1218,TA0005
+Disable Windows IIS HTTP Logging,T1685.001,TA0112
+Microsoft IIS Service Account Password Dumped,T1003,TA0006
+IIS Native-Code Module Command Line Installation,T1505.003,TA0003
+Microsoft IIS Connection Strings Decryption,T1003,TA0006
+IIS WebServer Log Deletion via CommandLine Utilities,T1070,TA0005
+Suspicious IIS Module Registration,T1505.004,TA0003
+C# IL Code Compilation Via Ilasm.EXE,T1127,TA0002;TA0005
+Arbitrary File Download Via IMEWDBLD.EXE,T1218,TA0005
+InfDefaultInstall.exe .inf Execution,T1218,TA0005
+File Download Via InstallUtil.EXE,T1218,TA0005
+Suspicious Child Process Of Manage Engine ServiceDesk,T1102,TA0011
+Java Running with Remote Debugging,T1203,TA0002
+Suspicious SysAidServer Child,T1210,TA0008
+JScript Compiler Execution,T1127,TA0002;TA0005
+Kavremover Dropped Binary LOLBIN Usage,T1127,TA0002;TA0005
+Attempts of Kerberos Coercion Via DNS SPN Spoofing,T1187;T1557.001,TA0006;TA0009
+Potentially Suspicious Child Process of KeyScrambler.exe,T1203;T1574.001,TA0002;TA0005
+Import LDAP Data Interchange Format File Via Ldifde.EXE,T1105;T1218,TA0005;TA0011
+Uncommon Link.EXE Parent Process,T1218,TA0005
+Suspicious Windows Trace ETW Session Tamper Via Logman.EXE,T1685;T1685.005,TA0112
+LOLBAS Data Exfiltration by DataSvcUtil.exe,T1567,TA0010
+Devtoolslauncher.exe Executes Specified Binary,T1218,TA0005
+Suspicious Diantz Alternate Data Stream Execution,T1564.004,TA0005
+Suspicious Diantz Download and Compress Into a CAB File,T1105,TA0011
+Suspicious Extrac32 Execution,T1105,TA0011
+Suspicious Extrac32 Alternate Data Stream Execution,T1564.004,TA0005
+Potential Reconnaissance Activity Via GatherNetworkInfo.VBS,T1059.005;T1615,TA0002;TA0007
+Gpscript Execution,T1218,TA0005
+Ie4uinit Lolbin Use From Invalid Path,T1218,TA0005
+Launch-VsDevShell.PS1 Proxy Execution,T1216.001,TA0005
+Potential Manage-bde.wsf Abuse To Proxy Execution,T1216,TA0005
+Mavinject Inject DLL Into Running Process,T1055.001;T1218.013,TA0004;TA0005
+MpiExec Lolbin,T1218,TA0005
+Execute Files with Msdeploy.exe,T1218,TA0005
+Use of OpenConsole,T1059,TA0002
+OpenWith.exe Executes Specified Binary,T1218,TA0005
+Use of Pcalua For Execution,T1059,TA0002
+Indirect Command Execution By Program Compatibility Wizard,T1218,TA0005
+Execute Pcwrun.EXE To Leverage Follina,T1218,TA0005
+Code Execution via Pcwutl.dll,T1218.011,TA0005
+Execute Code with Pester.bat as Parent,T1059.001;T1216,TA0002;TA0005
+Execute Code with Pester.bat,T1059.001;T1216,TA0002;TA0005
+PrintBrm ZIP Creation of Extraction,T1105;T1564.004,TA0005;TA0011
+Pubprn.vbs Proxy Execution,T1216.001,TA0005
+DLL Execution via Rasautou.exe,T1218,TA0005
+REGISTER_APP.VBS Proxy Execution,T1218,TA0005
+Use of Remote.exe,T1127,TA0002;TA0005
+Replace.exe Usage,T1105,TA0011
+Lolbin Runexehelper Use As Proxy,T1218,TA0005
+Suspicious Runscripthelper.exe,T1059;T1202,TA0002;TA0005
+Use of Scriptrunner.exe,T1218,TA0005
+Using SettingSyncHost.exe as LOLBin,T1574.008,TA0002;TA0005
+Use Of The SFTP.EXE Binary As A LOLBIN,T1218,TA0005
+Suspicious Driver Install by pnputil.exe,T1547,TA0003;TA0004
+Suspicious GrpConv Execution,T1547,TA0003;TA0004
+Dumping Process via Sqldumper.exe,T1003.001,TA0006
+SyncAppvPublishingServer Execute Arbitrary PowerShell Code,T1218,TA0005
+SyncAppvPublishingServer VBS Execute Arbitrary PowerShell Code,T1216;T1218,TA0005
+Potential DLL Injection Or Execution Using Tracker.exe,T1055.001,TA0004;TA0005
+Use of TTDInject.exe,T1127,TA0002;TA0005
+Time Travel Debugging Utility Usage,T1003.001;T1218,TA0005;TA0006
+Lolbin Unregmp2.exe Use As Proxy,T1218,TA0005
+UtilityFunctions.ps1 Proxy Dll,T1216,TA0005
+Use of VisualUiaVerifyNative.exe,T1218,TA0005
+Visual Basic Command Line Compiler Usage,T1027.004,TA0005
+Use of VSIISExeLauncher.exe,T1127,TA0002;TA0005
+Use of Wfc.exe,T1127,TA0002;TA0005
+Potential Register_App.Vbs LOLScript Abuse,T1218,TA0005
+Potential Credential Dumping Via LSASS Process Clone,T1003;T1003.001,TA0006
+LSA PPL Protection Setting Modification via CommandLine,T1689,TA0112
+Potential Mftrace.EXE Abuse,T1127,TA0002;TA0005
+Windows Default Domain GPO Modification via GPME,T1484.001,TA0004;TA0112
+MMC20 Lateral Movement,T1021.003,TA0008
+MMC Executing Files with Reversed Extensions Using RTLO Abuse,T1036.002;T1204.002;T1218.014,TA0002;TA0005
+MMC Spawning Windows Shell,T1021.003,TA0008
+CodePage Modification Via MODE.COM To Russian Language,T1036,TA0005
+Potentially Suspicious Mofcomp Execution,T1218,TA0005
+Potential Mpclient.DLL Sideloading Via Defender Binaries,T1574.001,TA0002;TA0005
+File Download Via Windows Defender MpCmpRun.EXE,T1105;T1218,TA0005;TA0011
+Windows Defender Definition Files Removed,T1685,TA0112
+MSDT Execution Via Answer File,T1218,TA0005
+Potential Arbitrary Command Execution Using Msdt.EXE,T1202,TA0005
+Suspicious Cabinet File Execution Via Msdt.EXE,T1202,TA0005
+Suspicious MSDT Parent Process,T1036;T1218,TA0005
+Arbitrary File Download Via MSEDGE_PROXY.EXE,T1218,TA0005
+Remotely Hosted HTA File Executed Via Mshta.EXE,T1218.005,TA0005
+Wscript Shell Run In CommandLine,T1059,TA0002
+Suspicious JavaScript Execution Via Mshta.EXE,T1218.005,TA0005
+Potential LethalHTA Technique Execution,T1218.005,TA0005
+Suspicious MSHTA Child Process,T1218.005,TA0005
+MSHTA Execution with Suspicious File Extensions,T1059.007;T1140;T1218.005,TA0002;TA0005
+Suspicious Mshta.EXE Execution Patterns,T1106,TA0002
+DllUnregisterServer Function Call Via Msiexec.EXE,T1218.007,TA0005
+Suspicious MsiExec Embedding Parent,T1218.007,TA0005
+Suspicious Msiexec Execute Arbitrary DLL,T1218.007,TA0005
+Msiexec Quiet Installation,T1218.007,TA0005
+Suspicious Msiexec Quiet Install From Remote Location,T1218.007,TA0005
+Potential MsiExec Masquerading,T1036.005,TA0005
+MsiExec Web Install,T1105;T1218.007,TA0005;TA0011
+Windows MSIX Package Support Framework AI_STUBS Execution,T1204.002;T1218;T1553.005,TA0002;TA0005;TA0112
+Arbitrary File Download Via MSOHTMED.EXE,T1218,TA0005
+Arbitrary File Download Via MSPUB.EXE,T1218,TA0005
+Potential Process Injection Via Msra.EXE,T1055,TA0004;TA0005
+Detection of PowerShell Execution via Sqlps.exe,T1059.001;T1127,TA0002;TA0005
+SQL Client Tools PowerShell Session Detection,T1059.001;T1127,TA0002;TA0005
+Suspicious Child Process Of SQL Server,T1190;T1505.003,TA0001;TA0003
+Potential MSTSC Shadowing Activity,T1563.002,TA0008
+New Remote Desktop Connection Initiated Via Mstsc.EXE,T1021.001,TA0008
+Mstsc.EXE Execution With Local RDP File,T1219.002,TA0011
+Suspicious Mstsc.EXE Execution With Local RDP File,T1219.002,TA0011
+Msxsl.EXE Execution,T1220,TA0005
+Remote XSL Execution Via Msxsl.EXE,T1220,TA0005
+New Firewall Rule Added Via Netsh.EXE,T1686.003,TA0112
+Suspicious Program Location Whitelisted In Firewall Via Netsh.EXE,T1686.003,TA0112
+RDP Connection Allowed Via Netsh.EXE,T1686.003,TA0112
+Firewall Rule Deleted Via Netsh.EXE,T1686.003,TA0112
+Firewall Disabled via Netsh.EXE,T1686.003,TA0112
+Netsh Allow Group Policy on Microsoft Defender Firewall,T1686.003,TA0112
+Firewall Configuration Discovery Via Netsh.EXE,T1016,TA0007
+Potential Persistence Via Netsh Helper DLL,T1546.007,TA0003;TA0004
+New Network Trace Capture Started Via Netsh.EXE,T1040,TA0006;TA0007
+New Port Forwarding Rule Added Via Netsh.EXE,T1090,TA0011
+RDP Port Forwarding Rule Added Via Netsh.EXE,T1090,TA0011
+Harvesting Of Wifi Credentials Via Netsh.EXE,T1040,TA0006;TA0007
+Suspicious Group And Account Reconnaissance Activity Using Net.EXE,T1087.001;T1087.002,TA0007
+Unmount Share Via Net.EXE,T1070.005,TA0005
+Start Windows Service Via Net.EXE,T1569.002,TA0002
+Stop Windows Service Via Net.EXE,T1489,TA0040
+New User Created Via Net.EXE,T1136.001,TA0003
+New User Created Via Net.EXE With Never Expire Option,T1136.001,TA0003
+Suspicious Manipulation Of Default Accounts Via Net.EXE,T1560.001,TA0009
+Windows Admin Share Mount Via Net.EXE,T1021.002,TA0008
+Windows Internet Hosted WebDav Share Mount Via Net.EXE,T1021.002,TA0008
+Windows Share Mount Via Net.EXE,T1021.002,TA0008
+System Network Connections Discovery Via Net.EXE,T1049,TA0007
+Password Provided In Command Line Of Net.EXE,T1021.002;T1078,TA0001;TA0003;TA0004;TA0005;TA0008
+Share And Session Enumeration Using Net.EXE,T1018,TA0007
+Nltest.EXE Execution,T1016;T1018;T1482,TA0007
+Potential Recon Activity Via Nltest.EXE,T1016;T1482,TA0007
+Potential Arbitrary Code Execution Via Node.EXE,T1127,TA0002;TA0005
+Node Process Executions,T1059.007;T1127,TA0002;TA0005
+New Agent Skills Installation Attempt Via Node.EXE,T1059.007,TA0002
+Notepad Password Files Discovery,T1083,TA0007
+Network Reconnaissance Activity,T1082;T1087,TA0007
+Suspicious Usage Of Active Directory Diagnostic Tool (ntdsutil.exe),T1003.003,TA0006
+Invocation of Active Directory Diagnostic Tool (ntdsutil.exe),T1003.003,TA0006
+Driver/DLL Installation Via Odbcconf.EXE,T1218.008,TA0005
+Suspicious Driver/DLL Installation Via Odbcconf.EXE,T1218.008,TA0005
+Odbcconf.EXE Suspicious DLL Location,T1218.008,TA0005
+New DLL Registered Via Odbcconf.EXE,T1218.008,TA0005
+Potentially Suspicious DLL Registered Via Odbcconf.EXE,T1218.008,TA0005
+Response File Execution Via Odbcconf.EXE,T1218.008,TA0005
+Suspicious Response File Execution Via Odbcconf.EXE,T1218.008,TA0005
+Uncommon Child Process Spawned By Odbcconf.EXE,T1218.008,TA0005
+Potential Arbitrary File Download Using Office Application,T1202,TA0005
+Potential Excel.EXE DCOM Lateral Movement Via ActivateMicrosoftApp,T1021.003,TA0008
+Potentially Suspicious Office Document Executed From Trusted Location,T1202,TA0005
+OneNote.EXE Execution of Malicious Embedded Scripts,T1218.001,TA0005
+Suspicious Microsoft OneNote Child Process,T1566;T1566.001,TA0001
+Outlook EnableUnsafeClientMailRules Setting Enabled,T1059;T1202,TA0002;TA0005
+Suspicious Execution From Outlook Temporary Folder,T1566.001,TA0001
+Suspicious Outlook Child Process,T1204.002,TA0002
+Suspicious Remote Child Process From Outlook,T1059;T1202,TA0002;TA0005
+Suspicious Binary In User Directory Spawned From Office Application,T1204.002,TA0002
+Suspicious Microsoft Office Child Process,T1047;T1204.002;T1218.010,TA0002;TA0005
+Potential Arbitrary DLL Load Using Winword,T1202,TA0005
+Potential Mpclient.DLL Sideloading Via OfflineScannerShell.EXE Execution,T1218,TA0005
+PDQ Deploy Remote Adminstartion Tool Execution,T1072,TA0002;TA0008
+Perl Inline Command Execution,T1059,TA0002
+Php Inline Command Execution,T1059,TA0002
+Ping Hex IP,T1027;T1140,TA0005
+PktMon.EXE Execution,T1040,TA0006;TA0007
+Suspicious Plink Port Forwarding,T1021.001;T1572,TA0008;TA0011
+Potential RDP Tunneling Via Plink,T1572,TA0011
+New User Account Creation Attempt Via ADSI in CommandLine,T1136.001;T1136.002,TA0003
+Potential AMSI Bypass Via .NET Reflection,T1685,TA0112
+Potential AMSI Bypass Using NULL Bits,T1685,TA0112
+PowerShell AppLocker Policy Discovery Via Get-AppLockerPolicy,T1518.001,TA0007
+Audio Capture via PowerShell,T1123,TA0009
+Suspicious Encoded PowerShell Command Line,T1059.001,TA0002
+Suspicious PowerShell Encoded Command Patterns,T1059.001,TA0002
+PowerShell Base64 Encoded FromBase64String Cmdlet,T1059.001;T1140,TA0002;TA0005
+Malicious Base64 Encoded PowerShell Keywords in Command Lines,T1059.001,TA0002
+PowerShell Base64 Encoded IEX Cmdlet,T1059.001,TA0002
+PowerShell Base64 Encoded Invoke Keyword,T1027;T1059.001,TA0002;TA0005
+Powershell Base64 Encoded MpPreference Cmdlet,T1685,TA0112
+PowerShell Base64 Encoded Reflective Assembly Load,T1027;T1059.001;T1620,TA0002;TA0005
+Suspicious Encoded And Obfuscated Reflection Assembly Load Function Call,T1027;T1059.001,TA0002;TA0005
+PowerShell Base64 Encoded WMI Classes,T1027;T1059.001,TA0002;TA0005
+Potential Process Execution Proxy Via CL_Invocation.ps1,T1216,TA0005
+Assembly Loading Via CL_LoadAssembly.ps1,T1216,TA0005
+Potential Script Proxy Execution Via CL_Mutexverifiers.ps1,T1216,TA0005
+ConvertTo-SecureString Cmdlet Usage Via CommandLine,T1027;T1059.001,TA0002;TA0005
+Potential PowerShell Obfuscation Via Reversed Commands,T1027;T1059.001,TA0002;TA0005
+Potential PowerShell Command Line Obfuscation,T1027;T1059.001,TA0002;TA0005
+Obfuscated PowerShell MSI Install via WindowsInstaller COM,T1027.010;T1059.001;T1218.007,TA0002;TA0005
+PowerShell MSI Install via WindowsInstaller COM From Remote Location,T1059.001;T1105;T1218,TA0002;TA0005;TA0011
+Computer Discovery And Export Via Get-ADComputer Cmdlet,T1033,TA0007
+Potential PowerShell Console History Access Attempt via History File,T1552.001,TA0006
+New Service Creation Using PowerShell,T1543.003,TA0003;TA0004
+Gzip Archive Decode Via PowerShell,T1132.001,TA0011
+Powershell Defender Disable Scan Feature,T1685,TA0112
+Powershell Defender Exclusion,T1685,TA0112
+Disable Windows Defender AV Security Monitoring,T1685,TA0112
+Windows Firewall Disabled via PowerShell,T1685,TA0112
+Disabled IE Security Features,T1685,TA0112
+Potential PowerShell Downgrade Attack,T1059.001,TA0002
+Potential COM Objects Download Cradles Usage - Process Creation,T1105,TA0011
+Obfuscated PowerShell OneLiner Execution,T1059.001;T1685,TA0002;TA0112
+Potential DLL File Download Via PowerShell Invoke-WebRequest,T1059.001;T1105,TA0002;TA0011
+PowerShell Download and Execution Cradles,T1059,TA0002
+PowerShell Download Pattern,T1059.001,TA0002
+DSInternals Suspicious PowerShell Cmdlets,T1059.001,TA0002
+Suspicious Execution of Powershell with Base64,T1059.001,TA0002
+Potential Encoded PowerShell Patterns In CommandLine,T1027;T1059.001,TA0002;TA0005
+Powershell Inline Execution From A File,T1059.001,TA0002
+Certificate Exported Via PowerShell,T1059.001;T1552.004,TA0002;TA0006
+Base64 Encoded PowerShell Command Detected,T1027;T1059.001;T1140,TA0002;TA0005
+Suspicious FromBase64String Usage On Gzip Archive - Process Creation,T1132.001,TA0011
+PowerShell Get-Process LSASS,T1552.004,TA0006
+PowerShell Get-Clipboard Cmdlet Via CLI,T1115,TA0009
+Suspicious Reconnaissance Activity Using Get-LocalGroupMember Cmdlet,T1087.001,TA0007
+Abuse of Service Permissions to Hide Services Via Set-Service,T1574.011,TA0002;TA0005
+Suspicious PowerShell IEX Execution Patterns,T1059.001,TA0002
+Root Certificate Installed From Susp Locations,T1553.004,TA0112
+Import PowerShell Modules From Suspicious Directories - ProcCreation,T1059.001,TA0002
+Suspicious Invoke-WebRequest Execution With DirectIP,T1105,TA0011
+Suspicious Invoke-WebRequest Execution,T1105,TA0011
+Suspicious Kerberos Ticket Request via CLI,T1558.003,TA0006
+Malicious PowerShell Commandlets - ProcessCreation,T1059.001;T1069;T1069.001;T1069.002;T1087;T1087.001;T1087.002;T1482,TA0002;TA0007
+MSExchange Transport Agent Installation,T1505.002,TA0003
+Non Interactive PowerShell Process Spawned,T1059.001,TA0002
+Potential PowerShell Obfuscation Via WCHAR/CHAR,T1027;T1059.001,TA0002;TA0005
+Execution of Powershell Script in Public Folder,T1059.001,TA0002
+RemoteFXvGPUDisablement Abuse Via AtomicTestHarnesses,T1218,TA0005
+Tamper Windows Defender Remove-MpPreference,T1685,TA0112
+Potential Powershell ReverseShell Connection,T1059.001,TA0002
+Run PowerShell Script from ADS,T1564.004,TA0005
+Run PowerShell Script from Redirected Input Stream,T1059,TA0002
+PowerShell SAM Copy,T1003.002,TA0006
+Suspicious PowerShell Invocation From Script Engines,T1059.001,TA0002
+Potentially Suspicious Powershell Script Execution From Temp Folder,T1059.001,TA0002
+Suspicious Service DACL Modification Via Set-Service Cmdlet,T1543.003,TA0003;TA0004
+Change PowerShell Policies to an Insecure Level,T1059.001,TA0002
+Service StartupType Change Via PowerShell Set-Service,T1685,TA0112
+Deletion of Volume Shadow Copies via WMI with PowerShell,T1490,TA0040
+Exchange PowerShell Snap-Ins Usage,T1059.001;T1114,TA0002;TA0009
+Stop Windows Service Via PowerShell Stop-Service,T1489,TA0040
+Suspicious PowerShell Download and Execute Pattern,T1059.001,TA0002
+Suspicious PowerShell Parameter Substring,T1059.001,TA0002
+Suspicious PowerShell Parent Process,T1059.001,TA0002
+PowerShell Script Run in AppData,T1059.001,TA0002
+Powershell Token Obfuscation - Process Creation,T1027.009,TA0005
+Suspicious Uninstall of Windows Defender Feature via PowerShell,T1685,TA0112
+User Discovery And Export Via Get-ADUser Cmdlet,T1033,TA0007
+Net WebClient Casing Anomalies,T1059.001,TA0002
+Suspicious X509Enrollment - Process Creation,T1553.004,TA0112
+Suspicious XOR Encoded PowerShell Command,T1027;T1059.001;T1140,TA0002;TA0005
+Folder Compress To Potentially Suspicious Output Via Compress-Archive Cmdlet,T1074.001,TA0009
+Arbitrary File Download Via PresentationHost.EXE,T1218,TA0005
+XBAP Execution From Uncommon Locations Via PresentationHost.EXE,T1218,TA0005
+Visual Studio NodejsTools PressAnyKey Arbitrary Binary Execution,T1218,TA0005
+Sensitive File Dump Via Print.EXE,T1003.002;T1003.003;T1218,TA0005;TA0006
+Abusing Print Executable,T1218,TA0005
+File Download Using ProtocolHandler.exe,T1218,TA0005
+Potential Provlaunch.EXE Binary Proxy Execution Abuse,T1218,TA0005
+Suspicious Provlaunch.EXE Child Process,T1218,TA0005
+Screen Capture Activity Via Psr.EXE,T1113,TA0009
+PUA - 3Proxy Execution,T1572,TA0011
+PUA - Suspicious ActiveDirectory Enumeration Via AdFind.EXE,T1087.002,TA0007
+PUA - AdFind.EXE Execution,T1087.002,TA0007
+PUA - AdFind Suspicious Execution,T1018;T1069.002;T1087.002;T1482,TA0007
+PUA - AdvancedRun Execution,T1059.003;T1134.002;T1564.003,TA0002;TA0004;TA0005
+PUA - AdvancedRun Suspicious Execution,T1134.002,TA0004;TA0005
+PUA - Advanced IP Scanner Execution,T1046;T1135,TA0007
+PUA - Advanced Port Scanner Execution,T1046;T1135,TA0007
+PUA - Chisel Tunneling Tool Execution,T1090.001,TA0011
+PUA - CleanWipe Execution,T1685,TA0112
+PUA - Crassus Execution,T1590.001,TA0043
+PUA - CsExec Execution,T1569.002;T1587.001,TA0002;TA0042
+PUA - DefenderCheck Execution,T1027.005,TA0005
+PUA - DIT Snapshot Viewer,T1003.003,TA0006
+PUA - Fast Reverse Proxy (FRP) Execution,T1090,TA0011
+PUA- IOX Tunneling Tool Execution,T1090,TA0011
+PUA - Kernel Driver Utility (KDU) Execution,T1543.003,TA0003;TA0004
+PUA - Memory Dump Mount Via MemProcFS,T1003;T1003.001;T1003.002;T1003.004,TA0006
+PUA - Mouse Lock Execution,T1056.002,TA0006;TA0009
+PUA - Netcat Suspicious Execution,T1095,TA0011
+PUA - SoftPerfect Netscan Execution,T1046,TA0007
+PUA - Ngrok Execution,T1572,TA0011
+PUA - Nimgrab Execution,T1105,TA0011
+PUA - NimScan Execution,T1046,TA0007
+PUA - NirCmd Execution,T1569.002,TA0002
+PUA - NirCmd Execution As LOCAL SYSTEM,T1569.002,TA0002
+PUA - Nmap/Zenmap Execution,T1046,TA0007
+PUA - NPS Tunneling Tool Execution,T1090,TA0011
+PUA - NSudo Execution,T1569.002,TA0002
+PUA - PingCastle Execution,T1595,TA0043
+PUA - PingCastle Execution From Potentially Suspicious Parent,T1595,TA0043
+PUA - Process Hacker Execution,T1543;T1564;T1622,TA0003;TA0004;TA0005;TA0007
+PUA - Radmin Viewer Utility Execution,T1072,TA0002;TA0008
+PUA - Potential PE Metadata Tamper Using Rcedit,T1027;T1027.005;T1036;T1036.003,TA0005
+PUA - Rclone Execution,T1567.002,TA0010
+PUA - Restic Backup Tool Execution,T1048;T1567.002,TA0010
+PUA - RunXCmd Execution,T1569.002,TA0002
+PUA - Seatbelt Execution,T1083;T1087;T1526,TA0007
+PUA - System Informer Execution,T1082;T1543;T1564,TA0003;TA0004;TA0005;TA0007
+PUA - TruffleHog Execution,T1083;T1552.001,TA0006;TA0007
+PUA - WebBrowserPassView Execution,T1555.003,TA0006
+PUA - Wsudo Suspicious Execution,T1059,TA0002
+PUA - Adidnsdump Execution,T1018,TA0007
+Python One-Liners with Base64 Decoding,T1027.010;T1059.006,TA0002;TA0005
+Python Inline Command Execution,T1059,TA0002
+Python Spawning Pretty TTY on Windows,T1059,TA0002
+Potentially Suspicious Usage Of Qemu,T1090;T1572,TA0011
+QuickAssist Execution,T1219.002,TA0011
+Rar Usage with Password and Compression Level,T1560.001,TA0009
+Files Added To An Archive Using Rar.EXE,T1560.001,TA0009
+Suspicious Greedy Compression Using Rar.EXE,T1059,TA0002
+Suspicious RASdial Activity,T1059,TA0002
+RDP Enable or Disable via Win32_TerminalServiceSetting WMI Class,T1021.001;T1047,TA0002;TA0008
+Process Memory Dump via RdrLeakDiag.EXE,T1003.001,TA0006
+Windows Recovery Environment Disabled Via Reagentc,T1490,TA0040
+RegAsm.EXE Execution Without CommandLine Flags or Files,T1218.009,TA0005
+Potentially Suspicious Execution Of Regasm/Regsvcs With Uncommon Extension,T1218.009,TA0005
+Potentially Suspicious Execution Of Regasm/Regsvcs From Uncommon Location,T1218.009,TA0005
+Exports Critical Registry Keys To a File,T1012,TA0007
+Exports Registry Key To a File,T1012,TA0007
+Imports Registry Key From a File,T1112,TA0003;TA0112
+Imports Registry Key From an ADS,T1112,TA0003;TA0112
+Regedit as Trusted Installer,T1548,TA0004
+Suspicious Registry Modification From ADS Via Regini.EXE,T1112,TA0003;TA0112
+Registry Modification Via Regini.EXE,T1112,TA0003;TA0112
+DLL Execution Via Register-cimprovider.exe,T1574,TA0002;TA0005
+Enumeration for 3rd Party Creds From CLI,T1552.002,TA0006
+Registry Export of Third-Party Credentials,T1552.002,TA0006
+Suspicious Debugger Registration Cmdline,T1546.008,TA0003;TA0004
+Potential Persistence Via Logon Scripts - CommandLine,T1037.001,TA0003;TA0004
+Potential Credential Dumping Attempt Using New NetworkProvider - CLI,T1003,TA0006
+Python Function Execution Security Warning Disabled In Excel,T1685,TA0112
+Potential Privilege Escalation via Service Permissions Weakness,T1574.011,TA0002;TA0005
+Potential Provisioning Registry Key Abuse For Binary Proxy Execution,T1218,TA0005
+Hiding User Account Via SpecialAccounts Registry Key - CommandLine,T1564.002,TA0005
+Potential Regsvr32 Commandline Flag Anomaly,T1218.010,TA0005
+Potentially Suspicious Regsvr32 HTTP IP Pattern,T1218.010,TA0005
+Potentially Suspicious Regsvr32 HTTP/FTP Pattern,T1218.010,TA0005
+Suspicious Regsvr32 Execution From Remote Share,T1218.010,TA0005
+Potentially Suspicious Child Process Of Regsvr32,T1218.010,TA0005
+Regsvr32 Execution From Potential Suspicious Location,T1218.010,TA0005
+Regsvr32 Execution From Highly Suspicious Location,T1218.010,TA0005
+Regsvr32 DLL Execution With Suspicious File Extension,T1218.010,TA0005
+Scripting/CommandLine Process Spawned Regsvr32,T1218.010,TA0005
+Regsvr32 DLL Execution With Uncommon Extension,T1574,TA0002;TA0005
+Potential Persistence Attempt Via Run Keys Using Reg.EXE,T1547.001,TA0003;TA0004
+Add SafeBoot Keys Via Reg Utility,T1685,TA0112
+Suspicious Reg Add BitLocker,T1486,TA0040
+Dropping Of Password Filter DLL,T1556.002,TA0003;TA0006;TA0112
+Suspicious Windows Defender Folder Exclusion Added Via Reg.EXE,T1685,TA0112
+RunMRU Registry Key Deletion,T1070.003,TA0005
+SafeBoot Registry Key Deleted Via Reg.EXE,T1685,TA0112
+Service Registry Key Deleted Via Reg.EXE,T1685,TA0112
+Potentially Suspicious Desktop Background Change Using Reg.EXE,T1112;T1491.001,TA0003;TA0040;TA0112
+Direct Autorun Keys Modification,T1547.001,TA0003;TA0004
+Disabling Windows Defender WMI Autologger Session via Reg.exe,T1685,TA0112
+Security Service Disabled Via Reg.EXE,T1685,TA0112
+Dumping of Sensitive Hives Via Reg.EXE,T1003.002;T1003.004;T1003.005,TA0006
+Windows Recall Feature Enabled Via Reg.EXE,T1113,TA0009
+Enumeration for Credentials in Registry,T1552.002,TA0006
+Potential Suspicious Registry File Imported Via Reg.EXE,T1112,TA0003;TA0112
+RestrictedAdminMode Registry Value Tampering - ProcCreation,T1112,TA0003;TA0112
+Suspicious Query of MachineGUID,T1082,TA0007
+Modify Group Policy Settings,T1484.001,TA0004;TA0112
+Enable LM Hash Storage - ProcCreation,T1112,TA0003;TA0112
+Potential Configuration And Service Reconnaissance Via Reg.EXE,T1007;T1012,TA0007
+Potential Tampering With RDP Related Registry Keys Via Reg.EXE,T1021.001;T1112,TA0003;TA0008;TA0112
+Suspicious ScreenSave Change by Reg.exe,T1546.002,TA0003;TA0004
+Changing Existing Service ImagePath Value Via Reg.EXE,T1574.011,TA0002;TA0005
+Detected Windows Software Discovery,T1518,TA0007
+Reg Add Suspicious Paths,T1112;T1685,TA0003;TA0112
+System Language Discovery via Reg.Exe,T1614.001,TA0007
+System Restore Registry Modification via CommandLine,T1490,TA0040
+Disabled Volume Snapshots,T1685,TA0112
+Suspicious Windows Defender Registry Key Tampering Via Reg.EXE,T1685,TA0112
+Write Protect For Storage Disabled,T1685,TA0112
+Remote Access Tool - AnyDesk Execution,T1219.002,TA0011
+Remote Access Tool - AnyDesk Piped Password Via CLI,T1219.002,TA0011
+Remote Access Tool - AnyDesk Silent Installation,T1219.002,TA0011
+Remote Access Tool - Anydesk Execution From Suspicious Folder,T1219.002,TA0011
+Remote Access Tool - GoToAssist Execution,T1219.002,TA0011
+Remote Access Tool - LogMeIn Execution,T1219.002,TA0011
+Remote Access Tool - Potential MeshAgent Execution - Windows,T1219.002,TA0011
+Remote Access Tool - MeshAgent Command Execution via MeshCentral,T1219.002,TA0011
+Remote Access Tool - NetSupport Execution,T1219.002,TA0011
+Remote Access Tool - Renamed MeshAgent Execution - Windows,T1036.003;T1219.002,TA0005;TA0011
+Remote Access Tool - ScreenConnect Execution,T1219.002,TA0011
+Remote Access Tool - ScreenConnect Installation Execution,T1133,TA0001;TA0003
+Remote Access Tool - ScreenConnect Remote Command Execution,T1059.003,TA0002
+Remote Access Tool - ScreenConnect Potential Suspicious Remote Command Execution,T1219.002,TA0011
+Remote Access Tool - ScreenConnect Server Web Shell Execution,T1190,TA0001
+Remote Access Tool - Simple Help Execution,T1219.002,TA0011
+Remote Access Tool - TacticalRMM Agent Registration to Potentially Attacker-Controlled Server,T1105;T1219,TA0011
+Remote Access Tool - Team Viewer Session Started On Windows Host,T1133,TA0001;TA0003
+Remote Access Tool - UltraViewer Execution,T1219.002,TA0011
+Discovery of a System Time,T1124,TA0007
+Renamed AdFind Execution,T1018;T1069.002;T1087.002;T1482,TA0007
+Renamed AutoIt Execution,T1027,TA0005
+Potential Defense Evasion Via Binary Rename,T1036.003,TA0005
+Potential Defense Evasion Via Rename Of Highly Relevant Binaries,T1036.003,TA0005
+Renamed BOINC Client Execution,T1553,TA0112
+Renamed BrowserCore.EXE Execution,T1036.003;T1528,TA0005;TA0006
+Renamed Cloudflared.EXE Execution,T1090.001,TA0011
+Renamed CreateDump Utility Execution,T1003.001;T1036,TA0005;TA0006
+Renamed CURL.EXE Execution,T1059;T1202,TA0002;TA0005
+Renamed ZOHO Dctask64 Execution,T1036;T1055.001;T1202;T1218,TA0004;TA0005
+Renamed FTP.EXE Execution,T1059;T1202,TA0002;TA0005
+Renamed Gpg.EXE Execution,T1486,TA0040
+Renamed Jusched.EXE Execution,T1036.003,TA0005
+Renamed Mavinject.EXE Execution,T1055.001;T1218.013,TA0004;TA0005
+Renamed MegaSync Execution,T1218,TA0005
+Renamed Msdt.EXE Execution,T1036.003,TA0005
+Renamed NirCmd.EXE Execution,T1059;T1202,TA0002;TA0005
+Renamed Office Binary Execution,T1036.003,TA0005
+Renamed PAExec Execution,T1202,TA0005
+Renamed PingCastle Binary Execution,T1059;T1202,TA0002;TA0005
+Renamed Plink Execution,T1036,TA0005
+Visual Studio NodejsTools PressAnyKey Renamed Execution,T1218,TA0005
+Renamed Schtasks Execution,T1036.003;T1053.005,TA0002;TA0003;TA0004;TA0005
+Renamed SysInternals DebugView Execution,T1588.002,TA0042
+Renamed ProcDump Execution,T1036.003,TA0005
+Renamed Sysinternals Sdelete Execution,T1485,TA0040
+Renamed Vmnat.exe Execution,T1574.001,TA0002;TA0005
+Renamed Whoami Execution,T1033,TA0007
+Capture Credentials with Rpcping.exe,T1003,TA0006
+Ruby Inline Command Execution,T1059,TA0002
+Potential Rundll32 Execution With DLL Stored In ADS,T1564.004,TA0005
+Suspicious Rundll32 Invoking Inline VBScript,T1055,TA0004;TA0005
+Rundll32 InstallScreenSaver Execution,T1218.011,TA0005
+Suspicious Key Manager Access,T1555.004,TA0006
+Rundll32 Execution Without CommandLine Parameters,T1202,TA0005
+Suspicious NTLM Authentication on the Printer Spooler Service,T1212,TA0006
+Potential Obfuscated Ordinal Call Via Rundll32,T1027.010,TA0005
+Process Memory Dump Via Comsvcs.DLL,T1003.001;T1036,TA0005;TA0006
+Rundll32 Registered COM Objects,T1546.015,TA0003;TA0004
+Suspicious Process Start Locations,T1036,TA0005
+Suspicious Rundll32 Setupapi.dll Activity,T1218.011,TA0005
+Shell32 DLL Execution in Suspicious Directory,T1218.011,TA0005
+RunDLL32 Spawning Explorer,T1218.011,TA0005
+Potentially Suspicious Rundll32 Activity,T1218.011,TA0005
+Suspicious Control Panel DLL Load,T1218.011,TA0005
+Suspicious Rundll32 Execution With Image Extension,T1218.011,TA0005
+Suspicious ShellExec_RunDLL Call Via Ordinal,T1218.011,TA0005
+ShimCache Flush,T1112,TA0003;TA0112
+Suspicious Rundll32 Activity Invoking Sys File,T1218.011,TA0005
+Potentially Suspicious Rundll32.EXE Execution of UDL File,T1071;T1218.011,TA0005;TA0011
+Rundll32 Execution With Uncommon DLL Extension,T1218.011,TA0005
+Rundll32 UNC Path Execution,T1021.002;T1218.011,TA0005;TA0008
+WebDav Client Execution Via Rundll32.EXE,T1048.003,TA0010
+Suspicious WebDav Client Execution Via Rundll32.EXE,T1048.003,TA0010
+Rundll32 Execution Without Parameters,T1021.002;T1569.002;T1570,TA0002;TA0008
+Run Once Task Execution as Configured in Registry,T1112,TA0003;TA0112
+Suspicious Schtasks Execution AppData Folder,T1053.005;T1059.001,TA0002;TA0003;TA0004
+Suspicious Modification Of Scheduled Tasks,T1053.005,TA0002;TA0003;TA0004
+Scheduled Task Creation Via Schtasks.EXE,T1053.005,TA0002;TA0003;TA0004
+Suspicious Scheduled Task Creation Involving Temp Folder,T1053.005,TA0002;TA0003;TA0004
+Scheduled Task Creation with Curl and PowerShell Execution Combo,T1053.005;T1105;T1218,TA0002;TA0003;TA0004;TA0005;TA0011
+Delete Important Scheduled Task,T1489,TA0040
+Delete All Scheduled Tasks,T1489,TA0040
+Disable Important Scheduled Task,T1489,TA0040
+Schedule Task Creation From Env Variable Or Potentially Suspicious Path Via Schtasks.EXE,T1053.005,TA0002;TA0003;TA0004
+Schtasks From Suspicious Folders,T1053.005,TA0002;TA0003;TA0004
+Suspicious Scheduled Task Name As GUID,T1053.005,TA0002;TA0003;TA0004
+Uncommon One Time Only Scheduled Task At 00:00,T1053.005,TA0002;TA0003;TA0004
+Potential SSH Tunnel Persistence Install Using A Scheduled Task,T1053.005,TA0002;TA0003;TA0004
+Potential Persistence Via Microsoft Compatibility Appraiser,T1053.005,TA0002;TA0003;TA0004
+Potential Persistence Via Powershell Search Order Hijacking - Task,T1053.005;T1059.001,TA0002;TA0003;TA0004
+Scheduled Task Executing Payload from Registry,T1053.005;T1059.001,TA0002;TA0003;TA0004
+Scheduled Task Executing Encoded Payload from Registry,T1053.005;T1059.001,TA0002;TA0003;TA0004
+Suspicious Schtasks Schedule Types,T1053.005,TA0002;TA0003;TA0004
+Suspicious Schtasks Schedule Type With High Privileges,T1053.005,TA0002;TA0003;TA0004
+Suspicious Scheduled Task Creation via Masqueraded XML File,T1036.005;T1053.005,TA0002;TA0003;TA0004;TA0005
+Suspicious Command Patterns In Scheduled Task Creation,T1053.005,TA0002;TA0003;TA0004
+Schtasks Creation Or Modification With SYSTEM Privileges,T1053.005,TA0002;TA0003;TA0004
+Scheduled Task Creation Masquerading as System Processes,T1036.004;T1036.005;T1053.005,TA0002;TA0003;TA0004;TA0005
+Script Event Consumer Spawning Process,T1047,TA0002
+Possible Privilege Escalation via Weak Service Permissions,T1574.011,TA0002;TA0005
+New Service Creation Using Sc.EXE,T1543.003,TA0003;TA0004
+Service StartupType Change Via Sc.EXE,T1685,TA0112
+New Kernel Driver Via SC.EXE,T1543.003,TA0003;TA0004
+Interesting Service Enumeration Via Sc.EXE,T1003,TA0006
+Allow Service Access Using Security Descriptor Tampering Via Sc.EXE,T1543.003,TA0003;TA0004
+Deny Service Access Using Security Descriptor Tampering Via Sc.EXE,T1543.003,TA0003;TA0004
+Service DACL Abuse To Hide Services Via Sc.EXE,T1574.011,TA0002;TA0005
+Service Security Descriptor Tampering Via Sc.EXE,T1574.011,TA0002;TA0005
+Suspicious Service Path Modification,T1543.003,TA0003;TA0004
+Potential Persistence Attempt Via Existing Service Tampering,T1543.003;T1574.011,TA0002;TA0003;TA0004;TA0005
+Stop Windows Service Via Sc.EXE,T1489,TA0040
+Potential Shim Database Persistence via Sdbinst.EXE,T1546.011,TA0003;TA0004
+Uncommon Extension Shim Database Installation Via Sdbinst.EXE,T1546.011,TA0003;TA0004
+Sdclt Child Processes,T1548.002,TA0004
+Sdiagnhost Calling Suspicious Child Process,T1036;T1218,TA0005
+Potential Suspicious Activity Using SeCEdit,T1082;T1505.005;T1546.007;T1546.008;T1547.001;T1547.002;T1547.010;T1547.014;T1556.002;T1557;T1564.002;T1574.007;T1685;T1685.001,TA0002;TA0003;TA0004;TA0005;TA0006;TA0007;TA0009;TA0112
+NodeJS Execution of JavaScript File,T1059.007,TA0002
+Suspicious Serv-U Process Pattern,T1555,TA0006
+Uncommon Child Process Of Setres.EXE,T1202;T1218,TA0005
+Potential SPN Enumeration Via Setspn.EXE,T1558.003,TA0006
+Setup16.EXE Execution With Custom .Lst File,T1574.005,TA0002;TA0005
+Indirect Command Execution via SFTP ProxyCommand,T1202,TA0005
+Suspicious Execution of Shutdown,T1529,TA0040
+Suspicious Execution of Shutdown to Log Out,T1529,TA0040
+Uncommon Sigverif.EXE Child Process,T1216,TA0005
+Audio Capture via SoundRecorder,T1123,TA0009
+Suspicious Speech Runtime Binary Child Process,T1021.003;T1218,TA0005;TA0008
+Suspicious Splwow64 Without Params,T1202,TA0005
+Suspicious Spool Service Child Process,T1068;T1203,TA0002;TA0004
+Veeam Backup Database Suspicious Query,T1005,TA0009
+VeeamBackup Database Credentials Dump Via Sqlcmd.EXE,T1005,TA0009
+SQLite Chromium Profile Data DB Access,T1005;T1539;T1555.003,TA0006;TA0009
+SQLite Firefox Profile Data DB Access,T1005;T1539,TA0006;TA0009
+Arbitrary File Download Via Squirrel.EXE,T1218,TA0005
+Process Proxy Execution Via Squirrel.EXE,T1218,TA0005
+Port Forwarding Activity Via SSH.EXE,T1021.001;T1021.004;T1572,TA0008;TA0011
+Program Executed Using Proxy/Local Command Via SSH.EXE,T1218,TA0005
+Potential RDP Tunneling Via SSH,T1572,TA0011
+Potential Amazon SSM Agent Hijacking,T1219.002,TA0011
+Execution via stordiag.exe,T1218,TA0005
+Abused Debug Privilege by Arbitrary Parent Processes,T1548,TA0004
+User Added to Local Administrators Group,T1098,TA0003;TA0004
+User Added To Highly Privileged Group,T1098,TA0003;TA0004
+User Added to Remote Desktop Users Group,T1021.001;T1133;T1136.001,TA0001;TA0003;TA0008
+Execute From Alternate Data Streams,T1564.004,TA0005
+Always Install Elevated Windows Installer,T1548.002,TA0004
+Arbitrary Shell Command Execution Via Settingcontent-Ms,T1204;T1566.001,TA0001;TA0002
+Phishing Pattern ISO in Archive,T1566,TA0001
+Automated Collection Command Prompt,T1119;T1552.001,TA0006;TA0009
+Bad Opsec Defaults Sacrificial Processes With Improper Arguments,T1218.011,TA0005
+Potential Suspicious Browser Launch From Document Reader Process,T1204.002,TA0002
+Suspicious Child Process Created as System,T1134.002,TA0004;TA0005
+Suspicious ClickFix/FileFix Execution Pattern,T1204.001;T1204.004,TA0002
+Suspicious Explorer Process with Whitespace Padding - ClickFix/FileFix,T1027.010;T1204.004,TA0002;TA0005
+Potential Commandline Obfuscation Using Escape Characters,T1140,TA0005
+Potential CommandLine Obfuscation Using Unicode Characters From Suspicious Image,T1027,TA0005
+Suspicious Usage of For Loop with Recursive Directory Search in CMD,T1027.010;T1059.003,TA0002;TA0005
+Potential Command Line Path Traversal Evasion Attempt,T1036,TA0005
+Potential Browser Data Stealing,T1555.003,TA0006
+Copy From Or To Admin Share Or Sysvol Folder,T1021.002;T1039;T1048,TA0008;TA0009;TA0010
+Suspicious Copy From or To System Directory,T1036.003,TA0005
+LOL-Binary Copied From System Directory,T1036.003,TA0005
+Suspicious Cross-User Process Spawn,T1055;T1134,TA0004;TA0005
+Potential Crypto Mining Activity,T1496,TA0040
+Potential Data Exfiltration Activity Via CommandLine Tools,T1059.001,TA0002
+Raccine Uninstall,T1685,TA0112
+Suspicious Double Extension File Execution,T1566.001,TA0001
+Suspicious Parent Double Extension File Execution,T1036.007,TA0005
+Suspicious Download from Office Domain,T1105;T1608,TA0011;TA0042
+Always Install Elevated MSI Spawned Cmd And Powershell,T1548.002,TA0004
+Elevated System Shell Spawned From Uncommon Parent Location,T1059,TA0002
+Hidden Powershell in Link File Pattern,T1059.001,TA0002
+ETW Logging Tamper In .NET Processes Via CommandLine,T1685,TA0112
+ETW Trace Evasion Activity,T1070;T1685,TA0005;TA0112
+Suspicious Eventlog Clearing or Configuration Change Activity,T1685.001;T1685.005,TA0112
+Potentially Suspicious EventLog Recon Activity Using Log Query Utilities,T1087;T1552,TA0006;TA0007
+Potentially Suspicious Execution From Parent Process In Public Folder,T1059;T1564,TA0002;TA0005
+Process Execution From A Potentially Suspicious Folder,T1036,TA0005
+Suspicious FileFix Execution Pattern,T1204.004,TA0002
+Suspicious File Characteristics Due to Missing Fields,T1059.006,TA0002
+Suspicious Reconnaissance Activity Via GatherNetworkInfo.VBS,T1059.005;T1615,TA0002;TA0007
+Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream - CLI,T1564.004,TA0005
+Writing Of Malicious Files To The Fonts Folder,T1059;T1211,TA0002;TA0005
+Potential Homoglyph Attack Using Lookalike Characters,T1036;T1036.003,TA0005
+Execution Of Non-Existing File,T1055,TA0004;TA0005
+Potentially Suspicious Inline JavaScript Execution via NodeJS Binary,T1059.007,TA0002
+Potential WinAPI Calls Via CommandLine,T1106,TA0002
+Potentially Suspicious JWT Token Search Via CLI,T1528;T1552.001,TA0006
+Suspicious LNK Command-Line Padding with Whitespace Characters,T1204.002,TA0002
+Local Accounts Discovery,T1033;T1087.001,TA0007
+LSASS Dump Keyword In CommandLine,T1003.001,TA0006
+Potential File Download Via MS-AppInstaller Protocol Handler,T1218,TA0005
+Suspicious Network Command,T1016,TA0007
+Suspicious Scan Loop Network,T1018;T1059,TA0002;TA0007
+Potential Network Sniffing Activity Using Network Tools,T1040,TA0006;TA0007
+Non-privileged Usage of Reg or Powershell,T1112,TA0003;TA0112
+Suspicious Process Patterns NTDS.DIT Exfil,T1003.003,TA0006
+Use Short Name Path in Image,T1564.004,TA0005
+Use NTFS Short Name in Command Line,T1564.004,TA0005
+Use NTFS Short Name in Image,T1564.004,TA0005
+Suspicious Process Parents,T1036,TA0005
+Potential PowerShell Execution Via DLL,T1218.011,TA0005
+Private Keys Reconnaissance Via CommandLine Tools,T1552.004,TA0006
+Privilege Escalation via Named Pipe Impersonation,T1021,TA0008
+Windows Processes Suspicious Parent Directory,T1036.003;T1036.005,TA0005
+Suspicious Program Names,T1059,TA0002
+Recon Information for Export with Command Prompt,T1119,TA0009
+Suspicious Redirection to Local Admin Share,T1048,TA0010
+Registry Modification of MS-settings Protocol Handler,T1112;T1546.001;T1548.002,TA0003;TA0004;TA0112
+Potential Remote Desktop Tunneling,T1021,TA0008
+Potential Defense Evasion Via Right-to-Left Override,T1036.002,TA0005
+Script Interpreter Execution From Suspicious Folder,T1059,TA0002
+Script Interpreter Spawning Credential Scanner - Windows,T1005;T1059.007;T1552,TA0002;TA0006;TA0009
+Sensitive File Access Via Volume Shadow Copy Backup,T1490,TA0040
+Suspicious New Service Creation,T1543.003,TA0003;TA0004
+Suspicious Service Binary Directory,T1202,TA0005
+Suspicious Windows Service Tampering,T1489;T1685,TA0040;TA0112
+Shadow Copies Creation Using Operating Systems Utilities,T1003;T1003.002;T1003.003,TA0006
+Shadow Copies Deletion Using Operating Systems Utilities,T1070;T1490,TA0005;TA0040
+Windows Shell/Scripting Processes Spawning Suspicious Programs,T1059.001;T1059.005;T1218,TA0002;TA0005
+Process Creation Using Sysnative Folder,T1055,TA0004;TA0005
+System File Execution Location Anomaly,T1036,TA0005
+Suspicious SYSTEM User Process Creation,T1003;T1027;T1134,TA0004;TA0005;TA0006
+Suspicious SYSVOL Domain Group Policy Access,T1552.006,TA0006
+Tasks Folder Evasion,T1574.001,TA0002;TA0005
+Suspicious Userinit Child Process,T1055,TA0004;TA0005
+Malicious Windows Script Components File Execution by TAEF Detection,T1218,TA0005
+Malicious PE Execution by Microsoft Visual Studio Debugger,T1218,TA0005
+Suspicious Velociraptor Child Process,T1219,TA0011
+Usage Of Web Request Commands And Cmdlets,T1059.001,TA0002
+WhoAmI as Parameter,T1033,TA0007
+Execution via WorkFolders.exe,T1218,TA0005
+Suspect Svchost Activity,T1055,TA0004;TA0005
+Suspicious Process Masquerading As SvcHost.EXE,T1036.005,TA0005
+Terminal Service Process Spawn,T1190;T1210,TA0001;TA0008
+Uncommon Svchost Command Line Parameter,T1036.005;T1055;T1055.012,TA0004;TA0005
+Uncommon Svchost Parent Process,T1036.005,TA0005
+Permission Check Via Accesschk.EXE,T1069.001,TA0007
+Active Directory Database Snapshot Via ADExplorer,T1069.002;T1087.002;T1482,TA0007
+Suspicious Active Directory Database Snapshot Via ADExplorer,T1069.002;T1087.002;T1482,TA0007
+Potential Execution of Sysinternals Tools,T1588.002,TA0042
+Procdump Execution,T1003.001;T1036,TA0005;TA0006
+Potential SysInternals ProcDump Evasion,T1003.001;T1036,TA0005;TA0006
+Potential LSASS Process Dump Via Procdump,T1003.001;T1036,TA0005;TA0006
+Psexec Execution,T1021;T1569,TA0002;TA0008
+PsExec/PAExec Escalation to LOCAL SYSTEM,T1587.001,TA0042
+Potential PsExec Remote Execution,T1587.001,TA0042
+Suspicious Use of PsLogList,T1087;T1087.001;T1087.002,TA0007
+Sysinternals PsService Execution,T1543.003,TA0003;TA0004
+Sysinternals PsSuspend Execution,T1543.003,TA0003;TA0004
+Sysinternals PsSuspend Suspicious Execution,T1685,TA0112
+Potential File Overwrite Via Sysinternals SDelete,T1485,TA0040
+Potential Privilege Escalation To LOCAL SYSTEM,T1587.001,TA0042
+Sysmon Configuration Update,T1685,TA0112
+Uninstall Sysinternals Sysmon,T1685,TA0112
+Potential Binary Impersonating Sysinternals Tools,T1036.005;T1202;T1218,TA0005
+Sysprep on AppData Folder,T1059,TA0002
+Suspicious Execution of Systeminfo,T1082,TA0007
+Windows Defender Disabled Via SystemSettingsAdminFlows.EXE,T1685,TA0112
+Suspicious Recursive Takeown,T1222.001,TA0112
+Tap Installer Execution,T1048,TA0010
+Compressed File Creation Via Tar.EXE,T1560;T1560.001,TA0009
+Compressed File Extraction Via Tar.EXE,T1560;T1560.001,TA0009
+Taskkill Symantec Endpoint Protection,T1685,TA0112
+Loaded Module Enumeration Via Tasklist.EXE,T1003,TA0006
+Taskmgr as LOCAL_SYSTEM,T1036,TA0005
+New Process Created Via Taskmgr.EXE,T1036,TA0005
+Potentially Suspicious Command Targeting Teams Sensitive Files,T1528,TA0006
+Suspicious TSCON Start as SYSTEM,T1219.002,TA0011
+Suspicious RDP Redirect Using TSCON,T1021.001;T1563.002,TA0008
+UAC Bypass Using ChangePK and SLUI,T1548.002,TA0004
+UAC Bypass Using Disk Cleanup,T1548.002,TA0004
+Bypass UAC via CMSTP,T1218.003;T1548.002,TA0004;TA0005
+CMSTP UAC Bypass via COM Object Access,T1218.003;T1548.002,TA0004;TA0005
+UAC Bypass Tools Using ComputerDefaults,T1548.002,TA0004
+UAC Bypass Using Consent and Comctl32 - Process,T1548.002,TA0004
+UAC Bypass Using DismHost,T1548.002,TA0004
+Bypass UAC via Fodhelper.exe,T1548.002,TA0004
+UAC Bypass via Windows Firewall Snap-In Hijack,T1548,TA0004
+UAC Bypass via ICMLuaUtil,T1548.002,TA0004
+UAC Bypass Using IDiagnostic Profile,T1548.002,TA0004
+UAC Bypass Using IEInstal - Process,T1548.002,TA0004
+UAC Bypass Using MSConfig Token Modification - Process,T1548.002,TA0004
+UAC Bypass Using NTFS Reparse Point - Process,T1548.002,TA0004
+UAC Bypass Using PkgMgr and DISM,T1548.002,TA0004
+Potential UAC Bypass Via Sdclt.EXE,T1548.002,TA0004
+TrustedPath UAC Bypass Pattern,T1548.002,TA0004
+UAC Bypass Abusing Winsat Path Parsing - Process,T1548.002,TA0004
+UAC Bypass Using Windows Media Player - Process,T1548.002,TA0004
+Bypass UAC via WSReset.exe,T1548.002,TA0004
+UAC Bypass WSReset,T1548.002,TA0004
+Use of UltraVNC Remote Access Software,T1219.002,TA0011
+Suspicious UltraVNC Execution,T1021.005,TA0008
+Uninstall Crowdstrike Falcon Sensor,T1685,TA0112
+Uncommon Userinit Child Process,T1037.001,TA0003;TA0004
+User Shell Folders Registry Modification via CommandLine,T1112;T1547.001,TA0003;TA0004;TA0112
+Windows Credential Manager Access via VaultCmd,T1555.004,TA0006
+Registry Modification Attempt Via VBScript,T1059.005;T1112,TA0002;TA0003;TA0112
+Verclsid.exe Runs COM Object,T1218,TA0005
+Virtualbox Driver Installation or Starting of VMs,T1564;T1564.006,TA0005
+Suspicious VBoxDrvInst.exe Parameters,T1112,TA0003;TA0112
+Potential Persistence Via VMwareToolBoxCmd.EXE VM State Change Script,T1059,TA0002
+Suspicious Persistence Via VMwareToolBoxCmd.EXE VM State Change Script,T1059,TA0002
+VMToolsd Suspicious Child Process,T1059,TA0002
+Potentially Suspicious Child Process Of VsCode,T1202;T1218,TA0005
+Visual Studio Code Tunnel Execution,T1071.001;T1219,TA0011
+Visual Studio Code Tunnel Shell Execution,T1071.001,TA0011
+Renamed Visual Studio Code Tunnel Execution,T1071.001;T1219,TA0011
+Visual Studio Code Tunnel Service Installation,T1071.001,TA0011
+Potential Binary Proxy Execution Via VSDiagnostics.EXE,T1218,TA0005
+Proxy Execution via Vshadow,T1202,TA0005
+Suspicious Vsls-Agent Command With AgentExtensionPath Load,T1218,TA0005
+Vulnerable Driver Blocklist Registry Tampering Via CommandLine,T1685,TA0112
+Use of W32tm as Timer,T1124,TA0007
+All Backups Deleted Via Wbadmin.EXE,T1490,TA0040
+Windows Backup Deleted Via Wbadmin.EXE,T1490,TA0040
+Sensitive File Dump Via Wbadmin.EXE,T1003.003,TA0006
+File Recovery From Backup Via Wbadmin.EXE,T1490,TA0040
+Sensitive File Recovery From Backup Via Wbadmin.EXE,T1003.003,TA0006
+Potentially Suspicious WebDAV LNK Execution,T1059.001;T1204,TA0002
+Chopper Webshell Process Pattern,T1018;T1033;T1087;T1505.003,TA0003;TA0007
+Webshell Hacking Activity Patterns,T1018;T1033;T1087;T1505.003,TA0003;TA0007
+Webshell Detection With Command Line Keywords,T1018;T1033;T1087;T1505.003,TA0003;TA0007
+Suspicious Process By Web Server Process,T1190;T1505.003,TA0001;TA0003
+Webshell Tool Reconnaissance Activity,T1505.003,TA0003
+PPL Tampering Via WerFaultSecure,T1003.001;T1685,TA0006;TA0112
+Potential Credential Dumping Via WER,T1003.001,TA0006
+Potential ReflectDebugger Content Execution Via WerFault.EXE,T1036,TA0005
+Suspicious Child Process Of Wermgr.EXE,T1036;T1055,TA0004;TA0005
+Suspicious Where Execution,T1217,TA0007
+Enumerate All Information With Whoami.EXE,T1033,TA0007
+Whoami.EXE Execution From Privileged Process,T1033,TA0007
+Group Membership Reconnaissance Via Whoami.EXE,T1033,TA0007
+Whoami.EXE Execution With Output Option,T1033,TA0007
+Whoami.EXE Execution Anomaly,T1033,TA0007
+Security Privileges Enumeration Via Whoami.EXE,T1033,TA0007
+Add New Download Source To Winget,T1059,TA0002
+Add Insecure Download Source To Winget,T1059,TA0002
+Add Potential Suspicious New Download Source To Winget,T1059,TA0002
+Install New Package Via Winget Local Manifest,T1059,TA0002
+Winrar Compressing Dump Files,T1560.001,TA0009
+Potentially Suspicious Child Process Of WinRAR.EXE,T1203,TA0002
+WinRAR Execution in Non-Standard Folder,T1560.001,TA0009
+AWL Bypass with Winrm.vbs and Malicious WsmPty.xsl/WsmTxt.xsl,T1216,TA0005
+Remote Code Execute via Winrm.vbs,T1216,TA0005
+Remote PowerShell Session Host Process (WinRM),T1021.006;T1059.001,TA0002;TA0008
+Suspicious Processes Spawned by WinRM,T1190,TA0001
+Potential Lateral Movement via Windows Remote Shell,T1021.006,TA0008
+Winrs Local Command Execution,T1021.006;T1218,TA0005;TA0008
+Compress Data and Lock With Password for Exfiltration With WINZIP,T1560.001,TA0009
+Wlrmdr.EXE Uncommon Argument Or Child Process,T1218,TA0005
+NewActiveScriptEventConsumer Creation Attempt via Wmic.EXE,T1546.003,TA0003;TA0004
+Potential Windows Defender Tampering Via Wmic.EXE,T1047;T1685,TA0002;TA0112
+Process Creation Attempt via Wmic.EXE,T1047,TA0002
+Computer System Reconnaissance Via Wmic.EXE,T1047,TA0002
+Hardware Model Reconnaissance Via Wmic.EXE,T1047,TA0002
+Local Groups Reconnaissance Via Wmic.EXE,T1069.001,TA0007
+Windows Hotfix Updates Reconnaissance Via Wmic.EXE,T1047,TA0002
+Potential Process Reconnaissance via Wmic.EXE,T1047;T1057,TA0002;TA0007
+Potential Product Reconnaissance Via Wmic.EXE,T1047,TA0002
+Potential Product Class Reconnaissance Via Wmic.EXE,T1047;T1082,TA0002;TA0007
+Service Reconnaissance Via Wmic.EXE,T1047,TA0002
+Uncommon System Information Discovery Via Wmic.EXE,T1082,TA0007
+Potential Unquoted Service Path Reconnaissance Via Wmic.EXE,T1047,TA0002
+System Disk And Volume Reconnaissance Via Wmic.EXE,T1047;T1082,TA0002;TA0007
+WMIC Remote Command Execution,T1047,TA0002
+Service Started/Stopped Via Wmic.EXE,T1047,TA0002
+Service Startup Type Change Via Wmic.EXE,T1047;T1685,TA0002;TA0112
+Potential Remote SquiblyTwo Technique Execution,T1047;T1059.005;T1059.007;T1220,TA0002;TA0005
+Registry Enumeration via WMI Stdregprov,T1012;T1047,TA0002;TA0007
+Registry Manipulation via WMI Stdregprov,T1047;T1112,TA0002;TA0003;TA0112
+Suspicious WMIC Execution Via Office Process,T1047;T1204.002;T1218.010,TA0002;TA0005
+Suspicious Process Created Via Wmic.EXE,T1047,TA0002
+Application Termination Attempt via Wmic.EXE,T1047,TA0002
+Application Removed Via Wmic.EXE,T1047,TA0002
+Potential Tampering With Security Products Via WMIC,T1685,TA0112
+XSL Script Execution Via WMIC.EXE,T1047;T1059.005;T1059.007;T1220,TA0002;TA0005
+WmiPrvSE Spawned A Process,T1047,TA0002
+Potential WMI Lateral Movement WmiPrvSE Spawned PowerShell,T1047;T1059.001,TA0002
+Suspicious WmiPrvSE Child Process,T1047;T1204.002;T1218.010,TA0002;TA0005
+WMI Backdoor Exchange Transport Agent,T1546.003,TA0003;TA0004
+Password Set to Never Expire via WMI,T1047;T1098,TA0002;TA0003;TA0004
+WMI Persistence - Script Event Consumer,T1546.003,TA0003;TA0004
+UEFI Persistence Via Wpbbin - ProcessCreation,T1542.001,TA0003;TA0005
+Potential Dropper Script Execution Via WScript/CScript/MSHTA,T1059.005;T1059.007,TA0002
+Cscript/Wscript Uncommon Script Extension Execution,T1059.005;T1059.007,TA0002
+WSL Child Process Anomaly,T1202;T1218,TA0005
+Installation of WSL Kali-Linux,T1059,TA0002
+WSL Kali-Linux Usage,T1202,TA0005
+Windows Binary Executed From WSL,T1202,TA0005
+Proxy Execution Via Wuauclt.EXE,T1218,TA0005
+Suspicious Windows Update Agent Empty Cmdline,T1036,TA0005
+Xwizard.EXE Execution From Non-Default Location,T1574.001,TA0002;TA0005
+COM Object Execution via Xwizard.EXE,T1218,TA0005
+Potential Process Hollowing Activity,T1055.012,TA0004;TA0005
+Potential Defense Evasion Via Raw Disk Access By Uncommon Tools,T1006,TA0005
+Windows Credential Guard Related Registry Value Deleted - Registry,T1685,TA0112
+Windows Recall Feature Enabled - DisableAIDataAnalysis Value Deleted,T1113,TA0009
+Folder Removed From Exploit Guard ProtectedFolders List - Registry,T1685,TA0112
+Terminal Server Client Connection History Cleared - Registry,T1070;T1112,TA0003;TA0005;TA0112
+Removal Of AMSI Provider Registry Keys,T1685,TA0112
+Removal of Potential COM Hijacking Registry Keys,T1112,TA0003;TA0112
+RunMRU Registry Key Deletion - Registry,T1070.003,TA0005
+Removal Of Index Value to Hide Schedule Task - Registry,T1685,TA0112
+Removal Of SD Value to Hide Schedule Task - Registry,T1685,TA0112
+Creation of a Local Hidden User Account by Registry,T1136.001,TA0003
+UAC Bypass Via Wsreset,T1548.002,TA0004
+CMSTP App Paths Registry Key Modification,T1218.003,TA0005
+Windows Defender Threat Severity Default Action Modified,T1685,TA0112
+Disable Security Events Logging Adding Reg Key MiniNt,T1112;T1685.001,TA0003;TA0112
+Wdigest CredGuard Registry Modification,T1112,TA0003;TA0112
+Esentutl Volume Shadow Copy Service Keys,T1003.002,TA0006
+Windows Credential Editor Registry,T1003.001,TA0006
+HybridConnectionManager Service Installation - Registry,T1608,TA0042
+Potential Qakbot Registry Activity,T1112,TA0003;TA0112
+Registry Entries For Azorult Malware,T1112,TA0003;TA0112
+Path To Screensaver Binary Modified,T1546.002,TA0003;TA0004
+Narrator's Feedback-Hub Persistence,T1547.001,TA0003;TA0004
+NetNTLM Downgrade Attack - Registry,T1112;T1685,TA0003;TA0112
+New DLL Added to AppCertDlls Registry Key,T1546.009,TA0003;TA0004
+New DLL Added to AppInit_DLLs Registry Key,T1546.010,TA0003;TA0004
+Office Application Startup - Office Test,T1137.002,TA0003
+Windows Registry Trust Record Modification,T1566.001,TA0001
+Registry Persistence Mechanisms in Recycle Bin,T1547,TA0003;TA0004
+New PortProxy Registry Entry Added,T1090,TA0011
+RedMimicry Winnti Playbook Registry Manipulation,T1112,TA0003;TA0112
+WINEKEY Registry Modification,T1547,TA0003;TA0004
+Run Once Task Configuration in Registry,T1112,TA0003;TA0112
+Shell Open Registry Keys Manipulation,T1546.001;T1548.002,TA0003;TA0004
+Potential Credential Dumping Via LSASS SilentProcessExit Technique,T1003.001,TA0006
+Security Support Provider (SSP) Added to LSA Configuration,T1547.005,TA0003;TA0004
+Sticky Key Like Backdoor Usage - Registry,T1546.008,TA0003;TA0004
+Atbroker Registry Change,T1218;T1547,TA0003;TA0004;TA0005
+Suspicious Run Key from Download,T1547.001,TA0003;TA0004
+DLL Load via LSASS,T1547.008,TA0003;TA0004
+Suspicious Camera and Microphone Access,T1123;T1125,TA0009
+Registry Tampering by Potentially Suspicious Processes,T1059.005;T1112,TA0002;TA0003;TA0112
+Enable Remote Connection Between Anonymous Computer - AllowAnonymousCallback,T1685,TA0112
+Registry Persistence via Service in Safe Mode,T1564.001,TA0005
+Add Port Monitor Persistence in Registry,T1547.010,TA0003;TA0004
+Allow RDP Remote Assistance Feature,T1112,TA0003;TA0112
+Potential AMSI COM Server Hijacking,T1685,TA0112
+AMSI Disabled via Registry Modification,T1685,TA0112
+Classes Autorun Keys Modification,T1547.001,TA0003;TA0004
+Common Autorun Keys Modification,T1547.001,TA0003;TA0004
+CurrentControlSet Autorun Keys Modification,T1547.001,TA0003;TA0004
+CurrentVersion Autorun Keys Modification,T1547.001,TA0003;TA0004
+CurrentVersion NT Autorun Keys Modification,T1547.001,TA0003;TA0004
+Internet Explorer Autorun Keys Modification,T1547.001,TA0003;TA0004
+Office Autorun Keys Modification,T1547.001,TA0003;TA0004
+Session Manager Autorun Keys Modification,T1546.009;T1547.001,TA0003;TA0004
+System Scripts Autorun Keys Modification,T1547.001,TA0003;TA0004
+WinSock2 Autorun Keys Modification,T1547.001,TA0003;TA0004
+Wow6432Node CurrentVersion Autorun Keys Modification,T1547.001,TA0003;TA0004
+Wow6432Node Classes Autorun Keys Modification,T1547.001,TA0003;TA0004
+Wow6432Node Windows NT CurrentVersion Autorun Keys Modification,T1547.001,TA0003;TA0004
+New BgInfo.EXE Custom DB Path Registry Configuration,T1112,TA0003;TA0112
+New BgInfo.EXE Custom VBScript Registry Configuration,T1112,TA0003;TA0112
+New BgInfo.EXE Custom WMI Query Registry Configuration,T1112,TA0003;TA0112
+Bypass UAC Using DelegateExecute,T1548.002,TA0004
+Bypass UAC Using Event Viewer,T1547.010,TA0003;TA0004
+Bypass UAC Using SilentCleanup Task,T1548.002,TA0004
+Default RDP Port Changed to Non Standard Port,T1547.010,TA0003;TA0004
+IE Change Domain Zone,T1137,TA0003
+Sysmon Driver Altitude Change,T1685,TA0112
+Change Winevt Channel Access Permission Via Registry,T1685.001,TA0112
+Running Chrome VPN Extensions via the Registry 2 VPN Extension,T1133,TA0001;TA0003
+ClickOnce Trust Prompt Tampering,T1112,TA0003;TA0112
+Potential CobaltStrike Service Installations - Registry,T1021.002;T1543.003;T1569.002,TA0002;TA0003;TA0004;TA0008
+COM Hijack via Sdclt,T1546;T1548,TA0003;TA0004
+CrashControl CrashDump Disabled,T1112;T1564,TA0003;TA0005;TA0112
+Security Event Logging Disabled via MiniNt Registry Key - Registry Set,T1112;T1685.001,TA0003;TA0112
+Service Binary in Suspicious Folder,T1112,TA0003;TA0112
+Windows Credential Guard Disabled - Registry,T1685,TA0112
+Custom File Open Handler Executes PowerShell,T1202,TA0005
+Potential Registry Persistence Attempt Via DbgManagedDebugger,T1574,TA0002;TA0005
+Windows Defender Exclusions Added - Registry,T1685,TA0112
+Potentially Suspicious Desktop Background Change Via Registry,T1112;T1491.001,TA0003;TA0040;TA0112
+Antivirus Filter Driver Disallowed On Dev Drive - Registry,T1685,TA0112
+Windows Hypervisor Enforced Code Integrity Disabled,T1685,TA0112
+Hypervisor Enforced Paging Translation Disabled,T1685,TA0112
+DHCP Callout DLL Installation,T1112;T1574.001,TA0002;TA0003;TA0005;TA0112
+Disable Exploit Guard Network Protection on Windows Defender,T1685,TA0112
+Disabled Windows Defender Eventlog,T1685,TA0112
+Disable PUA Protection on Windows Defender,T1685,TA0112
+Disable Tamper Protection on Windows Defender,T1685,TA0112
+Disable Administrative Share Creation at Startup,T1070.005,TA0005
+Potential AutoLogger Sessions Tampering,T1685.001,TA0112
+Disable Microsoft Defender Firewall via Registry,T1686.003,TA0112
+Disable Internal Tools or Feature in Registry,T1112,TA0003;TA0112
+Disable Privacy Settings Experience in Registry,T1685,TA0112
+Disable Windows Security Center Notifications,T1112,TA0003;TA0112
+Registry Disable System Restore,T1490,TA0040
+Windows Defender Service Disabled - Registry,T1685,TA0112
+Windows Event Log Access Tampering Via Registry,T1112;T1547.001,TA0003;TA0004;TA0112
+Disable Windows Firewall by Registry,T1686.003,TA0112
+Disable Windows Event Logging Via Registry,T1685.001,TA0112
+Add DisallowRun Execution to Registry,T1112,TA0003;TA0112
+DNS-over-HTTPS Enabled by Registry,T1112;T1140,TA0003;TA0005;TA0112
+New DNS ServerLevelPluginDll Installed,T1112;T1574.001,TA0002;TA0003;TA0005;TA0112
+ETW Logging Disabled In .NET Processes - Sysmon Registry,T1112;T1685,TA0003;TA0112
+Directory Service Restore Mode(DSRM) Registry Value Tampering,T1556,TA0003;TA0006;TA0112
+Periodic Backup For System Registry Hives Enabled,T1113,TA0009
+Windows Recall Feature Enabled - Registry,T1113,TA0009
+Enabling COR Profiler Environment Variables,T1574.012,TA0002;TA0005
+Scripted Diagnostics Turn Off Check Enabled - Registry,T1685,TA0112
+Potential EventLog File Location Tampering,T1685.001,TA0112
+Suspicious Application Allowed Through Exploit Guard,T1685,TA0112
+Change User Account Associated with the FAX Service,T1112,TA0003;TA0112
+Change the Fax Dll,T1112,TA0003;TA0112
+FileFix - Command Evidence in TypedPaths,T1204.004,TA0002
+Registry Modification to Hidden File Extension,T1137,TA0003
+Displaying Hidden Files Feature Disabled,T1564.001,TA0005
+Registry Hide Function from User,T1112,TA0003;TA0112
+Hide Schedule Task Via Index Value Tamper,T1685,TA0112
+Uncommon Extension In Keyboard Layout IME File Registry Value,T1685,TA0112
+Suspicious Path In Keyboard Layout IME File Registry Value,T1685,TA0112
+New Root or CA or AuthRoot Certificate to Store,T1490,TA0040
+Potential Ransomware Activity Using LegalNotice Message,T1491.001,TA0040
+Lolbas OneDriveStandaloneUpdater.exe Proxy Download,T1105,TA0011
+Lsass Full Dump Request Via DumpType Registry Settings,T1003.001,TA0006
+RestrictedAdminMode Registry Value Tampering,T1112,TA0003;TA0112
+Potential Persistence Via Netsh Helper DLL - Registry,T1546.007,TA0003;TA0004
+New Netsh Helper DLL Registered From A Suspicious Location,T1546.007,TA0003;TA0004
+NET NGenAssemblyUsageLog Registry Key Tamper,T1112,TA0003;TA0112
+New Application in AppCompat,T1204.002,TA0002
+Potential Credential Dumping Attempt Using New NetworkProvider - REG,T1003,TA0006
+Potentially Suspicious ODBC Driver Registered,T1003,TA0006
+Trust Access Disable For VBApplications,T1112,TA0003;TA0112
+Microsoft Office Protected View Disabled,T1685,TA0112
+Python Function Execution Security Warning Disabled In Excel - Registry,T1685,TA0112
+Enable Microsoft Dynamic Data Exchange,T1559.002,TA0002
+Potential Persistence Via Outlook LoadMacroProviderOnBoot Setting,T1008;T1137;T1546,TA0003;TA0004;TA0011
+Outlook Macro Execution Without Warning Setting Enabled,T1008;T1137;T1546,TA0003;TA0004;TA0011
+Outlook EnableUnsafeClientMailRules Setting Enabled - Registry,T1112,TA0003;TA0112
+Outlook Security Settings Updated - Registry,T1137,TA0003
+Uncommon Microsoft Office Trusted Location Added,T1112,TA0003;TA0112
+Macro Enabled In A Potentially Suspicious Document,T1112,TA0003;TA0112
+Office Macros Warning Disabled,T1112,TA0003;TA0112
+MaxMpxCt Registry Value Changed,T1070.005,TA0005
+Potential Persistence Using DebugPath,T1546.015,TA0003;TA0004
+Potential Persistence Via AppCompat RegisterAppRestart Layer,T1546.011,TA0003;TA0004
+Potential Persistence Via App Paths Default Property,T1546.012,TA0003;TA0004
+Potential PSFactoryBuffer COM Hijacking,T1546.015,TA0003;TA0004
+COM Object Hijacking Via Modification Of Default System CLSID Default Value,T1546.015,TA0003;TA0004
+Potential COM Object Hijacking Via TreatAs Subkey - Registry,T1546.015,TA0003;TA0004
+Potential Persistence Via Custom Protocol Handler,T1112,TA0003;TA0112
+Potential Persistence Via Event Viewer Events.asp,T1112,TA0003;TA0112
+Potential Persistence Via GlobalFlags,T1546.012,TA0003;TA0004
+Modification of IE Registry Settings,T1112,TA0003;TA0112
+Potential Persistence Via Logon Scripts - Registry,T1037.001,TA0003;TA0004
+Potential Persistence Via Visual Studio Tools for Office,T1137.006,TA0003
+Potential Persistence Via Outlook Home Page,T1112,TA0003;TA0112
+Potential Persistence Via Outlook Today Page,T1112,TA0003;TA0112
+Potential WerFault ReflectDebugger Registry Value Abuse,T1036.003,TA0005
+Potential Persistence Via Scrobj.dll COM Hijacking,T1546.015,TA0003;TA0004
+Potential Persistence Via Shim Database Modification,T1546.011,TA0003;TA0004
+Suspicious Shim Database Patching Activity,T1546.011,TA0003;TA0004
+Potential Persistence Via Shim Database In Uncommon Location,T1546.011,TA0003;TA0004
+Potential Persistence Via Excel Add-in - Registry,T1137.006,TA0003
+Potential ClickFix Execution Pattern - Registry,T1204.001,TA0002
+Registry Modification for OCI DLL Redirection,T1112;T1574.001,TA0002;TA0003;TA0005;TA0112
+PowerShell as a Service in Registry,T1569.002,TA0002
+Suspicious PowerShell In Registry Run Keys,T1547.001,TA0003;TA0004
+PowerShell Logging Disabled Via Registry Key Tampering,T1112;T1564.001,TA0003;TA0005;TA0112
+Potential Provisioning Registry Key Abuse For Binary Proxy Execution - REG,T1218,TA0005
+PUA - Sysinternal Tool Execution - Registry,T1588.002,TA0042
+Suspicious Execution Of Renamed Sysinternals Tools - Registry,T1588.002,TA0042
+PUA - Sysinternals Tools Execution - Registry,T1588.002,TA0042
+Usage of Renamed Sysinternals Tools - RegistrySet,T1588.002,TA0042
+ETW Logging Disabled For rpcrt4.dll,T1112;T1685,TA0003;TA0112
+Potentially Suspicious Command Executed Via Run Dialog Box - Registry,T1059.001,TA0002
+ScreenSaver Registry Key Set,T1218.011,TA0005
+ServiceDll Hijack,T1543.003,TA0003;TA0004
+ETW Logging Disabled For SCM,T1112;T1685,TA0003;TA0112
+Registry Explorer Policy Modification,T1112,TA0003;TA0112
+Persistence Via New SIP Provider,T1553.003,TA0112
+Tamper With Sophos AV Registry Keys,T1685,TA0112
+Hiding User Account Via SpecialAccounts Registry Key,T1564.002,TA0005
+Activate Suppression of Windows Security Center Notifications,T1112,TA0003;TA0112
+Suspicious Keyboard Layout Load,T1588.002,TA0042
+Potential PendingFileRenameOperations Tampering,T1036.003,TA0005
+Suspicious Printer Driver Empty Manufacturer,T1574,TA0002;TA0005
+Registry Persistence via Explorer Run Key,T1547.001,TA0003;TA0004
+Suspicious Space Characters in RunMRU Registry Path - ClickFix,T1027.010;T1204.004,TA0002;TA0005
+New RUN Key Pointing to Suspicious Folder,T1547.001,TA0003;TA0004
+Suspicious Service Installed,T1685,TA0112
+Suspicious Shell Open Command Registry Modification,T1546.001;T1548.002,TA0003;TA0004
+Suspicious Space Characters in TypedPaths Registry Path - FileFix,T1027.010;T1204.004,TA0002;TA0005
+Modify User Shell Folders Startup Value,T1547.001,TA0003;TA0004
+WFP Filter Added via Registry,T1569.002;T1685,TA0002;TA0112
+Enable LM Hash Storage,T1112,TA0003;TA0112
+Scheduled TaskCache Change by Uncommon Program,T1053;T1053.005,TA0002;TA0003;TA0004
+Potential Registry Persistence Attempt Via Windows Telemetry,T1053.005,TA0002;TA0003;TA0004
+RDP Sensitive Settings Changed to Zero,T1112,TA0003;TA0112
+RDP Sensitive Settings Changed,T1112,TA0003;TA0112
+New TimeProviders Registered With Uncommon DLL Name,T1547.003,TA0003;TA0004
+COM Hijacking via TreatAs,T1546.015,TA0003;TA0004
+UAC Bypass via Event Viewer,T1548.002,TA0004
+UAC Bypass via Sdclt,T1548.002,TA0004
+UAC Bypass Abusing Winsat Path Parsing - Registry,T1548.002,TA0004
+UAC Bypass Using Windows Media Player - Registry,T1548.002,TA0004
+UAC Disabled,T1548.002,TA0004
+UAC Notification Disabled,T1548.002,TA0004
+UAC Secure Desktop Prompt Disabled,T1548.002,TA0004
+VBScript Payload Stored in Registry,T1547.001,TA0003;TA0004
+Windows Vulnerable Driver Blocklist Disabled,T1685,TA0112
+Execution DLL of Choice Using WAB.EXE,T1218,TA0005
+Wdigest Enable UseLogonCredential,T1112,TA0003;TA0112
+Disable Windows Defender Functionalities Via Registry Keys,T1685,TA0112
+Winlogon AllowMultipleTSSessions Enable,T1112,TA0003;TA0112
+Winlogon Notify Key Logon Persistence,T1547.004,TA0003;TA0004
+Sysmon Configuration Error,T1564,TA0005
+Sysmon Configuration Modification,T1564,TA0005
+WMI Event Subscription,T1546.003,TA0003;TA0004
+Suspicious Encoded Scripts in a WMI Consumer,T1047;T1546.003,TA0002;TA0003;TA0004
+Suspicious Scripting in a WMI Consumer,T1059.005,TA0002

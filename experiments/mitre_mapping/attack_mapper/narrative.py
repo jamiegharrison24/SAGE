@@ -6,22 +6,13 @@ no LLM provider is configured anywhere in this environment (see
 from here, not from an LLM. `pipeline.py` records which path ran in
 `MappedRule.processing_steps`.
 
-Reuses `../tiered_approach/normalize.py`'s canonicalization (vendor-prefix
-strip, entity placeholders, abbreviation expansion) rather than
-reimplementing it -- that file's docstring is explicit that normalization
-"moves the numbers more than most model tuning".
+Reuses `normalize.py`'s canonicalization (vendor-prefix strip, entity
+placeholders, abbreviation expansion) rather than reimplementing it -- that
+file's docstring is explicit that normalization "moves the numbers more than
+most model tuning".
 """
-import os
-import sys
-
 from .models import BehavioralNarrative, ExtractedRule
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-TIERED_DIR = os.path.normpath(os.path.join(HERE, "..", "..", "tiered_approach"))
-if TIERED_DIR not in sys.path:
-    sys.path.insert(0, TIERED_DIR)
-
-from normalize import canonicalize  # noqa: E402
+from .normalize import canonicalize
 
 _STAGE_KEYWORDS = {
     "reconnaissance": ["recon", "scan", "enumerate", "discovery", "whoami", "systeminfo"],

@@ -1,10 +1,10 @@
 """
-Sigma rule extractor. No Sigma rules are vendored in this repo (SAGE is
-Suricata-only) so this is exercised via `../../tests/test_extractors.py`
-fixtures, not a local corpus. Pulling SigmaHQ's rule set is a separate,
-not-yet-taken step -- see ../../findings.md -- useful for broadening
-technique-label coverage (per `../../tiered_approach/embedding_swap_findings.md`),
-not required for the extractor itself to work.
+Sigma rule extractor. SAGE itself is Suricata-only, so this is exercised
+both via `../../tests/test_extractors.py` fixtures and, for real-world
+coverage, against the full SigmaHQ ruleset pulled in `../sigma_corpus/`
+(3,144 real rules, 100% parsed -- see `../sigma_corpus/findings.md`), which
+also broadens the ET-only training corpus's technique-label coverage per
+`../../archive/tiered_approach/embedding_swap_findings.md`.
 """
 import re
 from typing import Any, List, Optional

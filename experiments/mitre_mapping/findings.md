@@ -18,8 +18,8 @@ Validation harness: `validate.py` -> `validation_report.md`.
 
 ## Update: stacking in the ET+Sigma classifier (effort 4)
 
-`../STATUS.md` flagged this pipeline (effort 3) and the ET+Sigma-broadened
-Tier 2 classifier (effort 4, `../sigma_corpus/findings.md`) as evaluated in
+`STATUS.md` flagged this pipeline (effort 3) and the ET+Sigma-broadened
+Tier 2 classifier (effort 4, `attack_mapper/sigma_corpus/findings.md`) as evaluated in
 isolation but never combined. `attack_mapper/classifier_resolver.py` now
 wires effort 4's classifier in as a candidate source, live-trained (not a
 static lookup) so it resolves any rule text, not just the 773 signatures
@@ -50,7 +50,7 @@ and does not touch the 71 rows other sources already answer correctly or
 incorrectly, so it's a strictly additive change on top of the original
 result, not a re-shuffle of it.
 
-This confirms `../STATUS.md`'s open question: the two levers add rather
+This confirms `STATUS.md`'s open question: the two levers add rather
 than overlap, because they fire on disjoint rows by construction (the
 combination only ever gets to act where SAGE's own internal signal has
 nothing to say).
@@ -58,9 +58,9 @@ nothing to say).
 ## Original headline result (pre-stacking)
 
 **48.8% top-1 (39/80 scoreable) vs. the hand-audited sample
-(`../tiered_approach/hand_audit_sample*.csv`), vs. 34.2% (27/79) for the
+(`archive/tiered_approach/hand_audit_sample*.csv`), vs. 34.2% (27/79) for the
 existing tiered-approach TF-IDF classifier
-(`../tiered_approach/tier2_vs_audit_findings.md`).**
+(`archive/tiered_approach/tier2_vs_audit_findings.md`).**
 
 Read this number with the breakdown below, not instead of it — it is not an
 apples-to-apples win over Tier 2. Kept for the record; superseded by the
@@ -79,7 +79,7 @@ apples-to-apples win over Tier 2. Kept for the record; superseded by the
 essentially the entire result. Two things follow:
 
 1. **The embedding layer (Layer A) contributes nothing here**, confirming
-   `../results.md`'s existing finding (zero-shot MiniLM/ATTACK-BERT
+   `archive/results.md`'s existing finding (zero-shot MiniLM/ATTACK-BERT
    similarity against the full technique list: 6.4-8.4% top-1 there, 0/8
    here). It is wired correctly (see "bugs fixed" below) and is genuinely
    useful as a low-confidence fallback for rules nothing else resolves, not
@@ -98,12 +98,12 @@ generalisable extraction/embedding/LLM architecture -- it's that this
 pipeline has access to a piece of SAGE-internal context Tier 2's classifier
 never saw at all: `signatures/alert_signatures.py`'s existing
 `MicroAttackStage` label for the alert, fed through the already-validated
-34-row bridge table (`../bridge_table_validated.json`, 0 validation problems
-against live STIX -- `../results.md` section 1b). That's the "internal
+34-row bridge table (`attack_mapper/data/bridge_table_validated.json`, 0 validation problems
+against live STIX -- `archive/results.md` section 1b). That's the "internal
 threat intel" lever the user's brief called the highest-value
 customization, and it is: reusing SAGE's own classification is a bigger
 lever than better embeddings or a fancier candidate-fusion architecture,
-which lines up with `../tiered_approach/embedding_swap_findings.md`'s
+which lines up with `archive/tiered_approach/embedding_swap_findings.md`'s
 conclusion that embedding-model choice isn't the bottleneck for this
 problem family.
 
@@ -111,7 +111,7 @@ problem family.
 
 `ground_truth_signatures.csv`'s `current_gt` column is *also* derived by
 propagating `MicroAttackStage` through this same bridge table
-(`../results.md` section 1c). So `bridge_table`-sourced predictions are, in
+(`archive/results.md` section 1c). So `bridge_table`-sourced predictions are, in
 part, re-deriving the mechanism that produced the historical GT -- not
 independent inference from rule content.
 
@@ -152,32 +152,66 @@ IoC dict + a from-scratch STIX client):
   field the sketch didn't have (SAGE-specific input signal).
 - `extractors/` -- `base.py` + `suricata.py` (primary format; handles both a
   full rule body and a bare signature-name string, the latter looked up
-  against `../tiered_approach/emerging-all.rules` for the real body when
-  possible, since rule bodies carry far more signal than titles per
-  `../tiered_approach/strategy.md`) + `sigma.py` + a `generic.py` fallback.
+  against `data/emerging-all.rules` for the real body when possible, since
+  rule bodies carry far more signal than titles per
+  `archive/tiered_approach/strategy.md`) + `sigma.py` + a `generic.py` fallback.
   Not built: Splunk/KQL/Elastic/YARA extractors -- would be dead stub code
   today (no rules of those formats exist anywhere in this repo to test
   against), and CLAUDE.md rules out half-finished implementations.
-- `mitre_client.py` -- thin wrapper over the already-existing
-  `../attack_data.py` (reads the committed `../enterprise-attack.json`, no
-  network fetch).
-- `ioc_resolver.py` -- wraps `../tiered_approach/tier1_build.py`'s STIX
-  malware/tool alias table (with its hard-won stoplist for common-word
-  alias collisions) instead of reimplementing a lookup dict, plus the
-  `MicroAttackStage` bridge-table lookup described above.
+- `mitre_client.py` -- thin wrapper over `attack_data.py` (reads
+  `data/enterprise-attack.json`, no network fetch), both this package's own
+  copies -- see "package promoted and made self-contained" below.
+- `ioc_resolver.py` -- wraps `alias_table.py`'s STIX malware/tool alias
+  table (with its hard-won stoplist for common-word alias collisions)
+  instead of reimplementing a lookup dict, plus the `MicroAttackStage`
+  bridge-table lookup described above.
 - `narrative.py` -- template narrative generator (the actually-working
-  default path), reusing `../tiered_approach/normalize.py`'s
-  canonicalization rather than reimplementing it.
+  default path), reusing `normalize.py`'s canonicalization rather than
+  reimplementing it.
 - `embedder.py` -- Layer A, MiniLM cosine similarity against every
   technique's name+description+detection text.
 - `llm_client.py` -- `LLMClient` ABC, `NullLLMClient` (default, raises if
   ever called without being checked), `OpenAIClient`/`AnthropicClient`
   adapters (untested, no credentials available).
 - `reasoner.py` -- priority-ordered candidate fusion (declared > ioc_alias/
-  bridge_table > embedding > optional LLM refinement) with a full evidence
-  trail per candidate.
+  bridge_table > tier2_combined > embedding > optional LLM refinement) with
+  a full evidence trail per candidate.
+- `classifier_resolver.py` / `classifier_training.py` -- effort 5's stacked
+  ET+Sigma classifier; see the "Update" section above.
 - `pipeline.py` -- orchestrates all of the above into `MappedRule` +
   `processing_steps`.
+
+## Update: package promoted and made self-contained
+
+Originally built under `hugging-face-suggestion/` and reaching into
+`tiered_approach/` for several runtime dependencies (the alias table,
+`normalize.py`, the training corpora, `emerging-all.rules`,
+`hand_audit_sample*.csv`). Per the user's explicit direction -- this is the
+approach going forward, not one of several being compared -- the package is
+now promoted to `experiments/mitre_mapping/attack_mapper/` directly, with
+zero imports reaching outside its own tree:
+
+- `attack_data.py`, `normalize.py` -- own copies (originals stay in
+  `archive/` for that material's own scripts to keep working).
+- `alias_table.py`, `classifier_training.py` -- own copies of just the
+  reusable logic from `archive/tiered_approach/tier1_build.py` and
+  `tier2_classifier.py` (their own script/CLI/CV-reporting code stays
+  archived, since it isn't part of this package).
+- `data/` -- own copies of `enterprise-attack.json`, `emerging-all.rules`
+  (both gitignored, large), `bridge_table_validated.json`,
+  `et_labeled_corpus.csv`, `hand_audit_sample*.csv`,
+  `sigma_labeled_corpus.csv`/`sigma_parse_failures.csv`.
+- `sigma_corpus/` -- folded in as a subfolder (`build_corpus.py` + its own
+  `findings.md`), since it's this package's own data-pipeline step, not a
+  separate experiment.
+- Effort 1 (7-method comparison, `results.md`/`SMET_STATUS.md`/etc.) and
+  effort 2 (`tiered_approach/`) moved to `archive/`, unmodified internally
+  (their own cross-references to each other and to shared data files still
+  resolve -- only this package stopped depending on them).
+
+Re-ran `validate.py` after the move: identical 53.8% top-1 (43/80), same
+source breakdown -- confirms the restructure changed only where files live,
+not what the pipeline does. See `STATUS.md` for the full directory map.
 
 ## Bugs in the HF sketch, fixed here rather than transcribed
 
@@ -210,7 +244,7 @@ python validate.py                              # -> validation_report.md
    step, not more pipeline engineering. Especially now: the classifier-
    stacking gain above rests on a 5-row sample.
 2. ~~Pull SigmaHQ's ATT&CK-tagged rule corpus~~ -- done, see
-   `../sigma_corpus/findings.md`.
+   `attack_mapper/sigma_corpus/findings.md`.
 3. ~~Stack effort 4's classifier into this pipeline~~ -- done, see "Update"
    section above.
 4. Wire a real LLM client (`llm_client.OpenAIClient`/`AnthropicClient`) if

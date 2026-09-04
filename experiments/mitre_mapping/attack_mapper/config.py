@@ -21,7 +21,7 @@ class Settings:
     classifier_confidence_cap: float = 0.5
 
     # Embedding fallback (Layer A). Known weak zero-shot on this corpus --
-    # see ../results.md methods 1-4 (6-8% top-1 over 697 techniques) -- so it
+    # see ../archive/results.md methods 1-4 (6-8% top-1 over 697 techniques) -- so it
     # is deliberately the lowest-priority, lowest-confidence source, not a
     # primary signal.
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"

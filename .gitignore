@@ -25,10 +25,12 @@ venv/
 .playwright-mcp/
 
 # MITRE mapping experiment: cached raw STIX bundle (large, re-downloadable)
-experiments/mitre_mapping/enterprise-attack.json
+experiments/mitre_mapping/archive/enterprise-attack.json
+experiments/mitre_mapping/attack_mapper/data/enterprise-attack.json
 
 # MITRE mapping experiment (tiered approach): cached ET Open ruleset (large, re-downloadable)
-experiments/mitre_mapping/tiered_approach/emerging-all.rules
+experiments/mitre_mapping/archive/tiered_approach/emerging-all.rules
+experiments/mitre_mapping/attack_mapper/data/emerging-all.rules
 
 # MITRE mapping experiment (sigma_corpus): cloned SigmaHQ ruleset (large, re-clonable)
-experiments/mitre_mapping/sigma_corpus/sigmahq/
+experiments/mitre_mapping/attack_mapper/sigma_corpus/sigmahq/

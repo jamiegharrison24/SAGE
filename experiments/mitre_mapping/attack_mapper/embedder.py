@@ -2,7 +2,7 @@
 Layer A: zero-shot embedding similarity between a rule's narrative and every
 ATT&CK technique description.
 
-Known weak on this corpus -- `../results.md` methods 1-4 already ran exactly
+Known weak on this corpus -- `../archive/results.md` methods 1-4 already ran exactly
 this (MiniLM/ATTACK-BERT, full 697-technique list, cosine similarity) and
 got 6.4-8.4% top-1 / 24.9-26.3% right-tactic. It is kept here anyway as the
 lowest-priority fallback candidate source (see `config.Settings.

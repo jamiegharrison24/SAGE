@@ -1,24 +1,25 @@
 """
 Build a Sigma-derived (rule text -> ATT&CK technique) labeled corpus,
-mirroring `../tiered_approach/et_labeled_corpus.csv`'s format so the two are
-directly comparable.
+mirroring `../archive/tiered_approach/et_labeled_corpus.csv`'s format so the
+two are directly comparable (a copy of that file also lives at
+`../data/et_labeled_corpus.csv` for `classifier_resolver.py` to train on).
 
-Purpose (see `findings.md`): `../tiered_approach/embedding_swap_findings.md`
-found Tier 2's weak accuracy isn't a feature-representation problem but a
-training-corpus class-imbalance problem (the ET corpus's top 5 techniques
-are 81.3% of rows; T1203 has exactly 1 example) -- and recommended folding
-in Sigma's ATT&CK-tagged rules specifically because they cover different
-technique territory (host/EDR telemetry, client-side techniques) that ET's
-network-rule corpus barely touches. This also doubles as the first real-data
-stress test of `../hugging-face-suggestion/attack_mapper/extractors/
-sigma.py`, which until now was only exercised against one hand-written
-fixture.
+Purpose (see `findings.md`): `../archive/tiered_approach/
+embedding_swap_findings.md` found Tier 2's weak accuracy isn't a feature-
+representation problem but a training-corpus class-imbalance problem (the ET
+corpus's top 5 techniques are 81.3% of rows; T1203 has exactly 1 example) --
+and recommended folding in Sigma's ATT&CK-tagged rules specifically because
+they cover different technique territory (host/EDR telemetry, client-side
+techniques) that ET's network-rule corpus barely touches. This also doubles
+as the first real-data stress test of `../extractors/sigma.py`, which until
+then was only exercised against one hand-written fixture.
 
 Usage: python build_corpus.py
 Requires a local checkout of SigmaHQ/sigma's `rules/` directory at
-./sigmahq/rules (see ../STATUS.md or this file's header for how it was
+./sigmahq/rules (see ../../STATUS.md or this file's header for how it was
 fetched: sparse/shallow git clone, `rules/` only, ~3100 files, ~18MB).
-Writes sigma_labeled_corpus.csv, sigma_parse_failures.csv, and prints stats.
+Writes ../data/sigma_labeled_corpus.csv, ../data/sigma_parse_failures.csv,
+and prints stats.
 """
 import csv
 import os
@@ -27,11 +28,11 @@ import traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RULES_DIR = os.path.join(HERE, "sigmahq", "rules")
-HF_DIR = os.path.normpath(os.path.join(HERE, "..", "hugging-face-suggestion"))
-OUT_CORPUS = os.path.join(HERE, "sigma_labeled_corpus.csv")
-OUT_FAILURES = os.path.join(HERE, "sigma_parse_failures.csv")
+MITRE_MAPPING_DIR = os.path.normpath(os.path.join(HERE, "..", ".."))
+OUT_CORPUS = os.path.join(HERE, "..", "data", "sigma_labeled_corpus.csv")
+OUT_FAILURES = os.path.join(HERE, "..", "data", "sigma_parse_failures.csv")
 
-sys.path.insert(0, HF_DIR)
+sys.path.insert(0, MITRE_MAPPING_DIR)
 from attack_mapper.extractors.sigma import SigmaExtractor  # noqa: E402
 from attack_mapper.mitre_client import MitreAttackClient  # noqa: E402
 

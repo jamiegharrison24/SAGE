@@ -1,18 +1,11 @@
 """
-Thin wrapper around `../attack_data.py`, which already reads the local STIX
-Enterprise ATT&CK bundle committed at `../enterprise-attack.json` (53MB, no
-network fetch needed). Do not re-download or reimplement STIX parsing here.
+Thin wrapper around `attack_data.py`, which reads the local STIX Enterprise
+ATT&CK bundle at `data/enterprise-attack.json` (53MB, gitignored, no network
+fetch needed at runtime). Do not re-download or reimplement STIX parsing here.
 """
-import os
-import sys
 from typing import Dict, List, Optional
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-MITRE_MAPPING_ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
-if MITRE_MAPPING_ROOT not in sys.path:
-    sys.path.insert(0, MITRE_MAPPING_ROOT)
-
-import attack_data  # noqa: E402
+from . import attack_data
 
 
 class MitreAttackClient:

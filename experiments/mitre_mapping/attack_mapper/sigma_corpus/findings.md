@@ -1,11 +1,10 @@
 # Sigma corpus pull: extractor stress test + class-imbalance check
 
-Two purposes, per `../STATUS.md`'s "what's not done" list:
+Two purposes, per `../../STATUS.md`'s "what's not done" list:
 
-1. First real-data test of `../hugging-face-suggestion/attack_mapper/
-   extractors/sigma.py`, previously only exercised against one hand-written
-   fixture.
-2. Test `../tiered_approach/embedding_swap_findings.md`'s conclusion that
+1. First real-data test of `../extractors/sigma.py`, previously only
+   exercised against one hand-written fixture.
+2. Test `../../archive/tiered_approach/embedding_swap_findings.md`'s conclusion that
    Tier 2's weak accuracy is a training-corpus class-imbalance problem, not
    a feature-representation problem, and its specific recommendation:
    broaden coverage by folding in Sigma's ATT&CK-tagged rules.
@@ -36,7 +35,7 @@ but is left on disk for anyone continuing this locally.
 
 This is a stronger result than expected going in — real Sigma rules use
 substantially more structure than the single fixture in
-`../hugging-face-suggestion/tests/test_extractors.py` (nested selections,
+`../../tests/test_extractors.py` (nested selections,
 list-of-dict selections, multiple named selection blocks, `1 of selection*`/
 `all of` conditions) and none of it broke the extractor. Caveat: "parsed
 without crashing" isn't the same as "extracted every field correctly" —
@@ -64,13 +63,13 @@ has ≥2 examples once the two corpora are combined.
 
 ## Does it actually improve Tier 2's accuracy?
 
-`../tiered_approach/tier2_classifier_combined.py` retrains Tier 2's exact
+`../../archive/tiered_approach/tier2_classifier_combined.py` retrains Tier 2's exact
 architecture (dual char/word TF-IDF + `OneVsRestClassifier(LinearSVC)`,
 decision scores averaged) on the concatenated corpus and is scored against
 the same hand-audited sample used everywhere else in this research branch
-(`../tiered_approach/compare_combined_vs_audit.py`, identical convention to
+(`../../archive/tiered_approach/compare_combined_vs_audit.py`, identical convention to
 `compare_tier2_vs_audit.py`). Full detail in
-`../tiered_approach/tier2_combined_vs_audit_findings.md`.
+`../../archive/tiered_approach/tier2_combined_vs_audit_findings.md`.
 
 **Yes, modestly — and the hub-collapse effect moves more than raw accuracy
 does:**
@@ -82,7 +81,7 @@ does:**
 
 +3.8 points of top-1 accuracy is real but small — broadening the corpus is
 not a silver bullet on its own. The bigger, more interpretable effect is on
-hub-collapse: `embedding_swap_findings.md` and `../results.md` both flagged
+hub-collapse: `embedding_swap_findings.md` and `../../archive/results.md` both flagged
 every method's tendency to dump a large fraction of predictions onto a
 handful of hub techniques (`T1190` above all). Giving the classifier 352
 additional techniques' worth of real training examples visibly breaks that
@@ -97,19 +96,26 @@ in-distribution learning problem by construction, independent of whether it
 generalizes better out-of-distribution (which the hand-audit number above is
 what actually answers).
 
-Still well short of the HF pipeline's 48.8% (`../hugging-face-suggestion/
-findings.md`) — but that number draws on a different, non-overlapping lever
-(SAGE's own `MicroAttackStage` bridge + vendor-declared tags, not a trained
-classifier at all), so the two are not competing fixes for the same problem
-and are worth combining rather than choosing between.
+Still well short of the main pipeline's 48.8% (`../../findings.md`) — but
+that number draws on a different, non-overlapping lever (SAGE's own
+`MicroAttackStage` bridge + vendor-declared tags, not a trained classifier
+at all), so the two aren't competing fixes for the same problem. Update:
+they've since been combined -- `../classifier_resolver.py` stacks this
+ET+Sigma classifier into the main pipeline as a candidate source, taking the
+result to 53.8%. See `../../findings.md`'s "Update" section.
 
 ## Reproducing
 
 ```bash
 # 1. fetch (see above)
 # 2. build the labeled corpus + stress-test the extractor
-python build_corpus.py                                   # -> sigma_labeled_corpus.csv, sigma_parse_failures.csv
-# 3. retrain Tier 2 on ET+Sigma and score against the hand-audited sample
-python ../tiered_approach/tier2_classifier_combined.py
-python ../tiered_approach/compare_combined_vs_audit.py
+python build_corpus.py                     # -> ../data/sigma_labeled_corpus.csv, ../data/sigma_parse_failures.csv
+# 3. the active pipeline picks the new corpus up automatically -- classifier_resolver.py
+#    reads ../data/*_labeled_corpus.csv at construction time, no extra step needed
+python ../../validate.py
+
+# historical: retrain the ORIGINAL (archived) Tier 2 architecture on ET+Sigma and score it
+# separately, the standalone comparison this findings.md's numbers above come from
+python ../../archive/tiered_approach/tier2_classifier_combined.py
+python ../../archive/tiered_approach/compare_combined_vs_audit.py
 ```

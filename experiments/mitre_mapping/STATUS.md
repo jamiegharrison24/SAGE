@@ -6,21 +6,28 @@ repo `CLAUDE.md`). Goal: find a way to map SAGE's Suricata/ET signature
 vocabulary to MITRE ATT&CK technique IDs that beats the current mapping
 quality, and ideally generalizes beyond Suricata.
 
+**The active approach is `attack_mapper/`** (the HF-suggested generalisable
+pipeline, effort 3 below, now stacked with effort 4 — see effort 5). Effort
+1 (the original 7-method comparison) and effort 2 (`tiered_approach`) are
+superseded and live under `archive/` — kept for the record (real completed
+research, cited by later efforts' findings), not because anything there is
+still being iterated on. See "Where things live" for the directory map.
+
 Five sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
-## 1. Seven-method zero-shot/kNN/SMET comparison — `results.md`, `SMET_STATUS.md`
+## 1. Seven-method zero-shot/kNN/SMET comparison — `archive/results.md`, `archive/SMET_STATUS.md`
 
 First spike. Built a 773-signature ground truth by propagating
 `signatures/alert_signatures.py`'s `MicroAttackStage` labels through a
-34-row bridge table (`bridge_table_validated.json`, validated with 0
+34-row bridge table (`archive/bridge_table_validated.json`, validated with 0
 problems against live STIX). Compared 7 methods against it:
 
 | method | top-1 (scoreable) |
 |---|---:|
 | zero-shot embedding similarity, full technique list (ATTACK-BERT/MiniLM, 4 variants) | 5.5-8.4% |
 | kNN (k=5) over the 773 labeled signatures | 56.6-61.0% *(inflated — see caveat below)* |
-| SMET (external pretrained classifier, unblocked via a user-space Miniconda Python 3.9 env — see `SMET_STATUS.md`) | 13.2% |
+| SMET (external pretrained classifier, unblocked via a user-space Miniconda Python 3.9 env — see `archive/SMET_STATUS.md`) | 13.2% |
 
 **Caveat that matters:** the kNN numbers are not solving the same problem
 as the rest. Because ground truth is *propagated from* `MicroAttackStage`,
@@ -28,8 +35,11 @@ kNN over the same 773 hand-labeled signatures mostly just re-derives the
 original stage clustering wearing a technique-ID costume — it's not
 evidence technique-level classification is "mostly solved." SMET is the
 strongest genuinely-comparable zero-shot number, and it's still weak.
+Legacy: SMET itself (the external repo + its own Python 3.9 conda env) is
+not present on this machine anymore, only `archive/SMET_STATUS.md`'s
+write-up — nothing to clean up there.
 
-## 2. Tiered approach (Tier 0-4) — `tiered_approach/strategy.md`, `tier2_vs_audit_findings.md`, `embedding_swap_findings.md`
+## 2. Tiered approach (Tier 0-4) — `archive/tiered_approach/strategy.md`, `tier2_vs_audit_findings.md`, `embedding_swap_findings.md`
 
 Tier 0 (harvest vendor-declared MITRE tags) + Tier 1 (STIX malware/tool
 alias table, high precision/narrow recall) + Tier 2 (supervised classifier
@@ -46,11 +56,11 @@ corpus — top 5 techniques are 81.3% of rows, and `T1203` (client-side
 browser exploitation) has exactly **1** training example — not a feature-
 representation problem, so no encoder swap fixes it.
 
-## 3. Generalisable HF-suggested pipeline — `hugging-face-suggestion/findings.md`
+## 3. Generalisable HF-suggested pipeline — `findings.md`
 
 Implements the extract -> enrich -> narrate -> embed -> LLM-reason
-architecture from a Hugging-Face-chat suggestion (`hugging-face-suggestion/
-generalisable mitre mapper.md`), scoped to what this repo can actually
+architecture from a Hugging-Face-chat suggestion (`plan.md`,
+`generalisable mitre mapper.md`), scoped to what this repo can actually
 exercise: Suricata (primary, since SAGE ingests Suricata) + Sigma
 extractors, an IoC resolver reusing Tier 1's alias table plus SAGE's own
 `MicroAttackStage` bridge table, a MiniLM embedding fallback, and a
@@ -74,15 +84,14 @@ derived via that same bridge table, so part of the bridge_table row's 50%
 reflects "does the stage-level judgment still hold up under independent
 review," not fully independent inference.
 
-## 4. Sigma corpus pull — `sigma_corpus/findings.md`
+## 4. Sigma corpus pull — `attack_mapper/sigma_corpus/findings.md`
 
 Follow-on to effort 3's recommendation. Sparse/shallow-cloned SigmaHQ's
-`rules/` (3,144 files, 18MB) and ran it through `hugging-face-suggestion`'s
-`SigmaExtractor` for the first time against real (non-fixture) data —
-**100% parsed, 0 exceptions.** 2,798 rules yielded a labeled
-(rule -> ATT&CK technique) corpus, `sigma_labeled_corpus.csv`, built the
-same way as the tiered-approach's `et_labeled_corpus.csv` so the two are
-directly comparable:
+`rules/` (3,144 files, 18MB) and ran it through `SigmaExtractor` for the
+first time against real (non-fixture) data — **100% parsed, 0 exceptions.**
+2,798 rules yielded a labeled (rule -> ATT&CK technique) corpus,
+`sigma_labeled_corpus.csv`, built the same way as the tiered-approach's
+`et_labeled_corpus.csv` so the two are directly comparable:
 
 | | ET corpus | Sigma corpus |
 |---|---:|---:|
@@ -96,24 +105,26 @@ Confirms `embedding_swap_findings.md`'s prediction directly: Sigma covers
 had ≤1 training example gets ≥2 once combined.
 
 Retrained Tier 2's exact classifier architecture on the concatenated
-ET+Sigma corpus (`tiered_approach/tier2_classifier_combined.py`) and scored
-it the same way: **38.0% top-1 (30/79)**, vs. 34.2% (27/79) ET-only — a real
-but modest +3.8-point gain. The bigger effect is on hub-collapse, not raw
-accuracy: top-1 `T1190` predictions drop from 76.8% to 52.5% of all matched
-rows. Broadening the corpus is a genuine, evidence-backed lever, just not
-individually a large one — see `sigma_corpus/findings.md` for the full
-breakdown, including why this and effort 3's 48.8% are non-competing levers
-(different signal sources) worth stacking rather than choosing between.
+ET+Sigma corpus (`archive/tiered_approach/tier2_classifier_combined.py`,
+scoring the original archived Tier 2 in isolation — a separate check from
+effort 5 below) and scored it the same way: **38.0% top-1 (30/79)**, vs.
+34.2% (27/79) ET-only — a real but modest +3.8-point gain. The bigger effect
+is on hub-collapse, not raw accuracy: top-1 `T1190` predictions drop from
+76.8% to 52.5% of all matched rows. Broadening the corpus is a genuine,
+evidence-backed lever, just not individually a large one — see
+`attack_mapper/sigma_corpus/findings.md` for the full breakdown, including
+why this and effort 3's 48.8% are non-competing levers (different signal
+sources), which effort 5 stacks together.
 
-## 5. Stacking effort 3 + effort 4 — `hugging-face-suggestion/findings.md` ("Update" section)
+## 5. Stacking effort 3 + effort 4 — `findings.md` ("Update" section)
 
-The untried combination flagged above: `hugging-face-suggestion/attack_mapper/
-classifier_resolver.py` wires effort 4's live-trained ET+Sigma classifier
-into effort 3's pipeline as a new candidate source, slotted between the
-high-precision IoC/bridge sources and the low-precision embedding fallback.
-It only ever gets a turn on rows where `declared`/`ioc_alias`/`bridge_table`
-found nothing (18 of 80 scoreable rows, pre-stacking) — i.e. exactly the
-rows that used to fall through to the near-useless embedding layer.
+The untried combination flagged above: `attack_mapper/classifier_resolver.py`
+wires a live-trained ET+Sigma classifier into the pipeline as a new
+candidate source, slotted between the high-precision IoC/bridge sources and
+the low-precision embedding fallback. It only ever gets a turn on rows where
+`declared`/`ioc_alias`/`bridge_table` found nothing (18 of 80 scoreable
+rows, pre-stacking) — i.e. exactly the rows that used to fall through to the
+near-useless embedding layer.
 
 **Result: 53.8% top-1 (43/80), up from 48.8%.** The classifier claims 5 of
 those 18 rows (only when its own prediction clears a positive decision-
@@ -123,6 +134,19 @@ still fall through to embedding, still at ~0% precision. Because the two
 levers fire on disjoint rows by construction, the gain is strictly additive
 — resolving the "do they add or overlap" open question from effort 4: they
 add.
+
+**Also effort 5:** the whole package was promoted from
+`hugging-face-suggestion/` (a subfolder alongside `tiered_approach/`) to
+`experiments/mitre_mapping/attack_mapper/` directly, and made fully
+self-contained — no imports reach outside its own tree anymore (previously
+it reached into `tiered_approach/` for the alias table, `normalize.py`, the
+training corpora, and the vendored ET ruleset). `tiered_approach/` and
+effort 1's top-level files moved to `archive/`, unmodified internally, per
+the user's direction that this is the approach going forward, not one of
+several being compared. Re-ran `validate.py` after the move: identical
+53.8%, confirming the restructure changed only file locations. See
+`findings.md`'s "Update: package promoted and made self-contained" section
+and "Where things live" below for the full picture.
 
 ## Current bottom line
 
@@ -142,10 +166,11 @@ come from a non-embedding signal.
 - **Ground truth depth.** 100 hand-audited rows (80 scoreable), and their
   `reviewer_verdict`/`reviewer_notes` columns are still empty — these are
   proposed corrections from a prior analysis pass, not yet human-confirmed.
-  The brief for the HF pipeline asked for 200+.
-- **LLM reasoning layer.** Architecturally ready (`hugging-face-suggestion/
-  attack_mapper/llm_client.py`) but has never actually run once, anywhere,
-  in this research branch.
+  The brief for the HF pipeline asked for 200+. This is the one item that
+  needs a human, not more engineering.
+- **LLM reasoning layer.** Architecturally ready (`attack_mapper/
+  llm_client.py`) but has never actually run once, anywhere, in this
+  research branch — no API key configured.
 - **The classifier-stacking gain rests on a 5-row sample** (effort 5, the
   18 rows that used to fall through to embedding, of which the classifier
   claims 5). Directionally promising, not a stable estimate — the 200+-row
@@ -158,25 +183,41 @@ come from a non-embedding signal.
 
 ```
 experiments/mitre_mapping/
-  results.md, SMET_STATUS.md          # effort 1: 7-method comparison
-  bridge_table_validated.json         # MicroAttackStage -> ATT&CK, shared by efforts 1 & 3
-  ground_truth_signatures.csv         # 773-signature GT, shared by efforts 1 & 2
-  attack_data.py                      # shared STIX-bundle reader, shared by efforts 1 & 3
-  tiered_approach/                    # effort 2: Tier 0-4
-    strategy.md, results.md, embedding_swap_findings.md, tier2_vs_audit_findings.md
-    emerging-all.rules                # vendored ET ruleset, reused by effort 3's Suricata extractor
-    hand_audit_sample*.csv            # 100-row hand-audited sample, reused by effort 3
-  hugging-face-suggestion/            # effort 3: generalisable pipeline; effort 5: stacked with effort 4
-    plan.md, generalisable mitre mapper.md   # the original HF suggestion
-    findings.md                       # effort 3's results + caveats + effort 5's "Update" section
-    attack_mapper/                    # the implementation
-      classifier_resolver.py          # effort 5: wires effort 4's classifier in as a candidate source
-    validate.py, validation_report.md, tests/
-  sigma_corpus/                       # effort 4: Sigma corpus pull
-    findings.md
-    build_corpus.py, sigma_labeled_corpus.csv, sigma_parse_failures.csv
-    sigmahq/                          # third-party clone, not committed -- see findings.md to refetch
-  tiered_approach/tier2_classifier_combined.py       # effort 4's retrained Tier 2
-  tiered_approach/compare_combined_vs_audit.py       # effort 4's scoring
-  tiered_approach/tier2_combined_vs_audit_findings.md
+  STATUS.md                     # this file
+  findings.md                   # effort 3's results + effort 5's stacking/reorg updates
+  plan.md, generalisable mitre mapper.md   # the original HF suggestion
+  validate.py, validation_report.md
+  tests/                        # extractor unit tests
+
+  attack_mapper/                # THE ACTIVE PACKAGE (effort 3 + effort 5) -- self-contained,
+                                 # no imports reach outside this tree
+    __init__.py, models.py, config.py
+    attack_data.py               # own copy of the STIX-bundle reader
+    normalize.py                 # own copy (signature-text canonicalization)
+    alias_table.py                # own copy of the STIX tool/malware alias-table logic
+    classifier_training.py        # own copy of the TF-IDF+LinearSVC training logic
+    mitre_client.py, ioc_resolver.py, narrative.py, embedder.py,
+    llm_client.py, classifier_resolver.py, reasoner.py, pipeline.py
+    extractors/                  # suricata.py (primary), sigma.py, generic.py, base.py
+    data/                        # own copies of every data dependency:
+      enterprise-attack.json      # gitignored, large -- STIX bundle cache
+      emerging-all.rules          # gitignored, large -- vendored ET ruleset
+      bridge_table_validated.json
+      et_labeled_corpus.csv
+      hand_audit_sample*.csv      # the 100-row hand-audited sample (effort 2's, reused)
+      sigma_labeled_corpus.csv, sigma_parse_failures.csv
+    sigma_corpus/                # effort 4: how the Sigma corpus was built
+      build_corpus.py, findings.md
+      sigmahq/                   # third-party clone, gitignored -- see findings.md to refetch
+
+  archive/                       # SUPERSEDED -- kept for the record, not iterated on
+    results.md, SMET_STATUS.md, bad_call_table.*, bridge_table.py, build_*.py,
+    candidate_techniques.json, conflicts.csv, coverage_check.py, fetch_techniques.py,
+    ground_truth.py, ground_truth_signatures.csv, merged_ground_truth_stage.csv,
+    report.md, run_methods.py, score.py, techniques.json, validate_bridge.py,
+    attack_data.py, bridge_table_validated.json, enterprise-attack.json   # effort 1
+    tiered_approach/              # effort 2, moved wholesale, internally unchanged --
+                                   # its own scripts still resolve their own relative paths
+    sigma_corpus/sigma_labeled_corpus.csv   # frozen copy so tier2_classifier_combined.py
+                                             # (archived) still runs unmodified
 ```

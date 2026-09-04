@@ -8,17 +8,17 @@ Two input shapes, both handled here:
    mitre_technique_id T1190; ...)`. Parsed directly for content/pcre/
    classtype/metadata, including any `mitre_technique_id`/`mitre_tactic_id`
    the rule already carries (harvested as `declared_technique_ids` -- Tier 0
-   in ../../tiered_approach/strategy.md: these are ~100% precision when
-   present and should short-circuit inference, not compete with it).
+   in ../../archive/tiered_approach/strategy.md: these are ~100% precision
+   when present and should short-circuit inference, not compete with it).
 
 2. A bare signature name/title string, e.g. "ET SCAN Potential VNC Scan
    5800-5820". This is what SAGE's own alert stream and the hand-audited
-   ground truth (`../../hand_audit_sample*.csv`) actually consist of --
+   ground truth (`../data/hand_audit_sample*.csv`) actually consist of --
    Suricata alerts as ingested by `sage.py` carry only the rule's `msg`
    text, not its body. `strategy.md` is explicit that rule bodies carry far
    more signal than titles, so this path looks the title up against
-   `../../tiered_approach/emerging-all.rules` (the ET ruleset already vendored
-   for the tiered-approach experiment) and, on a hit, re-parses the full
+   `../data/emerging-all.rules` (the ET ruleset, gitignored -- see
+   ../STATUS.md for how it's fetched) and, on a hit, re-parses the full
    body. `rule.body_matched` records which path actually ran, per
    `MappedRule.processing_steps`.
 """
@@ -30,9 +30,7 @@ from ..models import ExtractedRule, IoC, IoCType, RuleFormat
 from .base import BaseExtractor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RULES_PATH = os.path.normpath(
-    os.path.join(HERE, "..", "..", "..", "tiered_approach", "emerging-all.rules")
-)
+RULES_PATH = os.path.normpath(os.path.join(HERE, "..", "data", "emerging-all.rules"))
 
 VENDOR_PREFIXES = (
     "ET ", "ETPRO ", "GPL ", "SURICATA ", "MALWARE-CNC", "SERVER-", "BROWSER-",

@@ -3,15 +3,15 @@ IoC/context resolver -- Layer C ("IoC -> known technique association") plus
 a SAGE-specific extra source, wired to two pieces of already-debugged
 internal threat intel rather than a hand-typed lookup dict:
 
-1. Tool/malware alias table, imported directly from
-   `../tiered_approach/tier1_build.py` -- built from the live STIX
+1. Tool/malware alias table (`alias_table.py`, adapted from
+   ../archive/tiered_approach/tier1_build.py) -- built from the live STIX
    malware/tool `uses` relationships, with a hard-won stoplist for alias
    collisions with common English words (`ping`, `page`, `chaos`, ...) found
-   during probing. High precision, per `../results.md`.
+   during probing. High precision, per `../archive/results.md`.
 
-2. `../bridge_table_validated.json` -- the 34-row MicroAttackStage -> ATT&CK
-   bridge, validated with 0 problems against live STIX
-   (`../results.md` section 1b). This is SAGE's *own* existing
+2. `data/bridge_table_validated.json` -- the 34-row MicroAttackStage ->
+   ATT&CK bridge, validated with 0 problems against live STIX
+   (`../archive/results.md` section 1b). This is SAGE's *own* existing
    classification (`signatures/alert_signatures.py` assigns every alert a
    `MicroAttackStage` today, independent of this experiment) -- the closest
    thing this repo has to "internal threat intel" for a rule the extractor
@@ -21,22 +21,14 @@ internal threat intel rather than a hand-typed lookup dict:
 """
 import json
 import os
-import sys
 from typing import Dict, List, Optional, Set
 
+from . import alias_table as alias_table_mod
+from . import attack_data
 from .models import ExtractedRule
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MITRE_MAPPING_ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
-TIERED_DIR = os.path.join(MITRE_MAPPING_ROOT, "tiered_approach")
-BRIDGE_TABLE_PATH = os.path.join(MITRE_MAPPING_ROOT, "bridge_table_validated.json")
-
-for p in (MITRE_MAPPING_ROOT, TIERED_DIR):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-import attack_data  # noqa: E402
-import tier1_build  # noqa: E402
+BRIDGE_TABLE_PATH = os.path.join(HERE, "data", "bridge_table_validated.json")
 
 ALIAS_CONFIDENCE = 0.75
 BRIDGE_CONFIDENCE = {"high": 0.7, "ambiguous": 0.4, "none": 0.0}
@@ -45,7 +37,7 @@ BRIDGE_CONFIDENCE = {"high": 0.7, "ambiguous": 0.4, "none": 0.0}
 class IoCResolver:
     def __init__(self):
         objs = attack_data.load_bundle()
-        self._alias_table = tier1_build.build_alias_table(objs)
+        self._alias_table = alias_table_mod.build_alias_table(objs)
         self._bridge_table = self._load_bridge_table()
 
     @staticmethod
@@ -62,7 +54,7 @@ class IoCResolver:
         are keyed on rule-specific content while the bridge table is a
         coarse per-stage default."""
         text = " ".join(filter(None, [rule.title, rule.raw_content]))
-        hits = tier1_build.match_signature(text, self._alias_table)
+        hits = alias_table_mod.match_signature(text, self._alias_table)
         if hits:
             techniques: Set[str] = set()
             for techs in hits.values():
