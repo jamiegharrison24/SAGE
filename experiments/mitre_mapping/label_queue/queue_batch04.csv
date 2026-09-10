@@ -1,0 +1,51 @@
+signature
+ET POLICY POSSIBLE Web Crawl using Curl
+ET POLICY POSSIBLE Web Crawl using Wget
+ET POLICY Possible HTA Application Download
+ET POLICY Possible IP Check api.ipify.org
+ET POLICY Possible Kali Linux hostname in DHCP Request Packet
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement
+ET POLICY Proxy TRACE Request - inbound
+ET POLICY Python-urllib/ Suspicious User Agent
+ET POLICY RDP connection confirm
+ET POLICY SMB Executable File Transfer
+ET POLICY SMB Remote AT Scheduled Job Pipe Creation
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement
+ET POLICY SMB2 NT Create AndX Request For a Powershell .ps1 File
+ET POLICY SMB2 NT Create AndX Request For an Executable File
+ET POLICY SMB2 Remote AT Scheduled Job Create Request
+ET POLICY SSLv3 inbound connection to server vulnerable to POODLE attack
+ET POLICY SSLv3 outbound connection from client vulnerable to POODLE attack
+ET POLICY Suspicious inbound to MSSQL port 1433
+ET POLICY Suspicious inbound to Oracle SQL port 1521
+ET POLICY Suspicious inbound to PostgreSQL port 5432
+ET POLICY Suspicious inbound to mSQL port 4333
+ET POLICY TeamViewer Dyngate User-Agent
+ET POLICY User-Agent (Launcher)
+ET POLICY User-Agent (NSIS_Inetc (Mozilla)) - Sometimes used by hostile installers
+ET POLICY Vulnerable Java Version 1.7.x Detected
+ET POLICY curl User-Agent Outbound
+ET POLICY libwww-perl User-Agent
+ET SCAN Amap TCP Service Scan Detected
+ET SCAN Amap UDP Service Scan Detected
+ET SCAN Apache mod_deflate DoS via many multiple byte Range values
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection
+ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection
+ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound)
+ET SCAN COMMIX Command injection scan attempt
+ET SCAN Cisco Torch TFTP Scan
+ET SCAN DEBUG Method Request with Command
+ET SCAN DirBuster Scan in Progress
+ET SCAN DirBuster Web App Scan in Progress
+ET SCAN DominoHunter Security Scan in Progress
+ET SCAN Grendel-Scan Web Application Security Scan Detected
+ET SCAN Grim's Ping ftp scanning tool
+ET SCAN Havij SQL Injection Tool User-Agent Inbound
+ET SCAN Hydra User-Agent

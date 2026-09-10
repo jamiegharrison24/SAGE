@@ -1,0 +1,51 @@
+signature
+ET SCAN Suspicious inbound to MSSQL port 1433
+ET SCAN Suspicious inbound to Oracle SQL port 1521
+ET SCAN Suspicious inbound to PostgreSQL port 5432
+ET SCAN Suspicious inbound to mSQL port 4333
+ET SCAN Suspicious inbound to mySQL port 3306
+"ET SCAN Unusually Fast 400 Error Messages (Bad Request), Possible Web Application Scan"
+"ET SCAN Unusually Fast 403 Error Messages, Possible Web Application Scan"
+"ET SCAN Unusually Fast 404 Error Messages (Page Not Found), Possible Web Application Scan/Directory Guessing Attack"
+ET SCAN WSFuzzer Web Application Fuzzing
+ET SCAN Wapiti Web Server Vulnerability Scan
+ET SCAN Wikto Backend Data Miner Scan
+ET SCAN Wikto Scan
+ET SCAN ntop-ng Authentication Bypass via Session ID Guessing
+ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY)
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI
+ET SNMP Samsung Printer SNMP Hardcode RW Community String
+ET SNMP missing community string attempt 1
+ET TFTP Outbound TFTP Error Message
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 128
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 155
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 271
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 285
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 328
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 519
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 595
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 615
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 684
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing *nix
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - net command output
+ET TROJAN ATTACKER IRCBot - The command completed successfully - PRIVMSG Response
+ET TROJAN Backdoor family PCRat/Gh0st CnC traffic (OUTBOUND) 106
+ET TROJAN DDoS.XOR Checkin
+ET TROJAN Double HTTP/1.1 Header Inbound - Likely Hostile Traffic
+ET TROJAN HTTP Executable Download from suspicious domain with direct request/fake browser (multiple families)
+ET TROJAN HackerDefender Root Kit Remote Connection Attempt Detected
+ET TROJAN Miuref/Boaxxe Checkin
+ET TROJAN NgrBot IRC CnC Channel Join
+ET TROJAN Possible Metasploit Payload Common Construct Bind_API (from server)
+ET TROJAN Possible NanoCore C2 60B
+ET TROJAN Possible NanoCore C2 64B
+ET TROJAN Possible Windows executable sent when remote host claims to send html content
+ET TROJAN Possible Zendran ELF IRCBot Joining Channel 2
+ET TROJAN Poweliks Clickfraud CnC M4
+ET TROJAN Suspicious User-Agent (WindowsNT) With No Separating Space
+ET TROJAN Unknown - Loader - Check .exe Updated
+ET TROJAN Windows WMIC COMPUTERSYSTEM get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC NETLOGIN get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC NIC get Microsoft Windows DOS prompt command exit OUTBOUND

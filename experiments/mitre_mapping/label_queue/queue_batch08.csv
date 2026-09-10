@@ -1,0 +1,51 @@
+signature
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt
+ET WEB_SERVER PHP Easteregg Information-Disclosure (funny-logo)
+ET WEB_SERVER PHP Easteregg Information-Disclosure (php-logo)
+ET WEB_SERVER PHP Easteregg Information-Disclosure (phpinfo)
+ET WEB_SERVER PHP Easteregg Information-Disclosure (zend-logo)
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt
+ET WEB_SERVER PHP REQUEST SuperGlobal in URI
+ET WEB_SERVER PHP SERVER SuperGlobal in URI
+ET WEB_SERVER PHP System Command in HTTP POST
+ET WEB_SERVER PHP tags in HTTP POST
+ET WEB_SERVER PHP.//Input in HTTP POST
+ET WEB_SERVER Possible Attempt to Get SQL Server Version in URI using SELECT VERSION
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt
+ET WEB_SERVER Possible CVE-2014-6271 Attempt
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Cookie
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt
+ET WEB_SERVER Possible Cherokee Web Server GET AUX Request Denial Of Service Attempt
+ET WEB_SERVER Possible IIS Integer Overflow DoS (CVE-2015-1635)
+ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access
+ET WEB_SERVER Possible SQL Injection (exec)
+ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM
+ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT
+ET WEB_SERVER Possible SQLi xp_cmdshell POST body
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.
+ET WEB_SERVER Possible bash shell piped to dev tcp Inbound to WebServer
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt
+ET WEB_SERVER Suspicious Chmod Usage in URI
+ET WEB_SERVER Tilde in URI - potential .php~ source disclosure vulnerability
+ET WEB_SERVER WEB-PHP phpinfo access
+ET WEB_SERVER WGET Command Specifying Output in HTTP Headers
+ET WEB_SERVER WebShell Generic - wget http - POST
+ET WEB_SERVER allow_url_include PHP config option in uri
+ET WEB_SERVER auto_prepend_file PHP config option in uri
+ET WEB_SERVER disable_functions PHP config option in uri
+ET WEB_SERVER safe_mode PHP config option in uri
+ET WEB_SERVER suhosin.simulation PHP config option in uri
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt
+ET WEB_SPECIFIC_APPS BLOG CMS nsextt parameter Cross Site Scripting Vulnerability
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion

@@ -1,0 +1,51 @@
+signature
+ET SCAN ICMP =XXXXXXXX Likely Precursor to Scan
+ET SCAN ICMP Delphi Likely Precursor to Scan
+ET SCAN ICMP PING IPTools
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack
+ET SCAN MYSQL 4.1 brute force root login attempt
+ET SCAN Metasploit WMAP GET len 0 and type
+ET SCAN Modbus Scanning detected
+ET SCAN Modified Sipvicious User-Agent Detected (sundayddr)
+ET SCAN Multiple FTP Administrator Login Attempts from Single Source - Possible Brute Force Attempt
+ET SCAN Multiple FTP Root Login Attempts from Single Source - Possible Brute Force Attempt
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt
+"ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration"
+"ET SCAN NMAP -f -sXET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration"
+ET SCAN NMAP -sO
+ET SCAN NMAP -sS window 2048
+ET SCAN NMAP OS Detection Probe
+ET SCAN NMAP SIP Version Detect OPTIONS Scan
+ET SCAN NMAP SIP Version Detection Script Activity
+ET SCAN NMAP SQL Spider Scan
+ET SCAN NNG MS02-039 Exploit False Positive Generator - May Conceal A Genuine Attack
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl)
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl)
+ET SCAN Nessus User Agent
+ET SCAN Netsparker Scan in Progress
+ET SCAN Nikto Web App Scan in Progress
+ET SCAN Nmap NSE Heartbleed Request
+ET SCAN Nmap NSE Heartbleed Response
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE)
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server
+ET SCAN Non-Malicious SSH/SSL Scanner on the run
+ET SCAN PRO Search Crawler Probe
+ET SCAN Possible Fast-Track Tool Spidering User-Agent Detected
+ET SCAN Possible Nmap User-Agent Observed
+ET SCAN Possible SQLMAP Scan
+ET SCAN Possible Scanning for Vulnerable JBoss
+ET SCAN Potential FTP Brute-Force attempt response
+ET SCAN Potential SSH Scan
+ET SCAN Potential SSH Scan OUTBOUND
+ET SCAN Potential VNC Scan 5900-5920
+ET SCAN Potential muieblackcat scanner double-URI and HTTP library
+ET SCAN Rapid IMAP Connections - Possible Brute Force Attack
+ET SCAN Rapid IMAPS Connections - Possible Brute Force Attack
+ET SCAN Rapid POP3 Connections - Possible Brute Force Attack
+ET SCAN Rapid POP3S Connections - Possible Brute Force Attack
+ET SCAN Redis SSH Key Overwrite Probing
+ET SCAN SFTP/FTP Password Exposure via sftp-config.json
+ET SCAN SQLBrute SQL Scan Detected
+ET SCAN Sipvicious Scan
+ET SCAN Sqlmap SQL Injection Scan
+ET SCAN Suspicious User-Agent - get-minimal - Possible Vuln Scan

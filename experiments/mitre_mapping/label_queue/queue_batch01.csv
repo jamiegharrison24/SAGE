@@ -1,0 +1,51 @@
+signature
+BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt
+BROWSER-CHROME Google Chrome FileReader use after free attempt
+BROWSER-CHROME V8 JavaScript engine Out-of-Memory denial of service attempt
+ET ATTACK_RESPONSE Frequent HTTP 401 Unauthorized - Possible Brute Force Attack
+ET ATTACK_RESPONSE Metasploit Meterpreter Reverse HTTPS certificate
+ET ATTACK_RESPONSE Net User Command Response
+ET ATTACK_RESPONSE Output of id command from HTTP server
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style)
+ET ATTACK_RESPONSE Possible BeEF HTTP Headers Inbound
+ET ATTACK_RESPONSE python shell spawn attempt
+ET CHAT Facebook Chat using XMPP
+ET CHAT Google IM traffic Jabber client sign-on
+ET CHAT Google Talk (Jabber) Client Login
+ET CHAT IRC JOIN command
+ET CHAT IRC NICK command
+ET CHAT IRC PRIVMSG command
+ET CHAT IRC USER command
+ET CHAT IRC authorization message
+ET CHAT MSN status change
+ET CHAT Skype User-Agent detected
+ET CHAT Skype VOIP Checking Version (Startup)
+ET CINS Active Threat Intelligence Poor Reputation IP group 100
+ET CINS Active Threat Intelligence Poor Reputation IP group 44
+ET CINS Active Threat Intelligence Poor Reputation IP group 66
+ET CINS Active Threat Intelligence Poor Reputation IP group 91
+ET COMPROMISED Known Compromised or Hostile Host Traffic group 9
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (xxxatat456.com)
+ET CURRENT_EVENTS Malformed HeartBeat Request
+ET CURRENT_EVENTS Nuclear EK Landing Apr 03 2015
+ET CURRENT_EVENTS Nuclear EK Landing Apr 22 2015
+ET CURRENT_EVENTS Possible Magnitude IE EK Payload Nov 8 2013
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Client Init Vuln Server)
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Server Init Vuln Client)
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port)
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port)
+ET CURRENT_EVENTS Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords)
+ET CURRENT_EVENTS QNAP Shellshock CVE-2014-6271
+ET CURRENT_EVENTS SUSPICIOUS Firesale gTLD EXE DL with no Referer June 13 2016
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct M2 Feb 06 2015
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct Sept 15 2015
+ET DNS Query for .su TLD (Soviet Union) Often Malware Related
+ET DNS Query to a *.pw domain - Likely Hostile
+ET DNS Query to a .tk domain - Likely Hostile
+ET DOS Catalyst memory leak attack
+ET DOS Cisco 4200 Wireless Lan Controller Long Authorisation Denial of Service Attempt
+ET DOS Cisco 514 UDP flood DoS
+ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port
+ET DOS FreeBSD NFS RPC Kernel Panic
+ET DOS HOIC with booster inbound
+ET DOS HTTP GET AAAAAAAA Likely FireFlood

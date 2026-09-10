@@ -1,0 +1,51 @@
+signature
+ET TROJAN Windows WMIC OS get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC PROCESS get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC SERVER get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC SERVICE get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC SHARE get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows WMIC STARTUP get Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows dir Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows driverquery -si Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows driverquery -v Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows gpresult Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows quser Microsoft Windows DOS prompt command exit OUTBOUND
+ET TROJAN Windows qwinsta Microsoft Windows DOS prompt command exit OUTBOUND
+ET USER_AGENTS MSF Meterpreter Default User Agent
+ET WEB_CLIENT BeEF Cookie Outbound
+ET WEB_CLIENT HTA File containing Wscript.Shell Call - Potential CVE-2017-0199
+ET WEB_CLIENT Hex Obfuscation of Script Tag % Encoding
+ET WEB_CLIENT Hex Obfuscation of String.fromCharCode % Encoding
+ET WEB_CLIENT Hex Obfuscation of charCodeAt % Encoding
+ET WEB_CLIENT Hex Obfuscation of document.write % Encoding
+ET WEB_CLIENT Hex Obfuscation of substr % Encoding
+ET WEB_CLIENT Hex Obfuscation of unescape % Encoding
+ET WEB_CLIENT PowerShell call in script 1
+ET WEB_CLIENT PowerShell call in script 2
+"ET WEB_SERVER /bin/bash In URI, Possible Shell Command Execution Attempt Within Web Exploit"
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt
+ET WEB_SERVER /etc/shadow Detected in URI
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt
+ET WEB_SERVER 401TRG Generic Webshell Request - POST with wget in body
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013
+ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI
+ET WEB_SERVER CRLF Injection - Newline Characters in URL
+ET WEB_SERVER CURL Command Specifying Output in HTTP Headers
+ET WEB_SERVER ColdFusion adminapi access
+ET WEB_SERVER ColdFusion administrator access
+ET WEB_SERVER ColdFusion componentutils access
+ET WEB_SERVER ColdFusion password.properties access
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal
+ET WEB_SERVER DD-WRT Information Disclosure Attempt
+ET WEB_SERVER DFind w00tw00t GET-Requests
+ET WEB_SERVER Exploit Suspected PHP Injection Attack (cmd=)
+ET WEB_SERVER HTTP 414 Request URI Too Large
+ET WEB_SERVER IIS 8.3 Filename With Wildcard (Possible File/Dir Bruteforce)
+ET WEB_SERVER Joomla Component SQLi Attempt
+ET WEB_SERVER Likely Malicious Request for /proc/self/environ
+ET WEB_SERVER MYSQL SELECT CONCAT SQL Injection Attempt
+ET WEB_SERVER Muieblackcat scanner

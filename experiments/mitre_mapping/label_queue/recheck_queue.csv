@@ -1,0 +1,26 @@
+signature
+ET DOS Netgear DG632 Web Management Denial Of Service Attempt
+ET POLICY Executable and linking format (ELF) file download Over HTTP
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct Sept 15 2015
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1
+ET WEB_SERVER Likely Malicious Request for /proc/self/environ
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers
+ET POLICY User-Agent (NSIS_Inetc (Mozilla)) - Sometimes used by hostile installers
+ET TROJAN Possible NanoCore C2 60B
+ET POLICY Executable served from Amazon S3
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style)
+ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port
+ET EXPLOIT Possible Palo Alto SSL VPN sslmgr Format String Vulnerability (Inbound)
+ET EXPLOIT Possible iOS Pegasus Safari Exploit (CVE-2016-4657)
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt
+ET WEB_CLIENT Hex Obfuscation of charCodeAt % Encoding
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 615
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI
+ET DOS FreeBSD NFS RPC Kernel Panic
+ET WEB_SERVER WEB-PHP phpinfo access
+ET SCAN Suspicious User-Agent - get-minimal - Possible Vuln Scan

@@ -227,10 +227,52 @@ for most of these rows. See `findings.md`'s new "Update: qwen2.5:7b-instruct"
 section for the full breakdown and an untried fix direction (penalize
 low-specificity/repeated-technique reasoning, not just off-list IDs).
 
+## 9. 500-row blind-labeled set — the 53.8% doesn't survive it — `findings.md`
+
+Grew the evaluation set from 100 to 500 rows (400 new, `model_proposed`, in
+`attack_mapper/data/labeled_set_v2.csv`), labeled **blind to
+`micro_attack_stage` and `current_gt`** — the signals the pipeline's dominant
+`bridge_table` source keys off, and the same ones the original 100 rows'
+ground truth was derived through.
+
+**Result: 34.1% top-1 (108/317) on the blind rows, vs 53.8% (43/80) on the
+original 100.** 34.1% is indistinguishable from the ET-only Tier 2 classifier's
+34.2% — on a sample not scored against a rewritten copy of the bridge table,
+this pipeline does not clearly beat the classifier it was built to improve on.
+
+All three competing explanations were measured, not argued:
+- **Labeling drift** — ruled out. An independent re-label of 25 rows (fresh
+  agent, no memory of pass 1) agrees 88% exactly / 96% on technique overlap,
+  and all 3 disagreements are one convention gap (`ET POLICY` executable
+  downloads). See `label_queue/CONSISTENCY.md`.
+- **Circularity in the original set** — confirmed and quantified: labels agree
+  with the bridge table's own answer 42.7% when labeled with the stage visible,
+  **28.8%** when blind.
+- **Harder sample** — 52 distinct true labels vs 19.
+
+**The bigger finding is macro-average: 18.6% across 52 techniques**, vs 38.0%
+micro. The pipeline resolves a few common techniques and largely fails on the
+long tail — the same class-imbalance pathology already known in the *training*
+corpus, now shown to have been in the *evaluation* set too, which is why no
+prior number in this branch revealed it. `validate.py` now reports macro on
+every run; retroactively, it would have caught effort 8's fake 62.5% win
+automatically.
+
+Also fixed a reproducibility footgun: `emerging-all.rules` is gitignored, so a
+fresh clone silently scored **43.8%** instead of 53.8% (`declared` drops 11
+rows → 0). `validate.py` now hard-fails with the fetch command. And surfaced
+two missing commas in `signatures/alert_signatures.py` (lines 671, 821) that
+fuse four real signatures into two unmatched strings — production code,
+unfixed, see `findings.md`.
+
 ## Current bottom line
 
-**53.8% top-1** (effort 5, stacking 3+4) is still the best number and the
-default. Non-embedding, non-LLM signal remains the only thing that has
+**34.1% top-1 on blind-labeled rows** is the number that should be quoted going
+forward. **53.8%** (effort 5, stacking 3+4) remains the best number *on the
+original 100-row sample*, but effort 9 showed that sample was both narrow (19
+distinct labels) and partly circular, so 53.8% overstates real performance.
+The default pipeline configuration is unchanged — what changed is the
+measurement, not the code. Non-embedding, non-LLM signal remains the only thing that has
 actually helped in this branch: SAGE-internal signal (declared tags +
 `MicroAttackStage` bridge) and a broadened training corpus compose cleanly
 because they resolve disjoint rows. Every embedding/similarity-based method
@@ -247,11 +289,24 @@ model — embedding, classifier, or LLM — reasoning freshly over rule text.
 
 ## What's not done
 
-- **Ground truth depth.** 100 hand-audited rows (80 scoreable), and their
-  `reviewer_verdict`/`reviewer_notes` columns are still empty — these are
-  proposed corrections from a prior analysis pass, not yet human-confirmed.
-  The brief for the HF pipeline asked for 200+. This is the one item that
-  needs a human, not more engineering.
+- **Ground truth depth — half-solved by effort 9, and the remaining half is
+  the hard half.** The set is now 500 rows (397 scoreable), clearing the
+  brief's 200+ row count. But **only 100 are human-confirmed**; the 400 added
+  in effort 9 are `model_proposed` with `reviewer_verdict` empty, and the
+  original 100's reviewer columns were never filled in either. Row count is
+  not confirmation — an unreviewed label is a hypothesis. What exists now is a
+  *review queue* with measured 88-96% self-consistency
+  (`label_queue/CONSISTENCY.md`), which makes human confirmation fast; it is
+  not ground truth. **Start with the `ET POLICY` executable-download
+  convention gap** — is a routine binary transfer benign policy or `T1105`? —
+  which accounts for most of the residual inter-pass disagreement and, once
+  ruled on, applies to a whole class of rows at once.
+- **Two missing commas in `signatures/alert_signatures.py`** (lines 671, 821)
+  fuse four real signatures into two unmatched strings, so those alerts get
+  `unknown_mapping` instead of `END_POINT_DOS`/`HOST_DISC`. Found in effort 9,
+  **unfixed** — it is production-pipeline code, out of scope for this research
+  branch, and changing stage classification changes AGs, so it needs its own
+  branch and the `changes-ags` PR label.
 - **LLM reasoning layer has not produced a genuine improvement in 3 tries.**
   Effort 6 (`llama3.2:3b`, full-override design) regressed 20 points.
   Effort 7 fixed the gating/blending bugs and retried with `llama3.1:8b`:
@@ -266,8 +321,10 @@ model — embedding, classifier, or LLM — reasoning freshly over rule text.
   to catch modal-class collapse (catches effort 8's, not effort 7's).
 - **The classifier-stacking gain rests on a 5-row sample** (effort 5, the
   18 rows that used to fall through to embedding, of which the classifier
-  claims 5). Directionally promising, not a stable estimate — the 200+-row
-  ground-truth gap above is what would firm this up.
+  claims 5). Directionally promising, not a stable estimate. Effort 9's set
+  now gives the classifier 53 top-1 rows to be judged on instead of 5 — that
+  re-scoring has not been broken out per-source yet, and is the cheapest
+  remaining check.
 - **Splunk/KQL/Elastic/YARA extractors** from the original HF plan were
   explicitly not built — no rules of those formats exist anywhere in this
   repo to test against.

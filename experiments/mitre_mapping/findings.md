@@ -17,6 +17,116 @@ Code: `attack_mapper/`. Tests: `tests/test_extractors.py` (6/6 pass).
 Validation harness: `validate.py` -> `validation_report.md`
 (`validate.py --llm ollama` -> `validation_report_llm.md`, see below).
 
+## Update: 500-row blind-labeled set — 53.8% does not survive it
+
+The "grow the audit set toward 200+" item that every previous section deferred
+is now done, at 500 rows, and it changes the headline number. **The pipeline
+scores 34.1% on rows labeled blind, not 53.8%.**
+
+### What was built
+
+400 new rows drawn from the same 773-signature frame
+(`archive/ground_truth_signatures.csv`), labeled in 8 batches of 50 against
+`label_queue/CONVENTION.md`, merged by `merge_labels.py` into
+`attack_mapper/data/labeled_set_v2.csv`. They are `model_proposed`, **not**
+hand-audited: `reviewer_verdict` is empty on all 400, `validate.py` reports the
+provenance split on every run, and the filename deliberately stays outside the
+`hand_audit_sample*` glob so the phrase "hand-audited" cannot quietly attach to
+machine labels.
+
+**Labeling was blind to `micro_attack_stage` and to `current_gt`.** This is the
+methodological core, not a detail. The pipeline's dominant candidate source is
+`bridge_table` (314 of 500 rows), which maps `micro_attack_stage` → technique.
+The original 100 rows' `current_gt` was itself derived by propagating
+`MicroAttackStage` through that same bridge table — the circularity this file
+already flagged under "A circularity caveat, stated rather than resolved."
+Labeling the expansion with the stage visible would have re-derived that
+mechanism at five times the scale and reported a *better* number for it.
+
+### Result
+
+| | original 100 | new 400 (blind) | combined |
+|---|---:|---:|---:|
+| top-1 micro | 53.8% (43/80) | **34.1% (108/317)** | 38.0% (151/397) |
+| distinct true labels | 19 | — | 52 |
+| macro-average (mean per-technique) | 47.5% | — | **18.6%** |
+
+34.1% is statistically indistinguishable from the original ET-only Tier 2
+classifier's 34.2% — i.e. on a sample that isn't scored against a rewritten
+copy of the bridge table, the "generalisable pipeline" does not clearly beat
+the simple classifier it was built to improve on.
+
+### Ruling out the competing explanations
+
+Three things could produce this gap; all three were measured rather than
+argued.
+
+**(a) Labeling drift in the expansion.** Ruled out. 25 rows re-labeled by an
+independent agent with no memory of the first pass agree **88% exactly, 96% on
+technique overlap**, and all three disagreements are the same convention gap
+(`ET POLICY` executable downloads: benign distribution or `T1105`?), not noise.
+See `label_queue/CONSISTENCY.md`.
+
+**(b) The original number was inflated by circularity.** Confirmed, and
+quantified. Fraction of rows whose label agrees with the bridge table's own
+answer:
+
+| label set | agrees with bridge table |
+|---|---:|
+| original 100 (labeled with stage visible) | 42.7% (32/75) |
+| new 400 (labeled blind) | **28.8% (75/260)** |
+
+A 14-point drop in agreement with the pipeline's dominant source, produced
+purely by withholding that source from the labeler.
+
+**(c) The blind sample is genuinely harder.** Also true, and the more important
+finding: 52 distinct true labels versus 19. The original sample was 35% `T1190`
+and covered a narrow slice of ATT&CK; the expansion reaches the long tail.
+
+### The macro number is the real result
+
+**Macro-average 18.6% across 52 techniques**, against 38.0% micro. The pipeline
+resolves a handful of common techniques and largely fails outside them. The
+original 80-row sample could not show this — with 19 labels sharing the same
+skew as the training corpus, evaluation set and training set were failing in
+the same direction, so the failure was invisible.
+
+This is the same class-imbalance pathology
+`archive/tiered_approach/embedding_swap_findings.md` identified in the *training*
+corpus (top-5 techniques = 81.3% of rows), now shown to have been present in the
+*evaluation* set too. Every accuracy figure in this file above this section was
+measured on that skewed sample and should be read accordingly.
+
+`validate.py` now reports macro alongside micro, plus most-predicted-technique
+share, on every run. Applied retroactively, this is the check that would have
+caught effort 8's `qwen2.5:7b-instruct` "62.5% win" automatically instead of by
+manual inspection.
+
+### Two defects surfaced by this work
+
+- **`signatures/alert_signatures.py` has two missing commas** (lines 671 and
+  821), fusing four real signatures into two unmatched strings via Python's
+  implicit literal concatenation. Affects `endpointDoS_signatures` and
+  `hostdisc_signatures`; all four alerts fall through to `unknown_mapping`
+  instead of their intended stage. Production-pipeline code, out of scope for
+  this branch — **unfixed, needs its own branch and the `changes-ags` label.**
+  Detect with a `tokenize` scan for adjacent `STRING` tokens; a regex over
+  signature text misses line 821.
+- **`emerging-all.rules` absence silently degrades the score by 10 points.**
+  It is gitignored, so a fresh clone lacks it, the Suricata extractor then sees
+  only titles, `declared` drops from 11 rows to 0, and the run reports 43.8% as
+  though it were a baseline. `validate.py` now hard-fails with the fetch command
+  instead, and reports rule-body match coverage.
+
+### Status of the coverage gap
+
+The brief's "200+ labeled rows" bar is met on row count and **not** met on
+confirmation: 100 human-confirmed, 400 awaiting review. An unreviewed label is a
+hypothesis. What exists now is a review queue with a measured 88-96%
+self-consistency — the remaining work is human confirmation, starting with the
+`ET POLICY` download convention gap that accounts for most of the residual
+disagreement.
+
 ## Update: LLM layer (Layer D) tested for the first time — regression, not improvement
 
 Set up a local Ollama server (free, no repo footprint — see `attack_mapper/

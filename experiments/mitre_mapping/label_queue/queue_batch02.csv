@@ -1,0 +1,51 @@
+signature
+ET DOS IBM DB2 kuddb2 Remote Denial of Service Attempt
+ET DOS IBM Tivoli Endpoint Buffer Overflow Attempt
+ET DOS ICMP Path MTU lowered below acceptable threshold
+ET DOS LibuPnP CVE-2012-5963 ST UDN Buffer Overflow
+ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x02
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Integer indef DoS Attempt
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Negative Integer indef DoS Attempt
+ET DOS Microsoft Windows 7 ICMPv6 Router Advertisement Flood
+ET DOS Microsoft Windows LSASS Remote Memory Corruption (CVE-2017-0004)
+ET DOS Miniupnpd M-SEARCH Buffer Overflow CVE-2013-0229
+ET DOS Netgear DG632 Web Management Denial Of Service Attempt
+ET DOS NetrWkstaUserEnum Request with large Preferred Max Len
+ET DOS Outbound Low Orbit Ion Cannon LOIC Tool Internal User May Be Participating in DDOS
+ET DOS Possible Cisco ASA 5500 Series Adaptive Security Appliance Remote SIP Inspection Device Reload Denial of Service Attempt
+ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service AttemptET DOS Possible MySQL ALTER DATABASE Denial Of Service Attempt
+ET DOS Possible Memcached DDoS Amplification Query (set)
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x03
+ET DOS Possible SMBLoris NBSS Length Mem Exhaustion Vuln Inbound
+ET DOS Possible SSDP Amplification Scan in Progress
+ET DOS Possible SolarWinds TFTP Server Read Request Denial Of Service Attempt
+ET DOS Possible VNC ClientCutText Message Denial of Service/Memory Corruption Attempt
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 reply)
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 request)
+ET DOS Potential Tsunami SYN Flood Denial Of Service Attempt
+ET DOS Trojan.BlackRev V1.Botnet HTTP Login POST Flood Traffic Inbound
+ET DOS ntop Basic-Auth DOS inbound
+ET DOS ntop Basic-Auth DOS outbound
+ET EXPLOIT Cisco Smart Install Exploitation Tool - GetConfig
+ET EXPLOIT FortiOS SSL VPN - Pre-Auth Messages Payload Buffer Overflow (CVE-2018-13381)
+ET EXPLOIT FortiOS SSL VPN - Remote Code Execution (CVE-2018-13383)
+ET EXPLOIT IBM WebSphere - RCE Java Deserialization
+ET EXPLOIT Metasploit Random Base CharCode JS Encoded String
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1
+ET EXPLOIT Possible GoldenPac Priv Esc in-use
+ET EXPLOIT Possible Internet Explorer VBscript failure to handle error case information disclosure CVE-2014-6332 Common Construct M2
+ET EXPLOIT Possible MySQL cnf overwrite CVE-2016-6662 Attempt
+ET EXPLOIT Possible OpenVPN CVE-2014- 6271 attempt
+ET EXPLOIT Possible OpenVPN CVE-2014-6271 attempt
+ET EXPLOIT Possible Palo Alto SSL VPN sslmgr Format String Vulnerability (Inbound)
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt
+ET EXPLOIT Possible Pure-FTPd CVE-2014-6271 attempt
+ET EXPLOIT Possible Redirect to SMB exploit attempt - 303
+ET EXPLOIT Possible SpamAssassin Milter Plugin Remote Arbitrary Command Injection Attempt
+ET EXPLOIT Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords)
+ET EXPLOIT Possible iOS Pegasus Safari Exploit (CVE-2016-4657)
+ET EXPLOIT Potential Internet Explorer Use After Free CVE-2013-3163 Exploit URI Struct 1
+ET EXPLOIT QNAP Shellshock script retrieval
+ET EXPLOIT REDIS Attempted SSH Key Upload
+ET EXPLOIT Seagate Business NAS Unauthenticated Remote Command Execution
