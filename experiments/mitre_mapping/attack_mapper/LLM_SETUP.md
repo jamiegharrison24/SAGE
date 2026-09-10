@@ -18,6 +18,12 @@ them -- they're outside the repo entirely.
 Recommended default -- no API key, no per-call cost, nothing leaves your
 machine. Setup:
 
+**Update:** `llama3.1:8b` has now been scored too (on a 31GB machine, gating/
+blending fix applied to `reasoner.py`) — still a regression (46.2% top-1,
+down from 53.8% off), for a different reason than `llama3.2:3b`'s. See
+"The actual result" below and `findings.md`'s "Update: gating fix +
+llama3.1:8b" section.
+
 1. **Install.** On Windows:
    ```powershell
    winget install --id Ollama.Ollama -e
@@ -110,7 +116,7 @@ Costs per call, and your rule text/narratives leave your machine. Neither
 has been exercised in this research branch -- no credentials have ever been
 available in this environment.
 
-## The actual result (llama3.2:3b, first and only model scored so far)
+## The actual results
 
 `python validate.py --llm ollama --llm-model llama3.2:3b`: **33.8% top-1
 (27/80), down from 53.8% with the LLM off.** Full writeup, root-cause
@@ -125,10 +131,17 @@ confidence was uncorrelated with correctness (0.80 avg on misses, 0.83 on
 hits).
 
 `llama3.1:8b` -- the model this doc originally recommended as the better
-option -- was never actually scored; it kept triggering OOM kills on this
-16GB machine before finishing (see the memory troubleshooting note above).
-So model capability and `reasoner.py`'s override design are still
-confounded. If you pick this back up: fix the reasoner to gate Layer D on
-low-confidence rows only and blend rather than replace confidence *before*
-concluding a bigger model would have helped -- otherwise a good result from
-`llama3.1:8b` wouldn't tell you which of the two changes actually fixed it.
+option, which OOM-killed before finishing on the 16GB machine above -- has
+since been scored on a 31GB machine, with the gate/blend fix from that
+paragraph applied first (`Settings.llm_gate_confidence` in `config.py`;
+`_llm_refine` now blends rather than replaces). **Result: 46.2% top-1
+(37/80), still down from 53.8% off, but a smaller regression than
+`llama3.2:3b`'s (8 points vs. 20).** The design bugs are confirmed fixed
+(33/100 rows now skip the LLM entirely; blended rows often keep the correct
+prior) -- the residual loss is a third failure mode: the LLM proposing a
+technique outside the candidate list it was shown, at 0.80-0.95 confidence,
+which then wins the top-1 sort against a correct-but-lower-confidence prior
+(9 of 43 miss rows). See `findings.md`'s "Update: gating fix + llama3.1:8b"
+section for the full breakdown. Untried next step: reject/down-weight any
+`technique_id` in the LLM's JSON response that wasn't in the candidates it
+was given, rather than treating it as a legitimate new candidate.

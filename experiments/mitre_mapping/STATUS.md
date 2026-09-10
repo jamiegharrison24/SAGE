@@ -13,7 +13,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Six sub-experiments have run so far, in order. Each has its own detailed
+Eight sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 ## 1. Seven-method zero-shot/kNN/SMET comparison — `archive/results.md`, `archive/SMET_STATUS.md`
@@ -180,6 +180,53 @@ finishing), so model capability and reasoner design are still confounded.
 result lives in a separate `validation_report_llm.md`, not the committed
 baseline.
 
+## 7. Gating fix + `llama3.1:8b` on a bigger machine — `findings.md`
+
+Follow-on to effort 6, on a second machine (31GB RAM, no OOM risk).
+Implemented both untried fixes from effort 6: `reasoner.py`'s Layer D now
+only fires when the prior top candidate's confidence is below
+`Settings.llm_gate_confidence` (0.5), and blends confidence rather than
+fully overriding it. Then ran `llama3.1:8b` (never actually scored before —
+it OOM-killed on the 16GB machine).
+
+**Result: 46.2% top-1 (37/80), down from 53.8% — an 8-point regression, vs.
+effort 6's 20-point regression.** The gating/blending fix works as intended
+(33/100 rows never reach the LLM at all; blended rows often keep the
+correct prior answer), but a third failure mode shows up once the first two
+are fixed: the LLM sometimes proposes a technique **outside the candidate
+list it was shown**, at high self-reported confidence (0.80-0.95), and that
+free-floating guess wins the top-1 sort against a correct-but-low-confidence
+prior — 9 of 43 miss rows follow this exact pattern (e.g. correct `T1190`
+web-exploit rows overridden to `T1059`). This separates the two variables
+effort 6 left confounded: a stronger model with the design bugs fixed still
+regresses, just less badly, for a reason neither fix touches. See
+`findings.md`'s new "Update: gating fix + llama3.1:8b" section for the full
+breakdown and the suggested next step (reject/down-weight off-list
+technique IDs from the LLM response).
+
+## 8. `qwen2.5:7b-instruct` — a headline number that doesn't survive inspection — `findings.md`
+
+Tried a third model (4.7GB, reportedly stronger JSON/instruction-following
+than Llama at this size), same gated+blended reasoner as effort 7. Raw
+result looked like the branch's first genuine LLM win: **62.5% top-1
+(50/80), up from 53.8% off.** It isn't one: 47 of the 48 free-floating LLM
+answers are `T1190` at a flat 0.90 confidence, regardless of the rule —
+the model collapsed to guessing the single most common technique (35% of
+this sample's true labels) almost unconditionally. Precision on those 47
+`T1190` guesses is only 46.8%, not the 0.90 self-reported for every one.
+This is the same hub-collapse failure every non-LLM method in this branch
+has fought, now severe enough to look like a win purely because this
+80-row sample happens to be 35% `T1190`. **Would very likely hurt on a
+differently-balanced corpus** (e.g. what `sage.py` actually ingests).
+
+**None of the 3 models / 2 reasoner designs tried so far survive scrutiny.**
+`llama3.1:8b` fails by answering off-list; `qwen2.5:7b-instruct` fails by
+collapsing to the modal class — the off-list-rejection fix (effort 7)
+wouldn't catch the latter, since `T1190` is a legitimate in-list candidate
+for most of these rows. See `findings.md`'s new "Update: qwen2.5:7b-instruct"
+section for the full breakdown and an untried fix direction (penalize
+low-specificity/repeated-technique reasoning, not just off-list IDs).
+
 ## Current bottom line
 
 **53.8% top-1** (effort 5, stacking 3+4) is still the best number and the
@@ -189,12 +236,14 @@ actually helped in this branch: SAGE-internal signal (declared tags +
 because they resolve disjoint rows. Every embedding/similarity-based method
 tried anywhere in this research branch (zero-shot ATTACK-BERT/MiniLM, kNN,
 Tier 2 TF-IDF/MiniLM/ATTACK-BERT, Tier 2 combined, Layer A in the HF
-pipeline) tops out under 40% top-1 on its own — and now Layer D, the one
-piece explicitly designed to add reasoning on top of everything else, has
-made things *worse* (effort 6) in its only test so far. Every accuracy gain
-in this research branch has come from harvesting or combining existing
-structured signal, not from any model — embedding, classifier, or LLM —
-reasoning freshly over rule text.
+pipeline) tops out under 40% top-1 on its own — and Layer D, the one piece
+explicitly designed to add reasoning on top of everything else, has not
+produced one genuine improvement across 3 models / 2 reasoner designs
+(effort 6's full-override regression, effort 7's off-list-answer regression,
+effort 8's headline "win" that turned out to be majority-class collapse).
+Every accuracy gain in this research branch that survives scrutiny has come
+from harvesting or combining existing structured signal, not from any
+model — embedding, classifier, or LLM — reasoning freshly over rule text.
 
 ## What's not done
 
@@ -203,15 +252,18 @@ reasoning freshly over rule text.
   proposed corrections from a prior analysis pass, not yet human-confirmed.
   The brief for the HF pipeline asked for 200+. This is the one item that
   needs a human, not more engineering.
-- **LLM reasoning layer needs a design fix, not just a bigger model.**
-  Effort 6 tested it (`llama3.2:3b`) and got a 20-point regression, traced
-  to `reasoner.py`'s full-override design (Layer D reprocesses every row,
-  not just uncertain ones, and replaces rather than blends prior
-  confidence). Two untried fixes before drawing a final conclusion: (a) gate
-  Layer D to only fire on low-confidence/`embedding`-sourced rows and blend
-  rather than replace confidence; (b) retry with `llama3.1:8b` or a hosted
-  model once (a) is in, to separate "small local model" from "override
-  design" as the cause. Neither attempted yet.
+- **LLM reasoning layer has not produced a genuine improvement in 3 tries.**
+  Effort 6 (`llama3.2:3b`, full-override design) regressed 20 points.
+  Effort 7 fixed the gating/blending bugs and retried with `llama3.1:8b`:
+  still regressed 8 points, traced to the LLM proposing a technique outside
+  the candidate list at high confidence. Effort 8 tried `qwen2.5:7b-instruct`
+  with the same fixed reasoner and got a headline 62.5% — but it's an
+  artifact of collapsing to guess `T1190` (the modal class) almost every
+  time, not better reasoning; would likely hurt on a less `T1190`-heavy
+  corpus. Two untried next steps, neither sufficient alone: (a) reject/
+  down-weight off-list `technique_id`s (catches effort 7's failure, not
+  effort 8's); (b) penalize low-specificity or repeated-technique reasoning
+  to catch modal-class collapse (catches effort 8's, not effort 7's).
 - **The classifier-stacking gain rests on a 5-row sample** (effort 5, the
   18 rows that used to fall through to embedding, of which the classifier
   claims 5). Directionally promising, not a stable estimate — the 200+-row

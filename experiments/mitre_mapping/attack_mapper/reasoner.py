@@ -88,10 +88,16 @@ class TechniqueReasoner:
                 conf = min(max(sim["similarity"], 0.0), 1.0) * self.settings.embedding_confidence_cap
                 self._add(candidates, tid, conf, "embedding", f"semantic similarity: {sim['similarity']:.3f}")
 
-        if self.llm.is_configured and candidates:
+        top_confidence = max((c["confidence"] for c in candidates.values()), default=0.0)
+        if self.llm.is_configured and candidates and top_confidence < self.settings.llm_gate_confidence:
             candidates = self._llm_refine(rule, narrative, candidates, steps)
-        else:
+        elif not self.llm.is_configured:
             steps.append({"step": "llm_reasoning", "status": "skipped", "reason": "no LLM client configured"})
+        else:
+            steps.append({
+                "step": "llm_reasoning", "status": "skipped",
+                "reason": f"top prior confidence {top_confidence:.2f} >= gate {self.settings.llm_gate_confidence:.2f}",
+            })
 
         mappings = [
             TechniqueMapping(
@@ -123,9 +129,15 @@ class TechniqueReasoner:
         candidates: Dict[str, dict],
         steps: List[dict],
     ) -> Dict[str, dict]:
-        """Chain-of-thought validation over the candidate pool. Untested in
-        this environment (no LLM configured) -- exercised only when a real
-        client is wired in via AttackMapperPipeline(llm_client=...)."""
+        """Chain-of-thought validation over the candidate pool. Only called
+        when the prior top confidence is below `Settings.llm_gate_confidence`
+        (see `infer`) -- effort 6 found that reprocessing every row and fully
+        replacing confidence caused a 20-point regression. Blends rather than
+        replaces: a technique the LLM confirms gets its confidence averaged
+        with the prior, not overwritten; a prior candidate the LLM doesn't
+        mention is kept as-is rather than dropped; a technique the LLM
+        proposes that wasn't already a candidate is added at its own
+        confidence."""
         candidate_lines = "\n".join(
             f"- {tid}: prior_confidence={c['confidence']:.2f}, evidence={c['evidence']}"
             for tid, c in candidates.items()
@@ -149,15 +161,21 @@ add one sentence of reasoning each. Respond as JSON:
             steps.append({"step": "llm_reasoning", "status": "error", "error": str(exc)})
             return candidates
 
-        refined: Dict[str, dict] = {}
+        blended: Dict[str, dict] = dict(candidates)
         for m in parsed.get("mappings", []):
             tid = m.get("technique_id")
             if not tid or not self.mitre.exists(tid):
                 continue
-            refined[tid] = {
-                "confidence": float(m.get("confidence", 0.0)),
-                "source": "llm",
-                "evidence": [m.get("reasoning", "")],
-            }
-        steps.append({"step": "llm_reasoning", "status": "ok", "kept": list(refined.keys())})
-        return refined or candidates
+            llm_conf = float(m.get("confidence", 0.0))
+            reasoning = m.get("reasoning", "")
+            prior = candidates.get(tid)
+            if prior is None:
+                blended[tid] = {"confidence": llm_conf, "source": "llm", "evidence": [reasoning]}
+            else:
+                blended[tid] = {
+                    "confidence": (prior["confidence"] + llm_conf) / 2,
+                    "source": f"{prior['source']}+llm",
+                    "evidence": prior["evidence"] + [reasoning],
+                }
+        steps.append({"step": "llm_reasoning", "status": "ok", "blended": list(blended.keys())})
+        return blended

@@ -32,3 +32,12 @@ class Settings:
     # environment, so the reasoner runs in template-only mode unless a
     # client is explicitly passed in.
     llm_provider: Optional[str] = None
+
+    # Layer D gating (see STATUS.md "effort 6"): effort 6 found the LLM
+    # reprocessing every row and fully overriding prior confidence caused a
+    # 20-point regression (53.8% -> 33.8%). Layer D now only fires when the
+    # best prior candidate's confidence is below this threshold -- i.e. rows
+    # that fell through to tier2_combined/embedding, not ones already
+    # answered with high precision by declared/bridge_table -- and blends
+    # rather than replaces confidence (see reasoner._llm_refine).
+    llm_gate_confidence: float = 0.5

@@ -93,6 +93,109 @@ unaffected — this finding lives in `validation_report_llm.md`, a separate
 opt-in report, specifically so a negative LLM result never contaminates the
 53.8% baseline everyone else in this document builds on.
 
+## Update: gating fix + `llama3.1:8b` on a bigger machine — still a regression, different failure mode
+
+Did the two follow-ups the previous update left open, on a second machine
+(31GB RAM vs. the original 16GB — `llama3.1:8b` never OOMs here). First,
+fixed `reasoner.py`'s design per (a) above: `Settings.llm_gate_confidence`
+(default 0.5, `config.py`) now gates `_llm_refine` to only fire when the
+prior top candidate's confidence is below the threshold — a `declared`
+(1.0) or `bridge_table` (0.70) answer skips the LLM entirely and is never
+touched. `_llm_refine` also now blends: a technique the LLM confirms gets
+`(prior + llm) / 2` confidence with `source` extended to `"<prior>+llm"`,
+a prior candidate the LLM doesn't mention is kept rather than dropped, and
+a genuinely new technique the LLM proposes is added rather than replacing
+the pool. Then ran `validate.py --llm ollama --llm-model llama3.1:8b`.
+
+**Result: 46.2% top-1 (37/80), down from 53.8% with the LLM off — an
+8-point regression, versus effort 6's 20-point regression.** Better, but
+still a net loss, and for a different reason than effort 6's bug.
+
+| | LLM off (default) | LLM on, full-override (`llama3.2:3b`, effort 6) | LLM on, gated+blended (`llama3.1:8b`) |
+|---|---:|---:|---:|
+| top-1 vs. hand-audit | 43/80 = 53.8% | 27/80 = 33.8% | **37/80 = 46.2%** |
+| flagged for human review | 89/100 | 63/100 | 77/100 |
+| source breakdown | n/a | `{'llm': 100}` | `{'bridge_table': 33, 'llm': 28, 'bridge_table+llm': 19, 'embedding+llm': 12, 'tier2_combined+llm': 6, 'ioc_alias': 2}` |
+
+The gate worked as designed — 33 of 100 rows (the `declared`/high-confidence
+`bridge_table` ones) never reach the LLM at all, versus 100/100 before — and
+`bridge_table+llm`/`tier2_combined+llm` rows show the blend keeping the
+prior's correct answer in several cases (e.g. `T1190` at 0.61-0.66 in the
+hit table). So the two design bugs effort 6 identified are actually fixed
+here, confirmed by the source breakdown and by spot-checking the blended
+rows in `validation_report_llm.md`.
+
+The residual regression traces to a **third failure mode**, not previously
+seen because the full-override design masked it: rows where the prior pool
+was correctly low-confidence (e.g. embedding fallback, ~0.5) and *should*
+have been refined toward the right answer instead get a **pure `llm`-source
+answer at 0.90-0.95 confidence that isn't in the prior candidate list at
+all** — e.g. six separate `ET EXPLOIT ... CVE-...` / `WEB_SERVER ... SQL
+Injection` rows (all correctly `T1190`) get overridden to `T1059` at
+0.90-0.95 by the LLM. This isn't the blend logic failing — `_llm_refine`
+correctly adds an unlisted technique the LLM proposes as its own new
+candidate — it's `llama3.1:8b` confidently proposing a technique **outside
+the candidate pool it was shown**, then that free-floating high-confidence
+guess winning the top-1 sort against the correct-but-low-confidence prior.
+9 of the 43 miss rows show this exact pattern (source `llm` alone, 0.80-0.95
+confidence, `T1059` or `T1190` guessed for what should have been the other).
+Confidence is still uninformative for this model too: no attempt was made
+in this run to compare LLM self-reported confidence to correctness, but the
+sheer count of high-confidence wrong `llm`-sourced answers is the same
+"model doesn't know when it's wrong" pattern as effort 6.
+
+**Conclusion: this separates the two confounded variables from effort 6.**
+`llama3.1:8b` (a materially stronger model, run to completion this time) is
+*not* the fix — with the design bug fixed, it still regresses, just less
+badly, and for a reason the design fix couldn't touch: an unconstrained LLM
+call can answer off-list. The untried next step this suggests: constrain
+the prompt/parsing to reject or down-weight any `technique_id` the LLM
+returns that wasn't in the candidate list it was given, rather than treating
+`_llm_refine`'s "propose a new technique" path as legitimate refinement.
+**LLM-off (53.8%) remains the default and the best number in this branch.**
+
+## Update: `qwen2.5:7b-instruct` — a headline number that doesn't hold up
+
+Tried a third model, same gated+blended `reasoner.py` from the update above:
+`qwen2.5:7b-instruct` (4.7GB, chosen over `llama3.1:8b` for reportedly
+stronger JSON/instruction-following at a similar size). Raw result looked
+like the first genuine win: **62.5% top-1 (50/80), up from 53.8% off** —
+source breakdown `{'bridge_table': 33, 'llm': 48, 'embedding+llm': 7,
+'tier2_combined+llm': 6, 'bridge_table+llm': 4, 'ioc_alias': 2}`.
+
+**It doesn't survive inspection.** Of the 48 rows where the LLM proposed a
+free-floating (non-blended) answer, **47 are `T1190` at exactly 0.90
+confidence** — the model has collapsed to guessing the single most common
+technique almost unconditionally, independent of the rule's actual
+narrative. `T1190` is 35% of this 80-row sample's true labels (28/80) — the
+single largest class by a wide margin — so a near-constant `T1190` guess
+nets positive purely off that base rate: precision on those 47 guesses is
+only 46.8% (22 hits, 25 misses), not the confident 0.90 the model reports
+for every one of them. This is the exact hub-collapse pattern every
+non-LLM method in this branch already fought (`archive/tiered_approach/
+embedding_swap_findings.md`, effort 4's Layer A) — now reproduced by an LLM
+severely enough that it happens to look like a win on this particular
+class-imbalanced sample. It is not evidence the model reasons better than
+`llama3.1:8b`, and this pattern would very likely **hurt** on a corpus with
+a different class balance (e.g. the CCDC/CPTC alert mix `sage.py` actually
+ingests, which isn't 35% web-exploit signatures).
+
+**Revised bottom line: no LLM tried so far (3 models, 2 reasoner designs)
+survives scrutiny as a genuine improvement.** `llama3.1:8b`'s failure mode
+(answering off-list) and `qwen2.5:7b-instruct`'s (collapsing to the modal
+class) are different symptoms of the same root cause: nothing in
+`_llm_refine`'s prompt or parsing constrains or penalizes a generic,
+low-specificity guess. The off-list-rejection fix flagged above would catch
+`llama3.1:8b`'s failure mode but not this one — `T1190` *is* in the
+candidate list for plenty of these rows, so rejecting off-list answers
+wouldn't stop the model from defaulting to it. A fix here needs something
+that penalizes the LLM repeating the same technique across dissimilar
+narratives (e.g. tracking prediction diversity, or requiring the reasoning
+text to reference rule-specific evidence rather than accepting a generic
+justification) — untried. **LLM-off (53.8%) remains the default, the best
+number, and now the only one of the four configurations tried that isn't
+compromised by a collapse-to-majority-class artifact.**
+
 ## Update: stacking in the ET+Sigma classifier (effort 4)
 
 `STATUS.md` flagged this pipeline (effort 3) and the ET+Sigma-broadened
