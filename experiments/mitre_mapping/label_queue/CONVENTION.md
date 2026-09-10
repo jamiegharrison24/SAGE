@@ -10,17 +10,27 @@ Label from **the signature text alone**. Do not look up the row's
 `micro_attack_stage`, its `current_gt`/`gt_ids`, or what the pipeline
 predicts for it.
 
-Why: the pipeline's dominant candidate source (`bridge_table`, ~60 of 80
-scoreable rows) works by mapping `micro_attack_stage` → technique. A labeler
-who sees the stage largely re-derives that mapping, so the pipeline gets
-scored against a rewritten version of its own input. The result is a set that
-reports a *higher* number while carrying less information.
+Why this was written: the pipeline's dominant candidate source used to be
+`bridge_table`, which mapped `micro_attack_stage` → technique. A labeler who
+saw the stage largely re-derived that mapping, so the pipeline was scored
+against a rewritten version of its own input — a set that reported a *higher*
+number while carrying less information. `bridge_table` has since been removed
+from the pipeline entirely (see `../STATUS.md` effort 9: 70% of scoreable rows
+at only 34.8% accuracy — a structural ceiling from mapping ~12 broad stages
+onto 52+ specific techniques, not a tunable weakness), so this specific
+circularity can no longer occur.
 
-The existing 100 rows earn their value precisely by disagreeing with the
-bridge — e.g. Shellshock `ARBITRARY_CODE_EXE` → T1203 rejected in favour of
-T1190 (server-side, not client-side), and RDP admin login `ROOT_PRIV_ESC` →
-T1068 rejected in favour of T1021.001 with the note "looks like an upstream
-stage-classification error". Those disagreements are only possible blind.
+**The rule stays in force anyway.** `micro_attack_stage` is still SAGE's own
+coarse judgment about the alert, and a labeler anchoring on it will still tend
+to reproduce that judgment rather than reasoning independently from the rule
+text — which is exactly what makes the set worth having as an *independent*
+check. The existing 100 rows earned their value by disagreeing with the old
+bridge mapping — e.g. Shellshock `ARBITRARY_CODE_EXE` → T1203 rejected in
+favour of T1190 (server-side, not client-side), and RDP admin login
+`ROOT_PRIV_ESC` → T1068 rejected in favour of T1021.001 with the note "looks
+like an upstream stage-classification error". Those disagreements are only
+possible blind, and the same independence is valuable for whatever eventually
+replaces `bridge_table`.
 
 Consulting the ET rule body, its CVE, or its references is fine and
 encouraged — that is rule-level evidence, not pipeline input.

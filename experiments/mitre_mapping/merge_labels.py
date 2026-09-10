@@ -4,12 +4,14 @@ Merges `label_queue/labeled_batch*.csv` into one scoreable set at
 
 Two things happen here, both deliberate:
 
-1. **`micro_attack_stage` is joined back in.** Labeling was blind to it (see
-   `label_queue/CONVENTION.md`), but `validate.py` must pass it to the
-   pipeline, because it is the pipeline's own input signal -- the bridge_table
-   source keys off it. Withholding it at label time and supplying it at score
-   time is the whole point: the labeler and the system under test see
-   different things.
+1. **`micro_attack_stage` is joined back in, as informational metadata only.**
+   Labeling was blind to it (see `label_queue/CONVENTION.md`) because the
+   pipeline's `bridge_table` source used to key off it. `bridge_table` has
+   since been removed entirely (see `ioc_resolver.py` and `../STATUS.md`
+   effort 9 -- 70% of scoreable rows at only 34.8% accuracy, a structural
+   ceiling, not a tunable one) and `validate.py` no longer passes this column
+   to the pipeline. It stays in the merged CSV purely as review context (which
+   coarse stage a row falls under), not as an active input to anything.
 
 2. **The output filename deliberately does not match `hand_audit_sample*`.**
    `validate.py` globs that pattern, and these rows are `model_proposed`, not

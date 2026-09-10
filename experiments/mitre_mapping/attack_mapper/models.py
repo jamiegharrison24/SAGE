@@ -67,11 +67,6 @@ class ExtractedRule(BaseModel):
     # inference candidate.
     declared_technique_ids: List[str] = Field(default_factory=list)
 
-    # SAGE's own existing classification for this alert (signatures/attack_stages.py
-    # MicroAttackStage name, e.g. "SERVICE_DISC"), when the caller has one --
-    # real SAGE alerts always do. Not derived from this pipeline's own output.
-    micro_attack_stage: Optional[str] = None
-
     source_path: Optional[str] = None
     body_matched: bool = False  # True if a Suricata rule body was found and parsed, not just the title
 

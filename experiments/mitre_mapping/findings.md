@@ -83,6 +83,40 @@ purely by withholding that source from the labeler.
 finding: 52 distinct true labels versus 19. The original sample was 35% `T1190`
 and covered a narrow slice of ATT&CK; the expansion reaches the long tail.
 
+### Per-source accuracy at real scale, not a 5-row sample
+
+`validate.py` now reports accuracy broken down by which candidate source
+produced the top-1 answer. At 397 scoreable rows, not 80:
+
+| source | rows | accuracy | prior estimate (80-row sample) |
+|---|---:|---:|---:|
+| `declared` | 39 | 71.8% | 81.8% |
+| `tier2_combined` (classifier) | 36 | **66.7%** | 80.0% *(on a 5-row sample)* |
+| `ioc_alias` | 8 | 37.5% | 0.0% |
+| `bridge_table` | 276 | **34.8%** | 50.0% |
+| `embedding` | 38 | 0.0% | 0.0% |
+
+This reframes the 34.1% overall number: **the pipeline isn't uniformly worse,
+it's bottlenecked on one source that dominates volume.** `bridge_table` fires
+on 276/397 scoreable rows (70%) and is right on barely a third of them.
+`declared` and the classifier hold up well at scale — the classifier's number,
+previously resting on the 5-row sample effort 5 flagged as "not a stable
+estimate," is now backed by 36 rows at a similar rate, a real confirmation.
+
+The `bridge_table` weakness is structural, not a bug: it maps roughly a dozen
+broad `MicroAttackStage` values onto 52+ specific ATT&CK techniques in this
+sample alone. One coarse label mapping to many equally-plausible specific
+techniques cannot exceed some ceiling well under 50% regardless of
+implementation quality — this is the same limit noted in "A circularity
+caveat" above, now visible in the accuracy number rather than just argued from
+first principles.
+
+**Implication for future work:** the highest-leverage lever is not the
+classifier, embedding, or LLM layers — none of which touch more than 38 rows
+each — it's **improving or replacing `bridge_table`'s coverage**, since it is
+both the largest bucket by far and the weakest of the three high-volume
+sources.
+
 ### The macro number is the real result
 
 **Macro-average 18.6% across 52 techniques**, against 38.0% micro. The pipeline
@@ -126,6 +160,51 @@ hypothesis. What exists now is a review queue with a measured 88-96%
 self-consistency — the remaining work is human confirmation, starting with the
 `ET POLICY` download convention gap that accounts for most of the residual
 disagreement.
+
+## Update: `bridge_table` removed entirely — 32.7%, down from 38.0%, and that's the point
+
+Effort 9 showed `bridge_table` was structurally capped (~12 broad
+`MicroAttackStage` values mapped onto 52+ specific techniques) and, at scale,
+the weakest of the three high-volume sources. Per the user's direction, it has
+now been **removed from the pipeline entirely** — `ioc_resolver.py` no longer
+loads `bridge_table_validated.json`, `ExtractedRule.micro_attack_stage` is
+gone from `models.py`, and nothing in `attack_mapper/` reads a SAGE stage
+label anymore. `pipeline.process_rule`/`process_batch` no longer accept one.
+
+### Result: a real regression, expected and accepted
+
+| | with bridge_table | without |
+|---|---:|---:|
+| top-1 micro | 38.0% (151/397) | **32.7% (130/397)** |
+| macro-average | 18.6% | **13.5%** |
+| most-predicted (`T1190`) share | 13.4% | **38.5%** |
+
+The 276 rows `bridge_table` used to answer fell mostly to `tier2_combined`
+(36 → 218 rows, holding 42.7% accuracy on the larger pool) and `embedding`
+(38 → 132 rows, collapsing to **4.5%**). `T1190`'s predicted share nearly
+tripling is the same majority-class-collapse failure mode effort 8 found in
+the LLM layer, now visible in the embedding fallback once it has to cover a
+much larger share of rows on its own.
+
+**This is a known, accepted trade, not a hidden regression.** 34.8%
+(`bridge_table`'s accuracy) was mathematically higher than 4.5%
+(`embedding`'s, on the same rows) — removing it necessarily drops the number
+until something better replaces its coverage. The point of removing it is
+that it was capping the *ceiling*, not just the current score: no
+implementation improvement to `bridge_table` itself could ever clear roughly
+its own accuracy on 70% of rows, because the many-broad-stages-to-one-
+technique compression is lossy by construction. **32.7% is now the honest
+floor to build up from, with no structural ceiling baked in from a coarse
+lookup table.**
+
+### What this means for next steps
+
+`declared` (71.8%, unaffected) and `ioc_alias` (37.5%, unaffected) are
+untouched by the removal. `tier2_combined` now carries the largest share of
+volume (218/397 scoreable rows) at 42.7% — the most promising lever for
+raising the floor is strengthening the classifier or building a genuine
+`bridge_table` replacement, not the embedding layer, which has never exceeded
+single digits at any point in this branch's history.
 
 ## Update: LLM layer (Layer D) tested for the first time — regression, not improvement
 

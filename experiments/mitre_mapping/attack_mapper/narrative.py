@@ -42,8 +42,6 @@ def generate(rule: ExtractedRule, ioc_evidence: list) -> BehavioralNarrative:
         parts.append(f"Matches on: {sample}.")
     if ioc_evidence:
         parts.append("Known context: " + "; ".join(ioc_evidence[:3]) + ".")
-    if rule.micro_attack_stage:
-        parts.append(f"SAGE's existing stage classification: {rule.micro_attack_stage}.")
 
     narrative_text = " ".join(parts) if parts else canonicalize(rule.raw_content[:200])
     stage = _infer_stage(narrative_text)

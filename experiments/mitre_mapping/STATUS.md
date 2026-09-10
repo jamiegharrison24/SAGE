@@ -258,6 +258,18 @@ prior number in this branch revealed it. `validate.py` now reports macro on
 every run; retroactively, it would have caught effort 8's fake 62.5% win
 automatically.
 
+**Per-source accuracy at real scale reframes where the loss comes from.**
+`bridge_table` fires on 276/397 scoreable rows (70% of volume) at only 34.8%
+accuracy — it is both the largest bucket and the weakest of the three
+high-volume sources. `declared` (71.8%, 39 rows) and the classifier (**66.7%,
+36 rows** — a real number now, not the 5-row sample effort 5 flagged as
+unstable) both hold up well. The bottleneck is structural: `bridge_table` maps
+~12 broad `MicroAttackStage` values onto 52+ specific techniques in this
+sample, which caps its ceiling regardless of implementation quality. The
+highest-leverage future lever is improving or replacing `bridge_table`'s
+coverage, not the classifier/embedding/LLM layers, none of which touch more
+than 38 rows each.
+
 Also fixed a reproducibility footgun: `emerging-all.rules` is gitignored, so a
 fresh clone silently scored **43.8%** instead of 53.8% (`declared` drops 11
 rows → 0). `validate.py` now hard-fails with the fetch command. And surfaced
@@ -265,14 +277,41 @@ two missing commas in `signatures/alert_signatures.py` (lines 671, 821) that
 fuse four real signatures into two unmatched strings — production code,
 unfixed, see `findings.md`.
 
+## 10. `bridge_table` removed — 32.7%, the new honest floor — `findings.md`
+
+Effort 9 found `bridge_table`'s weakness was structural, not tunable
+(~12 broad `MicroAttackStage` values onto 52+ specific techniques). Per the
+user's explicit direction, it is now **removed from the pipeline entirely** —
+no `micro_attack_stage` field, no bridge-table lookup, anywhere in
+`attack_mapper/`.
+
+**Result: 32.7% top-1 (130/397), down from 38.0%; macro-average 13.5%, down
+from 18.6%.** This is an expected, accepted regression, not a bug: the 276
+rows `bridge_table` used to answer (at 34.8% accuracy) now mostly fall to
+`embedding`, which collapses to 4.5% on them, tripling `T1190`'s predicted
+share to 38.5% — the same majority-class-collapse pattern the LLM layer
+showed in efforts 6-8. `declared` (71.8%) and `ioc_alias` (37.5%) are
+unaffected. `tier2_combined` now carries 218/397 scoreable rows at 42.7%,
+the largest remaining pool.
+
+**32.7% is the new baseline to build up from.** Its point is not that it's
+higher — it's lower — but that nothing in it is capped by a structurally
+lossy coarse-to-fine lookup. The highest-leverage next step is a genuine
+`bridge_table` replacement or a stronger classifier, not embedding tuning
+(never exceeded single digits at any point in this branch).
+
 ## Current bottom line
 
-**34.1% top-1 on blind-labeled rows** is the number that should be quoted going
-forward. **53.8%** (effort 5, stacking 3+4) remains the best number *on the
-original 100-row sample*, but effort 9 showed that sample was both narrow (19
-distinct labels) and partly circular, so 53.8% overstates real performance.
-The default pipeline configuration is unchanged — what changed is the
-measurement, not the code. Non-embedding, non-LLM signal remains the only thing that has
+**32.7% top-1 (130/397)** is the current number, with `bridge_table` removed
+entirely per effort 10. It is lower than every number in this file's history
+(53.8% original, 38.0%/34.1% after the blind-labeled expansion) by design —
+each successive number removed a source of inflation (small/narrow sample,
+label circularity, a structurally-capped lookup table) rather than reflecting
+a code regression. **53.8%** was never a real ceiling; it was a measurement
+artifact stacked on top of another measurement artifact. The path forward is
+to raise 32.7% with a genuine `bridge_table` replacement or a stronger
+classifier — not to chase the old number, which the pipeline never actually
+earned. Non-embedding, non-LLM signal remains the only thing that has
 actually helped in this branch: SAGE-internal signal (declared tags +
 `MicroAttackStage` bridge) and a broadened training corpus compose cleanly
 because they resolve disjoint rows. Every embedding/similarity-based method

@@ -4,8 +4,8 @@ objects from the sources `pipeline.py` gathers, in priority order:
 
   1. declared   -- Tier 0: the rule format's own ATT&CK tag (ET metadata,
                    Sigma `attack.txxxx` tags). ~100% precision when present.
-  2. ioc_alias / bridge_table -- Layer C / SAGE-internal-intel, from
-                   `ioc_resolver.py`. High precision, narrow recall.
+  2. ioc_alias  -- Layer C, from `ioc_resolver.py`'s tool/malware alias
+                   table. High precision, narrow recall.
   3. tier2_combined -- effort 4's ET+Sigma-trained classifier, from
                    `classifier_resolver.py`. Standalone 38.0% top-1 (see
                    ../STATUS.md) -- weaker than the sources above, stronger

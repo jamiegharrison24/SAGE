@@ -50,7 +50,6 @@ class AttackMapperPipeline:
         self,
         raw_content: str,
         source_path: Optional[str] = None,
-        micro_attack_stage: Optional[str] = None,
     ) -> MappedRule:
         steps = []
         t0 = time.monotonic()
@@ -59,8 +58,6 @@ class AttackMapperPipeline:
         if extractor is None:
             raise ExtractionError("No extractor matched (GenericExtractor should always match)")
         rule = extractor.extract(raw_content, source_path)
-        if micro_attack_stage:
-            rule = rule.model_copy(update={"micro_attack_stage": micro_attack_stage})
         steps.append({
             "step": "extract",
             "extractor": extractor.format.value,
@@ -133,11 +130,11 @@ class AttackMapperPipeline:
         )
 
     def process_batch(self, rules: List[tuple]) -> List[MappedRule]:
-        """rules: list of (raw_content, source_path, micro_attack_stage)."""
+        """rules: list of (raw_content, source_path)."""
         out = []
         for item in rules:
-            raw_content, source_path, stage = (list(item) + [None, None])[:3]
-            out.append(self.process_rule(raw_content, source_path, stage))
+            raw_content, source_path = (list(item) + [None])[:2]
+            out.append(self.process_rule(raw_content, source_path))
         return out
 
     def _find_extractor(self, raw_content: str) -> Optional[BaseExtractor]:

@@ -139,6 +139,7 @@ def main():
     rows = load_audit_rows(include_v2=not args.hand_audit_only)
     pipeline = AttackMapperPipeline(llm_client=llm_client)
     origin_stats = {}
+    verified_stats = {}
 
     scoreable = correct = 0
     source_counts = {}
@@ -154,7 +155,7 @@ def main():
     for row in rows:
         sig = row["signature"]
         ids = parse_proposed(row["proposed_technique"])
-        mapped = pipeline.process_rule(sig, micro_attack_stage=row.get("micro_attack_stage") or None)
+        mapped = pipeline.process_rule(sig)
 
         top = mapped.mappings[0] if mapped.mappings else None
         top_id = top.technique_id if top else None
@@ -185,6 +186,11 @@ def main():
             ob = origin_stats.setdefault(row.get("_origin", "?"), [0, 0])
             ob[0] += hit
             ob[1] += 1
+            is_confirmed = (row.get("label_source") in ("hand_audit", "human_confirmed")
+                            or row.get("reviewer_verdict", "").strip())
+            vb = verified_stats.setdefault("confirmed" if is_confirmed else "pending", [0, 0])
+            vb[0] += hit
+            vb[1] += 1
             sb = source_acc.setdefault(source, [0, 0])
             sb[0] += hit
             sb[1] += 1
@@ -232,6 +238,10 @@ def main():
         f"- source breakdown (top-1 mapping's source): {source_counts}",
         (f"- label provenance: {confirmed_n} human-confirmed, {len(rows) - confirmed_n} "
          "model-proposed/unconfirmed"),
+        ("- accuracy on reviewer-confirmed rows so far: " + ", ".join(
+            f"{k} {h}/{n} = {h / n:.1%}" for k, (h, n) in sorted(verified_stats.items(), reverse=True))
+         + " -- confirmed is the only number that reflects real ground truth; pending "
+           "will move as review continues") if len(verified_stats) > 1 else "",
         ("- accuracy by label set: " + ", ".join(
             f"{k} {h}/{n} = {h / n:.1%}" for k, (h, n) in sorted(origin_stats.items()))
          + " -- a gap between the two has three candidate causes and this line alone "
