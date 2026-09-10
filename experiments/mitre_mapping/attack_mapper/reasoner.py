@@ -10,10 +10,13 @@ objects from the sources `pipeline.py` gathers, in priority order:
                    `classifier_resolver.py`. Standalone 38.0% top-1 (see
                    ../STATUS.md) -- weaker than the sources above, stronger
                    than raw embedding similarity, so it sits between them.
-  4. embedding  -- Layer A, from `embedder.py`. Low precision fallback, only
-                   used when nothing above fired, and capped at
-                   `Settings.embedding_confidence_cap` (see its docstring
-                   for why: known ~6-8% top-1 on this corpus).
+  4. knn_corpus -- nearest-neighbour retrieval over the labeled ET+Sigma
+                   corpus, from `knn_resolver.py`. Replaced the old zero-shot
+                   `embedding` layer, which compared rule text against MITRE
+                   *description* prose and measured 4.5% top-1 on the 500-row
+                   set; retrieving against labeled rule text instead measures
+                   36.3% micro / 19.7% macro standalone. Capped at
+                   `Settings.knn_confidence_cap`.
   5. llm        -- Layer D, only if `llm_client.is_configured`. Skipped (and
                    logged as skipped) otherwise -- see llm_client.py.
 
@@ -51,7 +54,7 @@ class TechniqueReasoner:
         rule: ExtractedRule,
         narrative: BehavioralNarrative,
         ioc_result: dict,
-        similar: List[dict],
+        knn_predictions: List[dict],
         steps: List[dict],
         classifier_predictions: Optional[List[dict]] = None,
     ) -> List[TechniqueMapping]:
@@ -81,12 +84,12 @@ class TechniqueReasoner:
                 )
 
         if not candidates:
-            for sim in similar:
-                tid = sim["technique_id"]
+            for pred in knn_predictions:
+                tid = pred["technique_id"]
                 if not self.mitre.exists(tid):
                     continue
-                conf = min(max(sim["similarity"], 0.0), 1.0) * self.settings.embedding_confidence_cap
-                self._add(candidates, tid, conf, "embedding", f"semantic similarity: {sim['similarity']:.3f}")
+                conf = min(max(pred["confidence"], 0.0), 1.0) * self.settings.knn_confidence_cap
+                self._add(candidates, tid, conf, "knn_corpus", pred["evidence"])
 
         top_confidence = max((c["confidence"] for c in candidates.values()), default=0.0)
         if self.llm.is_configured and candidates and top_confidence < self.settings.llm_gate_confidence:

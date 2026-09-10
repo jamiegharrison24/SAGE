@@ -300,18 +300,60 @@ lossy coarse-to-fine lookup. The highest-leverage next step is a genuine
 `bridge_table` replacement or a stronger classifier, not embedding tuning
 (never exceeded single digits at any point in this branch).
 
+## 11. kNN over the labeled corpus + prior correction — 38.8% / 21.1% — `findings.md`
+
+Rebuilt the fallback layers after effort 10 removed `bridge_table`. **Best
+macro-average this project has measured, without `bridge_table`.**
+
+- **`knn_resolver.py` replaces `embedder.py`** (deleted). The old layer
+  compared rule text to MITRE *description prose* — a register mismatch that
+  measured 4.5% top-1. The new one retrieves against the ~30k labeled ET+Sigma
+  corpus (rule text vs rule text), with IDF-weighted voting to avoid the T1190
+  hub and a leakage guard excluding the 39 eval signatures present verbatim in
+  the training corpus.
+- **A ranking bug cost 3.2 points before it was caught.** `predict()` ranked by
+  IDF vote but reported `confidence` as mean similarity; `reasoner.py` re-sorts
+  by confidence and silently discarded the IDF ranking. **Any resolver
+  returning a ranked list must encode that ranking in `confidence` —
+  nothing enforces this.**
+- **`ClassifierResolver(prior_alpha=0.5)`** subtracts a class-frequency term
+  from decision scores; the classifier had become the hub-collapse source
+  (T1190 on 56.2% of rows it answered). Costs 0.2 micro for 6 points of
+  calibration, and makes the classifier abstain more honestly (161 rows at
+  45.2%, versus 253 at 42.7%).
+- **Ensembling did not help** — higher-confidence-wins and agreement-voting
+  both landed on the plain cascade's number.
+
+| | micro | macro | T1190 (true 28.5%) |
+|---|---:|---:|---:|
+| original, with `bridge_table` | 38.0% | 18.6% | 13.4% |
+| `bridge_table` removed (effort 10) | 32.7% | 13.5% | 38.5% |
+| **effort 11** | **38.8%** | **21.1%** | **33.5%** |
+
+Known and uncorrected: the 39-row train/eval leakage also inflates
+`tier2_combined` slightly, since it trains on those rows.
+
 ## Current bottom line
 
-**32.7% top-1 (130/397)** is the current number, with `bridge_table` removed
-entirely per effort 10. It is lower than every number in this file's history
-(53.8% original, 38.0%/34.1% after the blind-labeled expansion) by design —
-each successive number removed a source of inflation (small/narrow sample,
-label circularity, a structurally-capped lookup table) rather than reflecting
-a code regression. **53.8%** was never a real ceiling; it was a measurement
-artifact stacked on top of another measurement artifact. The path forward is
-to raise 32.7% with a genuine `bridge_table` replacement or a stronger
-classifier — not to chase the old number, which the pipeline never actually
-earned. Non-embedding, non-LLM signal remains the only thing that has
+**38.8% top-1 / 21.1% macro (effort 11)** is the current number: the best
+macro this project has measured, achieved *without* `bridge_table`.
+
+Read the history as two phases. First, successive measurement fixes brought the
+reported number *down* as inflation was removed — 53.8% (narrow, partly
+circular 80-row sample) → 38.0%/34.1% (500-row blind-labeled) → 32.7%
+(`bridge_table`, structurally capped, removed). None of those drops were code
+regressions. Then effort 11 raised it back to 38.8% with genuine improvements:
+retrieval against labeled rule text instead of MITRE prose, plus class-prior
+correction on the classifier.
+
+So the pipeline now scores slightly better than its original headline
+(38.8% vs 38.0% micro, 21.1% vs 18.6% macro) while resting on none of what
+made that original number untrustworthy. **53.8% was never a real ceiling** —
+it was two measurement artifacts stacked.
+
+Highest-leverage remaining work: `tier2_combined` and `knn_corpus` together
+answer 350 of 397 scoreable rows at 45.2% and 27.9%; both have headroom, and
+neither is capped the way `bridge_table` was. Non-embedding, non-LLM signal remains the only thing that has
 actually helped in this branch: SAGE-internal signal (declared tags +
 `MicroAttackStage` bridge) and a broadened training corpus compose cleanly
 because they resolve disjoint rows. Every embedding/similarity-based method

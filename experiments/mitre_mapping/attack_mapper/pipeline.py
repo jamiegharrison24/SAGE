@@ -10,8 +10,8 @@ from typing import List, Optional
 
 from .classifier_resolver import ClassifierResolver
 from .config import Settings
-from .embedder import TechniqueEmbedder
 from .extractors import DEFAULT_EXTRACTORS, BaseExtractor
+from .knn_resolver import KnnResolver
 from .ioc_resolver import IoCResolver
 from .llm_client import LLMClient, default_client
 from . import narrative as narrative_mod
@@ -30,11 +30,11 @@ class AttackMapperPipeline:
         extractors: Optional[List[BaseExtractor]] = None,
         mitre_client: Optional[MitreAttackClient] = None,
         ioc_resolver: Optional[IoCResolver] = None,
-        embedder: Optional[TechniqueEmbedder] = None,
+        knn: Optional[KnnResolver] = None,
         classifier: Optional[ClassifierResolver] = None,
         llm_client: Optional[LLMClient] = None,
         settings: Optional[Settings] = None,
-        use_embedder: bool = True,
+        use_knn: bool = True,
         use_classifier: bool = True,
     ):
         self.extractors = extractors or DEFAULT_EXTRACTORS
@@ -42,7 +42,7 @@ class AttackMapperPipeline:
         self.mitre = mitre_client or MitreAttackClient()
         self.ioc_resolver = ioc_resolver or IoCResolver()
         self.llm = llm_client or default_client()
-        self.embedder = embedder or (TechniqueEmbedder(self.mitre) if use_embedder else None)
+        self.knn = knn or (KnnResolver() if use_knn else None)
         self.classifier = classifier or (ClassifierResolver() if use_classifier else None)
         self.reasoner = TechniqueReasoner(self.mitre, self.llm, self.settings)
 
@@ -92,20 +92,25 @@ class AttackMapperPipeline:
             )
             steps.append({"step": "classifier", "status": "skipped", "reason": classifier_skip_reason})
 
-        similar = []
-        if self.embedder is not None and not higher_priority_fired and not classifier_predictions:
-            similar = self.embedder.find_similar(bn.narrative)
-            steps.append({"step": "embedding", "top": [s["technique_id"] for s in similar[:5]]})
+        knn_predictions = []
+        if self.knn is not None and not higher_priority_fired and not classifier_predictions:
+            knn_predictions = self.knn.predict(rule.title or rule.raw_content)
+            steps.append({
+                "step": "knn_corpus",
+                "top": [p["technique_id"] for p in knn_predictions],
+            })
         else:
-            if self.embedder is None:
-                reason = "no embedder configured"
+            if self.knn is None:
+                reason = "no knn resolver configured"
             elif higher_priority_fired:
                 reason = "higher-priority source already fired"
             else:
                 reason = "classifier already answered"
-            steps.append({"step": "embedding", "status": "skipped", "reason": reason})
+            steps.append({"step": "knn_corpus", "status": "skipped", "reason": reason})
 
-        mappings = self.reasoner.infer(rule, bn, ioc_result, similar, steps, classifier_predictions)
+        mappings = self.reasoner.infer(
+            rule, bn, ioc_result, knn_predictions, steps, classifier_predictions
+        )
 
         overall_conf, review_required, reason = self._assess(mappings)
         steps.append({

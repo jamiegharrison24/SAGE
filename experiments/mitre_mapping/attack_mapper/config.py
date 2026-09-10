@@ -20,12 +20,14 @@ class Settings:
     # 0.0% in the same breakdown) that motivate this ordering.
     classifier_confidence_cap: float = 0.5
 
-    # Embedding fallback (Layer A). Known weak zero-shot on this corpus --
-    # see ../archive/results.md methods 1-4 (6-8% top-1 over 697 techniques) -- so it
-    # is deliberately the lowest-priority, lowest-confidence source, not a
-    # primary signal.
+    # kNN retrieval over the labeled ET+Sigma corpus (knn_resolver.py), the
+    # lowest-priority source. Replaced the old zero-shot embedding layer, which
+    # compared rule text against MITRE *description* prose and measured 4.5%
+    # top-1 on the 500-row set; retrieving against labeled *rule text* instead
+    # measures 36.3% micro / 19.7% macro standalone. Still capped below the
+    # classifier, since it only fires where everything above found nothing.
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
-    embedding_confidence_cap: float = 0.4
+    knn_confidence_cap: float = 0.45
 
     # LLM reasoning layer (optional; see llm_client.py). No provider is
     # configured by default -- there is no API key anywhere in this

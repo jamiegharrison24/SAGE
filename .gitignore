@@ -34,3 +34,7 @@ experiments/mitre_mapping/attack_mapper/data/emerging-all.rules
 
 # MITRE mapping experiment (sigma_corpus): cloned SigmaHQ ruleset (large, re-clonable)
 experiments/mitre_mapping/attack_mapper/sigma_corpus/sigmahq/
+
+# MITRE mapping experiment: kNN corpus embedding cache (44MB, regenerated on
+# first run; knn_resolver.py rebuilds it whenever the corpus or model changes)
+experiments/mitre_mapping/attack_mapper/data/knn_corpus_embeddings.npz

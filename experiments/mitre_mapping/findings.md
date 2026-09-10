@@ -161,6 +161,88 @@ self-consistency — the remaining work is human confirmation, starting with the
 `ET POLICY` download convention gap that accounts for most of the residual
 disagreement.
 
+## Update: kNN over the labeled corpus + class-prior correction — 38.8% / 21.1% macro
+
+Rebuilt the fallback layers after `bridge_table`'s removal. **Best result this
+project has measured on macro-average, and it no longer depends on
+`bridge_table` at all.**
+
+| | micro | macro | T1190 predicted (true rate 28.5%) |
+|---|---:|---:|---:|
+| original, with `bridge_table` | 38.0% | 18.6% | 13.4% |
+| `bridge_table` removed | 32.7% | 13.5% | 38.5% |
+| + kNN replacing embedding | 35.8% | 16.8% | 39.3% |
+| + kNN ranking bug fixed | 39.0% | 20.8% | 39.5% |
+| **+ classifier prior correction** | **38.8%** | **21.1%** | **33.5%** |
+
+### 1. Retrieval against labeled rule text, not MITRE prose
+
+`embedder.py` compared a rule's narrative against MITRE's *documentation*
+("Adversaries may attempt to get a listing of services running on remote
+hosts..."). Detection-rule titles are terse vendor shorthand. General-purpose
+sentence embeddings do not bridge that register gap — that layer measured 4.5%
+top-1 on the 500-row set, consistent with `archive/results.md`'s original
+6.4-8.4%.
+
+`knn_resolver.py` retrieves against the ~30k **labeled ET+Sigma corpus**
+instead: rule text vs rule text, same vocabulary on both sides, label taken
+from real vendor-tagged neighbours. Standalone it measured 36.3% micro /
+19.7% macro. `embedder.py` is deleted.
+
+Two details did the actual work:
+
+- **IDF-weighted voting.** Summing neighbour similarity per technique hands the
+  win to whatever is most common in the corpus (T1190 is ~a third of it).
+  Scaling each vote by `log(N / (1 + corpus_frequency))` fixed it: sum-of-
+  similarity predicts T1190 on 49.4% of rows (macro 16.0%), IDF-weighted on
+  29.7% (macro 19.7%) for the same micro.
+- **Leakage guard.** 39 of the 500 evaluation signatures appear verbatim in
+  the training corpus. Exact canonical matches are excluded at query time.
+  *This leakage also affects `tier2_combined`, which trains on those rows —
+  its accuracy is correspondingly a little optimistic, and that is not yet
+  corrected.*
+
+### 2. A ranking bug that silently discarded the IDF fix
+
+`predict()` initially ranked candidates by IDF-weighted vote but set
+`confidence` to *mean neighbour similarity* — a different quantity.
+`reasoner.py` re-sorts every candidate by confidence, so it reordered the list
+and **threw the IDF weighting away**. Cost: 3.2 points of top-1 (35.8% vs
+39.0%), and it was invisible in the source breakdown because the layer still
+reported as `knn_corpus`.
+
+Found by diffing an offline prototype against the live pipeline row by row: all
+83 disagreements were the same resolver disagreeing with itself. Fixed by
+making confidence monotonic in the vote (`vote_share * row_quality`).
+
+**Generalisable rule for this codebase: any resolver returning a ranked list
+must encode its ranking in `confidence`, because `reasoner.py` re-sorts
+globally.** Nothing enforces this today.
+
+### 3. Class-prior correction on the classifier
+
+With kNN de-biased, the classifier became the hub-collapse source — predicting
+T1190 on 56.2% of rows it answered. `ClassifierResolver(prior_alpha=0.5)` now
+subtracts a normalised class-frequency term from the decision scores. Sweep:
+
+| alpha | micro | macro | T1190 share |
+|---:|---:|---:|---:|
+| 0.0 | 39.0% | 20.8% | 39.5% |
+| **0.5** (default) | **38.8%** | **21.1%** | **33.5%** |
+| 1.0 | 37.8% | 21.4% | 28.5% (exact) |
+
+0.5 buys a 6-point calibration gain for 0.2 points of micro. Raise toward 1.0
+if per-technique honesty matters more than top-line accuracy. A side effect
+worth noting: the correction makes the classifier abstain more (161 scoreable
+rows instead of 253), and it is *more accurate* on that smaller pool (45.2% vs
+42.7%) — it is now declining rows it was previously answering badly.
+
+### What did not work
+
+Ensembling. Letting the classifier and kNN both run and taking the more
+confident, or trusting agreement, all landed on the plain cascade's number
+(38.8-39.0%). No free win there.
+
 ## Update: `bridge_table` removed entirely — 32.7%, down from 38.0%, and that's the point
 
 Effort 9 showed `bridge_table` was structurally capped (~12 broad
