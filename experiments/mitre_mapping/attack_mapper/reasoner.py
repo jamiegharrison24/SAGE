@@ -6,10 +6,16 @@ objects from the sources `pipeline.py` gathers, in priority order:
                    Sigma `attack.txxxx` tags). ~100% precision when present.
   2. ioc_alias  -- Layer C, from `ioc_resolver.py`'s tool/malware alias
                    table. High precision, narrow recall.
-  3. tier2_combined -- effort 4's ET+Sigma-trained classifier, from
-                   `classifier_resolver.py`. Standalone 38.0% top-1 (see
-                   ../STATUS.md) -- weaker than the sources above, stronger
-                   than raw embedding similarity, so it sits between them.
+  3. supervised_classifier -- the live-trained dual TF-IDF + LinearSVC
+                   classifier, from `classifier_resolver.py`. Standalone 38.0%
+                   top-1 (see ../STATUS.md) -- weaker than the sources above,
+                   stronger than raw similarity, so it sits between them.
+                   **Renamed from `tier2_combined`** (2026-09-11): "tier2" was
+                   its slot in the archived Tier 0-4 approach and "combined"
+                   meant the ET+Sigma corpus, so by effort 12 neither half of
+                   the name described it. Docs written before that date, and
+                   `validation_report_llm.md`, still use the old name for
+                   results measured under it.
   4. knn_corpus -- nearest-neighbour retrieval over the labeled ET+Sigma
                    corpus, from `knn_resolver.py`. Replaced the old zero-shot
                    `embedding` layer, which compared rule text against MITRE
@@ -79,7 +85,7 @@ class TechniqueReasoner:
                     continue
                 conf = _sigmoid(pred["score"]) * self.settings.classifier_confidence_cap
                 self._add(
-                    candidates, tid, conf, "tier2_combined",
+                    candidates, tid, conf, "supervised_classifier",
                     f"ET+Sigma classifier margin: {pred['score']:.3f}",
                 )
 

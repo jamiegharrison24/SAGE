@@ -149,6 +149,7 @@ def main():
     predicted_counts = {}
     tactic_only = 0
     source_acc = {}
+    knn_corpus_acc = {}
     detail = []
 
     t0 = time.monotonic()
@@ -194,6 +195,17 @@ def main():
             sb = source_acc.setdefault(source, [0, 0])
             sb[0] += hit
             sb[1] += 1
+            # Which corpus supplied the winning neighbour, for knn_corpus rows.
+            # Adding corpus rows shifts the IDF denominator for *every*
+            # technique, so the headline can move even on rows where no
+            # new-corpus row is ever retrieved -- this attributes the answer
+            # rather than assuming the new data caused the delta.
+            if source == "knn_corpus" and top:
+                m = re.search(r"closest \[(\w+)\]", " ".join(top.evidence))
+                if m:
+                    kb = knn_corpus_acc.setdefault(m.group(1), [0, 0])
+                    kb[0] += hit
+                    kb[1] += 1
             if top_id:
                 predicted_counts[top_id] = predicted_counts.get(top_id, 0) + 1
 
@@ -236,6 +248,13 @@ def main():
         (f"- flagged for human review: {review_required_count}/{len(rows)} "
          f"({review_required_count / len(rows):.1%})") if rows else "",
         f"- source breakdown (top-1 mapping's source): {source_counts}",
+        (f"- kNN retrieval pool (neighbours returned, by corpus): "
+         f"{getattr(pipeline.knn, 'neighbour_source_counts', {})} -- a corpus contributing rows "
+         "but never winning a top-k slot did not affect retrieval; any accuracy delta in that "
+         "case came from the IDF denominator shifting, not new signal") if pipeline.knn else "",
+        ("- knn_corpus top-1 accuracy by winning corpus: " + ", ".join(
+            f"{k} {h}/{n} = {h / n:.1%}" for k, (h, n) in sorted(knn_corpus_acc.items()))
+         ) if knn_corpus_acc else "",
         (f"- label provenance: {confirmed_n} human-confirmed, {len(rows) - confirmed_n} "
          "model-proposed/unconfirmed"),
         ("- accuracy on reviewer-confirmed rows so far: " + ", ".join(
@@ -299,6 +318,11 @@ def main():
     print(f"ET rule body matched: {body_matched_count}/{len(rows)}")
     print(f"human review required: {review_required_count}/{len(rows)}")
     print(f"source breakdown: {source_counts}")
+    if pipeline.knn:
+        print(f"kNN retrieval pool by corpus: {pipeline.knn.neighbour_source_counts}")
+    if knn_corpus_acc:
+        print("knn_corpus accuracy by winning corpus: " + ", ".join(
+            f"{k} {h}/{n} = {h / n:.1%}" for k, (h, n) in sorted(knn_corpus_acc.items())))
 
 
 if __name__ == "__main__":

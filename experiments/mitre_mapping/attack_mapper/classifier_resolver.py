@@ -26,11 +26,8 @@ import numpy as np
 from sklearn.preprocessing import MultiLabelBinarizer
 
 from .classifier_training import decision_scores, fit_dual_ovr
+from .corpora import CORPUS_PATHS
 from .normalize import canonicalize
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-ET_CORPUS_PATH = os.path.join(HERE, "data", "et_labeled_corpus.csv")
-SIGMA_CORPUS_PATH = os.path.join(HERE, "data", "sigma_labeled_corpus.csv")
 
 
 def _load_corpus(path: str):
@@ -68,17 +65,15 @@ class ClassifierResolver:
     def __init__(self, prior_alpha: float = 0.5):
         texts = []
         labels = []
-        if os.path.exists(ET_CORPUS_PATH):
-            corpus_texts, corpus_labels = _load_corpus(ET_CORPUS_PATH)
-            texts += corpus_texts
-            labels += corpus_labels
-        if os.path.exists(SIGMA_CORPUS_PATH):
-            corpus_texts, corpus_labels = _load_corpus(SIGMA_CORPUS_PATH)
+        for path in CORPUS_PATHS:
+            if not os.path.exists(path):
+                continue
+            corpus_texts, corpus_labels = _load_corpus(path)
             texts += corpus_texts
             labels += corpus_labels
         if not texts:
             raise RuntimeError(
-                f"no training corpus found at {ET_CORPUS_PATH} or {SIGMA_CORPUS_PATH}"
+                "no labeled training corpus found at any of: " + ", ".join(CORPUS_PATHS)
             )
 
         self.mlb = MultiLabelBinarizer()

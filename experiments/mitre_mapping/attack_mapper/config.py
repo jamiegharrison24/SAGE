@@ -39,7 +39,7 @@ class Settings:
     # reprocessing every row and fully overriding prior confidence caused a
     # 20-point regression (53.8% -> 33.8%). Layer D now only fires when the
     # best prior candidate's confidence is below this threshold -- i.e. rows
-    # that fell through to tier2_combined/embedding, not ones already
+    # that fell through to supervised_classifier/knn_corpus, not ones already
     # answered with high precision by declared/ioc_alias -- and blends
     # rather than replaces confidence (see reasoner._llm_refine).
     llm_gate_confidence: float = 0.5

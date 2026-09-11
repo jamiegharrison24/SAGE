@@ -13,8 +13,14 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Eight sub-experiments have run so far, in order. Each has its own detailed
+Twelve sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
+
+**Planned next, not started:** entity-aware normalisation —
+`entity_normalisation_plan.md` is the source of truth for that work (design,
+settled decisions, known traps, sequencing and the prediction to judge it
+against). It is gated on the `reviewer_verdict` scoring decision in "What's not
+done" below, and will become effort 13 here once measured.
 
 ## 1. Seven-method zero-shot/kNN/SMET comparison — `archive/results.md`, `archive/SMET_STATUS.md`
 
@@ -333,9 +339,51 @@ macro-average this project has measured, without `bridge_table`.**
 Known and uncorrected: the 39-row train/eval leakage also inflates
 `tier2_combined` slightly, since it trains on those rows.
 
+## 12. Corpus diversity — Elastic adopted, Splunk rejected — 38.8% / 22.2% — `attack_mapper/elastic_corpus/findings.md`, `attack_mapper/splunk_corpus/findings.md`
+
+Effort 11 named the highest-leverage remaining work: `tier2_combined` and
+`knn_corpus` answer 350 of 397 scoreable rows and both draw on the same
+ET-dominated corpus (26,644 of 29,933 rows covering only 45 techniques). Two
+public ATT&CK-labeled rule sets were built into corpora in that same format
+and measured one at a time, against a baseline first re-run on unchanged code
+(reproduced effort 11 exactly: 154/397, 21.1% macro, T1190 33.5%).
+
+| corpus  | rows  | distinct techniques | top-5 share | adopted |
+|---------|------:|--------------------:|------------:|---------|
+| Elastic | 1,892 |                 444 |       15.3% | **yes** |
+| Splunk  | 2,140 |                 376 |       15.1% | no      |
+
+| config | micro | macro | T1190 share (true 28.5%) |
+|---|---:|---:|---:|
+| baseline (ET+Sigma) | 38.8% | 21.1% | 33.5% |
+| **+Elastic** | 38.8% | **22.2%** | **29.0%** |
+| +Elastic +Splunk | 39.3% | 21.8% | 27.5% |
+
+**Elastic: +1.1 macro and a 4.5-point calibration gain for 6% more rows**,
+with micro flat — predicted before the run and confirmed on all three counts,
+since class *coverage* is a calibration problem rather than a top-line one.
+
+**Splunk rejected despite owning the best micro number.** +0.5 micro is 2 rows
+of 397 on a set where only 208 rows carry an explicit reviewer verdict, and
+it cost 0.4 macro. New
+per-corpus instrumentation (`knn_resolver.neighbour_source_counts`, plus
+`validate.py`'s top-1 accuracy split by winning corpus) shows why: Splunk's
+retrieved neighbours won 20 top-1 rows at **0/20**, and crowded Elastic's
+contribution down from 27.9% to 15.2%. The micro tick came from the extra
+classes promoting 29 rows from retrieval to the stronger classifier layer, not
+from Splunk retrieval working. This is exactly the artifact-vs-signal
+distinction effort 8 got wrong, caught here by instrumentation rather than
+inspection after the fact.
+
+Generalisation for future corpora: diversity stats did not predict usefulness
+(both corpora were similarly diverse). Register did — Elastic names describe
+the observed event, Splunk names describe an analytic over a data model, and
+only the former shares vocabulary with network IDS signatures. Check
+per-corpus retrieval accuracy before adopting.
+
 ## Current bottom line
 
-**38.8% top-1 / 21.1% macro (effort 11)** is the current number: the best
+**38.8% top-1 / 22.2% macro (effort 12)** is the current number: the best
 macro this project has measured, achieved *without* `bridge_table`.
 
 Read the history as two phases. First, successive measurement fixes brought the
@@ -347,13 +395,17 @@ retrieval against labeled rule text instead of MITRE prose, plus class-prior
 correction on the classifier.
 
 So the pipeline now scores slightly better than its original headline
-(38.8% vs 38.0% micro, 21.1% vs 18.6% macro) while resting on none of what
+(38.8% vs 38.0% micro, 22.2% vs 18.6% macro) while resting on none of what
 made that original number untrustworthy. **53.8% was never a real ceiling** —
 it was two measurement artifacts stacked.
 
-Highest-leverage remaining work: `tier2_combined` and `knn_corpus` together
-answer 350 of 397 scoreable rows at 45.2% and 27.9%; both have headroom, and
-neither is capped the way `bridge_table` was. Non-embedding, non-LLM signal remains the only thing that has
+Effort 12 then took the corpus-diversity lever the bottom line had flagged:
++1.1 macro and a 4.5-point calibration gain from Elastic, with the same lever
+*rejected* for Splunk on per-corpus evidence. Both dominant sources still have
+headroom — `tier2_combined` and `knn_corpus` answer 351 of 397 scoreable rows
+at 43.1% and 27.3% — and neither is capped the way `bridge_table` was, but the
+cheap corpus wins are now largely taken: the next corpus should be chosen on
+register match, not on diversity stats. Non-embedding, non-LLM signal remains the only thing that has
 actually helped in this branch: SAGE-internal signal (declared tags +
 `MicroAttackStage` bridge) and a broadened training corpus compose cleanly
 because they resolve disjoint rows. Every embedding/similarity-based method
@@ -370,12 +422,33 @@ model — embedding, classifier, or LLM — reasoning freshly over rule text.
 
 ## What's not done
 
+- **Scoring counts rejected labels as ground truth — found in effort 12,
+  convention now ruled, code not yet changed.** 208 of the 500 rows carry an
+  explicit `reviewer_verdict` (165 `1`, 43 `0`). `validate.py:190` treats *any*
+  non-empty verdict as "confirmed", so the 43 rejections are scored against the
+  very `proposed_technique` the reviewer rejected. 36 of those 43 are
+  scoreable, and **22 are currently counted as HITs**.
+  **Ruled 2026-09-11:** `1` = reviewer agrees, include the row; `0` = reviewer
+  disagrees, exclude the row from evaluation entirely. Applying that moves the
+  headline from 38.8% (154/397) to **36.6% (132/361)** — a measurement
+  correction of the same kind as efforts 9 and 10, not a regression. Effort
+  12's Elastic result is unaffected (measured as a delta on a constant set, so
+  the bias cancelled). **Still to do:** encode the rule in `validate.py`, and
+  define the values in `label_queue/CONVENTION.md`, which documents the column
+  as starting empty but never says what its values mean.
+  Worth noting for the label review: 30 of the 36 are `ET SCAN`-style rows
+  proposed as `T1046`, so this is one convention disagreement (`T1046` vs
+  `T1595`/`T1018` for external service scanning), not 36 independent errors —
+  the same shape as the `ET POLICY` gap below.
 - **Ground truth depth — half-solved by effort 9, and the remaining half is
   the hard half.** The set is now 500 rows (397 scoreable), clearing the
-  brief's 200+ row count. But **only 100 are human-confirmed**; the 400 added
-  in effort 9 are `model_proposed` with `reviewer_verdict` empty, and the
-  original 100's reviewer columns were never filled in either. Row count is
-  not confirmation — an unreviewed label is a hypothesis. What exists now is a
+  brief's 200+ row count. But **only 208 rows carry an explicit reviewer
+  verdict**; the other 292 are unreviewed. Note the reported "human-confirmed"
+  count (308) counts the original 100 `hand_audit` rows as confirmed purely by
+  provenance — `validate.py:190` defaults their `label_source` to
+  `hand_audit` — even though their `reviewer_verdict` columns were never
+  filled in. By the standard this section itself sets (an unreviewed label is
+  a hypothesis), the defensible count is 208, not 308. What exists now is a
   *review queue* with measured 88-96% self-consistency
   (`label_queue/CONSISTENCY.md`), which makes human confirmation fast; it is
   not ground truth. **Start with the `ET POLICY` executable-download
@@ -427,19 +500,34 @@ experiments/mitre_mapping/
     normalize.py                 # own copy (signature-text canonicalization)
     alias_table.py                # own copy of the STIX tool/malware alias-table logic
     classifier_training.py        # own copy of the TF-IDF+LinearSVC training logic
-    mitre_client.py, ioc_resolver.py, narrative.py, embedder.py,
+    corpora.py                    # effort 12: the one CORPUS_PATHS tuple both the
+                                   # classifier and kNN read (it is read twice inside
+                                   # knn_resolver -- loader and cache fingerprint --
+                                   # and a mismatch silently misaligns the leakage mask)
+    mitre_client.py, ioc_resolver.py, narrative.py, knn_resolver.py,
     llm_client.py, classifier_resolver.py, reasoner.py, pipeline.py
     extractors/                  # suricata.py (primary), sigma.py, generic.py, base.py
     data/                        # own copies of every data dependency:
       enterprise-attack.json      # gitignored, large -- STIX bundle cache
       emerging-all.rules          # gitignored, large -- vendored ET ruleset
-      bridge_table_validated.json
-      et_labeled_corpus.csv
-      hand_audit_sample*.csv      # the 100-row hand-audited sample (effort 2's, reused)
-      sigma_labeled_corpus.csv, sigma_parse_failures.csv
+      knn_corpus_embeddings.npz   # gitignored, 44MB -- rebuilt when the corpus changes
+      labeled_set_v2.csv          # effort 9's 500-row labeled/review set
+      hand_audit_sample*.csv      # the original 100-row hand-audited sample
+      et_labeled_corpus.csv       # the four training corpora (see corpora.py for which
+      sigma_labeled_corpus.csv    #  are actually loaded -- splunk is built but not used)
+      elastic_labeled_corpus.csv
+      splunk_labeled_corpus.csv
+      *_parse_failures.csv
     sigma_corpus/                # effort 4: how the Sigma corpus was built
       build_corpus.py, findings.md
       sigmahq/                   # third-party clone, gitignored -- see findings.md to refetch
+    elastic_corpus/              # effort 12: adopted (+1.1 macro, -4.5 T1190 share)
+      build_corpus.py, findings.md
+      detection-rules/           # third-party clone, gitignored -- see findings.md to refetch
+    splunk_corpus/               # effort 12: built and measured, NOT loaded (0/20 on the
+                                  # top-1 rows its own neighbours won) -- see findings.md
+      build_corpus.py, findings.md
+      security_content/          # third-party clone, gitignored -- see findings.md to refetch
 
   archive/                       # SUPERSEDED -- kept for the record, not iterated on
     results.md, SMET_STATUS.md, bad_call_table.*, bridge_table.py, build_*.py,

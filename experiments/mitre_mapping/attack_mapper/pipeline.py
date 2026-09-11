@@ -82,7 +82,7 @@ class AttackMapperPipeline:
             classifier_predictions = self.classifier.predict(rule.title or rule.raw_content)
             steps.append({
                 "step": "classifier",
-                "model": "tier2_combined (ET+Sigma)",
+                "model": "supervised_classifier (TF-IDF + LinearSVC)",
                 "top": [p["technique_id"] for p in classifier_predictions],
             })
         else:

@@ -38,35 +38,39 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
+from .corpora import CORPUS_PATHS, corpus_name
 from .normalize import canonicalize
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ET_CORPUS_PATH = os.path.join(HERE, "data", "et_labeled_corpus.csv")
-SIGMA_CORPUS_PATH = os.path.join(HERE, "data", "sigma_labeled_corpus.csv")
 CACHE_PATH = os.path.join(HERE, "data", "knn_corpus_embeddings.npz")
 
 _MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_K = 10
 
 
-def _load_corpus() -> Tuple[List[str], List[List[str]]]:
-    texts, labels = [], []
-    for path in (ET_CORPUS_PATH, SIGMA_CORPUS_PATH):
+def _load_corpus() -> Tuple[List[str], List[List[str]], List[str]]:
+    """Returns (texts, labels, sources) -- `sources` names the corpus each row
+    came from, so retrieval can be attributed per corpus (see
+    `KnnResolver.neighbour_source_counts`)."""
+    texts, labels, sources = [], [], []
+    for path in CORPUS_PATHS:
         if not os.path.exists(path):
             continue
+        name = corpus_name(path)
         with open(path, encoding="utf-8") as fh:
             for row in csv.DictReader(fh):
                 ids = [t for t in row["technique_ids"].split(";") if t]
                 if ids:
                     texts.append(canonicalize(row["msg"]))
                     labels.append(ids)
-    return texts, labels
+                    sources.append(name)
+    return texts, labels, sources
 
 
 def _corpus_fingerprint() -> str:
     """Cheap cache key: path, size and mtime of each corpus file."""
     h = hashlib.sha256()
-    for path in (ET_CORPUS_PATH, SIGMA_CORPUS_PATH):
+    for path in CORPUS_PATHS:
         if os.path.exists(path):
             st = os.stat(path)
             h.update(f"{path}:{st.st_size}:{st.st_mtime_ns}".encode())
@@ -85,11 +89,16 @@ class KnnResolver:
         from sentence_transformers import SentenceTransformer  # heavy import, deferred
 
         self.k = k
-        self.texts, self.labels = _load_corpus()
+        self.texts, self.labels, self.sources = _load_corpus()
         if not self.texts:
             raise RuntimeError(
-                f"no labeled corpus found at {ET_CORPUS_PATH} or {SIGMA_CORPUS_PATH}"
+                "no labeled corpus found at any of: " + ", ".join(CORPUS_PATHS)
             )
+        # Which corpus the retrieved neighbours actually came from, summed over
+        # every predict() call. A corpus that contributes rows but never wins a
+        # top-k slot did not affect retrieval -- any accuracy delta in that case
+        # came from the IDF denominator shifting, not from new signal.
+        self.neighbour_source_counts: Dict[str, int] = {}
         self.model = SentenceTransformer(_MODEL_NAME)
         self._embeddings = self._load_or_build_embeddings()
         self._canon = np.array(self.texts)
@@ -156,14 +165,18 @@ class KnnResolver:
         votes: Dict[str, float] = {}
         support: Dict[str, List[float]] = {}
         nearest: Dict[str, str] = {}
+        nearest_source: Dict[str, str] = {}
         for j in idx:
             sim = float(sims[j])
             if sim <= 0:
                 continue
+            src = self.sources[j]
+            self.neighbour_source_counts[src] = self.neighbour_source_counts.get(src, 0) + 1
             for tid in self.labels[j]:
                 votes[tid] = votes.get(tid, 0.0) + sim * self._idf.get(tid, 1.0)
                 support.setdefault(tid, []).append(sim)
                 nearest.setdefault(tid, self.texts[j])
+                nearest_source.setdefault(tid, src)
 
         if not votes:
             return []
@@ -179,10 +192,12 @@ class KnnResolver:
                 "technique_id": tid,
                 "confidence": float(weight / total_vote * row_quality),
                 "support": len(sup),
+                "corpus": nearest_source[tid],
                 "evidence": (
                     f"{len(sup)} of {k} nearest labeled rules "
                     f"(vote share {weight / total_vote:.0%}, closest neighbour "
-                    f"{max(sup):.2f}); closest: \"{nearest[tid][:80]}\""
+                    f"{max(sup):.2f}); closest [{nearest_source[tid]}]: "
+                    f"\"{nearest[tid][:80]}\""
                 ),
             })
         return out

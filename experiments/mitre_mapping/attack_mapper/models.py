@@ -76,7 +76,11 @@ class TechniqueMapping(BaseModel):
     technique_name: str
     tactics: List[str] = Field(default_factory=list)
     confidence: float = Field(ge=0.0, le=1.0)
-    source: str  # "declared" | "ioc_alias" | "bridge_table" | "embedding" | "llm"
+    # reasoner.py's cascade, in priority order. `bridge_table` (effort 10) and
+    # `embedding` (effort 11, replaced by knn_corpus) are both gone. A Layer D
+    # pass that confirms a prior candidate blends into "{source}+llm"; one it
+    # introduces itself is plain "llm".
+    source: str  # "declared" | "ioc_alias" | "supervised_classifier" | "knn_corpus" | "llm" | "<source>+llm"
     evidence: List[str] = Field(default_factory=list)
     is_primary: bool = False
 
