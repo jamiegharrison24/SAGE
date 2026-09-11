@@ -35,6 +35,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(HERE, "attack_mapper", "data")
 sys.path.insert(0, HERE)
 
+from attack_mapper import entity_tagger  # noqa: E402
 from attack_mapper.pipeline import AttackMapperPipeline  # noqa: E402
 from attack_mapper.llm_client import ollama_client  # noqa: E402
 
@@ -126,11 +127,33 @@ def main():
              "expansion in labeled_set_v2.csv. Use this to reproduce the historical "
              "numbers in findings.md exactly.",
     )
+    parser.add_argument(
+        "--entity-tagging", nargs="?", const=entity_tagger.DEFAULT_MERGE_RULE,
+        default=None, choices=list(entity_tagger.MERGE_RULES),
+        help="Enable entity-aware normalisation (plan §5 Step 2) with the given merge "
+             "rule. Needs the precomputed spans artifact -- build it with "
+             "`python -m attack_mapper.entity_ner.build_spans` -- except for "
+             "'gazetteer_only', which needs none. Default: off, matching every "
+             "number in findings.md so far.",
+    )
     args = parser.parse_args()
 
     check_required_data()
 
-    out_path = os.path.join(HERE, "validation_report_llm.md" if args.llm else "validation_report.md")
+    # Enable BEFORE the pipeline is constructed: the resolvers canonicalize
+    # their whole corpus in __init__, and the kNN embedding cache key is
+    # derived from the tagger's fingerprint at that moment.
+    if args.entity_tagging:
+        tagger = entity_tagger.enable(args.entity_tagging)
+        print(f"entity tagging: ON, merge rule '{args.entity_tagging}', "
+              f"{len(tagger.ner_spans)} texts in spans artifact")
+    else:
+        entity_tagger.disable()
+
+    suffix = f"_entity_{args.entity_tagging}" if args.entity_tagging else ""
+    out_path = os.path.join(
+        HERE, f"validation_report_llm{suffix}.md" if args.llm
+        else f"validation_report{suffix}.md")
 
     llm_client = ollama_client(model=args.llm_model) if args.llm == "ollama" else None
     if llm_client:
@@ -148,6 +171,7 @@ def main():
     per_technique = {}
     predicted_counts = {}
     tactic_only = 0
+    rejected_excluded = 0
     source_acc = {}
     knn_corpus_acc = {}
     detail = []
@@ -173,6 +197,20 @@ def main():
         if row["proposed_technique"].strip().startswith("TA"):
             tactic_only += 1
 
+        # `reviewer_verdict` semantics, ruled by the project owner 2026-09-11:
+        #   "1" -- reviewer checked the mapping against the source of truth and
+        #          agrees; score the row.
+        #   "0" -- reviewer checked and the mapping is false; EXCLUDE the row
+        #          from evaluation entirely.
+        #   ""  -- not yet reviewed; scored, and reported as unconfirmed.
+        # Before this, any non-empty verdict counted as "confirmed" and the 43
+        # rejections were scored against the very label the reviewer rejected --
+        # 36 of them scoreable, 22 counted as HITs, inflating micro by 2.2
+        # points (38.8% -> 36.6%). See ../STATUS.md "What's not done".
+        if (row.get("reviewer_verdict") or "").strip() == "0":
+            rejected_excluded += 1
+            ids = None
+
         verdict = "SKIPPED"
         if ids is not None:
             scoreable += 1
@@ -187,8 +225,7 @@ def main():
             ob = origin_stats.setdefault(row.get("_origin", "?"), [0, 0])
             ob[0] += hit
             ob[1] += 1
-            is_confirmed = (row.get("label_source") in ("hand_audit", "human_confirmed")
-                            or row.get("reviewer_verdict", "").strip())
+            is_confirmed = (row.get("reviewer_verdict") or "").strip() == "1"
             vb = verified_stats.setdefault("confirmed" if is_confirmed else "pending", [0, 0])
             vb[0] += hit
             vb[1] += 1
@@ -226,12 +263,15 @@ def main():
     top_pred, top_pred_n = max(predicted_counts.items(), key=lambda kv: kv[1], default=("-", 0))
     pred_share = top_pred_n / scoreable if scoreable else 0.0
     confirmed_n = sum(1 for r in rows
-                      if r.get("label_source") in ("hand_audit", "human_confirmed")
-                      or r.get("reviewer_verdict", "").strip())
+                      if (r.get("reviewer_verdict") or "").strip() == "1")
 
     lines = [
         "# attack_mapper vs. hand-audited sample\n",
         f"- LLM reasoning layer (Layer D): {'Ollama ' + args.llm_model if llm_client else 'off (NullLLMClient)'}",
+        (f"- entity-aware normalisation: **on**, merge rule "
+         f"`{args.entity_tagging}` ({entity_tagger.active().stats()})"
+         if args.entity_tagging else
+         "- entity-aware normalisation: off (`normalize.canonicalize` unmodified)"),
         f"- matched audit rows: **{len(rows)}**",
         f"- scoreable (non-ambiguous) rows: **{scoreable}**",
         (f"- excluded: {len(rows) - scoreable} rows -- of which {tactic_only} are tactic-only "
@@ -247,6 +287,9 @@ def main():
          "per-rule reasoning") if scoreable else "",
         (f"- flagged for human review: {review_required_count}/{len(rows)} "
          f"({review_required_count / len(rows):.1%})") if rows else "",
+        (f"- excluded by reviewer verdict `0` (mapping checked and rejected): "
+         f"**{rejected_excluded}** rows -- these are not scored, per the 2026-09-11 ruling; "
+         "scoring them against the rejected label previously inflated micro by 2.2 points"),
         f"- source breakdown (top-1 mapping's source): {source_counts}",
         (f"- kNN retrieval pool (neighbours returned, by corpus): "
          f"{getattr(pipeline.knn, 'neighbour_source_counts', {})} -- a corpus contributing rows "
@@ -316,6 +359,7 @@ def main():
         print(f"macro-average ({len(per_technique)} distinct true labels): {macro:.1%}")
         print(f"most-predicted: {top_pred} on {top_pred_n}/{scoreable} rows ({pred_share:.1%})")
     print(f"ET rule body matched: {body_matched_count}/{len(rows)}")
+    print(f"excluded by reviewer verdict 0: {rejected_excluded}")
     print(f"human review required: {review_required_count}/{len(rows)}")
     print(f"source breakdown: {source_counts}")
     if pipeline.knn:

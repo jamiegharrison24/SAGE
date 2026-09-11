@@ -8,6 +8,8 @@ so this package has no imports reaching outside its own tree -- see ../STATUS.md
 """
 import re
 
+from . import entity_tagger
+
 VENDOR_PREFIXES = [
     "ETPRO", "ET ", "GPL ", "MALWARE-CNC", "SERVER-", "BROWSER-", "FILE-",
     "POLICY-", "INDICATOR-", "OS-", "PROTOCOL-", "APP-DETECT", "EXPLOIT-KIT",
@@ -69,10 +71,34 @@ def expand_abbreviations(tokens):
     return out
 
 
+def entity_key(text):
+    """The string entity spans are keyed on.
+
+    Tagging runs after the vendor prefix is stripped -- `ET`, `GPL`, `ETPRO`
+    are corpus bookkeeping, not text, and feeding them to an NER only invites
+    false positives -- and before `placeholder_entities`, so the model sees
+    natural text rather than `<CVE>`. `entity_ner/build_spans.py` keys the
+    artifact with this same function; if they diverge, every lookup misses.
+    """
+    return strip_vendor_prefix(text)
+
+
 def canonicalize(text):
-    """Full pipeline: vendor-prefix strip -> entity placeholders -> split
-    concatenation -> lowercase -> abbreviation expansion -> collapse whitespace."""
+    """Full pipeline: vendor-prefix strip -> entity tagging (optional) ->
+    entity placeholders -> split concatenation -> lowercase -> abbreviation
+    expansion -> collapse whitespace.
+
+    The entity step is off unless `entity_tagger.enable()` has been called. It
+    lives here rather than at the four `canonicalize()` call sites so that
+    corpus text and query text cannot drift apart -- train/inference asymmetry
+    through this function is a bug this branch has already paid for once.
+    """
     text = strip_vendor_prefix(text)
+
+    tagger = entity_tagger.active()
+    if tagger is not None:
+        text = tagger.tag(text)
+
     text = placeholder_entities(text)
     text = split_concatenated(text)
     text = text.lower()

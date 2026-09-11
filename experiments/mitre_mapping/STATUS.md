@@ -381,10 +381,122 @@ the observed event, Splunk names describe an analytic over a data model, and
 only the former shares vocabulary with network IDS signatures. Check
 per-corpus retrieval accuracy before adopting.
 
+### Caveat added 2026-09-11 — the Elastic evidence did not survive the scoring fix
+
+Re-running under the corrected `reviewer_verdict` rule (Step 0 of
+`entity_normalisation_plan.md`) moves the per-corpus retrieval accuracies:
+
+| winning corpus | before (397 scoreable) | after (361 scoreable) |
+|---|---:|---:|
+| elastic | 12/43 = **27.9%** | 2/30 = **6.7%** |
+| et | 19/77 = 24.7% | 19/76 = 25.0% |
+| sigma | 17/56 = 30.4% | 16/52 = 30.8% |
+
+ET and Sigma barely move. **Elastic collapses**, because 10 of its 12 apparent
+hits were on rows the reviewer had rejected. The claim this section rests on —
+"Elastic rows win top-1 at an accuracy comparable to Sigma and better than ET,
+so this is new signal rather than a reweighting artifact" — is therefore no
+longer supported by the evidence quoted for it.
+
+What still stands: the aggregate macro gain (+1.1) and hub-share improvement
+were measured as a delta across a constant evaluation set, so the rejected-row
+bias sat on both sides and cancelled in *that* comparison. What does not stand
+is the per-source attribution used to argue the gain was real signal.
+
+**Resolved same day** by re-running the ET+Sigma baseline under corrected
+scoring:
+
+| config (corrected scoring, 361 scoreable) | micro | macro | T1190 share |
+|---|---:|---:|---:|
+| ET + Sigma | 37.1% (134) | 20.9% | 36.3% |
+| **+ Elastic** | 36.6% (132) | **22.2%** | **31.3%** |
+| delta | **-0.5** | **+1.3** | **-5.0** |
+
+**The adoption decision holds, but the stated mechanism was wrong.** Effort
+12 claimed Elastic supplied *new signal*, evidenced by its rows winning top-1
+at accuracy comparable to Sigma. Under corrected scoring Elastic's own
+retrieval accuracy is 6.7% — far *worse* than ET (24.3%) and Sigma (26.6%) —
+yet macro still improves 1.3 points and hub share falls 5.
+
+So Elastic is helping by **diluting the T1190 hub in the IDF-weighted voting
+pool**, not by contributing better neighbours. That is precisely the
+"reweighting artifact" the `neighbour_source_counts` instrumentation was built
+to detect, and here it is the actual mechanism. It remains a real, reproducible
+benefit — reducing hub collapse is what the corpus-diversity work set out to do
+— but it is a calibration effect, not a retrieval-quality one, and it costs 0.5
+points of micro.
+
+Kept on that basis. The lesson generalises: a corpus can improve macro and
+calibration purely by changing the class-prior denominator, without its own
+retrievals being any good.
+
+## 13. Entity-aware normalisation — built, measured, **negative** — `attack_mapper/entity_ner/findings.md`, `entity_normalisation_plan.md`
+
+The hypothesis: the statistical layers match on surface wording, so `nmap` and
+`masscan` are unrelated strings to them. Marking entity spans should let the
+model learn "a TOOL appears here" instead of memorising every tool name.
+
+Built in three parts — a 94,786-entry gazetteer (MISP galaxy + IANA + CPE), a
+GLiNER v2.1 zero-shot NER pass, and an `<ENTITY>` marker injected inside
+`canonicalize()` so corpus and query text are augmented identically.
+
+**Result: macro down, hub share up, in both measured arms.**
+
+| arm | micro | macro | T1190 share |
+|---|---|---|---|
+| baseline (off) | 36.6% | **22.2%** | 31.3% |
+| `gliner_only` | 35.5% | **19.4%** | 33.8% |
+| `intersection` | 37.1% | **21.3%** | 33.2% |
+
+`intersection`'s +0.5 micro is 2 rows of 361 — inside noise, and arriving with
+macro down and hub share up, which is the combination the plan pre-registered
+as modal collapse rather than a gain. Not banked.
+
+**Why it failed is structural, and was derivable before the corpus pass.**
+Augmentation preserves the distinguishing token: `nmap <ENTITY> scan` and
+`masscan <ENTITY> sweep` still differ exactly where it matters. All the marker
+adds is a token present in 42% of rows, with the low IDF that implies, applied
+near-uniformly — which nudges every row slightly toward every other, including
+toward the hub. Only *replacement* makes two tools look alike, and replacement
+was rejected earlier on risk grounds. Augment-not-replace and generic-not-typed
+were each defensible alone; together they cannot deliver the generalisation
+that motivated the work.
+
+Three of five merge rules were eliminated *before* any scoring run, by
+`entity_ner/marker_rate.py`: `union`, `gliner_primary` and `gazetteer_only` tag
+~90% of corpus rows, making `<ENTITY>` a constant rather than a feature. That
+diagnostic cost seconds and saved three `validate.py` passes; it is the reusable
+part of this effort.
+
+**Two validity checks passed before the negative was accepted**, which is what
+makes it a result rather than a plumbing failure: `canonicalize()` with the
+tagger off was diffed byte-for-byte against the committed normaliser over all
+31,825 corpus strings (**0 differ**), and both arms logged **0 NER cache
+misses**, so queries and corpus rows were tagged from the same artifact with no
+train/inference asymmetry.
+
+Kept, off by default (`Settings.use_entity_tagging = False`). The machinery,
+the frequency diagnostic and one genuine bug fix are all reusable:
+`knn_resolver._corpus_fingerprint()` now hashes the normaliser identity. That
+trap was live — the 49MB embedding cache is keyed on corpus files and model
+name, neither of which a normalisation change touches, so every arm here would
+have silently scored the *old* normaliser with entirely plausible numbers.
+
 ## Current bottom line
 
-**38.8% top-1 / 22.2% macro (effort 12)** is the current number: the best
-macro this project has measured, achieved *without* `bridge_table`.
+**36.6% top-1 / 22.2% macro** is the current number, after the 2026-09-11
+scoring correction (`reviewer_verdict` `0` = reviewer rejected the mapping =
+row excluded from evaluation). 132/361 scoreable rows, 43 excluded.
+
+The previous 38.8% was measured with those 43 rejected rows scored against
+the very labels a reviewer had rejected — 22 of them counted as HITs. The
+2.2-point drop is a measurement correction, the fourth in this branch's
+history, not a code regression. Macro is unchanged at 22.2%; `T1190` share
+rose 29.0% -> 31.3%, because the excluded rows were disproportionately
+`ET SCAN`-style `T1046` proposals.
+
+**This correction damaged effort 12's Elastic evidence — see the caveat in
+that section.**
 
 Read the history as two phases. First, successive measurement fixes brought the
 reported number *down* as inflation was removed — 53.8% (narrow, partly
@@ -422,8 +534,12 @@ model — embedding, classifier, or LLM — reasoning freshly over rule text.
 
 ## What's not done
 
-- **Scoring counts rejected labels as ground truth — found in effort 12,
-  convention now ruled, code not yet changed.** 208 of the 500 rows carry an
+- ~~**Scoring counts rejected labels as ground truth**~~ — **DONE 2026-09-11**
+  (effort 13, "Step 0"). The rule is now implemented in `validate.py` and
+  defined in `label_queue/CONVENTION.md`. Original entry kept below for the
+  reasoning; the headline has carried the corrected 36.6% since.
+
+  208 of the 500 rows carry an
   explicit `reviewer_verdict` (165 `1`, 43 `0`). `validate.py:190` treats *any*
   non-empty verdict as "confirmed", so the 43 rejections are scored against the
   very `proposed_technique` the reviewer rejected. 36 of those 43 are

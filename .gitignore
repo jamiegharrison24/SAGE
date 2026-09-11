@@ -47,3 +47,9 @@ experiments/mitre_mapping/attack_mapper/data/knn_corpus_embeddings.npz
 
 # MITRE mapping experiment (entity_dicts): cached upstream dictionaries (large, re-fetchable)
 experiments/mitre_mapping/attack_mapper/entity_dicts/sources/
+
+# MITRE mapping experiment (entity_ner): precomputed GLiNER spans over the
+# corpus (~28 min to rebuild via entity_ner/build_spans.py, deterministic given
+# the pinned model/threshold/labels in entity_tagger.py). Regenerable model
+# output, so it stays out of history like the embedding cache above.
+experiments/mitre_mapping/attack_mapper/data/entity_spans.json.gz

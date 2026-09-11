@@ -55,8 +55,29 @@ traversal tagged `T1083`, likewise `T1190`).
   app", not "looks like T1190".
 - `label_source` — `model_proposed` for this pass. Becomes `human_confirmed`
   only when a person has actually checked the row.
-- `reviewer_verdict` / `reviewer_notes` — left **empty**. These are for the
-  human review pass, and their emptiness is what marks the set as unconfirmed.
+- `reviewer_verdict` / `reviewer_notes` — left **empty** by the labelling
+  pass. These are for the human review pass, and their emptiness is what marks
+  a row as unconfirmed.
+
+### `reviewer_verdict` values — ruled 2026-09-11
+
+The column was in use before its values were ever defined here, which is how
+`validate.py` came to treat *any* non-empty verdict as "confirmed" and score
+43 rejected rows against the very labels a reviewer had rejected (2.2 points
+of inflation; see `../STATUS.md`). Defined now:
+
+| value | meaning | effect on scoring |
+|---|---|---|
+| `1` | reviewer checked `proposed_technique` against the source of truth and **agrees** | row is scored, and counts as a confirmed label |
+| `0` | reviewer checked and the mapping is **false** | row is **excluded from evaluation entirely** — not scored, not counted as confirmed |
+| *(empty)* | not yet reviewed | row is scored, and reported as unconfirmed |
+
+A `0` is a statement that the *proposed label* is wrong, not that the
+signature is unmappable. Excluding rather than re-scoring is deliberate: the
+corrected label is not recorded in a machine-readable field, so there is
+nothing to score against. Where a reviewer did write the correction into
+`reviewer_notes` as free text ("t1021.004 is correct, t1110 is not"), that
+signal is currently unused.
 
 ## Value grammar for `proposed_technique`
 

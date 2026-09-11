@@ -38,6 +38,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
+from . import entity_tagger
 from .corpora import CORPUS_PATHS, corpus_name
 from .normalize import canonicalize
 
@@ -68,13 +69,23 @@ def _load_corpus() -> Tuple[List[str], List[List[str]], List[str]]:
 
 
 def _corpus_fingerprint() -> str:
-    """Cheap cache key: path, size and mtime of each corpus file."""
+    """Cache key: path/size/mtime of each corpus file, the embedding model, and
+    the *normaliser* identity.
+
+    That last term matters more than it looks. The cached matrix is embeddings
+    of `canonicalize(msg)`, so any change to normalisation invalidates it --
+    but a normalisation change touches no corpus file and no model name, so
+    without this term the 49MB cache is silently reused and every experiment
+    measures the old normaliser while reporting the new one. It fails quietly,
+    with entirely plausible numbers. See `../entity_normalisation_plan.md` §4.
+    """
     h = hashlib.sha256()
     for path in CORPUS_PATHS:
         if os.path.exists(path):
             st = os.stat(path)
             h.update(f"{path}:{st.st_size}:{st.st_mtime_ns}".encode())
     h.update(_MODEL_NAME.encode())
+    h.update(entity_tagger.fingerprint().encode())
     return h.hexdigest()
 
 

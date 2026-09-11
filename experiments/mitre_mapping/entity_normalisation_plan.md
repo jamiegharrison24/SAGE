@@ -166,6 +166,20 @@ numbers. **Fix: hash a normaliser version string into the fingerprint and bump
 it on every normalisation change.** One line, must land with the first change.
 The classifier is unaffected — it refits from scratch each run.
 
+**The corpus NER pass costs ~1 hour and MUST be cached.** Measured 2026-09-11,
+`gliner_medium-v2.1` on CPU over the real 31,825-row corpus:
+
+| mode | throughput | full corpus |
+|---|---:|---:|
+| one row at a time | 4.3 rows/s | 125 min |
+| `batch_predict_entities`, batch 16 | 9.9 rows/s | **54 min** |
+
+Batching is a 2.3x win and is not optional. More importantly the result has to
+persist to disk keyed on a corpus+model+normaliser fingerprint, exactly like
+`knn_corpus_embeddings.npz` — otherwise every `validate.py` run pays an extra
+hour, turning a 10-minute experiment cycle into a 70-minute one. Query-side NER
+is per-title and negligible (~0.1s).
+
 **Scope is set by the corpus side, not the query side.** Because normalisation
 must be symmetric, the lookup table has to cover entities appearing in the
 corpus too. Upper-bound candidate counts (crude, no NER, inflated by ordinary
@@ -189,8 +203,19 @@ are measured on prose and must not be read as numbers we would inherit.
 
 Each step independently measurable. Do not combine.
 
-**Step 0 — unblock measurement. Convention now ruled on; implementation
-pending.**
+**Step 0 — unblock measurement. DONE 2026-09-11.**
+
+Implemented in `validate.py` and documented in `label_queue/CONVENTION.md`
+(which defined the column but never its values — the gap that allowed this).
+Result: **36.6% (132/361)**, 43 rows excluded, exactly the predicted figure.
+Macro unchanged at 22.2%; `T1190` share rose 29.0% -> 31.3% because the
+excluded rows were disproportionately `ET SCAN`/`T1046` proposals.
+
+Side effect worth knowing: the correction **invalidated effort 12's per-source
+evidence for Elastic** (its kNN accuracy fell 27.9% -> 6.7%, as 10 of its 12
+apparent hits were on rejected rows). See `STATUS.md` effort 12's caveat. A
+baseline re-run without Elastic, under corrected scoring, is now outstanding.
+
 
 `reviewer_verdict` semantics, ruled by the project owner 2026-09-11:
 
@@ -315,6 +340,65 @@ products (WordPress, Jetty, FortiOS), which is the 24.9% class. If it does,
 the objection largely collapses and only the protocol class is unreachable
 for it.
 
+### Step 2 integration — built 2026-09-11
+
+`normalize.py` is no longer untouched. `canonicalize()` gained one optional
+step, between the vendor-prefix strip and `placeholder_entities`:
+
+```
+strip_vendor_prefix -> [entity tagging] -> placeholder_entities -> split -> lower -> abbrev
+```
+
+Placement is deliberate at both ends. *After* the prefix strip, because `ET`,
+`GPL` and `ETPRO` are corpus bookkeeping rather than text and only invite
+false positives; *before* placeholdering, because the NER should see
+`CVE-2018-13379`, not `<CVE>`.
+
+| file | role |
+|---|---|
+| `attack_mapper/entity_tagger.py` | runtime: reads spans, merges, injects markers. No model load. |
+| `attack_mapper/entity_ner/build_spans.py` | one-off: GLiNER over all 32,273 distinct texts → `data/entity_spans.json.gz` |
+| `attack_mapper/normalize.py` | the hook + `entity_key()` |
+| `attack_mapper/knn_resolver.py` | fingerprint fix (below) |
+| `attack_mapper/config.py` | `use_entity_tagging`, `entity_merge_rule` — both off |
+| `validate.py` | `--entity-tagging [rule]` |
+
+Five decisions worth recording, because each closes a failure mode this branch
+has already hit or nearly hit:
+
+1. **Markers are generic `<ENTITY>`, appended not substituted.** `nmap` →
+   `nmap <ENTITY>`. Verified to survive `_CAMEL_RE`, `_NON_ALNUM_RE` and
+   `expand_abbreviations` intact, including adjacent to `-` and `(`. Had it
+   not survived, the mechanism would have produced no tags and read as "the
+   idea doesn't work".
+2. **The hook lives inside `canonicalize()`, not at its call sites.**
+   Corpus text and query text are augmented by construction rather than by
+   each caller remembering to. Train/inference asymmetry through this function
+   is a bug this branch has already paid for once. Note there are *five* call
+   sites, not the four this document said earlier: the corpus load and query
+   path in each of `knn_resolver` and `classifier_resolver`, plus
+   `narrative.py:37,46`, which builds LLM prompt text. The fifth means Layer D
+   prompts will contain `<ENTITY>` markers when tagging is on. Layer D is off
+   by default so it affects no number reported here, but it should be looked
+   at before Layer D is next exercised.
+3. **The artifact stores raw spans with their source and score, never marked-up
+   text.** The merge rule is applied at read time, so one 28-minute pass
+   serves every rule in the sweep. Caching final text would force a rebuild
+   per variant and quietly invite comparing variants built at different times.
+4. **The kNN embedding cache key now includes the normaliser fingerprint.**
+   This is §4's trap, and it was live: the cached matrix is embeddings of
+   `canonicalize(msg)`, but a normalisation change touches no corpus file and
+   no model name, so the 49MB cache would have been reused across exactly this
+   change — measuring the old normaliser while reporting the new one, with
+   entirely plausible numbers. The fingerprint is derived from the artifact's
+   own bytes rather than a hand-bumped constant, since a version number
+   someone forgets to bump is the same failure in slower motion.
+5. **A missing or mismatched artifact is fatal, not a warning.** A degraded run
+   that silently produces no tags is indistinguishable from a baseline run —
+   the failure `check_required_data()` exists to prevent. The model name,
+   threshold and label set are recorded *in* the artifact and checked on load,
+   so a build made under different settings cannot be scored by accident.
+
 **Step 3 — external resolution for the residual tail.** Only entities surviving
 steps 1 and 2. Offline, cached, committed, human-reviewed per §3.4.
 
@@ -333,6 +417,43 @@ Attribute with the per-source instrumentation added in effort 12
 (`neighbour_source_counts`, top-1 accuracy split by winning corpus). A change
 in the headline with no change in what gets retrieved is a reweighting
 artifact, not new signal.
+
+### Outcome, measured 2026-09-11 — the prediction was wrong
+
+| arm | micro | macro | T1190 share |
+|---|---|---|---|
+| baseline (off) | 36.6% | **22.2%** | 31.3% |
+| `gliner_only` | 35.5% | **19.4%** | 33.8% |
+| `intersection` | 37.1% | **21.3%** | 33.2% |
+
+Macro **down** and hub share **up** in both arms — the opposite of the
+prediction on both counts. `intersection`'s +0.5 micro is 2 rows of 361,
+inside noise, and arrives with macro down and hub share up: the exact
+combination flagged above as modal collapse rather than a gain. It is not
+banked.
+
+Both validity checks passed first, so this is a real negative and not a
+plumbing failure: the baseline reproduced the pre-change headline exactly,
+`canonicalize()` with the tagger off was diffed byte-for-byte against the
+committed normaliser over all 31,825 corpus strings (0 differ), and both arms
+logged **0 NER cache misses** — so queries and corpus rows were tagged by the
+same artifact, with no train/inference asymmetry.
+
+**Why, and it was derivable in advance.** Augmentation preserves the
+distinguishing token, so `nmap <ENTITY> scan` and `masscan <ENTITY> sweep`
+still differ exactly where it matters; all the marker adds is a token present
+in 42% of rows, with the low IDF that implies, applied near-uniformly. That
+nudges every row slightly closer to every other — including toward the hub,
+which is the direction observed. Only *replacement* makes two different tools
+look alike. §3.1 chose augment-not-replace, and §3.2/the generic-tag decision
+chose untyped; each was defensible alone, but **together they cannot deliver
+the generalisation that motivated the work.** The lesson for §4: a mechanism
+should be checked for structural viability against its own motivating example
+before a 26-minute corpus pass is spent on it.
+
+`normalize.py`'s entity hook is kept, off by default — the machinery, the
+cache-fingerprint fix and the frequency diagnostic are all reusable, and the
+negative result is only interpretable because they exist.
 
 ## 7. What is prior art and what is not
 

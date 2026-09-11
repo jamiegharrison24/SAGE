@@ -1,0 +1,169 @@
+"""
+Precompute GLiNER entity spans for every text `canonicalize()` will ever see.
+
+Plan §5 Step 2. A GLiNER pass runs at ~9.9 rows/s batched, so the ~32k corpus
+rows cost ~54 minutes. `canonicalize()` is called once per corpus row on every
+resolver construction, so doing this inline would add an hour to each
+`validate.py` run. This script pays it once and writes an artifact that
+`entity_tagger.py` reads.
+
+**Raw spans are stored, not marked-up text.** The merge rule (union /
+intersection / gliner_primary / ...) is applied at read time by
+`entity_tagger.merge_spans`, so one 54-minute pass serves every variant of the
+sweep. Storing final text instead would force a rebuild per rule.
+
+Texts are keyed by `normalize.entity_key()` -- the vendor-prefix-stripped
+title -- which is exactly the string `canonicalize()` hands the tagger. If the
+two ever diverge, every lookup misses and the run silently degrades to
+gazetteer-only.
+
+Usage:
+    python -m attack_mapper.entity_ner.build_spans            # full build
+    python -m attack_mapper.entity_ner.build_spans --limit 200  # smoke test
+    python -m attack_mapper.entity_ner.build_spans --resume     # keep existing
+"""
+import argparse
+import csv
+import glob
+import gzip
+import json
+import os
+import re
+import sys
+import time
+
+from .. import entity_tagger
+from ..corpora import CORPUS_PATHS
+from ..normalize import entity_key
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+PKG = os.path.normpath(os.path.join(HERE, ".."))
+DATA = os.path.join(PKG, "data")
+
+# csv's default 128k field cap is smaller than some Sigma/Elastic rule bodies.
+csv.field_size_limit(10 * 1024 * 1024)
+
+
+def parse_proposed(cell):
+    cell = cell.strip()
+    if cell.startswith("ambiguous") or cell.startswith("(none)") or cell == "":
+        return None
+    return set(re.findall(r"T\d{4}(?:\.\d{3})?", cell)) or None
+
+
+def collect_texts():
+    """Every string that reaches `canonicalize()`: corpus rows (kNN retrieval
+    pool + classifier training set) and eval signatures (queries).
+
+    Eval rows include the non-scoreable ones deliberately -- they still run
+    through the pipeline, and a cache miss there would trigger a live model
+    load mid-run.
+    """
+    texts = set()
+    corpus_n = 0
+    for path in CORPUS_PATHS:
+        if not os.path.exists(path):
+            print(f"  (skipping absent {os.path.basename(path)})")
+            continue
+        with open(path, encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                if [t for t in row["technique_ids"].split(";") if t]:
+                    texts.add(entity_key(row["msg"]))
+                    corpus_n += 1
+    print(f"  corpus rows: {corpus_n}")
+
+    eval_rows = []
+    for fn in sorted(glob.glob(os.path.join(DATA, "hand_audit_sample*.csv"))):
+        eval_rows += list(csv.DictReader(open(fn, encoding="utf-8")))
+    p = os.path.join(DATA, "labeled_set_v2.csv")
+    if os.path.exists(p):
+        eval_rows += list(csv.DictReader(open(p, encoding="utf-8")))
+    for r in eval_rows:
+        texts.add(entity_key(r["signature"]))
+    print(f"  eval rows:   {len(eval_rows)}")
+
+    return sorted(texts)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--limit", type=int, default=0,
+                    help="only tag the first N texts (smoke test)")
+    ap.add_argument("--batch", type=int, default=16)
+    ap.add_argument("--resume", action="store_true",
+                    help="keep spans already in the artifact, tag only new texts")
+    ap.add_argument("--out", default=entity_tagger.SPANS_PATH)
+    args = ap.parse_args()
+
+    print("collecting texts ...")
+    texts = collect_texts()
+    print(f"  distinct after dedupe: {len(texts)}")
+
+    existing = {}
+    if args.resume and os.path.exists(args.out):
+        with gzip.open(args.out, "rt", encoding="utf-8") as fh:
+            blob = json.load(fh)
+        if blob.get("meta", {}).get("model") == entity_tagger.NER_MODEL:
+            existing = blob["spans"]
+            print(f"  resuming: {len(existing)} already cached")
+
+    todo = [t for t in texts if t not in existing]
+    if args.limit:
+        todo = todo[:args.limit]
+    print(f"  to tag: {len(todo)}\n")
+
+    if not todo:
+        print("nothing to do.")
+        return 0
+
+    print(f"loading {entity_tagger.NER_MODEL} ...")
+    from gliner import GLiNER
+    model = GLiNER.from_pretrained(entity_tagger.NER_MODEL)
+    labels = list(entity_tagger.NER_LABELS)
+    print("loaded.\n")
+
+    spans = dict(existing)
+    t0 = time.time()
+    done = 0
+    for i in range(0, len(todo), args.batch):
+        chunk = todo[i:i + args.batch]
+        results = model.batch_predict_entities(
+            chunk, labels, threshold=entity_tagger.NER_THRESHOLD)
+        for text, ents in zip(chunk, results):
+            spans[text] = [[e["start"], e["end"], round(float(e["score"]), 4)]
+                           for e in ents]
+        done += len(chunk)
+        if done % (args.batch * 25) == 0 or done == len(todo):
+            el = time.time() - t0
+            rate = done / el if el else 0
+            eta = (len(todo) - done) / rate if rate else 0
+            print(f"  {done}/{len(todo)}  {rate:.1f} rows/s  eta {eta / 60:.1f} min")
+
+    tagged = sum(1 for v in spans.values() if v)
+    total_ents = sum(len(v) for v in spans.values())
+
+    blob = {
+        "meta": {
+            "model": entity_tagger.NER_MODEL,
+            "threshold": entity_tagger.NER_THRESHOLD,
+            "labels": list(entity_tagger.NER_LABELS),
+            "built": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "n_texts": len(spans),
+            "note": "keyed by normalize.entity_key(); raw spans, merge applied at read time",
+        },
+        "spans": spans,
+    }
+    os.makedirs(os.path.dirname(args.out), exist_ok=True)
+    with gzip.open(args.out, "wt", encoding="utf-8") as fh:
+        json.dump(blob, fh)
+
+    size_mb = os.path.getsize(args.out) / 1e6
+    print(f"\nwrote {args.out}  ({size_mb:.1f} MB)")
+    print(f"  texts: {len(spans)}   with >=1 entity: {tagged} ({tagged / len(spans):.1%})")
+    print(f"  total entities: {total_ents}")
+    print(f"  elapsed: {(time.time() - t0) / 60:.1f} min")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -29,6 +29,17 @@ class Settings:
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     knn_confidence_cap: float = 0.45
 
+    # Entity-aware normalisation (entity_tagger.py, plan §5 Step 2). Appends a
+    # generic `<ENTITY>` marker after gazetteer/NER-detected spans inside
+    # `canonicalize()`, so corpus and query text are augmented identically.
+    #
+    # Off by default: it needs a precomputed spans artifact (~54 min to build,
+    # `entity_ner/build_spans.py`) and it changes the text every downstream
+    # layer is trained and retrieved on, so it must be an explicit opt-in
+    # rather than something that happens to whoever imports the package.
+    use_entity_tagging: bool = False
+    entity_merge_rule: str = "union"
+
     # LLM reasoning layer (optional; see llm_client.py). No provider is
     # configured by default -- there is no API key anywhere in this
     # environment, so the reasoner runs in template-only mode unless a
