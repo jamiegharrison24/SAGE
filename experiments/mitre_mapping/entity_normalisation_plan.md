@@ -402,6 +402,64 @@ has already hit or nearly hit:
 **Step 3 — external resolution for the residual tail.** Only entities surviving
 steps 1 and 2. Offline, cached, committed, human-reviewed per §3.4.
 
+### Step 3 gated out on measurement, 2026-09-11 — not built
+
+Step 2's negative does **not** automatically kill Step 3: the mechanisms
+differ. Step 2 appended an uninformative constant; Step 3 would append
+entity-specific *descriptive content*, which is the one thing that actually
+makes two different tools look alike (`nmap` and `masscan` both gaining
+"port scanner network discovery"). That is §7's BLINK-style linking-by-
+description, and it is precisely Step 2's missing ingredient.
+
+So Step 3 was gated on its addressable set instead, measured from the two
+artifacts already on disk:
+
+| set | rows with >= 1 NIL entity | distinct NIL strings |
+|---|---|---|
+| eval (scoreable) | 74/397 (18.6%) | 39 |
+| corpus | 7,607/31,825 (23.9%) | **720** (the review burden) |
+
+The 18.6% headline dissolves on inspection. The NIL tail is dominated by three
+classes Step 3 cannot help:
+
+* **protocols already shared corpus-wide** — `tls` x5754, `dns` x201, `smb2`,
+  `vnc`, `ssl`, `netbios`. Describing `tls` adds nothing a high-frequency token
+  did not already carry.
+* **NER false positives** — `uri` x18, `post`, `asp`, `cgi`, and `sql
+  injection` (the NER tagging an attack *technique* as an entity).
+* **non-technique entities** — `wells fargo`, `w2b`: phishing target names,
+  not behaviour.
+
+The rows a description would genuinely help — `zyxels`, `exim`, `gunaysoft`,
+`d-link`, `tp-link` — are the rare long tail, ~20-25 of 397 (~6%) generously,
+of which only a fraction would flip wrong→right. **Optimistic ceiling ~2-3
+points of micro in exchange for curating and human-reviewing 720 descriptions**
+(§3.5's AVClass lesson makes the review mandatory, not optional). That is a bad
+trade.
+
+**The cheap variant was checked too, and is worse.** Attaching MISP galaxy's
+native descriptions (505 of 620 clusters carry one) to *already-known*
+entities would need no web lookup, no NIL detection and no review — but MISP
+tools hit **4 of 397 eval rows (1.0%)**: `metasploit`, `coinminer`, `pegasus`.
+MISP catalogues host-side malware (`Tinba`, `PlugX`, `Poison Ivy`); this corpus
+is network IDS signatures. Wrong register — the same mismatch that got Splunk
+rejected in effort 12, and the reason §5's "choose the next corpus on register
+match, not diversity stats" applies to dictionaries as well.
+
+Per-source gazetteer hit rates on the eval set, for the record:
+
+```
+misp_galaxy    4/397 ( 1.0%)   metasploit, coinminer, pegasus
+iana         132/397 (33.2%)   http, mysql, nmap, ftp, smb, udp, ntp
+cpedict      221/397 (55.7%)   command, trojan, microsoft, known, download  <- mostly noise
+```
+
+**Conclusion for the whole entity-normalisation line.** Step 1 measured and
+declined; Step 2 built, measured, negative; Step 3 gated out on addressable
+set. The hypothesis that entity normalisation would reduce hub collapse is
+tested and unsupported. The remaining untried lever is §8 (classifier
+modernisation), plus deepening the reviewed label set.
+
 ## 6. Prediction
 
 Recorded before implementation, per the practice that made effort 12
