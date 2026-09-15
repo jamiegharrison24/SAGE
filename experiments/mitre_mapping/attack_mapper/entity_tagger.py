@@ -75,11 +75,87 @@ NER_THRESHOLD = 0.85
 
 MARKER = "<ENTITY>"
 
+# Replace a span only when its corpus document frequency is strictly below
+# this. 1% sits an order of magnitude under the frequent tokens the report
+# names as must-keep (`SQL` 12.1%, `Injection Attempt` 12.0%, `HTTP` 12.2%)
+# and above GLiNER's residual false positives at 0.85 (`URI` 0.62%, `URL`
+# 0.18%, `UDN` 0.00%). It is a starting point for the sweep, not a finding.
+DEFAULT_DF_CUTOFF = 0.01
+
+# How a replaced span is substituted. Measured as an arm, because the obvious
+# choice is not obviously right:
+#
+#   marker    "nmap scan" -> "<ENTITY> scan"
+#   drop      "nmap scan" -> "scan"
+#   sentinel  "nmap scan" -> "qqentqq scan"
+#
+# `marker` is NOT a reserved symbol to the classifier. Its word vectorizer uses
+# sklearn's default token pattern, which strips non-word characters, so
+# `<ENTITY>` tokenizes to the bare word `entity` -- colliding with real uses of
+# the word (corpus DF 0.07%, and `identity` at 0.13% via char_wb `entit`
+# n-grams). The same is already true of the older placeholders: `<CVE>` -> cve,
+# `<VERSION>` -> version.
+#
+# The collision is small; the dilution is not. `gliner_only` fires on ~42% of
+# rows, so `marker` injects one near-constant word token AND its char n-grams
+# into ~42% of documents -- near-zero IDF for itself while shifting every real
+# feature's relative weight (the cost `marker_rate.py` documents).
+#
+# `drop` is the hypothesis that in REPLACE mode the mechanism is the removal
+# itself, making the marker dead weight. `sentinel` separates "does a
+# placeholder help?" from "does the placeholder collide?" -- it survives word
+# tokenization as one distinct token that appears nowhere in the corpora.
+REPLACEMENT_STYLES = ("marker", "drop", "sentinel")
+DEFAULT_REPLACEMENT_STYLE = "marker"
+
+# Deliberately lowercase and alphabetic: `canonicalize()` lowercases after
+# tagging, and anything non-alphanumeric would be stripped by the word
+# tokenizer exactly as the angle brackets are.
+SENTINEL = "qqentqq"
+
+# ---------------------------------------------------------------------------
+# Reserved placeholders for the OLDER entity classes (effort 15 follow-up).
+#
+# `normalize.placeholder_entities` substitutes `<CVE>`, `<IP>`, `<HEX>` and
+# `<VERSION>`, and none of the four is a distinct token to the classifier: its
+# word vectorizer uses sklearn's default `\w\w+`, which strips the angle
+# brackets, so `<cve>` is read as the ordinary word `cve`. The collapsing these
+# placeholders exist to do still works -- every CVE id lands on one shared
+# token -- but that token is not reserved, so it merges with literal uses of
+# the word.
+#
+# Measured before changing anything: `<CVE>` fires on 5.48% of corpus rows
+# (1,744), `<VERSION>` 0.32%, `<HEX>` 0.20%, `<IP>` 0.01%; the literal words
+# collide at `cve` 0.041% and `version` 0.047% of rows. So the defect is real
+# but small, which is why this is a measured arm rather than an assumed fix.
+#
+# Flipping this changes BASELINE text, so it invalidates every number on the
+# branch. It is therefore a module global defaulting to the existing
+# behaviour, folded into `fingerprint()` below so the embedding cache cannot
+# be shared across the two.
+RESERVED_PLACEHOLDERS = False
+
+# Alphabetic and lowercase for the same reason as SENTINEL: `canonicalize()`
+# lowercases after substitution, and anything non-alphanumeric would be
+# stripped by the word tokenizer exactly as the angle brackets are.
+RESERVED_MAP = {
+    "<CVE>": "qqcveqq",
+    "<IP>": "qqipqq",
+    "<HEX>": "qqhexqq",
+    "<VERSION>": "qqverqq",
+}
+
+
+def placeholder_for(tag: str) -> str:
+    """The substitution for one placeholder class, honouring the global."""
+    return RESERVED_MAP[tag] if RESERVED_PLACEHOLDERS else tag
+
+
 # Bump on ANY change to normalisation behaviour -- this string is hashed into
 # `knn_resolver._corpus_fingerprint()`, and a stale 49MB embedding cache
 # silently reused across a normalisation change produces plausible-looking
 # numbers that mean nothing. See plan §4.
-NORMALIZER_VERSION = "2-entity"
+NORMALIZER_VERSION = "3-entity-replace"
 
 MERGE_RULES = ("union", "intersection", "gliner_only", "gazetteer_only",
                "gliner_primary")
@@ -209,6 +285,66 @@ def inject_markers(text: str, spans: Sequence[Tuple[int, int]],
     return out
 
 
+def replace_spans(text: str, spans: Sequence[Tuple[int, int]],
+                  df_table, cutoff: float,
+                  marker: str = MARKER,
+                  style: str = DEFAULT_REPLACEMENT_STYLE) -> Tuple[str, int, int]:
+    """Substitute `marker` for each span whose surface DF is below `cutoff`.
+
+    This is the *replace* arm of REPORT.md §8 item 7, and the only variant that
+    implements effort 13's original hypothesis. `inject_markers` (augment) is
+    left exactly as it was: effort 13's 19.4%/21.3% numbers have to stay
+    reproducible for this comparison to mean anything, so this is a second path
+    rather than a mutation of the first.
+
+    Why replace rather than append. Augment leaves the rare token in place, so
+    `nmap <ENTITY> scan` and `masscan <ENTITY> sweep` still differ in every
+    token that made them differ before -- the marker adds a constant and
+    changes no distance. Replacement is what actually makes two rules alike:
+    `<ENTITY> scan` vs `<ENTITY> sweep`.
+
+    Why gated on DF. Replacement destroys the surface token. For `ASA 5500
+    Series` (DF 0.00%) that is the point; for `SQL` (DF 12.1%) it would delete
+    the token carrying the technique signal. The gate is measured corpus
+    document frequency, never a hand-written list -- see `df_table.py`.
+
+    Returns (text, n_replaced, n_kept) so the caller can report how often the
+    gate actually fired. A run where `n_replaced` is ~0 is a no-op arm, and a
+    run where `n_kept` is ~0 replaced everything; both are failures that look
+    like results if they are not counted.
+    """
+    if style not in REPLACEMENT_STYLES:
+        raise ValueError(f"unknown replacement style {style!r}; "
+                         f"expected one of {REPLACEMENT_STYLES}")
+    sub = {"marker": marker, "drop": "", "sentinel": SENTINEL}[style]
+
+    replaced = kept = 0
+    out = text
+    for start, end in sorted(spans, reverse=True):
+        if df_table.is_rare(text[start:end], cutoff):
+            out = out[:start] + sub + out[end:]
+            replaced += 1
+        else:
+            kept += 1
+    # `drop` leaves double spaces where spans were excised. canonicalize()
+    # collapses whitespace as its last step, but replace_spans is also called
+    # directly (tests, cutoff_screen), so normalise here rather than depending
+    # on a caller that may not exist.
+    out = " ".join(out.split())
+
+    # Floor: never hand back an empty document. A title that IS one entity
+    # ("Mimikatz", "Sipvicious") is fully covered by its own span, and under
+    # `drop` that erases the text completely. An empty document is not an
+    # error anywhere downstream -- it is an all-zero TF-IDF row, so the SVM
+    # classifies from the origin and kNN retrieves against a degenerate
+    # vector. Those rows still emit a confident-looking prediction derived
+    # from no information at all, which is worse than not replacing.
+    if not out:
+        return text, 0, len(spans)
+
+    return out, replaced, kept
+
+
 # ---------------------------------------------------------------------------
 # The tagger
 # ---------------------------------------------------------------------------
@@ -224,10 +360,30 @@ class EntityTagger:
     def __init__(self, merge_rule: str = DEFAULT_MERGE_RULE,
                  spans_path: str = SPANS_PATH,
                  gazetteer_path: str = GAZETTEER_PATH,
-                 allow_live_ner: bool = False):
+                 allow_live_ner: bool = False,
+                 replace_rare: bool = False,
+                 df_cutoff: float = DEFAULT_DF_CUTOFF,
+                 replacement_style: str = DEFAULT_REPLACEMENT_STYLE,
+                 df_path: Optional[str] = None):
         if merge_rule not in MERGE_RULES:
             raise ValueError(f"unknown merge rule {merge_rule!r}")
         self.merge_rule = merge_rule
+        if replacement_style not in REPLACEMENT_STYLES:
+            raise ValueError(f"unknown replacement style {replacement_style!r}")
+        self.replace_rare = replace_rare
+        self.df_cutoff = float(df_cutoff)
+        self.replacement_style = replacement_style
+        self.df_table = None
+        self.replaced = 0
+        self.kept_frequent = 0
+        if replace_rare:
+            # Imported lazily: the augment path and every existing caller must
+            # keep working on a checkout with no DF artifact built.
+            from .entity_ner.df_table import DFTable, DF_PATH
+            self.df_path = df_path or DF_PATH
+            self.df_table = DFTable(self.df_path)
+        else:
+            self.df_path = None
         self.spans_path = spans_path
         self.allow_live_ner = allow_live_ner
         self._live_model = None
@@ -281,6 +437,28 @@ class EntityTagger:
                   "constants in entity_tagger.py."
             )
 
+    def assert_complete(self, expected: int, tolerance: float = 0.02) -> None:
+        """Fail unless the artifact covers ~every text the run will query.
+
+        `_check_artifact_meta` validates model, threshold and labels but NOT
+        size, so an artifact left behind by `build_spans.py --limit 40` passes
+        it cleanly. With `allow_live_ner=False` every cache miss then returns
+        no spans, so the run produces almost no tags and scores like the
+        off-baseline -- a partial build is indistinguishable from "the feature
+        did not help", which is the one conclusion this experiment exists to
+        draw. Callers running a measured arm must invoke this; it is not
+        automatic because a deliberate `--limit` smoke test is legitimate.
+        """
+        have = len(self.ner_spans)
+        if have < expected * (1 - tolerance):
+            raise SpansArtifactError(
+                f"{self.spans_path} covers {have} texts but this run queries "
+                f"~{expected}. It looks like a partial (--limit) build. "
+                f"A partial artifact yields no spans on every miss and scores "
+                f"like the baseline -- rerun "
+                f"`python -m attack_mapper.entity_ner.build_spans` in full."
+            )
+
     def _spans_for(self, text: str) -> List[Span]:
         spans: List[Span] = []
         if self.merge_rule != "gliner_only":
@@ -311,8 +489,21 @@ class EntityTagger:
         merged = merge_spans(self._spans_for(text), self.merge_rule)
         if not merged:
             return text
-        self.tagged += 1
-        return inject_markers(text, merged)
+        if not self.replace_rare:
+            self.tagged += 1
+            return inject_markers(text, merged)
+
+        out, replaced, kept = replace_spans(
+            text, merged, self.df_table, self.df_cutoff,
+            style=self.replacement_style)
+        self.replaced += replaced
+        self.kept_frequent += kept
+        # A row whose every span cleared the DF gate is untouched text, so it
+        # is not "tagged" -- counting it would overstate coverage in exactly
+        # the arm whose whole question is how often the gate fires.
+        if replaced:
+            self.tagged += 1
+        return out
 
     def fingerprint(self) -> str:
         """Identity of everything that affects the emitted text.
@@ -325,6 +516,17 @@ class EntityTagger:
         h = hashlib.sha256()
         h.update(f"{self.merge_rule}|{MARKER}".encode())
 
+        # Replace-mode identity. Two runs at different DF cutoffs emit
+        # DIFFERENT text from the same spans, so without this they would key
+        # the same 49MB embedding cache and the second run would silently
+        # score the first run's vectors -- plausible numbers that mean nothing
+        # (plan §4). The augment path hashes the literal "augment" so its
+        # existing cache keys are unchanged by this feature landing.
+        if self.replace_rare:
+            h.update(f"|replace:{self.df_cutoff!r}:{self.replacement_style}".encode())
+        else:
+            h.update(b"|augment")
+
         paths = [GAZETTEER_PATH]
         if self.merge_rule != "gazetteer_only":
             # Only hash NER identity when NER actually contributes. Otherwise a
@@ -336,6 +538,11 @@ class EntityTagger:
             h.update("|".join(NER_LABELS).encode())
             paths.append(self.spans_path)
 
+        if self.replace_rare and self.df_path:
+            # A rebuilt DF table changes which spans clear the gate, so it is
+            # part of the emitted text's identity just as the spans are.
+            paths.append(self.df_path)
+
         for path in paths:
             if os.path.exists(path):
                 st = os.stat(path)
@@ -344,8 +551,17 @@ class EntityTagger:
 
     def stats(self) -> str:
         pct = (self.tagged / self.calls) if self.calls else 0.0
-        return (f"entity tagger [{self.merge_rule}]: tagged {self.tagged}/"
+        mode = (f"{self.merge_rule}/replace<{self.df_cutoff:.2%}"
+                f"/{self.replacement_style}"
+                if self.replace_rare else self.merge_rule)
+        base = (f"entity tagger [{mode}]: tagged {self.tagged}/"
                 f"{self.calls} texts ({pct:.1%}), {self.misses} NER cache misses")
+        if not self.replace_rare:
+            return base
+        total = self.replaced + self.kept_frequent
+        share = (self.replaced / total) if total else 0.0
+        return (f"{base}; replaced {self.replaced} spans, kept "
+                f"{self.kept_frequent} frequent ({share:.1%} replaced)")
 
 
 # ---------------------------------------------------------------------------
@@ -379,6 +595,7 @@ def active() -> Optional[EntityTagger]:
 def fingerprint() -> str:
     """Normalisation identity for cache keys. Includes the disabled case, so
     toggling the feature off also invalidates the embedding cache."""
+    ph = "reserved" if RESERVED_PLACEHOLDERS else "angle"
     if _ACTIVE is None:
-        return f"{NORMALIZER_VERSION}|off"
-    return f"{NORMALIZER_VERSION}|{_ACTIVE.fingerprint()}"
+        return f"{NORMALIZER_VERSION}|off|ph:{ph}"
+    return f"{NORMALIZER_VERSION}|{_ACTIVE.fingerprint()}|ph:{ph}"

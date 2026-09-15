@@ -668,7 +668,7 @@ usual_mapping = {
 endpointDoS_signatures = [
     "ET DOS Excessive SMTP MAIL-FROM DDoS",
     "ET DOS Possible MYSQL GeomFromWKB() function Denial Of Service Attempt",
-    "ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service Attempt"
+    "ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service Attempt",
     "ET DOS Possible MySQL ALTER DATABASE Denial Of Service Attempt",
     "ET DOS Possible SolarWinds TFTP Server Read Request Denial Of Service Attempt",
     "ET DOS SolarWinds TFTP Server Long Write Request Denial Of Service Attempt",
@@ -818,7 +818,7 @@ hostdisc_signatures = [
     "ET SCAN NMAP -sS window 2048",
     "ET SCAN NMAP -sO",
     "ET SCAN NMAP -sA (1)",
-    "ET SCAN NMAP -f -sX"
+    "ET SCAN NMAP -f -sX",
     "ET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration",
     "ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration",
     "ET SCAN Sipvicious Scan",

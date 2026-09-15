@@ -56,10 +56,18 @@ def split_concatenated(text):
 
 
 def placeholder_entities(text):
-    text = _CVE_RE.sub(" <CVE> ", text)
-    text = _IP_RE.sub(" <IP> ", text)
-    text = _HEX_RE.sub(" <HEX> ", text)
-    text = _VERSION_RE.sub(" <VERSION> ", text)
+    """Collapse CVE ids, IPs, hex blobs and version numbers onto shared tokens.
+
+    The substitution is read from `entity_tagger.placeholder_for` rather than
+    hardcoded: `<CVE>` and friends are not reserved tokens to the classifier
+    (its word vectorizer strips the angle brackets and reads `cve`), so
+    `entity_tagger.RESERVED_PLACEHOLDERS` switches them for collision-free
+    equivalents. Off by default -- it changes baseline text.
+    """
+    text = _CVE_RE.sub(f" {entity_tagger.placeholder_for('<CVE>')} ", text)
+    text = _IP_RE.sub(f" {entity_tagger.placeholder_for('<IP>')} ", text)
+    text = _HEX_RE.sub(f" {entity_tagger.placeholder_for('<HEX>')} ", text)
+    text = _VERSION_RE.sub(f" {entity_tagger.placeholder_for('<VERSION>')} ", text)
     return text
 
 

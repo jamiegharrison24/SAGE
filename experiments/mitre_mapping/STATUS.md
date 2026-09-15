@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all fourteen efforts; read the report first.
+> This file remains the detailed record for the running index of all fifteen efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Fourteen sub-experiments have run so far, in order. Each has its own detailed
+Fifteen sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -793,3 +793,80 @@ experiments/mitre_mapping/
     sigma_corpus/sigma_labeled_corpus.csv   # frozen copy so tier2_classifier_combined.py
                                              # (archived) still runs unmodified
 ```
+
+
+## 15. Replace-mode (rare-only) entity normalisation — built, measured, **negative** — `attack_mapper/entity_ner/replace_prereg.md`
+
+REPORT.md §8 item 7: replace *rare* entity spans only, leaving high-frequency
+ones alone — the one variant implementing effort 13's original hypothesis,
+since augment provably changes no distance between two rules.
+
+Built as a second path (`entity_tagger.replace_spans`), not a change to
+`inject_markers`, so effort 13's 19.4%/21.3% stay reproducible.
+
+**Result: negative, decisively.** Macro **16.4-18.3%** against the 22.2%
+baseline, and ~1-3 points *worse* than effort 13's augment. Pre-registration
+required >= 23.2%; no arm came close, so the outcome was never a judgement
+call.
+
+| arm | micro | macro | vs baseline |
+|---|---:|---:|---:|
+| baseline (off) | 36.6% | **22.2%** | - |
+| effort 13 augment | - | 19.4% | -2.8 |
+| `drop` @ 0.005 / 0.01 / 0.02 | 33.8 / 33.5 / 33.5% | **17.2 / 16.4 / 16.4%** | -5.0 / -5.8 / -5.8 |
+| `marker` @ 0.005 | 34.6% | **18.3%** | -3.9 |
+| `sentinel` @ 0.005 | 33.0% | **17.2%** | -5.0 |
+
+**The hypothesis is falsified, not merely unsupported.** Effort 13 argued
+augment failed *because* it left the rare token in place and changed no
+distance, and that replacement would fix it. Replacement is worse than augment,
+and degradation rises monotonically with the share of spans replaced
+(25.7% -> -5.0, 29.9% -> -5.8, 32.7% -> -5.8). The rare tokens were carrying
+signal, not blocking similarity. §8 item 7 is closed.
+
+**Style is second-order, and `<ENTITY>` was not the problem.** The three styles
+span 17.2-18.3% at a fixed cutoff — inside the noise band the pre-registration
+set — and `marker` is nominally *best*, i.e. the style the tokenization
+argument predicted worst. `drop` removes the marker entirely and still loses to
+keeping it.
+
+**Follow-up: the same defect in `<CVE>`/`<IP>`/`<HEX>`/`<VERSION>` is
+negligible.** Those run in every measurement including the baseline, so they
+were tested with collision-free replacements: micro 36.6% -> **36.8%**, macro
+22.2% -> **22.3%**. One row. The collapsing job always worked; only collision
+with literal `cve`/`version` (0.04-0.05% of rows) was at stake. Kept as
+`--reserved-placeholders`, off by default -- every number on this branch
+assumes off and stays valid.
+
+Four supporting measurements stand on their own, independent of the arms:
+
+1. **The DF gate holds.** `df_table.py` measures n-gram document frequency over
+   the 31,825-row corpus and reproduces the figures effort 13 and §8 item 7
+   were written from (`SQL` 12.06%, `Injection Attempt` 12.02%, `URI` 0.62%,
+   `RDP` 0.77%, `SMB` 0.15%). Across all 14,675 spans, `SQL`/`Injection
+   Attempt`/`HTTP`/`DNS` are replaced at **no** cutoff.
+2. **GLiNER-at-0.85 spans are NOT "mostly rare by construction"** — only 33.2%
+   are replaceable even at a 5% DF cutoff. This premise, written into §8 item 7
+   and this effort's own plan, is false: the 0.85 span set is not a proxy for
+   the rare entities.
+3. **`<ENTITY>` is not a reserved symbol to the classifier** — and this applies
+   to the *existing* normaliser, not just this effort. The word vectorizer uses
+   sklearn's default `\b\w\w+\b`, which strips non-word characters, so
+   `<entity>` reads as the ordinary word `entity` (and `<CVE>` as `cve`,
+   `<VERSION>` as `version`). Hence a three-way style sweep — `marker` / `drop`
+   / `sentinel` — over whether a placeholder should be left behind at all.
+   Typed markers stay rejected (~1 in 5 mistyped, settled 2026-09-11).
+4. **Baseline reproduces** under the bumped `NORMALIZER_VERSION`: micro 36.6%,
+   macro 22.2%, identical to `validation_report.md`.
+
+**Two silent-failure traps found and closed** (both yield a plausible number
+rather than an error): a partial spans artifact passes `_check_artifact_meta`
+and scores like the off-baseline — closed by `assert_complete()`; and `drop`
+can erase a title that *is* one entity to an empty all-zero TF-IDF row that
+still predicts confidently — floored, and measured to never fire on this
+corpus.
+
+Falsification fixed in advance: success requires macro **≥ 23.2%**
+(baseline + 1.0); within ±1.0 is noise, and an arm winning only where
+`n_replaced` ≈ 0 is disqualified. Per effort 14, this is expected to close
+out a hypothesis rather than move the headline.

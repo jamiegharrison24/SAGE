@@ -53,3 +53,8 @@ experiments/mitre_mapping/attack_mapper/entity_dicts/sources/
 # the pinned model/threshold/labels in entity_tagger.py). Regenerable model
 # output, so it stays out of history like the embedding cache above.
 experiments/mitre_mapping/attack_mapper/data/entity_spans.json.gz
+
+# Measured corpus document frequency for the replace-mode DF gate
+# (entity_ner/df_table.py). Derived deterministically from the labelled
+# corpora, so it regenerates in seconds and stays out of history.
+experiments/mitre_mapping/attack_mapper/data/entity_df.json.gz

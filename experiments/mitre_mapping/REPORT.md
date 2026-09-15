@@ -1581,6 +1581,240 @@ set. **The corpus is large and almost orthogonal to the test distribution.**
 
 ---
 
+### Effort 15 — Replace-mode (rare-only) entity normalisation · regime D
+
+`attack_mapper/entity_ner/replace_prereg.md`, `entity_ner/df_table.py`,
+`entity_ner/cutoff_screen.py`, `tests/test_entity_replace.py`
+
+**Status: complete. Decisive NEGATIVE result — replacement is worse than both
+the baseline and effort 13's augment, and the hypothesis is falsified rather
+than merely unsupported.**
+
+| arm | spans replaced | micro | macro | vs baseline |
+|---|---:|---:|---:|---:|
+| baseline, tagging off | — | 36.6% | **22.2%** | — |
+| effort 13 augment, `gliner_only` | — | — | 19.4% | −2.8 |
+| replace `drop` @ 0.005 | 25.7% | 33.8% | **17.2%** | **−5.0** |
+| replace `drop` @ 0.01 | 29.9% | 33.5% | **16.4%** | **−5.8** |
+| replace `drop` @ 0.02 | 32.7% | 33.5% | **16.4%** | **−5.8** |
+| replace `marker` @ 0.005 | 25.7% | 34.6% | **18.3%** | **−3.9** |
+| replace `sentinel` @ 0.005 | 25.7% | 33.0% | **17.2%** | **−5.0** |
+
+Pre-registration required macro **≥ 23.2%** for success and set 21.2% as the
+floor below which the result is negative. Every arm lands at 16–18%. No arm is
+close enough to the bar for the outcome to be a judgement call — which is why
+the bar was fixed before the arms ran.
+
+**Finding 1 — the effect is real, not noise: degradation is dose-responsive.**
+25.7% of spans replaced → −5.0; 29.9% → −5.8; 32.7% → −5.8, flattening exactly
+where the pre-screen predicted 0.02 and 0.05 converge. More replacement, more
+harm, along the curve the span counts predicted.
+
+**Finding 2 — the hypothesis is falsified, not unsupported.** Effort 13
+reasoned that augment failed *because* it left the rare token in place and so
+changed no distance, and that replacement would fix it. Replacement is
+**~1–3 points worse than augment**. The rare tokens were not noise blocking
+similarity; they were carrying signal. Collapsing `nmap scan` and `jetty scan`
+onto the same string destroys more than the resulting similarity gains. This
+closes §8 item 7: the variant is not untried-and-promising, it is tried and
+negative.
+
+**Finding 3 — the substitution style is second-order, and `<ENTITY>` was not
+the problem.** At a fixed cutoff the three styles span 17.2–18.3% — a
+1.1-point range, at the edge of the ±1.0 noise band the pre-registration set,
+on a macro average over 51 labels in 361 rows. `marker` is nominally best,
+i.e. the style predicted *worst* on the tokenization argument below. So the
+`<ENTITY>`-is-not-a-reserved-symbol defect is a true statement about the
+normaliser (Measurement 2) but **not a driver of accuracy here**: `drop`
+removes the marker entirely and still loses to keeping it. Any future work
+motivated by "the marker is too generic" should start from this result.
+
+**Finding 4 — the falling `T1190` share is drift, not a silver lining.** Every
+arm predicts `T1190` less often than baseline (31.6% / 29.9% / 29.6% against
+31.3%). That superficially resembles the hub-collapse improvement earlier
+efforts chased, and it is not: §6 records that `T1190` is *exactly calibrated*
+at 113/361 predicted against 113/361 true. Moving to 107-108 is drift **away
+from** calibration. A lower modal share is only good when the model is
+over-predicting the hub, which this pipeline stopped doing before effort 14.
+
+**The macro tie between two arms is coincidence, checked rather than assumed.**
+`drop` and `sentinel` at 0.005 both report macro 17.2%, which is also what a
+shared embedding cache would look like. Diffing the two written reports shows
+genuinely separate runs — source breakdown `knn_corpus` 263 vs 270, retrieval
+pool `sigma` 786 vs 823, `knn_corpus` by-corpus accuracy `sigma` 14.8% vs 8.2%.
+Distinct micro (33.8% vs 33.0%) with equal macro is a real tie on a
+51-label average, not one arm scoring the other's vectors.
+
+**Landed state: OFF**, the same as effort 13. `Settings.use_entity_tagging`
+remains `False`, so `DEFAULT_REPLACEMENT_STYLE = "marker"` is inert and nothing
+in the default pipeline changed. `NORMALIZER_VERSION` stays at
+`3-entity-replace`: the bump genuinely invalidated caches that had to be
+invalidated, and reverting it would silently re-validate stale ones. The
+machinery is kept, off, for the same reason effort 13's was — the measurement
+is the deliverable.
+
+**Follow-up — the same defect in the OLDER placeholders, measured and
+quantified as negligible.** Measurement 2 applies to `<CVE>`, `<IP>`, `<HEX>`
+and `<VERSION>` too: none is a reserved token, all four are read by the
+classifier as the bare words `cve`, `ip`, `hex`, `version`. Unlike `<ENTITY>`
+these run in **every** measurement on this branch, including the baseline, so
+the question is whether the headline numbers are affected. Tested by
+substituting collision-free equivalents (`qqcveqq` / `qqipqq` / `qqhexqq` /
+`qqverqq`, each verified at corpus DF 0.0 and a substring of no retained
+n-gram):
+
+| arm | micro | macro | `T1190` share |
+|---|---:|---:|---:|
+| baseline, angle-bracket placeholders | 132/361 = 36.6% | 22.2% | 31.3% |
+| reserved placeholders | 133/361 = **36.8%** | **22.3%** | 31.0% |
+
+**One row. +0.1 macro.** Within noise, and consistent with the DF measurement
+that predicted it: the placeholders' *collapsing* job always worked (every CVE
+id lands on one shared token either way); only the collision with literal uses
+of the word was ever at stake, and those words occur in 0.041% (`cve`) and
+0.047% (`version`) of corpus rows. So the defect is genuine, the fix is
+directionally correct, and it is **not worth invalidating the branch's numbers
+for**. Kept as `--reserved-placeholders`, **off by default**; every number in
+this report assumes off, and that remains safe.
+
+The four measurements below stand independently of the arms, and two of them
+(the tokenization defect, and GLiNER-at-0.85 spans not being mostly rare) are
+corrections to claims made elsewhere in this report.
+
+**What it is.** §8 item 7 — replacement of *rare* entities only, leaving
+high-frequency ones alone. The one variant implementing effort 13's original
+hypothesis, since augment demonstrably changes no distance:
+
+```
+augment   "nmap <entity> scan"  vs  "masscan <entity> sweep"   rare tokens STILL DIFFER
+replace   "<entity> scan"       vs  "<entity> sweep"           now genuinely alike
+```
+
+Built as a **second path** (`entity_tagger.replace_spans`) rather than a
+change to `inject_markers`, so effort 13's 19.4% / 21.3% augment numbers stay
+reproducible and the comparison remains meaningful.
+
+**Measurement 1 — the DF gate is real, and reproduces this report.**
+`df_table.py` computes n-gram document frequency over the 31,825-row corpus,
+keyed on `entity_key()`. It independently reproduces the figures §8 item 7 and
+effort 13 were written from — `SQL` 12.06%, `Injection Attempt` 12.02%, `URI`
+0.62%, `UDN` 0.000%, `RDP` 0.77%, `SMB` 0.15% — which is the point: the cut is
+made on measured DF, and the table measuring it agrees with the numbers
+already on file.
+
+**Measurement 2 — `<ENTITY>` is not a reserved symbol to the classifier.**
+New, and it applies to the *existing* normaliser, not just this effort. The
+classifier's word arm is `TfidfVectorizer(analyzer="word", ...)` with
+sklearn's default token pattern `\b\w\w+\b`, which strips non-word
+characters. So `<entity>` tokenizes to the bare word **`entity`** — and
+`<CVE>` → `cve`, `<VERSION>` → `version`, `<IP>` → `ip`. The placeholders
+introduced in `normalize.py` have never been distinct tokens in the word
+feature space. Measured collision is small (`entity` DF 0.072%, `identity`
+0.129% reaching it via `char_wb` `entit` n-grams), but the **dilution** is
+not: `gliner_only` fires on ~42% of rows, so a marker injects one
+near-constant word token and its char n-grams into ~42% of documents — the
+cost `marker_rate.py` documents. Pinned by
+`test_marker_does_NOT_survive_word_tokenization`.
+
+This turned the substitution into a swept dimension rather than an assumption:
+
+| style | `nmap scan` → | hypothesis |
+|---|---|---|
+| `marker` | `<ENTITY> scan` | effort 13's convention, carried for continuity |
+| `drop` | `scan` | in replace mode the *removal* is the mechanism; the marker is dead weight |
+| `sentinel` | `qqentqq scan` | separates "does a placeholder help?" from "does it collide?"; measured corpus DF **0.0** |
+
+Typed markers (`<TOOL>`, `<PRODUCT>`) remain rejected — both sources mistype
+~1 entity in 5, settled 2026-09-11. The dimension swept is whether a
+placeholder should be left behind *at all*, not what type it carries.
+
+**Measurement 3 — the baseline still reproduces.** `NORMALIZER_VERSION` was
+bumped to `3-entity-replace` (mandatory: arms at different cutoffs emit
+different text and would otherwise share one 49MB embedding cache). The off
+arm re-run under the new key returns micro **36.6%** (132/361), macro
+**22.2%** — identical to `validation_report.md`. The harness is sound.
+
+**Two silent-failure traps found and closed**, both of which produce a
+plausible number rather than an error:
+
+1. *Partial spans artifact.* `_check_artifact_meta()` validates model,
+   threshold and labels but **not size**, so an artifact left by
+   `build_spans.py --limit 40` passes cleanly. With `allow_live_ner=False`
+   every cache miss returns no spans, so the run tags almost nothing and
+   scores like the off-baseline — indistinguishable from "replacement did not
+   help", the one conclusion this effort exists to draw. Verified reachable,
+   then closed by `EntityTagger.assert_complete()`, wired into `validate.py`
+   and `cutoff_screen.py`.
+2. *`drop` emptying a document.* A title that **is** one entity (`Mimikatz`,
+   `Sipvicious`) is fully covered by its own span, so `drop` erased it to
+   `""`. An empty document raises nothing downstream — it is an all-zero
+   TF-IDF row, so the SVM classifies from the origin and kNN retrieves against
+   a degenerate vector, and the row still emits a confident prediction from no
+   information. `replace_spans` now floors the empty case back to the original
+   text, and `cutoff_screen.py` reports an `emptied` column so a `drop` arm
+   silently falling back is visible rather than inferred.
+
+**Measurement 4 — the pre-screen, and what it changed.** The spans artifact
+rebuilt to 32,273 texts, 42.0% carrying ≥ 1 entity at threshold 0.85 (matching
+effort 13's recorded 42.1%). `cutoff_screen.py` then tabulated the DF gate over
+all 14,675 spans, in seconds rather than five validate passes:
+
+| cutoff | replaced | kept | % replaced | rows touched | emptied | must-keep hit |
+|---:|---:|---:|---:|---:|---:|---|
+| 0.0 | 0 | 14,675 | 0.0% | 0 | 0 | none |
+| 0.005 | 3,770 | 10,905 | 25.7% | 3,444 | 0 | none |
+| 0.01 | 4,390 | 10,285 | 29.9% | 3,918 | 0 | none |
+| 0.02 | 4,794 | 9,881 | 32.7% | 4,241 | 0 | none |
+| 0.05 | 4,872 | 9,803 | 33.2% | 4,313 | 0 | none |
+
+Four things this settled before any arm ran:
+
+* **0.05 collapses into 0.02** (33.2% vs 32.7%, inside the 1% band) — dropped
+  from the sweep. 0.005 / 0.01 / 0.02 do separate, so the gate has real
+  dynamic range and "no cutoff separates" is *not* the outcome.
+* **The gate holds.** `must-keep hit` is none at every cutoff: `SQL`,
+  `Injection Attempt`, `HTTP` and `DNS` are never replaced. This is the
+  property the whole design exists to guarantee, now measured rather than
+  argued.
+* **`emptied` is 0 at every cutoff.** The `drop`-empties-a-document hazard is
+  real in code but never fires on this corpus — the floor is a guard that
+  correctly does nothing, not a silent fallback carrying the arm.
+* **Two-thirds of GLiNER's spans are frequent strings.** Even at a 5% cutoff
+  only 33.2% of spans are replaceable. This *contradicts* the assumption
+  written into §8 item 7 and this effort's own plan, that GLiNER-at-0.85 spans
+  are "mostly rare by construction". They are not: at 0.85 GLiNER mostly finds
+  common protocol and product tokens, and the rare tail it reaches is a
+  minority of its output. Any reasoning that treats the 0.85 span set as a
+  proxy for "the rare entities" is wrong, here and in the NuNER comparison.
+
+**Sweep design (factored, not crossed).** 5 cutoffs × 3 styles = 15 validate
+passes is not worth it:
+
+1. Arm zero — tagging off. Done (above).
+2. `cutoff_screen.py` — seconds, no validate pass. `gliner_only` spans are
+   mostly rare by construction, so the cutoffs may replace nearly the same set;
+   if so they are one arm and "no cutoff separates" is itself the finding.
+3. Cutoff sweep at style=`drop` — fixed there deliberately, because `marker`'s
+   dilution scales with the number of replacements and would move together
+   with the cutoff's own effect.
+4. Style sweep at the least-bad cutoff (0.005) once no cutoff won.
+
+The factoring cost **6 validate passes instead of 15**, and the pre-screen
+removed 0.05 before it cost anything. One design note worth keeping: fixing
+step 3 at `drop` was the right call for *isolating the cutoff* — `drop` adds
+no token, so the cutoff sweep measured the DF gate alone — but it meant the
+cutoff curve was traced with the style that later placed second. The ordering
+of the styles at 0.005 is unaffected by that; the shape of the cutoff curve
+under `marker` was not separately measured, and is not worth measuring given
+every arm is 4+ points below baseline.
+
+**Falsification, fixed in advance** (`replace_prereg.md`): success requires
+macro **≥ 23.2%** (baseline + 1.0). Within ±1.0 is noise; an arm that beats
+baseline only where `n_replaced` ≈ 0 is a no-op dressed as a win and is
+disqualified. Recorded before the numbers, because §6.1 and effort 14 predict
+this closes out a hypothesis rather than moving the headline — coverage, not
+representation, remains the binding constraint.
+
 ## 6. Cross-cutting findings
 
 ### 6.1 Coverage, not representation
@@ -1868,7 +2102,11 @@ Per §6.1, the more honest summary of pipeline quality is the bucket split:
 | `narrative.py` | template narrative generator |
 | `classifier_training.py`, `classifier_resolver.py` | live-trained TF-IDF + LinearSVC (`n_jobs` capped at 4) |
 | `knn_resolver.py` | IDF-weighted retrieval, leakage guard, `neighbour_source_counts` |
-| `entity_tagger.py` | effort 13 machinery, off by default |
+| `entity_tagger.py` | effort 13 machinery (augment) + effort 15 (replace-mode, DF-gated), off by default |
+| `entity_ner/df_table.py` | effort 15: measured n-gram corpus document frequency; the "rare" cut, and the artifact the DF gate reads |
+| `entity_ner/cutoff_screen.py` | effort 15: pre-screen asking whether DF cutoffs separate at all, before spending a validate pass each |
+| `entity_ner/replace_prereg.md` | effort 15: falsification criterion and sweep design, written before the arms ran |
+| `tests/test_entity_replace.py` | effort 15: the silent-failure invariants (offset validity under length change, zero-cutoff exactness, empty-document floor, cache-key separation per arm) |
 | `entity_ner/compare_ner.py`, `verdicts.py` | span-level model comparison (GLiNER / NuNER Zero / SecureBERT2.0-NER) and its recorded verdicts; measurement only, no pipeline path |
 | `llm_client.py` | `LLMClient` ABC, `NullLLMClient` default, OpenAI/Anthropic/Ollama adapters |
 | `reasoner.py` | priority-ordered fusion plus optional Layer D |
@@ -1907,7 +2145,23 @@ before the coverage diagnosis.
 6. **Re-score the classifier per-source on its 53 top-1 rows.** Effort 9 gave it
    53 rows instead of effort 5's 5-row sample, and that re-scoring was never
    broken out. The cheapest remaining check.
-7. **Entity replacement of rare entities only**, leaving high-frequency entities
+7. ~~**Entity replacement of rare entities only**~~ — **CLOSED by effort 15:
+   tried, measured, negative.** Macro 16.4-18.3% against a 22.2% baseline, and
+   ~1-3 points *worse* than effort 13's augment, with degradation rising
+   monotonically in the share of spans replaced. The hypothesis that
+   replacement would succeed where augment failed is falsified: the rare
+   tokens carry signal rather than blocking similarity. Two of this item's own
+   premises were measured along the way, and one is false: the DF gate does hold
+   (`SQL`, `Injection Attempt`, `HTTP`, `DNS` are never replaced at any
+   cutoff), but GLiNER-at-0.85 spans are **not** "mostly rare by construction"
+   — only 33.2% of them are replaceable even at a 5% DF cutoff, so the 0.85
+   span set is not a proxy for the rare entities. A third finding applies to
+   the existing normaliser rather than to this lever: `<ENTITY>` is not a
+   reserved symbol to the classifier, whose word vectorizer strips the angle
+   brackets and reads it as the ordinary word `entity` (as it reads `<CVE>` as
+   `cve`). Original text follows.
+
+   **Entity replacement of rare entities only**, leaving high-frequency entities
    alone — the only variant that implements effort 13's original hypothesis.
    The span-level comparison points this at **GLiNER at threshold 0.85, not
    NuNER Zero**: at that operating point GLiNER is 73% strict with *zero*

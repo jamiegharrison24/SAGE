@@ -17,7 +17,7 @@
 - accuracy on reviewer-confirmed rows so far: pending 96/261 = 36.8%, confirmed 36/100 = 36.0% -- confirmed is the only number that reflects real ground truth; pending will move as review continues
 - accuracy by label set: hand_audit 29/80 = 36.2%, v2_blind 103/281 = 36.7% -- a gap between the two has three candidate causes and this line alone does not distinguish them: (a) the blind set is genuinely harder (more distinct true labels, longer tail), (b) the original set was optimistic because its labels were derived through the same bridge table the pipeline's dominant source uses, or (c) labeling drift in the expansion. Compare macro vs micro for (a), the bridge-agreement rates for (b), and the re-label consistency check for (c)
 - ET rule body matched (not just the title): 311/500 (62.2%) -- near 0% means `attack_mapper/data/emerging-all.rules` is stale or absent and the `declared` source cannot fire; the run is degraded, not a baseline
-- wall time: 67.4s for 500 rows
+- wall time: 25.2s for 500 rows
 
 **Baseline for comparison** (`archive/tiered_approach/tier2_vs_audit_findings.md`, TF-IDF classifier trained on 26,644-row ET-labeled corpus): 27/79 = 34.2% top-1.
 

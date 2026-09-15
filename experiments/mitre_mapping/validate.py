@@ -136,21 +136,87 @@ def main():
              "'gazetteer_only', which needs none. Default: off, matching every "
              "number in findings.md so far.",
     )
+    parser.add_argument(
+        "--replace-rare", action="store_true",
+        help="Replace-mode entity normalisation (REPORT.md §8 item 7): rewrite "
+             "each tagged span to a bare <ENTITY> marker instead of appending "
+             "one, but ONLY where the span's measured corpus document "
+             "frequency is below --df-cutoff. High-frequency tokens (`SQL`, "
+             "`HTTP`, `Injection Attempt`) are left alone -- they carry the "
+             "technique signal. Requires --entity-tagging and the DF artifact "
+             "(`python -m attack_mapper.entity_ner.df_table`).",
+    )
+    parser.add_argument(
+        "--df-cutoff", type=float, default=entity_tagger.DEFAULT_DF_CUTOFF,
+        help="Document-frequency threshold for --replace-rare, as a fraction "
+             "(0.01 = 1%% of corpus rows). A span is replaced only when its DF "
+             "is strictly below this, so 0.0 replaces nothing and is a valid "
+             "no-op control arm. Default: %(default)s.",
+    )
+    parser.add_argument(
+        "--replacement-style", default=entity_tagger.DEFAULT_REPLACEMENT_STYLE,
+        choices=list(entity_tagger.REPLACEMENT_STYLES),
+        help="How a replaced span is substituted (with --replace-rare). "
+             "'marker' inserts <ENTITY>, but note the classifier's word "
+             "vectorizer strips the brackets, so it becomes the bare word "
+             "'entity'; 'drop' removes the span entirely, on the hypothesis "
+             "that in replace mode the removal IS the mechanism and the marker "
+             "only dilutes; 'sentinel' inserts a collision-free token, "
+             "separating 'does a placeholder help' from 'does it collide'. "
+             "Default: %(default)s.",
+    )
+    parser.add_argument(
+        "--reserved-placeholders", action="store_true",
+        help="Substitute collision-free tokens (qqcveqq, qqipqq, qqhexqq, "
+             "qqverqq) for <CVE>/<IP>/<HEX>/<VERSION>. The angle-bracket forms "
+             "are NOT reserved tokens: the classifier's word vectorizer strips "
+             "non-word characters, so <cve> is read as the ordinary word 'cve'. "
+             "Independent of --entity-tagging; this changes BASELINE text, so "
+             "it is off by default and every number on the branch assumes off.",
+    )
     args = parser.parse_args()
 
+    if args.replace_rare and not args.entity_tagging:
+        parser.error("--replace-rare requires --entity-tagging "
+                     "(it changes how spans are applied, not whether they are found)")
+
     check_required_data()
+
+    # Set before the pipeline is constructed, for the same reason entity
+    # tagging is: the resolvers canonicalize their whole corpus in __init__,
+    # and the kNN cache key is derived from the normaliser fingerprint then.
+    entity_tagger.RESERVED_PLACEHOLDERS = args.reserved_placeholders
+    if args.reserved_placeholders:
+        print("placeholders: RESERVED (qqcveqq/qqipqq/qqhexqq/qqverqq)")
 
     # Enable BEFORE the pipeline is constructed: the resolvers canonicalize
     # their whole corpus in __init__, and the kNN embedding cache key is
     # derived from the tagger's fingerprint at that moment.
     if args.entity_tagging:
-        tagger = entity_tagger.enable(args.entity_tagging)
+        tagger = entity_tagger.enable(args.entity_tagging,
+                                      replace_rare=args.replace_rare,
+                                      df_cutoff=args.df_cutoff,
+                                      replacement_style=args.replacement_style)
+        if args.entity_tagging != "gazetteer_only":
+            # Refuse a partial (--limit) spans artifact: it would silently
+            # score like the off-baseline. See EntityTagger.assert_complete.
+            from attack_mapper.entity_ner.build_spans import collect_texts
+            tagger.assert_complete(len(collect_texts()))
+        mode = (f"REPLACE rare spans (DF < {args.df_cutoff:.2%}, "
+                f"style={args.replacement_style})"
+                if args.replace_rare else "augment (append marker)")
         print(f"entity tagging: ON, merge rule '{args.entity_tagging}', "
-              f"{len(tagger.ner_spans)} texts in spans artifact")
+              f"{mode}, {len(tagger.ner_spans)} texts in spans artifact")
     else:
         entity_tagger.disable()
 
     suffix = f"_entity_{args.entity_tagging}" if args.entity_tagging else ""
+    if args.reserved_placeholders:
+        suffix += "_reservedph"
+    if args.replace_rare:
+        # Each cutoff is a separate arm; without this the sweep overwrites one
+        # report and only the last cutoff survives.
+        suffix += f"_replace{args.df_cutoff:g}_{args.replacement_style}"
     out_path = os.path.join(
         HERE, f"validation_report_llm{suffix}.md" if args.llm
         else f"validation_report{suffix}.md")
