@@ -1,0 +1,401 @@
+alert,mapped_code,mapped_name,mapped_type,similarity
+BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt,T1495,Firmware Corruption,technique,0.295204
+BROWSER-CHROME Google Chrome FileReader use after free attempt,T1204.002,Malicious File,technique,0.348068
+BROWSER-CHROME V8 JavaScript engine Out-of-Memory denial of service attempt,T1499.003,Application Exhaustion Flood,technique,0.429518
+ET ATTACK_RESPONSE Frequent HTTP 401 Unauthorized - Possible Brute Force Attack,T1110,Brute Force,technique,0.435718
+ET ATTACK_RESPONSE Metasploit Meterpreter Reverse HTTPS certificate,T1588.004,Digital Certificates,technique,0.351288
+ET ATTACK_RESPONSE Net User Command Response,T1059.008,Network Device CLI,technique,0.400691
+ET ATTACK_RESPONSE Output of id command from HTTP server,T1018,Remote System Discovery,technique,0.331395
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style),T1003.008,/etc/passwd and /etc/shadow,technique,0.445138
+ET ATTACK_RESPONSE Possible BeEF HTTP Headers Inbound,T1071.001,Web Protocols,technique,0.354207
+ET ATTACK_RESPONSE python shell spawn attempt,T1059.006,Python,technique,0.382731
+ET CHAT Facebook Chat using XMPP,T1095,Non-Application Layer Protocol,technique,0.311394
+ET CHAT Google IM traffic Jabber client sign-on,T1552.008,Chat Messages,technique,0.412458
+ET CHAT Google Talk (Jabber) Client Login,T1552.008,Chat Messages,technique,0.490540
+ET CHAT IRC JOIN command,T1552.008,Chat Messages,technique,0.330031
+ET CHAT IRC NICK command,T1213.005,Messaging Applications,technique,0.354357
+ET CHAT IRC PRIVMSG command,T1552.008,Chat Messages,technique,0.353648
+ET CHAT IRC USER command,T1552.008,Chat Messages,technique,0.413641
+ET CHAT IRC authorization message,T1552.008,Chat Messages,technique,0.480483
+ET CHAT MSN status change,T1552.008,Chat Messages,technique,0.310665
+ET CHAT Skype User-Agent detected,T1552.008,Chat Messages,technique,0.378083
+ET CHAT Skype VOIP Checking Version (Startup),T1552.008,Chat Messages,technique,0.244449
+ET CINS Active Threat Intelligence Poor Reputation IP group 100,T1681,Search Threat Vendor Data,technique,0.405810
+ET CINS Active Threat Intelligence Poor Reputation IP group 44,T1681,Search Threat Vendor Data,technique,0.452006
+ET CINS Active Threat Intelligence Poor Reputation IP group 66,T1681,Search Threat Vendor Data,technique,0.438912
+ET CINS Active Threat Intelligence Poor Reputation IP group 91,T1681,Search Threat Vendor Data,technique,0.426190
+ET COMPROMISED Known Compromised or Hostile Host Traffic group 9,T1584,Compromise Infrastructure,technique,0.461618
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (xxxatat456.com),T1498,Network Denial of Service,technique,0.471461
+ET CURRENT_EVENTS Malformed HeartBeat Request,T1685.005,Clear Windows Event Logs,technique,0.295127
+ET CURRENT_EVENTS Nuclear EK Landing Apr 03 2015,T1681,Search Threat Vendor Data,technique,0.215697
+ET CURRENT_EVENTS Nuclear EK Landing Apr 22 2015,T1681,Search Threat Vendor Data,technique,0.220660
+ET CURRENT_EVENTS Possible Magnitude IE EK Payload Nov 8 2013,T1190,Exploit Public-Facing Application,technique,0.318037
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Client Init Vuln Server),T1190,Exploit Public-Facing Application,technique,0.317954
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Server Init Vuln Client),T1190,Exploit Public-Facing Application,technique,0.312755
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port),T1588.004,Digital Certificates,technique,0.404318
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port),T1588.004,Digital Certificates,technique,0.393046
+ET CURRENT_EVENTS Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),T1003,OS Credential Dumping,technique,0.306374
+ET CURRENT_EVENTS QNAP Shellshock CVE-2014-6271,T1685.005,Clear Windows Event Logs,technique,0.297147
+ET CURRENT_EVENTS SUSPICIOUS Firesale gTLD EXE DL with no Referer June 13 2016,T1685.005,Clear Windows Event Logs,technique,0.406844
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct M2 Feb 06 2015,T1204.001,Malicious Link,technique,0.449000
+ET CURRENT_EVENTS Unknown Malicious Second Stage Download URI Struct Sept 15 2015,T1204.001,Malicious Link,technique,0.434294
+ET DNS Query for .su TLD (Soviet Union) Often Malware Related,T1590.002,DNS,technique,0.525917
+ET DNS Query to a *.pw domain - Likely Hostile,T1584.002,DNS Server,technique,0.448156
+ET DNS Query to a .tk domain - Likely Hostile,T1583.001,Domains,technique,0.418028
+ET DOS Catalyst memory leak attack,T1499.004,Application or System Exploitation,technique,0.401797
+ET DOS Cisco 4200 Wireless Lan Controller Long Authorisation Denial of Service Attempt,T1498,Network Denial of Service,technique,0.472388
+ET DOS Cisco 514 UDP flood DoS,T1498.001,Direct Network Flood,technique,0.588251
+ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port,T1568.003,DNS Calculation,technique,0.487481
+ET DOS FreeBSD NFS RPC Kernel Panic,T1499.004,Application or System Exploitation,technique,0.258476
+ET DOS HOIC with booster inbound,T1496.002,Bandwidth Hijacking,technique,0.299638
+ET DOS HTTP GET AAAAAAAA Likely FireFlood,T1016.001,Internet Connection Discovery,technique,0.385887
+ET DOS IBM DB2 kuddb2 Remote Denial of Service Attempt,T1498,Network Denial of Service,technique,0.465081
+ET DOS IBM Tivoli Endpoint Buffer Overflow Attempt,T1499,Endpoint Denial of Service,technique,0.356914
+ET DOS ICMP Path MTU lowered below acceptable threshold,T1030,Data Transfer Size Limits,technique,0.342500
+ET DOS LibuPnP CVE-2012-5963 ST UDN Buffer Overflow,T1030,Data Transfer Size Limits,technique,0.283372
+ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x02,T1498,Network Denial of Service,technique,0.515673
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Integer indef DoS Attempt,T1563.002,RDP Hijacking,technique,0.473300
+ET DOS Microsoft Remote Desktop Protocol (RDP) maxChannelIds Negative Integer indef DoS Attempt,T1563.002,RDP Hijacking,technique,0.490074
+ET DOS Microsoft Windows 7 ICMPv6 Router Advertisement Flood,T1496.002,Bandwidth Hijacking,technique,0.404556
+ET DOS Microsoft Windows LSASS Remote Memory Corruption (CVE-2017-0004),T1003.001,LSASS Memory,technique,0.557650
+ET DOS Miniupnpd M-SEARCH Buffer Overflow CVE-2013-0229,T1190,Exploit Public-Facing Application,technique,0.283960
+ET DOS Netgear DG632 Web Management Denial Of Service Attempt,T1498,Network Denial of Service,technique,0.621050
+ET DOS NetrWkstaUserEnum Request with large Preferred Max Len,T1030,Data Transfer Size Limits,technique,0.341507
+ET DOS Outbound Low Orbit Ion Cannon LOIC Tool Internal User May Be Participating in DDOS,T1498,Network Denial of Service,technique,0.522240
+ET DOS Possible Cisco ASA 5500 Series Adaptive Security Appliance Remote SIP Inspection Device Reload Denial of Service Attempt,T1498,Network Denial of Service,technique,0.435485
+ET DOS Possible MYSQL SELECT WHERE to User Variable Denial Of Service AttemptET DOS Possible MySQL ALTER DATABASE Denial Of Service Attempt,T1498,Network Denial of Service,technique,0.540052
+ET DOS Possible Memcached DDoS Amplification Query (set),T1498,Network Denial of Service,technique,0.413080
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02,T1498,Network Denial of Service,technique,0.492884
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x03,T1498,Network Denial of Service,technique,0.496587
+ET DOS Possible SMBLoris NBSS Length Mem Exhaustion Vuln Inbound,T1499.001,OS Exhaustion Flood,technique,0.409561
+ET DOS Possible SSDP Amplification Scan in Progress,T1595.002,Vulnerability Scanning,technique,0.340609
+ET DOS Possible SolarWinds TFTP Server Read Request Denial Of Service Attempt,T1499.001,OS Exhaustion Flood,technique,0.487143
+ET DOS Possible VNC ClientCutText Message Denial of Service/Memory Corruption Attempt,T1021.005,VNC,technique,0.397886
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 reply),T1498,Network Denial of Service,technique,0.525101
+ET DOS Potential Inbound NTP denial-of-service attempt (repeated mode 7 request),T1498,Network Denial of Service,technique,0.530241
+ET DOS Potential Tsunami SYN Flood Denial Of Service Attempt,T1498.001,Direct Network Flood,technique,0.563560
+ET DOS Trojan.BlackRev V1.Botnet HTTP Login POST Flood Traffic Inbound,T1584.005,Botnet,technique,0.530301
+ET DOS ntop Basic-Auth DOS inbound,T1556.004,Network Device Authentication,technique,0.429927
+ET DOS ntop Basic-Auth DOS outbound,T1556.004,Network Device Authentication,technique,0.428055
+ET EXPLOIT Cisco Smart Install Exploitation Tool - GetConfig,T1602.002,Network Device Configuration Dump,technique,0.492817
+ET EXPLOIT FortiOS SSL VPN - Pre-Auth Messages Payload Buffer Overflow (CVE-2018-13381),T1190,Exploit Public-Facing Application,technique,0.350995
+ET EXPLOIT FortiOS SSL VPN - Remote Code Execution (CVE-2018-13383),T1190,Exploit Public-Facing Application,technique,0.432802
+ET EXPLOIT IBM WebSphere - RCE Java Deserialization,T1559.001,Component Object Model,technique,0.345584
+ET EXPLOIT Metasploit Random Base CharCode JS Encoded String,T1027.018,Invisible Unicode,technique,0.451872
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1,T1218.008,Odbcconf,technique,0.389739
+ET EXPLOIT Possible GoldenPac Priv Esc in-use,T1190,Exploit Public-Facing Application,technique,0.525210
+ET EXPLOIT Possible Internet Explorer VBscript failure to handle error case information disclosure CVE-2014-6332 Common Construct M2,T1059.005,Visual Basic,technique,0.498684
+ET EXPLOIT Possible MySQL cnf overwrite CVE-2016-6662 Attempt,T1190,Exploit Public-Facing Application,technique,0.313200
+ET EXPLOIT Possible OpenVPN CVE-2014- 6271 attempt,T1190,Exploit Public-Facing Application,technique,0.421487
+ET EXPLOIT Possible OpenVPN CVE-2014-6271 attempt,T1190,Exploit Public-Facing Application,technique,0.421487
+ET EXPLOIT Possible Palo Alto SSL VPN sslmgr Format String Vulnerability (Inbound),T1190,Exploit Public-Facing Application,technique,0.367112
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt,T1190,Exploit Public-Facing Application,technique,0.390889
+ET EXPLOIT Possible Pure-FTPd CVE-2014-6271 attempt,T1190,Exploit Public-Facing Application,technique,0.362720
+ET EXPLOIT Possible Redirect to SMB exploit attempt - 303,T1190,Exploit Public-Facing Application,technique,0.447472
+ET EXPLOIT Possible SpamAssassin Milter Plugin Remote Arbitrary Command Injection Attempt,T1027.010,Command Obfuscation,technique,0.511934
+ET EXPLOIT Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),T1003,OS Credential Dumping,technique,0.404014
+ET EXPLOIT Possible iOS Pegasus Safari Exploit (CVE-2016-4657),T1190,Exploit Public-Facing Application,technique,0.458698
+ET EXPLOIT Potential Internet Explorer Use After Free CVE-2013-3163 Exploit URI Struct 1,T1203,Exploitation for Client Execution,technique,0.465162
+ET EXPLOIT QNAP Shellshock script retrieval,T1083,File and Directory Discovery,technique,0.369130
+ET EXPLOIT REDIS Attempted SSH Key Upload,T1098.004,SSH Authorized Keys,technique,0.388975
+ET EXPLOIT Seagate Business NAS Unauthenticated Remote Command Execution,T1039,Data from Network Shared Drive,technique,0.472173
+ET EXPLOIT Serialized Java Object Calling Common Collection Function,TA0009,Collection,tactic,0.416790
+ET EXPLOIT SolusVM 1.13.03 SQL injection,T1190,Exploit Public-Facing Application,technique,0.412394
+ET EXPLOIT TrendMicro node.js HTTP RCE Exploit Inbound (openUrlInDefaultBrowser),T1218.015,Electron Applications,technique,0.380547
+ET FTP Suspicious Quotation Mark Usage in FTP Username,T1071.002,File Transfer Protocols,technique,0.332185
+ET INFO Executable Download from dotted-quad Host,T1105,Ingress Tool Transfer,technique,0.326869
+ET INFO NetSSH SSH Version String Hardcoded in Metasploit,T1027.010,Command Obfuscation,technique,0.273871
+ET INFO Possible Windows executable sent when remote host claims to send a Text File,T1039,Data from Network Shared Drive,technique,0.462326
+ET INFO SUSPICIOUS Dotted Quad Host MZ Response,T1557.001,Name Resolution Poisoning and SMB Relay,technique,0.369105
+ET INFO WinHttp AutoProxy Request wpad.dat Possible BadTunnel,T1016.001,Internet Connection Discovery,technique,0.393118
+ET INFO Windows OS Submitting USB Metadata to Microsoft,T1564.004,NTFS File Attributes,technique,0.406125
+ET MALWARE Common Adware Library ISX User Agent Detected,T1543.001,Launch Agent,technique,0.470368
+ET MALWARE Suspicious User-Agent (1 space),T1543.001,Launch Agent,technique,0.482038
+ET MALWARE W32/OpenCandy Adware Checkin,T1583.008,Malvertising,technique,0.480197
+ET MOBILE_MALWARE Android/Code4hk.A Checkin,T1176,Software Extensions,technique,0.387152
+ET P2P BitTorrent DHT nodes reply,T1557.003,DHCP Spoofing,technique,0.378374
+ET P2P BitTorrent DHT ping request,T1557.003,DHCP Spoofing,technique,0.385247
+ET P2P BitTorrent peer sync,T1496.002,Bandwidth Hijacking,technique,0.235920
+ET P2P Bittorrent P2P Client User-Agent (Transmission/1.x),T1071.005,Publish/Subscribe Protocols,technique,0.307113
+ET P2P TOR 1.0 Outbound Circuit Traffic,T1599,Network Boundary Bridging,technique,0.383534
+ET POLICY Application Crash Report Sent to Microsoft,T1559.002,Dynamic Data Exchange,technique,0.327932
+ET POLICY Cisco Device in Config Mode,T1602.002,Network Device Configuration Dump,technique,0.430190
+ET POLICY Cleartext WordPress Login,T1547.015,Login Items,technique,0.355289
+ET POLICY DNS Query For XXX Adult Site Top Level Domain,T1590.001,Domain Properties,technique,0.420514
+ET POLICY DNS Update From External net,T1583.002,DNS Server,technique,0.378810
+ET POLICY Dropbox Client Broadcasting,T1071.005,Publish/Subscribe Protocols,technique,0.368652
+ET POLICY Dropbox DNS Lookup - Possible Offsite File Backup in Use,T1590.002,DNS,technique,0.332483
+ET POLICY Dropbox.com Offsite File Backup in Use,T1485.001,Lifecycle-Triggered Deletion,technique,0.300605
+ET POLICY DynDNS CheckIp External IP Address Server Response,T1568.003,DNS Calculation,technique,0.396436
+ET POLICY Executable and linking format (ELF) file download,T1027.004,Compile After Delivery,technique,0.380426
+ET POLICY Executable and linking format (ELF) file download Over HTTP,T1204.001,Malicious Link,technique,0.373782
+ET POLICY Executable served from Amazon S3,T1580,Cloud Infrastructure Discovery,technique,0.348769
+ET POLICY External Unencrypted Connection to BASE Console,T1133,External Remote Services,technique,0.409086
+ET POLICY GNU/Linux APT User-Agent Outbound likely related to package management,T1602,Data from Configuration Repository,technique,0.391296
+ET POLICY GNU/Linux YUM User-Agent Outbound likely related to package management,T1195.001,Compromise Software Dependencies and Development Tools,technique,0.343597
+ET POLICY HTTP Request to a *.tk domain,T1583.001,Domains,technique,0.379178
+ET POLICY HTTP traffic on port 443 (POST),T1568.003,DNS Calculation,technique,0.315527
+ET POLICY Http Client Body contains pass= in cleartext,T1567.003,Exfiltration to Text Storage Sites,technique,0.273760
+ET POLICY Http Client Body contains passwd= in cleartext,T1003.008,/etc/passwd and /etc/shadow,technique,0.295525
+ET POLICY IP Check Domain (icanhazip. com in HTTP Host),T1090.004,Domain Fronting,technique,0.324972
+ET POLICY IP Check Domain (whatismyip in HTTP Host),T1596.002,WHOIS,technique,0.337931
+ET POLICY Incoming Basic Auth Base64 HTTP Password detected unencrypted,T1201,Password Policy Discovery,technique,0.401400
+ET POLICY MS Terminal Server Root login,T1037.003,Network Logon Script,technique,0.378882
+ET POLICY Metasploit Framework Checking For Update,T1615,Group Policy Discovery,technique,0.381769
+ET POLICY OpenVPN Update Check,T1568.003,DNS Calculation,technique,0.196383
+ET POLICY Outbound MSSQL Connection to Non-Standard Port - Likely Malware,T1571,Non-Standard Port,technique,0.452313
+ET POLICY Outdated Flash Version M1,T1601.002,Downgrade System Image,technique,0.302537
+ET POLICY Outdated Flash Version M2,T1689,Downgrade Attack,technique,0.306265
+ET POLICY Outgoing Basic Auth Base64 HTTP Password detected unencrypted,T1201,Password Policy Discovery,technique,0.392607
+ET POLICY PDF With Embedded File,T1204.002,Malicious File,technique,0.320276
+ET POLICY PE EXE or DLL Windows file download HTTP,T1105,Ingress Tool Transfer,technique,0.428427
+ET POLICY POSSIBLE Web Crawl using Curl,T1048,Exfiltration Over Alternative Protocol,technique,0.330490
+ET POLICY POSSIBLE Web Crawl using Wget,T1596.004,CDNs,technique,0.352245
+ET POLICY Possible HTA Application Download,T1218.005,Mshta,technique,0.409897
+ET POLICY Possible IP Check api.ipify.org,T1556.009,Conditional Access Policies,technique,0.371604
+ET POLICY Possible Kali Linux hostname in DHCP Request Packet,T1557.003,DHCP Spoofing,technique,0.367930
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement,T1615,Group Policy Discovery,technique,0.433076
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,T1615,Group Policy Discovery,technique,0.389313
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,T1615,Group Policy Discovery,technique,0.397466
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement,T1615,Group Policy Discovery,technique,0.369822
+ET POLICY Proxy TRACE Request - inbound,T1090.001,Internal Proxy,technique,0.407233
+ET POLICY Python-urllib/ Suspicious User Agent,T1056.002,GUI Input Capture,technique,0.378543
+ET POLICY RDP connection confirm,T1070.007,Clear Network Connection History and Configurations,technique,0.381331
+ET POLICY SMB Executable File Transfer,T1021.002,SMB/Windows Admin Shares,technique,0.477704
+ET POLICY SMB Remote AT Scheduled Job Pipe Creation,T1677,Poisoned Pipeline Execution,technique,0.316833
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement,T1055.001,Dynamic-link Library Injection,technique,0.427501
+ET POLICY SMB2 NT Create AndX Request For a Powershell .ps1 File,T1059.001,PowerShell,technique,0.398298
+ET POLICY SMB2 NT Create AndX Request For an Executable File,T1218.007,Msiexec,technique,0.425790
+ET POLICY SMB2 Remote AT Scheduled Job Create Request,T1053.002,At,technique,0.365103
+ET POLICY SSLv3 inbound connection to server vulnerable to POODLE attack,T1001.003,Protocol or Service Impersonation,technique,0.319479
+ET POLICY SSLv3 outbound connection from client vulnerable to POODLE attack,T1001.003,Protocol or Service Impersonation,technique,0.314346
+ET POLICY Suspicious inbound to MSSQL port 1433,T1218.008,Odbcconf,technique,0.380669
+ET POLICY Suspicious inbound to Oracle SQL port 1521,T1686,Disable or Modify System Firewall,technique,0.357222
+ET POLICY Suspicious inbound to PostgreSQL port 5432,T1568.003,DNS Calculation,technique,0.345719
+ET POLICY Suspicious inbound to mSQL port 4333,T1686,Disable or Modify System Firewall,technique,0.351797
+ET POLICY TeamViewer Dyngate User-Agent,T1615,Group Policy Discovery,technique,0.358255
+ET POLICY User-Agent (Launcher),T1543.001,Launch Agent,technique,0.423213
+ET POLICY User-Agent (NSIS_Inetc (Mozilla)) - Sometimes used by hostile installers,T1543.001,Launch Agent,technique,0.549808
+ET POLICY Vulnerable Java Version 1.7.x Detected,T1190,Exploit Public-Facing Application,technique,0.362304
+ET POLICY curl User-Agent Outbound,T1599,Network Boundary Bridging,technique,0.300962
+ET POLICY libwww-perl User-Agent,T1543.001,Launch Agent,technique,0.373843
+ET SCAN Amap TCP Service Scan Detected,T1595.002,Vulnerability Scanning,technique,0.375798
+ET SCAN Amap UDP Service Scan Detected,T1595,Active Scanning,technique,0.350723
+ET SCAN Apache mod_deflate DoS via many multiple byte Range values,T1027.015,Compression,technique,0.326405
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1,T1595.001,Scanning IP Blocks,technique,0.342809
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection,T1595.002,Vulnerability Scanning,technique,0.410933
+ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection,T1595.002,Vulnerability Scanning,technique,0.406696
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection,T1595.002,Vulnerability Scanning,technique,0.397709
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection,T1595.002,Vulnerability Scanning,technique,0.414498
+ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection,T1571,Non-Standard Port,technique,0.432240
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound),T1016.001,Internet Connection Discovery,technique,0.435150
+ET SCAN COMMIX Command injection scan attempt,T1218.012,Verclsid,technique,0.339058
+ET SCAN Cisco Torch TFTP Scan,T1595,Active Scanning,technique,0.353074
+ET SCAN DEBUG Method Request with Command,T1595.001,Scanning IP Blocks,technique,0.409326
+ET SCAN DirBuster Scan in Progress,T1595,Active Scanning,technique,0.389190
+ET SCAN DirBuster Web App Scan in Progress,T1595,Active Scanning,technique,0.414398
+ET SCAN DominoHunter Security Scan in Progress,T1596.005,Scan Databases,technique,0.517287
+ET SCAN Grendel-Scan Web Application Security Scan Detected,T1595.002,Vulnerability Scanning,technique,0.524696
+ET SCAN Grim's Ping ftp scanning tool,T1595.001,Scanning IP Blocks,technique,0.487666
+ET SCAN Havij SQL Injection Tool User-Agent Inbound,T1596.005,Scan Databases,technique,0.401882
+ET SCAN Hydra User-Agent,T1526,Cloud Service Discovery,technique,0.356465
+ET SCAN ICMP =XXXXXXXX Likely Precursor to Scan,T1595.001,Scanning IP Blocks,technique,0.458344
+ET SCAN ICMP Delphi Likely Precursor to Scan,T1595.001,Scanning IP Blocks,technique,0.412201
+ET SCAN ICMP PING IPTools,T1016.001,Internet Connection Discovery,technique,0.422846
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack,T1563.001,SSH Hijacking,technique,0.491530
+ET SCAN MYSQL 4.1 brute force root login attempt,T1110,Brute Force,technique,0.330658
+ET SCAN Metasploit WMAP GET len 0 and type,T1595.002,Vulnerability Scanning,technique,0.237203
+ET SCAN Modbus Scanning detected,T1595,Active Scanning,technique,0.370728
+ET SCAN Modified Sipvicious User-Agent Detected (sundayddr),T1036.012,Browser Fingerprint,technique,0.363664
+ET SCAN Multiple FTP Administrator Login Attempts from Single Source - Possible Brute Force Attempt,T1110,Brute Force,technique,0.449903
+ET SCAN Multiple FTP Root Login Attempts from Single Source - Possible Brute Force Attempt,T1110,Brute Force,technique,0.426019
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt,T1110,Brute Force,technique,0.432097
+"ET SCAN NBTStat Query Response to External Destination, Possible Windows Network Enumeration",T1557.001,Name Resolution Poisoning and SMB Relay,technique,0.485018
+"ET SCAN NMAP -f -sXET SCAN Multiple NBTStat Query Responses to External Destination, Possible Automated Windows Network Enumeration",T1557.001,Name Resolution Poisoning and SMB Relay,technique,0.496996
+ET SCAN NMAP -sO,T1595.001,Scanning IP Blocks,technique,0.452199
+ET SCAN NMAP -sS window 2048,T1595.002,Vulnerability Scanning,technique,0.402254
+ET SCAN NMAP OS Detection Probe,T1595.002,Vulnerability Scanning,technique,0.438761
+ET SCAN NMAP SIP Version Detect OPTIONS Scan,T1553.003,SIP and Trust Provider Hijacking,technique,0.402912
+ET SCAN NMAP SIP Version Detection Script Activity,T1595.002,Vulnerability Scanning,technique,0.425149
+ET SCAN NMAP SQL Spider Scan,T1595.002,Vulnerability Scanning,technique,0.487616
+ET SCAN NNG MS02-039 Exploit False Positive Generator - May Conceal A Genuine Attack,T1190,Exploit Public-Facing Application,technique,0.459881
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl),T1071.002,File Transfer Protocols,technique,0.371564
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl),T1071.002,File Transfer Protocols,technique,0.367118
+ET SCAN Nessus User Agent,T1595.001,Scanning IP Blocks,technique,0.416834
+ET SCAN Netsparker Scan in Progress,T1595,Active Scanning,technique,0.419487
+ET SCAN Nikto Web App Scan in Progress,T1595,Active Scanning,technique,0.452748
+ET SCAN Nmap NSE Heartbleed Request,T1595.002,Vulnerability Scanning,technique,0.349681
+ET SCAN Nmap NSE Heartbleed Response,T1595.002,Vulnerability Scanning,technique,0.324531
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE),T1543.001,Launch Agent,technique,0.407385
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server,T1595.001,Scanning IP Blocks,technique,0.266790
+ET SCAN Non-Malicious SSH/SSL Scanner on the run,T1016.001,Internet Connection Discovery,technique,0.440149
+ET SCAN PRO Search Crawler Probe,T1595.001,Scanning IP Blocks,technique,0.520599
+ET SCAN Possible Fast-Track Tool Spidering User-Agent Detected,T1036.012,Browser Fingerprint,technique,0.482560
+ET SCAN Possible Nmap User-Agent Observed,T1595.001,Scanning IP Blocks,technique,0.473405
+ET SCAN Possible SQLMAP Scan,T1595,Active Scanning,technique,0.467122
+ET SCAN Possible Scanning for Vulnerable JBoss,T1595.002,Vulnerability Scanning,technique,0.546606
+ET SCAN Potential FTP Brute-Force attempt response,T1071.002,File Transfer Protocols,technique,0.358925
+ET SCAN Potential SSH Scan,T1595.001,Scanning IP Blocks,technique,0.456618
+ET SCAN Potential SSH Scan OUTBOUND,T1595.001,Scanning IP Blocks,technique,0.436555
+ET SCAN Potential VNC Scan 5900-5920,T1021.005,VNC,technique,0.425154
+ET SCAN Potential muieblackcat scanner double-URI and HTTP library,T1595.002,Vulnerability Scanning,technique,0.375385
+ET SCAN Rapid IMAP Connections - Possible Brute Force Attack,T1110,Brute Force,technique,0.379551
+ET SCAN Rapid IMAPS Connections - Possible Brute Force Attack,T1110,Brute Force,technique,0.387558
+ET SCAN Rapid POP3 Connections - Possible Brute Force Attack,T1016.001,Internet Connection Discovery,technique,0.426481
+ET SCAN Rapid POP3S Connections - Possible Brute Force Attack,T1016.001,Internet Connection Discovery,technique,0.435034
+ET SCAN Redis SSH Key Overwrite Probing,T1552.004,Private Keys,technique,0.340774
+ET SCAN SFTP/FTP Password Exposure via sftp-config.json,T1201,Password Policy Discovery,technique,0.342311
+ET SCAN SQLBrute SQL Scan Detected,T1595.002,Vulnerability Scanning,technique,0.390447
+ET SCAN Sipvicious Scan,T1595,Active Scanning,technique,0.460321
+ET SCAN Sqlmap SQL Injection Scan,T1595.002,Vulnerability Scanning,technique,0.407825
+ET SCAN Suspicious User-Agent - get-minimal - Possible Vuln Scan,T1595.002,Vulnerability Scanning,technique,0.462546
+ET SCAN Suspicious inbound to MSSQL port 1433,T1218.008,Odbcconf,technique,0.382130
+ET SCAN Suspicious inbound to Oracle SQL port 1521,T1205.001,Port Knocking,technique,0.372681
+ET SCAN Suspicious inbound to PostgreSQL port 5432,T1205.001,Port Knocking,technique,0.346314
+ET SCAN Suspicious inbound to mSQL port 4333,T1218.008,Odbcconf,technique,0.332503
+ET SCAN Suspicious inbound to mySQL port 3306,T1016.001,Internet Connection Discovery,technique,0.293076
+"ET SCAN Unusually Fast 400 Error Messages (Bad Request), Possible Web Application Scan",T1595.002,Vulnerability Scanning,technique,0.404700
+"ET SCAN Unusually Fast 403 Error Messages, Possible Web Application Scan",T1595.001,Scanning IP Blocks,technique,0.427418
+"ET SCAN Unusually Fast 404 Error Messages (Page Not Found), Possible Web Application Scan/Directory Guessing Attack",T1595.002,Vulnerability Scanning,technique,0.414799
+ET SCAN WSFuzzer Web Application Fuzzing,T1595.002,Vulnerability Scanning,technique,0.453565
+ET SCAN Wapiti Web Server Vulnerability Scan,T1595.002,Vulnerability Scanning,technique,0.573357
+ET SCAN Wikto Backend Data Miner Scan,T1595,Active Scanning,technique,0.456576
+ET SCAN Wikto Scan,T1595,Active Scanning,technique,0.446828
+ET SCAN ntop-ng Authentication Bypass via Session ID Guessing,T1550,Use Alternate Authentication Material,technique,0.394738
+ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY),T1602.002,Network Device Configuration Dump,technique,0.338693
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI,T1602.001,SNMP (MIB Dump),technique,0.336743
+ET SNMP Samsung Printer SNMP Hardcode RW Community String,T1602.001,SNMP (MIB Dump),technique,0.329218
+ET SNMP missing community string attempt 1,T1602.001,SNMP (MIB Dump),technique,0.321407
+ET TFTP Outbound TFTP Error Message,T1542.005,TFTP Boot,technique,0.339005
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 128,T1090.003,Multi-hop Proxy,technique,0.386966
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 155,T1090.003,Multi-hop Proxy,technique,0.368319
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 271,T1090.003,Multi-hop Proxy,technique,0.365563
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 285,T1090.003,Multi-hop Proxy,technique,0.385200
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 328,T1090.003,Multi-hop Proxy,technique,0.406628
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 519,T1090.003,Multi-hop Proxy,technique,0.389183
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 595,T1090.003,Multi-hop Proxy,technique,0.370158
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 615,T1090.003,Multi-hop Proxy,technique,0.370552
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 684,T1090.003,Multi-hop Proxy,technique,0.377041
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing,T1564.013,Bind Mounts,technique,0.414694
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing *nix,T1564.013,Bind Mounts,technique,0.411279
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output,T1016,System Network Configuration Discovery,technique,0.320470
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - net command output,T1216.001,PubPrn,technique,0.377661
+ET TROJAN ATTACKER IRCBot - The command completed successfully - PRIVMSG Response,T1548.004,Elevated Execution with Prompt,technique,0.334454
+ET TROJAN Backdoor family PCRat/Gh0st CnC traffic (OUTBOUND) 106,T1190,Exploit Public-Facing Application,technique,0.391700
+ET TROJAN DDoS.XOR Checkin,T1584.005,Botnet,technique,0.468089
+ET TROJAN Double HTTP/1.1 Header Inbound - Likely Hostile Traffic,T1496.002,Bandwidth Hijacking,technique,0.358131
+ET TROJAN HTTP Executable Download from suspicious domain with direct request/fake browser (multiple families),T1598.003,Spearphishing Link,technique,0.457715
+ET TROJAN HackerDefender Root Kit Remote Connection Attempt Detected,T1219,Remote Access Tools,technique,0.396817
+ET TROJAN Miuref/Boaxxe Checkin,T1036.008,Masquerade File Type,technique,0.347330
+ET TROJAN NgrBot IRC CnC Channel Join,T1041,Exfiltration Over C2 Channel,technique,0.297056
+ET TROJAN Possible Metasploit Payload Common Construct Bind_API (from server),T1564.013,Bind Mounts,technique,0.414734
+ET TROJAN Possible NanoCore C2 60B,T1190,Exploit Public-Facing Application,technique,0.339078
+ET TROJAN Possible NanoCore C2 64B,T1190,Exploit Public-Facing Application,technique,0.354280
+ET TROJAN Possible Windows executable sent when remote host claims to send html content,T1218.001,Compiled HTML File,technique,0.534342
+ET TROJAN Possible Zendran ELF IRCBot Joining Channel 2,T1041,Exfiltration Over C2 Channel,technique,0.353977
+ET TROJAN Poweliks Clickfraud CnC M4,T1204.004,Malicious Copy and Paste,technique,0.421760
+ET TROJAN Suspicious User-Agent (WindowsNT) With No Separating Space,T1564,Hide Artifacts,technique,0.467706
+ET TROJAN Unknown - Loader - Check .exe Updated,T1036.003,Rename Legitimate Utilities,technique,0.402848
+ET TROJAN Windows WMIC COMPUTERSYSTEM get Microsoft Windows DOS prompt command exit OUTBOUND,T1680,Local Storage Discovery,technique,0.464900
+ET TROJAN Windows WMIC NETLOGIN get Microsoft Windows DOS prompt command exit OUTBOUND,T1547.004,Winlogon Helper DLL,technique,0.470482
+ET TROJAN Windows WMIC NIC get Microsoft Windows DOS prompt command exit OUTBOUND,T1680,Local Storage Discovery,technique,0.431150
+ET TROJAN Windows WMIC OS get Microsoft Windows DOS prompt command exit OUTBOUND,T1218.007,Msiexec,technique,0.475208
+ET TROJAN Windows WMIC PROCESS get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,Windows Management Instrumentation,technique,0.483487
+ET TROJAN Windows WMIC SERVER get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,Windows Management Instrumentation,technique,0.468151
+ET TROJAN Windows WMIC SERVICE get Microsoft Windows DOS prompt command exit OUTBOUND,T1047,Windows Management Instrumentation,technique,0.481107
+ET TROJAN Windows WMIC SHARE get Microsoft Windows DOS prompt command exit OUTBOUND,T1680,Local Storage Discovery,technique,0.461501
+ET TROJAN Windows WMIC STARTUP get Microsoft Windows DOS prompt command exit OUTBOUND,T1688,Safe Mode Boot,technique,0.481803
+ET TROJAN Windows dir Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.468339
+ET TROJAN Windows driverquery -si Microsoft Windows DOS prompt command exit OUTBOUND,T1652,Device Driver Discovery,technique,0.457075
+ET TROJAN Windows driverquery -v Microsoft Windows DOS prompt command exit OUTBOUND,T1652,Device Driver Discovery,technique,0.447756
+ET TROJAN Windows gpresult Microsoft Windows DOS prompt command exit OUTBOUND,T1218.007,Msiexec,technique,0.433122
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND,T1688,Safe Mode Boot,technique,0.417148
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.423968
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.398162
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.425444
+ET TROJAN Windows quser Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.491603
+ET TROJAN Windows qwinsta Microsoft Windows DOS prompt command exit OUTBOUND,T1059.003,Windows Command Shell,technique,0.410667
+ET USER_AGENTS MSF Meterpreter Default User Agent,T1543.001,Launch Agent,technique,0.363695
+ET WEB_CLIENT BeEF Cookie Outbound,T1606.001,Web Cookies,technique,0.310165
+ET WEB_CLIENT HTA File containing Wscript.Shell Call - Potential CVE-2017-0199,T1218.005,Mshta,technique,0.414665
+ET WEB_CLIENT Hex Obfuscation of Script Tag % Encoding,T1027.018,Invisible Unicode,technique,0.516690
+ET WEB_CLIENT Hex Obfuscation of String.fromCharCode % Encoding,T1027.018,Invisible Unicode,technique,0.505338
+ET WEB_CLIENT Hex Obfuscation of charCodeAt % Encoding,T1027.018,Invisible Unicode,technique,0.540223
+ET WEB_CLIENT Hex Obfuscation of document.write % Encoding,T1027.018,Invisible Unicode,technique,0.503608
+ET WEB_CLIENT Hex Obfuscation of substr % Encoding,T1027.018,Invisible Unicode,technique,0.477239
+ET WEB_CLIENT Hex Obfuscation of unescape % Encoding,T1027.018,Invisible Unicode,technique,0.594248
+ET WEB_CLIENT PowerShell call in script 1,T1059.001,PowerShell,technique,0.374525
+ET WEB_CLIENT PowerShell call in script 2,T1059.001,PowerShell,technique,0.370035
+"ET WEB_SERVER /bin/bash In URI, Possible Shell Command Execution Attempt Within Web Exploit",T1505.003,Web Shell,technique,0.503993
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt,T1505.003,Web Shell,technique,0.484560
+ET WEB_SERVER /etc/shadow Detected in URI,T1003.008,/etc/passwd and /etc/shadow,technique,0.308857
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt,T1574.011,Services Registry Permissions Weakness,technique,0.386672
+ET WEB_SERVER 401TRG Generic Webshell Request - POST with wget in body,T1567.004,Exfiltration Over Webhook,technique,0.269997
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013,T1189,Drive-by Compromise,technique,0.306943
+ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI,T1505.001,SQL Stored Procedures,technique,0.413454
+ET WEB_SERVER CRLF Injection - Newline Characters in URL,T1132.002,Non-Standard Encoding,technique,0.331290
+ET WEB_SERVER CURL Command Specifying Output in HTTP Headers,T1071.001,Web Protocols,technique,0.246456
+ET WEB_SERVER ColdFusion adminapi access,T1505.004,IIS Components,technique,0.330502
+ET WEB_SERVER ColdFusion administrator access,T1548.005,Temporary Elevated Cloud Access,technique,0.342321
+ET WEB_SERVER ColdFusion componentutils access,T1505.004,IIS Components,technique,0.324368
+ET WEB_SERVER ColdFusion password.properties access,T1555.003,Credentials from Web Browsers,technique,0.479407
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal,T1083,File and Directory Discovery,technique,0.276550
+ET WEB_SERVER DD-WRT Information Disclosure Attempt,T1592.003,Firmware,technique,0.415097
+ET WEB_SERVER DFind w00tw00t GET-Requests,T1071.001,Web Protocols,technique,0.350185
+ET WEB_SERVER Exploit Suspected PHP Injection Attack (cmd=),T1203,Exploitation for Client Execution,technique,0.398198
+ET WEB_SERVER HTTP 414 Request URI Too Large,T1030,Data Transfer Size Limits,technique,0.246766
+ET WEB_SERVER IIS 8.3 Filename With Wildcard (Possible File/Dir Bruteforce),T1505.004,IIS Components,technique,0.342321
+ET WEB_SERVER Joomla Component SQLi Attempt,T1505,Server Software Component,technique,0.214501
+ET WEB_SERVER Likely Malicious Request for /proc/self/environ,T1003.007,Proc Filesystem,technique,0.401316
+ET WEB_SERVER MYSQL SELECT CONCAT SQL Injection Attempt,T1213.006,Databases,technique,0.196564
+ET WEB_SERVER Muieblackcat scanner,T1595.002,Vulnerability Scanning,technique,0.347060
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt,T1204.001,Malicious Link,technique,0.360553
+ET WEB_SERVER PHP Easteregg Information-Disclosure (funny-logo),T1036.002,Right-to-Left Override,technique,0.367052
+ET WEB_SERVER PHP Easteregg Information-Disclosure (php-logo),T1036.002,Right-to-Left Override,technique,0.301254
+ET WEB_SERVER PHP Easteregg Information-Disclosure (phpinfo),T1597.001,Threat Intel Vendors,technique,0.288310
+ET WEB_SERVER PHP Easteregg Information-Disclosure (zend-logo),T1036.002,Right-to-Left Override,technique,0.271280
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt,T1218.001,Compiled HTML File,technique,0.268682
+ET WEB_SERVER PHP REQUEST SuperGlobal in URI,T1204.001,Malicious Link,technique,0.248525
+ET WEB_SERVER PHP SERVER SuperGlobal in URI,T1204.001,Malicious Link,technique,0.254230
+ET WEB_SERVER PHP System Command in HTTP POST,T1132.002,Non-Standard Encoding,technique,0.278123
+ET WEB_SERVER PHP tags in HTTP POST,T1071.001,Web Protocols,technique,0.253804
+ET WEB_SERVER PHP.//Input in HTTP POST,T1056,Input Capture,technique,0.301602
+ET WEB_SERVER Possible Attempt to Get SQL Server Version in URI using SELECT VERSION,T1218.008,Odbcconf,technique,0.189598
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt,T1190,Exploit Public-Facing Application,technique,0.341682
+ET WEB_SERVER Possible CVE-2014-6271 Attempt,T1190,Exploit Public-Facing Application,technique,0.341924
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Cookie,T1606.001,Web Cookies,technique,0.457653
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number,T1190,Exploit Public-Facing Application,technique,0.301963
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers,T1190,Exploit Public-Facing Application,technique,0.269738
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt,T1190,Exploit Public-Facing Application,technique,0.373796
+ET WEB_SERVER Possible Cherokee Web Server GET AUX Request Denial Of Service Attempt,T1499.003,Application Exhaustion Flood,technique,0.389258
+ET WEB_SERVER Possible IIS Integer Overflow DoS (CVE-2015-1635),T1499.003,Application Exhaustion Flood,technique,0.457718
+ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access,T1213.006,Databases,technique,0.343485
+ET WEB_SERVER Possible SQL Injection (exec),T1505.001,SQL Stored Procedures,technique,0.372574
+ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM,T1505.001,SQL Stored Procedures,technique,0.287164
+ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT,T1110.003,Password Spraying,technique,0.277470
+ET WEB_SERVER Possible SQLi xp_cmdshell POST body,T1505.001,SQL Stored Procedures,technique,0.337696
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.,T1567.004,Exfiltration Over Webhook,technique,0.327240
+ET WEB_SERVER Possible bash shell piped to dev tcp Inbound to WebServer,T1505.003,Web Shell,technique,0.434055
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt,T1204.001,Malicious Link,technique,0.336195
+ET WEB_SERVER Suspicious Chmod Usage in URI,T1204,User Execution,technique,0.370223
+ET WEB_SERVER Tilde in URI - potential .php~ source disclosure vulnerability,T1189,Drive-by Compromise,technique,0.393324
+ET WEB_SERVER WEB-PHP phpinfo access,T1505.003,Web Shell,technique,0.263888
+ET WEB_SERVER WGET Command Specifying Output in HTTP Headers,T1071.001,Web Protocols,technique,0.267979
+ET WEB_SERVER WebShell Generic - wget http - POST,T1505.003,Web Shell,technique,0.266987
+ET WEB_SERVER allow_url_include PHP config option in uri,T1176.002,IDE Extensions,technique,0.154683
+ET WEB_SERVER auto_prepend_file PHP config option in uri,T1546.001,Change Default File Association,technique,0.234467
+ET WEB_SERVER disable_functions PHP config option in uri,T1686,Disable or Modify System Firewall,technique,0.257567
+ET WEB_SERVER safe_mode PHP config option in uri,T1688,Safe Mode Boot,technique,0.247120
+ET WEB_SERVER suhosin.simulation PHP config option in uri,T1505.003,Web Shell,technique,0.194401
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt,T1218.005,Mshta,technique,0.293260
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection,T1218.005,Mshta,technique,0.240405
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt,T1189,Drive-by Compromise,technique,0.287638
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt,T1176,Software Extensions,technique,0.277041
+ET WEB_SPECIFIC_APPS BLOG CMS nsextt parameter Cross Site Scripting Vulnerability,T1218.005,Mshta,technique,0.353582
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt,T1564.012,File/Path Exclusions,technique,0.270537
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection,T1204.001,Malicious Link,technique,0.359801
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection,T1218.001,Compiled HTML File,technique,0.249714
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt,T1218.001,Compiled HTML File,technique,0.276421
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion,T1574.009,Path Interception by Unquoted Path,technique,0.303404
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion,T1505.005,Terminal Services DLL,technique,0.309634
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion,T1547.013,XDG Autostart Entries,technique,0.283558

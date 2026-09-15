@@ -2,3 +2,4 @@ graphviz
 requests
 numpy
 matplotlib
+sentence-transformers
