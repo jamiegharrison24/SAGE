@@ -1,5 +1,8 @@
 # MITRE ATT&CK signature-mapping: 7-method comparison
 
+> **The consolidated reference for this work is [`../REPORT.md`](../REPORT.md).**
+> This file remains the detailed record for effort 1, the 7-method comparison; read the report first.
+
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline.
 Supersedes the earlier "just build the mapper" run (`report.md`); reuses its

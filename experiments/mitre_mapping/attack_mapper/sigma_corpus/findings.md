@@ -1,5 +1,8 @@
 # Sigma corpus pull: extractor stress test + class-imbalance check
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 4; read the report first.
+
 Two purposes, per `../../STATUS.md`'s "what's not done" list:
 
 1. First real-data test of `../extractors/sigma.py`, previously only

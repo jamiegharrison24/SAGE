@@ -1,5 +1,8 @@
 # Implementing the HF-suggested generalisable mapper
 
+> **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
+> This file remains the detailed record for efforts 3, 5-11; read the report first.
+
 `plan.md` / `generalisable mitre mapper.md` in this directory are a
 Hugging-Face-chat suggestion for a format-agnostic, LLM-assisted pipeline
 mapping *any* detection ruleset to MITRE ATT&CK (extract -> enrich -> narrate

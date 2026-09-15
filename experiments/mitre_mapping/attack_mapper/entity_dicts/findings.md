@@ -1,5 +1,8 @@
 # Step 1: deterministic entity dictionaries — built and measured
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 13, Step 1; read the report first.
+
 Step 1 of `../../entity_normalisation_plan.md`. Harvest three public
 redistributable dictionaries into a typed gazetteer, and measure coverage on
 the 397 scoreable eval rows **before** integrating anything.

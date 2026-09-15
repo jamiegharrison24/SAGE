@@ -1,5 +1,8 @@
 # Tiered ATT&CK mapping: build + results
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 2, the tiered pipeline; read the report first.
+
 Branch `research/b2-mitre-eval`, subfolder of the existing
 `experiments/mitre_mapping/` spike (see `../results.md` for the 7-method
 embedding/k-NN/SMET comparison this supersedes as "method 8"). Implements

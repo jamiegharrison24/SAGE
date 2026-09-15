@@ -1,5 +1,8 @@
 # MITRE ATT&CK mapping research — status
 
+> **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
+> This file remains the detailed record for the running index of all fourteen efforts; read the report first.
+
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
 repo `CLAUDE.md`). Goal: find a way to map SAGE's Suricata/ET signature
@@ -13,14 +16,45 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Twelve sub-experiments have run so far, in order. Each has its own detailed
+Fourteen sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
-**Planned next, not started:** entity-aware normalisation —
-`entity_normalisation_plan.md` is the source of truth for that work (design,
-settled decisions, known traps, sequencing and the prediction to judge it
-against). It is gated on the `reviewer_verdict` scoring decision in "What's not
-done" below, and will become effort 13 here once measured.
+**Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
+working explanation, and it supersedes the framing every earlier section was
+written under. The short version: every lever pulled in efforts 1-13 was a
+*representation* lever (better embeddings, better classifier, better text
+normalisation, an LLM on top), and the binding constraint is *coverage* — the
+corpus does not contain training examples for the techniques the evaluation set
+actually asks about. Sections 1-13 remain accurate as records of what was run
+and measured; where they speculate about *why* something failed, effort 14 is
+the later and better answer.
+
+**Read numbers by regime, not by effort number.** Five different evaluation
+regimes appear below, and four separate measurement corrections have landed in
+this branch's history. A score from section 5 and a score from section 13 are
+not comparable and must not be ranked against each other — see "Evaluation
+regimes" immediately below, which is the key to every table in this file.
+
+## Evaluation regimes
+
+| regime | eval set | scoreable rows | sections measured on it |
+|---|---|---:|---|
+| A | 80-row hand-audit sample | 80 | 3, 5, 6, 7, 8 |
+| B | hand-audit, Tier 2 scored in isolation | 79 | 2, 4 |
+| C | 500-row set, pre-scoring-fix | 397 | 9, 10, 11, 12 |
+| D | 500-row set, corrected `reviewer_verdict` | 361 | 12 (re-run), 13 — **current** |
+| E | 773-signature propagated ground truth | varies | 1 |
+
+Regime A is narrow and partly circular: its `current_gt` was derived through
+the same bridge table the pipeline's dominant source keyed off. Regime C→D is
+the 2026-09-11 `reviewer_verdict` correction (verdict `0` = reviewer rejected
+the mapping = row excluded), which moved the headline 38.8% → 36.6%.
+
+**Macro-average was not measured before section 9** — `validate.py` only began
+reporting it at effort 9. Blank macro cells in sections 1-8 mean not-measured,
+not zero. Per effort 14 §7, macro and the mid/tail bucket accuracies are now
+the numbers to watch; micro is dominated by three head classes and moves for
+reasons unrelated to whether the pipeline improved.
 
 ## 1. Seven-method zero-shot/kNN/SMET comparison — `archive/results.md`, `archive/SMET_STATUS.md`
 
@@ -475,6 +509,22 @@ tagger off was diffed byte-for-byte against the committed normaliser over all
 misses**, so queries and corpus rows were tagged from the same artifact with no
 train/inference asymmetry.
 
+**The two models this effort left unrun have since been run at span level** —
+`entity_ner/comparison_findings.md`, consolidated in `REPORT.md` §5. NuNER Zero
+wins rare-entity recall at every document-frequency cut but is less precise at
+every threshold (32% vs 44% strict) and its false-positive strings occur in
+19.4% of corpus rows against GLiNER's 2.5%; SecureBERT2.0-NER's `System` type
+does cover software products — the plan's recorded open question — but 65% of
+its output lands in a catch-all `Indicator` class, and it is closed. Two
+corrections came out of the same pass: this effort's 47%/73% per-entity
+precision was **not reproducible** (`entity_ner/trial_sample.csv` ships an empty
+`verdict` column; verdicts now live in `entity_ner/verdicts.py`), and its
+explanation of its own null — that the surviving spans were already
+high-frequency protocols — does not survive measurement: by corpus DF only
+`HTTP` (12.3%) is, against `SMB` 0.15% and `NTP` 0.009%. Effort 14's coverage
+explanation supersedes it either way. Still open: **replacement** of rare
+entities only, pointed at GLiNER at 0.85 rather than NuNER.
+
 Kept, off by default (`Settings.use_entity_tagging = False`). The machinery,
 the frequency diagnostic and one genuine bug fix are all reusable:
 `knn_resolver._corpus_fingerprint()` now hashes the normaliser identity. That
@@ -482,57 +532,144 @@ trap was live — the 49MB embedding cache is keyed on corpus files and model
 name, neither of which a normalisation change touches, so every arm here would
 have silently scored the *old* normaliser with entirely plausible numbers.
 
+## 14. Error analysis — the binding constraint is coverage, not representation — `corpus_coverage_findings.md`
+
+Diagnosed the 229 misses in the 36.6%/22.2% baseline. **This supersedes "hub
+collapse" as the working explanation for this branch and re-reads every prior
+negative result under one cause.**
+
+**Hub collapse is already solved, and this file previously cited a stale base
+rate.** The pipeline predicts `T1190` on 113/361 rows; the true `T1190` count is
+also 113/361 — exact calibration. The 28.5% base rate quoted in sections 11-13
+was measured pre-Step-0; the `reviewer_verdict` fix moved it to 31.3%. So
+effort 13's entity work targeted a problem the scoring fix had already
+dissolved, which explains its null better than the structural argument filed in
+`entity_ner/findings.md`.
+
+**Accuracy tracks training-example count, not text quality:**
+
+| bucket | eval examples | classes | rows | top-1 |
+|---|---|---:|---:|---:|
+| head | >=20 | 3 | 189 | 43.9% |
+| mid | 3-19 | 21 | 137 | 31.4% |
+| tail | <=2 | 27 | 35 | 17.1% |
+
+**Smoking gun.** All 21 `ET DOS` rows predict `T1495` Firmware Corruption. The
+corpora contain exactly **one** row labeled `T1495`, text "Cisco Denial of
+Service". Every `ET DOS` title normalises to contain "denial of service", so
+that single mislabeled row wins the neighbourhood for the whole category —
+because there is nothing else to retrieve.
+
+**Supply versus demand:**
+
+| technique | eval rows | corpus rows |
+|---|---:|---:|
+| `T1595.002` | 44 (12.2%) | 8 |
+| `T1499` | 32 (8.9%) | 9 |
+| `T1498` | 12 (3.3%) | 10 |
+
+Three techniques are 24.4% of the eval set with 27 training examples between
+them, out of 31,825. ET is 83% of the corpus but carries only 45 techniques
+(68% of it is `T1190`/`T1071`/`T1568`); Sigma and Elastic carry the diversity
+but in the wrong register — Windows/host and cloud/endpoint, against a
+network-IDS eval set. The corpus is large and almost orthogonal to the test
+distribution.
+
+**One cause covers every negative in this branch:** Splunk (0/20, host
+register), Elastic (6.7% own retrieval, helping only via IDF dilution, endpoint
+register), MISP galaxy (1.0% hit rate, host-side malware names), entity
+normalisation Steps 1-3 (normalising text cannot create training examples for a
+class that has eight), and Layer D's three failures (an LLM cannot retrieve what
+is not there).
+
+**The trap in the obvious fix.** Labelling ET's own `ET DOS` category as
+`T1498`/`T1499` by rule would supply the missing examples immediately — but
+`CONVENTION.md` instructs human labellers with that same rule, so scoring
+against those labels is scoring the pipeline against a copy of its own input.
+That is the `bridge_table` circularity effort 9/10 removed for capping at 34.8%.
+If a category rule builds training data, the eval rows in that category must be
+held out or the number is meaningless.
+
+**The number to watch is no longer micro** — it is mid/tail bucket accuracy
+(31.4% / 17.1%) and the supply column above.
+
 ## Current bottom line
 
-**36.6% top-1 / 22.2% macro** is the current number, after the 2026-09-11
-scoring correction (`reviewer_verdict` `0` = reviewer rejected the mapping =
-row excluded from evaluation). 132/361 scoreable rows, 43 excluded.
+**36.6% top-1 / 22.2% macro** on regime D (361 scoreable rows, 43 excluded),
+after the 2026-09-11 `reviewer_verdict` scoring correction. That is the current
+headline, but effort 14 says it is the wrong number to optimise: micro is
+carried by three head classes. The honest summary of pipeline quality is
+**43.9% head / 31.4% mid / 17.1% tail**, and the tail is where the technique
+diversity lives.
 
-The previous 38.8% was measured with those 43 rejected rows scored against
-the very labels a reviewer had rejected — 22 of them counted as HITs. The
-2.2-point drop is a measurement correction, the fourth in this branch's
-history, not a code regression. Macro is unchanged at 22.2%; `T1190` share
-rose 29.0% -> 31.3%, because the excluded rows were disproportionately
-`ET SCAN`-style `T1046` proposals.
+**How to read the history.** Two phases, then a reframe.
 
-**This correction damaged effort 12's Elastic evidence — see the caveat in
-that section.**
+*Phase 1 — inflation removed.* 53.8% (regime A: narrow, partly circular 80-row
+sample) → 38.0%/34.1% (regime C: 500-row blind-labeled) → 32.7% (`bridge_table`
+removed as structurally capped). None of those drops were code regressions; all
+four were measurement corrections. **53.8% was never a real ceiling** — it was
+two measurement artifacts stacked.
 
-Read the history as two phases. First, successive measurement fixes brought the
-reported number *down* as inflation was removed — 53.8% (narrow, partly
-circular 80-row sample) → 38.0%/34.1% (500-row blind-labeled) → 32.7%
-(`bridge_table`, structurally capped, removed). None of those drops were code
-regressions. Then effort 11 raised it back to 38.8% with genuine improvements:
-retrieval against labeled rule text instead of MITRE prose, plus class-prior
-correction on the classifier.
+*Phase 2 — genuine gains.* Effort 11 raised it to 38.8% by retrieving against
+labeled rule text instead of MITRE description prose, plus class-prior
+correction on the classifier. Effort 12 added Elastic for +1.3 macro and a
+5-point calibration gain. So the pipeline now scores better than its original
+headline (36.6%/22.2% vs 38.0%/18.6%, across a scoring correction) while
+resting on none of what made that original number untrustworthy.
 
-So the pipeline now scores slightly better than its original headline
-(38.8% vs 38.0% micro, 22.2% vs 18.6% macro) while resting on none of what
-made that original number untrustworthy. **53.8% was never a real ceiling** —
-it was two measurement artifacts stacked.
+*Phase 3 — the reframe (effort 14).* Every remaining lever tried was a
+representation lever, and they have all returned null: three LLM models across
+two reasoner designs, four encoder swaps, entity-aware normalisation Steps 1-3,
+and two of three candidate corpora. The binding constraint is that the training
+corpus does not contain examples of the techniques the eval set asks about.
+**No representation lever can fix a coverage problem**, which is why the null
+results are so uniform.
 
-Effort 12 then took the corpus-diversity lever the bottom line had flagged:
-+1.1 macro and a 4.5-point calibration gain from Elastic, with the same lever
-*rejected* for Splunk on per-corpus evidence. Both dominant sources still have
-headroom — `tier2_combined` and `knn_corpus` answer 351 of 397 scoreable rows
-at 43.1% and 27.3% — and neither is capped the way `bridge_table` was, but the
-cheap corpus wins are now largely taken: the next corpus should be chosen on
-register match, not on diversity stats. Non-embedding, non-LLM signal remains the only thing that has
-actually helped in this branch: SAGE-internal signal (declared tags +
-`MicroAttackStage` bridge) and a broadened training corpus compose cleanly
-because they resolve disjoint rows. Every embedding/similarity-based method
-tried anywhere in this research branch (zero-shot ATTACK-BERT/MiniLM, kNN,
-Tier 2 TF-IDF/MiniLM/ATTACK-BERT, Tier 2 combined, Layer A in the HF
-pipeline) tops out under 40% top-1 on its own — and Layer D, the one piece
-explicitly designed to add reasoning on top of everything else, has not
-produced one genuine improvement across 3 models / 2 reasoner designs
-(effort 6's full-override regression, effort 7's off-list-answer regression,
-effort 8's headline "win" that turned out to be majority-class collapse).
-Every accuracy gain in this research branch that survives scrutiny has come
-from harvesting or combining existing structured signal, not from any
-model — embedding, classifier, or LLM — reasoning freshly over rule text.
+What has actually worked, every time, is harvesting or combining existing
+structured signal — vendor-declared ATT&CK tags (71.8-81.8% precision), SAGE's
+own `MicroAttackStage`, and a broadened training corpus — because those add
+information rather than re-encoding what is already there. Nothing in this
+branch has been improved by a model reasoning freshly over rule text.
 
 ## What's not done
+
+### Untried levers, in priority order
+
+Ordered per effort 14, coverage-first. This supersedes any ordering implied by
+earlier sections or by `entity_normalisation_plan.md`, which still names
+"section 8 classifier modernisation" as the remaining lever — written before
+the coverage diagnosis.
+
+1. **Find a labeled corpus in the right register** — network-IDS rules carrying
+   genuine ATT&CK metadata. Select on *register match*, not diversity stats:
+   effort 12 showed diversity does not predict usefulness (Splunk and Elastic
+   were similarly diverse; Splunk retrieved 0/20). Check per-corpus retrieval
+   accuracy before adopting. Subject to effort 14's circularity trap.
+2. **Harvest ET/ETPRO/Snort declared tags more aggressively** — real vendor
+   metadata, so not circular, and the highest-precision source in the branch
+   (71.8-81.8%). Tier 0 recovers only 39 rows today; just 11 of 62 matched
+   bodies carry a tag, and ETPRO/Snort sources were never exhausted.
+3. **Deepen the reviewed label set** — only 208 of 500 rows carry an explicit
+   reviewer verdict. Start with the `ET POLICY` executable-download convention
+   ruling; it settles a whole class at once and is the residual inter-pass
+   disagreement in `label_queue/CONSISTENCY.md`. Detail in the bullets below.
+4. **LLM fixes (a) and (b) together, or not at all** — (a) reject/down-weight
+   off-list `technique_id`s catches effort 7's failure; (b) penalize
+   low-specificity or repeated-technique reasoning catches effort 8's modal
+   collapse. Neither is sufficient alone, and they are complementary, not
+   alternatives. Note effort 14 predicts a limited ceiling here regardless: an
+   LLM cannot retrieve what is not in the corpus.
+5. **Section 8 classifier modernisation.**
+6. **Cheapest remaining check** — re-score the classifier per-source on its 53
+   top-1 rows (effort 9 gave it 53 rows instead of the 5-row sample effort 5
+   flagged as unstable; never broken out).
+
+Out of scope here: the Splunk/KQL/YARA extractors (no rules of those formats
+exist in this repo to test against) and the two missing commas in
+`signatures/alert_signatures.py` (production code — own branch, `changes-ags`
+label). Both are detailed in the bullets below.
+
+### Backlog detail
 
 - ~~**Scoring counts rejected labels as ground truth**~~ — **DONE 2026-09-11**
   (effort 13, "Step 0"). The rule is now implemented in `validate.py` and

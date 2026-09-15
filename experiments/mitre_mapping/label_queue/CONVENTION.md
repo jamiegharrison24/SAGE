@@ -1,5 +1,8 @@
 # Labeling convention — signature → ATT&CK technique
 
+> **The consolidated reference for this work is [`../REPORT.md`](../REPORT.md).**
+> This file remains the detailed record for the labelling convention; read the report first.
+
 Applies to every `queue_batch*.csv` → `labeled_batch*.csv` pass. Read this
 before labeling, and keep it open while labeling; consistency across batches
 matters more than any individual row being perfect.

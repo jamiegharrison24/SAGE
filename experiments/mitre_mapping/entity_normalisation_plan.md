@@ -1,5 +1,8 @@
 # Entity-aware normalisation — plan and source of truth
 
+> **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
+> This file remains the detailed record for effort 13's design and settled decisions; read the report first.
+
 Status: **planned, not started.** Nothing in this document is implemented.
 Written before any code so the design, the decisions already settled, and the
 measurements that would falsify it are all recorded in one place.

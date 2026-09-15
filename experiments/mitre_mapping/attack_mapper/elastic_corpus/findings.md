@@ -1,5 +1,8 @@
 # Elastic detection-rules corpus: technique-diversity lever
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 12, Elastic; read the report first.
+
 Follow-on to `../../STATUS.md` effort 11's "highest-leverage remaining work"
 note: `tier2_combined` and `knn_corpus` together answer 350 of 397 scoreable
 rows, and both draw on the same labeled corpus. That corpus is ET-dominated

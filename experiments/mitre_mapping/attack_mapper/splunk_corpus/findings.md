@@ -1,5 +1,8 @@
 # Splunk security_content corpus: built, measured, not adopted
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 12, Splunk; read the report first.
+
 Second half of the corpus-diversity experiment begun in
 `../elastic_corpus/findings.md`. Same hypothesis (broaden technique coverage
 to break the T1190 hub collapse), same method, different source — and unlike

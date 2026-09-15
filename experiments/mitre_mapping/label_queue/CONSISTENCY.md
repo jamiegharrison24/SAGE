@@ -1,5 +1,8 @@
 # Re-label consistency check
 
+> **The consolidated reference for this work is [`../REPORT.md`](../REPORT.md).**
+> This file remains the detailed record for the consistency measurement; read the report first.
+
 A 500-row label set is only as good as its repeatability. This measures it,
 so the number reported next to the set is honest rather than implied.
 

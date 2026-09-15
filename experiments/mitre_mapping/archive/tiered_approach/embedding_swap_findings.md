@@ -1,5 +1,8 @@
 # Does swapping Tier 2's features fix the T1190 hub-collapse?
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 2's encoder-swap null; read the report first.
+
 Short answer: no. Three feature representations tested, all trained on the
 same architecture (OneVsRestClassifier(LinearSVC), same 26,644-row
 et_labeled_corpus.csv, same 773 target signatures), scored against the same

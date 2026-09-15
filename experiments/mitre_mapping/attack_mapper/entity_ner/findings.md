@@ -1,5 +1,8 @@
 # Step 2 trial: GLiNER on terse signature titles
 
+> **The consolidated reference for this work is [`../../REPORT.md`](../../REPORT.md).**
+> This file remains the detailed record for effort 13, Step 2; read the report first.
+
 Step 2 of `../../entity_normalisation_plan.md`, trial phase only. Answers the
 four questions the plan set **before** any integration. `normalize.py` is
 untouched.
@@ -232,10 +235,24 @@ frequency diagnostic (`marker_rate.py`) can pre-screen any of them in seconds.
 
 ## Not done
 
-- **NuNER Zero** (the plan's co-primary, MIT, token-classifier, expected
-  better on multi-word spans) has not been run.
-- **SecureBERT2.0-NER** has not been run — the plan's open question of whether
-  its `System` type covers software products is still unanswered.
+- ~~**NuNER Zero**~~ and ~~**SecureBERT2.0-NER**~~ — both now run at span
+  level; see [`comparison_findings.md`](comparison_findings.md). NuNER wins
+  rare-entity recall at every DF cut and both thresholds, but is less precise
+  at every threshold (32% vs 44% strict at 0.5) and carries an 8x corpus noise
+  burden: strings it false-positives on appear in 19.4% of corpus rows against
+  GLiNER's 2.5%, driven by `SQL` (DF 12.1%) and `Injection Attempt` (12.0%).
+  SecureBERT's `System` type does cover software products — the recorded open
+  question, answered yes — but 65% of its output lands in a catch-all
+  `Indicator` class and it is closed as unusable on this register.
+- **The protocol-frequency argument above does not survive measurement.**
+  Corpus DF over all 31,825 rows: `HTTP` 12.3%, but `RDP` 0.77%, `SMB` 0.15%,
+  `NTP` 0.009%, `NFS` 0.006%. The "already high-frequency tokens" claim was
+  read off eval-set tag counts, not corpus DF. Effort 14's coverage
+  explanation supersedes it either way.
+- The precision figures quoted above (47% / 73%) could not be reproduced from
+  `trial_sample.csv`, whose `verdict` column ships empty. A re-run and
+  re-verdict reproduces them (15 kept at 73% at threshold 0.85); the verdicts
+  are now written down in `verdicts.py`.
 - **No integration.** `normalize.py` untouched; no pipeline measurement, and
   Step 0 still gates any accuracy claim.
 - Threshold 0.85 is chosen from a 34-entity sample. Directional, not tight.

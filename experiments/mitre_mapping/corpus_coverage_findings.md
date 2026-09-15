@@ -1,5 +1,8 @@
 # Why the number doesn't move: the corpus doesn't cover the eval distribution
 
+> **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
+> This file remains the detailed record for effort 14's error analysis; read the report first.
+
 Error analysis of the 229 misses in `validation_report.md` (36.6% / 22.2%
 baseline, 2026-09-11). This supersedes "hub collapse" as the working diagnosis.
 
