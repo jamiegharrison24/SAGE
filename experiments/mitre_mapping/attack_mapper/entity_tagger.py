@@ -45,6 +45,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 GAZETTEER_PATH = os.path.join(DATA, "entity_gazetteer.csv")
 SPANS_PATH = os.path.join(DATA, "entity_spans.json.gz")
+SMB_SPANS_PATH = os.path.join(DATA, "entity_spans_smb.json.gz")
 
 # ---------------------------------------------------------------------------
 # Pinned inference configuration.
@@ -72,6 +73,38 @@ NER_LABELS = (
 # here against 53% at 0.5 -- see `entity_ner/findings.md`. Recall drops, but
 # the gazetteer covers the gap, which is the point of running both.
 NER_THRESHOLD = 0.85
+
+# Cyber-domain-trained alternative to GLiNER's generic zero-shot pass, per
+# `entity_ner/comparison_findings.md`'s addendum: on two independent
+# span-level samples (30 and 100 titles) it beat both GLiNER and NuNER Zero
+# on precision, rare-entity recall, and noise burden. Fixed 22-label schema
+# (token classification), so unlike GLiNER there is no threshold or label-set
+# lever -- `NER_THRESHOLD`/`NER_LABELS` above are meaningless for this
+# backend. `aggregation_strategy="first"` per `compare_ner.py.run_securebert`'s
+# precedent: `"simple"` returns subword fragments because adjacent subwords of
+# one word get different labels, which blocks grouping.
+SMB_MODEL = "attack-vector/SecureModernBERT-NER"
+SMB_AGGREGATION = "first"
+
+# Registry of NER backends `EntityTagger(ner_backend=...)` can select.
+# `spans_path` is backend-specific so a GLiNER build and a SecureModernBERT
+# build never collide or silently mix -- each backend's spans live in their
+# own artifact, checked against their own `meta` on load.
+NER_BACKENDS = {
+    "gliner": {
+        "model": NER_MODEL,
+        "labels": NER_LABELS,
+        "threshold": NER_THRESHOLD,
+        "spans_path": SPANS_PATH,
+    },
+    "securemodernbert": {
+        "model": SMB_MODEL,
+        "labels": None,       # fixed schema; not a declared-label model
+        "threshold": None,    # fixed-schema token classifier; no lever
+        "spans_path": SMB_SPANS_PATH,
+    },
+}
+DEFAULT_NER_BACKEND = "gliner"
 
 MARKER = "<ENTITY>"
 
@@ -358,18 +391,22 @@ class EntityTagger:
     """
 
     def __init__(self, merge_rule: str = DEFAULT_MERGE_RULE,
-                 spans_path: str = SPANS_PATH,
+                 spans_path: Optional[str] = None,
                  gazetteer_path: str = GAZETTEER_PATH,
                  allow_live_ner: bool = False,
                  replace_rare: bool = False,
                  df_cutoff: float = DEFAULT_DF_CUTOFF,
                  replacement_style: str = DEFAULT_REPLACEMENT_STYLE,
-                 df_path: Optional[str] = None):
+                 df_path: Optional[str] = None,
+                 ner_backend: str = DEFAULT_NER_BACKEND):
         if merge_rule not in MERGE_RULES:
             raise ValueError(f"unknown merge rule {merge_rule!r}")
         self.merge_rule = merge_rule
         if replacement_style not in REPLACEMENT_STYLES:
             raise ValueError(f"unknown replacement style {replacement_style!r}")
+        if ner_backend not in NER_BACKENDS:
+            raise ValueError(f"unknown ner_backend {ner_backend!r}; "
+                             f"expected one of {list(NER_BACKENDS)}")
         self.replace_rare = replace_rare
         self.df_cutoff = float(df_cutoff)
         self.replacement_style = replacement_style
@@ -384,26 +421,37 @@ class EntityTagger:
             self.df_table = DFTable(self.df_path)
         else:
             self.df_path = None
-        self.spans_path = spans_path
+
+        # `spans_path=` explicitly passed always wins (existing callers, tests
+        # pointing at a fixture path); otherwise the backend picks its own
+        # artifact, so GLiNER and SecureModernBERT spans never collide.
+        self.ner_backend = ner_backend
+        backend_cfg = NER_BACKENDS[ner_backend]
+        self._ner_model = backend_cfg["model"]
+        self._ner_labels = backend_cfg["labels"]
+        self._ner_threshold = backend_cfg["threshold"]
+        self.spans_path = spans_path or backend_cfg["spans_path"]
+
         self.allow_live_ner = allow_live_ner
         self._live_model = None
         self.misses = 0
         self.tagged = 0
         self.calls = 0
 
-        need_gliner = merge_rule != "gazetteer_only"
+        need_ner = merge_rule != "gazetteer_only"
         self.ner_spans: Dict[str, List[List]] = {}
         self.artifact_meta: Dict[str, object] = {}
 
-        if need_gliner:
-            if not os.path.exists(spans_path):
+        if need_ner:
+            if not os.path.exists(self.spans_path):
                 raise SpansArtifactError(
-                    f"entity spans artifact not found at {spans_path}.\n"
-                    f"Run:  python -m attack_mapper.entity_ner.build_spans\n"
-                    f"(~54 min for the full corpus; it is cached afterwards).\n"
+                    f"entity spans artifact not found at {self.spans_path}.\n"
+                    f"Run:  python -m attack_mapper.entity_ner.build_spans "
+                    f"--backend {ner_backend}\n"
+                    f"(~30-55 min for the full corpus; it is cached afterwards).\n"
                     f"Merge rule 'gazetteer_only' needs no artifact."
                 )
-            with gzip.open(spans_path, "rt", encoding="utf-8") as fh:
+            with gzip.open(self.spans_path, "rt", encoding="utf-8") as fh:
                 blob = json.load(fh)
             self.artifact_meta = blob.get("meta", {})
             self._check_artifact_meta()
@@ -419,22 +467,27 @@ class EntityTagger:
             self.single, self.multi = load_gazetteer(gazetteer_path)
 
     def _check_artifact_meta(self) -> None:
-        """A build made with a different model, threshold or label set produces
-        spans inconsistent with anything computed live. Fail loudly."""
+        """A build made with a different backend, model, threshold or label
+        set produces spans inconsistent with anything computed live. Fail
+        loudly."""
         m = self.artifact_meta
         mismatches = []
-        if m.get("model") != NER_MODEL:
-            mismatches.append(f"model {m.get('model')!r} != {NER_MODEL!r}")
-        if m.get("threshold") != NER_THRESHOLD:
-            mismatches.append(f"threshold {m.get('threshold')} != {NER_THRESHOLD}")
-        if tuple(m.get("labels") or ()) != NER_LABELS:
+        if m.get("backend", "gliner") != self.ner_backend:
+            mismatches.append(
+                f"backend {m.get('backend', 'gliner')!r} != {self.ner_backend!r}")
+        if m.get("model") != self._ner_model:
+            mismatches.append(f"model {m.get('model')!r} != {self._ner_model!r}")
+        if self._ner_threshold is not None and m.get("threshold") != self._ner_threshold:
+            mismatches.append(
+                f"threshold {m.get('threshold')} != {self._ner_threshold}")
+        if self._ner_labels is not None and tuple(m.get("labels") or ()) != self._ner_labels:
             mismatches.append("label set differs")
         if mismatches:
             raise SpansArtifactError(
                 f"{self.spans_path} was built with a different configuration: "
                 + "; ".join(mismatches)
-                + ".\nRebuild it (entity_ner/build_spans.py) or revert the "
-                  "constants in entity_tagger.py."
+                + ".\nRebuild it (entity_ner/build_spans.py --backend "
+                f"{self.ner_backend}) or revert the constants in entity_tagger.py."
             )
 
     def assert_complete(self, expected: int, tolerance: float = 0.02) -> None:
@@ -475,12 +528,22 @@ class EntityTagger:
         """Cache miss. Only reachable for text the build script never saw."""
         if not self.allow_live_ner:
             return []
-        if self._live_model is None:
-            from gliner import GLiNER  # heavy import, deferred
-            self._live_model = GLiNER.from_pretrained(NER_MODEL)
-        ents = self._live_model.predict_entities(
-            text, list(NER_LABELS), threshold=NER_THRESHOLD)
-        spans = [[e["start"], e["end"], e["score"]] for e in ents]
+        if self.ner_backend == "securemodernbert":
+            if self._live_model is None:
+                from transformers import pipeline  # heavy import, deferred
+                self._live_model = pipeline(
+                    "token-classification", model=self._ner_model,
+                    aggregation_strategy=SMB_AGGREGATION)
+            ents = self._live_model(text)
+            spans = [[int(e["start"]), int(e["end"]), float(e["score"])]
+                     for e in ents]
+        else:
+            if self._live_model is None:
+                from gliner import GLiNER  # heavy import, deferred
+                self._live_model = GLiNER.from_pretrained(self._ner_model)
+            ents = self._live_model.predict_entities(
+                text, list(self._ner_labels), threshold=self._ner_threshold)
+            spans = [[e["start"], e["end"], e["score"]] for e in ents]
         self.ner_spans[text] = spans  # memoise within the process
         return spans
 
@@ -534,8 +597,8 @@ class EntityTagger:
             # after it would key different embedding caches despite producing
             # byte-identical text, forcing a needless 45s re-embed and inviting
             # the difference to be read as noise.
-            h.update(f"{NER_MODEL}|{NER_THRESHOLD}".encode())
-            h.update("|".join(NER_LABELS).encode())
+            h.update(f"{self.ner_backend}|{self._ner_model}|{self._ner_threshold}".encode())
+            h.update("|".join(self._ner_labels or ()).encode())
             paths.append(self.spans_path)
 
         if self.replace_rare and self.df_path:

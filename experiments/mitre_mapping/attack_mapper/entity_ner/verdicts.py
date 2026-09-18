@@ -55,6 +55,10 @@ from .marker_rate import corpus_texts
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SAMPLE = os.path.join(HERE, "compare_sample_gliner-nuner-securebert.csv")
+# securemodernbert was run in its own pass (compare_ner.py names the output by
+# the --models it was given), so it lives in a second file with its own
+# 0-based row numbering -- not appended to SAMPLE's index space.
+SAMPLE2 = os.path.join(HERE, "compare_sample_securemodernbert.csv")
 
 TP, SPAN, FP = "TP", "SPAN", "FP"
 
@@ -163,21 +167,65 @@ VERDICTS = {
         90: FP,     # EXPLOIT
         91: SPAN,   # EDGE OOB -- swallows part of the vuln name
     },
+    # Cyber-domain fine-tuned (ModernBERT-large, 502k spans from threat
+    # reports/advisories, 22-label schema) -- run separately per supervisor
+    # direction to evaluate a non-generic/non-zero-shot cyber NER model, per
+    # ../../REPORT.md and comparison_findings.md's pre-registered gate.
+    "securemodernbert": {
+        0: TP,      # Java (platform/language)
+        1: TP,      # AlstraSoft (company)
+        2: TP,      # AskMe -- AlstraSoft AskMe is a real product
+        3: TP,      # SQL Server
+        4: TP,      # Powershell -> software product
+        5: FP,      # Lateral Movement -- MITRE tactic name used descriptively,
+                    # not a named entity (same class as "Injection Attempt")
+        6: TP,      # RDP
+        7: TP,      # CVE-2014-6271
+        8: TP,      # IBM
+        9: SPAN,    # Tivoli -> tool; real entity, boundary/type off (IBM
+                    # Tivoli Endpoint is one product)
+        10: TP,     # NTP
+        11: FP,     # POLICY -- ruleset category token
+        12: TP,     # Powershell -> software product
+        13: FP,     # Lateral Movement (same as row 5)
+        14: FP,     # POLICY -- ruleset category token
+        15: TP,     # SpamAssassin
+        16: TP,     # Milter -- real plugin name
+        17: FP,     # SCAN -- ruleset category token
+        18: SPAN,   # Chmod -> filepath; real term, wrong type (it's a command)
+        19: FP,     # POLICY -- ruleset category token
+        20: FP,     # Proxy -- generic noun in this context
+        21: TP,     # LibuPnP
+        22: FP,     # LINUX -- ruleset category token
+        23: TP,     # Linux (Linux Kernel)
+        24: SPAN,   # Cisco -> product; real entity, wrong type (vendor, not
+                    # a product)
+        25: FP,     # SCAN -- ruleset category token
+        26: FP,     # Rapid -- generic adjective
+        27: TP,     # SMBLoris
+        28: TP,     # NTP
+        29: TP,     # Cisco (vendor, correctly typed ORG here)
+        30: TP,     # ASA 5500 Series Adaptive Security Appliance
+        31: TP,     # FreeBSD
+    },
 }
 
 
-def load():
-    rows = list(csv.DictReader(open(SAMPLE, encoding="utf-8")))
-    missing = []
-    for i, r in enumerate(rows):
-        r["idx"] = i
-        r["score"] = float(r["score"])
-        if r["model"] == "securebert":
-            r["verdict"] = ""      # sanity check only; scored by label mix
-            continue
-        r["verdict"] = VERDICTS.get(r["model"], {}).get(i, "")
-        if not r["verdict"]:
-            missing.append((i, r["model"], r["entity"]))
+def load(paths=(SAMPLE,)):
+    rows = []
+    for path in paths:
+        file_rows = list(csv.DictReader(open(path, encoding="utf-8")))
+        for i, r in enumerate(file_rows):
+            r["idx"] = i
+            r["score"] = float(r["score"])
+            if r["model"] == "securebert":
+                r["verdict"] = ""      # sanity check only; scored by label mix
+                rows.append(r)
+                continue
+            r["verdict"] = VERDICTS.get(r["model"], {}).get(i, "")
+            rows.append(r)
+    missing = [(r["idx"], r["model"], r["entity"]) for r in rows
+               if r["model"] != "securebert" and not r["verdict"]]
     if missing:
         raise SystemExit(
             f"{len(missing)} scored rows have no verdict -- the CSV and "
@@ -222,8 +270,11 @@ def score(rows, df, threshold=0.0):
     }
 
 
+MODELS = ("gliner", "nuner", "securemodernbert")
+
+
 def main():
-    rows = load()
+    rows = load((SAMPLE, SAMPLE2))
     scored = [r for r in rows if r["verdict"]]
     n_titles = len({r["signature"] for r in rows})
 
@@ -239,19 +290,33 @@ def main():
     print("=" * 78)
     print("Verdicted arms -- all entities, no threshold")
     print("=" * 78)
-    print(f"{'model':>10} {'ents':>6} {'TP':>5} {'SPAN':>6} {'FP':>5} "
+    print(f"{'model':>17} {'ents':>6} {'TP':>5} {'SPAN':>6} {'FP':>5} "
           f"{'strict':>8} {'lenient':>9} {'rare TP':>9} {'common TP':>10}")
-    for model in ("gliner", "nuner"):
+    for model in MODELS:
         mrows = [r for r in scored if r["model"] == model]
         s = score(mrows, df)
-        print(f"{model:>10} {s['n']:>6} {s['tp']:>5} {s['span']:>6} {s['fp']:>5} "
+        print(f"{model:>17} {s['n']:>6} {s['tp']:>5} {s['span']:>6} {s['fp']:>5} "
               f"{s['strict']:>7.0%} {s['lenient']:>8.0%} "
               f"{s['rare_tp']:>9} {s['common_tp']:>10}")
 
     print("\n" + "=" * 78)
+    print("Noise burden -- share of corpus rows containing >=1 FP string "
+          "(the decisive column: 2.5% gliner / 19.4% nuner)")
+    print("=" * 78)
+    for model in MODELS:
+        fps = sorted({r["entity"].strip() for r in scored
+                      if r["model"] == model and r["verdict"] == FP})
+        fp_df, n_corpus = doc_frequency(fps)
+        texts = [t.lower() for t in corpus_texts()]
+        pats = [re.compile(r"\b" + re.escape(e.lower()) + r"\b") for e in fps]
+        union = sum(1 for t in texts if any(p.search(t) for p in pats))
+        print(f"  {model:>17}  {len(fps):>3} distinct FP strings, "
+              f"union burden {union}/{n_corpus} = {union / n_corpus:.2%}")
+
+    print("\n" + "=" * 78)
     print("Threshold sweep -- the lever effort 13 used to reach its 73%")
     print("=" * 78)
-    for model in ("gliner", "nuner"):
+    for model in MODELS:
         mrows = [r for r in scored if r["model"] == model]
         base = score(mrows, df)
         print(f"\n  [{model}]")
@@ -269,7 +334,7 @@ def main():
     print("\n" + "=" * 78)
     print("TP entities by measured corpus DF -- the column that gates the pass")
     print("=" * 78)
-    for model in ("gliner", "nuner"):
+    for model in MODELS:
         got = sorted({r["entity"] for r in scored
                       if r["model"] == model and r["verdict"] == TP},
                      key=lambda e: df[e])
@@ -289,22 +354,25 @@ def main():
         print(f"\n  at model threshold {thresh:.2f}")
         print("  " + "DF cut".rjust(9)
               + "".join(f"{c:>9.2%}" for c in cuts))
-        for model in ("gliner", "nuner"):
+        for model in MODELS:
             mrows = [r for r in scored
                      if r["model"] == model and r["score"] >= thresh]
             tps = [r for r in mrows if r["verdict"] == TP]
             counts = [sum(1 for r in tps if df.get(r["entity"], 1.0) < c)
                       for c in cuts]
-            print(f"  {model:>9}" + "".join(f"{n:>9}" for n in counts))
+            print(f"  {model:>17}" + "".join(f"{n:>9}" for n in counts))
 
     only = {}
-    for model in ("gliner", "nuner"):
+    for model in MODELS:
         only[model] = {r["entity"].lower() for r in scored
                        if r["model"] == model and r["verdict"] in (TP, SPAN)}
     print("\n  nuner finds, gliner misses: "
           + ", ".join(sorted(only["nuner"] - only["gliner"])))
     print("\n  gliner finds, nuner misses: "
           + ", ".join(sorted(only["gliner"] - only["nuner"])))
+    print("\n  securemodernbert finds, gliner+nuner both miss: "
+          + ", ".join(sorted(only["securemodernbert"]
+                              - only["gliner"] - only["nuner"])))
 
     # SecureBERT is a sanity check with a fixed schema, so it gets the one
     # question the plan actually recorded rather than a precision score.

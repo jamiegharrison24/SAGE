@@ -137,6 +137,15 @@ def main():
              "number in findings.md so far.",
     )
     parser.add_argument(
+        "--ner-backend", default=entity_tagger.DEFAULT_NER_BACKEND,
+        choices=list(entity_tagger.NER_BACKENDS),
+        help="Which NER model backs --entity-tagging. 'gliner' (effort 13, "
+             "the committed baseline) or 'securemodernbert' (cyber-domain- "
+             "trained, per entity_ner/comparison_findings.md's addendum -- "
+             "needs its own spans artifact: `build_spans.py --backend "
+             "securemodernbert`). Meaningless without --entity-tagging.",
+    )
+    parser.add_argument(
         "--replace-rare", action="store_true",
         help="Replace-mode entity normalisation (REPORT.md §8 item 7): rewrite "
              "each tagged span to a bare <ENTITY> marker instead of appending "
@@ -196,7 +205,8 @@ def main():
         tagger = entity_tagger.enable(args.entity_tagging,
                                       replace_rare=args.replace_rare,
                                       df_cutoff=args.df_cutoff,
-                                      replacement_style=args.replacement_style)
+                                      replacement_style=args.replacement_style,
+                                      ner_backend=args.ner_backend)
         if args.entity_tagging != "gazetteer_only":
             # Refuse a partial (--limit) spans artifact: it would silently
             # score like the off-baseline. See EntityTagger.assert_complete.
@@ -211,6 +221,10 @@ def main():
         entity_tagger.disable()
 
     suffix = f"_entity_{args.entity_tagging}" if args.entity_tagging else ""
+    if args.entity_tagging and args.ner_backend != entity_tagger.DEFAULT_NER_BACKEND:
+        # Only stamped for a non-default backend, so every existing filename
+        # (all runs so far used gliner) stays unchanged.
+        suffix += f"_{args.ner_backend}"
     if args.reserved_placeholders:
         suffix += "_reservedph"
     if args.replace_rare:
@@ -335,7 +349,8 @@ def main():
         "# attack_mapper vs. hand-audited sample\n",
         f"- LLM reasoning layer (Layer D): {'Ollama ' + args.llm_model if llm_client else 'off (NullLLMClient)'}",
         (f"- entity-aware normalisation: **on**, merge rule "
-         f"`{args.entity_tagging}` ({entity_tagger.active().stats()})"
+         f"`{args.entity_tagging}`, NER backend `{args.ner_backend}` "
+         f"({entity_tagger.active().stats()})"
          if args.entity_tagging else
          "- entity-aware normalisation: off (`normalize.canonicalize` unmodified)"),
         f"- matched audit rows: **{len(rows)}**",

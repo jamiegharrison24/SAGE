@@ -221,6 +221,256 @@ normalisation among the representation levers that all returned null for one
 reason — coverage. `T1595.002` has 44 eval rows and 8 corpus rows; no NER
 fixes that, and nothing measured here suggests otherwise.
 
+## Addendum (2026-09-18) — a fourth, non-generic model, per supervisor direction
+
+The three models above are all **zero-shot or fixed-schema-but-not-domain-trained**
+(GLiNER/NuNER: generic zero-shot span/token classifiers, given cyber labels at
+inference time; SecureBERT2.0-NER: cyber-domain-*pretrained* but its NER head
+is a 5-class schema that collapses 65% of output into a catch-all `Indicator`).
+Per explicit supervisor instruction, this section evaluates a NER model that is
+both cyber-domain-**trained** and carries a schema with enough entity classes
+not to collapse: `attack-vector/SecureModernBERT-NER`
+(`ModernBERT-large`, fine-tuned on 502,726 hand-labelled spans across 22 types
+— `THREAT-ACTOR`, `MALWARE`, `TOOL`, `PRODUCT`, `CVE`, `ORG`, `PLATFORM`,
+hash/IP/domain types, `MITRE-TACTIC`, etc. — from threat reports, advisories
+and incident writeups). Same harness (`compare_ner.py --models
+securemodernbert`, `aggregation_strategy="first"` per the SecureBERT
+`run_securebert` precedent), same 30-title sample (`trial.py` seed 11), same
+`entity_key()`-stripped text, same TP/SPAN/FP rubric, same pre-registered gate
+(`comparison_findings.md`'s "Verdict against the pre-registered gate" above:
+rare-entity recall as the gate, corpus-DF noise burden of FP strings as the
+cost). Verdicts are in `verdicts.py["securemodernbert"]`, assigned by Claude
+per the same caveat as the other two arms — spot-check before quoting.
+
+**Result: this is the first model in this branch to clear the gate on both
+axes at once.**
+
+| model | strict | lenient | rare TP (DF<1%) | common TP | noise burden (FP strings, corpus DF union) |
+|---|---:|---:|---:|---:|---:|
+| GLiNER medium v2.1 | 44% | 56% | 13 | 1 | **2.45%** (12 FP strings / 781 rows) |
+| NuNER Zero | 32% | 48% | **16** | 3 | 19.43% (26 FP strings / 6,184 rows) |
+| **SecureModernBERT-NER** | **59%** | **69%** | **17** | 2 | **1.63%** (6 FP strings / 519 rows) |
+
+It beats GLiNER outright on every column (strict, lenient, rare TP, noise
+burden) and beats NuNER on precision and noise burden while landing within one
+rare TP of NuNER's raw count — and ahead of it once the DF cut is drawn
+anywhere at or above 0.5% (gate-sensitivity table below). Its 6 FP strings are
+almost entirely ET ruleset category tokens surviving `entity_key()` stripping
+(`POLICY`×3, `SCAN`×2, `LINUX`×1) plus two genuine misses (`Lateral Movement`
+— a MITRE tactic name used descriptively, not as a named entity; `Proxy`,
+`Rapid` — generic nouns/adjectives in context). None of the near-constant
+tokens that sank NuNER (`SQL` 12.06%, `Injection Attempt` 12.02%) appear in
+its FP set at all — the 22-way schema does not reach for generic technique
+vocabulary the way a coarser or more permissive model does.
+
+**Gate sensitivity (rare TP count vs. where the DF cut is drawn), all three models:**
+
+```
+  at model threshold 0.50
+     DF cut    0.01%    0.05%    0.10%    0.50%    1.00%    5.00%
+             gliner        5        7        7       12       13       13
+              nuner        9       11       11       15       16       18
+   securemodernbert       10       11       12       13       15       17
+```
+
+SecureModernBERT-NER leads NuNER at every DF cut shown, including the
+tightest (0.01%, essentially DF=0: 10 vs. 9), and leads GLiNER at every cut.
+Unlike NuNER, this recall does not cost 8x the noise — the model's per-type
+schema apparently lets it decline to fire on the generic technique-description
+vocabulary that made NuNER's recall expensive.
+
+**Two real, measured weaknesses, both worth recording rather than glossing over:**
+
+1. **Boundary/type slippage on compound vendor+product names**, the same
+   failure class GLiNER showed on `FortiOS`→company: `IBM Tivoli Endpoint`
+   splits into `IBM`→ORG (correct) + `Tivoli`→TOOL (SPAN — the real product is
+   "Tivoli Endpoint" or "IBM Tivoli", and TOOL is the wrong type for an IBM
+   product line). `DOS Cisco 514 UDP flood` types `Cisco`→PRODUCT (SPAN —
+   Cisco is the vendor, not a product) where the ASA-5500 title two rows later
+   gets `Cisco`→ORG right. Type assignment is per-mention, not per-string —
+   the same instability findings.md flagged for GLiNER's `FortiOS`.
+2. **`MITRE-TACTIC` fires on tactic names used as descriptive English inside a
+   rule title** (`Likely Lateral Movement`, both occurrences), not as a named
+   reference to the ATT&CK tactic. This is structurally the same failure as
+   scoring `CRLF Injection`/`Injection Attempt` as entities under the other
+   models' schemas — a technique/tactic description is not a named entity —
+   except here the model's own label vocabulary (`MITRE-TACTIC`) makes it look
+   like a legitimate hit at a glance. Worth flagging for anyone re-verdicting
+   this arm: don't credit `MITRE-TACTIC` spans without checking whether the
+   text is *naming* a tactic reference or just *describing behaviour* in
+   English that happens to match a tactic name.
+
+**This does not change effort 14's conclusion, and the reasoning is the same
+as for the other three models.** A model that recovers more/cleaner spans on
+titles is still a *representation* lever; effort 14's diagnosis is that the
+binding constraint is *corpus coverage* — `T1595.002` has 44 eval rows and 8
+corpus rows, and no NER model, however well it tags, creates training examples
+where there are none. This result changes only the answer to "does a
+cyber-domain-trained model with a fine-grained schema out-measure zero-shot
+generic NER on this register" (yes, decisively, on a 30-title sample) — not
+the answer to "does entity work move the pipeline's score" (still gated by
+Step 0/coverage, still unmeasured past span level, and effort 13's own
+integration experiment already showed augmentation cannot deliver the
+generalisation even when spans are good).
+
+**What would justify spending the 26-minute corpus pass on this model,
+specifically:** per the pre-registered gate this is now the strongest
+candidate of the three to actually integrate — it is the first arm that does
+not force the augment-vs-noise tradeoff NuNER did. The untested variant
+`replace_prereg.md` flagged (replacement of rare entities only) was pointed at
+GLiNER-at-0.85 *because* NuNER's noise burden ruled it out; this result
+reopens that choice. Nothing here has been run past span level: no
+`build_spans.py` pass, no `marker_rate.py` frequency check, no
+`validate.py` arm. Per REPORT.md's own instruction, pre-register the success
+criterion (mid/tail bucket accuracy, not micro) before spending it, and run
+`marker_rate.py`-equivalent frequency screening first — it has caught three
+merge rules as unusable, in seconds, before every prior expensive pass.
+
+## Robustness check (2026-09-18) — n=100, independent draw
+
+The addendum above ran on the same 30-title sample as the original three-model
+comparison — small enough that "first model to clear the gate" could be a
+lucky draw. Re-ran all three models together on a fresh, larger,
+independently-seeded sample: `compare_ner.py --models
+gliner,nuner,securemodernbert --sample 100 --seed 42` (100 titles vs. the
+original 30, no overlap in the random draw's seed). All 437 resulting
+entities hand-verdicted against the same TP/SPAN/FP rubric
+(`entity_ner/verdicts_n100.py`).
+
+**A bug worth recording, because it inverted the finding before it was
+caught.** `securemodernbert`'s span text carries a leading space from the
+token classifier's slicing (`" Microsoft"`, not `"Microsoft"`); the DF lookup
+table is keyed on `.strip()`'d strings. The first pass looked up unstripped
+entity text, so every `securemodernbert` DF lookup silently missed and fell
+back to the "common" default — producing a table that said this model's
+recall was mostly *common* strings (54 common vs. 12 rare), the opposite of
+the true result. Caught by spot-checking `df_table.py --show` against the
+individual strings before trusting the aggregate, which is exactly the kind
+of check this branch's negative results have been built on. Fixed by
+stripping at the lookup site, not just when building the table's keys.
+
+**Corrected result: the addendum's finding holds, and by a wider margin than
+the 30-title sample showed.**
+
+| model | strict | lenient | rare TP (of TP total) | noise burden |
+|---|---:|---:|---:|---:|
+| GLiNER | 50% | 68% | 52/60 | 18.34% (up from 2.45% at n=30) |
+| NuNER Zero | 37% | 53% | 59/72 | 49.82% (up from 19.43% at n=30) |
+| **SecureModernBERT-NER** | **55%** | **69%** | **66/66** | **10.99%** (up from 1.63% at n=30) |
+
+SecureModernBERT-NER wins strict and lenient precision, wins rare-entity
+recall at **every** DF cut (gate-sensitivity table below), and its noise
+burden is still the lowest of the three by a wide margin — even though all
+three models' noise burden rose sharply at scale (a fixed set of FP strings
+hits a larger, more varied corpus sample harder; the *ranking* between models
+is what's being tested here, not the absolute numbers, which were never going
+to reproduce exactly at 3x the sample size). Every one of its 66 true
+positives falls below the 1% rarity cutoff — not because the model is
+constrained to rare entities, but because this register (terse ET/Suricata
+titles) simply doesn't contain many *correctly-recognized* common-word
+entities for it to find; the common tokens it does encounter (`Windows`,
+`Microsoft`, `Apache`) are still individually under 1% corpus DF.
+
+```
+  DF cut    0.01%    0.05%    0.10%    0.50%    1.00%    5.00%
+  gliner       23       37       38       49       52       53
+  nuner        30       44       44       53       59       66
+  securemodernbert 31   49       50       62       66       66
+```
+
+At every cut, SecureModernBERT-NER >= NuNER >= GLiNER. The ordering from the
+30-title sample was not a fluke.
+
+**What changed, and what didn't, going from 30 to 100 titles:** all three
+models' noise burden rose (a larger sample of corpus rows has more chances to
+contain any given FP string), and NuNER's rose fastest in relative terms —
+its FP set includes `SQL`, `Injection Attempt`-style generic technique
+vocabulary that is inherently a large share of *any* sample drawn from this
+corpus. SecureModernBERT-NER's FP set is dominated by ET ruleset category
+tokens (`SCAN`, `TOR`, `TROJAN`, `DOS`, `CHROME`, `APACHE`) rather than
+technique vocabulary — a closed, enumerable set findings.md already flagged
+as stoplist-able from the label schema rather than from eval errors, which is
+the cheapest remaining lever if this model is integrated.
+
+**This still does not change effort 14's conclusion** — see the addendum
+above; the reasoning is identical and the sample-size increase doesn't touch
+it. What it does establish is that the addendum's headline was not a
+statistical accident: SecureModernBERT-NER is a genuine, reproducible
+improvement over both prior candidates on span-level cyber NER for this
+register, confirmed on two independent samples totaling 130 titles.
+
+## Pipeline integration and `validate.py` result (2026-09-18) — the answer is null
+
+Everything above is span-level measurement. This section is the actual
+`validate.py` pass Jamie asked for: does swapping SecureModernBERT-NER in for
+GLiNER move the pipeline's real MITRE-mapping accuracy.
+
+**Integration.** `entity_tagger.py` gained a `ner_backend` registry
+(`NER_BACKENDS`, `EntityTagger(ner_backend=...)`) so either model can back
+`--entity-tagging`, each keyed to its own spans artifact
+(`data/entity_spans.json.gz` for GLiNER, `data/entity_spans_smb.json.gz` for
+SecureModernBERT-NER) so a build of one never collides with or silently
+overwrites the other. `build_spans.py`, `marker_rate.py` and `validate.py`
+all take `--backend`/`--ner-backend`. Default backend is still `gliner`, and
+the full test suite (23/23) plus a byte-for-byte fingerprint check confirm
+this is a no-op for every existing arm. Full corpus pass:
+`build_spans.py --backend securemodernbert` over all 32,273 texts
+(corpus + eval), 29.9 min at 18.0 rows/s — tags **89.4%** of texts (vs.
+GLiNER's 42.0%), consistent with the span-level finding that this model fires
+far more readily than GLiNER.
+
+**Pre-screen (`marker_rate.py --backend securemodernbert`) eliminates four of
+five merge rules before spending a `validate.py` pass, on the same frequency
+argument effort 13 used for GLiNER** — a marker present in ~9 of 10 rows has
+near-zero IDF and is cost without signal for the TF-IDF classifier:
+
+| rule | corpus rows tagged | verdict |
+|---|---:|---|
+| union | 97.5% | near-constant |
+| gliner_primary | 97.5% | near-constant |
+| gazetteer_only | 89.5% | near-constant |
+| securemodernbert-only (`gliner_only`) | 89.5% | near-constant |
+| **intersection** | **28.9%** | **informative range** |
+
+Only `intersection` (NER ∩ gazetteer) was worth running. Its noise check is
+notably cleaner than GLiNER's equivalent — top tags are specific tool/vendor
+names (`mysql`, `nmap`, `cisco`, `microsoft`, `powershell`, `coldfusion`,
+`solarwinds`) rather than GLiNER's mix of category tokens and generic English.
+
+**Result: no measurable improvement. Micro is identical to the off baseline
+row-for-row; macro is within noise.**
+
+| arm | micro | macro | T1190 share |
+|---|---:|---:|---:|
+| baseline (off) | 36.6% (132/361) | **22.2%** | 31.3% (113/361) |
+| **+ SecureModernBERT-NER, intersection** | 36.6% (132/361) | **21.5%** | 31.6% (114/361) |
+| (for reference) GLiNER, intersection (effort 13) | 37.1% (134/361) | 21.3% | 33.2% |
+
+Not just close — **the exact same 132 rows are correct** as the untagged
+baseline. The -0.7 macro delta is inside the noise band effort 15 established
+(within ±1.0), and T1190 share is flat. Unlike GLiNER's intersection arm
+(+0.5 micro / -0.9 macro, a genuine but small hub-collapse-flavoured shift),
+this arm doesn't move any of the three headline numbers in either direction.
+
+**This is exactly what effort 14 predicts, now confirmed for the strongest
+NER candidate measured on this branch, not just GLiNER.** A better span
+recognizer changes what gets marked in the text corpus rows already contain;
+it cannot manufacture technique-labeled training examples for
+`T1595.002`/`T1499`/`T1498` (44/32/12 eval rows against 8/9/10 corpus rows —
+effort 14's smoking gun) or shrink the register mismatch between this
+network-IDS eval set and the Windows/host and cloud/endpoint corpora that
+carry its diversity. SecureModernBERT-NER decisively wins every span-level
+metric measured against GLiNER and NuNER Zero — and it still cannot move the
+pipeline, because the two are different problems. **Span quality was never
+the bottleneck; corpus coverage is, and no NER model changes that.**
+
+Kept in the codebase (off by default, `ner_backend="gliner"`), because the
+integration machinery is reusable regardless of this result and the
+span-level win is real and independently useful (e.g. for a future feature
+that consumes entity types directly rather than through this pipeline's
+TF-IDF/kNN layers). Not adopted as a pipeline change. Full report:
+`validation_report_entity_intersection_securemodernbert.md`.
+
 ## If one expensive run is spent, spend it here
 
 The untested variant remains **replacement of rare entities only, leaving

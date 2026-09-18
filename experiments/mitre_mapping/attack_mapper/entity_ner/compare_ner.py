@@ -1,5 +1,5 @@
 """
-Span-level comparison of the three NER candidates on ONE fixed title sample.
+Span-level comparison of the NER candidates on ONE fixed title sample.
 
 `findings.md` left NuNER Zero and SecureBERT2.0-NER unrun, and the numbers
 quoted for GLiNER (47% precision at threshold 0.5, 73% at 0.85) came from hand
@@ -47,6 +47,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 GLINER_MODEL = "urchade/gliner_medium-v2.1"
 NUNER_MODEL = "numind/NuNER_Zero"
 SECUREBERT_MODEL = "cisco-ai/SecureBERT2.0-NER"
+SECUREMODERNBERT_MODEL = "attack-vector/SecureModernBERT-NER"
 
 
 def merge_entities(text, entities):
@@ -123,6 +124,29 @@ def run_securebert(titles, aggregation="first"):
     return out
 
 
+def run_securemodernbert(titles, aggregation="first"):
+    """Fixed-schema, fine-grained (22-label) token classification, trained on
+    502k spans from threat reports/advisories/incident writeups -- prose, not
+    the terse ET-title register. Included as a fourth arm per supervisor
+    direction to evaluate a *non-generic* (domain-trained, not zero-shot)
+    cyber NER model, and because its 22-way schema is the structural fix for
+    what closed SecureBERT2.0-NER here: a 65%-of-output catch-all `Indicator`
+    class. Same `first`-aggregation rationale as `run_securebert`.
+    """
+    from transformers import pipeline
+    pipe = pipeline("token-classification", model=SECUREMODERNBERT_MODEL,
+                    aggregation_strategy=aggregation)
+    out = {}
+    for t in titles:
+        ents = []
+        for e in pipe(t):
+            start, end = int(e["start"]), int(e["end"])
+            ents.append({"start": start, "end": end, "text": t[start:end],
+                         "label": e["entity_group"], "score": float(e["score"])})
+        out[t] = sorted(ents, key=lambda e: e["start"])
+    return out
+
+
 def report(name, results, titles):
     fired = sum(1 for t in titles if results[t])
     total = sum(len(results[t]) for t in titles)
@@ -141,7 +165,7 @@ def report(name, results, titles):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--models", default="gliner,nuner,securebert")
+    ap.add_argument("--models", default="gliner,nuner,securebert,securemodernbert")
     ap.add_argument("--threshold", type=float, default=0.5,
                     help="zero-shot models only; the sweep happens post-hoc "
                          "off the recorded scores, so collect at 0.5")
@@ -183,6 +207,7 @@ def main():
         "gliner": lambda ts: run_gliner(GLINER_MODEL, ts, args.threshold),
         "nuner": lambda ts: run_nuner(ts, args.threshold),
         "securebert": lambda ts: run_securebert(ts, args.aggregation),
+        "securemodernbert": lambda ts: run_securemodernbert(ts, args.aggregation),
     }
 
     rows = []

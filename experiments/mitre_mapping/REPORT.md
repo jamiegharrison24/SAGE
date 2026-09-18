@@ -1535,6 +1535,37 @@ binding constraint.
 
 Kept, off by default (`Settings.use_entity_tagging = False`).
 
+**Addendum (2026-09-18), per supervisor direction — a fourth, non-generic
+model.** GLiNER/NuNER are zero-shot models given cyber labels at inference,
+not domain-trained; per explicit instruction, evaluated
+`attack-vector/SecureModernBERT-NER` (ModernBERT-large fine-tuned on 502k
+cyber-domain spans, 22 fine-grained types), same harness and gate.
+**Result: the first model here to clear the gate on both axes at once** —
+59%/69% strict/lenient precision, 17 rare TPs, and a 1.63% noise burden that
+beats *both* priors (GLiNER 2.45%, NuNER 19.4%). Two measured weaknesses:
+type/boundary slippage on compound vendor+product names (`IBM Tivoli
+Endpoint` → `IBM`/ORG + `Tivoli`/TOOL), and its `MITRE-TACTIC` label firing on
+tactic names used as descriptive English (`Likely Lateral Movement`) rather
+than named references. Span-level only, same as the other three; does not
+change this section's "coverage, not representation" conclusion below, and is
+now the strongest candidate for the one `replace_prereg.md`-style run still
+outstanding. **Confirmed on a second, independent 100-title sample** (vs. the
+original 30): still wins precision (55%/69%), rare-recall at every DF cut
+(66/66 rare), and noise burden (11.0% vs. GLiNER 18.3%, NuNER 49.8% — all
+three rose at scale, but the ranking held).
+
+**Taken to `validate.py`, and the pipeline result is null.** Full corpus pass
+(29.9 min, tags 89.4% of texts vs. GLiNER's 42.0%); `marker_rate.py`
+eliminates four of five merge rules as near-constant, same as GLiNER's
+pre-screen; the one survivor, `intersection`, scores **36.6% micro (132/361 —
+the identical row count as the untagged baseline), 21.5% macro (vs. 22.2%,
+inside noise), T1190 flat (31.6% vs. 31.3%)**. Not a small win or loss: the
+same rows are correct with or without tagging. Confirms effort 14's
+prediction for the strongest NER model on this branch: span quality was
+never the bottleneck. Kept off by default. Full breakdown:
+`entity_ner/comparison_findings.md`'s addendum, "Robustness check", and
+"Pipeline integration" sections.
+
 ### Effort 14 — Error analysis: coverage, not representation · regime D
 
 `corpus_coverage_findings.md`
@@ -2107,7 +2138,7 @@ Per §6.1, the more honest summary of pipeline quality is the bucket split:
 | `entity_ner/cutoff_screen.py` | effort 15: pre-screen asking whether DF cutoffs separate at all, before spending a validate pass each |
 | `entity_ner/replace_prereg.md` | effort 15: falsification criterion and sweep design, written before the arms ran |
 | `tests/test_entity_replace.py` | effort 15: the silent-failure invariants (offset validity under length change, zero-cutoff exactness, empty-document floor, cache-key separation per arm) |
-| `entity_ner/compare_ner.py`, `verdicts.py` | span-level model comparison (GLiNER / NuNER Zero / SecureBERT2.0-NER) and its recorded verdicts; measurement only, no pipeline path |
+| `entity_ner/compare_ner.py`, `verdicts.py` | span-level model comparison (GLiNER / NuNER Zero / SecureBERT2.0-NER / SecureModernBERT-NER) and its recorded verdicts; measurement only, no pipeline path |
 | `llm_client.py` | `LLMClient` ABC, `NullLLMClient` default, OpenAI/Anthropic/Ollama adapters |
 | `reasoner.py` | priority-ordered fusion plus optional Layer D |
 | `pipeline.py` | orchestration → `MappedRule` + `processing_steps` |

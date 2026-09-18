@@ -54,6 +54,10 @@ experiments/mitre_mapping/attack_mapper/entity_dicts/sources/
 # output, so it stays out of history like the embedding cache above.
 experiments/mitre_mapping/attack_mapper/data/entity_spans.json.gz
 
+# Same, for the SecureModernBERT-NER backend (~30 min to rebuild via
+# `build_spans.py --backend securemodernbert`).
+experiments/mitre_mapping/attack_mapper/data/entity_spans_smb.json.gz
+
 # Measured corpus document frequency for the replace-mode DF gate
 # (entity_ner/df_table.py). Derived deterministically from the labelled
 # corpora, so it regenerates in seconds and stays out of history.

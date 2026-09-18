@@ -16,8 +16,11 @@ almost nothing, and the useful arms sit in between. Reports per rule:
 row coverage, mean markers per tagged row, and the marker's document
 frequency, over the corpus and the eval set separately.
 
-Usage: python -m attack_mapper.entity_ner.marker_rate
+Usage:
+    python -m attack_mapper.entity_ner.marker_rate
+    python -m attack_mapper.entity_ner.marker_rate --backend securemodernbert
 """
+import argparse
 import csv
 import glob
 import gzip
@@ -69,9 +72,16 @@ def eval_texts(scoreable_only=True):
 
 
 def main():
-    if not os.path.exists(et.SPANS_PATH):
-        raise SystemExit(f"{et.SPANS_PATH} not found -- run build_spans.py first")
-    with gzip.open(et.SPANS_PATH, "rt", encoding="utf-8") as fh:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--backend", default=et.DEFAULT_NER_BACKEND,
+                    choices=list(et.NER_BACKENDS))
+    args = ap.parse_args()
+    spans_path = et.NER_BACKENDS[args.backend]["spans_path"]
+
+    if not os.path.exists(spans_path):
+        raise SystemExit(f"{spans_path} not found -- run "
+                          f"`build_spans.py --backend {args.backend}` first")
+    with gzip.open(spans_path, "rt", encoding="utf-8") as fh:
         blob = json.load(fh)
     ner = blob["spans"]
     meta = blob["meta"]

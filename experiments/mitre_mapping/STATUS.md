@@ -870,3 +870,66 @@ Falsification fixed in advance: success requires macro **≥ 23.2%**
 (baseline + 1.0); within ±1.0 is noise, and an arm winning only where
 `n_replaced` ≈ 0 is disqualified. Per effort 14, this is expected to close
 out a hypothesis rather than move the headline.
+
+## 16. A non-generic (cyber-domain-trained) NER model — `attack_mapper/entity_ner/comparison_findings.md` (addendum)
+
+Per explicit supervisor direction, evaluated `attack-vector/SecureModernBERT-NER`
+(ModernBERT-large fine-tuned on 502k spans, 22 cyber-specific entity types) at
+span level, against the same 30-title sample and pre-registered gate as
+effort 13's GLiNER/NuNER/SecureBERT2.0 comparison. Unlike GLiNER/NuNER
+(generic zero-shot models given cyber labels at inference) and unlike
+SecureBERT2.0-NER (cyber-pretrained but a 5-class schema that collapses to a
+65%-catch-all `Indicator`), this model is both domain-trained and
+fine-schema'd enough not to collapse.
+
+**Result: the first model in this branch to clear the pre-registered gate on
+both axes at once** — 59% strict / 69% lenient precision (vs. GLiNER 44%/56%,
+NuNER 32%/48%), 17 rare (DF<1%) true positives (vs. GLiNER 13, NuNER 16), at a
+1.63% corpus-DF noise burden — *lower* than GLiNER's 2.45%, and 12x lower than
+NuNER's 19.4%. It wins the recall-vs-cost tradeoff that made GLiNER and NuNER
+each dominant on only one axis.
+
+**Does not change effort 14's conclusion.** This is still a representation
+lever (better span recovery on titles); the binding constraint remains corpus
+coverage (`T1595.002`: 44 eval rows, 8 corpus rows), and no NER model creates
+training examples where none exist. Span-level only — no `build_spans.py`
+corpus pass, no `marker_rate.py` frequency screen, no `validate.py` arm. It is
+now the strongest of the three candidates to spend the one `replace_prereg.md`
+run on (see comparison_findings.md's addendum for the full breakdown,
+including two measured weaknesses: type/boundary slippage on compound
+vendor+product names, e.g. `IBM Tivoli Endpoint`, and false hits on ATT&CK
+tactic names used as descriptive English rather than as named references).
+
+**Confirmed on a second, larger, independent sample (100 titles, seed 42, vs.
+the original 30).** SecureModernBERT-NER still wins strict/lenient precision
+(55%/69% vs. GLiNER 50%/68%, NuNER 37%/53%), still wins rare-entity recall at
+every DF cut (66/66 TPs rare vs. GLiNER 52/60, NuNER 59/72), and still has by
+far the lowest noise burden (10.99% vs. GLiNER 18.34%, NuNER 49.82% — all
+three rose sharply at 3x the sample size, but the ranking held). One bug
+caught and fixed in the process: the model's span text carries a leading
+space the DF lookup didn't strip, which silently inverted the rare/common
+split on the first pass (54 common vs. 12 rare) before being spotted via
+`df_table.py --show` on the individual strings and corrected. Full record:
+`entity_ner/comparison_findings.md`'s "Robustness check" section,
+`entity_ner/verdicts_n100.py`.
+
+**Taken all the way to `validate.py`, and the pipeline result is null.**
+`entity_tagger.py` was generalised to a `ner_backend` registry so either
+model can drive `--entity-tagging` (own spans artifact each, `gliner` still
+the unchanged default). Full corpus pass (`build_spans.py --backend
+securemodernbert`, 32,273 texts, 29.9 min) tags 89.4% of texts — far more
+than GLiNER's 42.0% — which means four of five merge rules are immediately
+near-constant on the corpus (`marker_rate.py` pre-screen: union 97.5%,
+gazetteer_only/NER-only 89.5%, only `intersection` at 28.9% is informative).
+`validate.py --entity-tagging intersection --ner-backend securemodernbert`:
+**36.6% micro (132/361) — the identical row count as the untagged baseline —
+21.5% macro (vs. 22.2% baseline, inside the ±1.0 noise band), T1190 share
+flat (31.6% vs. 31.3%).** Not a small win or a small loss: the same 132 rows
+score correctly with or without the tagging. This is effort 14's prediction
+confirmed for the strongest NER model measured on this branch, not just
+GLiNER — span quality was never the bottleneck, corpus coverage is, and a
+better span recognizer cannot manufacture training examples for
+`T1595.002`/`T1499`/`T1498` (44/32/12 eval rows vs. 8/9/10 corpus rows) no
+matter how much cleaner its tags are. Kept in the codebase, off by default;
+not adopted as a pipeline change. Full record:
+`entity_ner/comparison_findings.md`'s "Pipeline integration" section.

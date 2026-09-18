@@ -18,7 +18,8 @@ two ever diverge, every lookup misses and the run silently degrades to
 gazetteer-only.
 
 Usage:
-    python -m attack_mapper.entity_ner.build_spans            # full build
+    python -m attack_mapper.entity_ner.build_spans            # full build (gliner)
+    python -m attack_mapper.entity_ner.build_spans --backend securemodernbert
     python -m attack_mapper.entity_ner.build_spans --limit 200  # smoke test
     python -m attack_mapper.entity_ner.build_spans --resume     # keep existing
 """
@@ -85,80 +86,127 @@ def collect_texts():
     return sorted(texts)
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=0,
-                    help="only tag the first N texts (smoke test)")
-    ap.add_argument("--batch", type=int, default=16)
-    ap.add_argument("--resume", action="store_true",
-                    help="keep spans already in the artifact, tag only new texts")
-    ap.add_argument("--out", default=entity_tagger.SPANS_PATH)
-    args = ap.parse_args()
-
-    print("collecting texts ...")
-    texts = collect_texts()
-    print(f"  distinct after dedupe: {len(texts)}")
-
-    existing = {}
-    if args.resume and os.path.exists(args.out):
-        with gzip.open(args.out, "rt", encoding="utf-8") as fh:
-            blob = json.load(fh)
-        if blob.get("meta", {}).get("model") == entity_tagger.NER_MODEL:
-            existing = blob["spans"]
-            print(f"  resuming: {len(existing)} already cached")
-
-    todo = [t for t in texts if t not in existing]
-    if args.limit:
-        todo = todo[:args.limit]
-    print(f"  to tag: {len(todo)}\n")
-
-    if not todo:
-        print("nothing to do.")
-        return 0
-
+def _tag_gliner(todo, batch_size):
     print(f"loading {entity_tagger.NER_MODEL} ...")
     from gliner import GLiNER
     model = GLiNER.from_pretrained(entity_tagger.NER_MODEL)
     labels = list(entity_tagger.NER_LABELS)
     print("loaded.\n")
 
-    spans = dict(existing)
+    spans = {}
     t0 = time.time()
     done = 0
-    for i in range(0, len(todo), args.batch):
-        chunk = todo[i:i + args.batch]
+    for i in range(0, len(todo), batch_size):
+        chunk = todo[i:i + batch_size]
         results = model.batch_predict_entities(
             chunk, labels, threshold=entity_tagger.NER_THRESHOLD)
         for text, ents in zip(chunk, results):
             spans[text] = [[e["start"], e["end"], round(float(e["score"]), 4)]
                            for e in ents]
         done += len(chunk)
-        if done % (args.batch * 25) == 0 or done == len(todo):
+        if done % (batch_size * 25) == 0 or done == len(todo):
             el = time.time() - t0
             rate = done / el if el else 0
             eta = (len(todo) - done) / rate if rate else 0
             print(f"  {done}/{len(todo)}  {rate:.1f} rows/s  eta {eta / 60:.1f} min")
+    return spans, t0
+
+
+def _tag_securemodernbert(todo, batch_size):
+    """No batch_predict_entities equivalent -- transformers' pipeline batches
+    internally when given a list and `batch_size`, one call per chunk here
+    only so progress can be printed at the same cadence as the GLiNER path."""
+    print(f"loading {entity_tagger.SMB_MODEL} ...")
+    from transformers import pipeline
+    pipe = pipeline("token-classification", model=entity_tagger.SMB_MODEL,
+                    aggregation_strategy=entity_tagger.SMB_AGGREGATION)
+    print("loaded.\n")
+
+    spans = {}
+    t0 = time.time()
+    done = 0
+    for i in range(0, len(todo), batch_size):
+        chunk = todo[i:i + batch_size]
+        results = pipe(chunk, batch_size=batch_size)
+        for text, ents in zip(chunk, results):
+            spans[text] = [[int(e["start"]), int(e["end"]),
+                           round(float(e["score"]), 4)] for e in ents]
+        done += len(chunk)
+        if done % (batch_size * 25) == 0 or done == len(todo):
+            el = time.time() - t0
+            rate = done / el if el else 0
+            eta = (len(todo) - done) / rate if rate else 0
+            print(f"  {done}/{len(todo)}  {rate:.1f} rows/s  eta {eta / 60:.1f} min")
+    return spans, t0
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--backend", default=entity_tagger.DEFAULT_NER_BACKEND,
+                    choices=list(entity_tagger.NER_BACKENDS),
+                    help="which NER model to tag with -- each backend writes "
+                         "its own spans artifact (see entity_tagger.NER_BACKENDS)")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="only tag the first N texts (smoke test)")
+    ap.add_argument("--batch", type=int, default=16)
+    ap.add_argument("--resume", action="store_true",
+                    help="keep spans already in the artifact, tag only new texts")
+    ap.add_argument("--out", default=None,
+                    help="defaults to the backend's own spans_path")
+    args = ap.parse_args()
+
+    backend_cfg = entity_tagger.NER_BACKENDS[args.backend]
+    out_path = args.out or backend_cfg["spans_path"]
+
+    print("collecting texts ...")
+    texts = collect_texts()
+    print(f"  distinct after dedupe: {len(texts)}")
+
+    existing = {}
+    if args.resume and os.path.exists(out_path):
+        with gzip.open(out_path, "rt", encoding="utf-8") as fh:
+            blob = json.load(fh)
+        if blob.get("meta", {}).get("model") == backend_cfg["model"]:
+            existing = blob["spans"]
+            print(f"  resuming: {len(existing)} already cached")
+
+    todo = [t for t in texts if t not in existing]
+    if args.limit:
+        todo = todo[:args.limit]
+    print(f"  to tag: {len(todo)}  (backend: {args.backend})\n")
+
+    if not todo:
+        print("nothing to do.")
+        return 0
+
+    if args.backend == "securemodernbert":
+        new_spans, t0 = _tag_securemodernbert(todo, args.batch)
+    else:
+        new_spans, t0 = _tag_gliner(todo, args.batch)
+    spans = dict(existing)
+    spans.update(new_spans)
 
     tagged = sum(1 for v in spans.values() if v)
     total_ents = sum(len(v) for v in spans.values())
 
     blob = {
         "meta": {
-            "model": entity_tagger.NER_MODEL,
-            "threshold": entity_tagger.NER_THRESHOLD,
-            "labels": list(entity_tagger.NER_LABELS),
+            "backend": args.backend,
+            "model": backend_cfg["model"],
+            "threshold": backend_cfg["threshold"],
+            "labels": list(backend_cfg["labels"]) if backend_cfg["labels"] else None,
             "built": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "n_texts": len(spans),
             "note": "keyed by normalize.entity_key(); raw spans, merge applied at read time",
         },
         "spans": spans,
     }
-    os.makedirs(os.path.dirname(args.out), exist_ok=True)
-    with gzip.open(args.out, "wt", encoding="utf-8") as fh:
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with gzip.open(out_path, "wt", encoding="utf-8") as fh:
         json.dump(blob, fh)
 
-    size_mb = os.path.getsize(args.out) / 1e6
-    print(f"\nwrote {args.out}  ({size_mb:.1f} MB)")
+    size_mb = os.path.getsize(out_path) / 1e6
+    print(f"\nwrote {out_path}  ({size_mb:.1f} MB)")
     print(f"  texts: {len(spans)}   with >=1 entity: {tagged} ({tagged / len(spans):.1%})")
     print(f"  total entities: {total_ents}")
     print(f"  elapsed: {(time.time() - t0) / 60:.1f} min")
