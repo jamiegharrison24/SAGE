@@ -1,0 +1,51 @@
+signature
+ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174)
+SURICATA TLS invalid record/traffic
+SURICATA TLS invalid record version
+SURICATA SMTP no server welcome message
+SURICATA HTTP unable to match response to request
+GPL EXPLOIT iissamples access
+SURICATA HTTP Host header ambiguous
+SURICATA DNS Unsolicited response
+GPL WEB_SERVER 403 Forbidden
+SURICATA HTTP missing Host header
+ET WEB_SPECIFIC_APPS WEB-PHP RCE PHPBB 2004-1315
+SURICATA HTTP Host part of URI is invalid
+SURICATA HTTP Host header invalid
+GPL EXPLOIT ISAPI .idq access
+SURICATA SMTP tls rejected
+SURICATA HTTP METHOD terminated by non-compliant character
+GPL EXPLOIT .cnf access
+GPL WEB_SERVER .htaccess access
+GPL WEB_SERVER global.asa access
+GPL EXPLOIT unicode directory traversal attempt
+GPL WEB_SERVER .htpasswd access
+ET EXPLOIT ETERNALBLUE Exploit M2 MS17-010
+SURICATA TLS invalid handshake message
+GPL EXPLOIT .htr access
+GPL WEB_SERVER iisadmin access
+GPL WEB_SERVER printenv access
+ET TROJAN Generic - POST To .php w/Extended ASCII Characters
+SURICATA TLS error message encountered
+ETPRO WEB_SPECIFIC_APPS PHPMoAdmin RCE Attempt
+"SURICATA TLS overflow heartbeat encountered, possible exploit attempt (heartbleed)"
+GPL WEB_SERVER /~root access
+GPL EXPLOIT iisadmpwd attempt
+SURICATA DNS Not a response
+SURICATA SMTP bdat chunk len exceeded
+GPL EXPLOIT ISAPI .ida access
+GPL EXPLOIT /msadc/samples/ access
+SURICATA SMTP invalid reply
+SURICATA HTTP URI terminated by non-compliant character
+GPL EXPLOIT fpcount access
+ET SCAN NETWORK Outgoing Masscan detected
+ETPRO WEB_SPECIFIC_APPS ipTIME firmware < 9.58 RCE
+GPL WEB_SERVER viewcode access
+SURICATA TLS invalid SNI length
+ET WEB_SPECIFIC_APPS PHP Aardvark Topsites PHP CONFIG PATH Remote File Include Attempt
+SURICATA DNS malformed response data
+GPL WEB_SERVER author.exe access
+ET ATTACK_RESPONSE Possible  MS CMD Shell opened on local system 2
+ET ATTACK_RESPONSE Windows 7 CMD Shell from Local System
+ET EXPLOIT FREAK Weak Export Suite From Server (CVE-2015-0204)
+SURICATA HTTP invalid request chunk len

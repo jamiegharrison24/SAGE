@@ -1,0 +1,24 @@
+signature
+ET CNC Zeus Tracker Reported CnC Server group 11
+ET POLICY SMB NT Create AndX Request For an Executable File
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 289
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 266
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 197
+ET POLICY DNS Query for TOR Hidden Domain .onion Accessible Via TOR
+ET CURRENT_EVENTS SUSPICIOUS Possible CVE-2017-0199 IE7/NoCookie/Referer HTA dl
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 504
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 354
+ET CURRENT_EVENTS Observed Coin-Hive In Browser Mining Domain (coin-hive .com in TLS SNI)
+ET CURRENT_EVENTS Observed Malicious SSL Cert (Coin-Hive In Browser Mining)
+ET MALWARE Lavasoft PUA/Adware Client Install
+SURICATA DNS Z flag set
+ET EXPLOIT Linksys E-Series Device RCE Attempt
+ET CHAT IRC PING command
+ET WEB_CLIENT Possible BeEF Module in use
+SURICATA SMTP duplicate fields
+ET POLICY Possible External IP Lookup Domain Observed in SNI (ipinfo. io)
+ET EXPLOIT Netgear passwordrecovered.cgi attempt
+ET POLICY Request for Coinhive Browser Monero Miner M2
+ET POLICY Possible External IP Lookup SSL Cert Observed (ipinfo.io)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 433
+SURICATA HTTP request header invalid

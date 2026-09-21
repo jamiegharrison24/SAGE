@@ -1,0 +1,51 @@
+signature
+ET WEB_SPECIFIC_APPS evision cms addplain.php module parameter Local File Inclusion
+ET WEB_SPECIFIC_APPS IBSng str Parameter Cross Site Scripting Attempt
+ET POLICY Possible External IP Lookup ipinfo.io
+ET WEB_SPECIFIC_APPS PHP Booking Calendar page_info_message parameter Cross-Site Scripting Vulnerability
+ET TROJAN Suspicious Malformed Double Accept Header
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 611
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 634
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 91
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed GET_RESTRICT Requests IMPL 0x03
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 480
+ET TOR Known Tor Exit Node Traffic group 50
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 50
+GPL SMTP expn root
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 273
+ET WEB_SERVER  ColdFusion path disclosure to get the absolute path
+ET WEB_SPECIFIC_APPS PozScripts Business Directory Script cid parameter SQL Injection
+SURICATA HTTP request buffer too long
+ET WEB_SPECIFIC_APPS JobHut browse.php pk Parameter SQL Injection
+ET WEB_SPECIFIC_APPS Turnkeyforms Software Directory showcategory.php cid parameter SQL Injection
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 222
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 497
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 633
+ET WEB_SPECIFIC_APPS Noname Media Photo Galerie Standard SQL Injection Attempt -- view.php id SELECT
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 141
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site showcategory.php cid Parameter SQL Injection
+SURICATA TLS invalid SSLv2 header
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 149
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 67
+ET WEB_SPECIFIC_APPS axdcms aXconf Parameter Local File Inclusion Attempt
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 594
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 269
+ET NETBIOS Microsoft Windows NETAPI Stack Overflow Inbound - MS08-067 (15)
+ET NETBIOS Microsoft Windows NETAPI Stack Overflow Inbound - MS08-067 (25)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 501
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 241
+ET POLICY Microsoft user-agent automated process response to automated request
+ET TOR Known Tor Exit Node Traffic group 67
+SURICATA HTTP Request abnormal Content-Encoding header
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 115
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 258
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 336
+ET MALWARE Spyware Related User-Agent (UtilMind HTTPGet)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 493
+ET WEB_SPECIFIC_APPS WikyBlog which Parameter Cross Site Scripting Attempt
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 226
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 143
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 553
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site software-description.php id Parameter SQL Injection
+ETPRO EXPLOIT SOAP Netgear WNDR Auth Bypass/Info Disclosure
+ET WEB_SPECIFIC_APPS Fork-CMS js.php module parameter Local File Inclusion Attempt

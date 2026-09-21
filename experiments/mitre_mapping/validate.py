@@ -218,10 +218,7 @@ def main():
     elif not args.entity_tagging:
         args.typed_markers = False
 
-    if args.typed_markers and args.replace_rare:
-        parser.error("--typed-markers and --replace-rare are not measured together "
-                     "(see entity_tagger.EntityTagger.__init__) -- pass "
-                     "--no-typed-markers to use --replace-rare on securemodernbert")
+
 
     check_required_data()
 

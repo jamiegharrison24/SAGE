@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all seventeen efforts; read the report first.
+> This file remains the detailed record for the running index of all twenty efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Seventeen sub-experiments have run so far, in order. Each has its own detailed
+Twenty sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -994,3 +994,174 @@ too small a bucket to read as signal (effort 5's mistake, avoided). Does not
 change effort 14's conclusion: a marker's type cannot manufacture a training
 example the corpus lacks, so there was nothing for a more informative marker
 to disambiguate among. Kept in the codebase, off by default; not adopted.
+
+## 18. Full technique coverage of the observed alert data — `label_queue/labeled_batch09-14.csv`
+
+Built for the **AIF-vs-ATT&CK downstream study**, not for mapper accuracy. The
+research question is what happens to SAGE's attack graphs when alerts map to
+ATT&CK instead of the Action-Intent Framework (`MicroAttackStage`), and that
+needs a *working* mapper as an assumption — an oracle condition — for every
+signature that actually fires. Train/test leakage is therefore not an
+objection here: these labels must never be reported as a mapper accuracy
+number, and that is the only discipline the oracle framing requires.
+
+**262 new `model_proposed` labels, taking the observed alert data from 58% to
+100% technique coverage** — all 530 distinct signatures across all three
+datasets, covering all 1,431,663 alert records. 223 of the 262 are scoreable
+(33 distinct values; the rest are `(none)`/`ambiguous`/tactic-only declines
+per `CONVENTION.md`'s grammar). Labelled from signature text plus vendor rule
+body (classtype, CVE and reference fields), with `mitre_technique_id`
+redacted per the blind rule.
+
+**A parsing bug found and fixed mid-way, worth recording as a trap.** The
+three alert datasets use **three different JSON schemas**, and a reader
+written against one silently returns zero rows for the other two:
+
+| dataset | records | signature path |
+|---|---:|---|
+| `cptc-2017` | 47,876 | `result['alert.signature']` |
+| `cptc-2018` | 331,554 | Splunk export — inside the `_raw` JSON string |
+| `ccdc` | 1,052,233 | native Suricata EVE — `alert.signature` nested dict |
+
+The first pass of this work parsed only `cptc-2017` and reported "168 unique
+signatures, 100% coverage". The real figure is **530 unique signatures**; the
+missing 362 were not missing rows in one file but two entire datasets read as
+empty, with no error raised. A second integrity check (every labelled
+signature must appear verbatim in the alert data) then caught a separate
+truncation error where a signature had been transcribed from a
+width-truncated console listing. Both checks are cheap and both caught real
+defects — run them before trusting any coverage claim.
+
+**Distribution is not collapsed** but is genuinely concentrated by what the
+data contains: `T1190` 80 (the RFI/SQLi/XSS web-exploitation cluster —
+dozens of distinct ET `WEB_SPECIFIC_APPS` rules fired 41 times each by what
+looks like a single scanner sweep), `T1090.003` 51 (the `ET TOR` relay
+family), `(none)` 32 (Suricata protocol-parser anomalies, which are engine
+events rather than attack detections), `T1595.002` 24, `T1046` 15.
+
+**Two honest limits.** These are `model_proposed`, `reviewer_verdict` empty —
+hypotheses awaiting review, not ground truth, exactly as
+`CONVENTION.md` defines. And **no blind re-label consistency figure is
+reported**: the convention's drift control wants ~20 rows re-labelled blind
+and compared, which the labeller cannot do against its own labels in the same
+session. That number needs a separate pass before the set's ceiling is known.
+
+## 19. Training on effort 18's labels — the first genuine gain since effort 12 — `validation_report.md`
+
+The point of effort 18's labels. 223 of the 262 became corpus rows
+(`build_alert_corpus.py` → `data/alert_labeled_corpus.csv`, wired into
+`corpora.py`); the 39 `(none)`/`ambiguous`/tactic-only declines were **dropped,
+not coerced**, because none has a representation in a `msg,technique_ids,
+tactic_ids` schema and picking a side would manufacture labels the labeller
+explicitly refused to give. Tactics come from each technique's own STIX
+`kill_chain_phases`, never from `MicroAttackStage` — importing the
+Action-Intent Framework's judgment would defeat the point.
+
+**Clean by construction:** 0 of the 223 appear in the eval set (verified), so
+this is not the oracle/leakage case effort 18 was built for. These are
+signatures that fire in the data but were never drawn into the 500-row
+labelling frame.
+
+**Regime D, against the 36.6% / 22.2% baseline:**
+
+| | baseline | + alert corpus | delta |
+|---|---:|---:|---:|
+| micro | 36.6% (132/361) | **40.2% (145/361)** | **+3.6** |
+| macro | 22.2% | **28.7%** | **+6.5** |
+| head (3 classes, 189 rows) | 43.9% | 43.9% | **+0.0** |
+| mid (21 classes, 137 rows) | 31.4% | **38.7%** | **+7.3** |
+| tail (27 classes, 35 rows) | 17.1% | **25.7%** | **+8.6** |
+| `T1190` share | 31.3% | 29.4% | −1.9 |
+
+**This is effort 14's thesis confirmed in the one direction that matters.**
+Head is *exactly* flat — those three classes were already saturated, so more
+data cannot help them — while mid and tail, the starved buckets, move 7-9
+points. Every representation lever in efforts 13-17 produced the opposite
+shape or nothing at all. The new corpus also posts the **highest per-corpus
+retrieval accuracy on the branch** (alert 7/15 = 46.7%, against et 23.4%,
+sigma 16.7%, elastic 3.6%), which is the register-match effect §6.3 predicts:
+these rows are ET/GPL signature text scored against ET/GPL signature text.
+
+**The caveat, found by checking rather than by celebrating.** Row-level diff:
+17 rows flipped MISS→HIT, 4 HIT→MISS (all four `T1190`, consistent with the
+reduced hub share). Of the 17 gains, **6 have a ≥0.75-similar same-label
+sibling in the new corpus** — `portmap listing UDP 111` won by my
+`...TCP 111` (0.94), the SMB `asn1 overflow attempt` by my `unicode asn1
+overflow attempt` (0.94), two NTP `MON_LIST` rows by my `GET_RESTRICT` row
+(0.90/0.91), and so on. Excluding those six, micro is **38.5% (+1.9)** rather
+than 40.2%.
+
+So the honest mechanism is **family coverage, not learned generalisation**:
+labelling one member of a signature family gets the pipeline the other
+members. That is a real and useful finding — it is exactly how corpus
+expansion is supposed to work, and it is the first thing on this branch to
+move mid/tail at all — but the claim it supports is bounded. It predicts
+improvement on techniques whose *families* you label, not on unseen families.
+
+**And a softened form of §8's circularity trap applies.** Effort 18's labels
+were written against `CONVENTION.md`, explicitly anchored on sibling
+precedents from the eval set's own labelling passes. So for the near-duplicate
+gains, what is being measured is partly *convention-consistency between two
+labelling passes by the same kind of labeller*, not mapping ability. The 11
+non-duplicate gains are the part of the result that is not exposed to this.
+
+**Status: adopted** (`alert_labeled_corpus.csv` is in `CORPUS_PATHS`), with
+the headline stated as **40.2% / 28.7%, of which +1.9 micro survives removing
+near-duplicate retrieval**. The teacher behind the labels has one independent
+quality measurement: **87% exact agreement with vendor-declared ATT&CK tags**
+on the 54 signatures that carry both (effort 18).
+
+## 20. Replace-mode re-measured on the current NER stack — effort 15's conclusion revised — `validation_report_entity_*_typed_replace*.md`
+
+Per supervisor direction ("NER model integrated to identify entities in the
+signature and **replace the low level artefacts**"), run on the stack actually
+in use — SecureModernBERT-NER with typed markers — rather than effort 15's
+GLiNER + generic `<ENTITY>`.
+
+**This combination was previously impossible to run.** Effort 17 rejected
+`typed_markers + replace_rare` in `EntityTagger.__init__`, on the reasoning
+that replace was already negative and stacking two changed variables gives an
+unreadable result. That served measurement hygiene and defeated the actual
+requirement: the default stack could not perform the experiment it was asked
+to perform. The guard is removed and `replace_typed_spans()` implements the
+typed substitution — same DF gate (`SQL` at 12.1% survives, `ASA 5500 Series`
+at 0.00% does not), but what is left behind is the entity's *type* rather than
+one generic marker, so replacement collapses two rules onto the same string
+only when they carry the same **kind** of entity.
+
+**Regime D, against the current-corpus baseline (40.2% / 28.7%, tagging off):**
+
+| arm | micro | macro | head | mid | tail |
+|---|---:|---:|---:|---:|---:|
+| baseline, tagging off | **40.2%** | **28.7%** | 43.9% | **38.7%** | 25.7% |
+| `intersection` / typed / replace 0.01 / `drop` | 39.1% | 28.3% | 44.4% | 34.3% | **28.6%** |
+| `intersection` / typed / replace 0.01 / `marker` | 38.5% | 26.2% | 43.4% | 35.8% | 22.9% |
+| `gliner_only` / typed / replace 0.01 / `marker` | 35.7% | 20.3% | — | — | — |
+
+**Finding 1 — effort 15's headline needs qualifying.** That effort measured
+macro **16.4-18.3% against a 22.2% baseline (−4 to −6 points)** and recorded
+the hypothesis as *falsified*. On the current stack the same idea scores
+**26.2-28.3% against 28.7% (−0.4 to −2.5)**, and the best arm sits inside the
+±1.0 noise band. Most of the original damage was **the weak NER model and the
+generic marker, not the replacement idea**. "Decisively negative" becomes
+"no better than not tagging", which is a materially different claim and should
+be stated that way in any write-up of effort 15.
+
+**Finding 2 — it still does not help.** Every arm is at or below baseline. The
+supervisor's request is answered, and the answer is that replacing low-level
+artefacts is now harmless rather than harmful, but not useful. Tail improves
+(+2.9) and mid falls (−4.4); they roughly cancel.
+
+**Finding 3 — `drop` beats `marker` (28.3% vs 26.2% macro), so the type
+information is not what is paying.** Deleting the rare entity outright is
+better than substituting its type sentinel. The marker token costs something
+(dilution, per `marker_rate.py`'s near-zero-IDF argument) and the type it
+carries does not cover that cost. This is evidence against the mechanism
+effort 17 hypothesised, arriving from the replace side rather than the augment
+side.
+
+**Finding 4 — NER-only is again much worse** (20.3% macro vs `intersection`'s
+26.2%), consistent with the merge-rule note in the backlog: dropping the
+gazetteer-agreement filter admits noise faster than it admits signal.
+
+Kept in the codebase, off by default; not adopted.

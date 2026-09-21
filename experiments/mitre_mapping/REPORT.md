@@ -33,12 +33,13 @@ inline by GitHub and by any Markdown preview with Mermaid support:
 
 - **Figure 1** (§2.5) — the pipeline end to end: what happens to one signature,
   which source answers it, and what makes a row fall through to the next one.
-- **Figure 2** (§7.1) — where each source's knowledge comes from: the six
-  external artifacts behind the pipeline, and which resolver each one feeds.
+- **Figure 2** (§7.1) — where each source's knowledge comes from: the seven
+  artifacts behind the pipeline (six external, plus effort 19's alert corpus
+  built from this repo's own data), and which resolver each one feeds.
 
 ### How experiments are referred to
 
-Seventeen sub-experiments ran, numbered **1–17 in the order they happened**. §5
+Nineteen sub-experiments ran, numbered **1–19 in the order they happened**. §5
 describes each in full; every other section cites them shorthand, as "effort 10".
 Where a section says something was removed or added "in effort N", that is a
 pointer forward or back to §5, not a term you need to know yet.
@@ -49,7 +50,7 @@ Five different evaluation sets were used over this branch's history, and four
 separate measurement corrections landed between them. **A number measured on one
 set cannot be compared to a number measured on another.** Every result in this
 report is therefore tagged with a regime letter, A–E, defined in §3.2. When you
-see "36.6% (regime D)", the letter is not decoration — it is the only thing that
+see "40.2% (regime D)", the letter is not decoration — it is the only thing that
 makes the number mean anything.
 
 This matters because the branch's headline fell from 53.8% to 32.7% over its
@@ -69,6 +70,7 @@ that took efforts 9–14 to unwind.
 | 6 | [Cross-cutting findings](#6-cross-cutting-findings) |
 | 7 | [Current architecture](#7-current-architecture) |
 | 8 | [Untried levers](#8-untried-levers) |
+| 8a | [Substituting ATT&CK for the Action-Intent Framework — design notes](#8a-substituting-attck-for-the-action-intent-framework--design-notes) |
 | 9 | [Traps and reusable diagnostics](#9-traps-and-reusable-diagnostics) |
 | 10 | [Reproducing](#10-reproducing) |
 | 11 | [Appendix: every number, by regime](#11-appendix-every-number-by-regime) |
@@ -262,7 +264,7 @@ flowchart TB
     D["<b>declared</b><br/>the rule's own mitre_technique_id metadata"]
     A["<b>ioc_alias</b><br/>STIX malware / tool alias match on the title"]
     C["<b>tier2_combined</b><br/>TF-IDF + LinearSVC; abstains on a non-positive score"]
-    K["<b>knn_corpus</b><br/>IDF-weighted kNN over 31,825 labelled rule texts"]
+    K["<b>knn_corpus</b><br/>IDF-weighted kNN over 32,048 labelled rule texts"]
 
     D -- "no metadata" --> A
     A -- "no alias" --> C
@@ -303,7 +305,7 @@ labels are the fall-through conditions.
 
 **Where the NER sits, and why it sits there.** Entity tagging is not a stage of
 its own — it is step 2 of seven inside `normalize.canonicalize()`. That function
-is called on the incoming signature *and* on all 31,825 corpus rows before the
+is called on the incoming signature *and* on all 32,048 corpus rows before the
 classifier trains or the kNN builds its index, so turning the tagger on rewrites
 both sides of every comparison at once. `normalize.py` says why in its own
 docstring: the step "lives here rather than at the four `canonicalize()` call
@@ -444,7 +446,7 @@ non-malicious — see the value grammar in §3.3.
 | **A** | 100-row hand-audited sample (`hand_audit_sample*.csv`) | 80 | auditor's `proposed_technique` | efforts 3, 5, 6, 7, 8 |
 | **B** | same sample, scoring the Tier 2 classifier alone | 79 | auditor's `proposed_technique` | efforts 2, 4 |
 | **C** | 500-row set (`labeled_set_v2.csv`), before the scoring fix | 397 | `proposed_technique` | efforts 9, 10, 11, 12 |
-| **D** | same set, corrected `reviewer_verdict` rule | 361 | `proposed_technique`, rejected rows excluded | efforts 12 (re-run), 13, 17 — **current** |
+| **D** | same set, corrected `reviewer_verdict` rule | 361 | `proposed_technique`, rejected rows excluded | efforts 12 (re-run), 13, 17, 19 — **current** |
 | **E** | 773-signature propagated ground truth | 562 | bridge-propagated `gt_ids` | efforts 1, 2 |
 
 Caveats that must travel with any number quoted from these:
@@ -603,9 +605,11 @@ makes human confirmation fast. It is not ground truth.
 
 ### 4.1 Training corpora
 
-Four ATT&CK-labelled detection-rule corpora were built in one common format
-(`msg,technique_ids,tactic_ids`, technique IDs `;`-joined). Three are loaded; one
-is built and deliberately not loaded.
+Five ATT&CK-labelled detection-rule corpora were built in one common format
+(`msg,technique_ids,tactic_ids`, technique IDs `;`-joined). Four are loaded; one
+(Splunk) is built and deliberately not loaded. Four were pulled from external
+rule projects; the fifth is this repo's own alert signatures, labelled in effort
+18 and built into a corpus in effort 19.
 
 `attack_mapper/corpora.py` is the single source of truth for which — it is read
 twice inside `knn_resolver.py` (once to load rows, once to fingerprint the cached
@@ -618,11 +622,19 @@ raising an error.
 | **Sigma** | `github.com/SigmaHQ/sigma` | 3,757 `.yml` | **3,289** | 398 | 23.7% | yes |
 | **Elastic** | `github.com/elastic/detection-rules` | 2,101 `.toml` | **1,892** | 444 | 15.3% | yes |
 | **Splunk** | `github.com/splunk/security_content` | 2,169 `.yml` | **2,140** | 376 | 15.1% | **no** |
-| | | | **31,825 in use** | | | |
+| **Alert** | this repo's own `alerts/` (effort 18) | 262 labels | **223** | 26 | 80.3% | yes |
+| | | | **32,048 in use** | | | |
 
 "Top-5 share" is the fraction of rows carried by the five most common techniques
 — the class-imbalance measure from §2.7. ET at 81.3% is severely skewed; Elastic
-at 15.3% is nearly flat.
+at 15.3% is nearly flat. The Alert corpus is the only one not pulled from an
+external project: it is the observed alert data's own signatures, labelled in
+effort 18 and converted by `build_alert_corpus.py`. Its 80.3% top-5 share reads
+like ET's skew but means something different — it is a property of *what the
+three datasets contain* (an `ET WEB_SPECIFIC_APPS` scanner sweep and the `ET TOR`
+relay family between them carry 131 of 223 rows), not of a tagging vocabulary's
+ceiling, and 223 rows is in any case too few for the statistic to carry the
+weight it carries for ET.
 
 Fetch commands:
 
@@ -678,9 +690,18 @@ Per-corpus build notes that affect interpretation:
   `detections/deprecated/` and `status: deprecated` are skipped (3 rules);
   `status: experimental` (120 rules) is kept, since those carry real
   author-assigned IDs and this is training data, not a production ruleset.
+- **Alert.** No fetch — it is built from `label_queue/labeled_batch09-14.csv`,
+  effort 18's labels over the signatures that actually fire in this repo's three
+  alert datasets. 223 of the 262 labels become rows; the 39 `(none)` /
+  `ambiguous` / tactic-only declines are **dropped, not coerced**, and tactics
+  come from each technique's own STIX `kill_chain_phases` rather than from
+  `MicroAttackStage` (effort 19). Two properties matter for interpreting any
+  number measured on it: the rows are `model_proposed` and unreviewed, and **0
+  of the 223 appear in the evaluation set** — verified, not assumed, which is
+  what makes it trainable-on rather than an oracle (effort 18).
 
-**Extractor stress test.** All four builders parsed **100% of files with 0
-exceptions.** For Sigma this was the first real-data test of
+**Extractor stress test.** All four *external* builders parsed **100% of files
+with 0 exceptions.** For Sigma this was the first real-data test of
 `extractors/sigma.py`, previously exercised only against one hand-written
 fixture — real rules use substantially more structure (nested selections,
 list-of-dict selections, `1 of selection*` / `all of` conditions) and none of it
@@ -761,7 +782,7 @@ top-1 ceiling below 100%** — a candidate-list gap, not a model failure.
 
 ## 5. Approaches tried
 
-Fourteen sub-experiments, chronologically. Each opens with what it is, then
+Nineteen sub-experiments, chronologically. Each opens with what it is, then
 hypothesis → method → result (regime-tagged) → why. Detailed write-ups remain at
 the cited paths.
 
@@ -1617,9 +1638,19 @@ set. **The corpus is large and almost orthogonal to the test distribution.**
 `attack_mapper/entity_ner/replace_prereg.md`, `entity_ner/df_table.py`,
 `entity_ner/cutoff_screen.py`, `tests/test_entity_replace.py`
 
-**Status: complete. Decisive NEGATIVE result — replacement is worse than both
-the baseline and effort 13's augment, and the hypothesis is falsified rather
-than merely unsupported.**
+**Status: complete. NEGATIVE result on the stack measured here — replacement
+is worse than both the baseline and effort 13's augment.**
+
+> **Superseded in part by effort 20.** The "falsified rather than merely
+> unsupported" reading below was written against *this* configuration:
+> GLiNER spans at 0.85 with a single generic `<ENTITY>` marker. Re-run on the
+> NER stack now in use (SecureModernBERT-NER + typed markers), the same idea
+> scores macro 26.2–28.3% against a 28.7% baseline — **−0.4 to −2.5 points,
+> the best arm inside the ±1.0 noise band**, against the −4 to −6 recorded
+> here. Most of the damage below was the weak span source and the generic
+> marker, not the replacement hypothesis. It still does not *help*, so the
+> lever stays closed; but the correct claim is "no better than not tagging",
+> not "falsified". See effort 20.
 
 | arm | spans replaced | micro | macro | vs baseline |
 |---|---:|---:|---:|---:|
@@ -2045,6 +2076,182 @@ suppressed for the default backend, so re-running the typed arm today writes
 committed `validation_report_entity_intersection_securemodernbert_typed.md`
 that holds the numbers in the table above.
 
+### Effort 18 — Full technique coverage of the observed alert data · no regime (labelling, not measurement)
+
+`label_queue/labeled_batch09-14.csv`, `label_queue/CONVENTION.md`
+
+**Status: complete. 262 new labels taking the observed alert data to 100%
+technique coverage, with no accuracy number attached — and one reusable parsing
+trap (§9) found in the making of them.**
+
+**Why it was built, and the one discipline that framing requires.** These labels
+exist for the AIF-vs-ATT&CK downstream study, not for mapper accuracy. That study
+asks what happens to SAGE's attack graphs when alerts carry ATT&CK techniques
+instead of `MicroAttackStage`, and it needs a *working* mapper as an assumption —
+an oracle condition — for every signature that actually fires. Train/test leakage
+is not an objection to labels used that way. The discipline it does require is
+exactly one rule: **these labels are never to be reported as a mapper accuracy
+number.** Effort 19 does report one, and the next section opens by saying why
+that is not a violation.
+
+**What it is.** 262 new `model_proposed` labels, taking the observed alert data
+from **58% to 100% technique coverage** — all **530** distinct signatures across
+all three alert datasets, covering all **1,431,663** alert records. 223 of the
+262 are scoreable; the other 39 are `(none)` / `ambiguous` / tactic-only declines
+under `CONVENTION.md`'s value grammar. Each was labelled from the signature text
+plus the vendor rule body — classtype, CVE and reference fields — with
+`mitre_technique_id` redacted before labelling, per the blind rule (§3.3).
+
+**The distribution is concentrated, but by what the data contains rather than by
+collapse:** `T1190` 80 (the RFI/SQLi/XSS web-exploitation cluster — dozens of
+distinct ET `WEB_SPECIFIC_APPS` rules, each fired 41 times by what looks like a
+single scanner sweep), `T1090.003` 51 (the `ET TOR` relay family), `(none)` 32
+(Suricata protocol-parser anomalies, which are engine events rather than attack
+detections), `T1595.002` 24, `T1046` 15.
+
+**Finding 1 — the labeller has one independent quality number, and it is 87%.**
+54 of the labelled signatures carry a vendor-declared ATT&CK tag *as well as* a
+label written without sight of it. Exact agreement is **47 of 54 = 87%** — the
+same kind of external check §6.2 applies to the bridge table, run here against
+the labels themselves. One of the seven disagreements is informative rather than
+incidental: on the Powershell/WMIC-over-SMB family, the branch's own two label
+sources disagree with each other — the eval set says `T1021.002`, the ET corpus
+says `T1570`. That is an open convention question, not a labelling error.
+
+**Finding 2 — three alert datasets, three JSON schemas, and a reader written
+against one silently returns zero rows for the other two.** No error is raised;
+the run simply reports a smaller, entirely plausible universe.
+
+| dataset | records | where the signature lives |
+|---|---:|---|
+| `cptc-2017` | 47,876 | records wrapped in `result` |
+| `cptc-2018` | 331,554 | Splunk export — inside the `_raw` JSON string |
+| `ccdc` | 1,052,233 | native Suricata EVE — nested `alert` dict |
+
+The first pass of this work parsed only `cptc-2017` and reported "168 unique
+signatures, 100% coverage". The true figure is **530**, and the 362 missing were
+not missing rows in one file — they were two entire datasets read as empty. A
+second, independent check (every labelled signature must appear *verbatim* in the
+alert data) then caught a different defect: a signature transcribed from a
+width-truncated console listing. Both checks cost seconds and both found a real
+bug, which is why they are written up in §9 rather than only here.
+
+**Two honest limits.** The labels are `model_proposed` with `reviewer_verdict`
+empty — hypotheses awaiting review, not ground truth, exactly as `CONVENTION.md`
+defines the state. And **no blind re-label consistency figure exists**: the
+convention's drift control (§3.4) wants ~20 rows re-labelled blind and compared,
+which the labeller cannot do against its own labels in the same session. That
+number needs a separate pass before the set's own ceiling is known.
+
+**Landed state: on disk as labels**, and — for the disjoint 223 — as corpus rows
+via effort 19.
+
+### Effort 19 — Training on effort 18's labels · regime D
+
+`build_alert_corpus.py`, `attack_mapper/data/alert_labeled_corpus.csv`,
+`validation_report.md`
+
+**Status: complete. ADOPTED, and the branch's first accuracy gain since effort
+12 — micro 36.6% → 40.2%, macro 22.2% → 28.7%. The mechanism is family
+coverage rather than learned generalisation, which bounds the claim: excluding
+gains won by a near-duplicate sibling row, micro is 38.5% (+1.9).**
+
+**Why this is not the oracle case effort 18 was built for.** Effort 18's
+prohibition applies to those labels *as coverage of the evaluation frame* —
+scoring the mapper on signatures whose answers were supplied to it. It does not
+apply here, because **0 of the 223 corpus rows appear in the eval set
+(verified)**. These are signatures that fire in the alert data but were never
+drawn into the 500-row labelling frame, so as training data they are ordinary,
+and the leakage guard (§4.3) has nothing to mask.
+
+**How 262 labels became 223 rows.** `build_alert_corpus.py` writes the
+`msg,technique_ids,tactic_ids` schema `corpora.py` loads, under two deliberate
+rules. The 39 declines are **dropped, not coerced**: `ambiguous: X / Y`,
+`(none) - non-malicious` and tactic-only `TA####` have no representation in a
+schema whose key column is a technique ID, and picking a side would manufacture
+labels the labeller explicitly refused to give. And tactics come from each
+technique's own STIX `kill_chain_phases`, never from `MicroAttackStage` —
+importing the Action-Intent Framework's judgment into this file would defeat the
+purpose of a corpus that exists to be independent of it. The result is 223 rows
+over 26 distinct techniques (§4.1).
+
+**The measurement**, against the 36.6% / 22.2% regime D baseline, one changed
+variable (`alert_labeled_corpus.csv` added to `CORPUS_PATHS`):
+
+| | baseline | + alert corpus | delta |
+|---|---:|---:|---:|
+| micro | 36.6% (132/361) | **40.2% (145/361)** | **+3.6** |
+| macro | 22.2% | **28.7%** | **+6.5** |
+| head (3 classes, 189 rows) | 43.9% | 43.9% | **+0.0** |
+| mid (21 classes, 137 rows) | 31.4% | **38.7%** | **+7.3** |
+| tail (27 classes, 35 rows) | 17.1% | **25.7%** | **+8.6** |
+| `T1190` share | 31.3% | 29.4% | −1.9 |
+
+**Finding 1 — the bucket shape is effort 14's prediction, confirmed in the one
+direction that could confirm it.** Head is *exactly* flat: those three classes
+(`T1190`/`T1071`/`T1568`) are already saturated with training data, so more data
+cannot move them, and it did not — 43.9% before and after. Mid and tail, the
+starved buckets, move 7.3 and 8.6 points. Every representation lever in efforts
+13–17 produced either the opposite shape or nothing at all; this is the first
+intervention on the branch to move mid/tail at all. §6.1 is written up with this
+as its fourth leg.
+
+**Finding 2 — the new corpus posts the highest per-corpus retrieval accuracy on
+the branch, which is §6.3's register rule doing what it predicts.** `knn_corpus`
+top-1 accuracy by winning corpus: **alert 7/15 = 46.7%**, against et 15/64 =
+23.4%, sigma 6/36 = 16.7%, elastic 1/28 = 3.6%. These rows are ET/GPL signature
+text scored against ET/GPL signature text — the closest register match any corpus
+on this branch has had, and it beats the three external corpora by a factor of
+two or more. It also passes the adoption check §6.3 makes mandatory (per-corpus
+top-1 accuracy inspected before adopting, not after).
+
+**Finding 3 — the caveat, and it is half the finding: six of the seventeen gains
+were won by a near-duplicate sibling.** The row-level diff is 17 MISS→HIT against
+4 HIT→MISS (all four `T1190`, consistent with the reduced hub share). Of the 17
+gains, **6 have a ≥0.75-similar same-label sibling in the new corpus**:
+
+| eval row that flipped to HIT | new corpus row that won it | sim |
+|---|---|---:|
+| `portmap listing UDP 111` | `portmap listing TCP 111` | 0.94 |
+| SMB `asn1 overflow attempt` | `unicode asn1 overflow attempt` | 0.94 |
+| two NTP `MON_LIST` rows | an NTP `GET_RESTRICT` row | 0.90 / 0.91 |
+| `writeto.cnf access` | `service.cnf access` | 0.88 |
+| `SMB2 Remote AT Scheduled Job` | `SMB Remote AT Scheduled Job` | 0.78 |
+
+**Excluding those six, micro is 38.5% (+1.9), not 40.2%.** So the honest
+mechanism is **family coverage, not learned generalisation**: labelling one
+member of a signature family gets the pipeline the other members. That is real,
+it is useful, and it is exactly how corpus expansion is supposed to work — but
+the claim it supports is bounded. It predicts improvement on techniques whose
+*families* you label. It does not predict improvement on unseen families, and
+nothing here measures that.
+
+**Finding 4 — a softened form of §8's circularity trap applies to the
+near-duplicate subset.** Effort 18's labels were written against `CONVENTION.md`,
+which is explicitly anchored on sibling precedents drawn from the eval set's own
+labelling passes. For the six near-duplicate gains, then, part of what is being
+measured is *convention-consistency between two labelling passes by the same kind
+of labeller*, not mapping ability. This is much weaker than the `bridge_table`
+circularity efforts 9 and 10 removed — no category-to-technique rule is being
+scored against itself, and the eval labels were written blind — but it is the
+same family of problem and it is not zero. **The 11 non-duplicate gains are the
+part of the result that is not exposed to it**, and they are the part to quote
+when the question is whether the pipeline generalises.
+
+**Finding 5 — this is a teacher-student result, and the teacher has one
+number.** The 223 rows are `model_proposed` and unreviewed (`reviewer_verdict`
+empty, §3.6). The only independent measurement of their quality is effort 18's
+**87% exact agreement with vendor-declared ATT&CK tags** on the 54 signatures
+carrying both, and there is no blind re-label consistency figure. A student
+trained on an unreviewed teacher inherits the teacher's systematic errors
+silently; that ceiling is unmeasured here.
+
+**Landed state: ADOPTED.** `alert_labeled_corpus.csv` is in `CORPUS_PATHS`
+(§4.1, Figure 2), so it is live for both the classifier and the kNN layer, and
+the headline in §7.3 is now 40.2% / 28.7% — stated there, as here, with the
+"+1.9 excluding near-duplicate retrieval" qualifier attached, because the
+unqualified number overstates what was demonstrated.
+
 ## 6. Cross-cutting findings
 
 ### 6.1 Coverage, not representation
@@ -2065,10 +2272,38 @@ returned null or marginal results. **One cause explains all of them:**
 
 **The binding constraint is coverage** — the training corpus does not contain
 examples of the techniques the evaluation set asks about. This is the single most
-important claim for a paper to make from this work, and it rests on three
+important claim for a paper to make from this work, and it now rests on four
 independent legs: a controlled observation (the head/mid/tail gradient), a
-mechanism (the `T1495` smoking gun), and a quantification (the supply/demand
-table).
+mechanism (the `T1495` smoking gun), a quantification (the supply/demand table),
+and — as of effort 19 — **an intervention**.
+
+**Effort 19 is the first positive confirmation, and its shape is the evidence.**
+Every other entry in this section is a *null* result that is merely consistent
+with the coverage thesis; a null can never distinguish "coverage is the
+constraint" from "this particular lever was badly built". Adding 223 coverage
+rows and changing nothing else produces exactly the pattern the thesis predicts
+and no other:
+
+| bucket | baseline | + alert corpus | delta |
+|---|---:|---:|---:|
+| head (3 classes, 189 rows) | 43.9% | 43.9% | **+0.0** |
+| mid (21 classes, 137 rows) | 31.4% | 38.7% | **+7.3** |
+| tail (27 classes, 35 rows) | 17.1% | 25.7% | **+8.6** |
+
+Head is *exactly* flat — saturated classes cannot be helped by more data, and
+were not — while the two starved buckets move 7–9 points. Every representation
+lever in efforts 13–17 produced the opposite shape (head moves, mid flat) or
+nothing at all. This is the prediction §6.1 makes, tested in the one direction
+that could confirm rather than merely fail to falsify it.
+
+**Carried with it, because it bounds the claim:** effort 19's row-level diff
+shows 6 of its 17 gains were won by a ≥0.75-similar same-label sibling row, and
+excluding those, micro is +1.9 rather than +3.6. The confirmed mechanism is
+therefore **family coverage** — labelling one member of a signature family
+supplies its siblings — not learned generalisation. §6.1 stands in a bounded
+form: what is demonstrated is that covering the *families* the evaluation set
+asks about raises accuracy on them, not that coverage in the abstract transfers
+to families never seen.
 
 **Corollary for measurement: micro is the wrong headline.** It is dominated by
 three head classes and moves for reasons unrelated to whether the pipeline
@@ -2161,7 +2396,18 @@ most of its history and is now closed:
 | + IDF voting and prior correction (effort 11) | 33.5% | 28.5% |
 | + Elastic (effort 12) | 29.0% | 28.5% |
 | under corrected scoring (effort 12 re-run) | 31.3% | 31.3% |
-| current (effort 14 measurement) | 113/361 | 113/361 — **exact** |
+| effort 14 measurement | 113/361 | 113/361 — **exact** |
+| current (+ alert corpus, effort 19) | 106/361 (29.4%) | 113/361 (31.3%) |
+
+**The last row is a small step away from calibration, and is recorded as such.**
+Effort 15's Finding 4 established the rule: once the hub is exactly calibrated, a
+*falling* modal share is drift, not improvement. Effort 19 moves `T1190` from 113
+predicted to 106 against 113 true. Its four HIT→MISS rows are all `T1190`, so at
+least four of the seven lost hub predictions were correct ones; the remaining
+three are unattributed, and some may be the hub shedding false positives, which
+is what efforts 10–12 were trying to achieve. That split was not measured. Worth
+watching if the corpus is expanded again; at 7 rows it is not large enough to
+reopen this arc either way.
 
 Four mechanisms contributed, each measured separately: broadening the training
 corpus (efforts 4, 12), IDF-weighted voting in retrieval (effort 11), class-prior
@@ -2206,10 +2452,18 @@ over rule text:
 - vendor-declared ATT&CK tags (`declared`, 71.8–81.8% precision),
 - SAGE's own `MicroAttackStage` (34.8%, but on 70% of rows, while it was in use),
 - a broadened, more diverse training corpus (efforts 4, 12),
+- a broadened, *register-matched* training corpus — labelling the alert data's
+  own 530 signatures and training on the 223 that are disjoint from the eval set
+  (efforts 18–19: micro 36.6% → 40.2%, macro 22.2% → 28.7%, and the **first gain
+  on this branch since effort 12**; +1.9 micro rather than +3.6 once
+  near-duplicate sibling retrievals are excluded),
 - retrieval against *labelled rule text* rather than documentation prose (effort
   11 — a register fix, not a model upgrade).
 
-These compose cleanly because they resolve disjoint rows.
+These compose cleanly because they resolve disjoint rows. The pattern is
+consistent enough to state as a rule: **every gain came from putting more or
+better-matched signal into the corpus, and none from asking a model to reason
+harder over the signal already there.**
 
 ---
 
@@ -2230,7 +2484,7 @@ ioc_alias           STIX malware/tool alias match on the title
 tier2_combined      TF-IDF + LinearSVC, live-trained,
                     prior_alpha = 0.5 class-frequency subtraction
   ↓
-knn_corpus          IDF-weighted kNN over 31,825 labelled rule texts,
+knn_corpus          IDF-weighted kNN over 32,048 labelled rule texts,
                     leakage-guarded
   ↓
 [optional] llm      Layer D — fires only below llm_gate_confidence = 0.5,
@@ -2258,14 +2512,16 @@ flowchart LR
     SG[("<b>Sigma</b><br/>3,289 rows<br/>398 techniques")]
     EL[("<b>Elastic</b><br/>1,892 rows<br/>444 techniques")]
     SP[("<b>Splunk</b><br/>2,140 rows<br/>376 techniques")]
+    AL[("<b>Alert</b> — effort 18<br/>223 rows<br/>26 techniques")]
     ST[("<b>MITRE STIX bundle</b><br/>697 techniques,<br/>plus malware / tool objects")]
     RU[("<b>emerging-all.rules</b><br/>50,797 ET rules,<br/>54% carry MITRE metadata")]
 
-    CORP["<b>corpora.py</b><br/>31,825 labelled rows in use"]
+    CORP["<b>corpora.py</b><br/>32,048 labelled rows in use"]
 
     ET --> CORP
     SG --> CORP
     EL --> CORP
+    AL -->|"the only in-register corpus<br/>effort 19 · 7 of 15 retrievals right"| CORP
     SP -.->|"built, then rejected<br/>effort 12 · 0 of 20 retrievals right"| CORP
 
     CORP --> NORM["<b>normalize.canonicalize</b><br/>applied to every corpus row,<br/>the same function the query goes through"]
@@ -2282,7 +2538,7 @@ flowchart LR
     classDef data fill:#f0f0f4,stroke:#6a6a86,color:#1b1f1a
     classDef res fill:#eef4ea,stroke:#6d8a5f,color:#1b1f1a
     classDef off fill:#f7f7f5,stroke:#b5b5ad,color:#75756c
-    class ET,SG,EL,ST,RU data
+    class ET,SG,EL,AL,ST,RU data
     class SP,TAG2 off
     class CLF,KNN,ALI,CAT,DEC,EXB res
 ```
@@ -2316,13 +2572,30 @@ D) for per-corpus retrieval:
 | kNN won by **Elastic** | 30 | 6.7% | kept for IDF dilution only |
 | kNN won by **Splunk** | 20 | 0.0% | rejected, not loaded |
 
+The four kNN rows are effort 12's per-corpus figures, kept as the matched set
+that produced the rest of the table. Effort 19's run, with the alert corpus
+loaded, re-measures the same quantity as **alert 7/15 = 46.7%**, et 15/64 =
+23.4%, sigma 6/36 = 16.7%, elastic 1/28 = 3.6% — the alert corpus is the
+best-performing retrieval source on the branch. Do not read effort 19's figures
+against effort 12's row by row: adding a corpus changes which corpus wins each
+top-1 slot, so every per-corpus denominator moves at once (et 76 → 64, sigma 52 →
+36, elastic 30 → 28).
+
 ### 7.3 Current headline
 
-**36.6% micro / 22.2% macro** on regime D — 132 of 361 scoreable rows, 43
-excluded.
+**40.2% micro / 28.7% macro** on regime D — 145 of 361 scoreable rows, 43
+excluded. Set by effort 19 (the alert corpus); the previous headline was 36.6% /
+22.2%.
+
+**Quote it with its qualifier.** 6 of the 17 rows that flipped to correct were
+won by a ≥0.75-similar same-label sibling in the new corpus; **excluding those,
+micro is 38.5% (+1.9 over the 36.6% baseline, not +3.6)**. The gain is real and
+the mechanism is family coverage, not learned generalisation — see effort 19,
+Findings 3 and 4. The unqualified 40.2% overstates what was demonstrated.
 
 Per §6.1, the more honest summary of pipeline quality is the bucket split:
-**43.9% head / 31.4% mid / 17.1% tail.**
+**43.9% head / 38.7% mid / 25.7% tail**, against the pre-effort-19 baseline's
+43.9% / 31.4% / 17.1% — head flat, the starved buckets moved.
 
 ### 7.4 Package contents
 
@@ -2331,6 +2604,9 @@ Per §6.1, the more honest summary of pipeline quality is the bucket split:
 | `models.py` | `ExtractedRule` / `IoC` / `TechniqueMapping` / `BehavioralNarrative` / `MappedRule`, including the `processing_steps` audit trail |
 | `extractors/` | `base.py`, `suricata.py` (primary — handles a full rule body or a bare signature name, the latter looked up against `data/emerging-all.rules`), `sigma.py`, `generic.py` |
 | `corpora.py` | the one `CORPUS_PATHS` tuple both the classifier and kNN read |
+| `build_alert_corpus.py` | effort 19: effort 18's label batches → `msg,technique_ids,tactic_ids`; drops the 39 declines rather than coercing them, and takes tactics from STIX `kill_chain_phases`, not `MicroAttackStage` |
+| `attack_mapper/data/alert_labeled_corpus.csv` | effort 19: the 223 in-register alert-signature rows, 26 techniques, verified disjoint from the eval set — loaded |
+| `label_queue/labeled_batch09-14.csv` | effort 18: the 262 `model_proposed` labels giving 100% technique coverage of the observed alert data (530 signatures, 1,431,663 records) |
 | `normalize.py` | signature-text canonicalisation |
 | `attack_data.py`, `mitre_client.py` | STIX bundle reader (no network fetch) |
 | `alias_table.py`, `ioc_resolver.py` | Tier 1 alias logic and its stoplist |
@@ -2363,10 +2639,26 @@ Coverage-first, per §6.1. This ordering supersedes `entity_normalisation_plan.m
 §8, which still names classifier modernisation as the remaining lever — written
 before the coverage diagnosis.
 
-1. **Find a labelled corpus in the right register.** Network-IDS rules carrying
-   genuine ATT&CK metadata. Select on register match, not diversity statistics
-   (§6.3); check per-corpus retrieval accuracy before adopting. Subject to the
-   circularity trap below.
+1. ~~**Find a labelled corpus in the right register**~~ — **PARTLY CLOSED by
+   effort 19**, though not the way this item imagined. No external corpus was
+   found; instead the in-register rules already present in the repo were
+   labelled — the 530 signatures that actually fire in the three alert datasets
+   (effort 18) — and the 223 of them disjoint from the eval set became a corpus.
+   It behaved exactly as this item predicted a register-matched corpus would:
+   **the highest per-corpus retrieval accuracy on the branch (7/15 = 46.7%,
+   against et 23.4% / sigma 16.7% / elastic 3.6%)**, and the first movement in
+   mid/tail the branch has seen (§6.1). Two things keep it *partly* rather than
+   fully closed. The gain is **family coverage** — 6 of 17 gains came from a
+   near-duplicate sibling row, and excluding them micro is +1.9 not +3.6 — so it
+   supplies the families the eval set happens to ask about rather than covering
+   ATT&CK; and the source is finite (530 signatures, now exhausted), so the
+   lever cannot be pulled again on this data. **The residual item stands**: a
+   genuinely external network-IDS corpus with vendor ATT&CK metadata is still
+   worth finding, would extend coverage beyond the families these alerts
+   contain, and — unlike effort 19's rows — would carry labels this project did
+   not write. Select on register match, not diversity statistics (§6.3); check
+   per-corpus retrieval accuracy before adopting, as effort 19 did. Subject to
+   the circularity trap below, which effort 19 hit in a softened form.
 2. **Harvest ET / ETPRO / Snort declared tags more aggressively.** Real vendor
    metadata, so not circular, and the highest-precision source in the branch.
    Tier 0 recovers 39 rows today; only 11 of 62 matched bodies carry a tag, and
@@ -2438,12 +2730,136 @@ Defensible options, in order of preference:
    eval rows in that category must be excluded from scoring, or the number is
    meaningless.
 
+**Effort 19 hit a softened form of this trap, and it should be read as the
+calibrated example rather than as a clean case.** Its corpus is not built from a
+category-to-technique rule, and its rows are verified disjoint from the eval set,
+so option 3 is satisfied at the row level and the `bridge_table` failure mode —
+scoring a rule against labels produced by that same rule — does not apply. What
+*does* apply: effort 18's labels were written against `CONVENTION.md`, which is
+anchored on sibling precedents from the eval set's own labelling passes. So for
+the 6 gains won by a near-duplicate sibling, part of what is measured is
+**convention-consistency between two labelling passes by the same kind of
+labeller**. The 11 non-duplicate gains are not exposed to this. The generalisable
+rule: row-level disjointness is necessary but not sufficient — when training
+labels and eval labels are written to the same convention by the same kind of
+labeller, near-duplicate pairs across the two sets need separating out before the
+number means what it appears to mean.
+
 ### Out of scope
 
 - **Splunk/KQL/YARA extractors** — no rules of those formats in the repo.
 - **Two missing commas in `signatures/alert_signatures.py`** (lines 671, 821).
   Production-pipeline code; changing stage classification changes attack graphs,
   so this needs its own branch and the `changes-ags` PR label.
+
+---
+
+## 8a. Substituting ATT&CK for the Action-Intent Framework — design notes
+
+The branch's other half: replacing SAGE's `MicroAttackStage` taxonomy with
+ATT&CK and comparing the resulting attack graphs, evaluated with the metrics
+already recorded in `docs/BASELINE_METRICS.md`. Not run yet. These are the
+three design decisions that determine whether the comparison means anything,
+recorded before it is built so the reasoning is on the record rather than
+reconstructed afterwards.
+
+### 8a.1 Use the label table, not the classifier — the AIF side is a dictionary too
+
+The instinct is to drive the ATT&CK arm with the mapper this report spends
+most of its length measuring. **That would be the wrong choice, and the reason
+is symmetry.**
+
+SAGE's existing AIF mapping is `signatures/alert_signatures.py` — a
+hand-built, hardcoded `signature → MicroAttackStage` dictionary with no model
+in it. If the ATT&CK arm ran through a classifier scoring 70.1% (§5, effort
+19's oracle configuration) while the AIF arm used a perfect dictionary, the
+comparison would be *perfect AIF against 70% ATT&CK*, and **every difference
+in the resulting graphs would be confounded**: there would be no way to
+attribute a change to the taxonomy rather than to mapping errors. The study's
+question — what do attack graphs look like under ATT&CK instead of AIF — is
+only answerable when mapping quality is held constant across the two arms.
+
+Effort 18 produced exactly the artifact that holds it constant: **530
+signatures covering 100% of the alert volume across all three datasets**, one
+technique each, hand-labelled. That is the same *kind* of object as
+`alert_signatures.py`. Using it as a lookup is not a shortcut around the
+mapper — it is the like-for-like control the comparison requires.
+
+**This does not make the mapper work redundant.** The classifier answers a
+different question — *would this generalise to a ruleset nobody has
+labelled?* — which is a contribution in its own right (40.2% / 28.7%, §7.3)
+and is reported as such. It is simply not the instrument this particular
+study needs.
+
+### 8a.2 A quarter of the alert volume has no technique, and that is a result
+
+Of the 530 observed signatures, **85 carry a `(none)`/`ambiguous`/tactic-only
+label** under `CONVENTION.md`'s grammar — Suricata protocol-parser anomalies
+(`invalid TLS record version`, `missing Host header`), policy traffic, benign
+chat. Together they are **~25% of all alert records**.
+
+AIF assigns those alerts a low-severity stage. **ATT&CK has no vocabulary for
+them at all** — "the TLS parser saw a malformed record" is not adversary
+behaviour and no technique describes it. So the ATT&CK arm will simply have
+fewer alerts reaching episode generation, and its graphs will differ for that
+reason before any modelling difference is considered.
+
+This should be reported as a **finding about the two frameworks**, not
+engineered around: ATT&CK is a taxonomy of adversary behaviour, AIF is a
+taxonomy of alert semantics, and they are not the same coverage. The
+implementation decision it forces — drop those alerts, or give them a
+catch-all low-severity code — should be stated explicitly and, ideally, run
+both ways, because the delta between those two runs *is* the measurement of
+how much of SAGE's graph structure rests on alerts ATT&CK cannot name.
+
+### 8a.3 Severity, and why tactics are the right vehicle
+
+The pipeline reads severity off the **digit count** of the `mcat` integer
+(`len(str(mcat))`: 1 = low, 2 = medium, 3 = high), and that value is
+load-bearing in three places — subsequence cutting at severity drops
+(`episode_sequence_generation.py`), sink filtering (`model_learning.py`), and
+objective selection for each graph (`ag_generation.py`). Technique IDs have
+no severity ordering; `T1190` and `T1046` are both four digits.
+
+Substituting technique IDs naively therefore makes `len(str(...))` constant,
+which **removes every subsequence cut, marks every sink severe, and collapses
+objective selection**. The graphs would still render and would mean nothing.
+
+ATT&CK *tactics* supply the missing order: they are kill-chain phases, and
+`attack_data.technique_tactics()` already resolves technique → tactic from the
+STIX bundle for every labelled signature (`build_alert_corpus.py` writes the
+column today). Assigning each technique an integer code whose **digit count
+encodes its tactic's kill-chain position** preserves the existing convention
+exactly, which means episode generation, model learning and AG generation need
+no structural change — the substitution reduces to a new lookup table plus a
+trace-symbol table.
+
+One consequence to anticipate rather than discover: the FlexFringe alphabet is
+`mcat|mserv` pairs, so moving from ~12 stages to ~33 techniques multiplies it.
+Sparser transitions mean more sinks, and the baseline already resolves **38%
+of scored steps** through sinks (`docs/BASELINE_METRICS.md`). If that degrades
+sharply it is a result about the taxonomy's granularity being wrong for this
+model class, not a bug to tune away.
+
+### 8a.4 How the pieces sit together
+
+Recorded because the branch has produced several separable results and it is
+easy to mistake the supporting ones for the main ones.
+
+| contribution | what it is | status |
+|---|---|---|
+| **Coverage, not representation** | Every representation lever returns null (efforts 13–17, 20); adding 223 in-register training examples moved mid +7.3 and tail +8.6 while head stayed **exactly flat** (effort 19). The flat head is the evidence: saturated classes cannot be helped by more data, starved ones can. | **done — strongest result on the branch** |
+| **AIF → ATT&CK attack graphs** | The substitution above, evaluated against `docs/BASELINE_METRICS.md`. The novel contribution to SAGE itself. | **not started** |
+| **NER / entity normalisation is a dead end here** | 10+ arms, two NER models, two marker schemes, five merge rules, three replacement styles, a DF sweep. All null or negative, with a mechanism: the rare tokens NER finds are the ones carrying the technique signal, so tagging dilutes and replacing destroys. | done |
+| **The labelled dataset** | 530 signatures, 100% of 1,431,663 alert records, one technique each, with rationales. | done — reusable artifact |
+| **A generalisable mapper** | 40.2% / 28.7% held-out, against ~87% for a careful human reader. Reported as "hard problem, here is why", not as a solution. | done, honest |
+
+The coverage finding and the attack-graph comparison are the load-bearing
+results; the NER negative, the dataset and the mapper numbers are the evidence
+and the artifacts underneath them. Note that the NER negative is a *useful*
+publication in its own right precisely because the assumption it refutes —
+that entity normalisation should help short-signature matching — is the
+intuitive one.
 
 ---
 
@@ -2536,6 +2952,30 @@ survive only as their `validation_report_entity_*.md` output — citable, not
 reproducible without a ~500MB download and a 26-minute rebuild. Worth knowing
 before quoting a cost estimate for "just re-run it".
 
+**One dataset's JSON schema is not the next one's, and a reader written against
+one returns zero rows for the others without raising.** The three alert datasets
+in this repo store the signature in three different places — `cptc-2017` wraps
+each record in `result`, `cptc-2018` is a Splunk export with the record inside a
+`_raw` JSON string, `ccdc` is native Suricata EVE with a nested `alert` dict.
+Effort 18's first pass parsed only the first, found **168 unique signatures, and
+reported 100% coverage of them** — a completely plausible number, from 47,876 of
+1,431,663 records. The true figure is **530 signatures**; the 362 missing were
+not dropped rows but two entire datasets silently read as empty. **The cheap
+guard is a per-file non-zero row assertion**: any loader over a heterogeneous
+corpus should fail loudly when a file it was handed yields nothing, because zero
+rows is the failure mode that looks exactly like success.
+
+**Check that every label's key exists verbatim in the source data.** The second
+integrity check run over the same batches — every labelled signature string must
+appear byte-for-byte in the alert data — caught a defect the first check could
+not: a signature transcribed from a width-truncated console listing, which would
+have sat in the corpus as a row matching nothing and coverage arithmetic counting
+a signature that does not exist. This generalises past labelling: **any artifact
+keyed on strings copied from another system needs a verbatim-existence check
+against that system**, and it costs a set-difference. Both of effort 18's checks
+were seconds of work and both found a real bug, which is the argument for running
+them before trusting any coverage claim rather than after doubting one.
+
 **Macro-average catches artifacts micro conceals.** Applied retroactively, macro
 reporting would have caught effort 8's fake 62.5% automatically instead of by
 manual inspection.
@@ -2562,6 +3002,8 @@ python archive/tiered_approach/tier0_build.py        # ET  -> data/et_labeled_co
 python attack_mapper/sigma_corpus/build_corpus.py    # Sigma
 python attack_mapper/elastic_corpus/build_corpus.py  # Elastic
 python attack_mapper/splunk_corpus/build_corpus.py   # Splunk (built, not loaded)
+python build_alert_corpus.py                         # effort 19: label_queue/labeled_batch09-14.csv
+python build_alert_corpus.py --dry-run               #   -> data/alert_labeled_corpus.csv; --dry-run reports only
 # the pipeline picks corpora up automatically -- classifier_resolver.py trains
 # from data/*_labeled_corpus.csv at construction time, no extra step
 
@@ -2679,12 +3121,17 @@ by how many rows actually reach that candidate source — here 18 of 80.
 | effort | configuration | micro | macro | `T1190` share |
 |---|---|---:|---:|---:|
 | 12 | ET + Sigma | 37.1% (134) | 20.9% | 36.3% |
-| 12 | **+ Elastic — current headline** | **36.6% (132)** | **22.2%** | **31.3%** |
+| 12 | + Elastic — the baseline every later effort is measured against | 36.6% (132) | 22.2% | 31.3% |
 | 13 | + entity NER, `gliner_only` | 35.5% | 19.4% | 33.8% |
 | 13 | + entity NER, `intersection` | 37.1% | 21.3% | 33.2% |
+| 19 | **+ alert corpus — current headline** | **40.2% (145)** | **28.7%** | **29.4%** |
 
-Effort 14's bucket split of that headline: **43.9% head / 31.4% mid / 17.1%
-tail.**
+Bucket splits: effort 12's baseline is **43.9% head / 31.4% mid / 17.1% tail**
+(effort 14); effort 19's headline is **43.9% / 38.7% / 25.7%**.
+
+**The effort 19 row does not stand alone.** 6 of its 17 newly-correct rows were
+won by a ≥0.75-similar same-label sibling in the corpus it added; excluding
+those, micro is **38.5% (+1.9)**. Quote both numbers or neither (§7.3).
 
 ### Regime E — 773-signature propagated ground truth, 562 technique-scoreable
 

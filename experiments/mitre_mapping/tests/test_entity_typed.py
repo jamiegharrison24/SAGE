@@ -143,16 +143,46 @@ def test_typed_markers_accepts_has_types_artifact():
         assert tagger.tag("x scan") == f"x {et.TYPE_MARKERS['TOOL']}  scan"
 
 
-def test_typed_markers_rejects_replace_rare_combination():
-    """Not stacked: replace mode was already measured decisively negative on
-    its own (replace_prereg.md), and replace_spans doesn't understand the
-    3-tuples typed mode produces."""
-    try:
-        et.EntityTagger(merge_rule="gazetteer_only", typed_markers=True,
-                        replace_rare=True)
-        assert False, "expected ValueError"
-    except ValueError:
-        pass
+class _FakeDF:
+    """Mirrors test_entity_replace.py's fixture so these cases need no built
+    DF artifact. Values are the real measured ones."""
+
+    TABLE = {"sql": 0.1206, "cisco": 0.0, "asa 5500 series": 0.0}
+
+    def is_rare(self, text, cutoff):
+        return self.TABLE.get(" ".join(text.lower().split()), 0.0) < cutoff
+
+
+def test_typed_replace_substitutes_the_type_sentinel():
+    """The supervisor-requested arm: replace low-level artefacts, on the NER
+    stack actually in use. A replaced span leaves its TYPE behind, not one
+    generic marker -- that is the whole difference from effort 15."""
+    text = "Cisco ASA 5500 Series overflow"
+    spans = [(0, 5, "ORG"), (6, 21, "PRODUCT")]
+    out, replaced, kept = et.replace_typed_spans(text, spans, _FakeDF(), 0.01)
+    assert replaced == 2 and kept == 0
+    assert et.TYPE_MARKERS["ORG"] in out and et.TYPE_MARKERS["PRODUCT"] in out
+    assert "Cisco" not in out
+
+
+def test_typed_replace_honours_the_df_gate():
+    """A frequent span carries the technique signal and must survive, exactly
+    as in the untyped path -- the gate is the same, only the substitution
+    differs."""
+    text = "SQL injection attempt"
+    out, replaced, kept = et.replace_typed_spans(
+        text, [(0, 3, "PRODUCT")], _FakeDF(), 0.01)
+    assert replaced == 0 and kept == 1
+    assert out == text
+
+
+def test_typed_replace_keeps_different_types_distinguishable():
+    """Why typing should matter in replace mode at all: generic replacement
+    collapses two unrelated rules onto the same string, typed replacement
+    only collapses same-kind entities."""
+    a, _, _ = et.replace_typed_spans("Cisco reload", [(0, 5, "ORG")], _FakeDF(), 0.01)
+    b, _, _ = et.replace_typed_spans("Cisco scan", [(0, 5, "PRODUCT")], _FakeDF(), 0.01)
+    assert a.split()[0] != b.split()[0]
 
 
 def test_fingerprint_differs_between_typed_and_untyped():

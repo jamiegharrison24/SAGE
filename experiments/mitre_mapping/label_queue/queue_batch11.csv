@@ -1,0 +1,51 @@
+signature
+GPL WEB_SERVER Oracle Java Process Manager access
+ET EXPLOIT Apache Struts 2 REST Plugin XStream RCE (ProcessBuilder)
+ET WORM TheMoon.linksys.router 1
+ET WEB_SPECIFIC_APPS MODx CMS snippet.reflect.php reflect_base Remote File Inclusion
+ET WEB_SPECIFIC_APPS PHP phpMyAgenda rootagenda Remote File Include Attempt
+ET WEB_SPECIFIC_APPS MAXcms fm_includes_special Parameter Remote File Inclusion Attempt
+GPL EXPLOIT CodeRed v2 root.exe access
+ET WEB_SPECIFIC_APPS PHP Classifieds class.phpmailer.php lang_path Parameter Remote File Inclusion Attempt
+ETPRO SCAN IPMI Get Authentication Request (null seq number - null sessionID)
+ETPRO ATTACK_RESPONSE MongoDB Version Request
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 2
+GPL WEB_SERVER Tomcat server snoop access
+ET EXPLOIT Samba Arbitrary Module Loading Vulnerability (NT Create AndX .so) (CVE-2017-7494)
+GPL WEB_SERVER services.cnf access
+GPL WEB_SERVER service.cnf access
+GPL WEB_SERVER authors.pwd access
+GPL EXPLOIT administrators.pwd access
+ETPRO ATTACK_RESPONSE MongoDB Database Enumeration Request
+ET WEB_SPECIFIC_APPS SAPID get_infochannel.inc.php Remote File inclusion Attempt
+ET WEB_SPECIFIC_APPS Request to Wordpress W3TC Plug-in dbcache Directory
+ET POLICY SMB2 NT Create AndX Request For a .sys File - Possible Lateral Movement
+ET POLICY Powershell Command With Encoded Argument Over SMB - Likely Lateral Movement
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 223
+ET WEB_SPECIFIC_APPS Golem Gaming Portal root_path Parameter Remote File inclusion Attempt
+ET WEB_SPECIFIC_APPS Possible OpenSiteAdmin pageHeader.php Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS Horde type Parameter Local File Inclusion Attempt
+ET EXPLOIT ETERNALBLUE Probe Vulnerable System Response MS17-010
+ET WEB_SPECIFIC_APPS Joomla swMenuPro ImageManager.php Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS TECHNOTE shop_this_skin_path Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS OpenX phpAdsNew phpAds_geoPlugin Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS YapBB class_yapbbcooker.php cfgIncludeDirectory Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Joomla Simple RSS Reader admin.rssreader.php mosConfig_live_site Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS FormMailer formmailer.admin.inc.php BASE_DIR Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS phptraverse mp3_id.php GLOBALS Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS phpSkelSite theme parameter remote file inclusion
+ET WEB_SPECIFIC_APPS Joomla Dada Mail Manager Component config.dadamail.php GLOBALS Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Possible eFront database.php Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS PointComma pctemplate.php pcConfig Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS Joomla AjaxChat Component ajcuser.php GLOBALS Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS KingCMS menu.php CONFIG Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS ProdLer prodler.class.php sPath Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS OBOphiX fonctions_racine.php chemin_lib parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS SERWeb load_lang.php configdir Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Sisplet CMS komentar.php site_path Parameter Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS PHP-Paid4Mail RFI attempt
+ET WEB_SPECIFIC_APPS Mambo Component com_smf smf.php Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS PHPOF DB_AdoDB.Class.PHP PHPOF_INCLUDE_PATH parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Ve-EDIT edit_htmlarea.php highlighter Parameter Remote File Inclusion
+ET POLICY TLS possible TOR SSL traffic
+ET WEB_SPECIFIC_APPS ProjectButler RFI attempt

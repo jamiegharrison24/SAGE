@@ -1,0 +1,51 @@
+signature
+ET WEB_SPECIFIC_APPS Possible Mambo/Joomla! com_koesubmit Component 'koesubmit.php' Remote File Inclusion Attempt
+ET WEB_SPECIFIC_APPS Joomla Onguma Time Sheet Component onguma.class.php mosConfig_absolute_path Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Possible JBoss JMX Console Beanshell Deployer WAR Upload and Deployment Exploit Attempt
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php icerikyolu Parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS Enthusiast path parameter Remote File Inclusion
+ET WEB_SPECIFIC_APPS SERWeb main_prepend.php functionsdir Parameter Remote File Inclusion
+ET POLICY Powershell Command With Execution Bypass Argument Over SMB - Likely Lateral Movement
+ET EXPLOIT Samba Arbitrary Module Loading Vulnerability (.so file write to share) (CVE-2017-7494)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 122
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 236
+ET EXPLOIT Possible ETERNALBLUE MS17-010 Heap Spray
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 630
+SURICATA HTTP invalid transfer encoding value in request
+ET POLICY Unsupported/Fake Windows NT Version 5.0
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 120
+ET POLICY WMIC WMI Request Over SMB - Likely Lateral Movement
+GPL WEB_SERVER DELETE attempt
+ET POLICY SMB Remote AT Scheduled Job Create Request - Possible Lateral Movement
+ET EXPLOIT D-Link Devices Home Network Administration Protocol Command Execution
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 580
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 631
+ET WEB_SPECIFIC_APPS Opencadastre soustab.php script Local File Inclusion Vulnerability
+ET EXPLOIT Possible ETERNALBLUE MS17-010 Echo Response
+ETPRO WEB_SERVER JexBoss Common URI struct Observed 2 (INBOUND)
+SURICATA HTTP invalid content length field in request
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 338
+SURICATA HTTP request field missing colon
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 274
+ETPRO WEB_SERVER Possible Information Leak Vuln CVE-2015-1648
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 616
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 639
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 250
+ET EXPLOIT Cisco Catalyst Remote Code Execution (CVE-2017-3881)
+SURICATA HTTP multipart generic error
+ET EXPLOIT Possible ETERNALBLUE Probe MS17-010 (Generic Flags)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 666
+ET WEB_SPECIFIC_APPS WHMCompleteSolution templatefile Parameter Local File Inclusion Attempt
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 339
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 180
+GPL SMTP vrfy root
+ET EXPLOIT Possible ETERNALBLUE Probe MS17-010 (MSF style)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 509
+ET WEB_SPECIFIC_APPS Microhard Systems 3G/4G Cellular Ethernet and Serial Gateway - Default Credentials
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 485
+ET POLICY AOL Toolbar User-Agent (AOLToolbar)
+ET EXPLOIT Possible DOUBLEPULSAR Beacon Response
+ET WEB_SPECIFIC_APPS Zen Cart loader_file Parameter Local File Inclusion Attempt
+ET EXPLOIT Apache Struts 2 REST Plugin (ProcessBuilder)
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 255
+ETPRO WEB_SERVER SQLMap Scan Tool User Agent

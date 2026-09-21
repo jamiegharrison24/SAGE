@@ -428,6 +428,51 @@ def inject_typed_markers(text: str, typed_spans: Sequence[Tuple[int, int, str]])
     return out
 
 
+def replace_typed_spans(text: str, typed_spans: Sequence[Tuple[int, int, str]],
+                        df_table, cutoff: float,
+                        style: str = DEFAULT_REPLACEMENT_STYLE) -> Tuple[str, int, int]:
+    """Replace-mode with a per-type substitution -- the supervisor-requested
+    "replace the low-level artefacts" arm, run on the NER stack actually in
+    use (SecureModernBERT + typed markers) rather than effort 15's
+    GLiNER + generic `<ENTITY>`.
+
+    Same DF gate as `replace_spans`: a span is only replaced when its measured
+    corpus document frequency is below `cutoff`, so `SQL` (12.1%) survives and
+    `ASA 5500 Series` (0.00%) does not. The difference is what gets left
+    behind -- `qqe_productqq` rather than one generic marker, so replacement
+    collapses two rules onto the same string *only when they carry the same
+    kind of entity*. `nmap scan` and `cisco reload` stop being alike under
+    typing, where generic replacement made them identical.
+
+    Note `sentinel` is degenerate here and aliases `marker`: the typed
+    markers are already collision-free `qq...qq` tokens, so there is no
+    separate "does a placeholder collide" question left to ask.
+    """
+    if style not in REPLACEMENT_STYLES:
+        raise ValueError(f"unknown replacement style {style!r}; "
+                         f"expected one of {REPLACEMENT_STYLES}")
+
+    replaced = kept = 0
+    out = text
+    for start, end, etype in sorted(typed_spans, reverse=True):
+        if df_table.is_rare(text[start:end], cutoff):
+            sub = "" if style == "drop" else TYPE_MARKERS.get(
+                etype, TYPE_MARKERS[UNTYPED_TYPE])
+            out = out[:start] + sub + out[end:]
+            replaced += 1
+        else:
+            kept += 1
+    out = " ".join(out.split())
+
+    # Same empty-document floor as the untyped path: a title that IS one
+    # entity ("Mimikatz") is fully covered by its own span, and under `drop`
+    # that erases the text, leaving an all-zero TF-IDF row that still emits a
+    # confident-looking prediction from no information.
+    if not out:
+        return text, 0, len(typed_spans)
+    return out, replaced, kept
+
+
 def replace_spans(text: str, spans: Sequence[Tuple[int, int]],
                   df_table, cutoff: float,
                   marker: str = MARKER,
@@ -518,15 +563,6 @@ class EntityTagger:
         if ner_backend not in NER_BACKENDS:
             raise ValueError(f"unknown ner_backend {ner_backend!r}; "
                              f"expected one of {list(NER_BACKENDS)}")
-        if typed_markers and replace_rare:
-            # Not measured together deliberately (advisor note, effort 17):
-            # replace-mode was already measured decisively negative on its
-            # own (replace_prereg.md, -5.0 to -5.8 macro), so stacking a
-            # second changed variable on top gives an unreadable result.
-            # `replace_spans` also only understands (start, end) pairs, not
-            # the (start, end, etype) triples typed mode produces.
-            raise ValueError("typed_markers + replace_rare is not supported; "
-                             "these are separate, un-stacked experiment arms")
         self.typed = typed_markers
         self.replace_rare = replace_rare
         self.df_cutoff = float(df_cutoff)
@@ -692,15 +728,24 @@ class EntityTagger:
         self.calls += 1
         if self.typed:
             # Separate branch, not a fallthrough: typed spans are 3-tuples
-            # (start, end, etype), and replace_rare is rejected for this mode
-            # in __init__, so there is nothing past this to share with the
-            # untyped path below.
+            # (start, end, etype) and both the augment and replace paths need
+            # the type, so neither shares code with the untyped path below.
             typed_spans = merge_spans(self._spans_for(text), self.merge_rule,
                                       with_types=True)
             if not typed_spans:
                 return text
-            self.tagged += 1
-            return inject_typed_markers(text, typed_spans)
+            if not self.replace_rare:
+                self.tagged += 1
+                return inject_typed_markers(text, typed_spans)
+
+            out, replaced, kept = replace_typed_spans(
+                text, typed_spans, self.df_table, self.df_cutoff,
+                style=self.replacement_style)
+            self.replaced += replaced
+            self.kept_frequent += kept
+            if replaced:
+                self.tagged += 1
+            return out
 
         merged = merge_spans(self._spans_for(text), self.merge_rule)
         if not merged:

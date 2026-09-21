@@ -1,0 +1,446 @@
+msg,technique_ids,tactic_ids
+GPL RPC portmap listing UDP 111,T1046,TA0007
+ET SCAN Potential VNC Scan 5800-5820,T1046,TA0007
+ET SCAN NETWORK Incoming Masscan detected,T1595,TA0043
+GPL WEB_SERVER perl post attempt,T1190,TA0001
+ET WEB_SERVER Tilde in URI - potential .inc source disclosure vulnerability,T1595.002,TA0043
+ET WEB_SPECIFIC_APPS p-Table for WordPress wptable-tinymce.php ABSPATH Parameter RFI Attempt,T1190,TA0001
+GPL EXPLOIT ISAPI .idq attempt,T1190,TA0001
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (gggatat456.com),T1498,TA0040
+ET POLICY Suspicious inbound to mySQL port 3306,T1046,TA0007
+ET WEB_SERVER SQL Injection Local File Access Attempt Using LOAD_FILE,T1190,TA0001
+ET WEB_SERVER SELECT USER SQL Injection Attempt in URI,T1190,TA0001
+ET WEB_SERVER PHP Possible php Remote File Inclusion Attempt,T1190,TA0001
+ET SCAN Behavioral Unusual Port 135 traffic Potential Scan or Infection,T1046,TA0007
+ET POLICY SMB2 NT Create AndX Request For a .bat File,T1105,TA0011
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),T1595,TA0043
+ET SCAN OpenVAS User-Agent Inbound,T1595.002,TA0043
+ET WEB_SERVER PHP SESSION SuperGlobal in URI,T1190,TA0001
+GPL RPC xdmcp info query,T1046,TA0007
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php sayfaid Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS BASE base_stat_common.php remote file include,T1190,TA0001
+GPL FTP CWD .... attempt,T1190,TA0001
+ET WEB_SERVER PHP ENV SuperGlobal in URI,T1190,TA0001
+ET WEB_SPECIFIC_APPS PithCMS oldnews_reader.php lang Parameter Local File Inclusion Attempt,T1190,TA0001
+ET POLICY MS Remote Desktop Administrator Login Request,T1021.001,TA0008
+ET WEB_SERVER cmd.exe In URI - Possible Command Execution Attempt,T1059.003,TA0002
+ET WEB_SERVER PHP Possible https Local File Inclusion Attempt,T1190,TA0001
+GPL NETBIOS SMB-DS Session Setup NTMLSSP asn1 overflow attempt,T1210,TA0008
+ET CURRENT_EVENTS Terse alphanumeric executable downloader high likelihood of being hostile,T1105,TA0011
+GPL EXPLOIT /iisadmpwd/aexp2.htr access,T1190,TA0001
+ET WEB_SPECIFIC_APPS KR-Web krgourl.php DOCUMENT_ROOT Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET DOS Microsoft Remote Desktop (RDP) Syn then Reset 30 Second DoS Attempt,T1498,TA0040
+GPL FTP CWD ~root attempt,T1190,TA0001
+GPL WEB_SERVER writeto.cnf access,T1595.002,TA0043
+GPL WEB_SERVER service.pwd,T1595.002,TA0043
+GPL NETBIOS SMB-DS ADMIN$ share access,T1021.002,TA0008
+GPL POLICY PCAnywhere server response,T1046,TA0007
+ET WEB_SERVER open_basedir PHP config option in uri,T1190,TA0001
+ET ATTACK_RESPONSE Possible /etc/passwd via HTTP (linux style),T1003.008,TA0006
+ET WEB_SERVER /etc/shadow Detected in URI,T1003.008,TA0006
+ET TROJAN Windows WMIC SERVICE get Microsoft Windows DOS prompt command exit OUTBOUND,T1007,TA0007
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - ipconfig command output,T1016,TA0007
+ET TROJAN Windows WMIC NIC get Microsoft Windows DOS prompt command exit OUTBOUND,T1016,TA0007
+ET TROJAN Windows nbtstat -n Microsoft Windows DOS prompt command exit OUTBOUND,T1016,TA0007
+ET TROJAN Windows nbtstat -r Microsoft Windows DOS prompt command exit OUTBOUND,T1016,TA0007
+ET POLICY Possible IP Check api.ipify.org,T1016.001,TA0007
+ET TROJAN Windows nbtstat -a Microsoft Windows DOS prompt command exit OUTBOUND,T1018,TA0007
+ET POLICY MS Terminal Server Root login,T1021.001,TA0008
+ET POLICY RDP connection confirm,T1021.001,TA0008
+ET POLICY Powershell Activity Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET POLICY Powershell Command With Hidden Window Argument Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET POLICY Powershell Command With No Profile Argument Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET POLICY Powershell Command With NonInteractive Argument Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET ATTACK_RESPONSE Output of id command from HTTP server,T1033,TA0007
+ET TROJAN Windows quser Microsoft Windows DOS prompt command exit OUTBOUND,T1033,TA0007
+ET TROJAN Windows qwinsta Microsoft Windows DOS prompt command exit OUTBOUND,T1033,TA0007
+ET INFO Possible Windows executable sent when remote host claims to send a Text File,T1036.008,TA0005
+ET POLICY Suspicious inbound to MSSQL port 1433,T1046,TA0007
+ET POLICY Suspicious inbound to Oracle SQL port 1521,T1046,TA0007
+ET POLICY Suspicious inbound to PostgreSQL port 5432,T1046,TA0007
+ET POLICY Suspicious inbound to mSQL port 4333,T1046,TA0007
+ET SCAN Behavioral Unusual Port 137 traffic Potential Scan or Infection,T1046,TA0007
+ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection,T1046,TA0007
+ET SCAN Behavioral Unusual Port 1433 traffic Potential Scan or Infection,T1046,TA0007
+ET SCAN Behavioral Unusual Port 1434 traffic Potential Scan or Infection,T1046,TA0007
+ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection,T1046,TA0007
+ET SCAN Behavioral Unusually fast Terminal Server Traffic Potential Scan or Infection (Inbound),T1046,TA0007
+ET SCAN NMAP SIP Version Detect OPTIONS Scan,T1046,TA0007
+ET SCAN NMAP SIP Version Detection Script Activity,T1046,TA0007
+ET SCAN Non-Allowed Host Tried to Connect to MySQL Server,T1046,TA0007
+ET SCAN Potential SSH Scan,T1046,TA0007
+ET SCAN Potential SSH Scan OUTBOUND,T1046,TA0007
+ET SCAN Potential VNC Scan 5900-5920,T1046,TA0007
+ET SCAN Suspicious inbound to MSSQL port 1433,T1046,TA0007
+ET SCAN Suspicious inbound to Oracle SQL port 1521,T1046,TA0007
+ET SCAN Suspicious inbound to PostgreSQL port 5432,T1046,TA0007
+ET SCAN Suspicious inbound to mSQL port 4333,T1046,TA0007
+ET SCAN Suspicious inbound to mySQL port 3306,T1046,TA0007
+ET TROJAN Windows nbtstat -s Microsoft Windows DOS prompt command exit OUTBOUND,T1049,TA0007
+ET POLICY SMB Remote AT Scheduled Job Pipe Creation,T1053.002,TA0002;TA0003;TA0004
+ET POLICY SMB2 Remote AT Scheduled Job Create Request,T1053.002,TA0002;TA0003;TA0004
+ET TROJAN Windows WMIC PROCESS get Microsoft Windows DOS prompt command exit OUTBOUND,T1057,TA0007
+ET TROJAN ATTACKER IRCBot - The command completed successfully - PRIVMSG Response,T1059,TA0002
+ET ATTACK_RESPONSE python shell spawn attempt,T1059.006,TA0002
+ET EXPLOIT Possible GoldenPac Priv Esc in-use,T1068,TA0004
+ET TROJAN NgrBot IRC CnC Channel Join,T1071,TA0011
+ET MOBILE_MALWARE Android/Code4hk.A Checkin,T1071.001,TA0011
+ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI,T1078.001,TA0005;TA0003;TA0004;TA0001
+ET SNMP Samsung Printer SNMP Hardcode RW Community String,T1078.001,TA0005;TA0003;TA0004;TA0001
+ET SNMP missing community string attempt 1,T1078.001,TA0005;TA0003;TA0004;TA0001
+ET TROJAN Windows WMIC COMPUTERSYSTEM get Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN Windows WMIC OS get Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN Windows WMIC SERVER get Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN Windows WMIC STARTUP get Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN Windows driverquery -si Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN Windows driverquery -v Microsoft Windows DOS prompt command exit OUTBOUND,T1082,TA0007
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing,T1083,TA0007
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - Directory Listing *nix,T1083,TA0007
+ET TROJAN Windows dir Microsoft Windows DOS prompt command exit OUTBOUND,T1083,TA0007
+ET TROJAN ATTACKER IRCBot - PRIVMSG Response - net command output,T1087,TA0007
+ET TROJAN Windows WMIC NETLOGIN get Microsoft Windows DOS prompt command exit OUTBOUND,T1087,TA0007
+ET ATTACK_RESPONSE Net User Command Response,T1087.001,TA0007
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 155,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 271,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 285,T1090.003,TA0011
+ET CURRENT_EVENTS SUSPICIOUS Firesale gTLD EXE DL with no Referer June 13 2016,T1105,TA0011
+ET INFO Executable Download from dotted-quad Host,T1105,TA0011
+ET SCAN Hydra User-Agent,T1110,TA0006
+ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack,T1110,TA0006
+ET SCAN Multiple MySQL Login Failures Possible Brute Force Attempt,T1110,TA0006
+ET SCAN Potential FTP Brute-Force attempt response,T1110,TA0006
+ET SCAN Rapid IMAP Connections - Possible Brute Force Attack,T1110,TA0006
+ET SCAN Rapid IMAPS Connections - Possible Brute Force Attack,T1110,TA0006
+ET SCAN Rapid POP3 Connections - Possible Brute Force Attack,T1110,TA0006
+ET SCAN Rapid POP3S Connections - Possible Brute Force Attack,T1110,TA0006
+ET TROJAN Windows WMIC SHARE get Microsoft Windows DOS prompt command exit OUTBOUND,T1135,TA0007
+ET ATTACK_RESPONSE Possible BeEF HTTP Headers Inbound,T1189,TA0001
+ET WEB_CLIENT BeEF Cookie Outbound,T1189,TA0001
+ET CURRENT_EVENTS Malformed HeartBeat Request,T1190,TA0001
+ET CURRENT_EVENTS Possible OpenSSL HeartBleed Large HeartBeat Response (Client Init Vuln Server),T1190,TA0001
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 3 (Inbound to Common SSL Port),T1190,TA0001
+ET CURRENT_EVENTS Possible TLS HeartBleed Unencrypted Request Method 4 (Inbound to Common SSL Port),T1190,TA0001
+ET CURRENT_EVENTS Possible ZyXELs ZynOS Configuration Download Attempt (Contains Passwords),T1190,TA0001
+ET CURRENT_EVENTS QNAP Shellshock CVE-2014-6271,T1190,TA0001
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 1,T1190,TA0001
+ET EXPLOIT Possible Postfix CVE-2014-6271 attempt,T1190,TA0001
+ET EXPLOIT Possible Pure-FTPd CVE-2014-6271 attempt,T1190,TA0001
+ET EXPLOIT Possible SpamAssassin Milter Plugin Remote Arbitrary Command Injection Attempt,T1190,TA0001
+ET EXPLOIT Serialized Java Object Calling Common Collection Function,T1190,TA0001
+ET FTP Suspicious Quotation Mark Usage in FTP Username,T1190,TA0001
+ET SCAN Redis SSH Key Overwrite Probing,T1190,TA0001
+"ET WEB_SERVER /bin/bash In URI, Possible Shell Command Execution Attempt Within Web Exploit",T1190,TA0001
+ET WEB_SERVER /bin/sh In URI Possible Shell Command Execution Attempt,T1190,TA0001
+ET WEB_SERVER /system32/ in Uri - Possible Protected Directory Access Attempt,T1190,TA0001
+ET WEB_SERVER Access to /phppath/php Possible Plesk 0-day Exploit June 05 2013,T1190,TA0001
+ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI,T1190,TA0001
+ET WEB_SERVER CRLF Injection - Newline Characters in URL,T1190,TA0001
+ET WEB_SERVER ColdFusion adminapi access,T1190,TA0001
+ET WEB_SERVER ColdFusion administrator access,T1190,TA0001
+ET WEB_SERVER ColdFusion componentutils access,T1190,TA0001
+ET WEB_SERVER Coldfusion cfcexplorer Directory Traversal,T1190,TA0001
+ET WEB_SERVER DD-WRT Information Disclosure Attempt,T1190,TA0001
+ET WEB_SERVER Exploit Suspected PHP Injection Attack (cmd=),T1190,TA0001
+ET WEB_SERVER Joomla Component SQLi Attempt,T1190,TA0001
+ET WEB_SERVER MYSQL SELECT CONCAT SQL Injection Attempt,T1190,TA0001
+ET WEB_SERVER Onmouseover= in URI - Likely Cross Site Scripting Attempt,T1190,TA0001
+ET WEB_SERVER PHP Possible file Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SERVER PHP REQUEST SuperGlobal in URI,T1190,TA0001
+ET WEB_SERVER PHP SERVER SuperGlobal in URI,T1190,TA0001
+ET WEB_SERVER PHP System Command in HTTP POST,T1190,TA0001
+ET WEB_SERVER PHP tags in HTTP POST,T1190,TA0001
+ET WEB_SERVER PHP.//Input in HTTP POST,T1190,TA0001
+ET WEB_SERVER Possible Attempt to Get SQL Server Version in URI using SELECT VERSION,T1190,TA0001
+ET WEB_SERVER Possible CVE-2014-3120 Elastic Search Remote Code Execution Attempt,T1190,TA0001
+ET WEB_SERVER Possible CVE-2014-6271 Attempt,T1190,TA0001
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Cookie,T1190,TA0001
+ET WEB_SERVER Possible CVE-2014-6271 Attempt in Headers,T1190,TA0001
+ET WEB_SERVER Possible CVE-2015-1427 Elastic Search Sandbox Escape Remote Code Execution Attempt,T1190,TA0001
+ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access,T1190,TA0001
+ET WEB_SERVER Possible SQL Injection (exec),T1190,TA0001
+ET WEB_SERVER Possible SQL Injection Attempt SELECT FROM,T1190,TA0001
+ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT,T1190,TA0001
+ET WEB_SERVER Possible SQLi xp_cmdshell POST body,T1190,TA0001
+ET WEB_SERVER Possible XXE SYSTEM ENTITY in POST BODY.,T1190,TA0001
+ET WEB_SERVER Possible bash shell piped to dev tcp Inbound to WebServer,T1190,TA0001
+ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt,T1190,TA0001
+ET WEB_SERVER Suspicious Chmod Usage in URI,T1190,TA0001
+ET WEB_SERVER Tilde in URI - potential .php~ source disclosure vulnerability,T1190,TA0001
+ET WEB_SERVER allow_url_include PHP config option in uri,T1190,TA0001
+ET WEB_SERVER auto_prepend_file PHP config option in uri,T1190,TA0001
+ET WEB_SERVER disable_functions PHP config option in uri,T1190,TA0001
+ET WEB_SERVER safe_mode PHP config option in uri,T1190,TA0001
+ET WEB_SERVER suhosin.simulation PHP config option in uri,T1190,TA0001
+ET WEB_SPECIFIC_APPS Achievo debugger.php config_atkroot parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS AjaxPortal ajaxp_backend.php page Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS AjaxPortal di.php pathtoserverdata Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS AlstraSoft AskMe que_id Parameter SELECT FROM SQL Injection Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS BLOG CMS nsextt parameter Cross Site Scripting Vulnerability,T1190,TA0001
+ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Beerwins PHPLinkAdmin edlink.php linkid Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Community CMS view.php article_id Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS CultBooking lang parameter Local File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Demium CMS urheber.php name Parameter Local File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS DesktopOnNet don3_requiem.php app_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS DesktopOnNet frontpage.php app_path Parameter Remote File Inclusion,T1190,TA0001
+ET POLICY TeamViewer Dyngate User-Agent,T1219,TA0011
+ET CURRENT_EVENTS Likely Linux/Xorddos DDoS Attack Participation (xxxatat456.com),T1498,TA0040
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x03,T1498.002,TA0040
+ET SCAN Apache mod_deflate DoS via many multiple byte Range values,T1499,TA0040
+ET WEB_SERVER Possible Cherokee Web Server GET AUX Request Denial Of Service Attempt,T1499,TA0040
+ET WEB_SERVER Possible IIS Integer Overflow DoS (CVE-2015-1635),T1499,TA0040
+ET WEB_SERVER ColdFusion password.properties access,T1552.001,TA0006
+ET POLICY SMB Executable File Transfer,T1570,TA0008
+ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement,T1570,TA0008
+ET POLICY SMB2 NT Create AndX Request For a Powershell .ps1 File,T1570,TA0008
+ET POLICY SMB2 NT Create AndX Request For an Executable File,T1570,TA0008
+ET POLICY Outbound MSSQL Connection to Non-Standard Port - Likely Malware,T1571,TA0011
+ET POLICY POSSIBLE Web Crawl using Curl,T1595,TA0043
+ET POLICY POSSIBLE Web Crawl using Wget,T1595,TA0043
+ET SCAN NMAP OS Detection Probe,T1595,TA0043
+ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap NSE),T1595,TA0043
+ET SCAN Possible Nmap User-Agent Observed,T1595,TA0043
+ET POLICY Proxy TRACE Request - inbound,T1595.002,TA0043
+ET SCAN Apache mod_proxy Reverse Proxy Exposure 1,T1595.002,TA0043
+ET SCAN DEBUG Method Request with Command,T1595.002,TA0043
+ET SCAN Grendel-Scan Web Application Security Scan Detected,T1595.002,TA0043
+ET SCAN Nessus FTP Scan detected (ftp_anonymous.nasl),T1595.002,TA0043
+ET SCAN Nessus FTP Scan detected (ftp_writeable_directories.nasl),T1595.002,TA0043
+ET SCAN Nessus User Agent,T1595.002,TA0043
+ET SCAN Nikto Web App Scan in Progress,T1595.002,TA0043
+ET SCAN Nmap NSE Heartbleed Request,T1595.002,TA0043
+ET SCAN SFTP/FTP Password Exposure via sftp-config.json,T1595.002,TA0043
+ET SCAN Sqlmap SQL Injection Scan,T1595.002,TA0043
+ET WEB_SERVER PHP Easteregg Information-Disclosure (funny-logo),T1595.002,TA0043
+ET WEB_SERVER PHP Easteregg Information-Disclosure (php-logo),T1595.002,TA0043
+ET WEB_SERVER PHP Easteregg Information-Disclosure (phpinfo),T1595.002,TA0043
+ET WEB_SERVER PHP Easteregg Information-Disclosure (zend-logo),T1595.002,TA0043
+ET WEB_SERVER WEB-PHP phpinfo access,T1595.002,TA0043
+ET SCAN DirBuster Scan in Progress,T1595.003,TA0043
+ET SCAN DirBuster Web App Scan in Progress,T1595.003,TA0043
+ET WEB_SERVER IIS 8.3 Filename With Wildcard (Possible File/Dir Bruteforce),T1595.003,TA0043
+ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY),T1602.002,TA0009
+ET TROJAN Windows gpresult Microsoft Windows DOS prompt command exit OUTBOUND,T1615,TA0007
+ET WEB_SPECIFIC_APPS PHP-CGI query string parameter vulnerability,T1190,TA0001
+GPL ATTACK_RESPONSE id check returned root,T1033,TA0007
+GPL DNS named authors attempt,T1046,TA0007
+GPL DNS named version attempt,T1046,TA0007
+GPL FTP CWD ...,T1190,TA0001
+GPL FTP CWD Root directory transversal attempt,T1190,TA0001
+GPL FTP CWD ~ attempt,T1499,TA0040
+GPL FTP LIST directory traversal attempt,T1190,TA0001
+GPL FTP MKD overflow,T1190,TA0001
+GPL FTP MKD overflow attempt,T1190,TA0001
+GPL FTP PORT bounce attempt,T1046,TA0007
+GPL FTP SITE EXEC attempt,T1190,TA0001
+GPL ICMP_INFO PING *NIX,T1018,TA0007
+GPL ICMP_INFO PING BSDtype,T1018,TA0007
+GPL MISC rsh root,T1021,TA0008
+GPL NETBIOS DCERPC IActivation little endian bind attempt,T1021.003,TA0008
+GPL NETBIOS DCERPC Remote Activation bind attempt,T1210,TA0008
+GPL NETBIOS SMB-DS C$ share access,T1021.002,TA0008
+GPL NETBIOS SMB-DS C$ unicode share access,T1021.002,TA0008
+GPL NETBIOS SMB-DS D$ share access,T1021.002,TA0008
+GPL NETBIOS SMB-DS IPC$ share access,T1021.002,TA0008
+GPL NETBIOS SMB-DS IPC$ unicode share access,T1021.002,TA0008
+GPL NETBIOS SMB-DS Session Setup NTMLSSP unicode asn1 overflow attempt,T1210,TA0008
+GPL NETBIOS SMB-DS repeated logon failure,T1110,TA0006
+GPL POP3 POP3 PASS overflow attempt,T1190,TA0001
+GPL RPC portmap bootparam request TCP,T1046,TA0007
+GPL RPC portmap cachefsd request TCP,T1046,TA0007
+GPL RPC portmap listing TCP 111,T1046,TA0007
+GPL RPC portmap mountd request UDP,T1046,TA0007
+GPL RPC portmap rstatd request TCP,T1046,TA0007
+GPL RPC portmap rusers request TCP,T1046,TA0007
+GPL RPC portmap sadmind request TCP,T1046,TA0007
+GPL RPC portmap ypserv request TCP,T1046,TA0007
+GPL RPC portmap ypupdated request TCP,T1046,TA0007
+GPL SNMP private access udp,T1078.001,TA0005;TA0003;TA0004;TA0001
+GPL SNMP public access udp,T1078.001,TA0005;TA0003;TA0004;TA0001
+GPL WEB_SERVER globals.pl access,T1595.002,TA0043
+GPL WEB_SERVER mod_gzip_status access,T1595.002,TA0043
+ET EXPLOIT NETGEAR WNR2000v5 hidden_lang_avi Stack Overflow (CVE-2016-10174),T1190,TA0001
+GPL EXPLOIT iissamples access,T1595.002,TA0043
+GPL WEB_SERVER 403 Forbidden,T1595.002,TA0043
+ET WEB_SPECIFIC_APPS WEB-PHP RCE PHPBB 2004-1315,T1190,TA0001
+GPL EXPLOIT ISAPI .idq access,T1595.002,TA0043
+GPL EXPLOIT .cnf access,T1595.002,TA0043
+GPL WEB_SERVER .htaccess access,T1595.002,TA0043
+GPL WEB_SERVER global.asa access,T1552.001,TA0006
+GPL EXPLOIT unicode directory traversal attempt,T1190,TA0001
+GPL WEB_SERVER .htpasswd access,T1552.001,TA0006
+ET EXPLOIT ETERNALBLUE Exploit M2 MS17-010,T1210,TA0008
+GPL EXPLOIT .htr access,T1595.002,TA0043
+GPL WEB_SERVER iisadmin access,T1190,TA0001
+GPL WEB_SERVER printenv access,T1595.002,TA0043
+ET TROJAN Generic - POST To .php w/Extended ASCII Characters,T1071.001,TA0011
+ETPRO WEB_SPECIFIC_APPS PHPMoAdmin RCE Attempt,T1190,TA0001
+"SURICATA TLS overflow heartbeat encountered, possible exploit attempt (heartbleed)",T1190,TA0001
+GPL WEB_SERVER /~root access,T1595.002,TA0043
+GPL EXPLOIT iisadmpwd attempt,T1190,TA0001
+GPL EXPLOIT ISAPI .ida access,T1595.002,TA0043
+GPL EXPLOIT /msadc/samples/ access,T1595.002,TA0043
+GPL EXPLOIT fpcount access,T1595.002,TA0043
+ET SCAN NETWORK Outgoing Masscan detected,T1595,TA0043
+ETPRO WEB_SPECIFIC_APPS ipTIME firmware < 9.58 RCE,T1190,TA0001
+GPL WEB_SERVER viewcode access,T1595.002,TA0043
+ET WEB_SPECIFIC_APPS PHP Aardvark Topsites PHP CONFIG PATH Remote File Include Attempt,T1190,TA0001
+GPL WEB_SERVER author.exe access,T1595.002,TA0043
+ET ATTACK_RESPONSE Possible  MS CMD Shell opened on local system 2,T1059.003,TA0002
+ET ATTACK_RESPONSE Windows 7 CMD Shell from Local System,T1059.003,TA0002
+GPL WEB_SERVER Oracle Java Process Manager access,T1595.002,TA0043
+ET EXPLOIT Apache Struts 2 REST Plugin XStream RCE (ProcessBuilder),T1190,TA0001
+ET WORM TheMoon.linksys.router 1,T1190,TA0001
+ET WEB_SPECIFIC_APPS MODx CMS snippet.reflect.php reflect_base Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHP phpMyAgenda rootagenda Remote File Include Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS MAXcms fm_includes_special Parameter Remote File Inclusion Attempt,T1190,TA0001
+GPL EXPLOIT CodeRed v2 root.exe access,T1505.003,TA0003
+ET WEB_SPECIFIC_APPS PHP Classifieds class.phpmailer.php lang_path Parameter Remote File Inclusion Attempt,T1190,TA0001
+ETPRO SCAN IPMI Get Authentication Request (null seq number - null sessionID),T1046,TA0007
+ETPRO ATTACK_RESPONSE MongoDB Version Request,T1046,TA0007
+ET EXPLOIT Possible CVE-2014-3704 Drupal SQLi attempt URLENCODE 2,T1190,TA0001
+GPL WEB_SERVER Tomcat server snoop access,T1595.002,TA0043
+ET EXPLOIT Samba Arbitrary Module Loading Vulnerability (NT Create AndX .so) (CVE-2017-7494),T1210,TA0008
+GPL WEB_SERVER services.cnf access,T1595.002,TA0043
+GPL WEB_SERVER service.cnf access,T1595.002,TA0043
+GPL WEB_SERVER authors.pwd access,T1552.001,TA0006
+GPL EXPLOIT administrators.pwd access,T1552.001,TA0006
+ETPRO ATTACK_RESPONSE MongoDB Database Enumeration Request,T1046,TA0007
+ET WEB_SPECIFIC_APPS SAPID get_infochannel.inc.php Remote File inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Request to Wordpress W3TC Plug-in dbcache Directory,T1595.002,TA0043
+ET POLICY SMB2 NT Create AndX Request For a .sys File - Possible Lateral Movement,T1570,TA0008
+ET POLICY Powershell Command With Encoded Argument Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 223,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS Golem Gaming Portal root_path Parameter Remote File inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible OpenSiteAdmin pageHeader.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Horde type Parameter Local File Inclusion Attempt,T1190,TA0001
+ET EXPLOIT ETERNALBLUE Probe Vulnerable System Response MS17-010,T1595.002,TA0043
+ET WEB_SPECIFIC_APPS Joomla swMenuPro ImageManager.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS TECHNOTE shop_this_skin_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS OpenX phpAdsNew phpAds_geoPlugin Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS YapBB class_yapbbcooker.php cfgIncludeDirectory Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Simple RSS Reader admin.rssreader.php mosConfig_live_site Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS FormMailer formmailer.admin.inc.php BASE_DIR Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS phptraverse mp3_id.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS phpSkelSite theme parameter remote file inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Dada Mail Manager Component config.dadamail.php GLOBALS Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible eFront database.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PointComma pctemplate.php pcConfig Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla AjaxChat Component ajcuser.php GLOBALS Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS KingCMS menu.php CONFIG Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS ProdLer prodler.class.php sPath Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS OBOphiX fonctions_racine.php chemin_lib parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS SERWeb load_lang.php configdir Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Sisplet CMS komentar.php site_path Parameter Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHP-Paid4Mail RFI attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Mambo Component com_smf smf.php Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS PHPOF DB_AdoDB.Class.PHP PHPOF_INCLUDE_PATH parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Ve-EDIT edit_htmlarea.php highlighter Parameter Remote File Inclusion,T1190,TA0001
+ET POLICY TLS possible TOR SSL traffic,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS ProjectButler RFI attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible Mambo/Joomla! com_koesubmit Component 'koesubmit.php' Remote File Inclusion Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS Joomla Onguma Time Sheet Component onguma.class.php mosConfig_absolute_path Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Possible JBoss JMX Console Beanshell Deployer WAR Upload and Deployment Exploit Attempt,T1190,TA0001
+ET WEB_SPECIFIC_APPS phPortal gunaysoft.php icerikyolu Parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS Enthusiast path parameter Remote File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS SERWeb main_prepend.php functionsdir Parameter Remote File Inclusion,T1190,TA0001
+ET POLICY Powershell Command With Execution Bypass Argument Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET EXPLOIT Samba Arbitrary Module Loading Vulnerability (.so file write to share) (CVE-2017-7494),T1210,TA0008
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 122,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 236,T1090.003,TA0011
+ET EXPLOIT Possible ETERNALBLUE MS17-010 Heap Spray,T1210,TA0008
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 630,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 120,T1090.003,TA0011
+ET POLICY WMIC WMI Request Over SMB - Likely Lateral Movement,T1021.002,TA0008
+ET POLICY SMB Remote AT Scheduled Job Create Request - Possible Lateral Movement,T1053.002,TA0002;TA0003;TA0004
+ET EXPLOIT D-Link Devices Home Network Administration Protocol Command Execution,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 580,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 631,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS Opencadastre soustab.php script Local File Inclusion Vulnerability,T1190,TA0001
+ET EXPLOIT Possible ETERNALBLUE MS17-010 Echo Response,T1210,TA0008
+ETPRO WEB_SERVER JexBoss Common URI struct Observed 2 (INBOUND),T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 338,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 274,T1090.003,TA0011
+ETPRO WEB_SERVER Possible Information Leak Vuln CVE-2015-1648,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 616,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 639,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 250,T1090.003,TA0011
+ET EXPLOIT Cisco Catalyst Remote Code Execution (CVE-2017-3881),T1190,TA0001
+ET EXPLOIT Possible ETERNALBLUE Probe MS17-010 (Generic Flags),T1595.002,TA0043
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 666,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS WHMCompleteSolution templatefile Parameter Local File Inclusion Attempt,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 339,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 180,T1090.003,TA0011
+GPL SMTP vrfy root,T1087.003,TA0007
+ET EXPLOIT Possible ETERNALBLUE Probe MS17-010 (MSF style),T1595.002,TA0043
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 509,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS Microhard Systems 3G/4G Cellular Ethernet and Serial Gateway - Default Credentials,T1078.001,TA0005;TA0003;TA0004;TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 485,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS Zen Cart loader_file Parameter Local File Inclusion Attempt,T1190,TA0001
+ET EXPLOIT Apache Struts 2 REST Plugin (ProcessBuilder),T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 255,T1090.003,TA0011
+ETPRO WEB_SERVER SQLMap Scan Tool User Agent,T1595.002,TA0043
+ET WEB_SPECIFIC_APPS evision cms addplain.php module parameter Local File Inclusion,T1190,TA0001
+ET WEB_SPECIFIC_APPS IBSng str Parameter Cross Site Scripting Attempt,T1190,TA0001
+ET POLICY Possible External IP Lookup ipinfo.io,T1016.001,TA0007
+ET WEB_SPECIFIC_APPS PHP Booking Calendar page_info_message parameter Cross-Site Scripting Vulnerability,T1190,TA0001
+ET TROJAN Suspicious Malformed Double Accept Header,T1071.001,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 611,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 634,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 91,T1090.003,TA0011
+ET DOS Possible NTP DDoS Inbound Frequent Un-Authed GET_RESTRICT Requests IMPL 0x03,T1498.002,TA0040
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 480,T1090.003,TA0011
+ET TOR Known Tor Exit Node Traffic group 50,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 50,T1090.003,TA0011
+GPL SMTP expn root,T1087.003,TA0007
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 273,T1090.003,TA0011
+ET WEB_SERVER  ColdFusion path disclosure to get the absolute path,T1190,TA0001
+ET WEB_SPECIFIC_APPS PozScripts Business Directory Script cid parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS JobHut browse.php pk Parameter SQL Injection,T1190,TA0001
+ET WEB_SPECIFIC_APPS Turnkeyforms Software Directory showcategory.php cid parameter SQL Injection,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 222,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 497,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 633,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS Noname Media Photo Galerie Standard SQL Injection Attempt -- view.php id SELECT,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 141,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site showcategory.php cid Parameter SQL Injection,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 149,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 67,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS axdcms aXconf Parameter Local File Inclusion Attempt,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 594,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 269,T1090.003,TA0011
+ET NETBIOS Microsoft Windows NETAPI Stack Overflow Inbound - MS08-067 (15),T1210,TA0008
+ET NETBIOS Microsoft Windows NETAPI Stack Overflow Inbound - MS08-067 (25),T1210,TA0008
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 501,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 241,T1090.003,TA0011
+ET TOR Known Tor Exit Node Traffic group 67,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 115,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 258,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 336,T1090.003,TA0011
+ET MALWARE Spyware Related User-Agent (UtilMind HTTPGet),T1071.001,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 493,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS WikyBlog which Parameter Cross Site Scripting Attempt,T1190,TA0001
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 226,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 143,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 553,T1090.003,TA0011
+ET WEB_SPECIFIC_APPS SFS EZ Hotscripts-like Site software-description.php id Parameter SQL Injection,T1190,TA0001
+ETPRO EXPLOIT SOAP Netgear WNDR Auth Bypass/Info Disclosure,T1190,TA0001
+ET WEB_SPECIFIC_APPS Fork-CMS js.php module parameter Local File Inclusion Attempt,T1190,TA0001
+ET POLICY SMB NT Create AndX Request For an Executable File,T1570,TA0008
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 289,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 266,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 197,T1090.003,TA0011
+ET POLICY DNS Query for TOR Hidden Domain .onion Accessible Via TOR,T1090.003,TA0011
+ET CURRENT_EVENTS SUSPICIOUS Possible CVE-2017-0199 IE7/NoCookie/Referer HTA dl,T1105,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 504,T1090.003,TA0011
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 354,T1090.003,TA0011
+ET CURRENT_EVENTS Observed Coin-Hive In Browser Mining Domain (coin-hive .com in TLS SNI),T1496,TA0040
+ET CURRENT_EVENTS Observed Malicious SSL Cert (Coin-Hive In Browser Mining),T1496,TA0040
+ET MALWARE Lavasoft PUA/Adware Client Install,T1105,TA0011
+ET EXPLOIT Linksys E-Series Device RCE Attempt,T1190,TA0001
+ET WEB_CLIENT Possible BeEF Module in use,T1189,TA0001
+ET POLICY Possible External IP Lookup Domain Observed in SNI (ipinfo. io),T1016.001,TA0007
+ET EXPLOIT Netgear passwordrecovered.cgi attempt,T1190,TA0001
+ET POLICY Request for Coinhive Browser Monero Miner M2,T1496,TA0040
+ET POLICY Possible External IP Lookup SSL Cert Observed (ipinfo.io),T1016.001,TA0007
+ET TOR Known Tor Relay/Router (Not Exit) Node Traffic group 433,T1090.003,TA0011
