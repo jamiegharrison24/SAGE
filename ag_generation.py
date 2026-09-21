@@ -9,6 +9,7 @@ Entry point: make_attack_graphs(state_sequences, severe_sinks, path_to_traces, a
 import os
 import subprocess
 
+from signatures import taxonomy
 from signatures.mappings import macro_inv, micro, micro2macro, verbose_micro
 
 
@@ -311,7 +312,7 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
             for vname, signatures in node_signatures.items():
                 vname_parts = vname.split('|')
                 mcat = vname_parts[0]
-                mcat = macro_inv[micro2macro['MicroAttackStage.' + mcat]]
+                mcat = taxonomy.shape_index(mcat)
                 shape = shapes[mcat]
                 # If it's oval, we don't do anything because it is not a high-sev sink.
                 # Low-sev nodes are named `mcat|mserv` (no state ID), so there is no ID to look up either.

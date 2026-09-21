@@ -2798,6 +2798,12 @@ label** under `CONVENTION.md`'s grammar — Suricata protocol-parser anomalies
 (`invalid TLS record version`, `missing Host header`), policy traffic, benign
 chat. Together they are **~25% of all alert records**.
 
+> **Measured correction (cptc-2017).** The ~25% figure is across all three
+> datasets combined and is dominated by ccdc (1.05M of 1.43M records) plus
+> one NETGEAR signature at 374k. On cptc-2017 alone only **2.0%** of alerts
+> are lost under `drop`, making the drop-vs-catchall axis nearly a no-op
+> there (6 episodes). Re-measure per dataset before quoting it.
+
 AIF assigns those alerts a low-severity stage. **ATT&CK has no vocabulary for
 them at all** — "the TLS parser saw a malformed record" is not adversary
 behaviour and no technique describes it. So the ATT&CK arm will simply have
@@ -2834,12 +2840,98 @@ exactly, which means episode generation, model learning and AG generation need
 no structural change — the substitution reduces to a new lookup table plus a
 trace-symbol table.
 
+> **Measured correction.** This prediction is wrong. The alphabet *shrinks*:
+> 20 symbols under AIF, 16 under hybrid, 9 under tactic (cptc-2017). Symbols
+> are `mcat|mserv` pairs, and collapsing stage codes collapses pairs faster
+> than technique granularity expands them, so the expected consequence
+> (sparser transitions, more sinks) should go the other way.
+
 One consequence to anticipate rather than discover: the FlexFringe alphabet is
 `mcat|mserv` pairs, so moving from ~12 stages to ~33 techniques multiplies it.
 Sparser transitions mean more sinks, and the baseline already resolves **38%
 of scored steps** through sinks (`docs/BASELINE_METRICS.md`). If that degrades
 sharply it is a result about the taxonomy's granularity being wrong for this
 model class, not a bug to tune away.
+
+### 8a.5 Objective granularity: tactic, technique, or hybrid — an open question, not a settled one
+
+**Decision recorded 2026-09-21.** SAGE draws one attack graph per (victim,
+*objective*), where an objective is any high-severity stage. The taxonomy
+chosen therefore decides how many graphs exist and what each one means:
+
+| annotation level | distinct high-severity objectives |
+|---|---:|
+| AIF (current) | **13** — `NETWORK_DOS`, `DATA_EXFILTRATION`, `DATA_ENCRYPTION`, `DEFACEMENT`, … |
+| ATT&CK **tactics** | **1** — `impact` (`exfiltration` never fires in these datasets) |
+| ATT&CK **techniques** | **4** — the impact/DoS techniques the labels actually use |
+
+At tactic level, a denial-of-service objective and a ransomware objective
+against the same victim **become the same graph**, because ATT&CK files both
+under Impact. That is a real consequence of the abstraction level, not a
+mapping error.
+
+**Both directions are defensible, which is why this is recorded as a question
+rather than resolved by argument.** Fewer objectives means coarser graphs
+that blur distinct attacker goals — bad for the proposal's predicted
+"more coherent, easier to interpret" outcome. But it also means *fewer,
+denser graphs*, which is unambiguously better for the **alert compression
+ratio** (§Results Evaluation) and plausibly better for an analyst who has to
+read them. SAGE's stated purpose is reducing triage burden, and one graph per
+victim is easier to triage than thirteen.
+
+**This is measurable, so it should be measured rather than argued.** The
+evaluation framework already carries both sides of the trade-off: alert
+compression favours aggregation, while branching factor, path linearity and
+graph density characterise what aggregation costs in structure. Running the
+arms and reporting the trade-off is a stronger result than picking one and
+defending it.
+
+**Chosen implementation: hybrid.** Tactics drive severity (preserving the
+digit-count encoding, so no pipeline stage changes), while techniques carry
+node identity at the medium and high tiers where graph meaning lives. Only
+the *low* tier collapses to tactic level — 18 low-tier techniques do not fit
+the 9 single-digit codes available, and scanning/discovery is where
+granularity matters least (AIF itself has only 7 low stages). The tactic-only
+arm remains buildable (`build_mitre_mapping.py`) so the granularity
+trade-off can be measured rather than assumed.
+
+### 8a.6 Implementation record — what the substitution actually touched
+
+Built 2026-09-21, switchable via `SAGE_TAXONOMY` (default `aif`, unchanged).
+Recorded here because the effort landed differently from the proposal's
+description of it.
+
+**The proposal calls this "replacing a hardcoded lookup table". It is four
+places, not one**, and three of them are invisible until something breaks:
+
+| file | dependency on AIF | failure mode if missed |
+|---|---|---|
+| `alert_loading.py` | signature -> stage code | the lookup the proposal names |
+| `model_learning.py` | `small_mapping[mcat]` for FlexFringe symbols | `KeyError` on every trace |
+| `ag_generation.py` | `micro2macro` -> node shape | `KeyError`; ATT&CK has no macro layer at all |
+| `plotting.py` | histogram indexes a fixed AIF code list | `ValueError: N is not in list`, then a tick/label count mismatch |
+
+That `ag_generation` needs a *macro* stage is the substantive one: AIF is a
+two-level taxonomy (micro stage -> macro stage -> node shape) and ATT&CK is
+not, so the shape bucket is taken from the severity tier instead. The three
+buckets (oval / box / hexagon) happen to correspond exactly to low / medium /
+high, so the visual grammar survives unchanged.
+
+**The AIF arm is kept bit-identical on purpose.** `_aif_attack_stage_mapping()`
+retains the original body and `plotting.py` branches on `taxonomy.IS_MITRE`.
+An intermediate version of this change quietly altered the AIF histogram from
+36 bars to 34 by deriving labels from the active taxonomy in both arms --
+cosmetic, but it would have made the baseline something other than the
+baseline, which is the one property the comparison cannot do without.
+
+**Status: not yet run end to end.** FlexFringe is a Linux ELF binary and WSL
+is unavailable on the development machine (`Class not registered`), so the
+S-PDFA and attack-graph stages -- and therefore the evaluation diff that is
+task 4 -- need a working FlexFringe. Everything upstream is pure Python and
+runs: `compare_taxonomies.py` executes each arm to the point of trace
+generation and reports alerts surviving, episode and subsequence counts,
+alphabet size and objectives present, which is enough to see how each arm
+reshapes the input before any modelling.
 
 ### 8a.4 How the pieces sit together
 

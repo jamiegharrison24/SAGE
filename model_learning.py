@@ -19,6 +19,7 @@ import subprocess
 from collections import defaultdict
 
 from signatures.mappings import small_mapping, rev_smallmapping
+from signatures import taxonomy
 
 
 def _most_frequent(serv):
@@ -66,7 +67,7 @@ def generate_traces(subsequences, datafile):
         max_services = [_most_frequent(x[6]) for x in episodes]
 
         # symbols = [str(mcat) + ":" + str(num_serv) + "," + str(mserv) for (mcat, num_serv, mserv) in zip(mcats, num_services, max_services)]  # Multivariate case (TODO: has to be fixed if used)
-        symbols = [small_mapping[mcat] + "|" + mserv for mcat, mserv in zip(mcats, max_services)]
+        symbols = [taxonomy.trace_symbol(mcat) + "|" + mserv for mcat, mserv in zip(mcats, max_services)]
         unique_symbols.update(symbols)
         symbols.reverse()  # Reverse traces to accentuate high-severity episodes (to create an S-PDFA)
         trace = '1' + " " + str(len(mcats)) + ' ' + ' '.join(symbols) + '\n'
@@ -241,7 +242,7 @@ def encode_sequences(dfa, sinks, subsequences):
 
         mcats = [x[2] for x in episodes]
         max_services = [_most_frequent(epi[6]) for epi in episodes]
-        trace_ = [str(small_mapping[c]) + "|" + str(s) for (c, s) in zip(mcats, max_services)]
+        trace_ = [str(taxonomy.trace_symbol(c)) + "|" + str(s) for (c, s) in zip(mcats, max_services)]
         trace_.reverse()
 
         attackers.append(attacker)

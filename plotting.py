@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from signatures.attack_stages import MicroAttackStage
+from signatures import taxonomy
 from signatures.mappings import macro_inv, mcols, micro, micro2macro
 
 
@@ -81,8 +82,19 @@ def plot_histogram(team_alerts, team_labels, experiment_name, suricata_summary=F
         'Attempted Information Leak': 14
     }
 
-    micro_attack_stages_codes = [x for x, _ in micro.items()]
-    micro_attack_stages = [y for _, y in micro.items()]
+    # Codes come from whichever taxonomy is active, not necessarily AIF's
+    # `micro`. Under ATT&CK the codes are tactic/technique codes, and under
+    # the `drop` arms some alerts carry NON_MALICIOUS before the filter
+    # removes them -- either way an unknown code must not crash a histogram.
+    if taxonomy.IS_MITRE:
+        micro_attack_stages_codes = list(taxonomy.symbol_table().keys())
+        micro_attack_stages = [taxonomy.code_to_label(c)
+                               for c in micro_attack_stages_codes]
+    else:
+        # AIF unchanged, deliberately: the ATT&CK comparison is only
+        # meaningful if the baseline arm renders exactly what it always did.
+        micro_attack_stages_codes = [x for x, _ in micro.items()]
+        micro_attack_stages = [y.split('.')[1] for _, y in micro.items()]
 
     if suricata_summary:
         num_categories = len(suricata_categories)
@@ -98,7 +110,8 @@ def plot_histogram(team_alerts, team_labels, experiment_name, suricata_summary=F
             if suricata_summary:
                 percentages[tid][suricata_categories[alert[6]]] += 1
             else:
-                percentages[tid][micro_attack_stages_codes.index(alert[9])] += 1
+                if alert[9] in micro_attack_stages_codes:
+                    percentages[tid][micro_attack_stages_codes.index(alert[9])] += 1
         for i, acat in enumerate(percentages[tid]):
             percentages[tid][i] = acat / len(team)
     plots = []
@@ -121,7 +134,7 @@ def plot_histogram(team_alerts, team_labels, experiment_name, suricata_summary=F
     if suricata_summary:
         plt.xticks(indices, ['c' + str(i) for i in range(15)])  # 14 columns
     else:
-        plt.xticks(indices, [x.split('.')[1] for x in micro_attack_stages], rotation='vertical')
+        plt.xticks(indices, micro_attack_stages, rotation='vertical')
     plt.tick_params(axis='x', which='major', labelsize=8)
     plt.tick_params(axis='x', which='minor', labelsize=8)
     # plt.yticks(np.arange(0, 13000, 1000))

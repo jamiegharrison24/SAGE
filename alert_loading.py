@@ -25,6 +25,7 @@ from plotting import plot_alert_filtering
 from signatures.attack_stages import MicroAttackStage
 from signatures.mappings import micro_inv
 from signatures.alert_signatures import usual_mapping, unknown_mapping, ccdc_combined, attack_stage_mapping
+from signatures import taxonomy
 
 
 IANA_CSV_FILE = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
@@ -39,6 +40,17 @@ def _get_attack_stage_mapping(signature):
 
     @param signature: the signature of the alert
     @return: the inferred attack stage
+    """
+    return taxonomy.signature_to_code(signature, _aif_attack_stage_mapping)
+
+
+def _aif_attack_stage_mapping(signature):
+    """The original AIF lookup, unchanged.
+
+    Kept as its own function so `taxonomy.signature_to_code` can call it in
+    AIF mode without importing this module (which would be a cycle), and so
+    the AIF path stays byte-identical to what it was -- the ATT&CK comparison
+    is only meaningful if the baseline arm is untouched.
     """
     result = MicroAttackStage.NON_MALICIOUS
     if signature in usual_mapping.keys():

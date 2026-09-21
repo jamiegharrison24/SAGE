@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all twenty efforts; read the report first.
+> This file remains the detailed record for the running index of all twenty-one efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Twenty sub-experiments have run so far, in order. Each has its own detailed
+Twenty-one sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -1165,3 +1165,122 @@ side.
 gazetteer-agreement filter admits noise faster than it admits signal.
 
 Kept in the codebase, off by default; not adopted.
+
+## 21. Substituting ATT&CK for AIF in the pipeline — built, switchable, not yet run end to end
+
+Task 3 of the supervisor's list. Design notes are `REPORT.md` 8a; this is the
+implementation record.
+
+**Level chosen: hybrid, after tactic-only was rejected on inspection.** The
+first build annotated every alert with its ATT&CK *tactic*, which fits SAGE's
+digit-count severity encoding perfectly (3 low, 9 medium, 2 high). It also
+collapses **13 AIF objectives into 1** (`impact`), because ATT&CK files DoS,
+ransomware, defacement and data destruction under the same tactic. Since
+attack graphs are generated per (victim, objective), that would merge a
+denial-of-service graph with a ransomware one. Hybrid keeps technique
+identity at the medium and high tiers and collapses only the low tier, giving
+**4 objectives** — between AIF's 13 and tactic-only's 1.
+
+The trade-off is genuinely two-sided and is recorded as an open question in
+`REPORT.md` 8a.5 rather than settled by argument: coarser graphs are worse for
+granularity but better for **alert compression**, which is one of the
+evaluation metrics, and plausibly better for an analyst. All four arms are
+built so it can be measured.
+
+**A structural finding, surfaced by trying to build it.** ATT&CK *techniques*
+cannot be substituted directly: AIF encodes severity in the **digit count** of
+the stage integer, capping the low tier at nine stages, and the observed
+signatures alone use **18** low-tier techniques. AIF's encoding is only viable
+because AIF is a small closed vocabulary; ATT&CK is neither. This is why the
+low tier collapses to tactics in the hybrid arm — the alternative was changing
+how the pipeline derives severity, which would have meant editing the three
+stages the substitution was supposed to leave alone.
+
+**Four arms, on two axes** (`signatures/build_mitre_mapping.py`):
+
+| arm | signatures | codes | objectives |
+|---|---:|---:|---|
+| `hybrid_drop` | 612 | 36 | 4 — `t1496`, `t1498`, `t1498_002`, `t1499` |
+| `hybrid_catchall` | 762 | 37 | 4 — same |
+| `tactic_drop` | 612 | 11 | 1 — `impact` |
+| `tactic_catchall` | 762 | 12 | 1 — `impact` |
+| *AIF baseline* | — | 36 | 13 |
+
+`drop` discards the ~25% of alert volume ATT&CK has no vocabulary for;
+`catchall` keeps it at low severity so the alert stream stays comparable to
+AIF's. The delta between them measures how much of SAGE's graph structure
+rests on alerts ATT&CK cannot name.
+
+**Wiring: `signatures/taxonomy.py`, selected by `SAGE_TAXONOMY`** (default
+`aif`, unchanged behaviour). Severity still comes from digit count in every
+arm, so subsequence cutting, sink filtering and objective selection are
+untouched.
+
+**Four integration points, not the one the proposal implies.** The proposal
+describes replacing "a hardcoded lookup table". The taxonomy is in fact reached
+from four places, and missing any one of them fails loudly or silently:
+
+| file | what it needed |
+|---|---|
+| `alert_loading.py` | signature -> stage code (the lookup the proposal names) |
+| `model_learning.py` | `small_mapping[mcat]` for FlexFringe trace symbols |
+| `ag_generation.py` | `micro2macro` -> node shape; ATT&CK has no macro layer, so severity picks the shape bucket instead |
+| `plotting.py` | the alert histogram indexes a fixed AIF code list and crashes on any other code |
+
+**AIF is deliberately bit-identical.** `_aif_attack_stage_mapping()` keeps the
+original body, and `plotting.py` branches on `taxonomy.IS_MITRE` so the
+baseline histogram renders exactly as before — an earlier version of this
+change altered the AIF histogram from 36 bars to 34, which would have made the
+two arms incomparable for a cosmetic reason.
+
+**Not yet run end to end: FlexFringe is a Linux ELF and WSL is broken on this
+machine** (`Class not registered`). Everything before model learning is pure
+Python and does run; `compare_taxonomies.py` exercises it per arm and reports
+alerts surviving, episode and subsequence counts, alphabet size and objectives
+present. The S-PDFA and attack-graph stages, and therefore task 4's evaluation
+diff against `docs/BASELINE_METRICS.md`, need a working FlexFringe.
+
+### Effort 21 addendum — measured on cptc-2017 (pre-FlexFringe stages)
+
+`compare_taxonomies.py`, all five arms, up to trace generation:
+
+| arm | alerts | episodes | subseqs | alphabet | objectives present |
+|---|---:|---:|---:|---:|---|
+| AIF | 43,299 | **7,370** | **2,339** | 20 | 4: `DATA_DELIVERY`, `DATA_EXFILTRATION`, `DATA_MANIPULATION`, `NETWORK_DOS` |
+| hybrid + drop | 42,441 | 4,602 | 1,354 | 16 | 3: `T1498`, `T1498.002`, `T1499` |
+| hybrid + catchall | 43,299 | 4,608 | 1,354 | 16 | 3 |
+| tactic + drop | 42,441 | 5,117 | 1,764 | 9 | 1: `impact` |
+| tactic + catchall | 43,299 | 5,124 | 1,764 | 9 | 1 |
+
+**Two predictions in 8a.2 and 8a.3 are wrong and are corrected here.**
+
+1. **"~25% of alert volume is lost under `drop`" — not on this dataset.** It
+   is **2.0%** on cptc-2017. The 25% figure is across all three datasets
+   combined and is dominated by ccdc (1.05M of the 1.43M records) and by the
+   single NETGEAR signature at 374k. Drop-vs-catchall is therefore nearly a
+   no-op here (6 episodes) and the axis may only matter on ccdc. Re-measure
+   per dataset before quoting it.
+2. **"The FlexFringe alphabet multiplies" — it shrinks.** 20 symbols under
+   AIF, 16 under hybrid, 9 under tactic. Symbols are `mcat|mserv` pairs, and
+   collapsing stage codes collapses pairs faster than technique granularity
+   expands them. The predicted consequence (sparser transitions, more sinks)
+   should therefore go the other way, and the 38%-of-steps-via-sinks baseline
+   may *improve* rather than degrade.
+
+**The real effect is episode merging, and it is large.** Comparing AIF with
+hybrid + catchall — which process the *identical* 43,299 alerts — episodes
+fall **7,370 -> 4,608 (-37%)** and subsequences **2,339 -> 1,354 (-42%)**.
+This is not alert loss; it is the taxonomy assigning one code where AIF
+assigned several, so adjacent alerts merge into a single episode and fewer
+severity drops occur to cut subsequences on.
+
+That is the granularity/readability trade-off of 8a.5, quantified: fewer and
+larger episodes and fewer attack attempts means a **better alert-compression
+ratio** (the metric that operationalises analyst workload) bought with
+**coarser structure**. Which way that reads depends on the graph metrics,
+which need FlexFringe.
+
+**Objectives are closer than the theory suggested.** AIF exercises only 4 of
+its 13 possible objectives on this dataset, against hybrid's 3 and tactic's 1
+— so the practical gap is 4-vs-3, not 13-vs-1. The tactic arm's collapse to a
+single `impact` objective remains the sharper difference.
