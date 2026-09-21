@@ -54,12 +54,37 @@ TACTIC_CODES = {
     "credential-access":    (15, "credAcc"),
     "lateral-movement":     (16, "lateral"),
     "collection":           (17, "collect"),
-    "command-and-control":  (18, "CnC"),
 
     # HIGH -- the attacker's objective is realised
-    "exfiltration":         (100, "exfil"),
-    "impact":               (101, "impact"),
+    "command-and-control":  (100, "CnC"),
+    "exfiltration":         (101, "exfil"),
+    "impact":               (102, "impact"),
 }
+
+# ---------------------------------------------------------------------------
+# Why `command-and-control` is HIGH, against ATT&CK's own kill-chain logic.
+#
+# ATT&CK treats C2 as an *enabler*: the attacker is maintaining access, not
+# realising a goal. Tiering it MEDIUM on that reasoning was the first build,
+# and it cost **29 of 36 victims** their attack graphs on cptc-2017 (104 AGs
+# -> 9). Attack graphs are generated per high-severity objective, and AIF
+# treats `DATA_DELIVERY` and `DATA_EXFILTRATION` as terminal objectives while
+# the signatures behind them label as C2 techniques (T1071, T1105) under
+# ATT&CK. Demote C2 and those objectives simply cease to exist.
+#
+# The project proposal settles this explicitly -- its Severity Configuration
+# section asks for "a configurable mapping from MITRE ATT&CK tactics to
+# severity tiers, which will **preserve the original implementation's
+# behaviour**". Preserving behaviour means AIF's objectives stay objectives,
+# so C2 is HIGH here. This is implementing the spec, not tuning for a result.
+#
+# `initial-access` deliberately stays MEDIUM even though AIF's `PHISHING` is
+# high: that tactic also carries `T1190`, and AIF puts exploitation at medium
+# (`PUBLIC_APP_EXP` = 16). Promoting it would move far more than it fixed.
+#
+# The ATT&CK-faithful tiering is a recorded finding rather than a live arm --
+# see REPORT.md 8a.7. Flip C2 back to (18, "CnC") and rebuild to reproduce it.
+# ---------------------------------------------------------------------------
 
 # Kill-chain order, for reporting and for resolving multi-tactic techniques.
 TACTIC_ORDER = (
