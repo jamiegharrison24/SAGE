@@ -258,12 +258,19 @@ def main():
         entity_tagger.disable()
 
     suffix = f"_entity_{args.entity_tagging}" if args.entity_tagging else ""
-    if args.entity_tagging and args.ner_backend != entity_tagger.DEFAULT_NER_BACKEND:
-        # Only stamped for a non-default backend. DEFAULT_NER_BACKEND flipped
-        # gliner -> securemodernbert at effort 17's adoption, so this now
-        # suppresses the suffix for securemodernbert runs (the new standard)
-        # and adds it for gliner ones -- existing gliner-suffixed filenames
-        # from effort 13-16 predate the flip and are untouched on disk.
+    if args.entity_tagging:
+        # ALWAYS stamped, regardless of which backend is currently the
+        # default. This used to be conditional ("only stamp a non-default
+        # backend") to keep effort 13-15's gliner filenames unsuffixed --
+        # but DEFAULT_NER_BACKEND flipped to securemodernbert at effort 17's
+        # adoption, and that conditional silently collided a securemodernbert
+        # run's filename with effort 13's *committed* gliner_only report
+        # (both rendered as `validation_report_entity_gliner_only.md`),
+        # overwriting it on disk the first time this ran post-flip. An
+        # unconditional stamp can never collide across a future default
+        # change again; the cost is that gliner runs are now (correctly)
+        # suffixed too, so a handful of effort 13-16 filenames on disk
+        # predate this and are not reproduced by today's default args.
         suffix += f"_{args.ner_backend}"
     if args.typed_markers:
         suffix += "_typed"

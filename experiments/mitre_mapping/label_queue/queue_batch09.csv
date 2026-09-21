@@ -1,0 +1,40 @@
+signature
+ET WEB_SPECIFIC_APPS PHP-CGI query string parameter vulnerability
+GPL ATTACK_RESPONSE id check returned root
+GPL DNS named authors attempt
+GPL DNS named version attempt
+GPL FTP .forward
+GPL FTP CWD ...
+GPL FTP CWD Root directory transversal attempt
+GPL FTP CWD ~ attempt
+GPL FTP LIST directory traversal attempt
+GPL FTP MKD overflow
+GPL FTP MKD overflow attempt
+GPL FTP PORT bounce attempt
+GPL FTP SITE EXEC attempt
+GPL ICMP_INFO PING *NIX
+GPL ICMP_INFO PING BSDtype
+GPL MISC rsh root
+GPL NETBIOS DCERPC IActivation little endian bind attempt
+GPL NETBIOS DCERPC Remote Activation bind attempt
+GPL NETBIOS SMB-DS C$ share access
+GPL NETBIOS SMB-DS C$ unicode share access
+GPL NETBIOS SMB-DS D$ share access
+GPL NETBIOS SMB-DS IPC$ share access
+GPL NETBIOS SMB-DS IPC$ unicode share access
+GPL NETBIOS SMB-DS Session Setup NTMLSSP unicode asn1 overflow attempt
+GPL NETBIOS SMB-DS repeated logon failure
+GPL POP3 POP3 PASS overflow attempt
+GPL RPC portmap bootparam request TCP
+GPL RPC portmap cachefsd request TCP
+GPL RPC portmap listing TCP 111
+GPL RPC portmap mountd request UDP
+GPL RPC portmap rstatd request TCP
+GPL RPC portmap rusers request TCP
+GPL RPC portmap sadmind request TCP
+GPL RPC portmap ypserv request TCP
+GPL RPC portmap ypupdated request TCP
+GPL SNMP private access udp
+GPL SNMP public access udp
+GPL WEB_SERVER globals.pl access
+GPL WEB_SERVER mod_gzip_status access

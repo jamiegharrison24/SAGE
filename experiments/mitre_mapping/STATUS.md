@@ -671,6 +671,28 @@ label). Both are detailed in the bullets below.
 
 ### Backlog detail
 
+- **Circle back: `intersection` vs `gliner_only` (NER-only) merge rule, under
+  typed markers.** Measured 2026-09-21, same session as effort 17, not yet
+  written up formally. Dropping the gazetteer-agreement filter (keeping every
+  NER span, not just ones the dictionary corroborates) was expected to help —
+  it looks like pure information loss reading `intersection`'s dropped spans
+  in isolation (e.g. a correctly-typed `PLATFORM` span on "Windows" gets
+  discarded because the gazetteer has no matching entry). Measured the
+  opposite: `gliner_only` scores worse than `intersection` on every axis,
+  generic or typed (micro 128/361 vs 132/361; macro 19.8-21.1% vs 20.5-21.5%;
+  mid-bucket 27.0-27.7% vs 29.2%). One flipped tail-bucket row under
+  `gliner_only`/typed is a source change, not just a confidence wobble
+  (`supervised_classifier` 0.26 hit → `knn_corpus` 0.21 miss landing on the
+  modal `T1190` — the hub-collapse pattern §6.4/§6.5 already flag elsewhere).
+  Also visible in the same numbers, not yet separately investigated: **every**
+  tagging configuration (both merge rules, generic or typed) drops mid-bucket
+  accuracy below the no-tagging baseline (31.4% → 27.0-29.2%) — a bigger,
+  more consistent effect than the generic-vs-typed question the numbers were
+  gathered to answer. Worth its own writeup (`bucket_accuracy.py` on
+  `validation_report.md`, `validation_report_entity_gliner_only_securemodernbert*.md`,
+  `validation_report_entity_intersection_securemodernbert*.md`) before
+  concluding anything — this note is the raw finding, not the analysis.
+
 - ~~**Scoring counts rejected labels as ground truth**~~ — **DONE 2026-09-11**
   (effort 13, "Step 0"). The rule is now implemented in `validate.py` and
   defined in `label_queue/CONVENTION.md`. Original entry kept below for the
