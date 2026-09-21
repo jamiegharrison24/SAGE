@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all fifteen efforts; read the report first.
+> This file remains the detailed record for the running index of all seventeen efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Fifteen sub-experiments have run so far, in order. Each has its own detailed
+Seventeen sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -933,3 +933,42 @@ better span recognizer cannot manufacture training examples for
 matter how much cleaner its tags are. Kept in the codebase, off by default;
 not adopted as a pipeline change. Full record:
 `entity_ner/comparison_findings.md`'s "Pipeline integration" section.
+
+## 17. Typed markers — one sentinel per entity type instead of generic `<ENTITY>` — **negative** — `attack_mapper/entity_ner/typed_markers_prereg.md`
+
+Every marker on this branch so far, including effort 16's SecureModernBERT-NER
+run, has been the same generic `<ENTITY>` regardless of the source model's
+type (`ORG`, `PRODUCT`, `TOOL`, ...). That was a deliberate 2026-09-11 decision
+(`entity_ner/replace_prereg.md`, "What was considered and rejected"), reasoned
+from GLiNER/the gazetteer's ~20% type-mistake rate — never measured, and never
+revisited for SecureModernBERT specifically, whose fixed 22-label schema is
+the reason it clears the pre-registered gate at all. Per explicit direction,
+reopened for SecureModernBERT only (GLiNER is no longer in active use).
+
+Implemented as an opt-in `EntityTagger(typed_markers=True)` path: `qqe_<type>qq`
+sentinels (not literal `<TYPE>` — the same angle-bracket-stripping collision
+`MARKER`/`SENTINEL` already document applies worse to a hyphenated type like
+`MITRE-TACTIC`, which would split into two tokens), gated on a spans artifact
+storing per-span types (`build_spans.py`'s new `has_types` field — GLiNER's
+artifact format is untouched). `entity_tagger.py`, `build_spans.py`,
+`validate.py` (`--typed-markers`), `marker_rate.py` (`--per-type`), and
+`bucket_accuracy.py` (new: head/mid/tail bucket accuracy from a report,
+reusable beyond this one experiment) all updated;
+`tests/test_entity_typed.py` covers the silent-failure invariants (untyped
+artifact read in typed mode must raise, not degrade; fingerprint separation;
+sentinel collision-freedom). Full corpus rebuild (32,273 rows) took 4.9 min
+on a GTX 1660 Ti after installing a CUDA `torch` build — this machine had one
+sitting unused behind a CPU-only `torch` install, which projected 45-75 min.
+
+Per-type frequency screen cleared first (no type near-constant, unlike the
+89.4%-of-corpus generic marker). `validate.py --entity-tagging intersection
+--ner-backend securemodernbert --typed-markers`, matched against effort 16's
+generic-marker run at the identical configuration: **micro bit-identical**
+(132/361, same numerator), macro 21.5%→20.5%, and per the pre-registered
+mid/tail-bucket criterion — **mid (137 rows, the stable bucket) dead flat at
++0.0 pt**; tail (35 rows) moved -2.9 pt but traces to exactly one row
+flipping between two sub-0.05-confidence `knn_corpus` guesses, i.e. noise in
+too small a bucket to read as signal (effort 5's mistake, avoided). Does not
+change effort 14's conclusion: a marker's type cannot manufacture a training
+example the corpus lacks, so there was nothing for a more informative marker
+to disambiguate among. Kept in the codebase, off by default; not adopted.

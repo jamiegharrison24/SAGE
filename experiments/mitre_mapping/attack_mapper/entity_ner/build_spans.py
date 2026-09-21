@@ -118,8 +118,18 @@ def _tag_securemodernbert(todo, batch_size):
     only so progress can be printed at the same cadence as the GLiNER path."""
     print(f"loading {entity_tagger.SMB_MODEL} ...")
     from transformers import pipeline
+    # `pipeline()` does NOT auto-select a GPU here -- measured directly:
+    # omitting `device=` ran the 200-row benchmark at ~7-12 rows/s even with
+    # CUDA installed and `torch.cuda.is_available()` True; passing `device=0`
+    # measured ~98 rows/s on a GTX 1660 Ti (~5.5 min projected for the full
+    # 32k-row corpus vs. 45-75 min on CPU). Falls back to CPU (-1) when no
+    # GPU is present so this still runs on a CPU-only checkout.
+    import torch
+    device = 0 if torch.cuda.is_available() else -1
+    print(f"  device: {'cuda:0 (' + torch.cuda.get_device_name(0) + ')' if device == 0 else 'cpu'}")
     pipe = pipeline("token-classification", model=entity_tagger.SMB_MODEL,
-                    aggregation_strategy=entity_tagger.SMB_AGGREGATION)
+                    aggregation_strategy=entity_tagger.SMB_AGGREGATION,
+                    device=device)
     print("loaded.\n")
 
     spans = {}
@@ -129,8 +139,12 @@ def _tag_securemodernbert(todo, batch_size):
         chunk = todo[i:i + batch_size]
         results = pipe(chunk, batch_size=batch_size)
         for text, ents in zip(chunk, results):
+            # 4th element is the entity_group (`ORG`, `PRODUCT`, ...) --
+            # effort 17's typed markers. GLiNER's spans (above) stay 3-wide;
+            # entity_tagger._spans_for() reads len(s) > 3 to tell them apart.
             spans[text] = [[int(e["start"]), int(e["end"]),
-                           round(float(e["score"]), 4)] for e in ents]
+                           round(float(e["score"]), 4), e["entity_group"]]
+                          for e in ents]
         done += len(chunk)
         if done % (batch_size * 25) == 0 or done == len(todo):
             el = time.time() - t0
@@ -162,13 +176,27 @@ def main():
     texts = collect_texts()
     print(f"  distinct after dedupe: {len(texts)}")
 
+    has_types = args.backend == "securemodernbert"
+
     existing = {}
     if args.resume and os.path.exists(out_path):
         with gzip.open(out_path, "rt", encoding="utf-8") as fh:
             blob = json.load(fh)
-        if blob.get("meta", {}).get("model") == backend_cfg["model"]:
+        same_model = blob.get("meta", {}).get("model") == backend_cfg["model"]
+        # Gate resume on has_types too, not just model: a same-model artifact
+        # built before effort 17 (3-wide spans, no label) resuming today
+        # would silently mix 3-wide and 4-wide entries in one file. That is
+        # exactly the "partial build scores like the baseline" failure
+        # `assert_complete`'s docstring warns about, just from a schema
+        # change instead of a --limit cutoff.
+        same_types = blob.get("meta", {}).get("has_types") == has_types
+        if same_model and same_types:
             existing = blob["spans"]
             print(f"  resuming: {len(existing)} already cached")
+        elif same_model:
+            print(f"  NOT resuming: existing artifact has_types="
+                  f"{blob.get('meta', {}).get('has_types')!r}, this build "
+                  f"wants {has_types!r} -- rebuilding from scratch")
 
     todo = [t for t in texts if t not in existing]
     if args.limit:
@@ -195,6 +223,7 @@ def main():
             "model": backend_cfg["model"],
             "threshold": backend_cfg["threshold"],
             "labels": list(backend_cfg["labels"]) if backend_cfg["labels"] else None,
+            "has_types": has_types,
             "built": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "n_texts": len(spans),
             "note": "keyed by normalize.entity_key(); raw spans, merge applied at read time",

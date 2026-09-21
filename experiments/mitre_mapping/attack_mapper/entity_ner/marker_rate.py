@@ -19,6 +19,16 @@ frequency, over the corpus and the eval set separately.
 Usage:
     python -m attack_mapper.entity_ner.marker_rate
     python -m attack_mapper.entity_ner.marker_rate --backend securemodernbert
+    python -m attack_mapper.entity_ner.marker_rate --backend securemodernbert --per-type
+
+--per-type (effort 17, typed markers): the near-constant/too-sparse verdict
+above is for ONE merged marker across ALL entity types. Splitting `union`'s
+89.4%-of-corpus coverage (comparison_findings.md's "Pipeline integration"
+section) across ~22 types means no single type need be near-constant even
+though the merged rule is -- which would make NER-only markers viable again
+under typing where they were ruled out generic. Run this BEFORE spending a
+`validate.py --typed-markers` pass: it is the same "rule out arms in
+seconds" cheap check the un-typed screen above already is.
 """
 import argparse
 import csv
@@ -71,10 +81,55 @@ def eval_texts(scoreable_only=True):
     return [entity_key(r["signature"]) for r in rows]
 
 
+def per_type_report(ner, sets):
+    """Coverage broken down by entity type, over NER spans only (`gl` in
+    entity_tagger's merge terms -- the gazetteer is never typed, see
+    TYPE_MARKERS). One row per type using the same near-constant/too-sparse/
+    informative verdict as the merge-rule table, so the two are read the
+    same way.
+    """
+    for setname, texts in sets.items():
+        print("=" * 72)
+        print(f"{setname}  --  per-type coverage (NER spans only)")
+        print("=" * 72)
+        print(f"{'type':>16} {'rows tagged':>13} {'markers/tagged':>16} {'verdict':>22}")
+
+        by_type = {}  # etype -> [tagged, markers]
+        for t in texts:
+            cached = ner.get(t, [])
+            seen_types = set()
+            for s in cached:
+                etype = s[3] if len(s) > 3 else None
+                if etype is None:
+                    continue  # untyped artifact -- caller should have refused already
+                counts = by_type.setdefault(etype, [0, 0])
+                counts[1] += 1
+                seen_types.add(etype)
+            for etype in seen_types:
+                by_type[etype][0] += 1
+
+        for etype in sorted(by_type, key=lambda k: -by_type[k][0]):
+            tagged, markers = by_type[etype]
+            cov = tagged / len(texts) if texts else 0
+            mpt = markers / tagged if tagged else 0
+            if cov >= 0.85:
+                verdict = "near-constant"
+            elif cov <= 0.10:
+                verdict = "too sparse"
+            else:
+                verdict = "informative range"
+            print(f"{etype:>16} {tagged:>6} ({cov:>5.1%}) {mpt:>16.2f} {verdict:>22}")
+        print()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", default=et.DEFAULT_NER_BACKEND,
                     choices=list(et.NER_BACKENDS))
+    ap.add_argument("--per-type", action="store_true",
+                    help="Break down coverage by entity type instead of by "
+                         "merge rule. Needs an artifact with per-span types "
+                         "(securemodernbert) -- see module docstring.")
     args = ap.parse_args()
     spans_path = et.NER_BACKENDS[args.backend]["spans_path"]
 
@@ -88,8 +143,18 @@ def main():
     print(f"artifact: {meta['n_texts']} texts, model {meta['model']} @ {meta['threshold']}")
     print(f"          built {meta['built']}\n")
 
-    single, multi = et.load_gazetteer()
     sets = {"corpus": corpus_texts(), "eval (scoreable)": eval_texts()}
+
+    if args.per_type:
+        if not meta.get("has_types"):
+            raise SystemExit(f"{spans_path} has no per-span types "
+                             f"(has_types={meta.get('has_types')!r}) -- "
+                             f"rebuild with `build_spans.py --backend "
+                             f"{args.backend}`")
+        per_type_report(ner, sets)
+        return 0
+
+    single, multi = et.load_gazetteer()
 
     for setname, texts in sets.items():
         print("=" * 72)

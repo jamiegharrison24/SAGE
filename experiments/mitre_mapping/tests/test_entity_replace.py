@@ -122,6 +122,7 @@ def test_all_three_styles_key_different_caches():
         t.merge_rule, t.spans_path, t.df_path = "gliner_only", "x", None
         t.replace_rare, t.df_cutoff, t.replacement_style = True, 0.01, style
         t.ner_backend = "gliner"
+        t.typed = False
         t._ner_model, t._ner_threshold, t._ner_labels = et.NER_MODEL, et.NER_THRESHOLD, et.NER_LABELS
         seen[style] = t.fingerprint()
     assert len(set(seen.values())) == 3, seen

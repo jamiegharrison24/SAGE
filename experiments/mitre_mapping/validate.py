@@ -146,6 +146,24 @@ def main():
              "securemodernbert`). Meaningless without --entity-tagging.",
     )
     parser.add_argument(
+        "--typed-markers", action=argparse.BooleanOptionalAction, default=None,
+        help="Effort 17: append a per-type sentinel (qqe_productqq, "
+             "qqe_orgqq, ...) instead of one generic <ENTITY>. Needs a spans "
+             "artifact built with per-span types (`build_spans.py --backend "
+             "securemodernbert`, which is the only backend that stores them "
+             "-- GLiNER/the gazetteer's types were measured ~20%% wrong in "
+             "the 2026-09-11 decision this reopens for SecureModernBERT "
+             "only; see entity_tagger.py's TYPE_MARKERS comment). Mutually "
+             "exclusive with --replace-rare (unmeasured combination). "
+             "Default: on with --ner-backend securemodernbert (the adopted "
+             "standard, per project direction -- effort 17's own measured "
+             "result on the CURRENT corpus was null, not negative, and "
+             "typed is the configuration to re-test once the corpus "
+             "expansion lands), off with 'gliner' (no typed artifact "
+             "exists for it). Pass --no-typed-markers to reproduce effort "
+             "16's generic-marker numbers on securemodernbert.",
+    )
+    parser.add_argument(
         "--replace-rare", action="store_true",
         help="Replace-mode entity normalisation (REPORT.md §8 item 7): rewrite "
              "each tagged span to a bare <ENTITY> marker instead of appending "
@@ -188,6 +206,22 @@ def main():
     if args.replace_rare and not args.entity_tagging:
         parser.error("--replace-rare requires --entity-tagging "
                      "(it changes how spans are applied, not whether they are found)")
+    if args.typed_markers is not None and not args.entity_tagging:
+        parser.error("--typed-markers/--no-typed-markers requires --entity-tagging")
+
+    # `--typed-markers` left unset (None) resolves per backend: on for
+    # securemodernbert (the adopted standard -- effort 17), off for gliner
+    # (no typed artifact exists for it). An explicit --typed-markers or
+    # --no-typed-markers always wins over this default in either direction.
+    if args.entity_tagging and args.typed_markers is None:
+        args.typed_markers = (args.ner_backend == "securemodernbert")
+    elif not args.entity_tagging:
+        args.typed_markers = False
+
+    if args.typed_markers and args.replace_rare:
+        parser.error("--typed-markers and --replace-rare are not measured together "
+                     "(see entity_tagger.EntityTagger.__init__) -- pass "
+                     "--no-typed-markers to use --replace-rare on securemodernbert")
 
     check_required_data()
 
@@ -206,7 +240,8 @@ def main():
                                       replace_rare=args.replace_rare,
                                       df_cutoff=args.df_cutoff,
                                       replacement_style=args.replacement_style,
-                                      ner_backend=args.ner_backend)
+                                      ner_backend=args.ner_backend,
+                                      typed_markers=args.typed_markers)
         if args.entity_tagging != "gazetteer_only":
             # Refuse a partial (--limit) spans artifact: it would silently
             # score like the off-baseline. See EntityTagger.assert_complete.
@@ -215,6 +250,8 @@ def main():
         mode = (f"REPLACE rare spans (DF < {args.df_cutoff:.2%}, "
                 f"style={args.replacement_style})"
                 if args.replace_rare else "augment (append marker)")
+        if args.typed_markers:
+            mode += ", TYPED (per-type sentinel)"
         print(f"entity tagging: ON, merge rule '{args.entity_tagging}', "
               f"{mode}, {len(tagger.ner_spans)} texts in spans artifact")
     else:
@@ -222,9 +259,14 @@ def main():
 
     suffix = f"_entity_{args.entity_tagging}" if args.entity_tagging else ""
     if args.entity_tagging and args.ner_backend != entity_tagger.DEFAULT_NER_BACKEND:
-        # Only stamped for a non-default backend, so every existing filename
-        # (all runs so far used gliner) stays unchanged.
+        # Only stamped for a non-default backend. DEFAULT_NER_BACKEND flipped
+        # gliner -> securemodernbert at effort 17's adoption, so this now
+        # suppresses the suffix for securemodernbert runs (the new standard)
+        # and adds it for gliner ones -- existing gliner-suffixed filenames
+        # from effort 13-16 predate the flip and are untouched on disk.
         suffix += f"_{args.ner_backend}"
+    if args.typed_markers:
+        suffix += "_typed"
     if args.reserved_placeholders:
         suffix += "_reservedph"
     if args.replace_rare:

@@ -38,7 +38,7 @@ inline by GitHub and by any Markdown preview with Mermaid support:
 
 ### How experiments are referred to
 
-Fourteen sub-experiments ran, numbered **1–14 in the order they happened**. §5
+Seventeen sub-experiments ran, numbered **1–17 in the order they happened**. §5
 describes each in full; every other section cites them shorthand, as "effort 10".
 Where a section says something was removed or added "in effort N", that is a
 pointer forward or back to §5, not a term you need to know yet.
@@ -444,7 +444,7 @@ non-malicious — see the value grammar in §3.3.
 | **A** | 100-row hand-audited sample (`hand_audit_sample*.csv`) | 80 | auditor's `proposed_technique` | efforts 3, 5, 6, 7, 8 |
 | **B** | same sample, scoring the Tier 2 classifier alone | 79 | auditor's `proposed_technique` | efforts 2, 4 |
 | **C** | 500-row set (`labeled_set_v2.csv`), before the scoring fix | 397 | `proposed_technique` | efforts 9, 10, 11, 12 |
-| **D** | same set, corrected `reviewer_verdict` rule | 361 | `proposed_technique`, rejected rows excluded | efforts 12 (re-run), 13 — **current** |
+| **D** | same set, corrected `reviewer_verdict` rule | 361 | `proposed_technique`, rejected rows excluded | efforts 12 (re-run), 13, 17 — **current** |
 | **E** | 773-signature propagated ground truth | 562 | bridge-propagated `gt_ids` | efforts 1, 2 |
 
 Caveats that must travel with any number quoted from these:
@@ -1755,9 +1755,12 @@ This turned the substitution into a swept dimension rather than an assumption:
 | `drop` | `scan` | in replace mode the *removal* is the mechanism; the marker is dead weight |
 | `sentinel` | `qqentqq scan` | separates "does a placeholder help?" from "does it collide?"; measured corpus DF **0.0** |
 
-Typed markers (`<TOOL>`, `<PRODUCT>`) remain rejected — both sources mistype
-~1 entity in 5, settled 2026-09-11. The dimension swept is whether a
-placeholder should be left behind *at all*, not what type it carries.
+Typed markers (`<TOOL>`, `<PRODUCT>`) remain rejected here — both sources
+mistype ~1 entity in 5, settled 2026-09-11 — and that rejection still holds
+for GLiNER and the gazetteer. It was reopened for SecureModernBERT only, whose
+fixed schema is measured rather than assumed: effort 17 below. The dimension
+swept in *this* effort is whether a placeholder should be left behind *at
+all*, not what type it carries.
 
 **Measurement 3 — the baseline still reproduces.** `NORMALIZER_VERSION` was
 bumped to `3-entity-replace` (mandatory: arms at different cutoffs emit
@@ -1846,11 +1849,207 @@ disqualified. Recorded before the numbers, because §6.1 and effort 14 predict
 this closes out a hypothesis rather than moving the headline — coverage, not
 representation, remains the binding constraint.
 
+### Effort 17 — Typed markers (per-type sentinels) and their adoption as the SecureModernBERT default · regime D
+
+`attack_mapper/entity_ner/typed_markers_prereg.md`, `bucket_accuracy.py`,
+`tests/test_entity_typed.py`
+
+(Effort 16 — the SecureModernBERT-NER evaluation — has no heading of its own;
+it is the addendum folded into effort 13 above, which is why §5 jumps from 15
+to 17.)
+
+**Status: complete. NULL against the pre-registered criterion — "bar not
+cleared in any way distinguishable from noise" — and adopted as the default
+configuration anyway, on project direction rather than on the strength of this
+measurement. Both halves of that sentence are load-bearing; the numbers below
+did not earn the adoption.**
+
+**What it is.** Every marker on this branch so far has been the same generic
+`<ENTITY>` regardless of what type the source model assigned the span —
+effort 13's convention, carried unchanged through effort 15's replace-mode
+styles and effort 16's SecureModernBERT run. This is the work effort 15's
+Finding 3 pointed at ("any future work motivated by *the marker is too
+generic* should start from this result"): an opt-in
+`EntityTagger(typed_markers=True)` path that appends a per-type sentinel
+(`qqe_orgqq`, `qqe_productqq`, `qqe_mitretacticqq`, …) — one per type in
+SecureModernBERT-NER's fixed schema, enumerated once from the model's own
+`AutoConfig.id2label` rather than from the handful of types that happened to
+appear in the 30/100-title samples, plus an `__untyped__` fallback for a
+gazetteer-only span or a label the pinned model version emits that the
+enumeration predates.
+
+**Sentinels, not literal `<TYPE>`, for the reason effort 15 measured.**
+Measurement 2 of that effort established that sklearn's default `\b\w\w+\b`
+token pattern strips angle brackets, so `<ENTITY>` reads to the classifier as
+the ordinary word `entity`. The same defect is worse for typed markers:
+`<PRODUCT>` would tokenize to the bare word `product`, which occurs in rule
+titles as itself, and a hyphenated type such as `<MITRE-TACTIC>` would
+additionally split into *two* tokens on the hyphen, breaking the
+one-marker-per-span invariant every other placeholder in the module keeps.
+The `qqe_<type>qq` form (namespaced away from effort 15's `RESERVED_MAP`
+sentinels for `normalize.py`'s older placeholders, which independently cover
+CVE) survives
+tokenization as one word-shaped token: `_sentinel_for_type("MITRE-TACTIC")`
+is `qqe_mitretacticqq`, pinned by `tests/test_entity_typed.py`.
+
+**Why the 2026-09-11 "generic, not typed" decision was reopened at all, and
+why reopening it is not overturning it.** That decision
+(`entity_ner/replace_prereg.md`, "What was considered and rejected", restated
+in effort 15's Measurement 2 above) was reasoned from GLiNER's and the
+gazetteer's ~20% type-mistake rate — *never measured end to end*, and never
+revisited for SecureModernBERT, whose fixed schema is the reason it clears
+effort 16's pre-registered gate at all. It is reopened here for
+SecureModernBERT only, per explicit project direction; GLiNER is no longer in
+active use and its types remain untrusted, as does the gazetteer's own
+free-text type, which is deliberately not surfaced as a marker even in typed
+mode. This was not a foregone win in either direction:
+`comparison_findings.md`'s own "Two real, measured weaknesses" section shows
+SecureModernBERT is *not* immune to type slippage (`Cisco` → PRODUCT in one
+title, → ORG two rows later; `IBM Tivoli Endpoint` split into ORG + TOOL).
+
+**Pre-registered before the run, per this branch's convention**
+(`typed_markers_prereg.md`, same header and discipline as effort 15's
+`replace_prereg.md`): **judge on mid/tail bucket accuracy, not micro or
+macro.** Micro is carried by three head classes (`T1190`/`T1071`/`T1568`)
+whose rows are already saturated with training data, and a marker's type can
+neither help nor hurt them (§6.1's corollary; effort 14's bucket framework).
+If typing does anything at all, the mechanism is a correctly-typed rare entity
+disambiguating *which* sparse-data technique a retrieval lands on — a `PRODUCT`
+span narrowing toward exploit/DoS-of-that-product techniques differently than
+a `TOOL` span would. That shows up in mid/tail. **Bar: mid or tail bucket
+accuracy moves by more than the ±1.0-point noise band** the branch already uses
+for macro.
+
+**Pre-flight per-type frequency screen** (`marker_rate.py --backend
+securemodernbert --per-type`, seconds, run before spending the pass, and the
+check that could have killed the arm outright): **no single type is
+near-constant on either side.** Top corpus type `DOMAIN` at 44.9%, top eval
+type `PRODUCT` at 24.4% — both far under the 85% near-constant threshold that
+eliminated four of five merge rules generically. This is the one structural
+thing typing genuinely changes: the *merged* marker is near-constant (89.4% of
+corpus texts under securemodernbert), and splitting it across 22 types avoids
+that trap. Worth recording separately: `DOMAIN` is the corpus's top type at
+44.9% but appears on **0.3%** of eval rows — a register mismatch of exactly
+the kind effort 14 diagnosed, and not something this arm can act on.
+
+**The measurement.** `validate.py --entity-tagging intersection --ner-backend
+securemodernbert --typed-markers`, matched against effort 16's generic-marker
+run at the identical configuration so typing is the one changed variable
+against an already-known number. `intersection` also removes an ambiguity:
+every kept span under it *is* an NER span, so no gazetteer-untyped fallback
+enters this arm.
+
+| | generic (effort 16) | typed | delta |
+|---|---:|---:|---:|
+| micro | 132/361 = 36.6% | 132/361 = 36.6% | **0** (same numerator) |
+| macro | 21.5% | 20.5% | −1.0 pt |
+| head (3 classes, 189 rows) | 45.5% | 46.0% | +0.5 pt |
+| mid (21 classes, 137 rows) | 29.2% | 29.2% | **+0.0 pt** |
+| tail (27 classes, 35 rows) | 17.1% | 14.3% | −2.9 pt |
+
+Both columns are tagging-*on* runs; neither is the untagged baseline, whose
+own bucket split is 43.9% / 31.4% / 17.1% (§7.3).
+
+**Finding 1 — mid, the only bucket with a usable sample size, is exactly
+flat.** 137 rows, 29.2% before and after, +0.0 points. This is the strongest
+evidence the experiment can produce, and it says typing produced no signal in
+either direction. Micro's numerator is unchanged at 132 — though not
+row-for-row: head gains one row and tail loses one (Finding 2), which is how
+a flat micro coexists with a −1.0-point macro over 51 labels.
+
+**Finding 2 — tail's −2.9 points is one row, and one row is not a result.**
+Tail clears the ±1.0-point bar numerically, so it was traced to its exact row
+with `bucket_accuracy.py`'s diff mode. A single signature moves: `ET EXPLOIT
+Possible GoldenPac Priv Esc in-use`, true label `T1068`, flips from a
+`knn_corpus` hit at confidence **0.04** to a `knn_corpus` miss at confidence
+**0.03**. Both are a coin flip by this branch's own repeated standard for
+sub-0.10 `knn_corpus` confidence. A 35-row bucket moves 2.9 points on one
+flip, which is the substantive point: **the ±1.0-point band is calibrated on
+macro's 361-row denominator and does not transfer to a 35-row bucket.**
+Reading this as a real regression would repeat effort 5's mistake — a
+conclusion drawn from too small a sample. The honest reading is that typing is
+neutral, not that it is worse.
+
+**Finding 3 — the result does not change effort 14's conclusion, exactly as
+effort 14 predicted it would not.** The prior was recorded in the
+pre-registration before the run: typing a marker is still a *representation*
+lever — it changes how a row is written, not whether the corpus contains an
+example of the technique an eval row asks about. A marker's type cannot
+manufacture a training example the corpus lacks, so there was nothing for a
+more informative marker to disambiguate *among*. §6.1 stands, now with the
+marker's information content tested as well as its presence.
+
+**Finding 4 — the generic-marker decision is not reinstated by this either.**
+It was never in question for GLiNER or the gazetteer, both still untyped by
+design, and for SecureModernBERT the measured finding is neutrality (mid
+flat), not inferiority (tail is noise). The 2026-09-11 rejection and this
+result are compatible: neither the generic marker nor the typed one moves the
+number on this corpus.
+
+**Supporting engineering, recorded because it changes the cost of the next
+rebuild.** The full corpus pass had to be re-run to store per-span types, and
+the machine's `torch` was CPU-only despite an available GPU — benchmarked at
+7–12 rows/s, i.e. 45–75 minutes projected for the 32,273-row corpus, against
+the 29.9 minutes effort 16 recorded elsewhere. Installing `torch==2.14.0+cu126`
+(the already-pinned version, with CUDA) moved the 200-row benchmark to ~98
+rows/s, and the **full rebuild completed in 4.9 min** (≈110 rows/s sustained),
+tagging **89.4% of texts (28,855 / 32,273) — identical coverage to effort 16's
+untyped pass**, which is the check that the same model saw the same data.
+`build_spans.py`'s `_tag_securemodernbert` now auto-detects CUDA and falls back
+to CPU; the pipeline call previously passed no `device=` at all and ran on CPU
+even when `torch.cuda.is_available()` was True.
+
+**One silent-failure trap closed, in the same family as effort 15's two.** The
+spans artifact gained a fourth element per span (the `entity_group` label) for
+the securemodernbert backend only — GLiNER's artifact stays 3-wide and
+unchanged — plus a `has_types` boolean in its `meta`. Requesting typed mode
+against an artifact without per-span types raises `SpansArtifactError` rather
+than silently falling back to untyped output, which would have scored as a
+plausible null and been indistinguishable from the real one this effort
+reports. `build_spans.py` gates its resume path on `has_types` as well as on
+the model name, for the same reason.
+
+**Landed state: ADOPTED as the default, and the reasons are not the numbers
+above.** This is where effort 17 departs from efforts 13, 15 and 16, all of
+which stayed off-by-default after a null or negative result.
+`DEFAULT_NER_BACKEND` moved from `"gliner"` to `"securemodernbert"`, and
+`--typed-markers` now resolves to **on** whenever `--ner-backend
+securemodernbert` is in effect (an explicit `--no-typed-markers` reproduces
+effort 16's generic-marker numbers exactly, and an explicit `--ner-backend
+gliner` resolves typing off, since no typed artifact exists for it). The
+pipeline default is unchanged in the sense that matters for every number in
+this report: `Settings.use_entity_tagging` is still `False`, so nothing is
+tagged unless tagging is switched on.
+
+Three stated reasons, none of them a measured improvement:
+
+1. **Explicit supervisor direction** to use typed NER going forward — the same
+   channel that directed effort 16's model comparison.
+2. **Staging for §8 item 1**, the corpus-expansion lever effort 14's diagnosis
+   makes the top-priority untried item. Effort 14's claim is that
+   representation levers are *gated by* coverage, not that they are wrong in
+   principle, so typed markers is the configuration to have in place and
+   re-test on the day a register-matched corpus lands.
+3. **It is measurably harmless on the current corpus** — mid exactly flat,
+   micro unchanged at 132/361. Harmless is the claim; validated is not.
+
+**Reproducibility consequence, worth knowing before quoting an old number.**
+Because `DEFAULT_NER_BACKEND` changed, a bare `validate.py --entity-tagging
+intersection` today produces securemodernbert + typed results, **not** effort
+13's `gliner` numbers; reproducing effort 13 now requires `--ner-backend
+gliner` explicitly. The committed report filenames on disk (e.g.
+`validation_report_entity_intersection_securemodernbert.md`) are untouched and
+still describe what produced them — but note that the backend suffix is now
+suppressed for the default backend, so re-running the typed arm today writes
+`validation_report_entity_intersection_typed.md`, a different filename from the
+committed `validation_report_entity_intersection_securemodernbert_typed.md`
+that holds the numbers in the table above.
+
 ## 6. Cross-cutting findings
 
 ### 6.1 Coverage, not representation
 
-Every lever pulled in efforts 1–13 was a *representation* lever: better
+Every lever pulled in efforts 1–17 was a *representation* lever: better
 embeddings, a better classifier, better text normalisation, an LLM on top. All
 returned null or marginal results. **One cause explains all of them:**
 
@@ -1860,6 +2059,7 @@ returned null or marginal results. **One cause explains all of them:**
 | Elastic marginal (6.7% own retrieval; helps only via IDF dilution) | endpoint register |
 | MISP galaxy 1.0% hit rate | host-side malware names |
 | Entity normalisation Steps 1–3 | normalising text cannot create training examples for a class that has eight |
+| Typed entity markers (effort 17) | a *better-typed* marker cannot either — mid bucket exactly flat at 29.2% |
 | Layer D's three failures | an LLM cannot retrieve what is not there |
 | Four encoder swaps (MiniLM, ATTACK-BERT, TF-IDF variants) | no encoder learns a class from one example |
 
@@ -2043,6 +2243,10 @@ happens to a row at each step.
 Removed over the branch's history: `bridge_table` (effort 10, structurally
 capped) and `embedder.py` (effort 11, register mismatch, 4.5% top-1).
 `entity_tagger.py` is present but off (`Settings.use_entity_tagging = False`).
+When it is switched on, its default is no longer effort 13's GLiNER + generic
+`<ENTITY>`: `DEFAULT_NER_BACKEND` is `securemodernbert` and typed markers
+resolve on with it (effort 17, adopted on direction rather than on a measured
+gain). Nothing in the default pipeline tags anything either way.
 
 **Figure 2 — where each resolver's knowledge comes from.** Nothing in the
 pipeline is hand-written per signature; every source is derived from one of six
@@ -2133,12 +2337,15 @@ Per §6.1, the more honest summary of pipeline quality is the bucket split:
 | `narrative.py` | template narrative generator |
 | `classifier_training.py`, `classifier_resolver.py` | live-trained TF-IDF + LinearSVC (`n_jobs` capped at 4) |
 | `knn_resolver.py` | IDF-weighted retrieval, leakage guard, `neighbour_source_counts` |
-| `entity_tagger.py` | effort 13 machinery (augment) + effort 15 (replace-mode, DF-gated), off by default |
+| `entity_tagger.py` | effort 13 machinery (augment) + effort 15 (replace-mode, DF-gated) + effort 17 (typed markers, `typed_markers=True`); all inert while `Settings.use_entity_tagging = False`, and when tagging *is* enabled the defaults are now `securemodernbert` + typed (effort 17) |
 | `entity_ner/df_table.py` | effort 15: measured n-gram corpus document frequency; the "rare" cut, and the artifact the DF gate reads |
 | `entity_ner/cutoff_screen.py` | effort 15: pre-screen asking whether DF cutoffs separate at all, before spending a validate pass each |
 | `entity_ner/replace_prereg.md` | effort 15: falsification criterion and sweep design, written before the arms ran |
 | `tests/test_entity_replace.py` | effort 15: the silent-failure invariants (offset validity under length change, zero-cutoff exactness, empty-document floor, cache-key separation per arm) |
 | `entity_ner/compare_ner.py`, `verdicts.py` | span-level model comparison (GLiNER / NuNER Zero / SecureBERT2.0-NER / SecureModernBERT-NER) and its recorded verdicts; measurement only, no pipeline path |
+| `entity_ner/typed_markers_prereg.md` | effort 17: `qqe_<type>qq`-per-type sentinel vs. one generic `<ENTITY>`, gated to SecureModernBERT's schema; falsification criterion (mid/tail bucket accuracy) written before the run — negative |
+| `bucket_accuracy.py` | effort 17: head/mid/tail bucket accuracy from a `validate.py` report, generalised from effort 14's one-off analysis so it's reusable per report |
+| `tests/test_entity_typed.py` | effort 17: silent-failure invariants for typed markers (untyped artifact read in typed mode must raise; fingerprint separation; sentinel collision-freedom; type-vs-gazetteer precedence in merge) |
 | `llm_client.py` | `LLMClient` ABC, `NullLLMClient` default, OpenAI/Anthropic/Ollama adapters |
 | `reasoner.py` | priority-ordered fusion plus optional Layer D |
 | `pipeline.py` | orchestration → `MappedRule` + `processing_steps` |
@@ -2368,6 +2575,21 @@ python attack_mapper/entity_dicts/build_dicts.py     # -> data/entity_gazetteer.
 python attack_mapper/entity_dicts/measure_coverage.py
 python -m attack_mapper.entity_ner.build_spans       # -> data/entity_spans.json.gz (~26 min)
 python -m attack_mapper.entity_ner.marker_rate       # frequency pre-screen
+
+# --- typed markers on SecureModernBERT (effort 17, the adopted default) ---
+# needs: pip install transformers torch   (no gliner/protobuf on this path)
+# NOTE data/entity_spans_smb.json.gz is gitignored too, and is a SEPARATE
+#   artifact from GLiNER's -- 4-wide spans carrying the per-span type, flagged
+#   meta.has_types; typed mode raises rather than degrading without it.
+# GPU is optional but worth it: a CUDA torch build ran the full 32,273-row
+#   rebuild in 4.9 min vs. 45-75 min projected on CPU (build_spans.py
+#   auto-detects and falls back).
+python -m attack_mapper.entity_ner.build_spans --backend securemodernbert
+python -m attack_mapper.entity_ner.marker_rate --backend securemodernbert --per-type
+python validate.py --entity-tagging intersection      # typed by default now
+python validate.py --entity-tagging intersection --no-typed-markers   # effort 16's generic run
+python validate.py --entity-tagging intersection --ner-backend gliner # effort 13's numbers
+python bucket_accuracy.py report_a.md report_b.md     # head/mid/tail, side-by-side
 
 # span-level model comparison (no corpus pass, seconds per model)
 python -m attack_mapper.entity_ner.compare_ner --models gliner,nuner,securebert

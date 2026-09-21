@@ -86,6 +86,18 @@ NER_THRESHOLD = 0.85
 SMB_MODEL = "attack-vector/SecureModernBERT-NER"
 SMB_AGGREGATION = "first"
 
+# The fixed 22-type schema (`AutoConfig.from_pretrained(SMB_MODEL).id2label`,
+# B-/I- prefixes stripped and de-duplicated, `O` excluded) -- enumerated once
+# from the model's own config rather than the handful of types that showed up
+# in the 30/100-title samples, so the marker map below is complete against
+# what the model can actually emit, not what happened to be observed.
+SMB_TYPES = (
+    "URL", "ORG", "SERVICE", "SECTOR", "FILEPATH", "DOMAIN", "PLATFORM",
+    "THREAT-ACTOR", "PRODUCT", "MALWARE", "LOC", "CVE", "TOOL", "IPV4",
+    "MITRE-TACTIC", "MD5", "CAMPAIGN", "SHA1", "SHA256", "EMAIL", "IPV6",
+    "REGISTRY-KEYS",
+)
+
 # Registry of NER backends `EntityTagger(ner_backend=...)` can select.
 # `spans_path` is backend-specific so a GLiNER build and a SecureModernBERT
 # build never collide or silently mix -- each backend's spans live in their
@@ -104,9 +116,68 @@ NER_BACKENDS = {
         "spans_path": SMB_SPANS_PATH,
     },
 }
-DEFAULT_NER_BACKEND = "gliner"
+DEFAULT_NER_BACKEND = "securemodernbert"
+# Was "gliner" through effort 16. Flipped per explicit project direction
+# (GLiNER is no longer in active use; typed NER -- SecureModernBERT's fixed
+# schema is what makes typing viable at all, effort 17 -- is the supervisor-
+# directed standard going forward, ahead of the corpus expansion effort 14
+# identifies as the actual binding constraint). GLiNER's artifact/backend
+# still works unchanged for anyone who passes `--ner-backend gliner`
+# explicitly (reproducing effort 13's numbers needs exactly that).
 
 MARKER = "<ENTITY>"
+
+# ---------------------------------------------------------------------------
+# Typed markers (effort 17): one qq<type>qq sentinel per entity type instead
+# of one generic <ENTITY>.
+#
+# Deliberately NOT a reopening of the 2026-09-11 "generic, not typed"
+# decision recorded in `entity_ner/replace_prereg.md` -- that decision was
+# measured against GLiNER/the gazetteer, both ~20% wrong on type (`fortios`
+# tagged a product, `FortiOS` tagged a company). It was never re-measured
+# against SecureModernBERT, whose fixed 22-label schema is the reason it
+# clears the pre-registered gate at all (`entity_ner/comparison_findings.md`)
+# -- and per that same doc's "Two real, measured weaknesses" section it is
+# NOT immune to the same failure (`Cisco` -> PRODUCT in one title, -> ORG two
+# rows later; `IBM Tivoli Endpoint` splits into ORG + TOOL). So this is a new,
+# separate arm to measure, not a correction of the old one -- gated behind
+# `EntityTagger(typed_markers=True)`, off by default, and the untyped path
+# below is untouched so effort 13/16's numbers stay reproducible.
+#
+# Sentinel, not literal <TYPE>: the same collision MARKER/SENTINEL already
+# document above applies here, worse. sklearn's default `\w\w+` token pattern
+# strips angle brackets, so `<PRODUCT>` would tokenize to the bare word
+# `product` -- a real word in rule titles -- and a hyphenated type like
+# `<MITRE-TACTIC>` would additionally split into two tokens (`mitre`,
+# `tactic`) since `-` isn't a word character, silently breaking the
+# one-marker-per-span invariant every other placeholder in this module keeps.
+# `qq...qq` sentinels (the existing convention: `SENTINEL`, `RESERVED_MAP`)
+# survive tokenization as one word-shaped token that appears nowhere in
+# ordinary English or the corpora.
+#
+# Namespaced `qqe_...qq` (not `qqcveqq` etc.) so this mechanism never collides
+# with `RESERVED_MAP`'s sentinels even though both happen to cover CVE --
+# they are two unrelated placeholder systems (normalize.py's older literal
+# `<CVE>`/`<IP>`/`<HEX>`/`<VERSION>` substitution vs. this module's NER spans)
+# and conflating their tokens would make a stale-cache-style bug invisible.
+
+
+def _sentinel_for_type(etype: str) -> str:
+    return "qqe_" + re.sub(r"[^a-z0-9]", "", etype.lower()) + "qq"
+
+
+TYPE_MARKERS = {t: _sentinel_for_type(t) for t in SMB_TYPES}
+
+# Fallback for a span with no NER type in typed mode: a gazetteer-only hit
+# (union/gliner_primary can keep one when NER missed it), or a label the
+# pinned model version emits that isn't in SMB_TYPES (schema drift). The
+# gazetteer's own free-text type (`"software product"`, `"network
+# protocol"`, ... from the CSV) is deliberately not surfaced as a marker --
+# it has never been measured for per-type accuracy the way SMB_TYPES has, so
+# surfacing it would reintroduce exactly the untrusted-type problem this
+# feature exists to avoid for the NER side.
+UNTYPED_TYPE = "__untyped__"
+TYPE_MARKERS[UNTYPED_TYPE] = "qqe_untypedqq"
 
 # Replace a span only when its corpus document frequency is strictly below
 # this. 1% sits an order of magnitude under the frequent tokens the report
@@ -196,7 +267,12 @@ DEFAULT_MERGE_RULE = "union"
 
 _TOKEN_RE = re.compile(r"[a-z0-9][a-z0-9_.+-]*")
 
-Span = Tuple[int, int, str]  # (start, end, source)
+Span = Tuple[int, int, str, str]  # (start, end, source, etype)
+# `etype` is "" for the gazetteer (never typed -- see UNTYPED_TYPE above) and
+# for spans read from a pre-typed-markers artifact that has no 4th element.
+# Every producer below fills it in as best it can; only `merge_spans(...,
+# with_types=True)` and its callers actually read it, so an empty string is a
+# silent no-op everywhere else, not a bug.
 
 
 class SpansArtifactError(RuntimeError):
@@ -249,11 +325,11 @@ def gazetteer_spans(text: str, single: Dict[str, str], multi: Dict[str, str],
         for i in range(len(toks) - size + 1):
             phrase = " ".join(t[2] for t in toks[i:i + size])
             if phrase in multi:
-                found.append((toks[i][0], toks[i + size - 1][1], "gazetteer"))
+                found.append((toks[i][0], toks[i + size - 1][1], "gazetteer", ""))
 
     for start, end, tok in toks:
         if tok in single or tok.rstrip(".-_") in single:
-            found.append((start, end, "gazetteer"))
+            found.append((start, end, "gazetteer", ""))
     return found
 
 
@@ -265,8 +341,9 @@ def _overlaps(a: Span, b: Span) -> bool:
     return a[0] < b[1] and b[0] < a[1]
 
 
-def merge_spans(spans: Sequence[Span], rule: str = DEFAULT_MERGE_RULE) -> List[Tuple[int, int]]:
-    """Apply a merge rule to raw (start, end, source) spans.
+def merge_spans(spans: Sequence[Span], rule: str = DEFAULT_MERGE_RULE,
+                with_types: bool = False):
+    """Apply a merge rule to raw (start, end, source, etype) spans.
 
     The artifact stores raw spans *with their source*, so every rule can be
     swept over one cached NER pass rather than re-running it per variant.
@@ -277,6 +354,12 @@ def merge_spans(spans: Sequence[Span], rule: str = DEFAULT_MERGE_RULE) -> List[T
     keeps GLiNER's boundaries). Since markers are appended rather than
     substituted, extent only moves where the marker lands, not how many appear
     -- so the sweep has four meaningful arms, not five.
+
+    Returns `List[Tuple[int, int]]` by default -- unchanged from before typed
+    markers existed, so every existing caller (`marker_rate.py`,
+    `cutoff_screen.py`, the tests) keeps working untouched. `with_types=True`
+    returns `List[Tuple[int, int, str]]` instead, one etype per collapsed
+    range, for `inject_typed_markers`.
     """
     if rule not in MERGE_RULES:
         raise ValueError(f"unknown merge rule {rule!r}; expected one of {MERGE_RULES}")
@@ -305,7 +388,21 @@ def merge_spans(spans: Sequence[Span], rule: str = DEFAULT_MERGE_RULE) -> List[T
             out[-1] = (out[-1][0], max(out[-1][1], end))
         else:
             out.append((start, end))
-    return out
+
+    if not with_types:
+        return out
+
+    # Assign each collapsed range a type. Prefer an NER-sourced type (`gl`)
+    # over the gazetteer's when both land in the range: NER's type is the
+    # thing this feature measures (SMB_TYPES, per comparison_findings.md);
+    # the gazetteer's is unvalidated free text from the CSV and is never
+    # surfaced (UNTYPED_TYPE) even when it is the only source that fired.
+    typed: List[Tuple[int, int, str]] = []
+    for start, end in out:
+        ner_hit = next((s for s in gl if s[0] < end and start < s[1]), None)
+        etype = (ner_hit[3] if ner_hit and ner_hit[3] else None) or UNTYPED_TYPE
+        typed.append((start, end, etype))
+    return typed
 
 
 def inject_markers(text: str, spans: Sequence[Tuple[int, int]],
@@ -314,6 +411,19 @@ def inject_markers(text: str, spans: Sequence[Tuple[int, int]],
     valid as the string grows."""
     out = text
     for start, end in sorted(spans, reverse=True):
+        out = out[:end] + " " + marker + " " + out[end:]
+    return out
+
+
+def inject_typed_markers(text: str, typed_spans: Sequence[Tuple[int, int, str]]) -> str:
+    """Like `inject_markers`, but appends `TYPE_MARKERS[etype]` per span
+    instead of one constant marker. Takes `merge_spans(..., with_types=True)`
+    output specifically -- (start, end) pairs from the untyped path have
+    nothing to look up and will fail to unpack.
+    """
+    out = text
+    for start, end, etype in sorted(typed_spans, reverse=True):
+        marker = TYPE_MARKERS.get(etype, TYPE_MARKERS[UNTYPED_TYPE])
         out = out[:end] + " " + marker + " " + out[end:]
     return out
 
@@ -398,7 +508,8 @@ class EntityTagger:
                  df_cutoff: float = DEFAULT_DF_CUTOFF,
                  replacement_style: str = DEFAULT_REPLACEMENT_STYLE,
                  df_path: Optional[str] = None,
-                 ner_backend: str = DEFAULT_NER_BACKEND):
+                 ner_backend: str = DEFAULT_NER_BACKEND,
+                 typed_markers: bool = False):
         if merge_rule not in MERGE_RULES:
             raise ValueError(f"unknown merge rule {merge_rule!r}")
         self.merge_rule = merge_rule
@@ -407,6 +518,16 @@ class EntityTagger:
         if ner_backend not in NER_BACKENDS:
             raise ValueError(f"unknown ner_backend {ner_backend!r}; "
                              f"expected one of {list(NER_BACKENDS)}")
+        if typed_markers and replace_rare:
+            # Not measured together deliberately (advisor note, effort 17):
+            # replace-mode was already measured decisively negative on its
+            # own (replace_prereg.md, -5.0 to -5.8 macro), so stacking a
+            # second changed variable on top gives an unreadable result.
+            # `replace_spans` also only understands (start, end) pairs, not
+            # the (start, end, etype) triples typed mode produces.
+            raise ValueError("typed_markers + replace_rare is not supported; "
+                             "these are separate, un-stacked experiment arms")
+        self.typed = typed_markers
         self.replace_rare = replace_rare
         self.df_cutoff = float(df_cutoff)
         self.replacement_style = replacement_style
@@ -455,6 +576,21 @@ class EntityTagger:
                 blob = json.load(fh)
             self.artifact_meta = blob.get("meta", {})
             self._check_artifact_meta()
+            if self.typed and not self.artifact_meta.get("has_types"):
+                # Deliberately fatal, same reasoning as SpansArtifactError's
+                # class docstring: an untyped artifact read in typed mode
+                # would silently fall back to UNTYPED_TYPE on every span (no
+                # 4th element to read), which looks exactly like "every
+                # marker is qqe_untypedqq" -- i.e. the old generic-marker
+                # result under a different name -- rather than an error.
+                raise SpansArtifactError(
+                    f"{self.spans_path} was built without per-span types "
+                    f"(has_types={self.artifact_meta.get('has_types')!r}); "
+                    f"typed_markers=True needs an artifact rebuilt with a "
+                    f"backend that stores them. Rebuild:  python -m "
+                    f"attack_mapper.entity_ner.build_spans --backend "
+                    f"{ner_backend}"
+                )
             self.ner_spans = blob["spans"]
 
         self.single, self.multi = ({}, {})
@@ -521,7 +657,12 @@ class EntityTagger:
             if cached is None:
                 self.misses += 1
                 cached = self._live_ner(text)
-            spans += [(s[0], s[1], "gliner") for s in cached]
+            # 4th element (label) only present for a backend build_spans.py
+            # stores types for (securemodernbert). Absent -> "", same as the
+            # gazetteer's untyped spans -- merge_spans(with_types=True) maps
+            # that to UNTYPED_TYPE like any other type-less hit.
+            spans += [(s[0], s[1], "gliner", s[3] if len(s) > 3 else "")
+                     for s in cached]
         return spans
 
     def _live_ner(self, text: str) -> List[List]:
@@ -535,8 +676,8 @@ class EntityTagger:
                     "token-classification", model=self._ner_model,
                     aggregation_strategy=SMB_AGGREGATION)
             ents = self._live_model(text)
-            spans = [[int(e["start"]), int(e["end"]), float(e["score"])]
-                     for e in ents]
+            spans = [[int(e["start"]), int(e["end"]), float(e["score"]),
+                     e["entity_group"]] for e in ents]
         else:
             if self._live_model is None:
                 from gliner import GLiNER  # heavy import, deferred
@@ -549,6 +690,18 @@ class EntityTagger:
 
     def tag(self, text: str) -> str:
         self.calls += 1
+        if self.typed:
+            # Separate branch, not a fallthrough: typed spans are 3-tuples
+            # (start, end, etype), and replace_rare is rejected for this mode
+            # in __init__, so there is nothing past this to share with the
+            # untyped path below.
+            typed_spans = merge_spans(self._spans_for(text), self.merge_rule,
+                                      with_types=True)
+            if not typed_spans:
+                return text
+            self.tagged += 1
+            return inject_typed_markers(text, typed_spans)
+
         merged = merge_spans(self._spans_for(text), self.merge_rule)
         if not merged:
             return text
@@ -578,6 +731,16 @@ class EntityTagger:
         """
         h = hashlib.sha256()
         h.update(f"{self.merge_rule}|{MARKER}".encode())
+
+        # Typed-marker identity. `TYPE_MARKERS` is a module constant today,
+        # but hashing it rather than just a "typed" flag means a future edit
+        # to the sentinel map invalidates old caches automatically instead of
+        # silently reusing embeddings keyed under the old text -- the same
+        # "derived from bytes, not a version someone forgets to bump" reason
+        # this whole method is structured this way.
+        h.update(b"|typed:1:" if self.typed else b"|typed:0")
+        if self.typed:
+            h.update("|".join(f"{k}={v}" for k, v in sorted(TYPE_MARKERS.items())).encode())
 
         # Replace-mode identity. Two runs at different DF cutoffs emit
         # DIFFERENT text from the same spans, so without this they would key
@@ -617,6 +780,8 @@ class EntityTagger:
         mode = (f"{self.merge_rule}/replace<{self.df_cutoff:.2%}"
                 f"/{self.replacement_style}"
                 if self.replace_rare else self.merge_rule)
+        if self.typed:
+            mode += "/typed"
         base = (f"entity tagger [{mode}]: tagged {self.tagged}/"
                 f"{self.calls} texts ({pct:.1%}), {self.misses} NER cache misses")
         if not self.replace_rare:
