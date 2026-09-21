@@ -27,7 +27,7 @@ def _translate(label, root=False):
         new_label += 'Victim: ' + str(root) + '\n'
 
     if len(parts) >= 1:
-        new_label += verbose_micro[parts[0]]
+        new_label += taxonomy.verbose_label(parts[0])
     if len(parts) >= 2:
         new_label += "\n" + parts[1]
     if len(parts) >= 3:
@@ -49,7 +49,7 @@ def _get_objective_nodes(state_sequences, obj_only=False):
     for episodes in state_sequences.values():  # Iterate over all episodes and collect the objective nodes
         for epi in episodes:
             if len(str(epi[2])) == 3:  # If high-severity, then include it
-                mcat = micro[epi[2]].split('.')[1]
+                mcat = taxonomy.code_to_label(epi[2])
                 if obj_only:  # Experiment: only mcat or mcat + mserv?
                     vert_name = mcat
                 else:
@@ -83,7 +83,7 @@ def _make_vertex_info(episode, in_main_model):
     """
     start_time = round(episode[0] / 1.0)
     end_time = round(episode[1] / 1.0)
-    cat = micro[episode[2]].split('.')[1]
+    cat = taxonomy.code_to_label(episode[2])
     signs = episode[5]
     timestamps = episode[6]
     if episode[3] in in_main_model:  # TODO: this check is useless, since it is always True

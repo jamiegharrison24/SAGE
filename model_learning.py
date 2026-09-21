@@ -203,7 +203,7 @@ def traverse(dfa, sinks, sequence):
     state_list = ["0"]
     for event in sequence:
         sym = event.split(":")[0]  # This is needed for the multivariate case in `generate_traces` function
-        sev = rev_smallmapping[sym.split('|')[0]]
+        sev = taxonomy.code_for_symbol(sym.split('|')[0])
         if state in dfa and sym in dfa[state]:  # Use the main model if possible, otherwise use the model with the sinks
             state = dfa[state][sym]
             state_list.append(state)
@@ -261,10 +261,10 @@ def encode_sequences(dfa, sinks, subsequences):
 
         sample = trace_
         med_sev = [int(state) for sym, state in zip(sample, state_list) if
-                   len(str(rev_smallmapping[sym.split('|')[0]])) == 2]
+                   len(str(taxonomy.code_for_symbol(sym.split('|')[0]))) == 2]
         med_sev_states.update(med_sev)
         high_sev = [int(state) for sym, state in zip(sample, state_list) if
-                    len(str(rev_smallmapping[sym.split('|')[0]])) == 3]
+                    len(str(taxonomy.code_for_symbol(sym.split('|')[0]))) == 3]
         high_sev_states.update(high_sev)
         sev_sinks.update(_sev_sinks)
 

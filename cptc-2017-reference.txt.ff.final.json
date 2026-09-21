@@ -1,0 +1,6048 @@
+{
+	"types" : [
+"1"
+	],
+	"alphabet" : [
+"discov|unknown",
+"discov|ncube-lm",
+"recon|unknown",
+"discov|mysql",
+"discov|xdmcp",
+"recon|http",
+"discov|ms-sql-m",
+"discov|ms-wbt-server",
+"recon|wap-wsp",
+"discov|ms-sql-s",
+"discov|rfb",
+"t1498|ms-wbt-server",
+"discov|postgresql",
+"discov|microsoft-ds",
+"discov|ssh",
+"recon|http-alt",
+"discov|dsd",
+"discov|epmap",
+"discov|rpas-c2",
+"discov|cpdlc",
+"discov|ag-swim",
+"discov|cm",
+"discov|netbios-ssn",
+"discov|eldim",
+"t1021_001|ms-wbt-server",
+"t1021_001|unknown",
+"discov|domain",
+"t1021_002|microsoft-ds",
+"discov|search-agent",
+"recon|vrml-multi-use",
+"discov|ahsp",
+"t1068|kerberos",
+"discov|ff-ice",
+"discov|sunrpc",
+"discov|http",
+"t1499|http",
+"t1078_001|snmp",
+"recon|wsman",
+"t1498_002|ntp",
+"t1021_003|epmap",
+"t1499|ftp",
+"recon|ftp",
+"recon|remoteware-cl",
+"recon|distinct",
+"recon|profinet-rt",
+"recon|websm",
+"discov|spt-automation",
+"discov|ipsma",
+"recon|esmagent",
+"discov|fis",
+"t1059_006|unknown",
+"discov|icmpd",
+"discov|asmgcs",
+"discov|agma",
+"discov|ads-c",
+"discov|ipsdtls",
+"t1021|syslog"
+	],
+	"nodes" : [
+		{
+			"id" : 0,
+			"source" :  -1,
+			"label" : "fin:  path: 0:600 , ",
+			"size" : 600,
+			"level" : 0,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "0 0",
+			"data" :  {"path_counts":{"0":600},"symbol_counts":null,"total_final":0,"total_paths":600,"trans_counts":{"discov|ag-swim":"3","discov|ahsp":"13","discov|cpdlc":"2","discov|domain":"2","discov|epmap":"2","discov|ff-ice":"4","discov|fis":"1","discov|icmpd":"1","discov|ipsdtls":"3","discov|microsoft-ds":"5","discov|ms-sql-s":"16","discov|ms-wbt-server":"7","discov|mysql":"47","discov|ncube-lm":"17","discov|netbios-ssn":"1","discov|postgresql":"13","discov|rfb":"1","discov|rpas-c2":"2","discov|search-agent":"1","discov|ssh":"30","discov|sunrpc":"3","discov|unknown":"62","discov|xdmcp":"25","recon|esmagent":"1","recon|http":"97","recon|http-alt":"16","recon|profinet-rt":"1","recon|remoteware-cl":"1","recon|unknown":"32","recon|vrml-multi-use":"1","recon|wap-wsp":"10","recon|wsman":"6","t1021_001|ms-wbt-server":"3","t1021_001|unknown":"12","t1021_002|microsoft-ds":"20","t1021|syslog":"1","t1059_006|unknown":"1","t1068|kerberos":"2","t1078_001|snmp":"75","t1498_002|ntp":"2","t1498|ms-wbt-server":"56","t1499|ftp":"1","t1499|http":"1"}}
+		},
+		{
+			"id" : 1,
+			"source" :  0,
+			"label" : "fin: 0:11 ,  path: 0:152 , ",
+			"size" : 163,
+			"level" : 9,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|unknown",
+			"data" :  {"final_counts":{"0":11},"path_counts":{"0":152},"symbol_counts":null,"total_final":11,"total_paths":152,"trans_counts":{"discov|ag-swim":"5","discov|agma":"3","discov|ahsp":"6","discov|asmgcs":"4","discov|cm":"1","discov|cpdlc":"1","discov|dsd":"3","discov|ff-ice":"3","discov|fis":"7","discov|icmpd":"1","discov|ipsdtls":"1","discov|ipsma":"1","discov|ms-sql-s":"8","discov|mysql":"12","discov|ncube-lm":"11","discov|postgresql":"6","discov|rfb":"1","discov|rpas-c2":"5","discov|ssh":"7","discov|sunrpc":"2","discov|unknown":"43","recon|http":"13","recon|http-alt":"4","recon|unknown":"4"}}
+		},
+		{
+			"id" : 2,
+			"source" :  0,
+			"label" : "fin: 0:7 ,  path: 0:49 , ",
+			"size" : 56,
+			"level" : 5,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|ncube-lm",
+			"data" :  {"final_counts":{"0":7},"path_counts":{"0":49},"symbol_counts":null,"total_final":7,"total_paths":49,"trans_counts":{"discov|ahsp":"5","discov|dsd":"1","discov|fis":"1","discov|ms-sql-s":"1","discov|ms-wbt-server":"2","discov|mysql":"3","discov|ncube-lm":"1","discov|netbios-ssn":"1","discov|postgresql":"8","discov|rfb":"2","discov|unknown":"8","discov|xdmcp":"2","recon|http":"8","recon|http-alt":"1","recon|unknown":"5"}}
+		},
+		{
+			"id" : 3,
+			"source" :  0,
+			"label" : "fin: 0:8 ,  path: 0:54 , ",
+			"size" : 62,
+			"level" : 4,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 recon|unknown",
+			"data" :  {"final_counts":{"0":8},"path_counts":{"0":54},"symbol_counts":null,"total_final":8,"total_paths":54,"trans_counts":{"discov|ag-swim":"1","discov|ahsp":"1","discov|cpdlc":"1","discov|dsd":"1","discov|ff-ice":"1","discov|microsoft-ds":"1","discov|ms-sql-s":"5","discov|mysql":"22","discov|ncube-lm":"6","discov|postgresql":"2","discov|rfb":"1","discov|rpas-c2":"1","discov|unknown":"2","discov|xdmcp":"1","recon|http":"1","recon|unknown":"4","recon|wsman":"3"}}
+		},
+		{
+			"id" : 4,
+			"source" :  0,
+			"label" : "fin: 0:39 ,  path: 0:149 , ",
+			"size" : 188,
+			"level" : 8,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|mysql",
+			"data" :  {"final_counts":{"0":39},"path_counts":{"0":149},"symbol_counts":null,"total_final":39,"total_paths":149,"trans_counts":{"discov|ag-swim":"4","discov|ff-ice":"1","discov|microsoft-ds":"2","discov|ms-sql-s":"4","discov|ms-wbt-server":"2","discov|mysql":"42","discov|ncube-lm":"4","discov|postgresql":"5","discov|rfb":"4","discov|spt-automation":"1","discov|ssh":"6","discov|unknown":"7","discov|xdmcp":"3","recon|http":"41","recon|http-alt":"6","recon|unknown":"15","recon|wap-wsp":"1","recon|wsman":"1"}}
+		},
+		{
+			"id" : 5,
+			"source" :  0,
+			"label" : "fin: 0:0 ,  path: 0:25 , ",
+			"size" : 25,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|xdmcp",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":25},"symbol_counts":null,"total_final":0,"total_paths":25,"trans_counts":{"discov|mysql":"1","discov|ncube-lm":"8","discov|postgresql":"2","discov|rpas-c2":"1","discov|ssh":"3","discov|unknown":"3","recon|http":"4","recon|http-alt":"2","recon|unknown":"1","recon|wsman":"0"}}
+		},
+		{
+			"id" : 6,
+			"source" :  0,
+			"label" : "fin: 0:8 ,  path: 0:181 , ",
+			"size" : 189,
+			"level" : 8,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 recon|http",
+			"data" :  {"final_counts":{"0":8},"path_counts":{"0":181},"symbol_counts":null,"total_final":8,"total_paths":181,"trans_counts":{"discov|ag-swim":"3","discov|ahsp":"2","discov|cpdlc":"2","discov|domain":"3","discov|dsd":"4","discov|epmap":"1","discov|http":"4","discov|ipsma":"1","discov|microsoft-ds":"1","discov|ms-sql-s":"15","discov|ms-wbt-server":"3","discov|mysql":"35","discov|ncube-lm":"14","discov|netbios-ssn":"1","discov|postgresql":"16","discov|rfb":"4","discov|rpas-c2":"1","discov|ssh":"21","discov|unknown":"13","discov|xdmcp":"2","recon|http":"35"}}
+		},
+		{
+			"id" : 7,
+			"source" :  0,
+			"label" : "fin:  path: 0:7 , ",
+			"size" : 7,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":7},"symbol_counts":null,"total_final":0,"total_paths":7,"trans_counts":{"discov|ncube-lm":"1","discov|netbios-ssn":"1","discov|ssh":"1","discov|unknown":"1","recon|http":"2","recon|http-alt":"1"}}
+		},
+		{
+			"id" : 8,
+			"source" :  0,
+			"label" : "fin:  path: 0:10 , ",
+			"size" : 10,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 recon|wap-wsp",
+			"data" :  {"path_counts":{"0":10},"symbol_counts":null,"total_final":0,"total_paths":10,"trans_counts":{"discov|cpdlc":"1","discov|mysql":"3","discov|ncube-lm":"2","discov|postgresql":"3","discov|unknown":"1"}}
+		},
+		{
+			"id" : 9,
+			"source" :  0,
+			"label" : "fin: 0:11 ,  path: 0:59 , ",
+			"size" : 70,
+			"level" : 7,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":11},"path_counts":{"0":59},"symbol_counts":null,"total_final":11,"total_paths":59,"trans_counts":{"discov|ag-swim":"1","discov|ahsp":"1","discov|cpdlc":"2","discov|domain":"1","discov|epmap":"2","discov|ff-ice":"1","discov|microsoft-ds":"1","discov|ms-sql-s":"4","discov|ms-wbt-server":"2","discov|mysql":"5","discov|ncube-lm":"4","discov|postgresql":"8","discov|rpas-c2":"2","discov|ssh":"2","discov|unknown":"7","discov|xdmcp":"1","recon|http":"8","recon|remoteware-cl":"1","recon|unknown":"5","recon|vrml-multi-use":"1"}}
+		},
+		{
+			"id" : 10,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|rfb",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 11,
+			"source" :  0,
+			"label" : "fin: 0:2 ,  path: 0:63 , ",
+			"size" : 65,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 t1498|ms-wbt-server",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":63},"symbol_counts":null,"total_final":2,"total_paths":63,"trans_counts":{"discov|ahsp":"1","discov|microsoft-ds":"1","discov|ms-sql-s":"7","discov|ms-wbt-server":"2","discov|mysql":"7","discov|ncube-lm":"3","discov|postgresql":"4","discov|unknown":"3","recon|http":"1","recon|unknown":"1","t1021_001|unknown":"5","t1021_002|microsoft-ds":"3","t1021_003|epmap":"3","t1078_001|snmp":"13","t1498|ms-wbt-server":"9"}}
+		},
+		{
+			"id" : 12,
+			"source" :  0,
+			"label" : "fin: 0:12 ,  path: 0:62 , ",
+			"size" : 74,
+			"level" : 6,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|postgresql",
+			"data" :  {"final_counts":{"0":12},"path_counts":{"0":62},"symbol_counts":null,"total_final":12,"total_paths":62,"trans_counts":{"discov|ahsp":"1","discov|asmgcs":"2","discov|cm":"2","discov|microsoft-ds":"1","discov|ms-sql-s":"6","discov|ms-wbt-server":"1","discov|mysql":"6","discov|ncube-lm":"3","discov|netbios-ssn":"1","discov|postgresql":"12","discov|rfb":"1","discov|rpas-c2":"1","discov|ssh":"1","discov|unknown":"8","recon|http":"9","recon|http-alt":"5","recon|unknown":"2"}}
+		},
+		{
+			"id" : 13,
+			"source" :  0,
+			"label" : "fin:  path: 0:5 , ",
+			"size" : 5,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|microsoft-ds",
+			"data" :  {"path_counts":{"0":5},"symbol_counts":null,"total_final":0,"total_paths":5,"trans_counts":{"discov|microsoft-ds":"3","discov|ncube-lm":"1","recon|http-alt":"1"}}
+		},
+		{
+			"id" : 14,
+			"source" :  0,
+			"label" : "fin: 0:17 ,  path: 0:63 , ",
+			"size" : 80,
+			"level" : 3,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|ssh",
+			"data" :  {"final_counts":{"0":17},"path_counts":{"0":63},"symbol_counts":null,"total_final":17,"total_paths":63,"trans_counts":{"discov|ahsp":"1","discov|icmpd":"1","discov|microsoft-ds":"2","discov|ms-sql-s":"4","discov|ms-wbt-server":"1","discov|mysql":"2","discov|ncube-lm":"4","discov|postgresql":"2","discov|rfb":"2","discov|rpas-c2":"1","discov|ssh":"16","discov|sunrpc":"2","discov|unknown":"2","discov|xdmcp":"1","recon|http":"19","recon|unknown":"3"}}
+		},
+		{
+			"id" : 15,
+			"source" :  0,
+			"label" : "fin: 0:1 ,  path: 0:34 , ",
+			"size" : 35,
+			"level" : 2,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 recon|http-alt",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":34},"symbol_counts":null,"total_final":1,"total_paths":34,"trans_counts":{"discov|ag-swim":"1","discov|ipsma":"1","discov|ms-sql-s":"1","discov|ms-wbt-server":"1","discov|mysql":"6","discov|ncube-lm":"3","discov|postgresql":"6","discov|rfb":"1","discov|ssh":"1","discov|unknown":"3","discov|xdmcp":"1","recon|http":"1","recon|http-alt":"8"}}
+		},
+		{
+			"id" : 16,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|epmap",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ncube-lm":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 17,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|rpas-c2",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 18,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|cpdlc",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|asmgcs":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 19,
+			"source" :  0,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|ag-swim",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ahsp":"2","discov|cpdlc":"1"}}
+		},
+		{
+			"id" : 20,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|netbios-ssn",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ssh":"1"}}
+		},
+		{
+			"id" : 21,
+			"source" :  0,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1021_001|ms-wbt-server",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"t1021_001|ms-wbt-server":"2","t1021_002|microsoft-ds":"1"}}
+		},
+		{
+			"id" : 22,
+			"source" :  0,
+			"label" : "fin: 0:3 ,  path: 0:22 , ",
+			"size" : 25,
+			"level" : 2,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 t1021_001|unknown",
+			"data" :  {"final_counts":{"0":3},"path_counts":{"0":22},"symbol_counts":null,"total_final":3,"total_paths":22,"trans_counts":{"discov|microsoft-ds":"3","discov|ms-sql-s":"2","discov|ms-wbt-server":"2","discov|ncube-lm":"4","discov|postgresql":"3","discov|rpas-c2":"1","discov|unknown":"2","recon|http":"1","t1021_001|unknown":"1","t1021_002|microsoft-ds":"1","t1078_001|snmp":"2"}}
+		},
+		{
+			"id" : 23,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|domain",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"recon|http":"2"}}
+		},
+		{
+			"id" : 24,
+			"source" :  0,
+			"label" : "fin: 0:4 ,  path: 0:58 , ",
+			"size" : 62,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 t1021_002|microsoft-ds",
+			"data" :  {"final_counts":{"0":4},"path_counts":{"0":58},"symbol_counts":null,"total_final":4,"total_paths":58,"trans_counts":{"discov|ahsp":"1","discov|ms-sql-s":"1","discov|ms-wbt-server":"1","discov|ncube-lm":"1","recon|wsman":"1","t1021_001|unknown":"8","t1021_002|microsoft-ds":"42","t1078_001|snmp":"3"}}
+		},
+		{
+			"id" : 25,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|search-agent",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 26,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 recon|vrml-multi-use",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 27,
+			"source" :  0,
+			"label" : "fin: 0:2 ,  path: 0:22 , ",
+			"size" : 24,
+			"level" : 2,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 discov|ahsp",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":22},"symbol_counts":null,"total_final":2,"total_paths":22,"trans_counts":{"discov|cm":"2","discov|cpdlc":"3","discov|fis":"1","discov|ms-sql-s":"3","discov|rpas-c2":"1","discov|ssh":"2","discov|unknown":"10"}}
+		},
+		{
+			"id" : 28,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1068|kerberos",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"t1021_001|unknown":"1","t1021_002|microsoft-ds":"1"}}
+		},
+		{
+			"id" : 29,
+			"source" :  0,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|ff-ice",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ahsp":"3","discov|postgresql":"1"}}
+		},
+		{
+			"id" : 30,
+			"source" :  0,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|sunrpc",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|postgresql":"1","discov|sunrpc":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 31,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1499|http",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 32,
+			"source" :  0,
+			"label" : "fin:  path: 0:75 , ",
+			"size" : 75,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 t1078_001|snmp",
+			"data" :  {"path_counts":{"0":75},"symbol_counts":null,"total_final":0,"total_paths":75,"trans_counts":{"discov|ahsp":"3","discov|domain":"1","discov|epmap":"1","discov|ms-sql-s":"7","discov|mysql":"6","discov|ncube-lm":"4","discov|netbios-ssn":"0","discov|postgresql":"2","discov|xdmcp":"21","recon|http":"7","t1021_001|ms-wbt-server":"1","t1021_002|microsoft-ds":"1","t1078_001|snmp":"21"}}
+		},
+		{
+			"id" : 33,
+			"source" :  0,
+			"label" : "fin:  path: 0:6 , ",
+			"size" : 6,
+			"level" : 1,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 1 recon|wsman",
+			"data" :  {"path_counts":{"0":6},"symbol_counts":null,"total_final":0,"total_paths":6,"trans_counts":{"discov|cpdlc":"1","discov|unknown":"5"}}
+		},
+		{
+			"id" : 34,
+			"source" :  0,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1498_002|ntp",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"t1021_002|microsoft-ds":"1","t1021_003|epmap":"1"}}
+		},
+		{
+			"id" : 35,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1499|ftp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"t1498|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 36,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 recon|remoteware-cl",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|cpdlc":"1"}}
+		},
+		{
+			"id" : 37,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 recon|profinet-rt",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 38,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 recon|esmagent",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|remoteware-cl":"1"}}
+		},
+		{
+			"id" : 39,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|fis",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 40,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1059_006|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"t1059_006|unknown":"1"}}
+		},
+		{
+			"id" : 41,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|icmpd",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 42,
+			"source" :  0,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 discov|ipsdtls",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|postgresql":"2","discov|unknown":"1"}}
+		},
+		{
+			"id" : 43,
+			"source" :  0,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 1,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 1 t1021|syslog",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 44,
+			"source" :  1,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown recon|unknown",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|mysql":"1","discov|rfb":"1","discov|unknown":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 45,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|unknown discov|ncube-lm discov|ahsp discov|unknown discov|rfb",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 46,
+			"source" :  1,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown recon|http-alt",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ms-sql-s":"1","discov|mysql":"2","discov|postgresql":"1"}}
+		},
+		{
+			"id" : 47,
+			"source" :  1,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown discov|dsd",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|unknown":"2"}}
+		},
+		{
+			"id" : 48,
+			"source" :  1,
+			"label" : "fin:  path: 0:5 , ",
+			"size" : 5,
+			"level" : 10,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 discov|unknown discov|rpas-c2",
+			"data" :  {"path_counts":{"0":5},"symbol_counts":null,"total_final":0,"total_paths":5,"trans_counts":{"discov|fis":"1","discov|postgresql":"2","discov|ssh":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 49,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|unknown discov|cpdlc",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 50,
+			"source" :  1,
+			"label" : "fin:  path: 0:5 , ",
+			"size" : 5,
+			"level" : 10,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 4 discov|unknown discov|unknown discov|unknown discov|ag-swim",
+			"data" :  {"path_counts":{"0":5},"symbol_counts":null,"total_final":0,"total_paths":5,"trans_counts":{"discov|asmgcs":"1","discov|ncube-lm":"1","discov|rpas-c2":"1","discov|unknown":"2"}}
+		},
+		{
+			"id" : 51,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 7 discov|unknown discov|unknown discov|unknown discov|unknown discov|ncube-lm discov|unknown discov|cm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|icmpd":"1"}}
+		},
+		{
+			"id" : 52,
+			"source" :  1,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown discov|ff-ice",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|postgresql":"2","discov|unknown":"1"}}
+		},
+		{
+			"id" : 53,
+			"source" :  1,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown discov|sunrpc",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|microsoft-ds":"1","discov|sunrpc":"1"}}
+		},
+		{
+			"id" : 54,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|unknown discov|unknown discov|ipsma",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 55,
+			"source" :  1,
+			"label" : "fin:  path: 0:7 , ",
+			"size" : 7,
+			"level" : 10,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 discov|unknown discov|fis",
+			"data" :  {"path_counts":{"0":7},"symbol_counts":null,"total_final":0,"total_paths":7,"trans_counts":{"discov|ipsdtls":"1","discov|ncube-lm":"1","discov|postgresql":"1","discov|unknown":"4"}}
+		},
+		{
+			"id" : 56,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|unknown discov|icmpd",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 57,
+			"source" :  1,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|unknown discov|asmgcs",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ahsp":"1","discov|ipsma":"1","discov|unknown":"2"}}
+		},
+		{
+			"id" : 58,
+			"source" :  1,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|unknown discov|unknown discov|agma",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ipsma":"2"}}
+		},
+		{
+			"id" : 59,
+			"source" :  1,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ahsp discov|unknown discov|ipsdtls",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ms-sql-s":"1"}}
+		},
+		{
+			"id" : 60,
+			"source" :  2,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|xdmcp discov|ncube-lm discov|ncube-lm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 61,
+			"source" :  2,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ncube-lm discov|mysql",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|mysql":"1","recon|http":"2"}}
+		},
+		{
+			"id" : 62,
+			"source" :  2,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ncube-lm discov|xdmcp",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|cpdlc":"1","discov|microsoft-ds":"1"}}
+		},
+		{
+			"id" : 63,
+			"source" :  2,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|xdmcp discov|ncube-lm discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ms-wbt-server":"1","discov|postgresql":"1"}}
+		},
+		{
+			"id" : 64,
+			"source" :  2,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|xdmcp discov|ncube-lm discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 65,
+			"source" :  2,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ncube-lm discov|rfb",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 66,
+			"source" :  2,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ncube-lm recon|http-alt",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|remoteware-cl":"1"}}
+		},
+		{
+			"id" : 67,
+			"source" :  2,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|xdmcp discov|ncube-lm discov|dsd",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 68,
+			"source" :  2,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|xdmcp discov|ncube-lm discov|netbios-ssn",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ssh":"1"}}
+		},
+		{
+			"id" : 69,
+			"source" :  2,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|ncube-lm discov|fis",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 70,
+			"source" :  3,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|unknown",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|unknown":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 71,
+			"source" :  3,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown recon|unknown",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ms-sql-s":"1","discov|mysql":"1","discov|postgresql":"2"}}
+		},
+		{
+			"id" : 72,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|xdmcp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 73,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown recon|http",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 74,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|rfb",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 75,
+			"source" :  3,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|postgresql",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ms-sql-s":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 76,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|microsoft-ds",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 77,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|dsd",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 78,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|rfb":"1"}}
+		},
+		{
+			"id" : 79,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|cpdlc",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 80,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|ag-swim",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ahsp":"1"}}
+		},
+		{
+			"id" : 81,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 recon|unknown discov|ncube-lm recon|unknown discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 82,
+			"source" :  3,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown discov|ff-ice",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 83,
+			"source" :  3,
+			"label" : "fin: 0:2 ,  path: 0:1 , ",
+			"size" : 3,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|unknown recon|wsman",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":1},"symbol_counts":null,"total_final":2,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 84,
+			"source" :  4,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|ncube-lm",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ms-wbt-server":"1","discov|xdmcp":"1","recon|http":"2"}}
+		},
+		{
+			"id" : 85,
+			"source" :  4,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|xdmcp",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|unknown":"1","discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 86,
+			"source" :  4,
+			"label" : "fin: 0:9 ,  path: 0:45 , ",
+			"size" : 54,
+			"level" : 11,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 discov|mysql recon|http",
+			"data" :  {"final_counts":{"0":9},"path_counts":{"0":45},"symbol_counts":null,"total_final":9,"total_paths":45,"trans_counts":{"discov|ahsp":"1","discov|cm":"1","discov|cpdlc":"0","discov|domain":"0","discov|ipsma":"0","discov|microsoft-ds":"0","discov|ms-sql-s":"6","discov|ms-wbt-server":"0","discov|mysql":"26","discov|ncube-lm":"1","discov|postgresql":"0","discov|rfb":"0","discov|ssh":"1","discov|unknown":"2","discov|xdmcp":"0","recon|http":"6","recon|unknown":"1"}}
+		},
+		{
+			"id" : 87,
+			"source" :  4,
+			"label" : "fin: 0:2 ,  path: ",
+			"size" : 2,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|mysql discov|ms-wbt-server",
+			"data" :  {"final_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":0}
+		},
+		{
+			"id" : 88,
+			"source" :  4,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql recon|wap-wsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 89,
+			"source" :  4,
+			"label" : "fin: 0:2 ,  path: 0:2 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":2,"trans_counts":{"discov|mysql":"1","discov|rfb":"1"}}
+		},
+		{
+			"id" : 90,
+			"source" :  4,
+			"label" : "fin: 0:1 ,  path: 0:3 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|rfb",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":3},"symbol_counts":null,"total_final":1,"total_paths":3,"trans_counts":{"discov|eldim":"1","discov|ms-sql-s":"1","discov|mysql":"1"}}
+		},
+		{
+			"id" : 91,
+			"source" :  4,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|microsoft-ds",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 92,
+			"source" :  4,
+			"label" : "fin: 0:3 ,  path: 0:1 , ",
+			"size" : 4,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|mysql discov|ag-swim",
+			"data" :  {"final_counts":{"0":3},"path_counts":{"0":1},"symbol_counts":null,"total_final":3,"total_paths":1,"trans_counts":{"discov|cm":"1"}}
+		},
+		{
+			"id" : 93,
+			"source" :  4,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|mysql discov|ff-ice",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 94,
+			"source" :  4,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server discov|mysql recon|wsman",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 95,
+			"source" :  4,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 10,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|ncube-lm recon|http discov|unknown discov|mysql discov|spt-automation",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 96,
+			"source" :  5,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp discov|unknown",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|microsoft-ds":"1","discov|ms-sql-s":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 97,
+			"source" :  5,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp recon|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1","recon|wsman":"0"}}
+		},
+		{
+			"id" : 98,
+			"source" :  5,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp discov|mysql",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 99,
+			"source" :  5,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp recon|http",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|postgresql":"1","discov|rfb":"1","discov|ssh":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 100,
+			"source" :  5,
+			"label" : "fin: 0:0 ,  path: 0:2 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp discov|postgresql",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ncube-lm":"2"}}
+		},
+		{
+			"id" : 101,
+			"source" :  5,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp discov|ssh",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|rfb":"1","discov|ssh":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 102,
+			"source" :  5,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp recon|http-alt",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"recon|http-alt":"2"}}
+		},
+		{
+			"id" : 103,
+			"source" :  5,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|xdmcp discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 104,
+			"source" :  6,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http recon|http discov|xdmcp",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 105,
+			"source" :  6,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"recon|http":"3"}}
+		},
+		{
+			"id" : 106,
+			"source" :  6,
+			"label" : "fin: 0:4 ,  path: ",
+			"size" : 4,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|http discov|ssh discov|ssh recon|http discov|rfb",
+			"data" :  {"final_counts":{"0":4},"symbol_counts":null,"total_final":4,"total_paths":0}
+		},
+		{
+			"id" : 107,
+			"source" :  6,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1078_001|snmp discov|ms-sql-s recon|http discov|microsoft-ds",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 108,
+			"source" :  6,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|dsd",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|cm":"1","discov|ms-sql-s":"2","recon|http":"1"}}
+		},
+		{
+			"id" : 109,
+			"source" :  6,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http recon|http discov|epmap",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 110,
+			"source" :  6,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ms-sql-s":"1"}}
+		},
+		{
+			"id" : 111,
+			"source" :  6,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|cpdlc",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|ms-sql-s":"1"}}
+		},
+		{
+			"id" : 112,
+			"source" :  6,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|ag-swim",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ahsp":"1","discov|ssh":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 113,
+			"source" :  6,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http recon|http discov|netbios-ssn",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 114,
+			"source" :  6,
+			"label" : "fin: 0:3 ,  path: ",
+			"size" : 3,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http recon|http discov|domain",
+			"data" :  {"final_counts":{"0":3},"symbol_counts":null,"total_final":3,"total_paths":0}
+		},
+		{
+			"id" : 115,
+			"source" :  6,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|ahsp",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|unknown":"2"}}
+		},
+		{
+			"id" : 116,
+			"source" :  6,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http discov|http",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|cm":"1","discov|ncube-lm":"1","discov|rpas-c2":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 117,
+			"source" :  6,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 6 discov|ssh recon|http discov|ncube-lm discov|postgresql recon|http discov|ipsma",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 118,
+			"source" :  7,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ahsp":"1"}}
+		},
+		{
+			"id" : 119,
+			"source" :  7,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server discov|ncube-lm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|wap-wsp":"1"}}
+		},
+		{
+			"id" : 120,
+			"source" :  7,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server recon|http",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"1","discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 121,
+			"source" :  7,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server discov|ssh",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 122,
+			"source" :  7,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server recon|http-alt",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 123,
+			"source" :  7,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-wbt-server discov|netbios-ssn",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 124,
+			"source" :  8,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wap-wsp discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 125,
+			"source" :  8,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wap-wsp discov|ncube-lm",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"1","discov|postgresql":"1"}}
+		},
+		{
+			"id" : 126,
+			"source" :  8,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wap-wsp discov|mysql",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ssh":"1","recon|wap-wsp":"2"}}
+		},
+		{
+			"id" : 127,
+			"source" :  8,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wap-wsp discov|postgresql",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|dsd":"1","discov|ms-sql-s":"1","discov|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 128,
+			"source" :  8,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wap-wsp discov|cpdlc",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 129,
+			"source" :  9,
+			"label" : "fin: 0:2 ,  path: 0:2 , ",
+			"size" : 4,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-sql-s discov|ncube-lm",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":2,"trans_counts":{"discov|ncube-lm":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 130,
+			"source" :  9,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 t1078_001|snmp recon|http recon|http discov|ms-sql-s discov|xdmcp",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 131,
+			"source" :  9,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-sql-s discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|postgresql":"1","discov|rfb":"1"}}
+		},
+		{
+			"id" : 132,
+			"source" :  9,
+			"label" : "fin: 0:2 ,  path: 0:2 , ",
+			"size" : 4,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-sql-s discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":2,"trans_counts":{"discov|epmap":"1","discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 133,
+			"source" :  9,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|ms-sql-s discov|microsoft-ds",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 134,
+			"source" :  9,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|ms-sql-s discov|ssh",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 135,
+			"source" :  9,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1498|ms-wbt-server t1498|ms-wbt-server discov|ms-sql-s discov|epmap",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|microsoft-ds":"1"}}
+		},
+		{
+			"id" : 136,
+			"source" :  9,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|ms-sql-s discov|rpas-c2",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ssh":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 137,
+			"source" :  9,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown recon|http discov|ms-sql-s discov|cpdlc",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|icmpd":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 138,
+			"source" :  9,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-sql-s discov|ag-swim",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|cpdlc":"1"}}
+		},
+		{
+			"id" : 139,
+			"source" :  9,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ms-sql-s discov|domain",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 140,
+			"source" :  9,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 6 t1078_001|snmp recon|http discov|ncube-lm recon|http discov|ms-sql-s recon|vrml-multi-use",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 141,
+			"source" :  9,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|ms-sql-s discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 142,
+			"source" :  9,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|ms-sql-s discov|ff-ice",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 143,
+			"source" :  9,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 9,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|ms-sql-s recon|remoteware-cl",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 145,
+			"source" :  11,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|unknown",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ms-sql-s":"1","recon|wsman":"1"}}
+		},
+		{
+			"id" : 146,
+			"source" :  11,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|ncube-lm",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|unknown":"1","recon|http":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 147,
+			"source" :  11,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server recon|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|wsman":"1"}}
+		},
+		{
+			"id" : 148,
+			"source" :  11,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server recon|http",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 149,
+			"source" :  11,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|ms-wbt-server",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 150,
+			"source" :  11,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|postgresql",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|dsd":"1","discov|ms-sql-s":"1","discov|ncube-lm":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 151,
+			"source" :  11,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|microsoft-ds",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 152,
+			"source" :  11,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server t1021_002|microsoft-ds",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"recon|unknown":"1","t1021_001|unknown":"2"}}
+		},
+		{
+			"id" : 153,
+			"source" :  11,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 154,
+			"source" :  11,
+			"label" : "fin:  path: 0:13 , ",
+			"size" : 13,
+			"level" : 2,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 t1498|ms-wbt-server t1078_001|snmp",
+			"data" :  {"path_counts":{"0":13},"symbol_counts":null,"total_final":0,"total_paths":13,"trans_counts":{"discov|ncube-lm":"1","discov|unknown":"1","recon|http":"1","t1021_002|microsoft-ds":"1","t1021_003|epmap":"9"}}
+		},
+		{
+			"id" : 155,
+			"source" :  11,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1498|ms-wbt-server t1021_003|epmap",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|microsoft-ds":"1","discov|ms-sql-s":"2"}}
+		},
+		{
+			"id" : 156,
+			"source" :  12,
+			"label" : "fin: 0:3 ,  path: ",
+			"size" : 3,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|postgresql discov|ncube-lm",
+			"data" :  {"final_counts":{"0":3},"symbol_counts":null,"total_final":3,"total_paths":0}
+		},
+		{
+			"id" : 157,
+			"source" :  12,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ms-sql-s discov|postgresql recon|unknown",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"2"}}
+		},
+		{
+			"id" : 158,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http-alt discov|postgresql discov|ms-wbt-server",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 159,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ncube-lm discov|postgresql discov|rfb",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 160,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 recon|http discov|ms-sql-s discov|postgresql discov|microsoft-ds",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 161,
+			"source" :  12,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 recon|http discov|postgresql discov|ssh",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 162,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 recon|http discov|ncube-lm discov|postgresql discov|rpas-c2",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 163,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|postgresql discov|cm",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 164,
+			"source" :  12,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ms-sql-s discov|postgresql discov|netbios-ssn",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 165,
+			"source" :  12,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|ms-sql-s discov|postgresql discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ssh":"1"}}
+		},
+		{
+			"id" : 166,
+			"source" :  12,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 8,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|postgresql discov|asmgcs",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|ahsp":"1","discov|ipsdtls":"1"}}
+		},
+		{
+			"id" : 167,
+			"source" :  13,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|microsoft-ds discov|ncube-lm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 168,
+			"source" :  13,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|microsoft-ds discov|microsoft-ds",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|microsoft-ds":"2","discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 169,
+			"source" :  13,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|microsoft-ds recon|http-alt",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 170,
+			"source" :  14,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|unknown",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|rfb":"1","discov|ssh":"1"}}
+		},
+		{
+			"id" : 171,
+			"source" :  14,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|ncube-lm",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ms-wbt-server":"1","discov|postgresql":"2","recon|http":"1"}}
+		},
+		{
+			"id" : 172,
+			"source" :  14,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh recon|unknown",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|postgresql":"2","discov|unknown":"1"}}
+		},
+		{
+			"id" : 173,
+			"source" :  14,
+			"label" : "fin: 0:2 ,  path: ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ssh discov|ssh discov|mysql",
+			"data" :  {"final_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":0}
+		},
+		{
+			"id" : 174,
+			"source" :  14,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ssh discov|ssh discov|xdmcp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 175,
+			"source" :  14,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 176,
+			"source" :  14,
+			"label" : "fin: 0:2 ,  path: 0:2 , ",
+			"size" : 4,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":2,"trans_counts":{"discov|mysql":"1","discov|rfb":"1"}}
+		},
+		{
+			"id" : 177,
+			"source" :  14,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|ssh discov|ssh discov|rfb",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"recon|unknown":"2"}}
+		},
+		{
+			"id" : 178,
+			"source" :  14,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|postgresql",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|rfb":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 179,
+			"source" :  14,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|microsoft-ds",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"recon|http":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 180,
+			"source" :  14,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 181,
+			"source" :  14,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|cpdlc":"1"}}
+		},
+		{
+			"id" : 182,
+			"source" :  14,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|sunrpc",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 183,
+			"source" :  14,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ssh discov|icmpd",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 184,
+			"source" :  15,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|unknown",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ag-swim":"1","recon|http-alt":"1"}}
+		},
+		{
+			"id" : 185,
+			"source" :  15,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ssh":"1","recon|http-alt":"1"}}
+		},
+		{
+			"id" : 186,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|xdmcp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 187,
+			"source" :  15,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|http discov|mysql recon|http-alt recon|http-alt recon|http",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 188,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http-alt":"1"}}
+		},
+		{
+			"id" : 189,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|ms-sql-s",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http-alt":"1"}}
+		},
+		{
+			"id" : 190,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|rfb",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 191,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|mysql recon|http-alt recon|http-alt discov|ssh",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http-alt":"1"}}
+		},
+		{
+			"id" : 192,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|ag-swim",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 193,
+			"source" :  15,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|http-alt discov|ipsma",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 205,
+			"source" :  22,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|unknown",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|ms-sql-s":"1"}}
+		},
+		{
+			"id" : 206,
+			"source" :  22,
+			"label" : "fin: 0:3 ,  path: 0:1 , ",
+			"size" : 4,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|ncube-lm",
+			"data" :  {"final_counts":{"0":3},"path_counts":{"0":1},"symbol_counts":null,"total_final":3,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 207,
+			"source" :  22,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown recon|http",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 208,
+			"source" :  22,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|ms-wbt-server",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|microsoft-ds":"1","discov|ms-sql-s":"1"}}
+		},
+		{
+			"id" : 209,
+			"source" :  22,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|ms-sql-s",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|dsd":"1","discov|microsoft-ds":"1"}}
+		},
+		{
+			"id" : 210,
+			"source" :  22,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|postgresql",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ms-sql-s":"1","discov|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 211,
+			"source" :  22,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown discov|microsoft-ds",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"recon|http":"2"}}
+		},
+		{
+			"id" : 212,
+			"source" :  22,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1021_001|unknown discov|rpas-c2",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 213,
+			"source" :  22,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1021_001|unknown t1021_001|unknown",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 214,
+			"source" :  22,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown t1021_002|microsoft-ds",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 215,
+			"source" :  22,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_001|unknown t1078_001|snmp",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|unknown":"1","t1021_003|epmap":"1"}}
+		},
+		{
+			"id" : 217,
+			"source" :  24,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1021_002|microsoft-ds t1021_002|microsoft-ds t1021_002|microsoft-ds discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 218,
+			"source" :  24,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1021_002|microsoft-ds t1021_002|microsoft-ds discov|ms-wbt-server",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 219,
+			"source" :  24,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_002|microsoft-ds discov|ms-sql-s",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|dsd":"1"}}
+		},
+		{
+			"id" : 220,
+			"source" :  24,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_002|microsoft-ds discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 221,
+			"source" :  24,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1021_002|microsoft-ds t1078_001|snmp",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ms-wbt-server":"1","recon|wsman":"1","t1021_001|ms-wbt-server":"1"}}
+		},
+		{
+			"id" : 222,
+			"source" :  24,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1021_002|microsoft-ds t1021_002|microsoft-ds t1021_002|microsoft-ds recon|wsman",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 225,
+			"source" :  27,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ahsp discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|dsd":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 226,
+			"source" :  27,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ahsp discov|ssh",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"recon|http":"1","recon|http-alt":"1"}}
+		},
+		{
+			"id" : 227,
+			"source" :  27,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ahsp discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 228,
+			"source" :  27,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ahsp discov|cpdlc",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ipsdtls":"1","recon|http":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 229,
+			"source" :  27,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|ncube-lm discov|ahsp discov|cm",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|unknown":"2"}}
+		},
+		{
+			"id" : 230,
+			"source" :  27,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 discov|ahsp discov|fis",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 239,
+			"source" :  32,
+			"label" : "fin:  path: 0:4 , ",
+			"size" : 4,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp discov|ncube-lm",
+			"data" :  {"path_counts":{"0":4},"symbol_counts":null,"total_final":0,"total_paths":4,"trans_counts":{"discov|ms-sql-s":"2","recon|unknown":"2"}}
+		},
+		{
+			"id" : 240,
+			"source" :  32,
+			"label" : "fin: 0:1 ,  path: 0:27 , ",
+			"size" : 28,
+			"level" : 3,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 t1078_001|snmp discov|xdmcp",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":27},"symbol_counts":null,"total_final":1,"total_paths":27,"trans_counts":{"discov|ag-swim":"1","discov|ff-ice":"1","discov|ms-sql-s":"2","discov|mysql":"1","discov|ncube-lm":"1","discov|postgresql":"3","discov|unknown":"1","recon|distinct":"1","recon|http":"7","recon|remoteware-cl":"1","recon|unknown":"5","recon|wap-wsp":"2","recon|wsman":"1"}}
+		},
+		{
+			"id" : 241,
+			"source" :  32,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp discov|postgresql",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|cpdlc":"1","recon|unknown":"1"}}
+		},
+		{
+			"id" : 242,
+			"source" :  32,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp discov|epmap",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ncube-lm":"1"}}
+		},
+		{
+			"id" : 243,
+			"source" :  32,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp t1021_001|ms-wbt-server",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|ftp":"1"}}
+		},
+		{
+			"id" : 244,
+			"source" :  32,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp discov|domain",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 245,
+			"source" :  32,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp t1021_002|microsoft-ds",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 246,
+			"source" :  32,
+			"label" : "fin: 0:0 ,  path: 0:3 , ",
+			"size" : 3,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 t1078_001|snmp discov|ahsp",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"recon|http":"3"}}
+		},
+		{
+			"id" : 247,
+			"source" :  32,
+			"label" : "fin:  path: 0:21 , ",
+			"size" : 21,
+			"level" : 2,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 2 t1078_001|snmp t1078_001|snmp",
+			"data" :  {"path_counts":{"0":21},"symbol_counts":null,"total_final":0,"total_paths":21,"trans_counts":{"discov|ahsp":"1","discov|mysql":"1","discov|netbios-ssn":"1","discov|xdmcp":"3","recon|http":"1","t1078_001|snmp":"14"}}
+		},
+		{
+			"id" : 248,
+			"source" :  33,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 2,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 2 recon|wsman discov|cpdlc",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 270,
+			"source" :  48,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|rpas-c2 discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|fis":"1"}}
+		},
+		{
+			"id" : 271,
+			"source" :  48,
+			"label" : "fin:  path: 0:2 , ",
+			"size" : 2,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 8 discov|unknown discov|ms-sql-s discov|unknown discov|unknown discov|unknown discov|unknown discov|rpas-c2 discov|postgresql",
+			"data" :  {"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|postgresql":"1","discov|unknown":"1"}}
+		},
+		{
+			"id" : 272,
+			"source" :  48,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|rpas-c2 discov|ssh",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 273,
+			"source" :  48,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|unknown discov|ms-sql-s discov|unknown discov|rpas-c2 discov|fis",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ff-ice":"1"}}
+		},
+		{
+			"id" : 275,
+			"source" :  50,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|ahsp discov|unknown discov|ag-swim discov|unknown",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 276,
+			"source" :  50,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|wsman discov|unknown discov|unknown discov|ag-swim discov|ncube-lm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ahsp":"1"}}
+		},
+		{
+			"id" : 277,
+			"source" :  50,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|unknown discov|unknown discov|unknown discov|ag-swim discov|rpas-c2",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 278,
+			"source" :  50,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|wsman discov|unknown discov|unknown discov|ag-swim discov|asmgcs",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ipsma":"1"}}
+		},
+		{
+			"id" : 285,
+			"source" :  55,
+			"label" : "fin: 0:1 ,  path: 0:3 , ",
+			"size" : 4,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|unknown discov|fis discov|unknown",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":3},"symbol_counts":null,"total_final":1,"total_paths":3,"trans_counts":{"discov|postgresql":"2","discov|unknown":"1"}}
+		},
+		{
+			"id" : 286,
+			"source" :  55,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|unknown discov|unknown discov|unknown discov|fis discov|ncube-lm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ahsp":"1"}}
+		},
+		{
+			"id" : 287,
+			"source" :  55,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|unknown discov|fis discov|postgresql",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ahsp":"1"}}
+		},
+		{
+			"id" : 288,
+			"source" :  55,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 11,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|ahsp discov|unknown discov|fis discov|ipsdtls",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 330,
+			"source" :  86,
+			"label" : "fin: 0:0 ,  path: 0:2 , ",
+			"size" : 2,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|mysql recon|http discov|unknown",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"0","recon|http":"2"}}
+		},
+		{
+			"id" : 331,
+			"source" :  86,
+			"label" : "fin: 0:1 ,  path: 0:0 , ",
+			"size" : 1,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 discov|mysql recon|http discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":0},"symbol_counts":null,"total_final":1,"total_paths":0,"trans_counts":{"discov|mysql":"0","discov|postgresql":"0","recon|http":"0"}}
+		},
+		{
+			"id" : 332,
+			"source" :  86,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 recon|unknown discov|mysql recon|http recon|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 333,
+			"source" :  86,
+			"label" : "fin: 0:14 ,  path: 0:12 , ",
+			"size" : 26,
+			"level" : 13,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 3 discov|mysql recon|http discov|mysql",
+			"data" :  {"final_counts":{"0":14},"path_counts":{"0":12},"symbol_counts":null,"total_final":14,"total_paths":12,"trans_counts":{"discov|ag-swim":"1","discov|cm":"1","discov|ms-sql-s":"3","discov|mysql":"3","discov|ncube-lm":"0","discov|postgresql":"0","discov|rfb":"0","discov|ssh":"1","discov|unknown":"1","discov|xdmcp":"0","recon|http":"2","recon|http-alt":"0","recon|unknown":"0","recon|wsman":"0"}}
+		},
+		{
+			"id" : 334,
+			"source" :  86,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown discov|unknown recon|http discov|ssh",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 335,
+			"source" :  86,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 6 recon|http recon|http recon|http discov|unknown recon|http discov|cm",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 336,
+			"source" :  86,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 13,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|http recon|http discov|mysql recon|http discov|ahsp",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|mysql":"1"}}
+		},
+		{
+			"id" : 427,
+			"source" :  154,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1078_001|snmp discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 428,
+			"source" :  154,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1078_001|snmp discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 429,
+			"source" :  154,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1078_001|snmp recon|http",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 430,
+			"source" :  154,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1498|ms-wbt-server t1078_001|snmp t1021_002|microsoft-ds",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 431,
+			"source" :  154,
+			"label" : "fin:  path: 0:9 , ",
+			"size" : 9,
+			"level" : 4,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 3 t1498|ms-wbt-server t1078_001|snmp t1021_003|epmap",
+			"data" :  {"path_counts":{"0":9},"symbol_counts":null,"total_final":0,"total_paths":9,"trans_counts":{"discov|ms-sql-s":"1","discov|xdmcp":"7","t1021_001|unknown":"1"}}
+		},
+		{
+			"id" : 532,
+			"source" :  240,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|unknown":"1"}}
+		},
+		{
+			"id" : 533,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 t1498|ms-wbt-server t1078_001|snmp t1021_003|epmap discov|xdmcp discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 534,
+			"source" :  240,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|mysql",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|unknown":"1"}}
+		},
+		{
+			"id" : 535,
+			"source" :  240,
+			"label" : "fin: 0:6 ,  path: 0:1 , ",
+			"size" : 7,
+			"level" : 5,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp recon|http",
+			"data" :  {"final_counts":{"0":6},"path_counts":{"0":1},"symbol_counts":null,"total_final":6,"total_paths":1,"trans_counts":{"discov|domain":"0","discov|microsoft-ds":"0","discov|ms-sql-s":"0","discov|mysql":"0","discov|ncube-lm":"1","discov|postgresql":"0","discov|ssh":"0","discov|unknown":"0"}}
+		},
+		{
+			"id" : 536,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: 0:1 , ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp recon|wap-wsp",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":1,"trans_counts":{"discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 537,
+			"source" :  240,
+			"label" : "fin: 0:2 ,  path: ",
+			"size" : 2,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":2},"symbol_counts":null,"total_final":2,"total_paths":0}
+		},
+		{
+			"id" : 538,
+			"source" :  240,
+			"label" : "fin: 0:3 ,  path: ",
+			"size" : 3,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|postgresql",
+			"data" :  {"final_counts":{"0":3},"symbol_counts":null,"total_final":3,"total_paths":0}
+		},
+		{
+			"id" : 539,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|ag-swim",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 540,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp discov|ff-ice",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 541,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 t1498|ms-wbt-server t1078_001|snmp t1021_003|epmap discov|xdmcp recon|wsman",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 542,
+			"source" :  240,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp recon|remoteware-cl",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 543,
+			"source" :  240,
+			"label" : "fin: 0:0 ,  path: 0:1 , ",
+			"size" : 1,
+			"level" : 5,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp discov|xdmcp recon|distinct",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|xdmcp":"1"}}
+		},
+		{
+			"id" : 551,
+			"source" :  247,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp discov|mysql",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"recon|http":"1"}}
+		},
+		{
+			"id" : 552,
+			"source" :  247,
+			"label" : "fin:  path: 0:3 , ",
+			"size" : 3,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp discov|xdmcp",
+			"data" :  {"path_counts":{"0":3},"symbol_counts":null,"total_final":0,"total_paths":3,"trans_counts":{"discov|ms-sql-s":"1","recon|distinct":"1","recon|http":"1"}}
+		},
+		{
+			"id" : 553,
+			"source" :  247,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp recon|http",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|postgresql":"1"}}
+		},
+		{
+			"id" : 554,
+			"source" :  247,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp discov|netbios-ssn",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 555,
+			"source" :  247,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 4,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp discov|ahsp",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 556,
+			"source" :  247,
+			"label" : "fin: 0:14 ,  path: ",
+			"size" : 14,
+			"level" : 4,
+			"style" : "",
+			"isred" :  1,
+			"issink" :  0,
+			"isblue" :  0,
+			"trace" :  "1 3 t1078_001|snmp t1078_001|snmp t1078_001|snmp",
+			"data" :  {"final_counts":{"0":14},"symbol_counts":null,"total_final":14,"total_paths":0}
+		},
+		{
+			"id" : 623,
+			"source" :  333,
+			"label" : "fin:  path: 0:1 , ",
+			"size" : 1,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 discov|unknown discov|unknown recon|http discov|mysql discov|unknown",
+			"data" :  {"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|cpdlc":"1"}}
+		},
+		{
+			"id" : 624,
+			"source" :  333,
+			"label" : "fin: 0:2 ,  path: 0:1 , ",
+			"size" : 3,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|mysql recon|http discov|mysql discov|mysql",
+			"data" :  {"final_counts":{"0":2},"path_counts":{"0":1},"symbol_counts":null,"total_final":2,"total_paths":1,"trans_counts":{"discov|ms-wbt-server":"0","discov|rfb":"0","recon|http":"1","recon|unknown":"0"}}
+		},
+		{
+			"id" : 625,
+			"source" :  333,
+			"label" : "fin: 0:0 ,  path: 0:2 , ",
+			"size" : 2,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|http discov|mysql recon|http discov|mysql recon|http",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":2},"symbol_counts":null,"total_final":0,"total_paths":2,"trans_counts":{"discov|mysql":"2","recon|http":"0","recon|unknown":"0"}}
+		},
+		{
+			"id" : 626,
+			"source" :  333,
+			"label" : "fin: 0:1 ,  path: 0:2 , ",
+			"size" : 3,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 5 recon|http discov|mysql recon|http discov|mysql discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":1},"path_counts":{"0":2},"symbol_counts":null,"total_final":1,"total_paths":2,"trans_counts":{"discov|ff-ice":"1","discov|netbios-ssn":"1"}}
+		},
+		{
+			"id" : 627,
+			"source" :  333,
+			"label" : "fin: 0:0 ,  path: 0:1 , ",
+			"size" : 1,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|unknown recon|http discov|mysql discov|ssh",
+			"data" :  {"final_counts":{"0":0},"path_counts":{"0":1},"symbol_counts":null,"total_final":0,"total_paths":1,"trans_counts":{"discov|ssh":"1","discov|sunrpc":"0"}}
+		},
+		{
+			"id" : 628,
+			"source" :  333,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 6 recon|http discov|mysql discov|unknown recon|http discov|mysql discov|ag-swim",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 629,
+			"source" :  333,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 15,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 discov|mysql recon|http discov|mysql discov|cm",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 689,
+			"source" :  431,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1498|ms-wbt-server t1078_001|snmp t1021_003|epmap discov|ms-sql-s",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 690,
+			"source" :  431,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 6,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1498|ms-wbt-server t1078_001|snmp t1021_003|epmap t1021_001|unknown",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		},
+		{
+			"id" : 753,
+			"source" :  535,
+			"label" : "fin: 0:1 ,  path: ",
+			"size" : 1,
+			"level" : 7,
+			"style" : "",
+			"isred" :  0,
+			"issink" :  1,
+			"isblue" :  1,
+			"trace" :  "1 4 t1078_001|snmp discov|xdmcp recon|http discov|ncube-lm",
+			"data" :  {"final_counts":{"0":1},"symbol_counts":null,"total_final":1,"total_paths":0}
+		}
+	],
+	"edges" : [
+		{
+			"id" : "0_1",
+			"source" : "0",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "0_2",
+			"source" : "0",
+			"target" : "2",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "0_3",
+			"source" : "0",
+			"target" : "3",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "0_4",
+			"source" : "0",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "0_5",
+			"source" : "0",
+			"target" : "5",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_6",
+			"source" : "0",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "0_7",
+			"source" : "0",
+			"target" : "7",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "0_8",
+			"source" : "0",
+			"target" : "8",
+			"name": "recon|wap-wsp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_9",
+			"source" : "0",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "0_10",
+			"source" : "0",
+			"target" : "10",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "0_11",
+			"source" : "0",
+			"target" : "11",
+			"name": "t1498|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "0_12",
+			"source" : "0",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "0_13",
+			"source" : "0",
+			"target" : "13",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "0_14",
+			"source" : "0",
+			"target" : "14",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "0_15",
+			"source" : "0",
+			"target" : "15",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "0_16",
+			"source" : "0",
+			"target" : "16",
+			"name": "discov|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "0_17",
+			"source" : "0",
+			"target" : "17",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "0_18",
+			"source" : "0",
+			"target" : "18",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "0_19",
+			"source" : "0",
+			"target" : "19",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "0_20",
+			"source" : "0",
+			"target" : "20",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "0_21",
+			"source" : "0",
+			"target" : "21",
+			"name": "t1021_001|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "0_22",
+			"source" : "0",
+			"target" : "22",
+			"name": "t1021_001|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "0_23",
+			"source" : "0",
+			"target" : "23",
+			"name": "discov|domain",
+			"appearances": ""}
+,
+		{
+			"id" : "0_24",
+			"source" : "0",
+			"target" : "24",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "0_25",
+			"source" : "0",
+			"target" : "25",
+			"name": "discov|search-agent",
+			"appearances": ""}
+,
+		{
+			"id" : "0_26",
+			"source" : "0",
+			"target" : "26",
+			"name": "recon|vrml-multi-use",
+			"appearances": ""}
+,
+		{
+			"id" : "0_27",
+			"source" : "0",
+			"target" : "27",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_28",
+			"source" : "0",
+			"target" : "28",
+			"name": "t1068|kerberos",
+			"appearances": ""}
+,
+		{
+			"id" : "0_29",
+			"source" : "0",
+			"target" : "29",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "0_30",
+			"source" : "0",
+			"target" : "30",
+			"name": "discov|sunrpc",
+			"appearances": ""}
+,
+		{
+			"id" : "0_31",
+			"source" : "0",
+			"target" : "31",
+			"name": "t1499|http",
+			"appearances": ""}
+,
+		{
+			"id" : "0_32",
+			"source" : "0",
+			"target" : "32",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_33",
+			"source" : "0",
+			"target" : "33",
+			"name": "recon|wsman",
+			"appearances": ""}
+,
+		{
+			"id" : "0_34",
+			"source" : "0",
+			"target" : "34",
+			"name": "t1498_002|ntp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_35",
+			"source" : "0",
+			"target" : "35",
+			"name": "t1499|ftp",
+			"appearances": ""}
+,
+		{
+			"id" : "0_36",
+			"source" : "0",
+			"target" : "36",
+			"name": "recon|remoteware-cl",
+			"appearances": ""}
+,
+		{
+			"id" : "0_37",
+			"source" : "0",
+			"target" : "37",
+			"name": "recon|profinet-rt",
+			"appearances": ""}
+,
+		{
+			"id" : "0_38",
+			"source" : "0",
+			"target" : "38",
+			"name": "recon|esmagent",
+			"appearances": ""}
+,
+		{
+			"id" : "0_39",
+			"source" : "0",
+			"target" : "39",
+			"name": "discov|fis",
+			"appearances": ""}
+,
+		{
+			"id" : "0_40",
+			"source" : "0",
+			"target" : "40",
+			"name": "t1059_006|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "0_41",
+			"source" : "0",
+			"target" : "41",
+			"name": "discov|icmpd",
+			"appearances": ""}
+,
+		{
+			"id" : "0_42",
+			"source" : "0",
+			"target" : "42",
+			"name": "discov|ipsdtls",
+			"appearances": ""}
+,
+		{
+			"id" : "0_43",
+			"source" : "0",
+			"target" : "43",
+			"name": "t1021|syslog",
+			"appearances": ""}
+,
+		{
+			"id" : "1_1",
+			"source" : "1",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "1_2",
+			"source" : "1",
+			"target" : "2",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "1_44",
+			"source" : "1",
+			"target" : "44",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "1_4",
+			"source" : "1",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "1_86",
+			"source" : "1",
+			"target" : "86",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "1_9",
+			"source" : "1",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "1_45",
+			"source" : "1",
+			"target" : "45",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "1_12",
+			"source" : "1",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "1_14",
+			"source" : "1",
+			"target" : "14",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "1_46",
+			"source" : "1",
+			"target" : "46",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "1_47",
+			"source" : "1",
+			"target" : "47",
+			"name": "discov|dsd",
+			"appearances": ""}
+,
+		{
+			"id" : "1_48",
+			"source" : "1",
+			"target" : "48",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "1_49",
+			"source" : "1",
+			"target" : "49",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "1_50",
+			"source" : "1",
+			"target" : "50",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "1_51",
+			"source" : "1",
+			"target" : "51",
+			"name": "discov|cm",
+			"appearances": ""}
+,
+		{
+			"id" : "1_27",
+			"source" : "1",
+			"target" : "27",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "1_52",
+			"source" : "1",
+			"target" : "52",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "1_53",
+			"source" : "1",
+			"target" : "53",
+			"name": "discov|sunrpc",
+			"appearances": ""}
+,
+		{
+			"id" : "1_54",
+			"source" : "1",
+			"target" : "54",
+			"name": "discov|ipsma",
+			"appearances": ""}
+,
+		{
+			"id" : "1_55",
+			"source" : "1",
+			"target" : "55",
+			"name": "discov|fis",
+			"appearances": ""}
+,
+		{
+			"id" : "1_56",
+			"source" : "1",
+			"target" : "56",
+			"name": "discov|icmpd",
+			"appearances": ""}
+,
+		{
+			"id" : "1_57",
+			"source" : "1",
+			"target" : "57",
+			"name": "discov|asmgcs",
+			"appearances": ""}
+,
+		{
+			"id" : "1_58",
+			"source" : "1",
+			"target" : "58",
+			"name": "discov|agma",
+			"appearances": ""}
+,
+		{
+			"id" : "1_59",
+			"source" : "1",
+			"target" : "59",
+			"name": "discov|ipsdtls",
+			"appearances": ""}
+,
+		{
+			"id" : "2_1",
+			"source" : "2",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "2_60",
+			"source" : "2",
+			"target" : "60",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "2_3",
+			"source" : "2",
+			"target" : "3",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "2_61",
+			"source" : "2",
+			"target" : "61",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "2_62",
+			"source" : "2",
+			"target" : "62",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "2_6",
+			"source" : "2",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "2_63",
+			"source" : "2",
+			"target" : "63",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "2_64",
+			"source" : "2",
+			"target" : "64",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "2_65",
+			"source" : "2",
+			"target" : "65",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "2_12",
+			"source" : "2",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "2_66",
+			"source" : "2",
+			"target" : "66",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "2_67",
+			"source" : "2",
+			"target" : "67",
+			"name": "discov|dsd",
+			"appearances": ""}
+,
+		{
+			"id" : "2_68",
+			"source" : "2",
+			"target" : "68",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "2_27",
+			"source" : "2",
+			"target" : "27",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "2_69",
+			"source" : "2",
+			"target" : "69",
+			"name": "discov|fis",
+			"appearances": ""}
+,
+		{
+			"id" : "3_70",
+			"source" : "3",
+			"target" : "70",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "3_2",
+			"source" : "3",
+			"target" : "2",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "3_71",
+			"source" : "3",
+			"target" : "71",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "3_4",
+			"source" : "3",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "3_72",
+			"source" : "3",
+			"target" : "72",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "3_73",
+			"source" : "3",
+			"target" : "73",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "3_9",
+			"source" : "3",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "3_74",
+			"source" : "3",
+			"target" : "74",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "3_75",
+			"source" : "3",
+			"target" : "75",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "3_76",
+			"source" : "3",
+			"target" : "76",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "3_77",
+			"source" : "3",
+			"target" : "77",
+			"name": "discov|dsd",
+			"appearances": ""}
+,
+		{
+			"id" : "3_78",
+			"source" : "3",
+			"target" : "78",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "3_79",
+			"source" : "3",
+			"target" : "79",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "3_80",
+			"source" : "3",
+			"target" : "80",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "3_81",
+			"source" : "3",
+			"target" : "81",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "3_82",
+			"source" : "3",
+			"target" : "82",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "3_83",
+			"source" : "3",
+			"target" : "83",
+			"name": "recon|wsman",
+			"appearances": ""}
+,
+		{
+			"id" : "4_1",
+			"source" : "4",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "4_84",
+			"source" : "4",
+			"target" : "84",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "4_3",
+			"source" : "4",
+			"target" : "3",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "4_4",
+			"source" : "4",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "4_85",
+			"source" : "4",
+			"target" : "85",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "4_86",
+			"source" : "4",
+			"target" : "86",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "4_87",
+			"source" : "4",
+			"target" : "87",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "4_88",
+			"source" : "4",
+			"target" : "88",
+			"name": "recon|wap-wsp",
+			"appearances": ""}
+,
+		{
+			"id" : "4_89",
+			"source" : "4",
+			"target" : "89",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "4_90",
+			"source" : "4",
+			"target" : "90",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "4_12",
+			"source" : "4",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "4_91",
+			"source" : "4",
+			"target" : "91",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "4_14",
+			"source" : "4",
+			"target" : "14",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "4_15",
+			"source" : "4",
+			"target" : "15",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "4_92",
+			"source" : "4",
+			"target" : "92",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "4_93",
+			"source" : "4",
+			"target" : "93",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "4_94",
+			"source" : "4",
+			"target" : "94",
+			"name": "recon|wsman",
+			"appearances": ""}
+,
+		{
+			"id" : "4_95",
+			"source" : "4",
+			"target" : "95",
+			"name": "discov|spt-automation",
+			"appearances": ""}
+,
+		{
+			"id" : "5_96",
+			"source" : "5",
+			"target" : "96",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "5_2",
+			"source" : "5",
+			"target" : "2",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "5_97",
+			"source" : "5",
+			"target" : "97",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "5_98",
+			"source" : "5",
+			"target" : "98",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "5_99",
+			"source" : "5",
+			"target" : "99",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "5_100",
+			"source" : "5",
+			"target" : "100",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "5_101",
+			"source" : "5",
+			"target" : "101",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "5_102",
+			"source" : "5",
+			"target" : "102",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "5_103",
+			"source" : "5",
+			"target" : "103",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "6_1",
+			"source" : "6",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "6_2",
+			"source" : "6",
+			"target" : "2",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "6_4",
+			"source" : "6",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "6_104",
+			"source" : "6",
+			"target" : "104",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "6_6",
+			"source" : "6",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "6_105",
+			"source" : "6",
+			"target" : "105",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "6_9",
+			"source" : "6",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "6_106",
+			"source" : "6",
+			"target" : "106",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "6_12",
+			"source" : "6",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "6_107",
+			"source" : "6",
+			"target" : "107",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "6_14",
+			"source" : "6",
+			"target" : "14",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "6_108",
+			"source" : "6",
+			"target" : "108",
+			"name": "discov|dsd",
+			"appearances": ""}
+,
+		{
+			"id" : "6_109",
+			"source" : "6",
+			"target" : "109",
+			"name": "discov|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "6_110",
+			"source" : "6",
+			"target" : "110",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "6_111",
+			"source" : "6",
+			"target" : "111",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "6_112",
+			"source" : "6",
+			"target" : "112",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "6_113",
+			"source" : "6",
+			"target" : "113",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "6_114",
+			"source" : "6",
+			"target" : "114",
+			"name": "discov|domain",
+			"appearances": ""}
+,
+		{
+			"id" : "6_115",
+			"source" : "6",
+			"target" : "115",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "6_116",
+			"source" : "6",
+			"target" : "116",
+			"name": "discov|http",
+			"appearances": ""}
+,
+		{
+			"id" : "6_117",
+			"source" : "6",
+			"target" : "117",
+			"name": "discov|ipsma",
+			"appearances": ""}
+,
+		{
+			"id" : "7_118",
+			"source" : "7",
+			"target" : "118",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "7_119",
+			"source" : "7",
+			"target" : "119",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "7_120",
+			"source" : "7",
+			"target" : "120",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "7_121",
+			"source" : "7",
+			"target" : "121",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "7_122",
+			"source" : "7",
+			"target" : "122",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "7_123",
+			"source" : "7",
+			"target" : "123",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "8_124",
+			"source" : "8",
+			"target" : "124",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "8_125",
+			"source" : "8",
+			"target" : "125",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "8_126",
+			"source" : "8",
+			"target" : "126",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "8_127",
+			"source" : "8",
+			"target" : "127",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "8_128",
+			"source" : "8",
+			"target" : "128",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "9_1",
+			"source" : "9",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "9_129",
+			"source" : "9",
+			"target" : "129",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "9_3",
+			"source" : "9",
+			"target" : "3",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "9_4",
+			"source" : "9",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "9_130",
+			"source" : "9",
+			"target" : "130",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "9_6",
+			"source" : "9",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "9_131",
+			"source" : "9",
+			"target" : "131",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "9_132",
+			"source" : "9",
+			"target" : "132",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "9_12",
+			"source" : "9",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "9_133",
+			"source" : "9",
+			"target" : "133",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "9_134",
+			"source" : "9",
+			"target" : "134",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "9_135",
+			"source" : "9",
+			"target" : "135",
+			"name": "discov|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "9_136",
+			"source" : "9",
+			"target" : "136",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "9_137",
+			"source" : "9",
+			"target" : "137",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "9_138",
+			"source" : "9",
+			"target" : "138",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "9_139",
+			"source" : "9",
+			"target" : "139",
+			"name": "discov|domain",
+			"appearances": ""}
+,
+		{
+			"id" : "9_140",
+			"source" : "9",
+			"target" : "140",
+			"name": "recon|vrml-multi-use",
+			"appearances": ""}
+,
+		{
+			"id" : "9_141",
+			"source" : "9",
+			"target" : "141",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "9_142",
+			"source" : "9",
+			"target" : "142",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "9_143",
+			"source" : "9",
+			"target" : "143",
+			"name": "recon|remoteware-cl",
+			"appearances": ""}
+,
+		{
+			"id" : "11_145",
+			"source" : "11",
+			"target" : "145",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "11_146",
+			"source" : "11",
+			"target" : "146",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "11_147",
+			"source" : "11",
+			"target" : "147",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "11_4",
+			"source" : "11",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "11_148",
+			"source" : "11",
+			"target" : "148",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "11_149",
+			"source" : "11",
+			"target" : "149",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "11_9",
+			"source" : "11",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "11_11",
+			"source" : "11",
+			"target" : "11",
+			"name": "t1498|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "11_150",
+			"source" : "11",
+			"target" : "150",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "11_151",
+			"source" : "11",
+			"target" : "151",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "11_22",
+			"source" : "11",
+			"target" : "22",
+			"name": "t1021_001|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "11_152",
+			"source" : "11",
+			"target" : "152",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "11_153",
+			"source" : "11",
+			"target" : "153",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "11_154",
+			"source" : "11",
+			"target" : "154",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "11_155",
+			"source" : "11",
+			"target" : "155",
+			"name": "t1021_003|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "12_1",
+			"source" : "12",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "12_156",
+			"source" : "12",
+			"target" : "156",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "12_157",
+			"source" : "12",
+			"target" : "157",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "12_4",
+			"source" : "12",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "12_6",
+			"source" : "12",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "12_158",
+			"source" : "12",
+			"target" : "158",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "12_9",
+			"source" : "12",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "12_159",
+			"source" : "12",
+			"target" : "159",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "12_12",
+			"source" : "12",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "12_160",
+			"source" : "12",
+			"target" : "160",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "12_161",
+			"source" : "12",
+			"target" : "161",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "12_15",
+			"source" : "12",
+			"target" : "15",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "12_162",
+			"source" : "12",
+			"target" : "162",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "12_163",
+			"source" : "12",
+			"target" : "163",
+			"name": "discov|cm",
+			"appearances": ""}
+,
+		{
+			"id" : "12_164",
+			"source" : "12",
+			"target" : "164",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "12_165",
+			"source" : "12",
+			"target" : "165",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "12_166",
+			"source" : "12",
+			"target" : "166",
+			"name": "discov|asmgcs",
+			"appearances": ""}
+,
+		{
+			"id" : "13_167",
+			"source" : "13",
+			"target" : "167",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "13_168",
+			"source" : "13",
+			"target" : "168",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "13_169",
+			"source" : "13",
+			"target" : "169",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "14_170",
+			"source" : "14",
+			"target" : "170",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "14_171",
+			"source" : "14",
+			"target" : "171",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "14_172",
+			"source" : "14",
+			"target" : "172",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "14_173",
+			"source" : "14",
+			"target" : "173",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "14_174",
+			"source" : "14",
+			"target" : "174",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "14_6",
+			"source" : "14",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "14_175",
+			"source" : "14",
+			"target" : "175",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "14_176",
+			"source" : "14",
+			"target" : "176",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "14_177",
+			"source" : "14",
+			"target" : "177",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "14_178",
+			"source" : "14",
+			"target" : "178",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "14_179",
+			"source" : "14",
+			"target" : "179",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "14_14",
+			"source" : "14",
+			"target" : "14",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "14_180",
+			"source" : "14",
+			"target" : "180",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "14_181",
+			"source" : "14",
+			"target" : "181",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "14_182",
+			"source" : "14",
+			"target" : "182",
+			"name": "discov|sunrpc",
+			"appearances": ""}
+,
+		{
+			"id" : "14_183",
+			"source" : "14",
+			"target" : "183",
+			"name": "discov|icmpd",
+			"appearances": ""}
+,
+		{
+			"id" : "15_184",
+			"source" : "15",
+			"target" : "184",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "15_185",
+			"source" : "15",
+			"target" : "185",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "15_4",
+			"source" : "15",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "15_186",
+			"source" : "15",
+			"target" : "186",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "15_187",
+			"source" : "15",
+			"target" : "187",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "15_188",
+			"source" : "15",
+			"target" : "188",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "15_189",
+			"source" : "15",
+			"target" : "189",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "15_190",
+			"source" : "15",
+			"target" : "190",
+			"name": "discov|rfb",
+			"appearances": ""}
+,
+		{
+			"id" : "15_12",
+			"source" : "15",
+			"target" : "12",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "15_191",
+			"source" : "15",
+			"target" : "191",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "15_15",
+			"source" : "15",
+			"target" : "15",
+			"name": "recon|http-alt",
+			"appearances": ""}
+,
+		{
+			"id" : "15_192",
+			"source" : "15",
+			"target" : "192",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "15_193",
+			"source" : "15",
+			"target" : "193",
+			"name": "discov|ipsma",
+			"appearances": ""}
+,
+		{
+			"id" : "22_205",
+			"source" : "22",
+			"target" : "205",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "22_206",
+			"source" : "22",
+			"target" : "206",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "22_207",
+			"source" : "22",
+			"target" : "207",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "22_208",
+			"source" : "22",
+			"target" : "208",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "22_209",
+			"source" : "22",
+			"target" : "209",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "22_210",
+			"source" : "22",
+			"target" : "210",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "22_211",
+			"source" : "22",
+			"target" : "211",
+			"name": "discov|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "22_212",
+			"source" : "22",
+			"target" : "212",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "22_213",
+			"source" : "22",
+			"target" : "213",
+			"name": "t1021_001|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "22_214",
+			"source" : "22",
+			"target" : "214",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "22_215",
+			"source" : "22",
+			"target" : "215",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "24_217",
+			"source" : "24",
+			"target" : "217",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "24_218",
+			"source" : "24",
+			"target" : "218",
+			"name": "discov|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "24_219",
+			"source" : "24",
+			"target" : "219",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "24_22",
+			"source" : "24",
+			"target" : "22",
+			"name": "t1021_001|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "24_24",
+			"source" : "24",
+			"target" : "24",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "24_220",
+			"source" : "24",
+			"target" : "220",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "24_221",
+			"source" : "24",
+			"target" : "221",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "24_222",
+			"source" : "24",
+			"target" : "222",
+			"name": "recon|wsman",
+			"appearances": ""}
+,
+		{
+			"id" : "27_1",
+			"source" : "27",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "27_225",
+			"source" : "27",
+			"target" : "225",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "27_226",
+			"source" : "27",
+			"target" : "226",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "27_227",
+			"source" : "27",
+			"target" : "227",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "27_228",
+			"source" : "27",
+			"target" : "228",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "27_229",
+			"source" : "27",
+			"target" : "229",
+			"name": "discov|cm",
+			"appearances": ""}
+,
+		{
+			"id" : "27_230",
+			"source" : "27",
+			"target" : "230",
+			"name": "discov|fis",
+			"appearances": ""}
+,
+		{
+			"id" : "32_239",
+			"source" : "32",
+			"target" : "239",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "32_4",
+			"source" : "32",
+			"target" : "4",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "32_240",
+			"source" : "32",
+			"target" : "240",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "32_6",
+			"source" : "32",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "32_9",
+			"source" : "32",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "32_241",
+			"source" : "32",
+			"target" : "241",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "32_242",
+			"source" : "32",
+			"target" : "242",
+			"name": "discov|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "32_243",
+			"source" : "32",
+			"target" : "243",
+			"name": "t1021_001|ms-wbt-server",
+			"appearances": ""}
+,
+		{
+			"id" : "32_244",
+			"source" : "32",
+			"target" : "244",
+			"name": "discov|domain",
+			"appearances": ""}
+,
+		{
+			"id" : "32_245",
+			"source" : "32",
+			"target" : "245",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "32_246",
+			"source" : "32",
+			"target" : "246",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "32_247",
+			"source" : "32",
+			"target" : "247",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "33_1",
+			"source" : "33",
+			"target" : "1",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "33_248",
+			"source" : "33",
+			"target" : "248",
+			"name": "discov|cpdlc",
+			"appearances": ""}
+,
+		{
+			"id" : "48_270",
+			"source" : "48",
+			"target" : "270",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "48_271",
+			"source" : "48",
+			"target" : "271",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "48_272",
+			"source" : "48",
+			"target" : "272",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "48_273",
+			"source" : "48",
+			"target" : "273",
+			"name": "discov|fis",
+			"appearances": ""}
+,
+		{
+			"id" : "50_275",
+			"source" : "50",
+			"target" : "275",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "50_276",
+			"source" : "50",
+			"target" : "276",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "50_277",
+			"source" : "50",
+			"target" : "277",
+			"name": "discov|rpas-c2",
+			"appearances": ""}
+,
+		{
+			"id" : "50_278",
+			"source" : "50",
+			"target" : "278",
+			"name": "discov|asmgcs",
+			"appearances": ""}
+,
+		{
+			"id" : "55_285",
+			"source" : "55",
+			"target" : "285",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "55_286",
+			"source" : "55",
+			"target" : "286",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "55_287",
+			"source" : "55",
+			"target" : "287",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "55_288",
+			"source" : "55",
+			"target" : "288",
+			"name": "discov|ipsdtls",
+			"appearances": ""}
+,
+		{
+			"id" : "86_330",
+			"source" : "86",
+			"target" : "330",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "86_331",
+			"source" : "86",
+			"target" : "331",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "86_332",
+			"source" : "86",
+			"target" : "332",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "86_333",
+			"source" : "86",
+			"target" : "333",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "86_6",
+			"source" : "86",
+			"target" : "6",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "86_9",
+			"source" : "86",
+			"target" : "9",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "86_334",
+			"source" : "86",
+			"target" : "334",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "86_335",
+			"source" : "86",
+			"target" : "335",
+			"name": "discov|cm",
+			"appearances": ""}
+,
+		{
+			"id" : "86_336",
+			"source" : "86",
+			"target" : "336",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "154_427",
+			"source" : "154",
+			"target" : "427",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "154_428",
+			"source" : "154",
+			"target" : "428",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "154_429",
+			"source" : "154",
+			"target" : "429",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "154_430",
+			"source" : "154",
+			"target" : "430",
+			"name": "t1021_002|microsoft-ds",
+			"appearances": ""}
+,
+		{
+			"id" : "154_431",
+			"source" : "154",
+			"target" : "431",
+			"name": "t1021_003|epmap",
+			"appearances": ""}
+,
+		{
+			"id" : "240_532",
+			"source" : "240",
+			"target" : "532",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "240_533",
+			"source" : "240",
+			"target" : "533",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+,
+		{
+			"id" : "240_3",
+			"source" : "240",
+			"target" : "3",
+			"name": "recon|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "240_534",
+			"source" : "240",
+			"target" : "534",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "240_535",
+			"source" : "240",
+			"target" : "535",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "240_536",
+			"source" : "240",
+			"target" : "536",
+			"name": "recon|wap-wsp",
+			"appearances": ""}
+,
+		{
+			"id" : "240_537",
+			"source" : "240",
+			"target" : "537",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "240_538",
+			"source" : "240",
+			"target" : "538",
+			"name": "discov|postgresql",
+			"appearances": ""}
+,
+		{
+			"id" : "240_539",
+			"source" : "240",
+			"target" : "539",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "240_540",
+			"source" : "240",
+			"target" : "540",
+			"name": "discov|ff-ice",
+			"appearances": ""}
+,
+		{
+			"id" : "240_541",
+			"source" : "240",
+			"target" : "541",
+			"name": "recon|wsman",
+			"appearances": ""}
+,
+		{
+			"id" : "240_542",
+			"source" : "240",
+			"target" : "542",
+			"name": "recon|remoteware-cl",
+			"appearances": ""}
+,
+		{
+			"id" : "240_543",
+			"source" : "240",
+			"target" : "543",
+			"name": "recon|distinct",
+			"appearances": ""}
+,
+		{
+			"id" : "247_551",
+			"source" : "247",
+			"target" : "551",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "247_552",
+			"source" : "247",
+			"target" : "552",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "247_553",
+			"source" : "247",
+			"target" : "553",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "247_554",
+			"source" : "247",
+			"target" : "554",
+			"name": "discov|netbios-ssn",
+			"appearances": ""}
+,
+		{
+			"id" : "247_555",
+			"source" : "247",
+			"target" : "555",
+			"name": "discov|ahsp",
+			"appearances": ""}
+,
+		{
+			"id" : "247_556",
+			"source" : "247",
+			"target" : "556",
+			"name": "t1078_001|snmp",
+			"appearances": ""}
+,
+		{
+			"id" : "333_623",
+			"source" : "333",
+			"target" : "623",
+			"name": "discov|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "333_624",
+			"source" : "333",
+			"target" : "624",
+			"name": "discov|mysql",
+			"appearances": ""}
+,
+		{
+			"id" : "333_625",
+			"source" : "333",
+			"target" : "625",
+			"name": "recon|http",
+			"appearances": ""}
+,
+		{
+			"id" : "333_626",
+			"source" : "333",
+			"target" : "626",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "333_627",
+			"source" : "333",
+			"target" : "627",
+			"name": "discov|ssh",
+			"appearances": ""}
+,
+		{
+			"id" : "333_628",
+			"source" : "333",
+			"target" : "628",
+			"name": "discov|ag-swim",
+			"appearances": ""}
+,
+		{
+			"id" : "333_629",
+			"source" : "333",
+			"target" : "629",
+			"name": "discov|cm",
+			"appearances": ""}
+,
+		{
+			"id" : "431_240",
+			"source" : "431",
+			"target" : "240",
+			"name": "discov|xdmcp",
+			"appearances": ""}
+,
+		{
+			"id" : "431_689",
+			"source" : "431",
+			"target" : "689",
+			"name": "discov|ms-sql-s",
+			"appearances": ""}
+,
+		{
+			"id" : "431_690",
+			"source" : "431",
+			"target" : "690",
+			"name": "t1021_001|unknown",
+			"appearances": ""}
+,
+		{
+			"id" : "535_753",
+			"source" : "535",
+			"target" : "753",
+			"name": "discov|ncube-lm",
+			"appearances": ""}
+
+	]
+}

@@ -12,6 +12,7 @@ from itertools import accumulate
 import numpy as np
 
 from plotting import plot_episodes, plot_alert_volume_per_episode
+from signatures import taxonomy
 from signatures.mappings import micro
 
 
@@ -189,7 +190,7 @@ def aggregate_into_episodes(team_data, start_times, step=150, plot=False, plot_a
                     window = [a for dt, a in zip(relative_elapsed_time, alerts) if (i <= dt < (i + step)) and a[1] == mcat]
                     hyperalert_seq.append(window)  # Alerts per 'step' seconds (window)
 
-                raw_episodes = _get_episodes(hyperalert_seq, micro[mcat], plot=plot)
+                raw_episodes = _get_episodes(hyperalert_seq, taxonomy.code_to_label(mcat), plot=plot)
                 if len(raw_episodes) > 0:
                     for epi in raw_episodes:
                         hyperalert_seq_epi = hyperalert_seq[epi[0]:epi[1] + 1]

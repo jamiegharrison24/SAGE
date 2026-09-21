@@ -38,6 +38,7 @@ import os
 from signatures.attack_stages import MicroAttackStage
 from signatures.mappings import (
     macro_inv, micro, micro2macro, micro_inv, rev_smallmapping, small_mapping,
+    verbose_micro,
 )
 
 TAXONOMY = os.environ.get("SAGE_TAXONOMY", "aif").strip().lower()
@@ -106,6 +107,26 @@ def code_for_symbol(symbol):
 def symbol_table():
     """The whole code -> symbol table, for callers that iterate it."""
     return _small
+
+
+def verbose_label(label):
+    """Human-readable node text. AIF has a curated `verbose_micro` table;
+    ATT&CK codes have no such table, so the label stands for itself
+    (`T1190`, `discovery`)."""
+    if not IS_MITRE:
+        return verbose_micro[label]
+    return label
+
+
+def colour_index(code):
+    """Index into `plotting.mcols` for a stage code.
+
+    AIF routes micro -> macro -> colour. ATT&CK has no macro layer, so
+    severity picks the colour band, matching how `shape_index` picks shapes.
+    """
+    if not IS_MITRE:
+        return macro_inv[micro2macro[micro[code]]]
+    return _SHAPE_BY_SEVERITY.get(len(str(code)), 0)
 
 
 def shape_index(label):

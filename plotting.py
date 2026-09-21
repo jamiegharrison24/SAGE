@@ -49,7 +49,7 @@ def plot_alert_filtering(unfiltered_alerts, filtered_alerts):
     plt.bar(r1, bars1, color='skyblue', width=bar_width, edgecolor='white', label='Raw')
     plt.bar(r2, bars2, color='salmon', width=bar_width, edgecolor='white', label='Cleaned')
 
-    labels = [micro[x].split('.')[1] for x in b1.keys()]
+    labels = [taxonomy.code_to_label(x) for x in b1.keys()]
 
     # Add xticks in the middle of the group bars
     plt.ylabel('Frequency', fontweight='bold', fontsize='20')
@@ -208,10 +208,10 @@ def plot_alert_volume_per_episode(tid, attacker_victim, host_episodes, mcats):
         lsize = ((thickness - tmin) / (tmax - tmin)) * (5 - 0.5) + 0.5 if (tmax - tmin) != 0.0 else 0.5
         # lsize = np.log(thickness) + 1 TODO: Either take log or normalize between [0.5 5]
         msize = (lsize * 2) + 1
-        ax.plot(xax, yax, color=mcols[macro_inv[micro2macro[micro[ep[2]]]]], linewidth=lsize)
-        ax.plot(ep[0], mcats.index(ep[2]), color=mcols[macro_inv[micro2macro[micro[ep[2]]]]], marker='.', linewidth=0,
-                markersize=msize, label=micro2macro[micro[ep[2]]])
-        ax.plot(ep[1], mcats.index(ep[2]), color=mcols[macro_inv[micro2macro[micro[ep[2]]]]], marker='.', linewidth=0,
+        ax.plot(xax, yax, color=mcols[taxonomy.colour_index(ep[2])], linewidth=lsize)
+        ax.plot(ep[0], mcats.index(ep[2]), color=mcols[taxonomy.colour_index(ep[2])], marker='.', linewidth=0,
+                markersize=msize, label=taxonomy.code_to_label(ep[2]))
+        ax.plot(ep[1], mcats.index(ep[2]), color=mcols[taxonomy.colour_index(ep[2])], marker='.', linewidth=0,
                 markersize=msize)
         plt.yticks(range(len(mcats)), [x.split('.')[1] for x in micro.values()], rotation=0)
     _legend_without_duplicate_labels(ax)
@@ -239,7 +239,7 @@ def plot_state_groups(state_sequences, data_file):
         all_states.update([epi[3] for epi in episodes])
 
         for i, state in enumerate(states):
-            macro = micro2macro[micro[state[0]]].split('.')[1]
+            macro = taxonomy.code_to_label(state[0])
             if state[1] == -1 or state[1] == 0:  # Skip the root node and nodes with ID -1
                 continue
             if macro not in state_groups.keys():
