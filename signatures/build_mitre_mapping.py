@@ -53,6 +53,7 @@ from mitre_stages import (  # noqa: E402
     TACTIC_CODES, TACTIC_ORDER, UNMAPPED_CODE, UNMAPPED_NAME,
     UNMAPPED_SYMBOL, severity_of, short_symbol, tactic_for,
 )
+TIER_SEVERITY = {"low": 1, "medium": 2, "high": 3}
 
 TECH_RE = re.compile(r"^T\d{4}(?:\.\d{3})?$")
 
@@ -133,7 +134,7 @@ def assign_hybrid_codes(tech_tier):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--unmapped", choices=["drop", "catchall"], required=True)
-    ap.add_argument("--level", choices=["tactic", "hybrid"], default="hybrid",
+    ap.add_argument("--level", choices=["tactic", "hybrid", "technique"], default="hybrid",
                     help="'tactic' annotates every alert with its ATT&CK "
                          "tactic (14 codes, 1 objective type). 'hybrid' keeps "
                          "technique identity at the medium and high tiers and "
@@ -162,11 +163,35 @@ def main():
         resolved[sig] = (tactic, lab)
 
     # Pass 2: allocate codes at the requested level.
-    code_to_name = {c: f"MitreTactic.{t}" for t, (c, _) in TACTIC_CODES.items()}
-    code_to_symbol = {c: s for _, (c, s) in TACTIC_CODES.items()}
+    # Seed with the tactic tables only where tactic codes are actually used.
+    # At the `technique` level they are not, and seeding would collide: the
+    # technique codes start at UNMAPPED_CODE+1 = 10, which is exactly where
+    # the medium tactic codes live (10-18), so entries would overwrite each
+    # other and a code would resolve to whichever wrote last.
+    if args.level == "technique":
+        code_to_name, code_to_symbol = {}, {}
+    else:
+        code_to_name = {c: f"MitreTactic.{t}" for t, (c, _) in TACTIC_CODES.items()}
+        code_to_symbol = {c: s for _, (c, s) in TACTIC_CODES.items()}
     sig_to_code, sig_to_tech = {}, {}
 
-    if args.level == "tactic":
+    explicit_severity = {}
+    if args.level == "technique":
+        # Sequential codes from UNMAPPED_CODE+1, severity in a side table --
+        # no digit-count constraint, so the low tier keeps all 18 techniques.
+        techs = sorted({lab for _, lab in resolved.values()})
+        tech_codes = {}
+        for offset, lab in enumerate(techs):
+            tech_codes[lab] = UNMAPPED_CODE + 1 + offset
+        for sig, (tactic, lab) in resolved.items():
+            code = tech_codes[lab]
+            sig_to_code[sig] = code
+            sig_to_tech[sig] = lab
+            explicit_severity[code] = severity_of(TACTIC_CODES[tactic][0])
+        for lab, code in tech_codes.items():
+            code_to_name[code] = f"MitreTechnique.{lab}"
+            code_to_symbol[code] = short_symbol(lab)
+    elif args.level == "tactic":
         for sig, (tactic, lab) in resolved.items():
             sig_to_code[sig] = TACTIC_CODES[tactic][0]
             sig_to_tech[sig] = lab
@@ -203,7 +228,7 @@ def main():
     print(f"  technique w/o tactic: {len(no_tactic)}")
     by_sev = {1: [], 2: [], 3: []}
     for code in used:
-        by_sev[severity_of(code)].append(code)
+        by_sev[explicit_severity.get(code) or severity_of(code)].append(code)
     print()
     print(f"{len(used)} codes in use:")
     for sev, name in ((1, "low"), (2, "medium"), (3, "high")):
@@ -225,13 +250,20 @@ def main():
         for name, table in (("mitre_signature_to_code", sig_to_code),
                             ("mitre_signature_to_technique", sig_to_tech),
                             ("mitre_code_to_name", code_to_name),
-                            ("mitre_small_mapping", code_to_symbol)):
+                            ("mitre_small_mapping", code_to_symbol),
+                            ("mitre_code_severity", explicit_severity)):
             fh.write(f"{name} = {{\n")
             for k in sorted(table, key=lambda x: (isinstance(x, str), x)):
                 fh.write(f"    {k!r}: {table[k]!r},\n")
             fh.write("}\n\n")
         fh.write("rev_mitre_small_mapping = "
                  "{v: k for k, v in mitre_small_mapping.items()}\n")
+        if explicit_severity:
+            # The technique level cannot encode severity in the digit count
+            # (sequential codes are all two digits), so it registers an
+            # explicit table that `mitre_stages.severity_of_code` consults.
+            fh.write("\nfrom signatures.mitre_stages import register_severity\n")
+            fh.write("register_severity(mitre_code_severity)\n")
 
     print(f"\nwrote {out}  ({len(sig_to_code)} signatures)")
     return 0

@@ -225,10 +225,10 @@ def traverse(dfa, sinks, sequence):
                 state = sinks[state][sym]
             else:
                 state = '-1'  # With `printblue = 1` in spdfa-config.ini this should not happen
-            state_to_save = state if len(str(sev)) >= 2 else '-1'  # Discard IDs from low-severity sinks
+            state_to_save = state if taxonomy.severity(sev) >= 2 else '-1'  # Discard IDs from low-severity sinks
             state_list.append(state_to_save)
 
-        if state in sinks and len(str(sev)) >= 2:  # Save med- and high-sev sinks (might be defined in the main model)
+        if state in sinks and taxonomy.severity(sev) >= 2:  # Save med- and high-sev sinks (might be defined in the main model)
             sev_sinks.add(state)
 
     return state_list, sev_sinks
@@ -274,10 +274,10 @@ def encode_sequences(dfa, sinks, subsequences):
 
         sample = trace_
         med_sev = [int(state) for sym, state in zip(sample, state_list) if
-                   len(str(taxonomy.code_for_symbol(sym.split('|')[0]))) == 2]
+                   taxonomy.severity(taxonomy.code_for_symbol(sym.split('|')[0])) == 2]
         med_sev_states.update(med_sev)
         high_sev = [int(state) for sym, state in zip(sample, state_list) if
-                    len(str(taxonomy.code_for_symbol(sym.split('|')[0]))) == 3]
+                    taxonomy.severity(taxonomy.code_for_symbol(sym.split('|')[0])) == 3]
         high_sev_states.update(high_sev)
         sev_sinks.update(_sev_sinks)
 

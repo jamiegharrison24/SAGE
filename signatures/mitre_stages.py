@@ -111,6 +111,42 @@ def severity_of(code):
     return len(str(code))
 
 
+# ---------------------------------------------------------------------------
+# Explicit severity, for the `technique` level.
+#
+# The digit-count encoding caps the low tier at nine codes, and the observed
+# signatures use **18** low-tier techniques -- which is why `hybrid` collapses
+# them to three tactics. Effort 22 measured what that costs: the ATT&CK arms
+# end up with a *coarser* alphabet than AIF (16 symbols vs 20) precisely
+# because scanning, which dominates the alert volume, loses its distinctions.
+# Attack graphs fall 90%.
+#
+# So the `technique` level carries severity in an explicit table instead, and
+# the three pipeline sites that read `len(str(mcat))` go through
+# `severity_of()`. AIF codes are unaffected: `severity_of()` falls back to the
+# digit-count rule, so `severity_of(16) == 2` exactly as before.
+# ---------------------------------------------------------------------------
+
+_EXPLICIT_SEVERITY = {}
+
+
+def register_severity(table):
+    """Install {code: severity} for a generated technique-level mapping."""
+    _EXPLICIT_SEVERITY.clear()
+    _EXPLICIT_SEVERITY.update(table)
+
+
+def severity_of_code(code):
+    """Severity of a stage code: 1 low, 2 medium, 3 high.
+
+    Falls back to AIF's digit-count rule for any code not explicitly
+    registered, so both AIF and the tactic/hybrid levels are unchanged.
+    """
+    if code in _EXPLICIT_SEVERITY:
+        return _EXPLICIT_SEVERITY[code]
+    return len(str(code))
+
+
 def short_symbol(technique_id):
     """Trace symbol for a technique -- `T1190` -> `t1190`, `T1021.002` ->
     `t1021_002`. Used only by the hybrid level, where medium and high codes

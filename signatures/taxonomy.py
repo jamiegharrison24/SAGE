@@ -35,6 +35,7 @@ objective selection all still read `len(str(mcat))`.
 import importlib
 import os
 
+from signatures import mitre_stages
 from signatures.attack_stages import MicroAttackStage
 from signatures.mappings import (
     macro_inv, micro, micro2macro, micro_inv, rev_smallmapping, small_mapping,
@@ -107,6 +108,17 @@ def code_for_symbol(symbol):
 def symbol_table():
     """The whole code -> symbol table, for callers that iterate it."""
     return _small
+
+
+def severity(code):
+    """Severity of a stage code: 1 low / 2 medium / 3 high.
+
+    AIF and the tactic/hybrid levels encode this in the digit count; the
+    technique level cannot (sequential codes are all two digits) and carries
+    an explicit table instead. Both routes go through here so the pipeline
+    never has to know which is in force.
+    """
+    return mitre_stages.severity_of_code(code)
 
 
 def verbose_label(label):

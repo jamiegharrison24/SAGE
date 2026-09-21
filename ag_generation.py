@@ -48,7 +48,7 @@ def _get_objective_nodes(state_sequences, obj_only=False):
     objectives = set()
     for episodes in state_sequences.values():  # Iterate over all episodes and collect the objective nodes
         for epi in episodes:
-            if len(str(epi[2])) == 3:  # If high-severity, then include it
+            if taxonomy.severity(epi[2]) == 3:  # If high-severity, then include it
                 mcat = taxonomy.code_to_label(epi[2])
                 if obj_only:  # Experiment: only mcat or mcat + mserv?
                     vert_name = mcat
@@ -87,7 +87,7 @@ def _make_vertex_info(episode, in_main_model):
     signs = episode[5]
     timestamps = episode[6]
     if episode[3] in in_main_model:  # TODO: this check is useless, since it is always True
-        state_id = '' if len(str(episode[2])) == 1 else '|' + str(episode[3])
+        state_id = '' if taxonomy.severity(episode[2]) == 1 else '|' + str(episode[3])
     else:
         state_id = '|Sink'
     vert_name = cat + '|' + episode[4] + state_id

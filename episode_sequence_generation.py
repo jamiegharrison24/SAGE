@@ -274,7 +274,8 @@ def break_into_subbehaviors(host_data, full_seq=False):
             #   they will not be appearing anywhere (and we call them partial paths).
             count = 0
             mcats = [epi[2] for epi in episodes]
-            cuts = [i for i in range(len(episodes) - 1) if (len(str(mcats[i])) > len(str(mcats[i + 1])))]
+            cuts = [i for i in range(len(episodes) - 1)
+                    if taxonomy.severity(mcats[i]) > taxonomy.severity(mcats[i + 1])]
 
             rest = (0, len(episodes) - 1)
             for j in range(len(cuts)):

@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all twenty-one efforts; read the report first.
+> This file remains the detailed record for the running index of all twenty-two efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Twenty-one sub-experiments have run so far, in order. Each has its own detailed
+Twenty-two sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -1284,3 +1284,98 @@ which need FlexFringe.
 its 13 possible objectives on this dataset, against hybrid's 3 and tactic's 1
 — so the practical gap is 4-vs-3, not 13-vs-1. The tactic arm's collapse to a
 single `impact` objective remains the sharper difference.
+
+## 22. Task 4 — AIF vs ATT&CK attack graphs, measured on cptc-2017
+
+First end-to-end run of the substitution. Three arms at commit `06cafbc`,
+same pinned IANA snapshot, `PYTHONHASHSEED=0`, isolated run-roots, held-out
+perplexity on seed 42. Everything is held constant except annotation
+granularity:
+
+| arm | annotation | objectives |
+|---|---|---:|
+| `aif` | `MicroAttackStage` (baseline) | 25 observed |
+| `mitre_hybrid_catchall` | technique at medium/high, tactic at low | 5 |
+| `mitre_tactic_catchall` | tactic throughout | 4 |
+
+**Precondition established first.** `evaluation check` on the AIF arm against
+`baseline/metrics-cptc-2017.json`: **18/18 structural metrics match**. Only
+throughput and wall-clock differ, both flagged informational (this machine is
+faster). The seven pipeline edits the taxonomy switch required are therefore
+behaviour-preserving for AIF, which is what makes the comparison attributable.
+The 19th metric, held-out perplexity, is reported missing by `check` for a
+harness reason rather than a regression: `--heldout` is honoured only by
+`command_run`, never by `command_check`.
+
+**Result.**
+
+| metric | aif | hybrid | tactic |
+|---|---:|---:|---:|
+| attack graphs | 104 | 10 (−90%) | 9 (−91%) |
+| victims with a graph | 36 | 7 (−81%) | 7 (−81%) |
+| objectives | 25 | 5 | 4 |
+| total nodes | 1,885 | 145 (−92%) | 135 (−93%) |
+| total edges | 3,024 | 223 (−93%) | 198 (−94%) |
+| alerts per AG | 460 | 4,788 (+940%) | 5,320 (+1056%) |
+| perplexity (training) | 13.48 | 9.45 (−30%) | 9.94 (−26%) |
+| perplexity (held-out) | 40.27 | 29.12 (−28%) | 33.42 (−17%) |
+| wall clock | 269 s | 49 s (−82%) | 49 s (−82%) |
+
+**Finding 1 — the compression gain is lost coverage, not aggregation.**
+"+940% alerts per AG" reads as a tenfold workload reduction and is nothing of
+the kind: **29 of 36 victims receive no attack graph at all**. The ratio
+improved because its denominator collapsed. The same caveat applies to the
+82% speedup — less work, not faster work. This matters beyond this experiment:
+alert-compression ratio is the metric the proposal uses to operationalise
+analyst workload, and it rewards coverage loss indistinguishably from genuine
+aggregation. **It should never be reported without a coverage figure beside
+it.**
+
+**Finding 2 — perplexity genuinely improves, and is not confounded.** It is
+measured over traces rather than graphs, so the coverage collapse does not
+flatter it: −30% training, −28% held-out. A coarser alphabet (16 symbols vs
+AIF's 20) makes sequences more predictable. This is the one axis on which the
+ATT&CK arms are cleanly better.
+
+**Finding 3 — granularity is second-order.** `hybrid` (5 objectives) and
+`tactic` (4) differ by a few percent on every structural metric. The gap that
+matters is AIF-vs-ATT&CK, not hybrid-vs-tactic.
+
+**Two hypotheses tested and falsified, which is what makes the cause
+attributable rather than assumed:**
+
+*Severity tiering.* ATT&CK files command-and-control as an enabler while AIF
+treats data delivery/exfiltration as terminal objectives, so the first build
+lost every non-DoS objective. Promoting `command-and-control` to HIGH — which
+the proposal's Severity Configuration section asks for, "preserve the original
+implementation's behaviour" — raised high-severity signatures from 57 to 146
+and objectives from 4 to 11. It gained **one graph and zero victims**. Not the
+cause.
+
+*The subsequence length floor.* `model_learning.py` discards subsequences
+shorter than 3 episodes, and the ATT&CK arms lose a larger share to it (62%
+vs AIF's 53%), so it looked like an amplifier. Parameterised as
+`SAGE_MIN_SUBSEQ` (default 3, unchanged) and re-run at 2: every arm gained
+~12% more graphs and **the relative gap moved 0.2 points** (−90.4% to
+−90.6%). Not the cause either.
+
+**What is left, and it is the real finding.** The coverage loss is intrinsic
+to vocabulary coarseness at the tier where the data actually lives. Our
+ATT&CK mapping is *coarser* than AIF on this dataset despite ATT&CK having
+~600 techniques to AIF's ~30 stages — 16 trace symbols against AIF's 20 —
+because the hybrid design collapses 18 low-tier techniques into 3 tactics
+(`reconnaissance`/`discovery`/`resource-development`) while AIF distinguishes
+seven scanning stages. Scanning dominates cptc-2017's alert volume, so
+adjacent distinct actions merge into single episodes (7,370 -> 4,891, −34%),
+which leaves genuinely fewer distinguishable attack steps and far fewer paths
+reaching an objective. The chain compounds: **−34% episodes -> −44% usable
+traces -> −90% attack graphs.**
+
+SAGE's graph output is therefore *non-linearly* sensitive to annotation
+granularity, and the low tier is where that sensitivity concentrates.
+
+**Consequence for the next step.** The low-tier collapse was forced by the
+digit-count severity encoding (9 single-digit codes, 18 low-tier techniques).
+Testing granularity properly requires dropping that encoding for an explicit
+severity table — the option set aside at effort 21 — so techniques survive at
+every tier.
