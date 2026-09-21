@@ -21,6 +21,19 @@ from collections import defaultdict
 from signatures.mappings import small_mapping, rev_smallmapping
 from signatures import taxonomy
 
+# Minimum episodes for a subsequence to be modelled. A 1- or 2-step attempt
+# carries no progression for FlexFringe to learn from, hence the floor.
+#
+# Made configurable (SAGE_MIN_SUBSEQ, default 3 = unchanged) because it
+# interacts badly with annotation granularity: a coarser vocabulary merges
+# adjacent alerts into single episodes, shortening subsequences, so a larger
+# share falls under the floor and is discarded before FlexFringe ever sees it.
+# Measured on cptc-2017: AIF loses 53% of subsequences here, the ATT&CK arms
+# 62%, which is part of why the ATT&CK arms produce ~90% fewer attack graphs.
+# Varying it separates "the floor deleted these attacks" from "these attacks
+# genuinely have fewer distinguishable steps under ATT&CK".
+MIN_SUBSEQUENCE_EPISODES = int(os.environ.get("SAGE_MIN_SUBSEQ", "3"))
+
 
 def _most_frequent(serv):
     """
@@ -59,7 +72,7 @@ def generate_traces(subsequences, datafile):
 
     flexfringe_traces = []
     for i, episodes in enumerate(subsequences.values()):
-        if len(episodes) < 3:  # Discard subsequences of length < 3 (can be commented out, also in make_state_sequences)
+        if len(episodes) < MIN_SUBSEQUENCE_EPISODES:
             continue
         num_traces += 1
         mcats = [x[2] for x in episodes]
@@ -237,7 +250,7 @@ def encode_sequences(dfa, sinks, subsequences):
     state_sequences = dict()
     med_sev_states, high_sev_states, sev_sinks = set(), set(), set()
     for i, (attacker, episodes) in enumerate(subsequences.items()):
-        if len(episodes) < 3:  # Discard subsequences of length < 3 (can be commented out, also in make_state_sequences)
+        if len(episodes) < MIN_SUBSEQUENCE_EPISODES:
             continue
 
         mcats = [x[2] for x in episodes]
