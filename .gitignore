@@ -62,3 +62,14 @@ experiments/mitre_mapping/attack_mapper/data/entity_spans_smb.json.gz
 # (entity_ner/df_table.py). Derived deterministically from the labelled
 # corpora, so it regenerates in seconds and stays out of history.
 experiments/mitre_mapping/attack_mapper/data/entity_df.json.gz
+
+# Evaluation harness run artifacts. The harness writes cells, a pinned IANA
+# snapshot and a sitecustomize shim into its --run-root, and FlexFringe writes
+# .ff.*.json next to the trace file. All are reproducible outputs, and while
+# they are TRACKED the harness cannot run at all: it moves/deletes them after
+# every cell and then refuses to continue because the worktree is dirty.
+results/
+*.ff.final.json
+*.ff.finalsinks.json
+*.ff.init.json
+*.ff.initsinks.json
