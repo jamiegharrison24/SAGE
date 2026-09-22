@@ -160,7 +160,13 @@ def aggregate_into_episodes(team_data, start_times, step=150, plot=False, plot_a
 
     print('---------------- TEAMS -------------------------')
 
-    mcats = list(micro.keys())
+    # The stage codes to build episodes for, from the ACTIVE taxonomy rather
+    # than AIF's `micro` dict. Hardcoding AIF's keys silently produced zero
+    # episodes for any code outside its numbering: the tactic/hybrid levels
+    # happened to overlap it and worked, while the technique level (sequential
+    # codes 10-62) lost every alert above ~40, including all of its
+    # high-severity ones, so no attack graph had an objective to build toward.
+    mcats = list(taxonomy.symbol_table().keys())
     for tid, team in team_data.items():
         print(tid, sep=' ', end=' ', flush=True)
         team_host_episodes = dict()
