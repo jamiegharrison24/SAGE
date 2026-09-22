@@ -631,6 +631,16 @@ own `MicroAttackStage`, and a broadened training corpus — because those add
 information rather than re-encoding what is already there. Nothing in this
 branch has been improved by a model reasoning freshly over rule text.
 
+**On the pipeline side (supervisor task 3/4), the bottom line is different and
+is now settled.** ATT&CK is substituted for AIF end to end and switchable at
+runtime (`SAGE_TAXONOMY`), and on cptc-2017 it reproduces AIF's attack-graph
+yield — **115 graphs / 41 victims against AIF's 104 / 36, at 23% lower training
+perplexity** — *provided* the severity tier table is set to `aif-aligned`. Under
+our first tiering it produced 9. Nothing but the tiering differs between those
+two numbers, and ATT&CK supplies no tiering, so **the severity table, not the
+taxonomy, is what the graph output measures** (effort 24). Report every
+graph-count figure with its variant named.
+
 ## What's not done
 
 ### Untried levers, in priority order
@@ -1467,23 +1477,126 @@ taxonomies recognise -- `ET WEB_SPECIFIC_APPS PHP-CGI query string parameter`
 | SMB IPC$ access | `DATA_EXFILTRATION` — **high** | `T1021.002` lateral-movement — **medium** |
 
 AIF terminates an attack graph at *exploitation* -- the attacker got in, that
-is the goal. ATT&CK reserves objectives for Impact and Exfiltration -- getting
-in is a means. Hence 677 high-severity episodes under AIF against 226, and 104
+is the goal, and its published model says so. The ATT&CK column reserves
+objectives for Impact and Exfiltration **because this project's tier table put
+them there**. Hence 677 high-severity episodes under AIF against 226, and 104
 graphs against 9.
 
-**Neither taxonomy is wrong**, and this is not a defect to engineer around.
-They encode different models of what an attack graph should show: AIF
-produces more graphs, each ending at "they got in"; ATT&CK produces fewer,
-each ending at "they did damage". Any comparison of graph counts between the
-two is therefore comparing definitions, not quality -- which is the finding.
+**The paragraph that stood here -- "neither taxonomy is wrong, they encode
+different models of what an attack graph should show" -- is part of the
+withdrawn claim.** It reads the tier table as ATT&CK's position. It is not;
+ATT&CK has no position. Effort 24 settled it empirically: re-tiering two
+tactics and changing nothing else takes the ATT&CK arm from 9 graphs to 115 --
+past AIF's 104. There was no second model to disagree with, only our
+configuration.
 
 **Relabelling was considered and rejected.** Aligning our labels to AIF's
 reading would mean calling web exploitation a terminal objective, which is
 wrong on ATT&CK's own terms and would degrade a label set measured at 87%
-agreement with vendor tags. The disagreement is the result, not an error.
+agreement with vendor tags. The labels were never the problem -- the tier
+table sitting on top of them was, and effort 24 varies that directly.
 
 **Standing caveat on the compression metric.** "+1056% alerts per attack
 graph" remains true and remains misleading: 29 of 36 victims receive no graph,
 so the ratio improved because its denominator collapsed. Alert compression
 cannot distinguish aggregation from coverage loss and must not be reported
 without a coverage figure beside it.
+
+## 24. Severity sensitivity — the 90% graph loss was our tier table, not ATT&CK
+
+Effort 23 withdrew the claim that the two taxonomies disagree about when an
+attack is finished, on the grounds that ATT&CK publishes no severity ordering
+at all, so the ATT&CK side of the "disagreement" was a table written here.
+That left the real question open: **how much of the 90% shortfall does our
+table actually account for?** This measures it.
+
+**Method.** Three severity variants, selected by `SAGE_SEVERITY_VARIANT`
+(`signatures/mitre_stages.SEVERITY_VARIANTS`), each generating its own mapping
+table. Everything else is held fixed: commit `fbf2112`, the 530-signature
+label set, `hybrid` level, `catchall` unmapped policy, 38 trace symbols, the
+pinned IANA snapshot, `PYTHONHASHSEED=0`, seed 42, held-out split. The only
+thing that varies is which tactics sit in the HIGH tier.
+
+| variant | HIGH tactics | high codes | high signatures |
+|---|---|---:|---:|
+| `kill-chain` | impact, exfiltration, command-and-control | 11 | 146 |
+| `aif-aligned` | + initial-access, lateral-movement | 20 | 387 |
+| `impact-only` | impact, exfiltration | 4 | 57 |
+
+**cptc-2017:**
+
+| | aif | kill-chain | impact-only | aif-aligned |
+|---|---:|---:|---:|---:|
+| attack graphs | 104 | 9 (−91.3%) | 9 (−91.3%) | **115 (+10.6%)** |
+| victims | 36 | 7 (−80.6%) | 7 (−80.6%) | **41 (+13.9%)** |
+| objectives | 25 | 4 | 4 | 24 |
+| total nodes | 1885 | 167 | 167 | 1608 (−14.7%) |
+| total edges | 3024 | 250 | 250 | 2626 (−13.2%) |
+| perplexity (training) | 13.48 | 10.76 | 10.76 | **10.33 (−23.4%)** |
+| perplexity (held-out) | 40.27 | 37.95 | 37.95 | 38.33 (−4.8%) |
+| alerts/sec | 537 | 2228 | 2239 | 948 (+76.6%) |
+
+**Result: all of it.** Moving `initial-access` and `lateral-movement` across
+the medium/high boundary — no label changed, no signature changed, no pipeline
+code changed — takes the same ATT&CK vocabulary from 9 graphs to 115, past
+AIF's 104, while *improving* training perplexity 23% and throughput 77%. The
+ATT&CK vocabulary was never short of graph-relevant structure. Our tiering was
+discarding it.
+
+**Why `impact-only` and `kill-chain` are byte-identical, and why that is not a
+caching bug.** Checked, because two arms silently sharing a result has already
+happened on this branch. 89 signatures change tier between them, but only
+**43 alerts of 47,876 (0.09%)** in cptc-2017 land on any of them — 20
+executable-download, 20 terse-downloader, 2 mobile-malware check-in, 1 IRC C2
+join. By contrast `aif-aligned` moves **241 signatures and 4,137 alerts
+(8.64%)**: RDP connection confirm (693), SNMP public access (693), PHP-CGI
+query string (588). One lever is invisible in this dataset and the other is
+not, which is exactly the asymmetry the output shows. Diagnostic:
+`experiments/mitre_mapping/tier_delta.py`.
+
+**This corrects effort 23's first falsification.** Effort 23 ruled out severity
+tiering because promoting `command-and-control` (57 → 146 high signatures)
+gained "one graph, zero victims". The tier-delta figures above explain why that
+test was uninformative rather than negative: that promotion touches 0.09% of
+the alerts. The conclusion drawn from it was wrong.
+
+**Effort 23's other three falsifications were not re-examined.** #3
+(vocabulary coarseness — the technique arm produced counts identical to the
+coarse hybrid) is the exposed one, because "identical counts" is precisely the
+observation shown above to be ambiguous between "inert lever" and "lever
+invisible in cptc-2017". Re-run it under `tier_delta.py` or on a second
+dataset before relying on it. #2 and #4 are untouched but rest on the same
+single-dataset volume reasoning.
+
+**Three things effort 24 does not establish**, recorded because the result is
+tempting to overread — the same failure mode as effort 23:
+
+1. It is **not** evidence that `aif-aligned` is the right tiering. That
+   variant was built to reproduce AIF's objective definition. It cannot be
+   both the reconstruction of the baseline and the independent evidence that
+   the baseline is correct.
+2. The spread is **not an error bar**. Three hand-chosen configurations are
+   not samples, and one is a deliberate reconstruction. The defensible claim
+   is narrower: graph count is a direct function of the high-tier assignment,
+   so no graph-count figure on this branch is interpretable without naming its
+   variant.
+3. It does **not** supply the missing severity model. ATT&CK still publishes
+   none. What the branch can now say honestly is that substituting ATT&CK into
+   SAGE *requires* inventing one, that the invention dominates the output, and
+   that we measured the dominance instead of shipping one configuration and
+   calling the difference a property of MITRE.
+
+**Reproducing.** `test-scripts/run_severity_sensitivity.sh` (Linux/WSL), then
+`python compare_arms.py ../eval-sensitivity --dataset cptc-2017`. The variant
+tables are generated and gitignored, so every arm records the same commit SHA;
+the runner stamps each arm directory with a `variant.json` (env, tier counts,
+table sha256, regenerate command) via
+`test-scripts/stamp_severity_variants.py`. Two operational notes learned the
+hard way: writing the tables to the *tracked* hybrid mapping dirties the
+worktree and the harness refuses to measure it, and editing any tracked file
+— a report, a note — while a run is in flight aborts that arm for the same
+reason.
+
+**Not done.** cptc-2018 and ccdc are unmeasured; only cptc-2017 has been run.
+The dashboard still renders per-dataset rather than per-arm with deltas.
+

@@ -2946,7 +2946,7 @@ generation and reports alerts surviving, episode and subsequence counts,
 alphabet size and objectives present, which is enough to see how each arm
 reshapes the input before any modelling.
 
-### 8a.7 Measured: the two taxonomies disagree about when an attack is finished
+### 8a.7 Measured: the graph count turns on where *we* drew the severity line
 
 The AIF-vs-ATT&CK comparison ran on cptc-2017 (four arms, commit `4ec7786`,
 one pinned IANA snapshot, `PYTHONHASHSEED=0`). The AIF arm first reproduced
@@ -3024,7 +3024,8 @@ have hit this.
 **Relabelling was considered and rejected.** Aligning our labels to AIF's
 reading means calling web exploitation a terminal objective, which is wrong on
 ATT&CK's own terms and would degrade a label set measured at 87% agreement
-with vendor tags. The disagreement *is* the result.
+with vendor tags. Our labels stay as they are; what needed defending was
+the *tier table* sitting on top of them, which 8a.9 varies directly.
 
 ### 8a.8 How the pieces sit together
 
@@ -3034,7 +3035,7 @@ easy to mistake the supporting ones for the main ones.
 | contribution | what it is | status |
 |---|---|---|
 | **Coverage, not representation** | Every representation lever returns null (efforts 13–17, 20); adding 223 in-register training examples moved mid +7.3 and tail +8.6 while head stayed **exactly flat** (effort 19). The flat head is the evidence: saturated classes cannot be helped by more data, starved ones can. | **done — strongest result on the branch** |
-| **AIF → ATT&CK attack graphs** | The substitution above, evaluated against `docs/BASELINE_METRICS.md`. The novel contribution to SAGE itself. | **not started** |
+| **AIF → ATT&CK attack graphs** | The substitution, switchable at runtime and behaviour-preserving on the AIF path. The finding is not a score: SAGE's architecture reads severity from the taxonomy at three points, ATT&CK publishes none, so substituting it means *authoring* a severity model — and that model, not the taxonomy, dominates the graph output (9 vs 115 graphs from two tactics, 8a.9). | **done — the dependency is the result** |
 | **NER / entity normalisation is a dead end here** | 10+ arms, two NER models, two marker schemes, five merge rules, three replacement styles, a DF sweep. All null or negative, with a mechanism: the rare tokens NER finds are the ones carrying the technique signal, so tagging dilutes and replacing destroys. | done |
 | **The labelled dataset** | 530 signatures, 100% of 1,431,663 alert records, one technique each, with rationales. | done — reusable artifact |
 | **A generalisable mapper** | 40.2% / 28.7% held-out, against ~87% for a careful human reader. Reported as "hard problem, here is why", not as a solution. | done, honest |
@@ -3046,12 +3047,134 @@ publication in its own right precisely because the assumption it refutes —
 that entity normalisation should help short-signature matching — is the
 intuitive one.
 
+### 8a.9 How much of the graph-count gap is our tier table? — all of it
+
+8a.7 could not separate two explanations for the ATT&CK arms' 90% shortfall:
+the taxonomy might carry less graph-relevant structure than AIF, or our
+invented severity tiering might be throwing that structure away. This measures
+it by varying **only** the tactic-to-severity assignment.
+
+Held constant across the three ATT&CK arms: commit `fbf2112`, the
+530-signature label set, the `hybrid` level, the `catchall` unmapped policy,
+38 trace symbols, the pinned IANA snapshot, `PYTHONHASHSEED=0`, seed 42 and
+the held-out split. The **only** difference is which tactics sit in the HIGH
+tier (`signatures/mitre_stages.SEVERITY_VARIANTS`):
+
+| variant | HIGH tactics | high codes | high signatures |
+|---|---|---:|---:|
+| `kill-chain` | impact, exfiltration, command-and-control | 11 | 146 |
+| `aif-aligned` | + initial-access, lateral-movement | 20 | 387 |
+| `impact-only` | impact, exfiltration | 4 | 57 |
+
+**cptc-2017, four arms, deltas against the AIF baseline:**
+
+| | aif | kill-chain | impact-only | aif-aligned |
+|---|---:|---:|---:|---:|
+| attack graphs | 104 | 9 (−91.3%) | 9 (−91.3%) | **115 (+10.6%)** |
+| victims with a graph | 36 | 7 (−80.6%) | 7 (−80.6%) | **41 (+13.9%)** |
+| objectives | 25 | 4 | 4 | 24 |
+| total nodes | 1885 | 167 | 167 | 1608 (−14.7%) |
+| total edges | 3024 | 250 | 250 | 2626 (−13.2%) |
+| perplexity (training) | 13.48 | 10.76 | 10.76 | **10.33 (−23.4%)** |
+| perplexity (held-out) | 40.27 | 37.95 | 37.95 | 38.33 (−4.8%) |
+| alerts/sec | 537 | 2228 | 2239 | 948 (+76.6%) |
+
+**The −91% is the tier table, not ATT&CK.** Moving two tactics across the
+medium/high boundary — changing no label, no signature and no line of pipeline
+code — takes the same ATT&CK vocabulary from 9 attack graphs to 115, past
+AIF's 104, at 23% lower training perplexity and 77% higher throughput. Any
+statement of the form "ATT&CK yields fewer attack graphs than AIF" is
+therefore a statement about `signatures/mitre_stages.py`, not about MITRE.
+
+**Three things this does not show, stated because each is easy to read in.**
+
+1. *It is not evidence that `aif-aligned` is the correct tiering.* That
+   variant was constructed to reproduce AIF's objective definition — it
+   promotes exactly the tactics whose alerts AIF already treats as terminal.
+   It shows the ATT&CK vocabulary *can* carry AIF's graph yield when told to
+   terminate in the same places. It cannot also be the independent evidence
+   that terminating there is right.
+2. *The spread is not an error bar.* Three hand-chosen configurations are not
+   samples from a distribution, and one of them is a deliberate reconstruction
+   of the baseline. The defensible claim is narrower: graph count is a direct
+   function of the high-tier assignment, so **no graph-count figure on this
+   branch is interpretable without naming its variant.**
+3. *`impact-only` and `kill-chain` being byte-identical is not a caching bug.*
+   They were checked, because two arms silently sharing a result has already
+   happened once on this branch (§9, Traps). 89 signatures change tier between
+   them, but in cptc-2017 only **43 alerts of 47,876 (0.09%)** fall on any of
+   those signatures — 20 executable-download, 20 terse-downloader, 2
+   mobile-malware check-in, 1 IRC C2 channel join. The C2 boundary is
+   untestable on this dataset; the two runs differ in wall clock and in
+   nothing else because there is almost nothing for them to differ over.
+   The contrast with `aif-aligned` is the whole finding in one line: that
+   variant moves **241 signatures and 4,137 alerts (8.64%)** across the
+   boundary — RDP connection confirm (693), SNMP public access (693), PHP-CGI
+   query string (588) — and the output moves with them. Check any pair with
+   `python experiments/mitre_mapping/tier_delta.py <left> <right> --dataset D`
+   before reading identical metrics as either a bug or a null result.
+
+**This corrects 8a.7's first falsification.** That section ruled out severity
+tiering on the grounds that promoting `command-and-control` (57 → 146
+high-severity signatures) gained "one graph, zero victims". Point 3 explains
+why: that particular promotion is invisible in cptc-2017 whether or not
+tiering matters. The conclusion drawn from it — that tiering was not the cause
+— was wrong, and `aif-aligned` is the counter-example: a twelvefold change in
+graph count from the same lever.
+
+**Falsifications 2-4 were not re-examined and should not be leaned on without
+being.** #3 in particular (vocabulary coarseness: the technique arm produced
+counts identical to the coarse hybrid) rests on exactly the observation point
+3 above shows is ambiguous — identical counts can mean "this lever is
+invisible in cptc-2017" rather than "this lever is inert". Re-run it under
+`tier_delta.py`, or on a second dataset, before treating it as settled.
+
+**Provenance.** The variant tables are generated, not committed
+(`signatures/mitre_mapping_var_*.py`, gitignored — a tracked table would dirty
+the worktree and the harness refuses to measure a dirty tree). All four arms
+therefore record the same commit SHA, so each arm directory also carries a
+`variant.json` holding the env vars, the tier counts, the table's sha256 and
+the command that regenerates it. Its `codes_by_severity` counts the symbol
+table the pipeline actually loaded, so `low` includes the `unmapped` catchall
+code and reads one higher than the tactic tally in the variant table above.
+Reproduce with
+`test-scripts/run_severity_sensitivity.sh`; tabulate with
+`python compare_arms.py ../eval-sensitivity --dataset cptc-2017`.
+
+**Still open.** Only cptc-2017 is measured; cptc-2018 and ccdc are not. And
+the question the variants were built to expose remains unanswered: nothing
+here defends a tier assignment on independent grounds, because ATT&CK supplies
+none. The honest position for the write-up is that substituting ATT&CK into
+SAGE *requires* supplying a severity model, that the choice dominates the
+output, and that we measured the dominance rather than hiding it behind one
+configuration.
+
 ---
 
 ## 9. Traps and reusable diagnostics
 
 Each of these silently produced plausible wrong numbers before it was caught.
 They are the transferable part of the branch.
+
+**A null result is not a null lever until you check that the lever fires.**
+Effort 23 ruled out severity tiering as the cause of the ATT&CK arms' 90%
+graph shortfall because promoting `command-and-control` moved 57 -> 146
+high-severity signatures and gained "one graph, zero victims". The inference
+was wrong: those 89 signatures account for **43 of cptc-2017's 47,876 alerts
+(0.09%)**, so the experiment could not have shown an effect whether or not one
+existed. Effort 24 moved a boundary that *does* fire — 241 signatures, 4,137
+alerts, 8.64% — and graph count went 9 -> 115. **Before reading a null,
+measure what share of the data the manipulation actually touches.**
+Diagnostic: `experiments/mitre_mapping/tier_delta.py`.
+
+**Two arms with identical metrics have two opposite explanations, and they
+look the same.** Either the runs shared a result (a caching bug this branch
+hit once already, see the embedding-cache entry below) or there was genuinely
+nothing for them to differ over. `impact-only` and `kill-chain` produced
+byte-identical structure across 187 of 191 metric keys — the four that differed
+were wall clock and output paths — and that was the *correct* result, for the
+reason above. Never accept identical arms without a mechanism for the
+identity; "the runs are deterministic" is not one.
 
 **A resolver returning a ranked list must encode its ranking in `confidence`.**
 `knn_resolver.predict()` ranked candidates by IDF-weighted vote but set

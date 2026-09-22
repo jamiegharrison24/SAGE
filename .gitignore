@@ -73,3 +73,9 @@ results/
 *.ff.finalsinks.json
 *.ff.init.json
 *.ff.initsinks.json
+
+# Severity-variant mapping tables. Derived artifacts: regenerated per run by
+# the sensitivity experiment, which must not dirty the worktree (the
+# evaluation harness refuses to measure a tree with tracked modifications,
+# since results could not then be attributed to a commit).
+signatures/mitre_mapping_var_*.py
