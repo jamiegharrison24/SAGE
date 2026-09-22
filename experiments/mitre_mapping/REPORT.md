@@ -2818,7 +2818,15 @@ catch-all low-severity code — should be stated explicitly and, ideally, run
 both ways, because the delta between those two runs *is* the measurement of
 how much of SAGE's graph structure rests on alerts ATT&CK cannot name.
 
-### 8a.3 Severity, and why tactics are the right vehicle
+### 8a.3 Severity, and why tactics were the first vehicle
+
+> **Superseded in part by 8a.7.** The argument below — that tactics are the
+> level that fits SAGE's digit-count severity encoding — held, but the
+> conclusion drawn from it did not. A `technique` level was later built by
+> moving severity into an explicit table (`SAGE_MIN_SUBSEQ`-style
+> configuration, `register_severity`), and it produced **identical** graph
+> counts to the tactic and hybrid levels. Granularity turned out not to be
+> what separates AIF from ATT&CK; see 8a.7.
 
 The pipeline reads severity off the **digit count** of the `mcat` integer
 (`len(str(mcat))`: 1 = low, 2 = medium, 3 = high), and that value is
@@ -2853,7 +2861,12 @@ of scored steps** through sinks (`docs/BASELINE_METRICS.md`). If that degrades
 sharply it is a result about the taxonomy's granularity being wrong for this
 model class, not a bug to tune away.
 
-### 8a.5 Objective granularity: tactic, technique, or hybrid — an open question, not a settled one
+### 8a.5 Objective granularity: an open question, since answered
+
+> **Answered by 8a.7.** All three levels — tactic (12 symbols), hybrid (38)
+> and technique (53) — produce the same 7 victims and 7-9 graphs. The
+> granularity trade-off this section sets out is real but second-order; the
+> difference that matters is definitional, not granular.
 
 **Decision recorded 2026-09-21.** SAGE draws one attack graph per (victim,
 *objective*), where an objective is any high-severity stage. The taxonomy
@@ -2933,7 +2946,87 @@ generation and reports alerts surviving, episode and subsequence counts,
 alphabet size and objectives present, which is enough to see how each arm
 reshapes the input before any modelling.
 
-### 8a.4 How the pieces sit together
+### 8a.7 Measured: the two taxonomies disagree about when an attack is finished
+
+The AIF-vs-ATT&CK comparison ran on cptc-2017 (four arms, commit `4ec7786`,
+one pinned IANA snapshot, `PYTHONHASHSEED=0`). The AIF arm first reproduced
+**18 of 18 structural metrics** against `baseline/metrics-cptc-2017.json`, so
+the eight pipeline sites the substitution touches are behaviour-preserving and
+the difference is attributable.
+
+| | aif | tactic | hybrid | technique |
+|---|---:|---:|---:|---:|
+| trace symbols | 20 | 12 | 38 | 53 |
+| attack graphs | 104 | 7 | 9 | 9 |
+| victims with a graph | 36 | 7 | 7 | 7 |
+| perplexity (training) | 13.48 | 10.37 | 10.76 | 12.18 |
+
+> **Correction.** An earlier version of this section read the result as a
+> disagreement *between the two taxonomies* about when an attack is finished.
+> That overclaims. AIF's severity is published (Moskal & Yang, encoded in the
+> `MicroAttackStage` integers); **ATT&CK publishes no severity ordering at
+> all**, so the ATT&CK side of the "disagreement" is a tier table written for
+> this project (`signatures/mitre_stages.py`). The gap is between a published
+> model and an invented one. The corrected reading is below; the alert-level
+> observations are unaffected.
+
+**The headline is not a quality difference, it is a configuration one.** The
+alerts that drive AIF's objectives are real attacks both taxonomies recognise
+— `ET WEB_SPECIFIC_APPS PHP-CGI query string parameter` (588 alerts),
+`ET WEB_SERVER PHP tags in HTTP POST` (441), `GPL NETBIOS SMB-DS IPC$ share
+access` (176). What differs is what they *mean*:
+
+| alert | AIF | ATT&CK |
+|---|---|---|
+| PHP-CGI exploitation | `DATA_DELIVERY` — high, an **objective** | `T1190` initial-access — medium, an **enabler** |
+| SMB IPC$ access | `DATA_EXFILTRATION` — high | `T1021.002` lateral-movement — medium |
+
+AIF terminates a graph at *exploitation* because its published model says so.
+The ATT&CK column reserves objectives for Impact and Exfiltration **because
+this project's tier table places them there** -- ATT&CK itself is silent on
+severity. That single choice yields 677 high-severity episodes against 226,
+and 104 graphs against 9.
+
+There is a weak semantic argument for the placement -- "Initial Access" is
+named as a beginning and "Impact" is defined as destroying or manipulating
+systems, an end state -- but where the boundary falls between them is a
+judgement, and moving `command-and-control` across it mid-experiment moved the
+whole result. **So comparing graph counts across the two arms compares our
+severity table at least as much as it compares the taxonomies**, and the
+substitution cannot be evaluated cleanly until that table is defended
+independently. Section 8a.9 measures its contribution.
+
+**Four alternative explanations were tested and falsified**, which is what
+makes the above a finding rather than a guess:
+
+1. *Severity tiering.* Promoting `command-and-control` to HIGH raised
+   high-severity signatures 57 → 146: **one extra graph, zero victims**.
+2. *The subsequence length floor.* `SAGE_MIN_SUBSEQ` lowered to 2: every arm
+   gained ~12%, the gap moved **0.2 points**.
+3. *Vocabulary coarseness.* The technique arm is finer than AIF at the low
+   tier (19 codes vs 7) and produced **identical** counts to the coarse
+   hybrid — 9 graphs, 7 victims.
+4. *Benign-traffic inflation.* AIF's exfiltration/delivery categories do
+   contain BitTorrent and Dropbox signatures we called non-malicious, and 76%
+   of its graphs end there. But by alert volume, **98.0%** of those alerts are
+   signatures ATT&CK also calls adversary behaviour. Falsified.
+
+**A pipeline bug found by running the technique arm, worth §9's attention.**
+`episode_sequence_generation.py` iterated `mcats = list(micro.keys())` —
+AIF's hardcoded stage list — so any code outside AIF's numbering produced **no
+episodes at all, silently**. The tactic and hybrid arms overlapped that
+numbering and worked by coincidence; the technique arm lost every code above
+~40, including all high-severity ones, and generated zero graphs with no
+error. It also means the first hybrid/tactic figures were wrong (10→9, 9→7).
+Any annotation scheme whose codes do not coincide with AIF's integers would
+have hit this.
+
+**Relabelling was considered and rejected.** Aligning our labels to AIF's
+reading means calling web exploitation a terminal objective, which is wrong on
+ATT&CK's own terms and would degrade a label set measured at 87% agreement
+with vendor tags. The disagreement *is* the result.
+
+### 8a.8 How the pieces sit together
 
 Recorded because the branch has produced several separable results and it is
 easy to mistake the supporting ones for the main ones.

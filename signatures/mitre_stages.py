@@ -34,6 +34,7 @@ Tier boundaries mirror AIF's own logic rather than inventing one. Note that
 = 17) and only impact/exfiltration is HIGH -- so `initial-access` sits in the
 medium tier here, alongside the AIF stage it replaces.
 """
+import os
 
 # Tactic shortname -> (code, trace symbol). Codes follow AIF's convention:
 # the DIGIT COUNT is the severity, so 1-9 is low, 10-99 medium, 100+ high.
@@ -62,29 +63,65 @@ TACTIC_CODES = {
 }
 
 # ---------------------------------------------------------------------------
-# Why `command-and-control` is HIGH, against ATT&CK's own kill-chain logic.
+# Why `command-and-control` is HIGH in the default table -- and why that is a
+# judgement, not a fact about ATT&CK.
 #
 # ATT&CK treats C2 as an *enabler*: the attacker is maintaining access, not
 # realising a goal. Tiering it MEDIUM on that reasoning was the first build,
-# and it cost **29 of 36 victims** their attack graphs on cptc-2017 (104 AGs
-# -> 9). Attack graphs are generated per high-severity objective, and AIF
-# treats `DATA_DELIVERY` and `DATA_EXFILTRATION` as terminal objectives while
-# the signatures behind them label as C2 techniques (T1071, T1105) under
-# ATT&CK. Demote C2 and those objectives simply cease to exist.
+# and it cost 29 of 36 victims their attack graphs on cptc-2017. AIF treats
+# `DATA_DELIVERY` / `DATA_EXFILTRATION` as terminal objectives, and the
+# signatures behind them label as C2 techniques (T1071, T1105) under ATT&CK,
+# so demoting C2 removes those objectives entirely.
 #
-# The project proposal settles this explicitly -- its Severity Configuration
-# section asks for "a configurable mapping from MITRE ATT&CK tactics to
-# severity tiers, which will **preserve the original implementation's
-# behaviour**". Preserving behaviour means AIF's objectives stay objectives,
-# so C2 is HIGH here. This is implementing the spec, not tuning for a result.
-#
-# `initial-access` deliberately stays MEDIUM even though AIF's `PHISHING` is
-# high: that tactic also carries `T1190`, and AIF puts exploitation at medium
-# (`PUBLIC_APP_EXP` = 16). Promoting it would move far more than it fixed.
-#
-# The ATT&CK-faithful tiering is a recorded finding rather than a live arm --
-# see REPORT.md 8a.7. Flip C2 back to (18, "CnC") and rebuild to reproduce it.
+# The proposal's Severity Configuration section asks for a tier mapping that
+# "preserves the original implementation's behaviour", which argues for HIGH.
+# But that is a project decision about what we want, **not** a claim about
+# ATT&CK: MITRE publishes no severity ordering, so nothing here is derived
+# from the taxonomy. An earlier version of this comment presented it as
+# "implementing the spec, not tuning for a result" -- that was overstated, and
+# the fact that moving this one tactic moved the whole result is exactly why
+# the variants below exist.
 # ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# SEVERITY VARIANTS -- because ATT&CK does not supply one.
+#
+# MITRE publishes no severity, priority or criticality ordering for tactics.
+# The table above is this project's judgement, and the attack-graph output
+# turns out to be dominated by it: moving `command-and-control` across the
+# medium/high boundary moved the whole result. Treating one guess as canonical
+# would misattribute our configuration to the taxonomy.
+#
+# So the boundary is selectable (SAGE_SEVERITY_VARIANT) and measured:
+#
+#   kill-chain   the default above. `initial-access` is an enabler, objectives
+#                are Impact/Exfiltration/C2. Closest to a literal reading of
+#                ATT&CK's tactic definitions.
+#   aif-aligned  `initial-access` and `lateral-movement` promoted to HIGH, so
+#                exploitation terminates a graph exactly as AIF's
+#                `PUBLIC_APP_EXP` / `DATA_DELIVERY` do. Not ATT&CK-faithful;
+#                it holds AIF's objective definition constant so the remaining
+#                difference is the vocabulary rather than the severity model.
+#   impact-only  only Impact and Exfiltration are HIGH -- C2 demoted back to
+#                medium. The strictest reading of "objective".
+#
+# The spread across these three is the honest error bar on every graph-count
+# figure this branch reports.
+# ---------------------------------------------------------------------------
+
+SEVERITY_VARIANTS = {
+    "kill-chain": {},                       # the table as written above
+    "aif-aligned": {"initial-access": (103, "initAcc"),
+                    "lateral-movement": (104, "lateral")},
+    "impact-only": {"command-and-control": (18, "CnC")},
+}
+
+SEVERITY_VARIANT = os.environ.get("SAGE_SEVERITY_VARIANT", "kill-chain").strip()
+if SEVERITY_VARIANT not in SEVERITY_VARIANTS:
+    raise SystemExit("unknown SAGE_SEVERITY_VARIANT %r; expected one of %s"
+                     % (SEVERITY_VARIANT, sorted(SEVERITY_VARIANTS)))
+TACTIC_CODES.update(SEVERITY_VARIANTS[SEVERITY_VARIANT])
+
 
 # Kill-chain order, for reporting and for resolving multi-tactic techniques.
 TACTIC_ORDER = (

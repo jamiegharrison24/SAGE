@@ -1,7 +1,7 @@
 # MITRE ATT&CK mapping research — status
 
 > **The consolidated reference for this work is [`REPORT.md`](REPORT.md).**
-> This file remains the detailed record for the running index of all twenty-two efforts; read the report first.
+> This file remains the detailed record for the running index of all twenty-three efforts; read the report first.
 
 Branch `research/b2-mitre-eval`. Standalone research spike under
 `experiments/mitre_mapping/` — does not touch the production pipeline (see
@@ -16,7 +16,7 @@ superseded and live under `archive/` — kept for the record (real completed
 research, cited by later efforts' findings), not because anything there is
 still being iterated on. See "Where things live" for the directory map.
 
-Twenty-two sub-experiments have run so far, in order. Each has its own detailed
+Twenty-three sub-experiments have run so far, in order. Each has its own detailed
 write-up; this file is the index and the current bottom line.
 
 **Read effort 14 first.** `corpus_coverage_findings.md` is the branch's current
@@ -1379,3 +1379,111 @@ digit-count severity encoding (9 single-digit codes, 18 low-tier techniques).
 Testing granularity properly requires dropping that encoding for an explicit
 severity table — the option set aside at effort 21 — so techniques survive at
 every tier.
+
+## 23. Task 4, corrected — why the ATT&CK arms produce 90% fewer graphs
+
+Effort 22's conclusion was wrong, and so were two further hypotheses. This
+records the corrected result, the four things ruled out, and a pipeline bug
+found along the way that invalidated part of effort 22's numbers.
+
+**A bug first, because it changes the earlier numbers.**
+`episode_sequence_generation.py` built episodes by iterating
+`mcats = list(micro.keys())` -- **AIF's hardcoded stage list**. Any code
+outside AIF's numbering silently produced no episodes at all. The tactic and
+hybrid arms happened to overlap that numbering and worked by coincidence; the
+technique arm (sequential codes 10-62) lost every alert above ~40, including
+all of its high-severity ones, so it generated **zero** attack graphs with no
+error raised. Fixed to read the active taxonomy's symbol table. This is the
+third integration point found by *running* rather than reading, after the
+reverse symbol lookup and the node/colour lookups, and it shifted the
+already-published hybrid (10 -> 9) and tactic (9 -> 7) figures.
+
+**Four arms, cptc-2017, commit `4ec7786`:**
+
+| | aif | tactic | hybrid | technique |
+|---|---:|---:|---:|---:|
+| trace symbols | 20 | 12 | 38 | 53 |
+| attack graphs | 104 | 7 | 9 | 9 |
+| victims | 36 | 7 | 7 | 7 |
+| objectives | 25 | 2 | 4 | 4 |
+| perplexity (training) | 13.48 | 10.37 | 10.76 | 12.18 |
+
+**Ruled out, in order:**
+
+1. **Severity tiering.** Promoting `command-and-control` to HIGH raised
+   high-severity signatures 57 -> 146 and objectives 4 -> 11. Gained **one
+   graph, zero victims**.
+2. **The subsequence length floor.** Parameterised as `SAGE_MIN_SUBSEQ` and
+   re-run at 2: every arm gained ~12% and the relative gap moved **0.2
+   points** (-90.4% -> -90.6%).
+3. **Vocabulary coarseness** -- effort 22's conclusion. The technique arm is
+   genuinely *finer* than AIF at the low tier (19 codes vs 7, 53 symbols vs
+   20) and produces **the same 9 graphs and same 7 victims** as the coarse
+   hybrid. Tripling the vocabulary changed nothing.
+4. **Benign-traffic inflation.** AIF's `DATA_EXFILTRATION`/`DATA_DELIVERY`
+   categories do contain BitTorrent, eDonkey and Dropbox signatures we
+   labelled non-malicious, and 76% of AIF's graphs terminate in those two
+   categories -- which suggested AIF was counting benign traffic as attack
+   goals. Checked against alert volume: **98.0% of the alerts AIF stages
+   that way are signatures ATT&CK also calls adversary behaviour** (1,933 of
+   1,972). The P2P signatures are in the label set but barely fire in
+   cptc-2017. Falsified.
+
+**CORRECTION (2026-09-22, same day).** The explanation first written here --
+"the taxonomies disagree about when an attack is finished" -- **overclaims and
+is withdrawn.** AIF terminates a graph at exploitation because its published
+model (Moskal & Yang's Action-Intent Framework, encoded in the
+`MicroAttackStage` integers) says so. ATT&CK terminates at impact **because
+this project put `impact` in the HIGH tier and `initial-access` in MEDIUM** --
+a table in `signatures/mitre_stages.py` written here, not by MITRE.
+
+**ATT&CK publishes no severity, priority or criticality ordering for tactics.**
+It is a behavioural taxonomy; the kill chain gives a rough sequence, not a
+severity. So the observed gap is between AIF's published severity model and a
+severity model invented for this project. That is a finding about our
+configuration, not about the two taxonomies.
+
+Evidence that the tiering is doing the work rather than the taxonomy: the
+`command-and-control` tier was moved from MEDIUM to HIGH midway through this
+effort, on judgement, and the whole result moved with it.
+
+**The corrected finding, which is still worth having:** substituting ATT&CK
+into SAGE *requires inventing a severity model ATT&CK does not supply*, and
+the attack-graph output is dominated by that invented model rather than by the
+taxonomy. The comparison cannot be made cleanly until a tier mapping is
+defended on independent grounds. Effort 24 measures how much of the result the
+table accounts for.
+
+The alert-level observations below remain accurate and are what the withdrawn
+explanation was built on: The alerts driving AIF's objectives are real attacks that both
+taxonomies recognise -- `ET WEB_SPECIFIC_APPS PHP-CGI query string parameter`
+(588 alerts), `ET WEB_SERVER PHP tags in HTTP POST` (441),
+`GPL NETBIOS SMB-DS IPC$ share access` (176). The disagreement is what they
+*mean*:
+
+| | AIF | ATT&CK |
+|---|---|---|
+| PHP-CGI exploitation | `DATA_DELIVERY` — **high, an objective** | `T1190` initial-access — **medium, an enabler** |
+| SMB IPC$ access | `DATA_EXFILTRATION` — **high** | `T1021.002` lateral-movement — **medium** |
+
+AIF terminates an attack graph at *exploitation* -- the attacker got in, that
+is the goal. ATT&CK reserves objectives for Impact and Exfiltration -- getting
+in is a means. Hence 677 high-severity episodes under AIF against 226, and 104
+graphs against 9.
+
+**Neither taxonomy is wrong**, and this is not a defect to engineer around.
+They encode different models of what an attack graph should show: AIF
+produces more graphs, each ending at "they got in"; ATT&CK produces fewer,
+each ending at "they did damage". Any comparison of graph counts between the
+two is therefore comparing definitions, not quality -- which is the finding.
+
+**Relabelling was considered and rejected.** Aligning our labels to AIF's
+reading would mean calling web exploitation a terminal objective, which is
+wrong on ATT&CK's own terms and would degrade a label set measured at 87%
+agreement with vendor tags. The disagreement is the result, not an error.
+
+**Standing caveat on the compression metric.** "+1056% alerts per attack
+graph" remains true and remains misleading: 29 of 36 victims receive no graph,
+so the ratio improved because its denominator collapsed. Alert compression
+cannot distinguish aggregation from coverage loss and must not be reported
+without a coverage figure beside it.
