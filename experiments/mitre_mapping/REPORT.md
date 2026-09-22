@@ -3047,7 +3047,7 @@ publication in its own right precisely because the assumption it refutes —
 that entity normalisation should help short-signature matching — is the
 intuitive one.
 
-### 8a.9 How much of the graph-count gap is our tier table? — all of it
+### 8a.9 How much of the graph-count gap is our tier table? — on cptc-2017, all of it
 
 8a.7 could not separate two explanations for the ATT&CK arms' 90% shortfall:
 the taxonomy might carry less graph-relevant structure than AIF, or our
@@ -3086,6 +3086,12 @@ AIF's 104, at 23% lower training perplexity and 77% higher throughput. Any
 statement of the form "ATT&CK yields fewer attack graphs than AIF" is
 therefore a statement about `signatures/mitre_stages.py`, not about MITRE.
 
+> **Scope.** Overtaking AIF's graph count is a *cptc-2017* result. 8a.10
+> re-runs all four arms on cptc-2018 and ccdc: the tier table dominates on
+> every dataset, but `aif-aligned` beats AIF's graph count on only two of the
+> three. What replicates everywhere is victim coverage. Read 8a.10 before
+> quoting any figure in this section.
+
 **Three things this does not show, stated because each is easy to read in.**
 
 1. *It is not evidence that `aif-aligned` is the correct tiering.* That
@@ -3122,12 +3128,20 @@ tiering matters. The conclusion drawn from it — that tiering was not the cause
 — was wrong, and `aif-aligned` is the counter-example: a twelvefold change in
 graph count from the same lever.
 
-**Falsifications 2-4 were not re-examined and should not be leaned on without
-being.** #3 in particular (vocabulary coarseness: the technique arm produced
-counts identical to the coarse hybrid) rests on exactly the observation point
-3 above shows is ambiguous — identical counts can mean "this lever is
-invisible in cptc-2017" rather than "this lever is inert". Re-run it under
-`tier_delta.py`, or on a second dataset, before treating it as settled.
+**Falsification #3 has since been re-examined, and the re-examination changes
+the claim.** #3 read the technique arm's counts, identical to the coarse
+hybrid's, as showing that vocabulary coarseness was not the cause. Unlike #1
+the lever was not invisible: `granularity_delta.py` shows the technique table
+splits hybrid codes carrying **82.21%** of cptc-2017's alerts (8.55% on ccdc).
+But **every split falls in the low tier** — hybrid already keeps technique
+identity at medium and high, so the two tables are identical *by construction*
+in the only tier that can terminate an attack graph. #3's conclusion stands;
+the experiment as designed could not have produced a difference whatever the
+alert volume. That is weaker than "granularity does not matter", and it is
+what the evidence supports.
+
+**Falsifications 2 and 4 remain unre-examined** and rest on the same
+single-dataset volume reasoning.
 
 **Provenance.** The variant tables are generated, not committed
 (`signatures/mitre_mapping_var_*.py`, gitignored — a tracked table would dirty
@@ -3139,15 +3153,136 @@ table the pipeline actually loaded, so `low` includes the `unmapped` catchall
 code and reads one higher than the tactic tally in the variant table above.
 Reproduce with
 `test-scripts/run_severity_sensitivity.sh`; tabulate with
-`python compare_arms.py ../eval-sensitivity --dataset cptc-2017`.
+`python compare_arms.py ../eval-sensitivity --dataset cptc-2017`; render the
+comparison dashboard to `experiments/mitre_mapping/arms.html` (gitignored --
+it is regenerated from the JSON, which is the artifact worth keeping) with
+`python -m evaluation.arm_dashboard ../eval-sensitivity --out experiments/mitre_mapping/arms.html`.
 
-**Still open.** Only cptc-2017 is measured; cptc-2018 and ccdc are not. And
-the question the variants were built to expose remains unanswered: nothing
+The measured records themselves stay in `../eval-sensitivity`, outside the
+worktree, because the harness refuses to measure a tree with tracked
+modifications and its run root defaults there. The rendered page does not need
+to: it lives beside this write-up so it is findable.
+
+**Still open.** cptc-2018 and ccdc are measured in 8a.10, which corrects part
+of this section. The question the variants were built to expose remains
+unanswered: nothing
 here defends a tier assignment on independent grounds, because ATT&CK supplies
 none. The honest position for the write-up is that substituting ATT&CK into
 SAGE *requires* supplying a severity model, that the choice dominates the
 output, and that we measured the dominance rather than hiding it behind one
 configuration.
+
+### 8a.10 Replication on cptc-2018 and ccdc — direction holds, magnitude does not
+
+8a.9 measured the severity table's effect on cptc-2017 alone, which is exactly
+the evidence standard 9's first trap entry warns about. All four arms were
+therefore re-run on cptc-2018 (331,554 alerts) and ccdc (1,052,233), under the
+same protocol: AIF's path is gated against its committed baseline first, and a
+dataset whose baseline does not reproduce is skipped rather than reported.
+
+**Attack graphs, by dataset and arm:**
+
+| dataset | aif | kill-chain | impact-only | aif-aligned |
+|---|---:|---:|---:|---:|
+| cptc-2017 | 104 | 9 (−91.3%) | 9 (−91.3%) | **115 (+10.6%)** |
+| cptc-2018 | 75 | 10 (−86.7%) | 9 (−88.0%) | **44 (−41.3%)** |
+| ccdc | 72 | 31 (−56.9%) | 29 (−59.7%) | **192 (+166.7%)** |
+
+**Victims with a graph:**
+
+| dataset | aif | kill-chain | impact-only | aif-aligned |
+|---|---:|---:|---:|---:|
+| cptc-2017 | 36 | 7 (−80.6%) | 7 (−80.6%) | **41 (+13.9%)** |
+| cptc-2018 | 12 | 9 (−25.0%) | 9 (−25.0%) | **19 (+58.3%)** |
+| ccdc | 47 | 29 (−38.3%) | 27 (−42.6%) | **128 (+172.3%)** |
+
+**What replicates.** The tier table dominates on every dataset. Re-tiering two
+tactics, with the vocabulary, labels, level and unmapped policy held fixed,
+moves the ATT&CK arm from a large deficit to parity or better in all three
+cases. Nothing else was changed to achieve it.
+
+**What does not replicate — and this corrects 8a.9's headline.** 8a.9 said the
+`aif-aligned` arm goes "past AIF's 104". That is true of cptc-2017 and ccdc and
+**false of cptc-2018**, where it produces 41% *fewer* graphs than AIF. The
+claim as written was a cptc-2017 claim generalised a dataset too far.
+
+Victim coverage is the measure that survives: `aif-aligned` reaches **more
+victims than AIF on all three datasets** (+13.9%, +58.3%, +172.3%). The
+divergence is arithmetic rather than mysterious — a graph is rendered per
+victim *per objective*, so graph count multiplies coverage by objective
+granularity, and granularity is a property of the taxonomy rather than a
+quality of the output. AIF distinguishes 34 high-severity objectives on
+cptc-2018 against `aif-aligned`'s 11, so it renders more graphs over fewer
+victims. **Graph count should not be compared across taxonomies without the
+victim count beside it**, for the same reason 23 records that alert
+compression must not be reported without a coverage figure.
+
+**The lever-size relationship, restated honestly.** 8a.9 explained cptc-2017's
+identical `kill-chain`/`impact-only` arms by the share of alerts whose tier
+changes. Across three datasets:
+
+| lever | dataset | alert share | attack graphs |
+|---|---|---:|---:|
+| impact-only → kill-chain | cptc-2017 | 0.090% | 9 → 9 (0%) |
+| | cptc-2018 | 0.014% | 9 → 10 (+11.1%) |
+| | ccdc | 0.089% | 29 → 31 (+6.9%) |
+| kill-chain → aif-aligned | cptc-2017 | 8.64% | 9 → 115 (+1178%) |
+| | cptc-2018 | 12.41% | 10 → 44 (+340%) |
+| | ccdc | 78.97% | 31 → 192 (+519%) |
+
+A lever touching well under 1% of the alerts moves graph count by at most 11%;
+a lever touching 8-79% moves it by 340-1178%. That separation is consistent
+across all three datasets. It is **not** monotone within either band — 8.64%
+produces a larger relative change than 78.97% — so alert share predicts
+whether an effect is observable, not how large it will be. Any stronger
+reading of this table is unsupported.
+
+**Perplexity inverts on ccdc**, which is worth recording because 8a.9 reported
+the ATT&CK arms as cheaper to model and that was also a single-dataset
+observation:
+
+| dataset | aif | kill-chain | aif-aligned |
+|---|---:|---:|---:|
+| cptc-2017 | 13.48 | 10.76 | 10.33 |
+| cptc-2018 | 9.42 | 6.97 | 5.92 |
+| ccdc | 4.84 | 5.36 | 5.37 |
+
+Lower on both CPTC datasets, **higher on ccdc**. Held-out perplexity behaves
+differently again (cptc-2018: 35.90 → 13.19 for `aif-aligned`; ccdc: 6.67 →
+6.66, no change). The substitution's effect on model quality is therefore
+dataset-dependent and should not be quoted as a general property.
+
+**Baseline gating.** On each dataset `evaluation check` re-ran AIF against
+`baseline/metrics-<ds>.json` before any arm was measured. **No metric failed
+on either new dataset.** Two drifted without failing: `alert_throughput` and
+`wall_clock_seconds` are tiered informational, so they *cannot* fail by
+construction, and on cptc-2018 they drifted hard (−57% and +132%) because
+other runs were competing for the machine. They are timing rather than
+structure, and the distinction between "did not fail" and "could not fail" is
+worth keeping here for the same reason it mattered to falsification #3.
+`check` reports FAIL regardless, because
+`command_check` never computes held-out perplexity — it builds its candidate
+from `_run_reference` and never calls `collect.score_heldout`, so
+`perplexity_heldout` is always missing against a baseline that has it, and
+missing is fatal. Passing `--heldout` to `check` does nothing; it is read only
+by `run`. That one metric is tolerated by the driver and nothing else is.
+
+**Two provenance caveats on these numbers.**
+
+1. The pinned IANA CSV now differs from the one the committed baselines used
+   (`757d5969…` vs `34328ed0…`); IANA republishes the file. The structural
+   metrics matched anyway, so nothing here rests on it, but the drift will
+   eventually make a genuine regression ambiguous and the snapshot should be
+   vendored rather than fetched.
+2. The ccdc arms were produced by a driver script that was overwritten while
+   bash was executing it, so bash parsed fragments of the replacement
+   mid-run. Each `evaluation run` still reported EXIT=0, but the baseline gate
+   ahead of them read a log that did not exist and passed on an empty match.
+   They were therefore re-verified afterwards, and **they reproduce**: the
+   re-run gate passes with only the structurally-unobtainable held-out metric
+   missing, and the re-measured `kill-chain` arm differs from the stored
+   record in **0 of 146 structural keys** (timing and filesystem paths
+   excluded). The corrupted execution did not corrupt the output.
 
 ---
 
@@ -3165,7 +3300,11 @@ was wrong: those 89 signatures account for **43 of cptc-2017's 47,876 alerts
 existed. Effort 24 moved a boundary that *does* fire — 241 signatures, 4,137
 alerts, 8.64% — and graph count went 9 -> 115. **Before reading a null,
 measure what share of the data the manipulation actually touches.**
-Diagnostic: `experiments/mitre_mapping/tier_delta.py`.
+Diagnostics: `experiments/mitre_mapping/tier_delta.py` for a severity change,
+`granularity_delta.py` for a vocabulary one. And check *where* the change
+lands, not only how much it touches: the technique-vs-hybrid comparison moves
+82% of the alerts and still cannot alter graph structure, because every one of
+its splits is in the low tier (8a.9).
 
 **Two arms with identical metrics have two opposite explanations, and they
 look the same.** Either the runs shared a result (a caching bug this branch

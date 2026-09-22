@@ -262,7 +262,8 @@ def main():
             # The technique level cannot encode severity in the digit count
             # (sequential codes are all two digits), so it registers an
             # explicit table that `mitre_stages.severity_of_code` consults.
-            fh.write("\nfrom signatures.mitre_stages import register_severity\n")
+            fh.write("\nfrom signatures.mitre_stages import register_severity"
+                     "  # noqa: E402\n")
             fh.write("register_severity(mitre_code_severity)\n")
 
     print(f"\nwrote {out}  ({len(sig_to_code)} signatures)")

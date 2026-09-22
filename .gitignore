@@ -79,3 +79,9 @@ results/
 # evaluation harness refuses to measure a tree with tracked modifications,
 # since results could not then be attributed to a commit).
 signatures/mitre_mapping_var_*.py
+
+# Rendered evaluation dashboards. Regenerated from the metrics JSON by
+# evaluation/arm_dashboard.py, so the JSON is the artifact worth keeping, not
+# the HTML. Kept in-tree rather than beside the run directories so it is
+# findable next to the write-up that cites it.
+experiments/mitre_mapping/arms.html

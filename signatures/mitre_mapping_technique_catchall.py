@@ -1557,5 +1557,5 @@ mitre_code_severity = {
 
 rev_mitre_small_mapping = {v: k for k, v in mitre_small_mapping.items()}
 
-from signatures.mitre_stages import register_severity
+from signatures.mitre_stages import register_severity  # noqa: E402
 register_severity(mitre_code_severity)

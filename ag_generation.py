@@ -241,7 +241,13 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
                 continue
 
             ag_name = objective.replace('|', '').replace('_', '').replace('-', '').replace('(', '').replace(')', '')
-            lines = [(0, 'digraph ' + ag_name + ' {'),
+            # Quoted, because a graph ID is only allowed to be a bare word, a
+            # number or a quoted string. AIF stage names are bare words so this
+            # never mattered; ATT&CK sub-technique labels contain a dot
+            # (`T1021.001mswbtserver`), which graphviz reads as a malformed
+            # number and rejects -- it wrote the .dot but silently rendered
+            # nothing, losing 59 of 115 images on one arm before anyone noticed.
+            lines = [(0, 'digraph "' + ag_name + '" {'),
                      (0, 'rankdir="BT"; \n graph [ nodesep="0.1", ranksep="0.02"] \n node [ fontname=Arial, ' +
                       'fontsize=24, penwidth=3]; \n edge [ fontname=Arial, fontsize=20,penwidth=5 ];')]
             root_node = _translate(objective, root=victim)
@@ -338,5 +344,15 @@ def make_attack_graphs(state_sequences, sev_sinks, datafile, dir_name, save_ag=T
                     for line in lines:
                         outfile.write(str(line[1]) + '\n')
 
-                subprocess.run(["dot", "-Tpng", out_filepath + ".dot", "-o", out_filepath + ".png"])
-                subprocess.run(["dot", "-Tsvg", out_filepath + ".dot", "-o", out_filepath + ".svg"])
+                # Reported rather than ignored: a failed render leaves the .dot
+                # in place, so the graph still counts in every metric while its
+                # image is missing. That divergence is invisible unless the
+                # failure is said out loud.
+                for fmt in ("png", "svg"):
+                    rendered = subprocess.run(["dot", "-T" + fmt, out_filepath + ".dot",
+                                               "-o", out_filepath + "." + fmt],
+                                              stderr=subprocess.PIPE)
+                    if rendered.returncode != 0:
+                        print('\t     WARNING: graphviz could not render ' + out_filename +
+                              '.' + fmt + ': ' +
+                              (rendered.stderr or b'').decode('utf-8', 'replace').strip())

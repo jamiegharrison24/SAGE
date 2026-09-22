@@ -42,24 +42,24 @@ import os
 # and they do not change -- the same reason `small_mapping` is hand-written.
 TACTIC_CODES = {
     # LOW -- reconnaissance and enumeration, before the attacker acts
-    "reconnaissance":       (1, "recon"),
+    "reconnaissance": (1, "recon"),
     "resource-development": (2, "resDev"),
-    "discovery":            (3, "discov"),
+    "discovery": (3, "discov"),
 
     # MEDIUM -- enablers: getting in, staying in, moving, preparing
-    "initial-access":       (10, "initAcc"),
-    "execution":            (11, "exec"),
-    "persistence":          (12, "persist"),
+    "initial-access": (10, "initAcc"),
+    "execution": (11, "exec"),
+    "persistence": (12, "persist"),
     "privilege-escalation": (13, "privEsc"),
-    "defense-evasion":      (14, "evasion"),
-    "credential-access":    (15, "credAcc"),
-    "lateral-movement":     (16, "lateral"),
-    "collection":           (17, "collect"),
+    "defense-evasion": (14, "evasion"),
+    "credential-access": (15, "credAcc"),
+    "lateral-movement": (16, "lateral"),
+    "collection": (17, "collect"),
 
     # HIGH -- the attacker's objective is realised
-    "command-and-control":  (100, "CnC"),
-    "exfiltration":         (101, "exfil"),
-    "impact":               (102, "impact"),
+    "command-and-control": (100, "CnC"),
+    "exfiltration": (101, "exfil"),
+    "impact": (102, "impact"),
 }
 
 # ---------------------------------------------------------------------------

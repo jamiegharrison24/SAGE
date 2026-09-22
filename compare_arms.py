@@ -20,21 +20,21 @@ import sys
 
 # (label, path in the record, higher_is_better or None when it is neither)
 METRICS = [
-    ("attack graphs",        "attack_graphs.aggregate.n_attack_graphs",   None),
-    ("victims",              "attack_graphs.aggregate.n_victims",         None),
-    ("objectives",           "attack_graphs.aggregate.n_objectives",      None),
-    ("total nodes",          "attack_graphs.aggregate.total_nodes",       None),
-    ("unique nodes",         "attack_graphs.aggregate.unique_nodes",      None),
-    ("total edges",          "attack_graphs.aggregate.total_edges",       None),
-    ("unique edges",         "attack_graphs.aggregate.unique_edges",      None),
-    ("self loops",           "attack_graphs.aggregate.self_loops",        None),
-    ("parallel edges",       "attack_graphs.aggregate.parallel_edges",    None),
-    ("alerts/AG (raw)",      "compression.raw_alerts_per_ag",             True),
-    ("alerts/AG node",       "compression.raw_alerts_per_ag_node",        True),
-    ("perplexity (train)",   "perplexity.training.perplexity",            False),
-    ("perplexity (heldout)", "perplexity.heldout.perplexity",             False),
-    ("wall clock (s)",       "timing.wall_clock_seconds",                 False),
-    ("alerts/sec",           "timing.alert_throughput",                   True),
+    ("attack graphs", "attack_graphs.aggregate.n_attack_graphs", None),
+    ("victims", "attack_graphs.aggregate.n_victims", None),
+    ("objectives", "attack_graphs.aggregate.n_objectives", None),
+    ("total nodes", "attack_graphs.aggregate.total_nodes", None),
+    ("unique nodes", "attack_graphs.aggregate.unique_nodes", None),
+    ("total edges", "attack_graphs.aggregate.total_edges", None),
+    ("unique edges", "attack_graphs.aggregate.unique_edges", None),
+    ("self loops", "attack_graphs.aggregate.self_loops", None),
+    ("parallel edges", "attack_graphs.aggregate.parallel_edges", None),
+    ("alerts/AG (raw)", "compression.raw_alerts_per_ag", True),
+    ("alerts/AG node", "compression.raw_alerts_per_ag_node", True),
+    ("perplexity (train)", "perplexity.training.perplexity", False),
+    ("perplexity (heldout)", "perplexity.heldout.perplexity", False),
+    ("wall clock (s)", "timing.wall_clock_seconds", False),
+    ("alerts/sec", "timing.alert_throughput", True),
 ]
 
 
