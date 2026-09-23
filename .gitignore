@@ -85,3 +85,4 @@ signatures/mitre_mapping_var_*.py
 # the HTML. Kept in-tree rather than beside the run directories so it is
 # findable next to the write-up that cites it.
 experiments/mitre_mapping/arms.html
+experiments/mitre_mapping/mapping.html

@@ -640,11 +640,20 @@ the graphs. Nothing but the tiering differs between those two results, and
 ATT&CK supplies no tiering, so **the severity table, not the taxonomy, is what
 the graph output measures** (efforts 24-25).
 
-Two reporting rules follow, and both are load-bearing: name the severity
-variant beside every graph-count figure, and never compare graph counts across
-taxonomies without the victim count beside them — graph count is coverage
+Three reporting rules follow, and all are load-bearing: name the severity
+variant beside every graph-count figure; never compare graph counts across
+taxonomies without the victim count beside them (graph count is coverage
 multiplied by objective granularity, and granularity is a property of the
-taxonomy rather than a quality of the output.
+taxonomy rather than a quality of the output); and never quote graph Jaccard
+without gained/lost beside it (effort 26).
+
+**The evaluation framework is now demonstrated rather than proposed.** All four
+arms have been through the full baseline matrix on all three datasets — 540
+cells — which yields three results the reference cells could not: determinism
+holds under every taxonomy (699 graphs byte-identical over 5 repeats), SAGE's
+noise failure mode is *fabrication* rather than loss, and perplexity improves
+while attack-graph coverage collapses. That last one is the proposal's
+Objective 3 evidenced instead of asserted.
 
 ## What's not done
 
@@ -1712,4 +1721,71 @@ commands now pass.
 
 **Not done.** The severity table still has no independent defence; that is
 unchanged and unchangeable by measurement alone.
+
+## 26. The full evaluation matrix, all four arms — `REPORT.md` §8a.11
+
+Efforts 24–25 compared reference cells only, which left the multi-dimensional
+evaluation approach demonstrated on AIF and merely claimed for the ATT&CK arms.
+The baseline matrix was re-run for all four: 61 cells per CPTC dataset, the
+documented reduced 13-cell matrix on ccdc, **540 cells, 14 h 44 m, every cell
+`EXIT=0`** (`test-scripts/run_arm_evaluation.sh`). Each arm now carries the
+same three artifacts as `baseline/` — `metrics-<ds>.json`, `report-<ds>.md`,
+`dashboard-<ds>.html` — from the same renderers.
+
+**1. Determinism holds under every taxonomy.** 12 combinations × 5 repeats:
+**699 attack graphs byte-identical**, zero missing, `main_model_identical` and
+`traces_identical` true throughout (aif 251, kill-chain 50, aif-aligned 351,
+impact-only 47). The substitution touches eight pipeline sites, several
+iterating sets and dicts — a hash- or set-ordering leak would have surfaced
+here as a match rate below 1.0 rather than as an error, and would have
+invalidated every comparison on the branch.
+
+**2. Noise fabricates, it does not erase.** Injected false positives distort
+the graph set almost entirely by *adding* graphs. cptc-2017 @ 20%: aif +281/−3,
+aif-aligned +494/−2, kill-chain +161/−0, impact-only +151/−0. Across every
+family, rate and arm in the matrix the **worst single loss is 13 graphs**,
+against +281 gained in that same cell. This is a property of SAGE, not of the
+substitution, and it means **graph Jaccard must never be reported alone** —
+0.053 reads as catastrophic loss and is the reverse.
+
+**3. The tier table is a precision/recall dial, not only a coverage dial.**
+Phantom generation scales with high-severity share, the same lever as effort 24
+and in the same direction: aif-aligned (387 high-severity signatures) +494,
+kill-chain (146) +161, impact-only (57) +151. This upgrades effort 24's
+finding: the severity model is not merely an unavoidable guess the taxonomy
+forced on us, it is a **tunable trade-off** between objectives reached and
+spurious objectives noise can manufacture. A deployment weighting analyst trust
+over recall has a principled reason to tier conservatively; one weighting
+coverage has a principled reason not to.
+
+**4. Perplexity points the wrong way, demonstrably.** On both CPTC datasets the
+kill-chain arm improves training *and* held-out perplexity while losing 87–91%
+of the attack graphs. cptc-2018: held-out 35.90 → 21.68 (−40%) as graphs fall
+75 → 10 (−87%); aif-aligned reaches 13.19 (−63%) at 44 graphs. A reviewer given
+only the perplexity column would conclude the substitution was an improvement.
+The mechanism is plain — a collapsed alphabet and shorter traces are easier to
+model — and none of it is evidence the output is more useful. **This is the
+strongest available support for the proposal's Objective 3**: not an argument
+that perplexity is insufficient, but a demonstration that it can contradict
+every structural measure at once.
+
+**Scope.** ccdc has no noise-injection cells in any arm, matching the
+baseline's documented reduction, so result 2 rests on the two CPTC datasets.
+The perturbation families are synthetic injections rather than observed IDS
+error, so the finding is about response to a *model* of noise.
+
+**Corrections made alongside** (all found by reading the code the report
+describes): `reasoner.py` is a **first-match-wins fallback chain**, not a
+fusion — every stage after the first is guarded by `if not candidates`, so a
+source's accuracy covers only the signatures every higher source drew a blank
+on; `tier2_combined` was renamed `supervised_classifier` on 2026-09-11 and the
+live-pipeline references now say so; and §11 carries a citation warning that
+`validation_report.md` has been overwritten by the oracle-condition run, so
+effort 19's evidence file needs regenerating under a distinct name.
+
+**Also built:** `experiments/mitre_mapping/mapping_dashboard.py` renders every
+signature→ATT&CK mapping attempt with the regimes kept strictly apart and the
+oracle condition quarantined, `mapping_results.json` holds the transcribed
+historical regimes, and `check_mapping_results.py` verifies all 98 transcribed
+figures still appear in REPORT.md §11.
 

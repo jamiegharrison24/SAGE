@@ -1,0 +1,492 @@
+{
+  "_comment": [
+    "Machine-readable twin of REPORT.md section 11, 'every number, by regime'.",
+    "Only the historical regimes live here: those runs are no longer",
+    "reproducible (the eval sets and scoring rules changed under them), so the",
+    "numbers are transcribed rather than measured. The entity-normalisation",
+    "arms are NOT here -- mapping_dashboard.py parses those from the",
+    "validation_report_*.md files they were written to, so they cannot drift.",
+    "check_mapping_results.py verifies every figure below still appears in",
+    "REPORT.md, so a correction there fails loudly here instead of silently",
+    "leaving two versions of the truth."
+  ],
+  "rule": "Do not rank across regimes. Each regime has its own eval set, denominator and scoring rules; a number is only comparable to others inside its own panel.",
+  "regimes": [
+    {
+      "id": "A",
+      "title": "100-row hand-audit sample",
+      "denominator": "80 scoreable",
+      "note": "The earliest frame. Narrow, and partly circular: its labels were derived through the same bridge table the pipeline's dominant source used.",
+      "columns": [
+        "effort",
+        "configuration",
+        "micro",
+        "note"
+      ],
+      "rows": [
+        [
+          3,
+          "generalisable pipeline (extract→enrich→narrate→embed)",
+          48.8,
+          "Layer D never executed"
+        ],
+        [
+          5,
+          "+ ET+Sigma classifier stacked",
+          53.8,
+          "classifier claims 5 rows, 4 right"
+        ],
+        [
+          6,
+          "+ Layer D, llama3.2:3b, full override",
+          33.8,
+          "−20.0"
+        ],
+        [
+          7,
+          "+ Layer D gated/blended, llama3.1:8b",
+          46.2,
+          "−7.6, off-list answering"
+        ],
+        [
+          8,
+          "+ Layer D gated/blended, qwen2.5:7b",
+          62.5,
+          "artifact — modal collapse, not a result"
+        ],
+        [
+          4,
+          "effort 5's config, re-run after the extended Sigma pull",
+          53.8,
+          "unchanged — none of the +491 rows reached the classifier"
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Tier 2 classifier in isolation",
+      "denominator": "79 scoreable",
+      "note": "The classifier alone, without the surrounding cascade.",
+      "columns": [
+        "effort",
+        "configuration",
+        "micro",
+        "T1190 share"
+      ],
+      "rows": [
+        [
+          2,
+          "TF-IDF, ET corpus only",
+          34.2,
+          76.8
+        ],
+        [
+          2,
+          "MiniLM embeddings",
+          29.1,
+          62.0
+        ],
+        [
+          2,
+          "ATTACK-BERT embeddings",
+          30.4,
+          58.2
+        ],
+        [
+          4,
+          "TF-IDF, ET + Sigma",
+          38.0,
+          52.5
+        ]
+      ]
+    },
+    {
+      "id": "C",
+      "title": "500-row set, before the scoring fix",
+      "denominator": "397 scoreable",
+      "note": "Superseded by regime D: scoring rows against labels a reviewer had explicitly rejected inflated micro by 2.2 points.",
+      "columns": [
+        "effort",
+        "configuration",
+        "micro",
+        "macro",
+        "T1190 share"
+      ],
+      "rows": [
+        [
+          9,
+          "with bridge_table",
+          38.0,
+          18.6,
+          13.4
+        ],
+        [
+          9,
+          "blind rows only (317)",
+          34.1,
+          null,
+          null
+        ],
+        [
+          10,
+          "bridge_table removed",
+          32.7,
+          13.5,
+          38.5
+        ],
+        [
+          11,
+          "+ kNN replacing embedding",
+          35.8,
+          16.8,
+          39.3
+        ],
+        [
+          11,
+          "+ kNN ranking bug fixed",
+          39.0,
+          20.8,
+          39.5
+        ],
+        [
+          11,
+          "+ classifier prior correction (α = 0.5)",
+          38.8,
+          21.1,
+          33.5
+        ],
+        [
+          12,
+          "+ Elastic",
+          38.8,
+          22.2,
+          29.0
+        ],
+        [
+          12,
+          "+ Elastic + Splunk (rejected)",
+          39.3,
+          21.8,
+          27.5
+        ]
+      ]
+    },
+    {
+      "id": "D",
+      "title": "500-row set, corrected verdicts",
+      "denominator": "361 scoreable",
+      "current": true,
+      "note": "The current frame. Every later effort is measured against effort 12's 36.6% / 22.2%.",
+      "columns": [
+        "effort",
+        "configuration",
+        "micro",
+        "macro",
+        "T1190 share"
+      ],
+      "rows": [
+        [
+          12,
+          "ET + Sigma",
+          37.1,
+          20.9,
+          36.3
+        ],
+        [
+          12,
+          "+ Elastic — the baseline every later effort is measured against",
+          36.6,
+          22.2,
+          31.3
+        ],
+        [
+          13,
+          "+ entity NER, gliner_only",
+          35.5,
+          19.4,
+          33.8
+        ],
+        [
+          13,
+          "+ entity NER, intersection",
+          37.1,
+          21.3,
+          33.2
+        ],
+        [
+          19,
+          "+ alert corpus — current headline",
+          40.2,
+          28.7,
+          29.4
+        ]
+      ],
+      "buckets": {
+        "note": "Head = the 3 saturated classes, mid = 21 classes, tail = 27 classes. The flat head is the evidence for the coverage thesis: saturated classes cannot be helped by more data, starved ones can.",
+        "columns": [
+          "configuration",
+          "head",
+          "mid",
+          "tail"
+        ],
+        "rows": [
+          [
+            "effort 12 baseline",
+            43.9,
+            31.4,
+            17.1
+          ],
+          [
+            "effort 19 headline",
+            43.9,
+            38.7,
+            25.7
+          ]
+        ]
+      },
+      "caveat": "Effort 19 does not stand alone: 6 of its 17 newly-correct rows were won by a ≥0.75-similar same-label sibling in the corpus it added. Excluding those, micro is 38.5% (+1.9). Quote both numbers or neither."
+    },
+    {
+      "id": "E",
+      "title": "773-signature propagated ground truth",
+      "denominator": "562 technique-scoreable",
+      "note": "A different problem from the regimes above, and methods 5–6 solve an easier one than the rest.",
+      "caveat": "Mandatory with every number here: ~30% of this denominator is anchored to a bridge-table mapping that 68 independent vendor samples contradict unanimously.",
+      "columns": [
+        "effort",
+        "method",
+        "top-1",
+        "lenient",
+        "top-3",
+        "right-tactic"
+      ],
+      "rows": [
+        [
+          1,
+          "ATTACK-BERT, full list",
+          6.4,
+          11.0,
+          14.9,
+          24.9
+        ],
+        [
+          1,
+          "ATTACK-BERT, filtered list",
+          5.5,
+          10.1,
+          14.1,
+          25.3
+        ],
+        [
+          1,
+          "MiniLM, full list",
+          8.4,
+          11.9,
+          16.9,
+          26.3
+        ],
+        [
+          1,
+          "MiniLM, filtered list",
+          7.1,
+          11.0,
+          16.5,
+          24.9
+        ],
+        [
+          1,
+          "kNN (k=5), ATTACK-BERT",
+          56.6,
+          56.6,
+          null,
+          63.5
+        ],
+        [
+          1,
+          "kNN (k=5), MiniLM",
+          61.0,
+          61.0,
+          null,
+          68.0
+        ],
+        [
+          1,
+          "SMET",
+          13.2,
+          15.1,
+          null,
+          29.9
+        ],
+        [
+          2,
+          "tiered pipeline, all tiers",
+          2.1,
+          2.5,
+          4.3,
+          4.8
+        ],
+        [
+          2,
+          "Tier 0 only (n = 81)",
+          0.0,
+          0.0,
+          null,
+          1.2
+        ],
+        [
+          2,
+          "Tier 1 only (n = 5)",
+          0.0,
+          0.0,
+          null,
+          20.0
+        ],
+        [
+          2,
+          "Tier 2 only (n = 334)",
+          1.3,
+          1.3,
+          null,
+          4.6
+        ],
+        [
+          2,
+          "Tier 3 only (n = 139)",
+          3.6,
+          4.7,
+          null,
+          12.5
+        ]
+      ]
+    }
+  ],
+  "human_reference": {
+    "value": 87,
+    "note": "Approximate agreement between a careful human reader and vendor-declared ATT&CK tags. The ceiling every automated number above should be read against."
+  },
+  "pipeline": {
+    "_comment": "Structure of reasoner.py cascade (REPORT.md 7.1) and its knowledge sources (Figure 2). Accuracies are 7.2; kNN is per-corpus so the box carries its best retrieval source.",
+    "cascade": [
+      {
+        "id": "declared",
+        "detail": "the rule own vendor mitre_technique_id metadata",
+        "rows": 39,
+        "accuracy": 71.8,
+        "state": "on",
+        "note": "best signal, under-harvested",
+        "effort": 9,
+        "regime": "C"
+      },
+      {
+        "id": "ioc_alias",
+        "detail": "STIX malware/tool alias match on the title",
+        "rows": 8,
+        "accuracy": 37.5,
+        "state": "on",
+        "note": "narrow by design",
+        "effort": 9,
+        "regime": "C"
+      },
+      {
+        "id": "supervised_classifier",
+        "detail": "TF-IDF + LinearSVC, live-trained, prior_alpha = 0.5",
+        "rows": 36,
+        "accuracy": 66.7,
+        "state": "on",
+        "note": "holds up at scale (was tier2_combined before 2026-09-11)",
+        "effort": 9,
+        "regime": "C"
+      },
+      {
+        "id": "knn_corpus",
+        "detail": "IDF-weighted kNN over 32,048 labelled rule texts, leakage-guarded",
+        "rows": null,
+        "accuracy": 46.7,
+        "state": "on",
+        "note": "per-corpus; best is the alert corpus at 46.7%",
+        "effort": 19,
+        "regime": "D"
+      },
+      {
+        "id": "llm (Layer D)",
+        "detail": "fires only below llm_gate_confidence = 0.5, blends rather than overrides",
+        "rows": null,
+        "accuracy": null,
+        "state": "off",
+        "note": "OFF by default",
+        "effort": null,
+        "regime": null
+      }
+    ],
+    "removed": [
+      {
+        "id": "bridge_table",
+        "accuracy": 34.8,
+        "note": "removed effort 10 - structurally capped",
+        "effort": 9,
+        "regime": "C"
+      },
+      {
+        "id": "embedding",
+        "accuracy": 4.5,
+        "note": "deleted effort 11 - register mismatch",
+        "effort": 9,
+        "regime": "C"
+      }
+    ],
+    "sources": [
+      {
+        "id": "ET Open",
+        "detail": "26,644 labelled rules / 45 techniques",
+        "target": "corpus",
+        "state": "on"
+      },
+      {
+        "id": "Sigma",
+        "detail": "3,289 labelled rules / 398 techniques",
+        "target": "corpus",
+        "state": "on"
+      },
+      {
+        "id": "Elastic",
+        "detail": "1,892 labelled rules / 444 techniques",
+        "target": "corpus",
+        "state": "on"
+      },
+      {
+        "id": "Alert (effort 18)",
+        "detail": "223 labelled signatures / 26 techniques - the only in-register corpus",
+        "target": "corpus",
+        "state": "on"
+      },
+      {
+        "id": "Splunk",
+        "detail": "2,140 labelled rules - built, then rejected (0 of 20 retrievals right)",
+        "target": "corpus",
+        "state": "off"
+      },
+      {
+        "id": "MITRE STIX bundle",
+        "detail": "697 techniques, plus malware / tool objects",
+        "target": "ioc_alias + catalogue",
+        "state": "on"
+      },
+      {
+        "id": "emerging-all.rules",
+        "detail": "50,797 ET rules, 54% carry MITRE metadata - gitignored",
+        "target": "declared + extractor",
+        "state": "on"
+      }
+    ],
+    "consequences": [
+      "supervised_classifier and knn_corpus share one corpus, so anything wrong with the corpus is wrong with both at once.",
+      "declared and the extractor both depend on emerging-all.rules, which is gitignored - its absence degrades two sources at once, silently.",
+      "canonicalize() is the one chokepoint both corpus and query pass through, which makes the entity tagger a switch over the whole system rather than a query-time filter."
+    ],
+    "glossary": {
+      "claimed": "A resolver *claims* an evaluation signature when it is the first in the chain to produce any candidate at all. The chain is strictly first-match-wins: if declared returns something, nothing below it runs for that signature. So the count is how many signatures every higher source drew a blank on, and the percentage is how often this one was right on exactly those.",
+      "corpus row": "One labelled rule text in a training corpus. Unrelated to the evaluation signatures above: corpus rows are what the classifier trains on and kNN retrieves against."
+    },
+    "provenance_warning": "These percentages are NOT one run. The cascade itself is structural, but each accuracy comes from the effort and regime marked on its box: the source layers are effort 9 at scale (regime C, 397 scoreable), and the kNN figure is effort 19 (regime D, 361 scoreable, best retrieval source). Read each box against its own regime panel below, never against its neighbours."
+  }
+}

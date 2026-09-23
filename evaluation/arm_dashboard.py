@@ -236,6 +236,8 @@ def load(root, datasets=None):
                 'reference': record.get('reference') or {},
                 'commit': record.get('measured_commit'),
                 'created_at': record.get('created_at'),
+                'perturbations': record.get('perturbations') or [],
+                'repeats': record.get('repeats') or {},
             }
             seen = True
         if seen:
@@ -314,6 +316,105 @@ def _bars(dataset, arms, per_arm):
         y += 20
     out.append('</svg>')
     return '\n'.join(out)
+
+
+FAMILY_LABELS = {
+    'false_positives': 'False positives',
+    'duplicates': 'Duplicate bursts',
+    'missing_alerts': 'Dropped alerts',
+    'missing_episodes': 'Dropped episodes',
+}
+
+# The two ends of the injected-noise sweep. The middle rates say the same
+# thing more quietly, and a table of all four rates x four families x four
+# arms is a wall rather than a comparison.
+SHOWN_RATES = (0.05, 0.20)
+
+
+def _robustness(arms, per_arm):
+    """
+    Graph survival under injected noise, per arm.
+
+    Reported as Jaccard against the clean run, with gained and lost split out
+    for the family that actually moves. They have to be split: Jaccard alone
+    is dominated by *gained* graphs here, and a reader who sees 0.15 and
+    concludes the pipeline lost 85% of its findings has it backwards.
+    """
+    cells = {}
+    for arm in arms:
+        for cell in per_arm[arm].get('perturbations') or []:
+            key = (cell['spec']['family'], cell['spec']['rate'], arm)
+            cells.setdefault(key, []).append(cell['distortion'])
+    if not cells:
+        return ''
+
+    def mean(values, field):
+        picked = [v[field] for v in values if v.get(field) is not None]
+        return sum(picked) / len(picked) if picked else None
+
+    rows = []
+    for family in FAMILY_LABELS:
+        for rate in SHOWN_RATES:
+            present = [(arm, cells.get((family, rate, arm))) for arm in arms]
+            if not any(v for _, v in present):
+                continue
+            tds = []
+            for _, values in present:
+                if not values:
+                    tds.append('<td>--</td>')
+                    continue
+                jaccard = mean(values, 'graph_jaccard')
+                gained = mean(values, 'n_ags_gained')
+                lost = mean(values, 'n_ags_lost')
+                tds.append('<td><span class="v">{:.3f}</span>'
+                           '<span class="d">+{:.0f}/&minus;{:.0f}</span></td>'
+                           .format(jaccard, gained or 0, lost or 0))
+            rows.append('<tr><td class="name">{} @ {:.0%}</td>{}</tr>'
+                        .format(FAMILY_LABELS[family], rate, ''.join(tds)))
+
+    head = ''.join('<th>{}</th>'.format(arm) for arm in arms)
+    return ('<h3>Robustness under injected noise</h3>'
+            '<p class="sub">Jaccard against the clean run, with the mean '
+            'graphs <b>gained</b> and <b>lost</b> beneath each. Read the pair, '
+            'not the Jaccard: distortion here is almost entirely graphs '
+            '<em>gained</em> &mdash; injected noise invents attack graphs '
+            'rather than destroying real ones, and the loss column stays near '
+            'zero in every arm.</p>'
+            '<div class="tablewrap"><table><thead><tr>'
+            '<th class="name">Perturbation</th>{}</tr></thead><tbody>{}</tbody>'
+            '</table></div>'.format(head, ''.join(rows)))
+
+
+def _determinism(arms, per_arm):
+    """
+    Whether repeat runs of the same arm produce the same graphs.
+
+    Checked per arm rather than assumed from the baseline: the substitution
+    touches eight pipeline sites, and a set-ordering or hash-ordering leak in
+    any of them would surface here as a match rate below 1.0 rather than as an
+    error. A single non-identical arm would invalidate every comparison on the
+    page, so the line is worth stating even when it is boring.
+    """
+    parts = []
+    for arm in arms:
+        repeats = per_arm[arm].get('repeats') or {}
+        exact = repeats.get('exact_match') or {}
+        if not exact:
+            continue
+        parts.append((arm, repeats.get('n'), exact.get('ag_dot_match_rate_raw'),
+                      exact.get('n_ag_dot_files'),
+                      exact.get('main_model_identical')))
+    if not parts:
+        return ''
+    perfect = all(p[2] == 1.0 and p[4] for p in parts)
+    detail = ', '.join('{} ({} graphs)'.format(p[0], p[3]) for p in parts)
+    verdict = ('every graph byte-identical across {} repeats in all arms &mdash; {}'
+               .format(parts[0][1], detail) if perfect else
+               'NOT identical in every arm &mdash; comparisons on this page are '
+               'unsafe until that is explained: ' +
+               ', '.join('{} {:.3f}'.format(p[0], p[2] or 0) for p in parts))
+    return ('<h3>Determinism</h3><p class="sub">{}{}</p>'
+            .format('' if perfect else '<b>WARNING. </b>', verdict))
 
 
 def _metric_table(arms, per_arm):
@@ -422,10 +523,12 @@ def render(arms, found, provenance):
                 .format(', '.join(missing)))
         sections.append(
             '<section class="card"><h2>{}</h2>{}<div class="tablewrap">{}</div>'
-            '<div class="chart">{}</div></section>'
+            '<div class="chart">{}</div>{}{}</section>'
             .format(dataset, note,
                     _metric_table(present, per_arm),
-                    _bars(dataset, present, per_arm)))
+                    _bars(dataset, present, per_arm),
+                    _determinism(present, per_arm),
+                    _robustness(present, per_arm)))
 
     commits = sorted({record['commit'][:7] for per_arm in found.values()
                       for record in per_arm.values() if record.get('commit')})

@@ -215,7 +215,7 @@ Every approach in this report is some combination of five strategies:
 |---|---|---|
 | **Metadata harvest** | the rule already carries an ATT&CK tag — just read it | Tier 0; the `declared` source |
 | **Entity lookup** | the title names a known tool or malware ("Mimikatz"), so inherit that object's techniques | Tier 1; the `ioc_alias` source |
-| **Supervised classification** | train on rules that *do* carry tags, predict for rules that don't | Tier 2; the `tier2_combined` source |
+| **Supervised classification** | train on rules that *do* carry tags, predict for rules that don't | Tier 2; the `supervised_classifier` source |
 | **Retrieval / similarity** | find the most similar text whose answer is known, copy its answer | Tier 3; the `embedding` and `knn_corpus` sources |
 | **LLM reasoning** | give a language model the rule and some candidates, ask it to choose | Layer D; the `llm` source |
 
@@ -240,7 +240,14 @@ must be legible before §5:
 | `declared` | the rule's own vendor-assigned `mitre_technique_id` metadata | active — highest precision |
 | `ioc_alias` | STIX malware/tool alias match on the title | active — narrow |
 | `bridge_table` | SAGE's `MicroAttackStage` → technique lookup | **removed**, effort 10 |
-| `tier2_combined` | TF-IDF + LinearSVC classifier trained on the labelled corpora | active |
+| `supervised_classifier` | TF-IDF + LinearSVC classifier trained on the labelled corpora | active |
+
+> **Renamed.** This source was called `tier2_combined` until 2026-09-11:
+> "tier2" was its slot in the archived Tier 0-4 approach and "combined"
+> meant the ET+Sigma corpus, so by effort 12 neither half of the name
+> described it (see `reasoner.py`'s docstring). The old name is kept
+> below wherever it names an archived file or a result measured under
+> it -- renaming those would misattribute them.
 | `embedding` | MiniLM similarity against MITRE *description prose* | **deleted**, effort 11 |
 | `knn_corpus` | IDF-weighted nearest-neighbour over labelled *rule text* (IDF is defined in §2.6) | active — replaced `embedding` |
 | `llm` | Layer D language-model refinement | built, **off by default** |
@@ -263,7 +270,7 @@ flowchart TB
 
     D["<b>declared</b><br/>the rule's own mitre_technique_id metadata"]
     A["<b>ioc_alias</b><br/>STIX malware / tool alias match on the title"]
-    C["<b>tier2_combined</b><br/>TF-IDF + LinearSVC; abstains on a non-positive score"]
+    C["<b>supervised_classifier</b><br/>TF-IDF + LinearSVC; abstains on a non-positive score"]
     K["<b>knn_corpus</b><br/>IDF-weighted kNN over 32,048 labelled rule texts"]
 
     D -- "no metadata" --> A
@@ -2473,16 +2480,30 @@ harder over the signal already there.**
 
 ### 7.1 The cascade
 
-`reasoner.py` fuses candidates in priority order, with a full evidence trail per
-candidate, then sorts globally by confidence:
+`reasoner.py` resolves a rule to a technique in priority order. It is a
+**first-match-wins fallback chain, not a fusion**: every stage after the first
+is guarded by `if not candidates`, so if `declared` finds a vendor tag, nothing
+below it runs for that signature at all. Confidence sorting happens only
+*within* whichever single source fired, and the evidence trail accumulates only
+across candidates from that source.
+
+That distinction matters for reading the per-source accuracies in 7.2: a
+source's row covers only the signatures every higher source drew a blank on, so
+each resolver is scored on the leftovers of the ones above it. `declared` at
+71.8% is scoring the easiest cases by construction, and `knn_corpus` at the
+bottom gets whatever nothing else could name. The chain:
 
 ```
 declared            the rule's own vendor mitre_technique_id metadata
   ↓
 ioc_alias           STIX malware/tool alias match on the title
   ↓
-tier2_combined      TF-IDF + LinearSVC, live-trained,
+supervised_classifier
+                    TF-IDF + LinearSVC, live-trained,
                     prior_alpha = 0.5 class-frequency subtraction
+                    (renamed from `tier2_combined`, 2026-09-11 -- see
+                    reasoner.py's docstring; results measured before that
+                    date are reported under the old name)
   ↓
 knn_corpus          IDF-weighted kNN over 32,048 labelled rule texts,
                     leakage-guarded
@@ -2528,7 +2549,7 @@ flowchart LR
     TAG2["<b>entity_tagger.py</b><br/>OFF by default — when on, it<br/>rewrites corpus and query alike"]
     TAG2 -.-> NORM
 
-    NORM --> CLF["<b>tier2_combined</b><br/>trains on these rows"]
+    NORM --> CLF["<b>supervised_classifier</b><br/>trains on these rows"]
     NORM --> KNN["<b>knn_corpus</b><br/>retrieves against these rows"]
     ST --> ALI["<b>ioc_alias</b><br/>alias table + stoplist"]
     ST --> CAT["technique catalogue<br/>mitre_client.py"]
@@ -2545,8 +2566,8 @@ flowchart LR
 
 Three consequences of that shape drive most of this report.
 
-- **`tier2_combined` and `knn_corpus` share one corpus**, so anything wrong with
-  the corpus is wrong with both at once — which is §6.1's finding.
+- **`supervised_classifier` and `knn_corpus` share one corpus**, so anything
+  wrong with the corpus is wrong with both at once — which is §6.1's finding.
 - **`declared` and the extractor both depend on `emerging-all.rules`**, which is
   gitignored, so its absence degrades two sources at once, and silently (§9).
 - **`canonicalize()` is the one chokepoint both the corpus and the query pass
@@ -3035,7 +3056,9 @@ easy to mistake the supporting ones for the main ones.
 | contribution | what it is | status |
 |---|---|---|
 | **Coverage, not representation** | Every representation lever returns null (efforts 13–17, 20); adding 223 in-register training examples moved mid +7.3 and tail +8.6 while head stayed **exactly flat** (effort 19). The flat head is the evidence: saturated classes cannot be helped by more data, starved ones can. | **done — strongest result on the branch** |
-| **AIF → ATT&CK attack graphs** | The substitution, switchable at runtime and behaviour-preserving on the AIF path. The finding is not a score: SAGE's architecture reads severity from the taxonomy at three points, ATT&CK publishes none, so substituting it means *authoring* a severity model — and that model, not the taxonomy, dominates the graph output (9 vs 115 graphs from two tactics, 8a.9). | **done — the dependency is the result** |
+| **AIF → ATT&CK attack graphs** | The substitution, switchable at runtime and behaviour-preserving on the AIF path. The finding is not a score: SAGE's architecture reads severity from the taxonomy at three points, ATT&CK publishes none, so substituting it means *authoring* a severity model — and that model, not the taxonomy, dominates the graph output (9 vs 115 graphs from two tactics, 8a.9). 8a.11 adds that the same table also governs noise sensitivity, making it a tunable precision/recall trade-off rather than an unavoidable guess. | **done — the dependency is the result** |
+| **Perplexity points the wrong way** | On both CPTC datasets an ATT&CK arm improves training *and* held-out perplexity while losing 87–91% of the attack graphs (8a.11). Not an argument that perplexity is insufficient — a demonstration that it can contradict every structural measure at once. | **done — evidences the proposal's Objective 3** |
+| **Noise fabricates, it does not erase** | Across 540 cells, injected false positives distort the graph set almost entirely by *adding* graphs; the worst loss anywhere is 13 against +281 gained in the same cell (8a.11). A property of SAGE, not of the substitution. | **done — changes how robustness must be reported** |
 | **NER / entity normalisation is a dead end here** | 10+ arms, two NER models, two marker schemes, five merge rules, three replacement styles, a DF sweep. All null or negative, with a mechanism: the rare tokens NER finds are the ones carrying the technique signal, so tagging dilutes and replacing destroys. | done |
 | **The labelled dataset** | 530 signatures, 100% of 1,431,663 alert records, one technique each, with rationales. | done — reusable artifact |
 | **A generalisable mapper** | 40.2% / 28.7% held-out, against ~87% for a careful human reader. Reported as "hard problem, here is why", not as a solution. | done, honest |
@@ -3284,12 +3307,127 @@ by `run`. That one metric is tolerated by the driver and nothing else is.
    record in **0 of 146 structural keys** (timing and filesystem paths
    excluded). The corrupted execution did not corrupt the output.
 
+### 8a.11 The full evaluation matrix — what the other cells say
+
+8a.9 and 8a.10 compare reference cells: one clean run per arm per dataset. That
+measures attack-graph structure and nothing else, which leaves the evaluation
+approach this project defines — model behaviour, output quality, computational
+cost — demonstrated on the AIF configuration and merely *claimed* for the
+others. The matrix in `docs/BASELINE_METRICS.md` was therefore re-run for all
+four arms: 61 cells on each CPTC set, the deliberate reduced 13-cell matrix on
+ccdc, 540 cells in total, 14 h 44 m, every cell `EXIT=0`
+(`test-scripts/run_arm_evaluation.sh`).
+
+Three results come out of it, and the third changes how the rest of this
+section should be read.
+
+**1. Determinism holds under every taxonomy.** Across all twelve arm-dataset
+combinations, five repeats each, **699 attack graphs are byte-identical**
+(`ag_dot_match_rate_raw` = 1.0, zero missing in any repeat), with
+`main_model_identical` and `traces_identical` true throughout.
+
+| arm | cptc-2017 | cptc-2018 | ccdc | total |
+|---|---:|---:|---:|---:|
+| `aif` | 104 | 75 | 72 | 251 |
+| `kill-chain` | 9 | 10 | 31 | 50 |
+| `aif-aligned` | 115 | 44 | 192 | 351 |
+| `impact-only` | 9 | 9 | 29 | 47 |
+
+This is worth stating even though it is boring, because it is the check that
+makes the substitution credible. The swap touches eight pipeline sites, several
+of which iterate sets and dicts; a set-ordering or hash-ordering leak in any of
+them would surface here as a match rate below 1.0 rather than as an error, and
+would invalidate every comparison on the branch. It did not.
+
+**2. SAGE's noise failure mode is fabrication, not loss** — and this is a
+finding about SAGE, not about the substitution. Injected false positives
+distort the graph set almost entirely by *adding* graphs:
+
+| cptc-2017, false positives @ 20% | Jaccard | gained | lost | base AGs |
+|---|---:|---:|---:|---:|
+| `aif` | 0.262 | +281 | −3 | 104 |
+| `aif-aligned` | 0.185 | +494 | −2 | 115 |
+| `kill-chain` | 0.053 | +161 | 0 | 9 |
+| `impact-only` | 0.056 | +151 | 0 | 9 |
+
+Across *every* family, rate and arm, the worst single loss figure anywhere in
+the matrix is 13 graphs (AIF, cptc-2017) against +281 gained in the same cell.
+
+**Therefore Jaccard must not be reported alone here.** A reader who sees 0.053
+and concludes the pipeline lost 95% of its findings has it exactly backwards:
+it kept them and invented more. This is the same defect as the compression
+metric in 23 — a ratio that moves for a reason opposite to the one it appears
+to report — and it is the second time on this branch that a single summary
+statistic has pointed the wrong way. Report gained and lost beside it.
+
+**3. The severity tier table is a precision/recall dial, not only a coverage
+dial.** Phantom-graph generation scales with how much of the signature space is
+high-severity — the same lever 8a.9 identified, moving in the same direction:
+
+| arm | high-severity signatures | graphs gained @ 20% FP | base AGs |
+|---|---:|---:|---:|
+| `aif-aligned` | 387 | +494 | 115 |
+| `kill-chain` | 146 | +161 | 9 |
+| `impact-only` | 57 | +151 | 9 |
+
+So the tier assignment buys coverage and noise-sensitivity together. That
+materially improves the finding in 8a.9: the severity model is not merely an
+unavoidable guess the taxonomy forced on us, it is a **tunable trade-off**
+between how many real objectives the pipeline reaches and how many spurious
+ones noise can manufacture. A deployment that cares about analyst trust more
+than recall has a principled reason to tier conservatively, and one that cares
+about coverage has a principled reason not to. That is a more useful thing to
+report than a single recommended table.
+
+**4. Perplexity moves the wrong way, demonstrably.** The proposal asserts that
+perplexity is a poor measure for a task that is not prediction. The matrix
+shows it actively misleading:
+
+| dataset | | aif | kill-chain | aif-aligned |
+|---|---|---:|---:|---:|
+| cptc-2017 | perplexity (train) | 13.48 | **10.76** | **10.33** |
+| | perplexity (held-out) | 40.27 | **37.95** | **38.33** |
+| | attack graphs | 104 | 9 | 115 |
+| cptc-2018 | perplexity (train) | 9.42 | **6.97** | **5.92** |
+| | perplexity (held-out) | 35.90 | **21.68** | **13.19** |
+| | attack graphs | 75 | 10 | 44 |
+
+On both CPTC datasets the `kill-chain` arm improves on AIF in **training and
+held-out perplexity simultaneously** while losing 87–91% of the attack graphs.
+On cptc-2018 held-out perplexity improves by 40% as graph coverage falls by
+87%. A reviewer handed only the perplexity column would conclude the
+substitution was an improvement.
+
+The mechanism is not mysterious: collapsing the alphabet and shortening the
+traces makes the sequence distribution easier to model, and none of that is
+evidence the output is more useful. **This is the strongest available support
+for the proposal's Objective 3** — not an argument that perplexity is
+insufficient, but a demonstration that it can point in the opposite direction
+to every structural measure at once.
+
+**What this does not cover.** ccdc carries no noise-injection cells in any arm,
+matching the baseline's documented reduction, so the robustness result rests on
+the two CPTC datasets. And the perturbation families are synthetic injections,
+not observed IDS error — the finding is about how the pipeline responds to a
+model of noise, not to a measured one.
+
 ---
 
 ## 9. Traps and reusable diagnostics
 
 Each of these silently produced plausible wrong numbers before it was caught.
 They are the transferable part of the branch.
+
+**A summary statistic can move for the opposite reason to the one it appears
+to report — twice now, so assume it by default.** Alert compression rose 1056%
+for the ATT&CK arms because 29 of 36 victims lost their graphs entirely: the
+ratio improved because its denominator collapsed (23). Graph Jaccard then fell
+to 0.053 under injected false positives, which reads as catastrophic loss and
+is the reverse — the pipeline kept its graphs and invented 161 more, and the
+worst loss anywhere in a 540-cell matrix is 13 graphs (8a.11). Both metrics are
+fine; quoting either alone is not. Pair compression with a coverage figure and
+Jaccard with gained/lost, and treat any single-number quality summary as
+suspect until you have seen its components.
 
 **A null result is not a null lever until you check that the lever fires.**
 Effort 23 ruled out severity tiering as the cause of the ATT&CK arms' 90%
@@ -3564,6 +3702,16 @@ by how many rows actually reach that candidate source — here 18 of 80.
 | 12 | + Elastic + Splunk (rejected) | 39.3% | 21.8% | 27.5% |
 
 ### Regime D — 500-row set, 361 scoreable, corrected verdicts · current
+
+> **Citation warning.** Effort 19's row below was measured into
+> `validation_report.md`, but that filename has since been **overwritten by the
+> oracle-condition run** (its kNN retrieval pool contains
+> `alert_oracle_corpus.csv`, and it reports 70.1% micro / 73.7% macro). Those
+> are not generalisation numbers and must never be quoted as the headline: the
+> oracle run measures the pipeline *given* a working mapper rather than
+> measuring whether the mapper works. Effort 19's own artifact is gone and
+> needs regenerating under a distinct filename. The 40.2% / 28.7% in the table
+> is correct; only its evidence file is missing.
 
 | effort | configuration | micro | macro | `T1190` share |
 |---|---|---:|---:|---:|
