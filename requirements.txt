@@ -3,3 +3,4 @@ requests
 numpy
 matplotlib
 sentence-transformers
+faiss-cpu

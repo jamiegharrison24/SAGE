@@ -103,7 +103,7 @@ def load_alerts(path: str) -> List[str]:
 
 
 def map_alerts(
-    alerts: List[str], candidates: List[Dict[str, str]], model_name: str
+    alerts: List[str], candidates: List[Dict[str, str]], model_name: str, top_k: int = 1
 ) -> List[Tuple[str, Dict[str, str], float]]:
     model = SentenceTransformer(model_name)
     candidate_embeddings = model.encode(
@@ -120,11 +120,49 @@ def map_alerts(
         normalize_embeddings=True,
         show_progress_bar=True,
     )
-    similarities = alert_embeddings @ candidate_embeddings.T
-    best_indices = np.argmax(similarities, axis=1)
+    return search_candidates(alerts, candidates, alert_embeddings, candidate_embeddings, top_k)
+
+
+def search_candidates(
+    alerts: List[str],
+    candidates: List[Dict[str, str]],
+    alert_embeddings: np.ndarray,
+    candidate_embeddings: np.ndarray,
+    top_k: int = 1,
+) -> List[Tuple[str, Dict[str, str], float]]:
+    """Rank ATT&CK candidates by cosine similarity using a FAISS flat index.
+
+    The supplied embeddings must be normalized; inner product then equals
+    cosine similarity, matching the previous dense-matrix implementation.
+    """
+    if top_k < 1:
+        raise ValueError("top_k must be at least 1")
+    if not candidates:
+        raise ValueError("At least one ATT&CK candidate is required")
+
+    try:
+        import faiss
+    except ImportError as exc:
+        raise RuntimeError(
+            "FAISS is required for description search. Install dependencies with "
+            "'pip install -r requirements.txt' in Linux or WSL."
+        ) from exc
+
+    candidate_embeddings = np.ascontiguousarray(candidate_embeddings, dtype=np.float32)
+    alert_embeddings = np.ascontiguousarray(alert_embeddings, dtype=np.float32)
+    index = faiss.IndexFlatIP(candidate_embeddings.shape[1])
+    index.add(candidate_embeddings)
+    similarities, candidate_indices = index.search(
+        alert_embeddings, min(top_k, len(candidates))
+    )
+
     return [
-        (alert, candidates[index], float(similarities[row_index, index]))
-        for row_index, (alert, index) in enumerate(zip(alerts, best_indices))
+        (alert, candidates[int(candidate_index)], float(similarity))
+        for alert, row_indices, row_similarities in zip(
+            alerts, candidate_indices, similarities
+        )
+        for candidate_index, similarity in zip(row_indices, row_similarities)
+        if candidate_index >= 0
     ]
 
 
@@ -153,11 +191,15 @@ def main() -> None:
     parser.add_argument("--input", default=DEFAULT_INPUT, help="Input labelled alert CSV")
     parser.add_argument("--output", default=DEFAULT_OUTPUT, help="Output mapping CSV")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="Sentence-transformers model")
+    parser.add_argument(
+        "--top-k", type=int, default=1,
+        help="Number of ranked ATT&CK technique/tactic matches per alert",
+    )
     args = parser.parse_args()
 
     candidates = load_candidates()
     alerts = load_alerts(args.input)
-    mappings = map_alerts(alerts, candidates, args.model)
+    mappings = map_alerts(alerts, candidates, args.model, top_k=args.top_k)
     write_output(args.output, mappings)
     print(f"Mapped {len(alerts)} alerts against {len(candidates)} ATT&CK candidates.")
     print(f"Wrote {args.output}")
